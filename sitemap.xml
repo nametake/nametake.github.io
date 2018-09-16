@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://nametake.github.io/posts/2018/09/15/hugo-github-pages/</loc>
+    <lastmod>2018-09-15T12:20:26+09:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://nametake.github.io/about/</loc>
     <lastmod>2018-09-09T22:52:28+09:00</lastmod>
   </url>
@@ -13,13 +18,26 @@
   </url>
   
   <url>
+    <loc>https://nametake.github.io/tags/hugo/</loc>
+    <lastmod>2018-09-15T12:20:26+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://nametake.github.io/posts/</loc>
+    <lastmod>2018-09-15T12:20:26+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://nametake.github.io/tags/</loc>
+    <lastmod>2018-09-15T12:20:26+09:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://nametake.github.io/</loc>
-    <lastmod>2018-09-09T22:52:28+09:00</lastmod>
+    <lastmod>2018-09-15T12:20:26+09:00</lastmod>
     <priority>0</priority>
   </url>
   

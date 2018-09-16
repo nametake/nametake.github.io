@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>nametake.info</title>
-    <link>https://nametake.github.io/</link>
-    <description>Recent content on nametake.info</description>
+    <title>Posts on nametake.info</title>
+    <link>https://nametake.github.io/posts/</link>
+    <description>Recent content in Posts on nametake.info</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Sat, 15 Sep 2018 12:20:26 +0900</lastBuildDate>
     
-	<atom:link href="https://nametake.github.io/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://nametake.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
@@ -24,15 +24,6 @@ Makefile makeコマンドだけでいろいろな作業を完結させたかっ�
 # new post title title= init: @git submodule update --init update: @git submodule foreach git checkout master @git submodule foreach git pull post: @./bin/new_post.sh ${title} server: init @hugo server --buildDrafts server_prod: init @hugo server pull: @git pull @cd public; git checkout master; git pull; build: init pull @hugo deploy: build @./bin/deploy.sh  deploy.sh 公式のデプロイ方法に書いてあることに少し自分に必要な要件を足して、以下のようなスクリプトを用意した。
 追加したことは以下。
  hugoコマンドの失敗に検知できるようにmakeファイルに役割を分割 引数でメッセージを変更しないためmsgを固定 dateコマンドで出力されるフォーマットを英語表記にするためにLANG=Cを追記 デプロイ後のcommit hashをブログリポジトリに反映させるためにcommit &amp;amp; push  #!</description>
-    </item>
-    
-    <item>
-      <title>About</title>
-      <link>https://nametake.github.io/about/</link>
-      <pubDate>Sun, 09 Sep 2018 22:52:28 +0900</pubDate>
-      
-      <guid>https://nametake.github.io/about/</guid>
-      <description>I&amp;rsquo;m Software Engineer and Gopher.</description>
     </item>
     
   </channel>
