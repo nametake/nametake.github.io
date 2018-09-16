@@ -18,12 +18,11 @@
       
       <guid>https://nametake.github.io/posts/2018/09/15/hugo-github-pages/</guid>
       <description>大して書いていなかったブログをgithub pages+hugoの組み合わせに移行したのでそのメモ。
-とは言うものの、構成そのものはHugoの入門用ページの内容をそのままやっただけなので割愛。
-自分で追加したところだけ書きます。
-Makefile makeコマンドだけでいろいろな作業を完結させたかったので、以下のようにMakefileを作成。
-# new post title title= init: @git submodule update --init update: @git submodule foreach git checkout master @git submodule foreach git pull post: @./bin/new_post.sh ${title} server: init @hugo server --buildDrafts server_prod: init @hugo server pull: @git pull @cd public; git checkout master; git pull; build: init pull @hugo deploy: build @./bin/deploy.sh  deploy.sh 公式のデプロイ方法に書いてあることに少し自分に必要な要件を足して、以下のようなスクリプトを用意した。
-追加したことは以下。
- hugoコマンドの失敗に検知できるようにmakeファイルに役割を分割 引数でメッセージを変更しないためmsgを固定 dateコマンドで出力されるフォーマットを英語表記にするためにLANG=Cを追記 デプロイ後のcommit hashをブログリポジトリに反映させるためにcommit &amp;amp; push  #!</description>
+とは言うものの、ほとんどHugoの入門用ページの内容をそのままやっただけなのでその辺は割愛。
+最終的なディレクトリ構成は以下。
+blog ├── Makefile ├── archetypes │ ├── default.md │ └── posts.md ├── bin │ ├── deploy.sh │ └── new_post.sh ├── config.toml ├── content │ ├── about │ │ └── index.md │ └── posts │ └── 2018-09-15-hugo-github-pages │ └── index.md ├── public(submodule) ├── static │ ├── css │ │ └── index.css │ └── images │ └── avatar.jpg └── themes └── coder(submodule) config.toml 自分はパーマリンクを日付+自分で設定した英単語にしたかったので、以下のようにconfig.tomlに追記。
+slugは各postのfrontmatter(postの先頭にあるヘッダ部分)に設定すると反映される。
+posts = &amp;quot;/posts/:year/:month/:day/:slug&amp;quot;のpostsの部分はcontentディレクトリにあるpostsディレクトリと同じ名前にする必要があるので注意。</description>
     </item>
     
   </channel>

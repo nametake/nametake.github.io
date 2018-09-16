@@ -82,10 +82,41 @@
 
 <p>大して書いていなかったブログをgithub pages+hugoの組み合わせに移行したのでそのメモ。</p>
 
-<p>とは言うものの、構成そのものは<a href="https://gohugo.io/categories/getting-started">Hugoの入門用ページ</a>の内容をそのままやっただけなので割愛。</p>
+<p>とは言うものの、ほとんど<a href="https://gohugo.io/categories/getting-started">Hugoの入門用ページ</a>の内容をそのままやっただけなのでその辺は割愛。</p>
 
-<p>自分で追加したところだけ書きます。</p>
+<p>最終的なディレクトリ構成は以下。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">blog
+ ├── Makefile
+ ├── archetypes
+ │   ├── default.md
+ │   └── posts.md
+ ├── bin
+ │   ├── deploy.sh
+ │   └── new_post.sh
+ ├── config.toml
+ ├── content
+ │   ├── about
+ │   │   └── index.md
+ │   └── posts
+ │       └── 2018-09-15-hugo-github-pages
+ │           └── index.md
+ ├── public(submodule)
+ ├── static
+ │   ├── css
+ │   │   └── index.css
+ │   └── images
+ │       └── avatar.jpg
+ └── themes
+     └── coder(submodule)</pre></div>
+<h2 id="config-toml">config.toml</h2>
 
+<p>自分はパーマリンクを<code>日付+自分で設定した英単語</code>にしたかったので、以下のようにconfig.tomlに追記。</p>
+
+<p>slugは各postのfrontmatter(postの先頭にあるヘッダ部分)に設定すると反映される。</p>
+
+<p><code>posts = &quot;/posts/:year/:month/:day/:slug&quot;</code>の<code>posts</code>の部分はcontentディレクトリにある<code>posts</code>ディレクトリと同じ名前にする必要があるので注意。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-toml" data-lang="toml">[<span style="color:#a6e22e">permalinks</span>]
+  <span style="color:#a6e22e">posts</span> = <span style="color:#e6db74">&#34;/posts/:year/:month/:day/:slug&#34;</span></code></pre></div>
 <h2 id="makefile">Makefile</h2>
 
 <p>makeコマンドだけでいろいろな作業を完結させたかったので、以下のようにMakefileを作成。</p>
@@ -156,7 +187,7 @@ git commit -m <span style="color:#e6db74">&#34;</span>$msg<span style="color:#e6
 git push</code></pre></div>
 <h2 id="new-post-sh">new_post.sh</h2>
 
-<p>postのディレクトリに<code>content/posts/2018-09-15-my-fist-post/index.md</code>のように日付を設定したかったため、postを作成するためのscriptを用意。</p>
+<p>postのディレクトリに新しく記事を追加するとき、ディレクトリには<code>content/posts/2018-09-15-my-fist-post/index.md</code>のように日付を設定したかったため、postを作成するためのscriptを用意。</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e">#!/bin/bash
 </span><span style="color:#75715e"></span>TITLE<span style="color:#f92672">=</span><span style="color:#e6db74">${</span>1<span style="color:#e6db74">}</span>
 
