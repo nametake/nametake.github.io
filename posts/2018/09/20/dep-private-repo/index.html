@@ -11,10 +11,10 @@
 
     <base href="https://nametake.github.io/">
     <title>
-  Posts · nametake.info
+  depでprivateリポジトリがupdateできなかったときの解決策 · nametake.info
 </title>
 
-    <link rel="canonical" href="https://nametake.github.io/posts/">
+    <link rel="canonical" href="https://nametake.github.io/posts/2018/09/20/dep-private-repo/">
 
     <link href="https://fonts.googleapis.com/css?family=Lato:400,700|Merriweather:300,700|Source+Code+Pro:400,700" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous" />
@@ -35,9 +35,6 @@
     <link rel="icon" type="image/png" href="https://nametake.github.io/images/favicon-32x32.png" sizes="32x32">
     <link rel="icon" type="image/png" href="https://nametake.github.io/images/favicon-16x16.png" sizes="16x16">
 
-    
-      <link href="https://nametake.github.io/posts/index.xml" rel="alternate" type="application/rss+xml" title="nametake.info" />
-      <link href="https://nametake.github.io/posts/index.xml" rel="feed" type="application/rss+xml" title="nametake.info" />
     
 
     <meta name="generator" content="Hugo 0.48" />
@@ -72,25 +69,32 @@
 
       <div class="content">
         
-  <section class="container list">
-  <h1 class="title">Posts</h1>
-  <ul>
-    
-    <li>
-      <span>September 20, 2018</span><a href="https://nametake.github.io/posts/2018/09/20/dep-private-repo/">depでprivateリポジトリがupdateできなかったときの解決策</a>
-    </li>
-    
-    <li>
-      <span>September 15, 2018</span><a href="https://nametake.github.io/posts/2018/09/15/hugo-github-pages/">hugo&#43;github pagesにブログを移転したメモ</a>
-    </li>
-    
-  </ul>
+  <section class="container post">
+  <article>
+    <header>
+      <h1 class="title">depでprivateリポジトリがupdateできなかったときの解決策</h1>
+      <h2 class="date">September 20, 2018</h2>
+
+      
+    </header>
+
+    <p>Goをアップデートした後、<code>dep update</code>をしたら以下のようなエラーが発生した。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">grouped write of manifest, lock and vendor: error while writing out vendor tree: failed to write dep tree: failed to export github.com/nametake/private-repo: unable to update repository: remote: Repository not found.
+fatal: repository &#39;https://github.com/nametake/private-repo/&#39; not found
+: command failed: [git fetch --tags --prune origin]: exit status 128
+make: *** [dep] Error 1</pre></div>
+<p>どうもprivateリポジトリをhttps経由でcloneしてこようとしているため起こっているっぽい。</p>
+
+<p>以下のconfig設定をして、githubではhttpsで始まるURLをgitのURLを使うように書き換える設定を追加したら治った。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-gitconfig" data-lang="gitconfig">[url &#34;git@github.com:&#34;]
+  insteadOf = https://github.com/</code></pre></div>
+<p><a href="https://git-scm.com/docs/git-config#git-config-urlltbasegtinsteadOf">https://git-scm.com/docs/git-config#git-config-urlltbasegtinsteadOf</a></p>
+
+  </article>
+
+  <br/>
+
   
-
-
-
-
-
 
 </section>
 
