@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://nametake.github.io/posts/2018/10/10/vim-shfmt-neoformat-indent/</loc>
+    <lastmod>2018-10-10T11:44:32+09:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://nametake.github.io/posts/2018/09/20/dep-private-repo/</loc>
     <lastmod>2018-09-20T18:47:46+09:00</lastmod>
   </url>
@@ -42,7 +47,13 @@
   
   <url>
     <loc>https://nametake.github.io/posts/</loc>
-    <lastmod>2018-09-20T18:47:46+09:00</lastmod>
+    <lastmod>2018-10-10T11:44:32+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://nametake.github.io/tags/sh/</loc>
+    <lastmod>2018-10-10T11:44:32+09:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -53,8 +64,14 @@
   </url>
   
   <url>
+    <loc>https://nametake.github.io/tags/vim/</loc>
+    <lastmod>2018-10-10T11:44:32+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://nametake.github.io/</loc>
-    <lastmod>2018-09-20T18:47:46+09:00</lastmod>
+    <lastmod>2018-10-10T11:44:32+09:00</lastmod>
     <priority>0</priority>
   </url>
   

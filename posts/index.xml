@@ -6,10 +6,27 @@
     <description>Recent content in Posts on nametake.info</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 20 Sep 2018 18:47:46 +0900</lastBuildDate>
+    <lastBuildDate>Wed, 10 Oct 2018 11:44:32 +0900</lastBuildDate>
     
 	<atom:link href="https://nametake.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>neoformatでshfmtを使うときにインデントをタブ文字にしたい時の設定</title>
+      <link>https://nametake.github.io/posts/2018/10/10/vim-shfmt-neoformat-indent/</link>
+      <pubDate>Wed, 10 Oct 2018 11:44:32 +0900</pubDate>
+      
+      <guid>https://nametake.github.io/posts/2018/10/10/vim-shfmt-neoformat-indent/</guid>
+      <description>VimでShell scriptを書くにあたって、shfmtとneoformatで保存時に自動的にフォーマットされるように設定しているが、チームのコーディングルールでインデントをタブ文字にする必要があったときにちょっと引っかかったのでメモ。
+neoformatでのshfmtはデフォルトだとインデントはスペースになる。
+shfmtのヘルプの
+-i uint indent: 0 for tabs (default), &amp;gt;0 for number of spaces という記述と、neoformatのshfmtの定義の
+function! neoformat#formatters#sh#shfmt() abort return { \ &amp;#39;exe&amp;#39;: &amp;#39;shfmt&amp;#39;, \ &amp;#39;args&amp;#39;: [&amp;#39;-i &amp;#39; . shiftwidth()], \ &amp;#39;stdin&amp;#39;: 1, \ }endfunction から、とりあえずshiftwidthを0にしたらタブ文字になるかと思い、プロジェクトでのVimの設定を以下のように設定してみた(プロジェクト固有の設定ができるようにしている)。
+autocmd Filetype sh setlocal sw=0 sts=0 noexpandtab しかし、どうしてもインデントがスペースになってしまうためちゃんとshiftwidth()の挙動を調べてみると、shiftwidthが0に設定されているとtabstopの値を使うようになっているらしい。
+https://vim-jp.org/vimmagazine/2012/08/31/vimmagazine.html
+tabstopは0を設定できないため、以下のようにneoformatのshfmt設定をプロジェクト固有の設定で上書きして対処した。
+let g:neoformat_sh_shfmt = { \ &amp;#39;exe&amp;#39;: &amp;#39;shfmt&amp;#39;, \ &amp;#39;args&amp;#39;: [&amp;#39;-i&amp;#39;, 0], \ &amp;#39;stdin&amp;#39;: 1, \ }</description>
+    </item>
     
     <item>
       <title>depでprivateリポジトリがupdateできなかったときの解決策</title>
