@@ -6,10 +6,32 @@
     <description>Recent content in Posts on nametake.info</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 09 Nov 2018 11:15:24 +0900</lastBuildDate>
+    <lastBuildDate>Wed, 21 Nov 2018 16:32:07 +0900</lastBuildDate>
     
 	<atom:link href="https://nametake.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Protobufのservice定義をhttp.Handler対応させるprotoc-gen-gohttpを作った</title>
+      <link>https://nametake.github.io/posts/2018/11/21/protoc-gen-gohttp/</link>
+      <pubDate>Wed, 21 Nov 2018 16:32:07 +0900</pubDate>
+      
+      <guid>https://nametake.github.io/posts/2018/11/21/protoc-gen-gohttp/</guid>
+      <description>nametake/protoc-gen-gohttpというプラグインを作ったのでその話。 細かい使い方とかはREADMEに任せる。
+なんで作ったの? Protocol Buffersのファイルにはserviceというものを定義できるが、どちらかというとgRPC向けの定義なので、Protocol Buffer on HTTPの構成でAPIサーバを作っていると活用できなくて勿体無いな〜とか思ってた。
+protoc-gen-goのgRPCオプションを使ってビルドするとServerのinterfaceまでは吐き出してくれるので、「だったらこのinterfaceをhttp.Handlerに対応させればいいんじゃね？」という勢いで作ってみた。
+コンセプト  RequestのBodyにJSONとProtobufのバイナリのどちらでも使えるようにする 生成される物が標準パッケージとProtobuf関係のパッケージしかimportしない 呼び出し毎に自由な処理を挟める(ログ等のため) errorが発生したときに自由にハンドリングができる 無駄にMarshal/Unmarshalをしない できる限り型で守る(Contextに情報を詰めたりしない)  何が嬉しいの? Protobufの定義にserviceを書いてこのプラグインを使うと、gRPCのServerをhttp.HandlerFuncに変換してくれるConverterが生成される。このConverterはgRPCのServerのinterfaceを必要とするため、メソッド定義も型で守れるようになる。
+変換されたhttp.HandlerFuncはContent-Typeを見て、Marshal/Unmarshalするパッケージを切り替えるので、BodyにはJSONが詰められていてもProtobufのJSONが詰められていてもどっちでも大丈夫なようになっている(はず)(テストケース不足)。
+また、http.HandlerFuncを抜けるときには、必要な情報を全部渡してコールバックを呼んでくれるので、1リクエスト毎に行いたい処理(ログ出力とか)を自分で定義できるようになる。errorも渡ってくるのでエラーを見て処理を変えたりもできる。
+比較 このプラグインを作る前にいくつか調べたのでそれとの比較も書いてみる。
+twrip 同じようにProtocol Buffersの定義からhttp.Handler対応をした上にContent−TypeをみてMarshal/Unmarshalをするパッケージを切り替えるライブラリだが、 以下の点が気になったので採用を見送った。
+ 生成されるものがtwripをimportしている エラー発生時のハンドリングの余地が少ない RPCの呼び出しに対するHookがContextに情報を詰める前提だった  個人的にはGoのライブラリなら、ライブラリに依存させる提供方法ではなく、標準パッケージに乗せられる提供方法のほうが良いと考えているので、生成したものがなにかに依存してしまうのは好ましくなかったため採用見送り。
+RussellLuo/protoc-go-plugins Protocol Buffersの定義からhttp.Handler対応の物を生成するプラグインだが、protoのMarshal/Unmarshalには対応していなかった。
+エラーハンドリングにも余地がなかったので採用見送り。
+moul/protoc-gen-gotemplate Protocol Buffersの定義からGoのテンプレート機能を使ってコードを生成するためのプラグイン。
+時間と労力をかけないならこれを使うのが一番早かった気はする。
+プラグインの作成にめちゃくちゃ時間がかかるようだったらこれも検討していたが、そこまで時間がかかりそうでもなかったので勉強も兼ねて自作することにした。</description>
+    </item>
     
     <item>
       <title>GCPの認証済みのhttp.Clientの取得方法</title>
