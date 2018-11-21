@@ -11,10 +11,10 @@
 
     <base href="https://nametake.github.io/">
     <title>
-  Posts · nametake.info
+  GCPの認証済みのhttp.Clientの取得方法 · nametake.info
 </title>
 
-    <link rel="canonical" href="https://nametake.github.io/posts/">
+    <link rel="canonical" href="https://nametake.github.io/posts/2018/11/09/auth-gcp-client/">
 
     <link href="https://fonts.googleapis.com/css?family=Lato:400,700|Merriweather:300,700|Source+Code+Pro:400,700" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous" />
@@ -35,9 +35,6 @@
     <link rel="icon" type="image/png" href="https://nametake.github.io/images/favicon-32x32.png" sizes="32x32">
     <link rel="icon" type="image/png" href="https://nametake.github.io/images/favicon-16x16.png" sizes="16x16">
 
-    
-      <link href="https://nametake.github.io/posts/index.xml" rel="alternate" type="application/rss+xml" title="nametake.info" />
-      <link href="https://nametake.github.io/posts/index.xml" rel="feed" type="application/rss+xml" title="nametake.info" />
     
 
     <meta name="generator" content="Hugo 0.49" />
@@ -72,33 +69,29 @@
 
       <div class="content">
         
-  <section class="container list">
-  <h1 class="title">Posts</h1>
-  <ul>
-    
-    <li>
-      <span>November 9, 2018</span><a href="https://nametake.github.io/posts/2018/11/09/auth-gcp-client/">GCPの認証済みのhttp.Clientの取得方法</a>
-    </li>
-    
-    <li>
-      <span>October 10, 2018</span><a href="https://nametake.github.io/posts/2018/10/10/vim-shfmt-neoformat-indent/">neoformatでshfmtを使うときにインデントをタブ文字にしたい時の設定</a>
-    </li>
-    
-    <li>
-      <span>September 20, 2018</span><a href="https://nametake.github.io/posts/2018/09/20/dep-private-repo/">depでprivateリポジトリがupdateできなかったときの解決策</a>
-    </li>
-    
-    <li>
-      <span>September 15, 2018</span><a href="https://nametake.github.io/posts/2018/09/15/hugo-github-pages/">hugo&#43;github pagesにブログを移転したメモ</a>
-    </li>
-    
-  </ul>
+  <section class="container post">
+  <article>
+    <header>
+      <h1 class="title">GCPの認証済みのhttp.Clientの取得方法</h1>
+      <h2 class="date">November 9, 2018</h2>
+
+      
+    </header>
+
+    <p>GCPの認証済みのhttp.Clientが欲しいときにちょっとだけ調べたのでメモ。</p>
+
+<p>結論だけ言うと、<a href="https://godoc.org/golang.org/x/oauth2/google#DefaultClient">golang.org/x/oauth2/googleのDefaultClient</a>を使えばよかった。</p>
+
+<p>今回はDataflowのAPIを叩きたかったので以下のようにすればできた。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#a6e22e">client</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">google</span>.<span style="color:#a6e22e">DefaultClient</span>(<span style="color:#a6e22e">ctx</span>, <span style="color:#a6e22e">dataflow</span>.<span style="color:#a6e22e">CloudPlatformScope</span>)
+<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Errorf</span>(<span style="color:#e6db74">&#34;failed create client: %v&#34;</span>, <span style="color:#a6e22e">err</span>)
+}</code></pre></div>
+  </article>
+
+  <br/>
+
   
-
-
-
-
-
 
 </section>
 

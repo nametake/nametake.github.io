@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://nametake.github.io/posts/2018/11/09/auth-gcp-client/</loc>
+    <lastmod>2018-11-09T11:15:24+09:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://nametake.github.io/posts/2018/10/10/vim-shfmt-neoformat-indent/</loc>
     <lastmod>2018-10-10T11:44:32+09:00</lastmod>
   </url>
@@ -28,6 +33,12 @@
   </url>
   
   <url>
+    <loc>https://nametake.github.io/tags/gcp/</loc>
+    <lastmod>2018-11-09T11:15:24+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://nametake.github.io/tags/git/</loc>
     <lastmod>2018-09-20T18:47:46+09:00</lastmod>
     <priority>0</priority>
@@ -35,7 +46,7 @@
   
   <url>
     <loc>https://nametake.github.io/tags/go/</loc>
-    <lastmod>2018-09-20T18:47:46+09:00</lastmod>
+    <lastmod>2018-11-09T11:15:24+09:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -47,7 +58,7 @@
   
   <url>
     <loc>https://nametake.github.io/posts/</loc>
-    <lastmod>2018-10-10T11:44:32+09:00</lastmod>
+    <lastmod>2018-11-09T11:15:24+09:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -59,7 +70,7 @@
   
   <url>
     <loc>https://nametake.github.io/tags/</loc>
-    <lastmod>2018-09-20T18:47:46+09:00</lastmod>
+    <lastmod>2018-11-09T11:15:24+09:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -71,7 +82,7 @@
   
   <url>
     <loc>https://nametake.github.io/</loc>
-    <lastmod>2018-10-10T11:44:32+09:00</lastmod>
+    <lastmod>2018-11-09T11:15:24+09:00</lastmod>
     <priority>0</priority>
   </url>
   
