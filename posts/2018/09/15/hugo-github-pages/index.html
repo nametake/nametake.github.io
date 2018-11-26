@@ -39,7 +39,7 @@
 
     
 
-    <meta name="generator" content="Hugo 0.51" />
+    <meta name="generator" content="Hugo 0.49" />
   </head>
 
   <body class=" ">
@@ -187,23 +187,23 @@
 
 echo -e <span style="color:#e6db74">&#34;\033[0;32mDeploying updates to GitHub...\033[0m&#34;</span>
 
-<span style="color:#75715e"># Go To Public folder.</span>
-cd public
-<span style="color:#75715e"># Add changes to git.</span>
-git add .
+<span style="color:#75715e"># Go To Public folder.
+</span><span style="color:#75715e"></span>cd public
+<span style="color:#75715e"># Add changes to git.
+</span><span style="color:#75715e"></span>git add .
 
-<span style="color:#75715e"># Commit changes.</span>
-msg<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;rebuilding site </span><span style="color:#66d9ef">$(</span>date<span style="color:#66d9ef">)</span><span style="color:#e6db74">&#34;</span>
+<span style="color:#75715e"># Commit changes.
+</span><span style="color:#75715e"></span>msg<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;rebuilding site </span><span style="color:#66d9ef">$(</span>date<span style="color:#66d9ef">)</span><span style="color:#e6db74">&#34;</span>
 git commit -m <span style="color:#e6db74">&#34;</span>$msg<span style="color:#e6db74">&#34;</span>
 
-<span style="color:#75715e"># Push source and build repos.</span>
-git push origin master
+<span style="color:#75715e"># Push source and build repos.
+</span><span style="color:#75715e"></span>git push origin master
 
-<span style="color:#75715e"># Come Back up to the Project Root.</span>
-cd ..
+<span style="color:#75715e"># Come Back up to the Project Root.
+</span><span style="color:#75715e"></span>cd ..
 
-<span style="color:#75715e"># Follows update of public.</span>
-git add public
+<span style="color:#75715e"># Follows update of public.
+</span><span style="color:#75715e"></span>git add public
 git commit -m <span style="color:#e6db74">&#34;</span>$msg<span style="color:#e6db74">&#34;</span>
 git push</code></pre></div>
 <h2 id="new-post-sh">new_post.sh</h2>
