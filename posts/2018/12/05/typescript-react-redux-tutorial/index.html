@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="author" content="nametake">
+    <meta name="description" content="nametake&#39;s personal website">
+    <meta name="keywords" content="blog,developer,personal">
+
+    <base href="https://nametake.github.io/">
+    <title>
+  TypeScript&#43;React&#43;Reduxチュートリアル · nametake.info
+</title>
+
+    <link rel="canonical" href="https://nametake.github.io/posts/2018/12/05/typescript-react-redux-tutorial/">
+
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700|Merriweather:300,700|Source+Code+Pro:400,700" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css" integrity="sha256-oSrCnRYXvHG31SBifqP2PM1uje7SJUyX0nTwO2RJV54=" crossorigin="anonymous" />
+
+    
+      
+      
+      <link rel="stylesheet" href="https://nametake.github.io/css/coder.min.cd087ace86754b082dec94545567f8361cba42e84f8e15edbc4a9f6e52bd1f6a.css" integrity="sha256-zQh6zoZ1Swgt7JRUVWf4Nhy6QuhPjhXtvEqfblK9H2o=" crossorigin="anonymous" media="screen" />
+    
+
+    
+
+    
+
+    
+      <link rel="stylesheet" href="https://nametake.github.io/css/index.css">
+    
+
+    <link rel="icon" type="image/png" href="https://nametake.github.io/images/favicon-32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="https://nametake.github.io/images/favicon-16x16.png" sizes="16x16">
+
+    
+
+    <meta name="generator" content="Hugo 0.49" />
+  </head>
+
+  <body class=" ">
+    <main class="wrapper">
+      <nav class="navigation">
+  <section class="container">
+    <a class="navigation-title" href="https://nametake.github.io/">
+      nametake.info
+    </a>
+    <input type="checkbox" id="menu-toggle" />
+    <label class="menu-button float-right" for="menu-toggle"><i class="fas fa-bars"></i></label>
+    <ul class="navigation-list">
+      
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="https://nametake.github.io/about/">About</a>
+          </li>
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="https://nametake.github.io/posts/">Blog</a>
+          </li>
+        
+      
+      
+    </ul>
+  </section>
+</nav>
+
+
+      <div class="content">
+        
+  <section class="container post">
+    <article>
+      <header>
+        <div class="post-title">
+          <h1 class="title">TypeScript&#43;React&#43;Reduxチュートリアル</h1>
+        </div>
+        <div class="post-meta">
+          <div class="date">
+            <span class="posted-on">
+              <i class="fas fa-calendar"></i>
+              <time datetime='2018-12-05T11:08:00&#43;09:00'>
+                December 5, 2018
+              </time>
+            </span>
+            <span class="reading-time">
+              <i class="fas fa-clock"></i>
+              7 minutes read
+            </span>
+          </div>
+          
+          <div class="tags">
+  <i class="fas fa-tag"></i>
+    <a href="https://nametake.github.io/tags/typescript/">typescript</a>
+      <span class="separator">•</span>
+    <a href="https://nametake.github.io/tags/react/">react</a>
+      <span class="separator">•</span>
+    <a href="https://nametake.github.io/tags/redux/">redux</a></div>
+
+        </div>
+      </header>
+
+      <div>
+        
+
+<p>普段は Go でサーバサイドのコードを書いているのですが、TypeScript+React+Redux を勉強する機会がありました。</p>
+
+<p>その際、巷に溢れているチュートリアルやサンプルコードで型で縛っているものが少なすぎて、理解にかなり苦労したので自分なりに Todo アプリケーションを作るチュートリアルを書いておきます。</p>
+
+<p>このチュートリアルは以下のことを意識して書かれています。</p>
+
+<ul>
+<li>引数や返り値は型で縛る</li>
+<li>外部ライブラリは以下の 3 つしか import しない
+
+<ul>
+<li>react</li>
+<li>redux</li>
+<li>react-redux</li>
+</ul></li>
+<li>標準の設計になるべく則る</li>
+</ul>
+
+<p>また、この記事では以下のことについては深く言及はしません</p>
+
+<ul>
+<li>nodeのツールのエコシステム</li>
+<li>TypeScript の記法</li>
+<li>JSX の記法</li>
+<li>React+Redux の概念</li>
+</ul>
+
+<h3 id="プロジェクトの準備">プロジェクトの準備</h3>
+
+<p>まずはプロジェクトを準備します。</p>
+
+<p>node と yarn は入っている前提で進めます。</p>
+
+<p>Facebook が公式で用意しているアプリケーション作成ツールを使用してプロジェクトテンプレートを作ります。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">npx create-react-app todo-app --scripts-version=react-scripts-ts</pre></div>
+<p>次にプロジェクトのディレクトリに移動して以下のツールをインストールします。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">cd todo-app
+yarn add redux react-redux
+yarn add -D @types/redux @types/react-redux</pre></div>
+<p>@types がついているパッケージは、<code>/</code>以下のパッケージの型情報が記述されているパッケージです。開発時しか使用しないので<code>-D</code>オプションを付けてインストールします。</p>
+
+<p>以下のコマンドでローカルサーバが立ち上がり、ブラウザに画面が表示されれば問題ありません。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">yarn start</pre></div>
+<p>チュートリアルのコードは作成されたプロジェクト内部の src ディレクトリに記述していきます。</p>
+
+<h3 id="component-の実装">Component の実装</h3>
+
+<p>何はともあれ何かが表示されてないとモチベーションが上がらないのでブラウザに見た目を表示させます。</p>
+
+<p>以下のコードを TodoComponent.tsx として src 以下に記述します。JSX 記法が含まれるファイルは tsx 拡張子にします。</p>
+
+<p>ちなみに以下のコードは React と TypeScript の要素しか出てきていません。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-tsx" data-lang="tsx"><span style="color:#75715e">// TodoComponent.tsx
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">import</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">as</span> <span style="color:#a6e22e">React</span> <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;react&#39;</span>;
+
+<span style="color:#66d9ef">interface</span> <span style="color:#a6e22e">IProps</span> {
+  <span style="color:#a6e22e">todos</span>: <span style="color:#66d9ef">string</span>[];
+  <span style="color:#a6e22e">onClickAddButton</span><span style="color:#f92672">:</span> (<span style="color:#a6e22e">todo</span>: <span style="color:#66d9ef">string</span>) <span style="color:#f92672">=&gt;</span> <span style="color:#66d9ef">void</span>;
+}
+
+<span style="color:#66d9ef">interface</span> <span style="color:#a6e22e">IState</span> {
+  <span style="color:#a6e22e">text</span>: <span style="color:#66d9ef">string</span>;
+}
+
+<span style="color:#75715e">/* tslint:disable:jsx-no-lambda */</span>
+<span style="color:#66d9ef">export</span> <span style="color:#66d9ef">default</span> <span style="color:#66d9ef">class</span> <span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">React</span>.<span style="color:#a6e22e">Component</span><span style="color:#f92672">&lt;</span><span style="color:#a6e22e">IProps</span>, <span style="color:#a6e22e">IState</span><span style="color:#f92672">&gt;</span> {
+  <span style="color:#66d9ef">constructor</span>(<span style="color:#a6e22e">props</span>: <span style="color:#66d9ef">IProps</span>) {
+    <span style="color:#66d9ef">super</span>(<span style="color:#a6e22e">props</span>);
+
+    <span style="color:#75715e">// Componentのstateの初期化
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">state</span> <span style="color:#f92672">=</span> {
+      <span style="color:#a6e22e">text</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;&#39;</span>
+    };
+  }
+
+  <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">render() {</span>
+    <span style="color:#66d9ef">const</span> { <span style="color:#a6e22e">todos</span> } <span style="color:#f92672">=</span> <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">props</span>;
+    <span style="color:#66d9ef">const</span> { <span style="color:#a6e22e">text</span> } <span style="color:#f92672">=</span> <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">state</span>;
+    <span style="color:#66d9ef">return</span> (
+      <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">div</span> <span style="color:#a6e22e">style</span><span style="color:#f92672">=</span>{{ <span style="color:#a6e22e">width</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;500px&#39;</span>, <span style="color:#a6e22e">margin</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;0 auto&#39;</span> }}<span style="color:#f92672">&gt;</span>
+        <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">h1</span><span style="color:#f92672">&gt;</span><span style="color:#a6e22e">TODO</span> <span style="color:#a6e22e">LIST</span><span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/h1&gt;</span>
+        <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">input</span> <span style="color:#a6e22e">type</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;text&#34;</span> <span style="color:#a6e22e">value</span><span style="color:#f92672">=</span>{<span style="color:#a6e22e">text</span>} <span style="color:#a6e22e">onChange</span><span style="color:#f92672">=</span>{<span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">onTextChange</span>} <span style="color:#960050;background-color:#1e0010">/&gt;</span>
+        <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">button</span> <span style="color:#a6e22e">onClick</span><span style="color:#f92672">=</span>{<span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">onClickAddButton</span>}<span style="color:#f92672">&gt;</span><span style="color:#a6e22e">Add</span> <span style="color:#a6e22e">Todo</span><span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/button&gt;</span>
+        <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">ul</span><span style="color:#f92672">&gt;</span>
+          {<span style="color:#a6e22e">todos</span>.<span style="color:#a6e22e">map</span>((<span style="color:#a6e22e">todo</span>, <span style="color:#a6e22e">i</span>) <span style="color:#f92672">=&gt;</span> (
+            <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">li</span> <span style="color:#a6e22e">key</span><span style="color:#f92672">=</span>{<span style="color:#a6e22e">i</span>}<span style="color:#f92672">&gt;</span>{<span style="color:#a6e22e">todo</span>}<span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/li&gt;</span>
+          ))}
+        <span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/ul&gt;</span>
+      <span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/div&gt;</span>
+    );
+  }
+
+  <span style="color:#75715e">// テキストが更新されたときのイベント関数
+</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">private</span> <span style="color:#a6e22e">onTextChange</span> <span style="color:#f92672">=</span> (<span style="color:#a6e22e">e</span>: <span style="color:#66d9ef">React.ChangeEvent</span><span style="color:#f92672">&lt;</span><span style="color:#a6e22e">HTMLInputElement</span><span style="color:#f92672">&gt;</span>) <span style="color:#f92672">=&gt;</span> {
+    <span style="color:#75715e">// text inputに文字が入力されるたびに入力内容をinputに反映させている
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">setState</span>({ <span style="color:#a6e22e">text</span>: <span style="color:#66d9ef">e.currentTarget.value</span> });
+  };
+
+  <span style="color:#75715e">// ボタンがクリックされたときのイベント関数
+</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">private</span> <span style="color:#a6e22e">onClickAddButton</span> <span style="color:#f92672">=</span> () <span style="color:#f92672">=&gt;</span> {
+    <span style="color:#66d9ef">const</span> { <span style="color:#a6e22e">onClickAddButton</span> } <span style="color:#f92672">=</span> <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">props</span>;
+    <span style="color:#66d9ef">const</span> { <span style="color:#a6e22e">text</span> } <span style="color:#f92672">=</span> <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">state</span>;
+    <span style="color:#a6e22e">onClickAddButton</span>(<span style="color:#a6e22e">text</span>);
+  };
+}</code></pre></div>
+<p>作成した TodoComponent を表示させるために、元からあった App.tsx を以下のように書き換えます。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-tsx" data-lang="tsx"><span style="color:#75715e">// App.tsx
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">import</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">as</span> <span style="color:#a6e22e">React</span> <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;react&#39;</span>;
+
+<span style="color:#66d9ef">import</span> <span style="color:#a6e22e">TodoComponent</span> <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;./TodoComponent&#39;</span>;
+
+<span style="color:#75715e">/* tslint:disable:no-console */</span>
+<span style="color:#75715e">/* tslint:disable:jsx-no-lambda */</span>
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">App</span> <span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">React</span>.<span style="color:#a6e22e">Component</span> {
+  <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">render() {</span>
+    <span style="color:#66d9ef">return</span> (
+      <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">div</span><span style="color:#f92672">&gt;</span>
+        <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">TodoComponent</span>
+          <span style="color:#a6e22e">todos</span><span style="color:#f92672">=</span>{[<span style="color:#e6db74">&#39;foo&#39;</span>, <span style="color:#e6db74">&#39;bar&#39;</span>]}
+          <span style="color:#a6e22e">onClickAddButton</span><span style="color:#f92672">=</span>{(<span style="color:#a6e22e">todo</span>: <span style="color:#66d9ef">string</span>)<span style="color:#f92672">:</span> <span style="color:#66d9ef">void</span> <span style="color:#f92672">=&gt;</span> {
+            <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">todo</span>);
+          }}
+        <span style="color:#960050;background-color:#1e0010">/&gt;</span>
+      <span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/div&gt;</span>
+    );
+  }
+}
+
+<span style="color:#66d9ef">export</span> <span style="color:#66d9ef">default</span> <span style="color:#a6e22e">App</span>;</code></pre></div>
+<p>画面を確認するとフォームとAdd Todoボタン、fooとbarがリストで表示されていると思います。この状態でフォームに文字を入力した状態で Add TODO ボタンをクリックすると console に入力したテキストが表示されます。</p>
+
+<p>ここで定義した <code>TodoComponent</code> は&rdquo;Presentational Component&rdquo;と呼ばれるもので、見た目を表現するためのものです。 この Component は Redux やその他ライブラリとは完全に切り離されたものになります。</p>
+
+<p><code>TodoComponent</code> に渡している IProps は React における props を明示的に型として定義したものです。React における props は親の Component から渡されてくる情報のことです。型を定義しておくことでこの Component には<code>todos</code>という string のリストと、string を受け取って void を返す関数が入った props が渡ってくることが明確になります。</p>
+
+<p>IState は React における state を明示的に型として定義したものです。React における state は<strong>この Component の状態(主に UI)を表す</strong>ものです。 型を定義することで、この Component は<code>text</code>という文字列を状態として持つことを明示します。</p>
+
+<p>onTextChangeやonClickAddButtonのようなコールバック関数はクラスのメンバとして定義します。こうすることで描画のたびに関数が生成されるのを防ぎます。</p>
+
+<h4 id="redux-を使わない場合">Redux を使わない場合</h4>
+
+<p>ちなみにこの程度のアプリケーションなら Redux を採用する必要もなく React で完結させられます。</p>
+
+<p><code>todos</code> を props 経由で親から渡ってくるものではなく Component の state として取り扱ってしまえばそれで終わりです。</p>
+
+<p>以下のように書き換えることで Redux を使わずに Todo リストを追加するコードになります。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-tsx" data-lang="tsx"><span style="color:#75715e">// TodoComponent.tsx
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">import</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">as</span> <span style="color:#a6e22e">React</span> <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;react&#39;</span>;
+
+<span style="color:#66d9ef">interface</span> <span style="color:#a6e22e">IProps</span> {
+  <span style="color:#a6e22e">onClickAddButton</span><span style="color:#f92672">:</span> (<span style="color:#a6e22e">todo</span>: <span style="color:#66d9ef">string</span>) <span style="color:#f92672">=&gt;</span> <span style="color:#66d9ef">void</span>;
+}
+
+<span style="color:#66d9ef">interface</span> <span style="color:#a6e22e">IState</span> {
+  <span style="color:#a6e22e">text</span>: <span style="color:#66d9ef">string</span>;
+  <span style="color:#a6e22e">todos</span>: <span style="color:#66d9ef">string</span>[];
+}
+
+<span style="color:#75715e">/* tslint:disable:jsx-no-lambda */</span>
+<span style="color:#66d9ef">export</span> <span style="color:#66d9ef">default</span> <span style="color:#66d9ef">class</span> <span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">React</span>.<span style="color:#a6e22e">Component</span><span style="color:#f92672">&lt;</span><span style="color:#a6e22e">IProps</span>, <span style="color:#a6e22e">IState</span><span style="color:#f92672">&gt;</span> {
+  <span style="color:#66d9ef">constructor</span>(<span style="color:#a6e22e">props</span>: <span style="color:#66d9ef">IProps</span>) {
+    <span style="color:#66d9ef">super</span>(<span style="color:#a6e22e">props</span>);
+
+    <span style="color:#75715e">// Componentのstateの初期化
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">state</span> <span style="color:#f92672">=</span> {
+      <span style="color:#a6e22e">text</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;&#39;</span>,
+      <span style="color:#a6e22e">todos</span><span style="color:#f92672">:</span> []
+    };
+  }
+
+  <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">render() {</span>
+    <span style="color:#66d9ef">const</span> { <span style="color:#a6e22e">todos</span>, <span style="color:#a6e22e">text</span> } <span style="color:#f92672">=</span> <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">state</span>;
+    <span style="color:#66d9ef">return</span> (
+      <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">div</span> <span style="color:#a6e22e">style</span><span style="color:#f92672">=</span>{{ <span style="color:#a6e22e">width</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;500px&#39;</span>, <span style="color:#a6e22e">margin</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;0 auto&#39;</span> }}<span style="color:#f92672">&gt;</span>
+        <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">h1</span><span style="color:#f92672">&gt;</span><span style="color:#a6e22e">TODO</span> <span style="color:#a6e22e">LIST</span><span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/h1&gt;</span>
+        <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">input</span> <span style="color:#a6e22e">type</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;text&#34;</span> <span style="color:#a6e22e">value</span><span style="color:#f92672">=</span>{<span style="color:#a6e22e">text</span>} <span style="color:#a6e22e">onChange</span><span style="color:#f92672">=</span>{<span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">onTextChange</span>} <span style="color:#960050;background-color:#1e0010">/&gt;</span>
+        <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">button</span> <span style="color:#a6e22e">onClick</span><span style="color:#f92672">=</span>{<span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">onClickAddButton</span>}<span style="color:#f92672">&gt;</span><span style="color:#a6e22e">Add</span> <span style="color:#a6e22e">Todo</span><span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/button&gt;</span>
+        <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">ul</span><span style="color:#f92672">&gt;</span>
+          {<span style="color:#a6e22e">todos</span>.<span style="color:#a6e22e">map</span>((<span style="color:#a6e22e">todo</span>, <span style="color:#a6e22e">i</span>) <span style="color:#f92672">=&gt;</span> (
+            <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">li</span> <span style="color:#a6e22e">key</span><span style="color:#f92672">=</span>{<span style="color:#a6e22e">i</span>}<span style="color:#f92672">&gt;</span>{<span style="color:#a6e22e">todo</span>}<span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/li&gt;</span>
+          ))}
+        <span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/ul&gt;</span>
+      <span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/div&gt;</span>
+    );
+  }
+
+  <span style="color:#75715e">// テキストが更新されたときのイベント関数
+</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">private</span> <span style="color:#a6e22e">onTextChange</span> <span style="color:#f92672">=</span> (<span style="color:#a6e22e">e</span>: <span style="color:#66d9ef">React.ChangeEvent</span><span style="color:#f92672">&lt;</span><span style="color:#a6e22e">HTMLInputElement</span><span style="color:#f92672">&gt;</span>) <span style="color:#f92672">=&gt;</span> {
+    <span style="color:#75715e">// text inputに文字が入力されるたびに入力内容をinputに反映させている
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">setState</span>({ <span style="color:#a6e22e">text</span>: <span style="color:#66d9ef">e.currentTarget.value</span> });
+  };
+
+  <span style="color:#75715e">// ボタンがクリックされたときのイベント関数
+</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">private</span> <span style="color:#a6e22e">onClickAddButton</span> <span style="color:#f92672">=</span> () <span style="color:#f92672">=&gt;</span> {
+    <span style="color:#66d9ef">const</span> { <span style="color:#a6e22e">text</span>, <span style="color:#a6e22e">todos</span> } <span style="color:#f92672">=</span> <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">state</span>;
+    <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">setState</span>({
+      <span style="color:#a6e22e">todos</span>: <span style="color:#66d9ef">todos.concat</span>([<span style="color:#a6e22e">text</span>])
+    });
+  };
+}</code></pre></div>
+<p><code>IProps</code>の<code>todos</code>がなくなったので App.tsx は以下のように書き換えます。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-tsx" data-lang="tsx"><span style="color:#75715e">// App.tsx
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">import</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">as</span> <span style="color:#a6e22e">React</span> <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;react&#39;</span>;
+
+<span style="color:#66d9ef">import</span> <span style="color:#a6e22e">TodoComponent</span> <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;./TodoComponent&#39;</span>;
+
+<span style="color:#75715e">/* tslint:disable:no-console */</span>
+<span style="color:#75715e">/* tslint:disable:jsx-no-lambda */</span>
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">App</span> <span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">React</span>.<span style="color:#a6e22e">Component</span> {
+  <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">render() {</span>
+    <span style="color:#66d9ef">return</span> (
+      <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">div</span><span style="color:#f92672">&gt;</span>
+        <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">TodoComponent</span>
+          <span style="color:#a6e22e">onClickAddButton</span><span style="color:#f92672">=</span>{(<span style="color:#a6e22e">todo</span>: <span style="color:#66d9ef">string</span>)<span style="color:#f92672">:</span> <span style="color:#66d9ef">void</span> <span style="color:#f92672">=&gt;</span> {
+            <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">todo</span>);
+          }}
+        <span style="color:#960050;background-color:#1e0010">/&gt;</span>
+      <span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/div&gt;</span>
+    );
+  }
+}
+
+<span style="color:#66d9ef">export</span> <span style="color:#66d9ef">default</span> <span style="color:#a6e22e">App</span>;</code></pre></div>
+<p>コンポーネントがネストしておらず、データフローが複雑ではないならこれで十分なのが理解できたかと思います。</p>
+
+<p>このあたりのことは Redux の作者である、Dan Abramov 氏が<a href="https://medium.com/@dan_abramov/you-might-not-need-redux-be46360cf367">You Might Not Need Redux</a>という記事を書いていますので一読しておくと良いかもしれません。</p>
+
+<p>とは言うものの、この記事は React+Redux のチュートリアル記事なので、Redux を使う方向で進めます。</p>
+
+<h3 id="store-の-state-の定義">Store の State の定義</h3>
+
+<p>次に Store の State を定義します。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ts" data-lang="ts"><span style="color:#75715e">// store.ts
+</span><span style="color:#75715e"></span>
+<span style="color:#75715e">// Storeが持つTodoにの状態を定義
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">interface</span> <span style="color:#a6e22e">ITodoState</span> {
+  <span style="color:#a6e22e">todos</span>: <span style="color:#66d9ef">string</span>[];
+}
+
+<span style="color:#75715e">// 全てのStateを集約したStateを定義
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">interface</span> <span style="color:#a6e22e">IRootState</span> {
+  <span style="color:#a6e22e">todoState</span>: <span style="color:#66d9ef">ITodoState</span>;
+}</code></pre></div>
+<p>Store とは Redux における役割の一つで、<a href="https://redux.js.org/api/store">公式ドキュメント</a>にあるとおり、そのアプリケーションにおける全ての状態(State)を持ちます。この State は後述する Action-&gt;Reducer 経由でしか更新されません。</p>
+
+<p>ちなみに上記のコードにはまだ Store は定義されておらず、Store が持つ State しか定義されていません。また、少し冗長ですが、いくつか State が出てくることを想定して、<code>IRootState</code> を用意しています。これぐらいのアプリケーションなら <code>ITodoState</code> だけでも十分です。</p>
+
+<p>少し厄介なのですが、ここにおける &ldquo;State&rdquo; は先程出てきた &ldquo;Component の state&rdquo; とは<strong>全くの別物</strong>です。Redux における State はアプリケーション全体の状態を表し、React の state はその Component の状態を表しています。</p>
+
+<h3 id="action-の追加">Action の追加</h3>
+
+<p>次に&rdquo;Add Todo&rdquo;ボタンを押したときに発火される Action を定義します。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ts" data-lang="ts"><span style="color:#75715e">// action.ts
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">Action</span> } <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;redux&#39;</span>; <span style="color:#75715e">// reduxで定義されているAction interfaceだけimport
+</span><span style="color:#75715e"></span>
+<span style="color:#75715e">// reduxのActionとして判別するための識別子をenumとして定義
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">enum</span> <span style="color:#a6e22e">TodoActionType</span> {
+  <span style="color:#a6e22e">ADD_TODO</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;ADD_TODO&#39;</span>
+}
+
+<span style="color:#75715e">// Todoを追加するActionとして、Actionを継承したinterfaceを定義
+</span><span style="color:#75715e">// 追加するPayloadの情報も同時に持つ
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">interface</span> <span style="color:#a6e22e">IAddTodoAction</span> <span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">Action</span> {
+  <span style="color:#a6e22e">type</span>: <span style="color:#66d9ef">TodoActionType.ADD_TODO</span>;
+  <span style="color:#a6e22e">payload</span><span style="color:#f92672">:</span> {
+    <span style="color:#a6e22e">todo</span>: <span style="color:#66d9ef">string</span>;
+  };
+}
+
+<span style="color:#75715e">// Actionを表現したinterfaceを一つの型として取り扱うためにTodoAction型を定義
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">export</span> <span style="color:#a6e22e">type</span> <span style="color:#a6e22e">TodoAction</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">IAddTodoAction</span>;
+
+<span style="color:#75715e">// 定義したActionのinterfaceを作成するCreatorのinterfaceを定義
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">interface</span> <span style="color:#a6e22e">ITodoActionCreator</span> {
+  <span style="color:#a6e22e">addTodoAction</span>(<span style="color:#a6e22e">todo</span>: <span style="color:#66d9ef">string</span>)<span style="color:#f92672">:</span> <span style="color:#a6e22e">IAddTodoAction</span>;
+}
+
+<span style="color:#75715e">// 定義したCreatorの実装を定義(exportをつけてないので外からは見えない)
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">TodoActionCreator</span> <span style="color:#66d9ef">implements</span> <span style="color:#a6e22e">ITodoActionCreator</span> {
+  <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">addTodoAction</span> <span style="color:#f92672">=</span> (<span style="color:#a6e22e">todo</span>: <span style="color:#66d9ef">string</span>)<span style="color:#f92672">:</span> <span style="color:#a6e22e">IAddTodoAction</span> <span style="color:#f92672">=&gt;</span> {
+    <span style="color:#66d9ef">return</span> {
+      <span style="color:#a6e22e">payload</span><span style="color:#f92672">:</span> {
+        <span style="color:#a6e22e">todo</span>
+      },
+      <span style="color:#a6e22e">type</span>: <span style="color:#66d9ef">TodoActionType.ADD_TODO</span>
+    };
+  };
+}
+
+<span style="color:#75715e">// Creatorのインスタンスを作成
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">todoActionCreator</span>: <span style="color:#66d9ef">ITodoActionCreator</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">TodoActionCreator</span>();</code></pre></div>
+<p>少し冗長ですが書いてあることはシンプルで、Action の型の定義とそれを作成する Creator を作成しています。</p>
+
+<p><code>redux</code> パッケージの <code>Action</code> の interface 定義には <code>type</code> しか定義されていませが、 Action と一緒にデータを渡したいため<a href="https://github.com/redux-utilities/flux-standard-action">Action のコーディング規約</a>に則って<code>payload</code>を付与しています。このコーディング規約自体は非公式ですが、これに則っているライブラリも多いためこのチュートリアルではそれに従います。</p>
+
+<p>以下の記述は TodoAction 型を作成するためのものです。今後 Action の interface が増えたときに<code>|</code>記述を使って TodoAction と一致する型を増やすことができます。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ts" data-lang="ts"><span style="color:#66d9ef">export</span> <span style="color:#a6e22e">type</span> <span style="color:#a6e22e">TodoAction</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">IAddTodoAction</span>;</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ts" data-lang="ts"><span style="color:#75715e">// TodoActionはITodoActionかIDeleteTodoActionのどちらかを受け取れる
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">export</span> <span style="color:#a6e22e">type</span> <span style="color:#a6e22e">TodoAction</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">IAddTodoAction</span> <span style="color:#f92672">|</span> <span style="color:#a6e22e">IDeleteTodoAction</span>;</code></pre></div>
+<h3 id="reducer-の追加">Reducer の追加</h3>
+
+<p>Action が発火したあと、その Action に応じて Store の State を更新する Reducer を作成します。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ts" data-lang="ts"><span style="color:#75715e">// reducer.ts
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">combineReducers</span>, <span style="color:#a6e22e">Reducer</span> } <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;redux&#39;</span>;
+
+<span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">IAddTodoAction</span>, <span style="color:#a6e22e">TodoAction</span>, <span style="color:#a6e22e">TodoActionType</span> } <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;./action&#39;</span>;
+<span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">IRootState</span>, <span style="color:#a6e22e">ITodoState</span> } <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;./store&#39;</span>;
+
+<span style="color:#75715e">// ITodoStateの初期データを作成
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">initTodoState</span>: <span style="color:#66d9ef">ITodoState</span> <span style="color:#f92672">=</span> {
+  <span style="color:#a6e22e">todos</span><span style="color:#f92672">:</span> []
+};
+
+<span style="color:#75715e">// Todoで発生するactionに対応してReduxのstateを返すReducerを作成
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">todoReducer</span>: <span style="color:#66d9ef">Reducer</span><span style="color:#f92672">&lt;</span><span style="color:#a6e22e">ITodoState</span><span style="color:#f92672">&gt;</span> <span style="color:#f92672">=</span> (
+  <span style="color:#a6e22e">state</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">initTodoState</span>,
+  <span style="color:#a6e22e">action</span>: <span style="color:#66d9ef">TodoAction</span>
+)<span style="color:#f92672">:</span> <span style="color:#a6e22e">ITodoState</span> <span style="color:#f92672">=&gt;</span> {
+  <span style="color:#75715e">// 関数の引数として渡されてきたactionのtypeを見てReduxのstateを返す
+</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">switch</span> (<span style="color:#a6e22e">action</span>.<span style="color:#a6e22e">type</span>) {
+    <span style="color:#66d9ef">case</span> <span style="color:#a6e22e">TodoActionType</span>.<span style="color:#a6e22e">ADD_TODO</span><span style="color:#f92672">:</span>
+      <span style="color:#75715e">// ADD_TODOの場合はactionのpayloadに新しいtodoが詰められているので
+</span><span style="color:#75715e"></span>      <span style="color:#75715e">// それを取り出してtodosに追加して新しいstateとして返す
+</span><span style="color:#75715e"></span>      <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">addTodoAction</span>: <span style="color:#66d9ef">IAddTodoAction</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">action</span>;
+      <span style="color:#66d9ef">return</span> {
+        ...<span style="color:#a6e22e">state</span>,
+        <span style="color:#a6e22e">todos</span>: <span style="color:#66d9ef">state.todos.concat</span>([<span style="color:#a6e22e">addTodoAction</span>.<span style="color:#a6e22e">payload</span>.<span style="color:#a6e22e">todo</span>])
+      };
+    <span style="color:#66d9ef">default</span><span style="color:#f92672">:</span>
+      <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">state</span>;
+  }
+};
+
+<span style="color:#75715e">// 全てを集約したReducerを作成
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">reducer</span>: <span style="color:#66d9ef">Reducer</span><span style="color:#f92672">&lt;</span><span style="color:#a6e22e">IRootState</span><span style="color:#f92672">&gt;</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">combineReducers</span>({
+  <span style="color:#a6e22e">todoState</span>: <span style="color:#66d9ef">todoReducer</span>
+});
+
+<span style="color:#66d9ef">export</span> <span style="color:#66d9ef">default</span> <span style="color:#a6e22e">reducer</span>;</code></pre></div>
+<p>action.ts に定義した <code>TodoAction</code> を受け取り、store.ts に定義した <code>ITodoState</code> 型を指定した Reducer を返す <code>todoReducer</code> を作成しています。</p>
+
+<p><code>todoReducer</code> では <code>TodoActionType</code> が <code>ADD_TODO</code> だったときに、Action に一緒に渡された <code>payload</code> の <code>todo</code> を <code>state.todos</code> に新しく追加しています。</p>
+
+<p>ここで気をつけなくてはいけないのは、<strong>Reducer が返す State は必ず新しいオブジェクトにする</strong>ということです。</p>
+
+<p>React+Redux では <strong>Reducer が返す State と現在の State を比較して差分がある時</strong>に UI を更新します。そのため Reducer のなかで State を直接操作してしまうと Reducer の返り値との差分がなくなり、正常に UI が更新されなくなってしまいます。</p>
+
+<p>今回の場合だと「 Action の <code>payload.todo</code> を <code>state.todos</code> に追加する」という点から <code>state.todos.push(payload.todo)</code> のようにしてしまうと UI が正常に更新されなくなってしまうので気をつけましょう。</p>
+
+<h3 id="reducer-を使って-store-の作成">Reducer を使って Store の作成</h3>
+
+<p>reducer.ts に定義した<code>reducer</code>を使用して、store.ts に<code>store</code>を以下のように追記して定義します。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ts" data-lang="ts"><span style="color:#75715e">// store.ts
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">createStore</span>, <span style="color:#a6e22e">Store</span> } <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;redux&#39;</span>;
+
+<span style="color:#66d9ef">import</span> <span style="color:#a6e22e">reducer</span> <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;./reducer&#39;</span>;
+
+<span style="color:#75715e">// Storeが持つTodoにの状態を定義
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">interface</span> <span style="color:#a6e22e">ITodoState</span> {
+  <span style="color:#a6e22e">todos</span>: <span style="color:#66d9ef">string</span>[];
+}
+
+<span style="color:#75715e">// 全てのStateを集約したStateを定義
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">interface</span> <span style="color:#a6e22e">IRootState</span> {
+  <span style="color:#a6e22e">todoState</span>: <span style="color:#66d9ef">ITodoState</span>;
+}
+
+<span style="color:#75715e">// importしたreducerを渡してstoreを作成
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">store</span>: <span style="color:#66d9ef">Store</span><span style="color:#f92672">&lt;</span><span style="color:#a6e22e">ITodoState</span><span style="color:#f92672">&gt;</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">createStore</span>(<span style="color:#a6e22e">reducer</span>);
+
+<span style="color:#66d9ef">export</span> <span style="color:#66d9ef">default</span> <span style="color:#a6e22e">store</span>;</code></pre></div>
+<p>上記の定義をすることで、 Action が発火されるとそれに対応した Reducer が起動して Store の State が更新されるようになります。</p>
+
+<p>しかし、まだ Action の発火部分と Store が更新されたときの描画については記述されていないので、それを行う Container というものを作成します。</p>
+
+<h3 id="container-を作成">Container を作成</h3>
+
+<p>最後に、最初に定義した Component と Redux の世界をつなぐための Container を作成します。</p>
+
+<p>以下のように TodoContainer.tsx を作成します。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-tsx" data-lang="tsx"><span style="color:#75715e">// TodoContainer.tsx
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">import</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">as</span> <span style="color:#a6e22e">React</span> <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;react&#39;</span>;
+<span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">connect</span> } <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;react-redux&#39;</span>;
+<span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">Action</span>, <span style="color:#a6e22e">Dispatch</span> } <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;redux&#39;</span>;
+
+<span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">todoActionCreator</span> } <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;./action&#39;</span>;
+<span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">IRootState</span> } <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;./store&#39;</span>;
+<span style="color:#66d9ef">import</span> <span style="color:#a6e22e">TodoComponent</span> <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;./TodoComponent&#39;</span>;
+
+<span style="color:#75715e">// ReduxのStoreをReactのContainerのPropsに変換するinterfaceを定義
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">interface</span> <span style="color:#a6e22e">IStateToProps</span> {
+  <span style="color:#a6e22e">todos</span>: <span style="color:#66d9ef">string</span>[];
+}
+
+<span style="color:#75715e">// ReduxのDispatchをPropsに変換するinterfaceを定義
+</span><span style="color:#75715e">// メンバにはどのアクションを実行するのかを定義する
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">interface</span> <span style="color:#a6e22e">IDispatchToProps</span> {
+  <span style="color:#a6e22e">addTodo</span><span style="color:#f92672">:</span> (<span style="color:#a6e22e">todo</span>: <span style="color:#66d9ef">string</span>) <span style="color:#f92672">=&gt;</span> <span style="color:#66d9ef">void</span>;
+}
+
+<span style="color:#75715e">// IStateToPropsとIDispatchToPropsの複合型を定義
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">type</span> <span style="color:#a6e22e">IProps</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">IStateToProps</span> <span style="color:#f92672">&amp;</span> <span style="color:#a6e22e">IDispatchToProps</span>;
+
+<span style="color:#75715e">// IPropsを受け取るContainerを定義
+</span><span style="color:#75715e">// Stateは持たないので空の定義を渡す
+</span><span style="color:#75715e"></span><span style="color:#75715e">/* tslint:disable:jsx-no-lambda */</span>
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">TodoContainer</span> <span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">React</span>.<span style="color:#a6e22e">Component</span><span style="color:#f92672">&lt;</span><span style="color:#a6e22e">IProps</span>, {}<span style="color:#f92672">&gt;</span> {
+  <span style="color:#66d9ef">constructor</span>(<span style="color:#a6e22e">props</span>: <span style="color:#66d9ef">IProps</span>) {
+    <span style="color:#66d9ef">super</span>(<span style="color:#a6e22e">props</span>);
+  }
+
+  <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">render</span>()<span style="color:#f92672">:</span> <span style="color:#a6e22e">JSX</span>.<span style="color:#a6e22e">Element</span> {
+    <span style="color:#75715e">// TodoComponentにpropsの値を詰めて返す
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">const</span> { <span style="color:#a6e22e">todos</span> } <span style="color:#f92672">=</span> <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">props</span>;
+    <span style="color:#66d9ef">return</span> (
+      <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">TodoComponent</span> <span style="color:#a6e22e">todos</span><span style="color:#f92672">=</span>{<span style="color:#a6e22e">todos</span>} <span style="color:#a6e22e">onClickAddButton</span><span style="color:#f92672">=</span>{<span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">onClickAddButton</span>} <span style="color:#960050;background-color:#1e0010">/&gt;</span>
+    );
+  }
+
+  <span style="color:#75715e">// TodoComponentにわたすコールバック関数
+</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">private</span> <span style="color:#a6e22e">onClickAddButton</span> <span style="color:#f92672">=</span> (<span style="color:#a6e22e">todo</span>: <span style="color:#66d9ef">string</span>)<span style="color:#f92672">:</span> <span style="color:#66d9ef">void</span> <span style="color:#f92672">=&gt;</span> {
+    <span style="color:#66d9ef">const</span> { <span style="color:#a6e22e">addTodo</span> } <span style="color:#f92672">=</span> <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">props</span>;
+    <span style="color:#a6e22e">addTodo</span>(<span style="color:#a6e22e">todo</span>);
+  };
+}
+
+<span style="color:#75715e">// Storeが更新されたときに送られてくるStateを受け取り、
+</span><span style="color:#75715e">// IStateToPropsに変換して返す関数を定義
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">mapStateToProps</span> <span style="color:#f92672">=</span> (<span style="color:#a6e22e">state</span>: <span style="color:#66d9ef">IRootState</span>)<span style="color:#f92672">:</span> <span style="color:#a6e22e">IStateToProps</span> <span style="color:#f92672">=&gt;</span> {
+  <span style="color:#66d9ef">const</span> { <span style="color:#a6e22e">todoState</span> } <span style="color:#f92672">=</span> <span style="color:#a6e22e">state</span>;
+  <span style="color:#66d9ef">return</span> {
+    <span style="color:#a6e22e">todos</span>: <span style="color:#66d9ef">todoState.todos</span>
+  };
+};
+
+<span style="color:#75715e">// Dispatchを受け取り、IDispatchToPropsの関数でどのアクションをDispatchするのかを定義する
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">mapDispatchToProps</span> <span style="color:#f92672">=</span> (<span style="color:#a6e22e">dispatch</span>: <span style="color:#66d9ef">Dispatch</span><span style="color:#f92672">&lt;</span><span style="color:#a6e22e">Action</span><span style="color:#f92672">&gt;</span>)<span style="color:#f92672">:</span> <span style="color:#a6e22e">IDispatchToProps</span> <span style="color:#f92672">=&gt;</span> {
+  <span style="color:#66d9ef">return</span> {
+    <span style="color:#a6e22e">addTodo</span><span style="color:#f92672">:</span> (<span style="color:#a6e22e">todo</span>: <span style="color:#66d9ef">string</span>) <span style="color:#f92672">=&gt;</span> {
+      <span style="color:#a6e22e">dispatch</span>(<span style="color:#a6e22e">todoActionCreator</span>.<span style="color:#a6e22e">addTodoAction</span>(<span style="color:#a6e22e">todo</span>));
+    }
+  };
+};
+
+<span style="color:#75715e">// Storeが更新されたときの挙動が詰められたIStatePropsと、
+</span><span style="color:#75715e">// Storeを更新するためのメソッドが詰められたIDispatchToPropsをTodoContainerと繋ぎこむ
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">default</span> <span style="color:#a6e22e">connect</span><span style="color:#f92672">&lt;</span><span style="color:#a6e22e">IStateToProps</span>, <span style="color:#a6e22e">IDispatchToProps</span><span style="color:#f92672">&gt;</span>(
+  <span style="color:#a6e22e">mapStateToProps</span>,
+  <span style="color:#a6e22e">mapDispatchToProps</span>
+)(<span style="color:#a6e22e">TodoContainer</span>);</code></pre></div>
+<p>次に App.tsx を以下のように変更します。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-tsx" data-lang="tsx"><span style="color:#75715e">// App.tsx
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">import</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">as</span> <span style="color:#a6e22e">React</span> <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;react&#39;</span>;
+<span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">Provider</span> } <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;react-redux&#39;</span>;
+
+<span style="color:#66d9ef">import</span> <span style="color:#a6e22e">store</span> <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;./store&#39;</span>;
+<span style="color:#66d9ef">import</span> <span style="color:#a6e22e">TodoContainer</span> <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;./TodoContainer&#39;</span>;
+
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">App</span> <span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">React</span>.<span style="color:#a6e22e">Component</span> {
+  <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">render() {</span>
+    <span style="color:#66d9ef">return</span> (
+      <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">Provider</span> <span style="color:#a6e22e">store</span><span style="color:#f92672">=</span>{<span style="color:#a6e22e">store</span>}<span style="color:#f92672">&gt;</span>
+        <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">TodoContainer</span> <span style="color:#960050;background-color:#1e0010">/&gt;</span>
+      <span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/Provider&gt;</span>
+    );
+  }
+}
+
+<span style="color:#66d9ef">export</span> <span style="color:#66d9ef">default</span> <span style="color:#a6e22e">App</span>;</code></pre></div>
+<p>上記まで書くとフォームに Add Todo ボタンを押したときに TODO が追加されるようになっていると思います。</p>
+
+<p><code>TodoContainer</code> は、 <code>TodoComponent</code> が &ldquo;Presentational Component&rdquo; と呼ばれるのに対して、 &ldquo;Container Component&rdquo; と呼ばれます。</p>
+
+<p>&ldquo;Container Component&rdquo; は &ldquo;Presentational Component&rdquo; にデータやコールバック関数を与える役割を持ちます。また、基本的には UI を持ちません。通常 Component が描画を行うための <code>render()</code> メソッドは &ldquo;Presentational Component&rdquo; の組み立てと、それらにデータとコールバックを与えるのが役割になります。</p>
+
+<p>さて、 Containerで で一番理解しづらいのは以下の部分になると思います。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ts" data-lang="ts"><span style="color:#75715e">// Storeが更新されたときに送られてくるStateを受け取り、
+</span><span style="color:#75715e">// IStateToPropsに変換して返す関数を定義
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">mapStateToProps</span> <span style="color:#f92672">=</span> (<span style="color:#a6e22e">state</span>: <span style="color:#66d9ef">IRootState</span>)<span style="color:#f92672">:</span> <span style="color:#a6e22e">IStateToProps</span> <span style="color:#f92672">=&gt;</span> {
+  <span style="color:#66d9ef">const</span> { <span style="color:#a6e22e">todoState</span> } <span style="color:#f92672">=</span> <span style="color:#a6e22e">state</span>;
+  <span style="color:#66d9ef">return</span> {
+    <span style="color:#a6e22e">todos</span>: <span style="color:#66d9ef">todoState.todos</span>
+  };
+};
+
+<span style="color:#75715e">// Dispatchを受け取り、IDispatchToPropsの関数でどのアクションをDispatchするのかを定義する
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">mapDispatchToProps</span> <span style="color:#f92672">=</span> (<span style="color:#a6e22e">dispatch</span>: <span style="color:#66d9ef">Dispatch</span><span style="color:#f92672">&lt;</span><span style="color:#a6e22e">Action</span><span style="color:#f92672">&gt;</span>)<span style="color:#f92672">:</span> <span style="color:#a6e22e">IDispatchToProps</span> <span style="color:#f92672">=&gt;</span> {
+  <span style="color:#66d9ef">return</span> {
+    <span style="color:#a6e22e">addTodo</span><span style="color:#f92672">:</span> (<span style="color:#a6e22e">todo</span>: <span style="color:#66d9ef">string</span>) <span style="color:#f92672">=&gt;</span> {
+      <span style="color:#a6e22e">dispatch</span>(<span style="color:#a6e22e">todoActionCreator</span>.<span style="color:#a6e22e">addTodoAction</span>(<span style="color:#a6e22e">todo</span>));
+    }
+  };
+};
+
+<span style="color:#75715e">// Storeが更新されたときの挙動が詰められたIStatePropsと、
+</span><span style="color:#75715e">// Storeを更新するためのメソッドが詰められたIDispatchToPropsをTodoContainerと繋ぎこむ
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">default</span> <span style="color:#a6e22e">connect</span><span style="color:#f92672">&lt;</span><span style="color:#a6e22e">IStateToProps</span>, <span style="color:#a6e22e">IDispatchToProps</span><span style="color:#f92672">&gt;</span>(
+  <span style="color:#a6e22e">mapStateToProps</span>,
+  <span style="color:#a6e22e">mapDispatchToProps</span>
+)(<span style="color:#a6e22e">TodoContainer</span>);</code></pre></div>
+<p>この部分を説明するにあたって、Store の機能を説明する必要があります。</p>
+
+<p>Storeは以下の2つの機能を持っています。</p>
+
+<ul>
+<li>State が更新されたときに更新された状態を通知する機能 (subscribe)</li>
+<li>Store に Action を伝えて状態を更新する機能 (dispatch)</li>
+</ul>
+
+<p>これらは Redux の概念であるため React とは特に関係のない機能です。その関係のない Redux の Store と、描画のための React の世界をつなげるために、 <code>react-redux</code> の <code>connect</code> 関数を使います。</p>
+
+<p><code>connect</code> の1つ目の引数には、「Store の subscribe が発火したときに、更新された State をどのように React の props に割り当てるのか」という記述がされた <code>mapStateToProps</code> を渡し、2つ目の引数には「 Action を伝える dispatch を実行するメソッドをどのように props に割り当てるのか」という記述がされた <code>mapDispatchToProps</code> が渡されています。</p>
+
+<p><code>connect</code> の返り値には Redux の Store の挙動をどのように React に割り当てるのか、という情報を持った関数が返ってくるため、それに <code>TodoContainer</code> を渡すことで React と Redux の世界をつなげています。</p>
+
+<h3 id="開発にあたって">開発にあたって</h3>
+
+<p>今回のチュートリアルでは使いませんでしたが、<a href="https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi/related">ReactのDevTool</a>や<a href="https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd?hl=ja">ReduxのDevTool</a>が用意されています。</p>
+
+<p>このあたりを使うとかなり細かい動作確認ができて便利なので、ここまで作ったものを利用して確認してみると面白いかもしれません。</p>
+
+<p>あとはこのチュートリアルのコードにDeleteやDoneの処理を追加してみるのも練習になって良いかもしれません。 あとはこのチュートリアルのコードに Delete や Done の処理を追加してみるのも練習になって良いかもしれません。</p>
+
+      </div>
+
+      <footer>
+        <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "nametake" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+      </footer>
+    </article>
+
+    
+  </section>
+
+      </div>
+
+      <footer class="footer">
+  <section class="container">
+    
+      <p>nametake.github.io</p>
+    
+     © 2018
+    
+       · 
+      Powered by <a href="https://gohugo.io/">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/">Coder</a>.
+    
+    
+  </section>
+</footer>
+
+    </main>
+
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-129739305-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+
+  </body>
+
+</html>
