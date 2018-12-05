@@ -112,7 +112,11 @@
 <p>このチュートリアルは以下のことを意識して書かれています。</p>
 
 <ul>
-<li>引数や返り値は型で縛る</li>
+<li>引数や返り値は型で縛る
+
+<ul>
+<li>データフローの理解を重視する</li>
+</ul></li>
 <li>外部ライブラリは以下の 3 つしか import しない
 
 <ul>
@@ -244,6 +248,10 @@ yarn add -D @types/redux @types/react-redux</pre></div>
 
 <p>onTextChangeやonClickAddButtonのようなコールバック関数はクラスのメンバとして定義します。こうすることで描画のたびに関数が生成されるのを防ぎます。</p>
 
+<p>あとは補足なのですが、 <code>render()</code> に含まれているリストの処理で<code>key</code>にリストのindexを使っているのはあまりいい方法ではありません。 Reactではリストの描画の際、key属性を見てその要素が追加されたのか削除されたのかを判別しています。そのため、keyはそのリストで一意になる値を使うほうが良いです。しかし、そこまでカバーしようとするとTodoオブジェクトを定義する必要があり実装の範囲が広がるため、今回はそこまでしていません。indexを使うのはIDがない場合の最終手段なので、そのことは覚えておくと良いと思います。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ts" data-lang="ts">          {<span style="color:#a6e22e">todos</span>.<span style="color:#a6e22e">map</span>((<span style="color:#a6e22e">todo</span>, <span style="color:#a6e22e">i</span>) <span style="color:#f92672">=&gt;</span> (
+            <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">li</span> <span style="color:#a6e22e">key</span><span style="color:#f92672">=</span>{<span style="color:#a6e22e">i</span>}<span style="color:#f92672">&gt;</span>{<span style="color:#a6e22e">todo</span>}<span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/li&gt;</span>
+          ))}</code></pre></div>
 <h4 id="redux-を使わない場合">Redux を使わない場合</h4>
 
 <p>ちなみにこの程度のアプリケーションなら Redux を採用する必要もなく React で完結させられます。</p>
@@ -621,11 +629,11 @@ yarn add -D @types/redux @types/react-redux</pre></div>
 
 <h3 id="開発にあたって">開発にあたって</h3>
 
-<p>今回のチュートリアルでは使いませんでしたが、<a href="https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi/related">ReactのDevTool</a>や<a href="https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd?hl=ja">ReduxのDevTool</a>が用意されています。</p>
+<p>今回のチュートリアルでは使いませんでしたが、<a href="https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi/related">ReactのDeveloper Tools</a>や<a href="https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd?hl=ja">ReduxのDeveloper Tools</a>が用意されています。Componentの構造やStoreの状態をChromeのDeveloper Toolsでできるようになります。</p>
 
-<p>このあたりを使うとかなり細かい動作確認ができて便利なので、ここまで作ったものを利用して確認してみると面白いかもしれません。</p>
+<p>それらを使いながら、このチュートリアルにDeleteやDoneの処理を追加すると理解が更に深まるかもしれません。</p>
 
-<p>あとはこのチュートリアルのコードにDeleteやDoneの処理を追加してみるのも練習になって良いかもしれません。 あとはこのチュートリアルのコードに Delete や Done の処理を追加してみるのも練習になって良いかもしれません。</p>
+<p>それでは良いTypeScript+React+Reduxライフを！</p>
 
       </div>
 
