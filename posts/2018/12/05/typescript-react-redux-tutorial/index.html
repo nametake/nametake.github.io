@@ -427,7 +427,7 @@ yarn add -D @types/redux @types/react-redux</pre></div>
 
 <span style="color:#75715e">// Todoで発生するactionに対応してReduxのstateを返すReducerを作成
 </span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">todoReducer</span>: <span style="color:#66d9ef">Reducer</span><span style="color:#f92672">&lt;</span><span style="color:#a6e22e">ITodoState</span><span style="color:#f92672">&gt;</span> <span style="color:#f92672">=</span> (
-  <span style="color:#a6e22e">state</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">initTodoState</span>,
+  <span style="color:#a6e22e">state</span>: <span style="color:#66d9ef">ITodoState</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">initTodoState</span>,
   <span style="color:#a6e22e">action</span>: <span style="color:#66d9ef">TodoAction</span>
 )<span style="color:#f92672">:</span> <span style="color:#a6e22e">ITodoState</span> <span style="color:#f92672">=&gt;</span> {
   <span style="color:#75715e">// 関数の引数として渡されてきたactionのtypeを見てReduxのstateを返す
