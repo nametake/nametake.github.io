@@ -238,7 +238,7 @@ yarn add -D @types/redux @types/react-redux</pre></div>
 }
 
 <span style="color:#66d9ef">export</span> <span style="color:#66d9ef">default</span> <span style="color:#a6e22e">App</span>;</code></pre></div>
-<p>画面を確認するとフォームとAdd Todoボタン、fooとbarがリストで表示されていると思います。この状態でフォームに文字を入力した状態で Add TODO ボタンをクリックすると console に入力したテキストが表示されます。</p>
+<p>画面を確認するとフォームとAdd Todoボタン、fooとbarがリストで表示されていると思います。この状態でフォームに文字を入力した状態で Add TODO ボタンをクリックすると console に入力したテキストが表示されます。 まだリストに追加はされません。</p>
 
 <p>ここで定義した <code>TodoComponent</code> は&rdquo;Presentational Component&rdquo;と呼ばれるもので、見た目を表現するためのものです。 この Component は Redux やその他ライブラリとは完全に切り離されたものになります。</p>
 
@@ -252,13 +252,13 @@ yarn add -D @types/redux @types/react-redux</pre></div>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ts" data-lang="ts">          {<span style="color:#a6e22e">todos</span>.<span style="color:#a6e22e">map</span>((<span style="color:#a6e22e">todo</span>, <span style="color:#a6e22e">i</span>) <span style="color:#f92672">=&gt;</span> (
             <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">li</span> <span style="color:#a6e22e">key</span><span style="color:#f92672">=</span>{<span style="color:#a6e22e">i</span>}<span style="color:#f92672">&gt;</span>{<span style="color:#a6e22e">todo</span>}<span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/li&gt;</span>
           ))}</code></pre></div>
-<h4 id="redux-を使わない場合">Redux を使わない場合</h4>
+<h4 id="react-のみでtodoアプリケーションを作る場合">React のみでTodoアプリケーションを作る場合</h4>
 
-<p>ちなみにこの程度のアプリケーションなら Redux を採用する必要もなく React で完結させられます。</p>
+<p>Redux はアプリケーションの全体で使う状態( Component の状態ではなく)を外出しすることで、アプリケーションの状態とUIを分離するためのフレームワークのことです。</p>
 
-<p><code>todos</code> を props 経由で親から渡ってくるものではなく Component の state として取り扱ってしまえばそれで終わりです。</p>
+<p>今回は Redux のチュートリアルのため、<code>todos</code> は外から渡される props に配置しましたが、この Component の状態( state )とすることで、React のみで完結させることができます。</p>
 
-<p>以下のように書き換えることで Redux を使わずに Todo リストを追加するコードになります。</p>
+<p>以下のように書き換えることで React のみで Todo リストを作成することができます。</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-tsx" data-lang="tsx"><span style="color:#75715e">// TodoComponent.tsx
 </span><span style="color:#75715e"></span><span style="color:#66d9ef">import</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">as</span> <span style="color:#a6e22e">React</span> <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;react&#39;</span>;
 
