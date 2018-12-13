@@ -465,7 +465,7 @@ yarn add -D @types/redux @types/react-redux</pre></div>
 
 <p>reducer.ts に定義した<code>reducer</code>を使用して、store.ts に<code>store</code>を以下のように追記して定義します。</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ts" data-lang="ts"><span style="color:#75715e">// store.ts
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">createStore</span>, <span style="color:#a6e22e">Store</span> } <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;redux&#39;</span>;
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">Action</span>, <span style="color:#a6e22e">createStore</span>, <span style="color:#a6e22e">Store</span> } <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;redux&#39;</span>;
 
 <span style="color:#66d9ef">import</span> <span style="color:#a6e22e">reducer</span> <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;./reducer&#39;</span>;
 
@@ -480,7 +480,7 @@ yarn add -D @types/redux @types/react-redux</pre></div>
 }
 
 <span style="color:#75715e">// importしたreducerを渡してstoreを作成
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">store</span>: <span style="color:#66d9ef">Store</span><span style="color:#f92672">&lt;</span><span style="color:#a6e22e">ITodoState</span><span style="color:#f92672">&gt;</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">createStore</span>(<span style="color:#a6e22e">reducer</span>);
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">store</span>: <span style="color:#66d9ef">Store</span><span style="color:#f92672">&lt;</span><span style="color:#a6e22e">ITodoState</span>, <span style="color:#a6e22e">Action</span><span style="color:#f92672">&gt;</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">createStore</span>(<span style="color:#a6e22e">reducer</span>);
 
 <span style="color:#66d9ef">export</span> <span style="color:#66d9ef">default</span> <span style="color:#a6e22e">store</span>;</code></pre></div>
 <p>上記の定義をすることで、 Action が発火されるとそれに対応した Reducer が起動して Store の State が更新されるようになります。</p>
