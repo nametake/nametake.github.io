@@ -6,10 +6,29 @@
     <description>Recent content in Posts on nametake.info</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 05 Dec 2018 11:08:00 +0900</lastBuildDate>
+    <lastBuildDate>Fri, 14 Dec 2018 00:00:00 +0900</lastBuildDate>
     
 	<atom:link href="https://nametake.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>protocのプラグインのテストの書き方</title>
+      <link>https://nametake.github.io/posts/2018/12/14/protoc-plugin-test/</link>
+      <pubDate>Fri, 14 Dec 2018 00:00:00 +0900</pubDate>
+      
+      <guid>https://nametake.github.io/posts/2018/12/14/protoc-plugin-test/</guid>
+      <description>最近周りでProtocol Buffersの話題をよく聞くようになりました。
+ということはそろそろ人類はprotocのプラグインをGoで書きたくなる時代がやってくると思います。
+そのときに世の中に生み出されるプラグインの品質が少しでも高くなればと思い、以前protoc-gen-gohttpというプラグイン作ったときにテストも書いたので、その知見を書こうと思います。
+プラグイン自体は@yuguiさんの「protocプラグインの書き方」がとても参考になったのでそちらを参照すると良いかもしれません。
+TL;DR  Goのコードでprotoファイルをplugin.CodeGeneratorRequestに変換することは(恐らく)できない プラグインの動作テストはテスト内でprotocコマンドを実行して行う 実行結果の確認はGolden testingで行う 細かいやり方はgithub.com/golang/protobuf/blob/master/protoc-gen-go/golden_test.goに書いてある  自分のプラグインのテストもそれを参考にして書いた   経緯(読み飛ばして大丈夫です) protocのプラグインは標準入力に入ってきたデータをproto.CodeGeneratorRequest型にUnmarshalしてprotoファイルの情報を取得します。
+そのため、最初にテストを書こうとしたときにはGoだけでprotoファイルをproto.CodeGeneratorRequestに変換する仕組みがあるのかと思っていたのですが、この記事公開時点ではその仕組みは提供されていないようでした(知ってたらコメント等で教えていただけると助かります)。
+「それじゃあ有名なプラグインはどうやってるんだ?」と思いprotoc-gen-goのコードを見てみると、Goのコードの中で直接protocコマンドを実行していて、少し面白いテストをしていたので解説しようと思います。
+golden_test.goの解説 ファイル名から想像できる通り、いわゆるGolden testingと呼ばれるものです。テストの中からprotocコマンドを直接実行して、その結果の出力ファイルとtestdataディレクトリに入っている期待するファイルとを比較をしてテストしています。
+300行ぐらいなので全部読んでもそんなに時間はかからないと思いますが、簡単に解説をしてみようと思います。
+コマンド実行部分 以下のコードが直接コマンドを実行する部分です。testing.T構造体とprotocに与える引数を受け取って実際にコマンドを実行します。
+func protoc(t *testing.T, args []string) { cmd := exec.Command(&amp;#34;protoc&amp;#34;, &amp;#34;--plugin=protoc-gen-go=&amp;#34;+os.Args[0]) cmd.Args = append(cmd.Args, args...) // We set the RUN_AS_PROTOC_GEN_GO environment variable to indicate that 	// the subprocess should act as a proto compiler rather than a test. 	cmd.Env = append(os.Environ(), &amp;#34;RUN_AS_PROTOC_GEN_GO=1&amp;#34;) out, err := cmd.</description>
+    </item>
     
     <item>
       <title>TypeScript&#43;React&#43;Reduxチュートリアル</title>
