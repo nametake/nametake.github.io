@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://nametake.github.io/posts/2019/01/20/intellij-popup-expand/</loc>
+    <lastmod>2019-01-20T21:05:06+09:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://nametake.github.io/posts/2018/12/19/created-labelerr-and-suberr/</loc>
     <lastmod>2018-12-19T11:37:17+09:00</lastmod>
   </url>
@@ -82,8 +87,14 @@
   </url>
   
   <url>
+    <loc>https://nametake.github.io/tags/intellij/</loc>
+    <lastmod>2019-01-20T21:05:06+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://nametake.github.io/posts/</loc>
-    <lastmod>2018-12-19T11:37:17+09:00</lastmod>
+    <lastmod>2019-01-20T21:05:06+09:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -131,13 +142,13 @@
   
   <url>
     <loc>https://nametake.github.io/tags/vim/</loc>
-    <lastmod>2018-11-24T10:15:34+09:00</lastmod>
+    <lastmod>2019-01-20T21:05:06+09:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://nametake.github.io/</loc>
-    <lastmod>2018-12-19T11:37:17+09:00</lastmod>
+    <lastmod>2019-01-20T21:05:06+09:00</lastmod>
     <priority>0</priority>
   </url>
   
