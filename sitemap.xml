@@ -8,8 +8,50 @@
   </url>
   
   <url>
+    <loc>https://nametake.github.io/posts/</loc>
+    <lastmod>2019-01-20T21:05:06+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://nametake.github.io/tags/</loc>
+    <lastmod>2019-01-20T21:05:06+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://nametake.github.io/tags/intellij/</loc>
+    <lastmod>2019-01-20T21:05:06+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://nametake.github.io/</loc>
+    <lastmod>2019-01-20T21:05:06+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://nametake.github.io/tags/vim/</loc>
+    <lastmod>2019-01-20T21:05:06+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://nametake.github.io/tags/go/</loc>
+    <lastmod>2018-12-19T11:37:17+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://nametake.github.io/posts/2018/12/19/created-labelerr-and-suberr/</loc>
     <lastmod>2018-12-19T11:37:17+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://nametake.github.io/tags/presentation/</loc>
+    <lastmod>2018-12-19T11:37:17+09:00</lastmod>
+    <priority>0</priority>
   </url>
   
   <url>
@@ -18,8 +60,32 @@
   </url>
   
   <url>
+    <loc>https://nametake.github.io/tags/protobuf/</loc>
+    <lastmod>2018-12-14T00:00:00+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://nametake.github.io/posts/2018/12/05/typescript-react-redux-tutorial/</loc>
     <lastmod>2018-12-05T11:08:00+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://nametake.github.io/tags/react/</loc>
+    <lastmod>2018-12-05T11:08:00+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://nametake.github.io/tags/redux/</loc>
+    <lastmod>2018-12-05T11:08:00+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://nametake.github.io/tags/typescript/</loc>
+    <lastmod>2018-12-05T11:08:00+09:00</lastmod>
+    <priority>0</priority>
   </url>
   
   <url>
@@ -38,13 +104,37 @@
   </url>
   
   <url>
+    <loc>https://nametake.github.io/tags/gcp/</loc>
+    <lastmod>2018-11-09T11:15:24+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://nametake.github.io/posts/2018/10/10/vim-shfmt-neoformat-indent/</loc>
     <lastmod>2018-10-10T11:44:32+09:00</lastmod>
   </url>
   
   <url>
+    <loc>https://nametake.github.io/tags/sh/</loc>
+    <lastmod>2018-10-10T11:44:32+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://nametake.github.io/posts/2018/09/20/dep-private-repo/</loc>
     <lastmod>2018-09-20T18:47:46+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://nametake.github.io/tags/git/</loc>
+    <lastmod>2018-09-20T18:47:46+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://nametake.github.io/tags/hugo/</loc>
+    <lastmod>2018-09-15T12:20:26+09:00</lastmod>
+    <priority>0</priority>
   </url>
   
   <url>
@@ -59,96 +149,6 @@
   
   <url>
     <loc>https://nametake.github.io/categories/</loc>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://nametake.github.io/tags/gcp/</loc>
-    <lastmod>2018-11-09T11:15:24+09:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://nametake.github.io/tags/git/</loc>
-    <lastmod>2018-09-20T18:47:46+09:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://nametake.github.io/tags/go/</loc>
-    <lastmod>2018-12-19T11:37:17+09:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://nametake.github.io/tags/hugo/</loc>
-    <lastmod>2018-09-15T12:20:26+09:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://nametake.github.io/tags/intellij/</loc>
-    <lastmod>2019-01-20T21:05:06+09:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://nametake.github.io/posts/</loc>
-    <lastmod>2019-01-20T21:05:06+09:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://nametake.github.io/tags/presentation/</loc>
-    <lastmod>2018-12-19T11:37:17+09:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://nametake.github.io/tags/protobuf/</loc>
-    <lastmod>2018-12-14T00:00:00+09:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://nametake.github.io/tags/react/</loc>
-    <lastmod>2018-12-05T11:08:00+09:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://nametake.github.io/tags/redux/</loc>
-    <lastmod>2018-12-05T11:08:00+09:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://nametake.github.io/tags/sh/</loc>
-    <lastmod>2018-10-10T11:44:32+09:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://nametake.github.io/tags/</loc>
-    <lastmod>2018-11-09T11:15:24+09:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://nametake.github.io/tags/typescript/</loc>
-    <lastmod>2018-12-05T11:08:00+09:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://nametake.github.io/tags/vim/</loc>
-    <lastmod>2019-01-20T21:05:06+09:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://nametake.github.io/</loc>
-    <lastmod>2019-01-20T21:05:06+09:00</lastmod>
     <priority>0</priority>
   </url>
   

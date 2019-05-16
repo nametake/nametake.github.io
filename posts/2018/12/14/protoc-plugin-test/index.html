@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en-us">
+<html lang="en">
 
   <head>
     <meta charset="utf-8">
@@ -9,21 +9,57 @@
     <meta name="description" content="nametake&#39;s personal website">
     <meta name="keywords" content="blog,developer,personal">
 
-    <base href="https://nametake.github.io/">
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Goでのprotocプラグインのテストの書き方"/>
+<meta name="twitter:description" content="最近周りでProtocol Buffersの話題をよく聞くようになりました。
+ということはそろそろ人類はprotocのプラグインをGoで書きたくなる時代がやってくると思います。
+そのときに世の中に生み出されるプラグインの品質が少しでも高くなればと思い、以前protoc-gen-gohttpというプラグイン作ったときにテストも書いたので、その知見を書こうと思います。
+プラグイン自体は@yuguiさんの「protocプラグインの書き方」がとても参考になったのでそちらを参照すると良いかもしれません。
+TL;DR  Goのコードでprotoファイルをplugin.CodeGeneratorRequestに変換することは(恐らく)できない プラグインの動作テストはテスト内でprotocコマンドを実行して行う 実行結果の確認はGolden testingで行う 細かいやり方はgithub.com/golang/protobuf/blob/master/protoc-gen-go/golden_test.goに書いてある  自分のプラグインのテストもそれを参考にして書いた   経緯(読み飛ばして大丈夫です) protocのプラグインは標準入力に入ってきたデータをproto.CodeGeneratorRequest型にUnmarshalしてprotoファイルの情報を取得します。
+そのため、最初にテストを書こうとしたときにはGoだけでprotoファイルをproto.CodeGeneratorRequestに変換する仕組みがあるのかと思っていたのですが、この記事公開時点ではその仕組みは提供されていないようでした(知ってたらコメント等で教えていただけると助かります)。
+「それじゃあ有名なプラグインはどうやってるんだ?」と思いprotoc-gen-goのコードを見てみると、Goのコードの中で直接protocコマンドを実行していて、少し面白いテストをしていたので解説しようと思います。
+golden_test.goの解説 ファイル名から想像できる通り、いわゆるGolden testingと呼ばれるものです。テストの中からprotocコマンドを直接実行して、その結果の出力ファイルとtestdataディレクトリに入っている期待するファイルとを比較をしてテストしています。
+300行ぐらいなので全部読んでもそんなに時間はかからないと思いますが、簡単に解説をしてみようと思います。
+コマンド実行部分 以下のコードが直接コマンドを実行する部分です。testing.T構造体とprotocに与える引数を受け取って実際にコマンドを実行します。
+func protoc(t *testing.T, args []string) { cmd := exec.Command(&#34;protoc&#34;, &#34;--plugin=protoc-gen-go=&#34;&#43;os.Args[0]) cmd.Args = append(cmd.Args, args...) // We set the RUN_AS_PROTOC_GEN_GO environment variable to indicate that 	// the subprocess should act as a proto compiler rather than a test. 	cmd.Env = append(os.Environ(), &#34;RUN_AS_PROTOC_GEN_GO=1&#34;) out, err := cmd."/>
+
+    <meta property="og:title" content="Goでのprotocプラグインのテストの書き方" />
+<meta property="og:description" content="最近周りでProtocol Buffersの話題をよく聞くようになりました。
+ということはそろそろ人類はprotocのプラグインをGoで書きたくなる時代がやってくると思います。
+そのときに世の中に生み出されるプラグインの品質が少しでも高くなればと思い、以前protoc-gen-gohttpというプラグイン作ったときにテストも書いたので、その知見を書こうと思います。
+プラグイン自体は@yuguiさんの「protocプラグインの書き方」がとても参考になったのでそちらを参照すると良いかもしれません。
+TL;DR  Goのコードでprotoファイルをplugin.CodeGeneratorRequestに変換することは(恐らく)できない プラグインの動作テストはテスト内でprotocコマンドを実行して行う 実行結果の確認はGolden testingで行う 細かいやり方はgithub.com/golang/protobuf/blob/master/protoc-gen-go/golden_test.goに書いてある  自分のプラグインのテストもそれを参考にして書いた   経緯(読み飛ばして大丈夫です) protocのプラグインは標準入力に入ってきたデータをproto.CodeGeneratorRequest型にUnmarshalしてprotoファイルの情報を取得します。
+そのため、最初にテストを書こうとしたときにはGoだけでprotoファイルをproto.CodeGeneratorRequestに変換する仕組みがあるのかと思っていたのですが、この記事公開時点ではその仕組みは提供されていないようでした(知ってたらコメント等で教えていただけると助かります)。
+「それじゃあ有名なプラグインはどうやってるんだ?」と思いprotoc-gen-goのコードを見てみると、Goのコードの中で直接protocコマンドを実行していて、少し面白いテストをしていたので解説しようと思います。
+golden_test.goの解説 ファイル名から想像できる通り、いわゆるGolden testingと呼ばれるものです。テストの中からprotocコマンドを直接実行して、その結果の出力ファイルとtestdataディレクトリに入っている期待するファイルとを比較をしてテストしています。
+300行ぐらいなので全部読んでもそんなに時間はかからないと思いますが、簡単に解説をしてみようと思います。
+コマンド実行部分 以下のコードが直接コマンドを実行する部分です。testing.T構造体とprotocに与える引数を受け取って実際にコマンドを実行します。
+func protoc(t *testing.T, args []string) { cmd := exec.Command(&#34;protoc&#34;, &#34;--plugin=protoc-gen-go=&#34;&#43;os.Args[0]) cmd.Args = append(cmd.Args, args...) // We set the RUN_AS_PROTOC_GEN_GO environment variable to indicate that 	// the subprocess should act as a proto compiler rather than a test. 	cmd.Env = append(os.Environ(), &#34;RUN_AS_PROTOC_GEN_GO=1&#34;) out, err := cmd." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://nametake.github.io/posts/2018/12/14/protoc-plugin-test/" />
+<meta property="article:published_time" content="2018-12-14T00:00:00&#43;09:00"/>
+<meta property="article:modified_time" content="2018-12-14T00:00:00&#43;09:00"/>
+
+
+    
+      <base href="https://nametake.github.io/posts/2018/12/14/protoc-plugin-test/">
+    
     <title>
   Goでのprotocプラグインのテストの書き方 · nametake.info
 </title>
 
-    <link rel="canonical" href="https://nametake.github.io/posts/2018/12/14/protoc-plugin-test/">
+    
+      <link rel="canonical" href="https://nametake.github.io/posts/2018/12/14/protoc-plugin-test/">
+    
 
-    <link href="https://fonts.googleapis.com/css?family=Lato:400,700|Merriweather:300,700|Source+Code+Pro:400,700" rel="stylesheet">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css" integrity="sha256-oSrCnRYXvHG31SBifqP2PM1uje7SJUyX0nTwO2RJV54=" crossorigin="anonymous" />
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700%7CMerriweather:300,700%7CSource+Code+Pro:400,700" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" integrity="sha256-l85OmPOjvil/SOvVt3HnSSjzF1TUMyT9eV0c2BzEGzU=" crossorigin="anonymous" />
 
     
       
       
-      <link rel="stylesheet" href="https://nametake.github.io/css/coder.min.cd087ace86754b082dec94545567f8361cba42e84f8e15edbc4a9f6e52bd1f6a.css" integrity="sha256-zQh6zoZ1Swgt7JRUVWf4Nhy6QuhPjhXtvEqfblK9H2o=" crossorigin="anonymous" media="screen" />
+      <link rel="stylesheet" href="https://nametake.github.io/css/coder.min.28d751104f30c16da1aa1bb04015cbe662cacfe0d1b01af4f2240ad58580069c.css" integrity="sha256-KNdREE8wwW2hqhuwQBXL5mLKz&#43;DRsBr08iQK1YWABpw=" crossorigin="anonymous" media="screen" />
     
 
     
@@ -37,9 +73,7 @@
     <link rel="icon" type="image/png" href="https://nametake.github.io/images/favicon-32x32.png" sizes="32x32">
     <link rel="icon" type="image/png" href="https://nametake.github.io/images/favicon-16x16.png" sizes="16x16">
 
-    
-
-    <meta name="generator" content="Hugo 0.53" />
+    <meta name="generator" content="Hugo 0.55.5" />
   </head>
 
   <body class=" ">
@@ -229,6 +263,9 @@
       </div>
 
       <footer>
+        
+
+
         <div id="disqus_thread"></div>
 <script type="application/javascript">
     var disqus_config = function () {

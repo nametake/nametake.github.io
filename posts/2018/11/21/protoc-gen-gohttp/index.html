@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en-us">
+<html lang="en">
 
   <head>
     <meta charset="utf-8">
@@ -9,21 +9,63 @@
     <meta name="description" content="nametake&#39;s personal website">
     <meta name="keywords" content="blog,developer,personal">
 
-    <base href="https://nametake.github.io/">
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Protobufのservice定義をhttp.Handler対応させるprotoc-gen-gohttpを作った"/>
+<meta name="twitter:description" content="nametake/protoc-gen-gohttpというプラグインを作ったのでその話。 細かい使い方とかはREADMEに任せる。
+なんで作ったの? Protocol Buffersのファイルにはserviceというものを定義できるが、どちらかというとgRPC向けの定義なので、Protocol Buffer on HTTPの構成でAPIサーバを作っていると活用できなくて勿体無いな〜とか思ってた。
+protoc-gen-goのgRPCオプションを使ってビルドするとServerのinterfaceまでは吐き出してくれるので、「だったらこのinterfaceをhttp.Handlerに対応させればいいんじゃね？」という勢いで作ってみた。
+コンセプト  RequestのBodyにJSONとProtobufのバイナリのどちらでも使えるようにする 生成される物が標準パッケージとProtobuf関係のパッケージしかimportしない 呼び出し毎に自由な処理を挟める(ログ等のため) errorが発生したときに自由にハンドリングができる 無駄にMarshal/Unmarshalをしない できる限り型で守る(Contextに情報を詰めたりしない)  何が嬉しいの? Protobufの定義にserviceを書いてこのプラグインを使うと、gRPCのServerをhttp.HandlerFuncに変換してくれるConverterが生成される。このConverterはgRPCのServerのinterfaceを必要とするため、メソッド定義も型で守れるようになる。
+変換されたhttp.HandlerFuncはContent-Typeを見て、Marshal/Unmarshalするパッケージを切り替えるので、BodyにはJSONが詰められていてもProtobufのJSONが詰められていてもどっちでも大丈夫なようになっている(はず)(テストケース不足)。
+また、http.HandlerFuncを抜けるときには、必要な情報を全部渡してコールバックを呼んでくれるので、1リクエスト毎に行いたい処理(ログ出力とか)を自分で定義できるようになる。errorも渡ってくるのでエラーを見て処理を変えたりもできる。
+比較 このプラグインを作る前にいくつか調べたのでそれとの比較も書いてみる。
+twrip 同じようにProtocol Buffersの定義からhttp.Handler対応をした上にContent−TypeをみてMarshal/Unmarshalをするパッケージを切り替えるライブラリだが、 以下の点が気になったので採用を見送った。
+ 生成されるものがtwripをimportしている エラー発生時のハンドリングの余地が少ない RPCの呼び出しに対するHookがContextに情報を詰める前提だった  個人的にはGoのライブラリなら、ライブラリに依存させる提供方法ではなく、標準パッケージに乗せられる提供方法のほうが良いと考えているので、生成したものがなにかに依存してしまうのは好ましくなかったため採用見送り。
+RussellLuo/protoc-go-plugins Protocol Buffersの定義からhttp.Handler対応の物を生成するプラグインだが、protoのMarshal/Unmarshalには対応していなかった。
+エラーハンドリングにも余地がなかったので採用見送り。
+moul/protoc-gen-gotemplate Protocol Buffersの定義からGoのテンプレート機能を使ってコードを生成するためのプラグイン。
+時間と労力をかけないならこれを使うのが一番早かった気はする。
+プラグインの作成にめちゃくちゃ時間がかかるようだったらこれも検討していたが、そこまで時間がかかりそうでもなかったので勉強も兼ねて自作することにした。"/>
+
+    <meta property="og:title" content="Protobufのservice定義をhttp.Handler対応させるprotoc-gen-gohttpを作った" />
+<meta property="og:description" content="nametake/protoc-gen-gohttpというプラグインを作ったのでその話。 細かい使い方とかはREADMEに任せる。
+なんで作ったの? Protocol Buffersのファイルにはserviceというものを定義できるが、どちらかというとgRPC向けの定義なので、Protocol Buffer on HTTPの構成でAPIサーバを作っていると活用できなくて勿体無いな〜とか思ってた。
+protoc-gen-goのgRPCオプションを使ってビルドするとServerのinterfaceまでは吐き出してくれるので、「だったらこのinterfaceをhttp.Handlerに対応させればいいんじゃね？」という勢いで作ってみた。
+コンセプト  RequestのBodyにJSONとProtobufのバイナリのどちらでも使えるようにする 生成される物が標準パッケージとProtobuf関係のパッケージしかimportしない 呼び出し毎に自由な処理を挟める(ログ等のため) errorが発生したときに自由にハンドリングができる 無駄にMarshal/Unmarshalをしない できる限り型で守る(Contextに情報を詰めたりしない)  何が嬉しいの? Protobufの定義にserviceを書いてこのプラグインを使うと、gRPCのServerをhttp.HandlerFuncに変換してくれるConverterが生成される。このConverterはgRPCのServerのinterfaceを必要とするため、メソッド定義も型で守れるようになる。
+変換されたhttp.HandlerFuncはContent-Typeを見て、Marshal/Unmarshalするパッケージを切り替えるので、BodyにはJSONが詰められていてもProtobufのJSONが詰められていてもどっちでも大丈夫なようになっている(はず)(テストケース不足)。
+また、http.HandlerFuncを抜けるときには、必要な情報を全部渡してコールバックを呼んでくれるので、1リクエスト毎に行いたい処理(ログ出力とか)を自分で定義できるようになる。errorも渡ってくるのでエラーを見て処理を変えたりもできる。
+比較 このプラグインを作る前にいくつか調べたのでそれとの比較も書いてみる。
+twrip 同じようにProtocol Buffersの定義からhttp.Handler対応をした上にContent−TypeをみてMarshal/Unmarshalをするパッケージを切り替えるライブラリだが、 以下の点が気になったので採用を見送った。
+ 生成されるものがtwripをimportしている エラー発生時のハンドリングの余地が少ない RPCの呼び出しに対するHookがContextに情報を詰める前提だった  個人的にはGoのライブラリなら、ライブラリに依存させる提供方法ではなく、標準パッケージに乗せられる提供方法のほうが良いと考えているので、生成したものがなにかに依存してしまうのは好ましくなかったため採用見送り。
+RussellLuo/protoc-go-plugins Protocol Buffersの定義からhttp.Handler対応の物を生成するプラグインだが、protoのMarshal/Unmarshalには対応していなかった。
+エラーハンドリングにも余地がなかったので採用見送り。
+moul/protoc-gen-gotemplate Protocol Buffersの定義からGoのテンプレート機能を使ってコードを生成するためのプラグイン。
+時間と労力をかけないならこれを使うのが一番早かった気はする。
+プラグインの作成にめちゃくちゃ時間がかかるようだったらこれも検討していたが、そこまで時間がかかりそうでもなかったので勉強も兼ねて自作することにした。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://nametake.github.io/posts/2018/11/21/protoc-gen-gohttp/" />
+<meta property="article:published_time" content="2018-11-21T16:32:07&#43;09:00"/>
+<meta property="article:modified_time" content="2018-11-21T16:32:07&#43;09:00"/>
+
+
+    
+      <base href="https://nametake.github.io/posts/2018/11/21/protoc-gen-gohttp/">
+    
     <title>
   Protobufのservice定義をhttp.Handler対応させるprotoc-gen-gohttpを作った · nametake.info
 </title>
 
-    <link rel="canonical" href="https://nametake.github.io/posts/2018/11/21/protoc-gen-gohttp/">
+    
+      <link rel="canonical" href="https://nametake.github.io/posts/2018/11/21/protoc-gen-gohttp/">
+    
 
-    <link href="https://fonts.googleapis.com/css?family=Lato:400,700|Merriweather:300,700|Source+Code+Pro:400,700" rel="stylesheet">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css" integrity="sha256-oSrCnRYXvHG31SBifqP2PM1uje7SJUyX0nTwO2RJV54=" crossorigin="anonymous" />
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700%7CMerriweather:300,700%7CSource+Code+Pro:400,700" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" integrity="sha256-l85OmPOjvil/SOvVt3HnSSjzF1TUMyT9eV0c2BzEGzU=" crossorigin="anonymous" />
 
     
       
       
-      <link rel="stylesheet" href="https://nametake.github.io/css/coder.min.cd087ace86754b082dec94545567f8361cba42e84f8e15edbc4a9f6e52bd1f6a.css" integrity="sha256-zQh6zoZ1Swgt7JRUVWf4Nhy6QuhPjhXtvEqfblK9H2o=" crossorigin="anonymous" media="screen" />
+      <link rel="stylesheet" href="https://nametake.github.io/css/coder.min.28d751104f30c16da1aa1bb04015cbe662cacfe0d1b01af4f2240ad58580069c.css" integrity="sha256-KNdREE8wwW2hqhuwQBXL5mLKz&#43;DRsBr08iQK1YWABpw=" crossorigin="anonymous" media="screen" />
     
 
     
@@ -37,9 +79,7 @@
     <link rel="icon" type="image/png" href="https://nametake.github.io/images/favicon-32x32.png" sizes="32x32">
     <link rel="icon" type="image/png" href="https://nametake.github.io/images/favicon-16x16.png" sizes="16x16">
 
-    
-
-    <meta name="generator" content="Hugo 0.53" />
+    <meta name="generator" content="Hugo 0.55.5" />
   </head>
 
   <body class=" ">
@@ -163,6 +203,9 @@
       </div>
 
       <footer>
+        
+
+
         <div id="disqus_thread"></div>
 <script type="application/javascript">
     var disqus_config = function () {
