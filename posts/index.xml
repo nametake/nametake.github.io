@@ -6,10 +6,22 @@
     <description>Recent content in Posts on nametake.info</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 20 Jan 2019 21:05:06 +0900</lastBuildDate>
+    <lastBuildDate>Sat, 18 May 2019 10:38:55 +0900</lastBuildDate>
     
 	<atom:link href="https://nametake.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Type SafeなReducerの書き方</title>
+      <link>https://nametake.github.io/posts/2019/05/18/type-safe-reducer/</link>
+      <pubDate>Sat, 18 May 2019 10:38:55 +0900</pubDate>
+      
+      <guid>https://nametake.github.io/posts/2019/05/18/type-safe-reducer/</guid>
+      <description>以前書いた記事で書いたReducerでは、受け取ったActionの型を判別するためには、switchで分岐した後にそれに対応したActionの型でキャストをする必要があった。
+const todoReducer: Reducer&amp;lt;ITodoState&amp;gt; = ( state: ITodoState = initTodoState, action: TodoAction ): ITodoState =&amp;gt; { switch (action.type) { case TodoActionType.ADD_TODO: const addTodoAction: IAddTodoAction = action; // &amp;lt;-- ここでキャストしている  return { ...state, todos: state.todos.concat([addTodoAction.payload.todo]) }; default: return state; } }; この方法だと、action.typeとそれに対応する型を実装者が気にしなければならず、型安全とは言い難かった。
+このあたりの話を某Slackで相談したら、以下のような Flux standard actionのtypeやpayloadをジェネリクスで指定するようにして、typeにenumを使うというやり方を教えてもらった。
+import { Reducer } from &amp;#39;redux&amp;#39;; // Flux standard action interface Action&amp;lt;TType, TPayload = null, TMeta = undefined&amp;gt; { type: TType; payload: TPayload; meta?: TMeta; } enum ActionType { ADD, DELETE } type AddAction = Action&amp;lt;ActionType.</description>
+    </item>
     
     <item>
       <title>IntelliJのPopupの候補を展開するKeymap</title>

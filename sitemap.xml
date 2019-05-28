@@ -3,30 +3,41 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>https://nametake.github.io/posts/2019/01/20/intellij-popup-expand/</loc>
-    <lastmod>2019-01-20T21:05:06+09:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://nametake.github.io/posts/</loc>
-    <lastmod>2019-01-20T21:05:06+09:00</lastmod>
+    <lastmod>2019-05-18T10:38:55+09:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://nametake.github.io/tags/</loc>
-    <lastmod>2019-01-20T21:05:06+09:00</lastmod>
+    <lastmod>2019-05-18T10:38:55+09:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://nametake.github.io/tags/intellij/</loc>
-    <lastmod>2019-01-20T21:05:06+09:00</lastmod>
-    <priority>0</priority>
+    <loc>https://nametake.github.io/posts/2019/05/18/type-safe-reducer/</loc>
+    <lastmod>2019-05-18T10:38:55+09:00</lastmod>
   </url>
   
   <url>
     <loc>https://nametake.github.io/</loc>
+    <lastmod>2019-05-18T10:38:55+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://nametake.github.io/tags/typescript/</loc>
+    <lastmod>2019-05-18T10:38:55+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://nametake.github.io/posts/2019/01/20/intellij-popup-expand/</loc>
+    <lastmod>2019-01-20T21:05:06+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://nametake.github.io/tags/intellij/</loc>
     <lastmod>2019-01-20T21:05:06+09:00</lastmod>
     <priority>0</priority>
   </url>
@@ -78,12 +89,6 @@
   
   <url>
     <loc>https://nametake.github.io/tags/redux/</loc>
-    <lastmod>2018-12-05T11:08:00+09:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://nametake.github.io/tags/typescript/</loc>
     <lastmod>2018-12-05T11:08:00+09:00</lastmod>
     <priority>0</priority>
   </url>
