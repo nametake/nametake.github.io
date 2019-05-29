@@ -6,10 +6,21 @@
     <description>Recent content on nametake.info</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 18 May 2019 10:38:55 +0900</lastBuildDate>
+    <lastBuildDate>Wed, 29 May 2019 15:47:35 +0900</lastBuildDate>
     
 	<atom:link href="https://nametake.github.io/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>インライン要素の高さを合わせるCSS定義</title>
+      <link>https://nametake.github.io/posts/2019/05/29/inline-center/</link>
+      <pubDate>Wed, 29 May 2019 15:47:35 +0900</pubDate>
+      
+      <guid>https://nametake.github.io/posts/2019/05/29/inline-center/</guid>
+      <description>ラジオボタンとラベルの高さを合わせるCSS定義を何回も調べている気がするのでメモ。
+たぶん下の書き方が一番モダンな気がする。
+display: inline-flex; align-items: center;</description>
+    </item>
     
     <item>
       <title>Type SafeなReducerの書き方</title>

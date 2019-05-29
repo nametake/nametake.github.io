@@ -4,25 +4,36 @@
   
   <url>
     <loc>https://nametake.github.io/posts/</loc>
-    <lastmod>2019-05-18T10:38:55+09:00</lastmod>
+    <lastmod>2019-05-29T15:47:35+09:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://nametake.github.io/tags/</loc>
-    <lastmod>2019-05-18T10:38:55+09:00</lastmod>
+    <lastmod>2019-05-29T15:47:35+09:00</lastmod>
     <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://nametake.github.io/tags/css/</loc>
+    <lastmod>2019-05-29T15:47:35+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://nametake.github.io/</loc>
+    <lastmod>2019-05-29T15:47:35+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://nametake.github.io/posts/2019/05/29/inline-center/</loc>
+    <lastmod>2019-05-29T15:47:35+09:00</lastmod>
   </url>
   
   <url>
     <loc>https://nametake.github.io/posts/2019/05/18/type-safe-reducer/</loc>
     <lastmod>2019-05-18T10:38:55+09:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://nametake.github.io/</loc>
-    <lastmod>2019-05-18T10:38:55+09:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
