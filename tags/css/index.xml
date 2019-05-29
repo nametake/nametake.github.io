@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>css on nametake.info</title>
+    <link>https://nametake.github.io/tags/css/</link>
+    <description>Recent content in css on nametake.info</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 29 May 2019 15:47:35 +0900</lastBuildDate>
+    
+	<atom:link href="https://nametake.github.io/tags/css/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>インライン要素の高さを合わせるCSS定義</title>
+      <link>https://nametake.github.io/posts/2019/05/29/inline-center/</link>
+      <pubDate>Wed, 29 May 2019 15:47:35 +0900</pubDate>
+      
+      <guid>https://nametake.github.io/posts/2019/05/29/inline-center/</guid>
+      <description>ラジオボタンとラベルの高さを合わせるCSS定義を何回も調べている気がするのでメモ。
+たぶん下の書き方が一番モダンな気がする。
+display: inline-flex; align-items: center;</description>
+    </item>
+    
+  </channel>
+</rss>

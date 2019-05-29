@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>protobuf on nametake.info</title>
+    <link>https://nametake.github.io/tags/protobuf/</link>
+    <description>Recent content in protobuf on nametake.info</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 14 Dec 2018 00:00:00 +0900</lastBuildDate>
+    
+	<atom:link href="https://nametake.github.io/tags/protobuf/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Goでのprotocプラグインのテストの書き方</title>
+      <link>https://nametake.github.io/posts/2018/12/14/protoc-plugin-test/</link>
+      <pubDate>Fri, 14 Dec 2018 00:00:00 +0900</pubDate>
+      
+      <guid>https://nametake.github.io/posts/2018/12/14/protoc-plugin-test/</guid>
+      <description>最近周りでProtocol Buffersの話題をよく聞くようになりました。
+ということはそろそろ人類はprotocのプラグインをGoで書きたくなる時代がやってくると思います。
+そのときに世の中に生み出されるプラグインの品質が少しでも高くなればと思い、以前protoc-gen-gohttpというプラグイン作ったときにテストも書いたので、その知見を書こうと思います。
+プラグイン自体は@yuguiさんの「protocプラグインの書き方」がとても参考になったのでそちらを参照すると良いかもしれません。
+TL;DR  Goのコードでprotoファイルをplugin.CodeGeneratorRequestに変換することは(恐らく)できない プラグインの動作テストはテスト内でprotocコマンドを実行して行う 実行結果の確認はGolden testingで行う 細かいやり方はgithub.com/golang/protobuf/blob/master/protoc-gen-go/golden_test.goに書いてある  自分のプラグインのテストもそれを参考にして書いた   経緯(読み飛ばして大丈夫です) protocのプラグインは標準入力に入ってきたデータをproto.CodeGeneratorRequest型にUnmarshalしてprotoファイルの情報を取得します。
+そのため、最初にテストを書こうとしたときにはGoだけでprotoファイルをproto.CodeGeneratorRequestに変換する仕組みがあるのかと思っていたのですが、この記事公開時点ではその仕組みは提供されていないようでした(知ってたらコメント等で教えていただけると助かります)。
+「それじゃあ有名なプラグインはどうやってるんだ?」と思いprotoc-gen-goのコードを見てみると、Goのコードの中で直接protocコマンドを実行していて、少し面白いテストをしていたので解説しようと思います。
+golden_test.goの解説 ファイル名から想像できる通り、いわゆるGolden testingと呼ばれるものです。テストの中からprotocコマンドを直接実行して、その結果の出力ファイルとtestdataディレクトリに入っている期待するファイルとを比較をしてテストしています。
+300行ぐらいなので全部読んでもそんなに時間はかからないと思いますが、簡単に解説をしてみようと思います。
+コマンド実行部分 以下のコードが直接コマンドを実行する部分です。testing.T構造体とprotocに与える引数を受け取って実際にコマンドを実行します。
+func protoc(t *testing.T, args []string) { cmd := exec.Command(&amp;#34;protoc&amp;#34;, &amp;#34;--plugin=protoc-gen-go=&amp;#34;+os.Args[0]) cmd.Args = append(cmd.Args, args...) // We set the RUN_AS_PROTOC_GEN_GO environment variable to indicate that 	// the subprocess should act as a proto compiler rather than a test. 	cmd.Env = append(os.Environ(), &amp;#34;RUN_AS_PROTOC_GEN_GO=1&amp;#34;) out, err := cmd.</description>
+    </item>
+    
+    <item>
+      <title>Protobufのservice定義をhttp.Handler対応させるprotoc-gen-gohttpを作った</title>
+      <link>https://nametake.github.io/posts/2018/11/21/protoc-gen-gohttp/</link>
+      <pubDate>Wed, 21 Nov 2018 16:32:07 +0900</pubDate>
+      
+      <guid>https://nametake.github.io/posts/2018/11/21/protoc-gen-gohttp/</guid>
+      <description>nametake/protoc-gen-gohttpというプラグインを作ったのでその話。 細かい使い方とかはREADMEに任せる。
+なんで作ったの? Protocol Buffersのファイルにはserviceというものを定義できるが、どちらかというとgRPC向けの定義なので、Protocol Buffer on HTTPの構成でAPIサーバを作っていると活用できなくて勿体無いな〜とか思ってた。
+protoc-gen-goのgRPCオプションを使ってビルドするとServerのinterfaceまでは吐き出してくれるので、「だったらこのinterfaceをhttp.Handlerに対応させればいいんじゃね？」という勢いで作ってみた。
+コンセプト  RequestのBodyにJSONとProtobufのバイナリのどちらでも使えるようにする 生成される物が標準パッケージとProtobuf関係のパッケージしかimportしない 呼び出し毎に自由な処理を挟める(ログ等のため) errorが発生したときに自由にハンドリングができる 無駄にMarshal/Unmarshalをしない できる限り型で守る(Contextに情報を詰めたりしない)  何が嬉しいの? Protobufの定義にserviceを書いてこのプラグインを使うと、gRPCのServerをhttp.HandlerFuncに変換してくれるConverterが生成される。このConverterはgRPCのServerのinterfaceを必要とするため、メソッド定義も型で守れるようになる。
+変換されたhttp.HandlerFuncはContent-Typeを見て、Marshal/Unmarshalするパッケージを切り替えるので、BodyにはJSONが詰められていてもProtobufのJSONが詰められていてもどっちでも大丈夫なようになっている(はず)(テストケース不足)。
+また、http.HandlerFuncを抜けるときには、必要な情報を全部渡してコールバックを呼んでくれるので、1リクエスト毎に行いたい処理(ログ出力とか)を自分で定義できるようになる。errorも渡ってくるのでエラーを見て処理を変えたりもできる。
+比較 このプラグインを作る前にいくつか調べたのでそれとの比較も書いてみる。
+twrip 同じようにProtocol Buffersの定義からhttp.Handler対応をした上にContent−TypeをみてMarshal/Unmarshalをするパッケージを切り替えるライブラリだが、 以下の点が気になったので採用を見送った。
+ 生成されるものがtwripをimportしている エラー発生時のハンドリングの余地が少ない RPCの呼び出しに対するHookがContextに情報を詰める前提だった  個人的にはGoのライブラリなら、ライブラリに依存させる提供方法ではなく、標準パッケージに乗せられる提供方法のほうが良いと考えているので、生成したものがなにかに依存してしまうのは好ましくなかったため採用見送り。
+RussellLuo/protoc-go-plugins Protocol Buffersの定義からhttp.Handler対応の物を生成するプラグインだが、protoのMarshal/Unmarshalには対応していなかった。
+エラーハンドリングにも余地がなかったので採用見送り。
+moul/protoc-gen-gotemplate Protocol Buffersの定義からGoのテンプレート機能を使ってコードを生成するためのプラグイン。
+時間と労力をかけないならこれを使うのが一番早かった気はする。
+プラグインの作成にめちゃくちゃ時間がかかるようだったらこれも検討していたが、そこまで時間がかかりそうでもなかったので勉強も兼ねて自作することにした。</description>
+    </item>
+    
+  </channel>
+</rss>

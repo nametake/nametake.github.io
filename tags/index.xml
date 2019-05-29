@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tags on nametake.info</title>
+    <link>https://nametake.github.io/tags/</link>
+    <description>Recent content in Tags on nametake.info</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 29 May 2019 15:47:35 +0900</lastBuildDate>
+    
+	<atom:link href="https://nametake.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>css</title>
+      <link>https://nametake.github.io/tags/css/</link>
+      <pubDate>Wed, 29 May 2019 15:47:35 +0900</pubDate>
+      
+      <guid>https://nametake.github.io/tags/css/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>typescript</title>
+      <link>https://nametake.github.io/tags/typescript/</link>
+      <pubDate>Sat, 18 May 2019 10:38:55 +0900</pubDate>
+      
+      <guid>https://nametake.github.io/tags/typescript/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>intellij</title>
+      <link>https://nametake.github.io/tags/intellij/</link>
+      <pubDate>Sun, 20 Jan 2019 21:05:06 +0900</pubDate>
+      
+      <guid>https://nametake.github.io/tags/intellij/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>vim</title>
+      <link>https://nametake.github.io/tags/vim/</link>
+      <pubDate>Sun, 20 Jan 2019 21:05:06 +0900</pubDate>
+      
+      <guid>https://nametake.github.io/tags/vim/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>go</title>
+      <link>https://nametake.github.io/tags/go/</link>
+      <pubDate>Wed, 19 Dec 2018 11:37:17 +0900</pubDate>
+      
+      <guid>https://nametake.github.io/tags/go/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>presentation</title>
+      <link>https://nametake.github.io/tags/presentation/</link>
+      <pubDate>Wed, 19 Dec 2018 11:37:17 +0900</pubDate>
+      
+      <guid>https://nametake.github.io/tags/presentation/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>protobuf</title>
+      <link>https://nametake.github.io/tags/protobuf/</link>
+      <pubDate>Fri, 14 Dec 2018 00:00:00 +0900</pubDate>
+      
+      <guid>https://nametake.github.io/tags/protobuf/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>react</title>
+      <link>https://nametake.github.io/tags/react/</link>
+      <pubDate>Wed, 05 Dec 2018 11:08:00 +0900</pubDate>
+      
+      <guid>https://nametake.github.io/tags/react/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>redux</title>
+      <link>https://nametake.github.io/tags/redux/</link>
+      <pubDate>Wed, 05 Dec 2018 11:08:00 +0900</pubDate>
+      
+      <guid>https://nametake.github.io/tags/redux/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>gcp</title>
+      <link>https://nametake.github.io/tags/gcp/</link>
+      <pubDate>Fri, 09 Nov 2018 11:15:24 +0900</pubDate>
+      
+      <guid>https://nametake.github.io/tags/gcp/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>sh</title>
+      <link>https://nametake.github.io/tags/sh/</link>
+      <pubDate>Wed, 10 Oct 2018 11:44:32 +0900</pubDate>
+      
+      <guid>https://nametake.github.io/tags/sh/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>git</title>
+      <link>https://nametake.github.io/tags/git/</link>
+      <pubDate>Thu, 20 Sep 2018 18:47:46 +0900</pubDate>
+      
+      <guid>https://nametake.github.io/tags/git/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>hugo</title>
+      <link>https://nametake.github.io/tags/hugo/</link>
+      <pubDate>Sat, 15 Sep 2018 12:20:26 +0900</pubDate>
+      
+      <guid>https://nametake.github.io/tags/hugo/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

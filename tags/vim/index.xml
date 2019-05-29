@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>vim on nametake.info</title>
+    <link>https://nametake.github.io/tags/vim/</link>
+    <description>Recent content in vim on nametake.info</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 20 Jan 2019 21:05:06 +0900</lastBuildDate>
+    
+	<atom:link href="https://nametake.github.io/tags/vim/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>IntelliJのPopupの候補を展開するKeymap</title>
+      <link>https://nametake.github.io/posts/2019/01/20/intellij-popup-expand/</link>
+      <pubDate>Sun, 20 Jan 2019 21:05:06 +0900</pubDate>
+      
+      <guid>https://nametake.github.io/posts/2019/01/20/intellij-popup-expand/</guid>
+      <description>自分は普段Vimでの補完候補を&amp;lt;C-k&amp;gt;で展開しているがIntelliJでの補完候補も同じコマンドで展開したかったのでメモ。
+結論だけいうと、Editor Actions -&amp;gt; Choose Lookup ItemにKeymapを設定すればできた。
+本当は.ideavimrcだけに設定したかったが、ここまで調べるのに少し時間がかかったので後で調べる。</description>
+    </item>
+    
+    <item>
+      <title>VimConf2018感想</title>
+      <link>https://nametake.github.io/posts/2018/11/24/vimconf2018/</link>
+      <pubDate>Sat, 24 Nov 2018 10:15:34 +0900</pubDate>
+      
+      <guid>https://nametake.github.io/posts/2018/11/24/vimconf2018/</guid>
+      <description>11月24日にあったVimConf2018に行ったので参加ブログを書きます。
+Keynote - What is the next feature?(o) スライド
+mattnさんの発表。
+vim-jpの起こりの話や
+Keynote - Vim: From hjkl to a platform for plugins 楽しみにしていたBram氏の発表。
+Vimの歴史とこれからのVimの話をされていた。
+非常に勝手ながらにあまりプラグインにはそこまで強い興味がないかと思っていたが、 発表で言及されていた「これからのVim」はプラグインに関することが多く、少し驚いた。
+発表の内容からも、終始開発者として「使う人」のことを強く意識しながらVimのこれからを考えていることが伝わった。
+個人的にはVSCodeのPopup Windowが羨ましいのでPopUp Windowがほしいです。
+Migrating plugins to standard features  この発表の聽いたので帰ってからVimのプラグインを10個削りました。
+Modes  デバッグのお話。
+この話を聽いてDelveのプラグインを思い出したのでちょっとあとで試そうと思う。
+A day in the life of (ordinary) Vimmer  1日1回プラグインのアップデートは私もやります。
+Modern editor-independent development environment for PHP Modern editor-independent development environment for PHP #vimconf / 黒點 さん - ニコナレ 宗教戦争好きですすみません。</description>
+    </item>
+    
+    <item>
+      <title>neoformatでshfmtを使うときにインデントをタブ文字にしたい時の設定</title>
+      <link>https://nametake.github.io/posts/2018/10/10/vim-shfmt-neoformat-indent/</link>
+      <pubDate>Wed, 10 Oct 2018 11:44:32 +0900</pubDate>
+      
+      <guid>https://nametake.github.io/posts/2018/10/10/vim-shfmt-neoformat-indent/</guid>
+      <description>VimでShell scriptを書くにあたって、shfmtとneoformatで保存時に自動的にフォーマットされるように設定しているが、チームのコーディングルールでインデントをタブ文字にする必要があったときにちょっと引っかかったのでメモ。
+neoformatでのshfmtはデフォルトだとインデントはスペースになる。
+shfmtのヘルプの
+-i uint indent: 0 for tabs (default), &amp;gt;0 for number of spaces という記述と、neoformatのshfmtの定義の
+function! neoformat#formatters#sh#shfmt() abort return { \ &amp;#39;exe&amp;#39;: &amp;#39;shfmt&amp;#39;, \ &amp;#39;args&amp;#39;: [&amp;#39;-i &amp;#39; . shiftwidth()], \ &amp;#39;stdin&amp;#39;: 1, \ }endfunction から、とりあえずshiftwidthを0にしたらタブ文字になるかと思い、プロジェクトでのVimの設定を以下のように設定してみた(プロジェクト固有の設定ができるようにしている)。
+autocmd Filetype sh setlocal sw=0 sts=0 noexpandtab しかし、どうしてもインデントがスペースになってしまうためちゃんとshiftwidth()の挙動を調べてみると、shiftwidthが0に設定されているとtabstopの値を使うようになっているらしい。
+https://vim-jp.org/vimmagazine/2012/08/31/vimmagazine.html
+tabstopは0を設定できないため、以下のようにneoformatのshfmt設定をプロジェクト固有の設定で上書きして対処した。
+let g:neoformat_sh_shfmt = { \ &amp;#39;exe&amp;#39;: &amp;#39;shfmt&amp;#39;, \ &amp;#39;args&amp;#39;: [&amp;#39;-i&amp;#39;, 0], \ &amp;#39;stdin&amp;#39;: 1, \ }</description>
+    </item>
+    
+  </channel>
+</rss>

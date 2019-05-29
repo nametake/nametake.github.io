@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>typescript on nametake.info</title>
+    <link>https://nametake.github.io/tags/typescript/</link>
+    <description>Recent content in typescript on nametake.info</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 18 May 2019 10:38:55 +0900</lastBuildDate>
+    
+	<atom:link href="https://nametake.github.io/tags/typescript/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Type SafeなReducerの書き方</title>
+      <link>https://nametake.github.io/posts/2019/05/18/type-safe-reducer/</link>
+      <pubDate>Sat, 18 May 2019 10:38:55 +0900</pubDate>
+      
+      <guid>https://nametake.github.io/posts/2019/05/18/type-safe-reducer/</guid>
+      <description>以前書いた記事で書いたReducerでは、受け取ったActionの型を判別するためには、switchで分岐した後にそれに対応したActionの型でキャストをする必要があった。
+const todoReducer: Reducer&amp;lt;ITodoState&amp;gt; = ( state: ITodoState = initTodoState, action: TodoAction ): ITodoState =&amp;gt; { switch (action.type) { case TodoActionType.ADD_TODO: const addTodoAction: IAddTodoAction = action; // &amp;lt;-- ここでキャストしている  return { ...state, todos: state.todos.concat([addTodoAction.payload.todo]) }; default: return state; } }; この方法だと、action.typeとそれに対応する型を実装者が気にしなければならず、型安全とは言い難かった。
+このあたりの話を某Slackで相談したら、以下のような Flux standard actionのtypeやpayloadをジェネリクスで指定するようにして、typeにenumを使うというやり方を教えてもらった。
+import { Reducer } from &amp;#39;redux&amp;#39;; // Flux standard action interface Action&amp;lt;TType, TPayload = null, TMeta = undefined&amp;gt; { type: TType; payload: TPayload; meta?: TMeta; } enum ActionType { ADD, DELETE } type AddAction = Action&amp;lt;ActionType.</description>
+    </item>
+    
+    <item>
+      <title>TypeScript&#43;React&#43;Reduxチュートリアル</title>
+      <link>https://nametake.github.io/posts/2018/12/05/typescript-react-redux-tutorial/</link>
+      <pubDate>Wed, 05 Dec 2018 11:08:00 +0900</pubDate>
+      
+      <guid>https://nametake.github.io/posts/2018/12/05/typescript-react-redux-tutorial/</guid>
+      <description>普段は Go でサーバサイドのコードを書いているのですが、TypeScript+React+Redux を勉強する機会がありました。
+その際、巷に溢れているチュートリアルやサンプルコードで型で縛っているものが少なすぎて、理解にかなり苦労したので自分なりに Todo アプリケーションを作るチュートリアルを書いておきます。
+このチュートリアルは以下のことを意識して書かれています。
+ 引数や返り値は型で縛る  データフローの理解を重視する  外部ライブラリは以下の 3 つしか import しない  react redux react-redux  標準の設計になるべく則る  また、この記事では以下のことについては深く言及はしません
+ nodeのツールのエコシステム TypeScript の記法 JSX の記法 React+Redux の概念  プロジェクトの準備 まずはプロジェクトを準備します。
+node と yarn は入っている前提で進めます。
+Facebook が公式で用意しているアプリケーション作成ツールを使用してプロジェクトテンプレートを作ります。
+npx create-react-app todo-app --scripts-version=react-scripts-ts 次にプロジェクトのディレクトリに移動して以下のツールをインストールします。
+cd todo-app yarn add redux react-redux yarn add -D @types/redux @types/react-redux @types がついているパッケージは、/以下のパッケージの型情報が記述されているパッケージです。開発時しか使用しないので-Dオプションを付けてインストールします。
+以下のコマンドでローカルサーバが立ち上がり、ブラウザに画面が表示されれば問題ありません。
+yarn start チュートリアルのコードは作成されたプロジェクト内部の src ディレクトリに記述していきます。
+Component の実装 何はともあれ何かが表示されてないとモチベーションが上がらないのでブラウザに見た目を表示させます。</description>
+    </item>
+    
+  </channel>
+</rss>
