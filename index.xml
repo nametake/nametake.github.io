@@ -6,10 +6,22 @@
     <description>Recent content on nametake.info</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 29 May 2019 15:47:35 +0900</lastBuildDate>
+    <lastBuildDate>Wed, 05 Jun 2019 23:50:36 +0900</lastBuildDate>
     
 	<atom:link href="https://nametake.github.io/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>FormikとYupを使った動的フォームのバリデーション</title>
+      <link>https://nametake.github.io/posts/2019/06/05/formik-yup-dynamic-validation/</link>
+      <pubDate>Wed, 05 Jun 2019 23:50:36 +0900</pubDate>
+      
+      <guid>https://nametake.github.io/posts/2019/06/05/formik-yup-dynamic-validation/</guid>
+      <description>Formikで動的なFormを作った時に、表示されるFormに応じてYupのバリデーションを切り替える方法でちょっと手間取ったのでメモ。
+結論から言うとYup.lazy()を使って遅延評価されるValidationSchemaを使えば解決した。Yup.lazy()に渡ってくるFormの値を元にValidationwSchemaを表示されるFormに対応したValidationSchemaを返せば狙った挙動が実現できた。
+サンプルコードは以下。
+ </description>
+    </item>
     
     <item>
       <title>インライン要素の高さを合わせるCSS定義</title>

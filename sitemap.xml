@@ -3,25 +3,42 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://nametake.github.io/posts/2019/06/05/formik-yup-dynamic-validation/</loc>
+    <lastmod>2019-06-05T23:50:36+09:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://nametake.github.io/posts/</loc>
-    <lastmod>2019-05-29T15:47:35+09:00</lastmod>
+    <lastmod>2019-06-05T23:50:36+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://nametake.github.io/tags/react/</loc>
+    <lastmod>2019-06-05T23:50:36+09:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://nametake.github.io/tags/</loc>
-    <lastmod>2019-05-29T15:47:35+09:00</lastmod>
+    <lastmod>2019-06-05T23:50:36+09:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://nametake.github.io/tags/css/</loc>
-    <lastmod>2019-05-29T15:47:35+09:00</lastmod>
+    <loc>https://nametake.github.io/tags/typescript/</loc>
+    <lastmod>2019-06-05T23:50:36+09:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://nametake.github.io/</loc>
+    <lastmod>2019-06-05T23:50:36+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://nametake.github.io/tags/css/</loc>
     <lastmod>2019-05-29T15:47:35+09:00</lastmod>
     <priority>0</priority>
   </url>
@@ -37,20 +54,14 @@
   </url>
   
   <url>
-    <loc>https://nametake.github.io/tags/typescript/</loc>
-    <lastmod>2019-05-18T10:38:55+09:00</lastmod>
+    <loc>https://nametake.github.io/tags/intellij/</loc>
+    <lastmod>2019-01-20T21:05:06+09:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://nametake.github.io/posts/2019/01/20/intellij-popup-expand/</loc>
     <lastmod>2019-01-20T21:05:06+09:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://nametake.github.io/tags/intellij/</loc>
-    <lastmod>2019-01-20T21:05:06+09:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
@@ -66,14 +77,14 @@
   </url>
   
   <url>
-    <loc>https://nametake.github.io/posts/2018/12/19/created-labelerr-and-suberr/</loc>
+    <loc>https://nametake.github.io/tags/slide/</loc>
     <lastmod>2018-12-19T11:37:17+09:00</lastmod>
+    <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://nametake.github.io/tags/presentation/</loc>
+    <loc>https://nametake.github.io/posts/2018/12/19/created-labelerr-and-suberr/</loc>
     <lastmod>2018-12-19T11:37:17+09:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
@@ -82,19 +93,8 @@
   </url>
   
   <url>
-    <loc>https://nametake.github.io/tags/protobuf/</loc>
+    <loc>https://nametake.github.io/tags/protocol-buffers/</loc>
     <lastmod>2018-12-14T00:00:00+09:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://nametake.github.io/posts/2018/12/05/typescript-react-redux-tutorial/</loc>
-    <lastmod>2018-12-05T11:08:00+09:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://nametake.github.io/tags/react/</loc>
-    <lastmod>2018-12-05T11:08:00+09:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -102,6 +102,11 @@
     <loc>https://nametake.github.io/tags/redux/</loc>
     <lastmod>2018-12-05T11:08:00+09:00</lastmod>
     <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://nametake.github.io/posts/2018/12/05/typescript-react-redux-tutorial/</loc>
+    <lastmod>2018-12-05T11:08:00+09:00</lastmod>
   </url>
   
   <url>
@@ -115,14 +120,14 @@
   </url>
   
   <url>
-    <loc>https://nametake.github.io/posts/2018/11/09/auth-gcp-client/</loc>
-    <lastmod>2018-11-09T11:15:24+09:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://nametake.github.io/tags/gcp/</loc>
     <lastmod>2018-11-09T11:15:24+09:00</lastmod>
     <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://nametake.github.io/posts/2018/11/09/auth-gcp-client/</loc>
+    <lastmod>2018-11-09T11:15:24+09:00</lastmod>
   </url>
   
   <url>
