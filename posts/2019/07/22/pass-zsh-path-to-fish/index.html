@@ -11,19 +11,19 @@
 
     <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="zshのPATHの順番をfish shellに引き継ぐ"/>
-<meta name="twitter:description" content="自分はメインのターミナル環境をfishにしています。
-特に設定を細かくしなくてもサクサク動いてくれるので非常に助かっているんですが、fish自身がPOSIX準拠ではないため、別の環境やOSに持ち込むことを想定して、OSのデフォルトシェルはzshにして、そこからtmux経由でfishを利用するようにしています。
-そういう使い方のため、環境変数の設定は全てzshenvにしているんですが、fishを起動したときにzshenvで設定した環境変数の順番を維持してくれないという問題がありました。
-普通にfishを起動するだけだと発生する問題のようだったので、以下のようにtmuxでfishを起動する際にzshのパスをそのままの順番でfishのパスに設定する変更することで対応しました。
-set -g default-command /usr/local/bin/fish --init-command=&#34;set PATH &#39;string split : $PATH&#39;)&#34; 上記のやり方は直接的な解決方法ではないんですが、PATHの順序に関するissueは挙がっているので、そのうち直るかもしれません。(深く追えていない……)
+<meta name="twitter:description" content="自分はメインのターミナル環境をfishにしている。
+特に設定を細かくしなくてもサクサク動いてくれるので非常に助かっているが、fish自身がPOSIX準拠ではないため、別の環境やOSに持ち込むことを想定して、OSのデフォルトシェルはzshにして、そこからtmux経由でfishを利用するようにしている。
+そういう使い方のため、環境変数の設定は全てzshenvにしているが、fishを起動したときにzshenvで設定した環境変数の順番を維持してくれないという問題があった。
+普通にfishを起動するだけだと発生する問題のようだったので、以下のようにtmuxでfishを起動する際にzshのパスをそのままの順番でfishのパスに設定する変更することで対応した。
+set -g default-command /usr/local/bin/fish --init-command=&#34;set PATH &#39;string split : $PATH&#39;)&#34; 上記のやり方は直接的な解決方法ではないが、PATHの順序に関するissueは挙がっているので、そのうち直るかもしれない。(深く追う時間が確保できない……)
 https://github.com/fish-shell/fish-shell/issues/5456"/>
 
     <meta property="og:title" content="zshのPATHの順番をfish shellに引き継ぐ" />
-<meta property="og:description" content="自分はメインのターミナル環境をfishにしています。
-特に設定を細かくしなくてもサクサク動いてくれるので非常に助かっているんですが、fish自身がPOSIX準拠ではないため、別の環境やOSに持ち込むことを想定して、OSのデフォルトシェルはzshにして、そこからtmux経由でfishを利用するようにしています。
-そういう使い方のため、環境変数の設定は全てzshenvにしているんですが、fishを起動したときにzshenvで設定した環境変数の順番を維持してくれないという問題がありました。
-普通にfishを起動するだけだと発生する問題のようだったので、以下のようにtmuxでfishを起動する際にzshのパスをそのままの順番でfishのパスに設定する変更することで対応しました。
-set -g default-command /usr/local/bin/fish --init-command=&#34;set PATH &#39;string split : $PATH&#39;)&#34; 上記のやり方は直接的な解決方法ではないんですが、PATHの順序に関するissueは挙がっているので、そのうち直るかもしれません。(深く追えていない……)
+<meta property="og:description" content="自分はメインのターミナル環境をfishにしている。
+特に設定を細かくしなくてもサクサク動いてくれるので非常に助かっているが、fish自身がPOSIX準拠ではないため、別の環境やOSに持ち込むことを想定して、OSのデフォルトシェルはzshにして、そこからtmux経由でfishを利用するようにしている。
+そういう使い方のため、環境変数の設定は全てzshenvにしているが、fishを起動したときにzshenvで設定した環境変数の順番を維持してくれないという問題があった。
+普通にfishを起動するだけだと発生する問題のようだったので、以下のようにtmuxでfishを起動する際にzshのパスをそのままの順番でfishのパスに設定する変更することで対応した。
+set -g default-command /usr/local/bin/fish --init-command=&#34;set PATH &#39;string split : $PATH&#39;)&#34; 上記のやり方は直接的な解決方法ではないが、PATHの順序に関するissueは挙がっているので、そのうち直るかもしれない。(深く追う時間が確保できない……)
 https://github.com/fish-shell/fish-shell/issues/5456" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://nametake.github.io/posts/2019/07/22/pass-zsh-path-to-fish/" />
@@ -131,15 +131,15 @@ https://github.com/fish-shell/fish-shell/issues/5456" />
       </header>
 
       <div>
-        <p>自分はメインのターミナル環境をfishにしています。</p>
+        <p>自分はメインのターミナル環境をfishにしている。</p>
 
-<p>特に設定を細かくしなくてもサクサク動いてくれるので非常に助かっているんですが、fish自身がPOSIX準拠ではないため、別の環境やOSに持ち込むことを想定して、OSのデフォルトシェルはzshにして、そこからtmux経由でfishを利用するようにしています。</p>
+<p>特に設定を細かくしなくてもサクサク動いてくれるので非常に助かっているが、fish自身がPOSIX準拠ではないため、別の環境やOSに持ち込むことを想定して、OSのデフォルトシェルはzshにして、そこからtmux経由でfishを利用するようにしている。</p>
 
-<p>そういう使い方のため、環境変数の設定は全てzshenvにしているんですが、fishを起動したときにzshenvで設定した環境変数の順番を維持してくれないという問題がありました。</p>
+<p>そういう使い方のため、環境変数の設定は全てzshenvにしているが、fishを起動したときにzshenvで設定した環境変数の順番を維持してくれないという問題があった。</p>
 
-<p>普通にfishを起動するだけだと発生する問題のようだったので、以下のようにtmuxでfishを起動する際にzshのパスをそのままの順番でfishのパスに設定する変更することで対応しました。</p>
+<p>普通にfishを起動するだけだと発生する問題のようだったので、以下のようにtmuxでfishを起動する際にzshのパスをそのままの順番でfishのパスに設定する変更することで対応した。</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-console" data-lang="console">set -g default-command /usr/local/bin/fish --init-command=&#34;set PATH &#39;string split : $PATH&#39;)&#34;</code></pre></div>
-<p>上記のやり方は直接的な解決方法ではないんですが、PATHの順序に関するissueは挙がっているので、そのうち直るかもしれません。(深く追えていない……)</p>
+<p>上記のやり方は直接的な解決方法ではないが、PATHの順序に関するissueは挙がっているので、そのうち直るかもしれない。(深く追う時間が確保できない……)</p>
 
 <p><a href="https://github.com/fish-shell/fish-shell/issues/5456">https://github.com/fish-shell/fish-shell/issues/5456</a></p>
 
