@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="author" content="nametake">
+    <meta name="description" content="nametake&#39;s personal website">
+    <meta name="keywords" content="blog,developer,personal">
+
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Vimのプラグインを整理した(あとcoc.nvimの紹介)"/>
+<meta name="twitter:description" content="ちまちまとdotfilesを育ててきたが、Goの補完が動かなくなっていたり、中途半端にLSP対応しようとした痕跡だけ残っていたりしたので、断捨離も兼ねてガッツリプラグインを整理した。
+プラグインの構成はdotfiles/vim/rc/plug.rc.vimに全部寄せている。
+あんまり凝った構成にしてもメンテナンスが大変なので、以下の基準でプラグインを選んだ。
+ githubのStar数が多くてAPIが安定してそう 少ない設定でも動く  整理しているときに、coc.nvimという良さげな補完プラグインを見つけたので軽く紹介してみる。
+coc.nvim coc.nvimはREADMEに書いてあるとおり、VSCodeライクな補完をVim上で実現するために作られているらしい。
+高速と謳っているだけあり、Vim上で重たいファイルを開いて補完を実行しても重くなることはなかった。また、デフォルトでLSPに対応している上に、非常に丁寧なドキュメントも用意されているため、導入のハードルはとにかく低い。aleと共存するための設定もあったのも個人的には嬉しい。
+一部設定はJSONで管理することになるが、それさえ問題なければ強くおすすめできる。
+導入に際して、coc-snippetsをCocInstallではなく、プラグインマネージャ(vim-plug)経由でインストールしようとしたときにちょっとだけ引っかかったので、それだけメモ。
+coc.nvimと連携するエクステンションをプラグインマネージャ経由でインストールするときには、以下のようにインストール後にyarnコマンドを実行するようにする必要がある。
+Plug &#39;neoclide/coc-snippets&#39;, {&#39;do&#39;: &#39;yarn install --frozen-lockfile&#39;} (ちなみにちゃんとドキュメントに書いてあるので、ちゃんと全部読んでおけば引っかかるようなこともなかった)"/>
+
+    <meta property="og:title" content="Vimのプラグインを整理した(あとcoc.nvimの紹介)" />
+<meta property="og:description" content="ちまちまとdotfilesを育ててきたが、Goの補完が動かなくなっていたり、中途半端にLSP対応しようとした痕跡だけ残っていたりしたので、断捨離も兼ねてガッツリプラグインを整理した。
+プラグインの構成はdotfiles/vim/rc/plug.rc.vimに全部寄せている。
+あんまり凝った構成にしてもメンテナンスが大変なので、以下の基準でプラグインを選んだ。
+ githubのStar数が多くてAPIが安定してそう 少ない設定でも動く  整理しているときに、coc.nvimという良さげな補完プラグインを見つけたので軽く紹介してみる。
+coc.nvim coc.nvimはREADMEに書いてあるとおり、VSCodeライクな補完をVim上で実現するために作られているらしい。
+高速と謳っているだけあり、Vim上で重たいファイルを開いて補完を実行しても重くなることはなかった。また、デフォルトでLSPに対応している上に、非常に丁寧なドキュメントも用意されているため、導入のハードルはとにかく低い。aleと共存するための設定もあったのも個人的には嬉しい。
+一部設定はJSONで管理することになるが、それさえ問題なければ強くおすすめできる。
+導入に際して、coc-snippetsをCocInstallではなく、プラグインマネージャ(vim-plug)経由でインストールしようとしたときにちょっとだけ引っかかったので、それだけメモ。
+coc.nvimと連携するエクステンションをプラグインマネージャ経由でインストールするときには、以下のようにインストール後にyarnコマンドを実行するようにする必要がある。
+Plug &#39;neoclide/coc-snippets&#39;, {&#39;do&#39;: &#39;yarn install --frozen-lockfile&#39;} (ちなみにちゃんとドキュメントに書いてあるので、ちゃんと全部読んでおけば引っかかるようなこともなかった)" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://nametake.github.io/posts/2019/07/25/change-vim-plugins/" />
+<meta property="article:published_time" content="2019-07-25T00:51:43&#43;09:00"/>
+<meta property="article:modified_time" content="2019-07-25T00:51:43&#43;09:00"/>
+
+
+    
+      <base href="https://nametake.github.io/posts/2019/07/25/change-vim-plugins/">
+    
+    <title>
+  Vimのプラグインを整理した(あとcoc.nvimの紹介) · nametake.info
+</title>
+
+    
+      <link rel="canonical" href="https://nametake.github.io/posts/2019/07/25/change-vim-plugins/">
+    
+
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700%7CMerriweather:300,700%7CSource+Code+Pro:400,700" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" integrity="sha256-l85OmPOjvil/SOvVt3HnSSjzF1TUMyT9eV0c2BzEGzU=" crossorigin="anonymous" />
+
+    
+      
+      
+      <link rel="stylesheet" href="https://nametake.github.io/css/coder.min.28d751104f30c16da1aa1bb04015cbe662cacfe0d1b01af4f2240ad58580069c.css" integrity="sha256-KNdREE8wwW2hqhuwQBXL5mLKz&#43;DRsBr08iQK1YWABpw=" crossorigin="anonymous" media="screen" />
+    
+
+    
+
+    
+
+    
+      <link rel="stylesheet" href="https://nametake.github.io/css/index.css" />
+    
+
+    
+    
+    <link rel="icon" type="image/png" href="https://nametake.github.io/images/favicon-32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="https://nametake.github.io/images/favicon-16x16.png" sizes="16x16">
+
+    <meta name="generator" content="Hugo 0.55.6" />
+  </head>
+
+  <body class=" ">
+    <main class="wrapper">
+      <nav class="navigation">
+  <section class="container">
+    <a class="navigation-title" href="https://nametake.github.io/">
+      nametake.info
+    </a>
+    <input type="checkbox" id="menu-toggle" />
+    <label class="menu-button float-right" for="menu-toggle"><i class="fas fa-bars"></i></label>
+    <ul class="navigation-list">
+      
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="https://nametake.github.io/about/">About</a>
+          </li>
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="https://nametake.github.io/posts/">Blog</a>
+          </li>
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="https://nametake.github.io/tags/">Tags</a>
+          </li>
+        
+      
+      
+    </ul>
+  </section>
+</nav>
+
+
+      <div class="content">
+        
+  <section class="container post">
+    <article>
+      <header>
+        <div class="post-title">
+          <h1 class="title">Vimのプラグインを整理した(あとcoc.nvimの紹介)</h1>
+        </div>
+        <div class="post-meta">
+          <div class="date">
+            <span class="posted-on">
+              <i class="fas fa-calendar"></i>
+              <time datetime='2019-07-25T00:51:43&#43;09:00'>
+                July 25, 2019
+              </time>
+            </span>
+            <span class="reading-time">
+              <i class="fas fa-clock"></i>
+              One minute read
+            </span>
+          </div>
+          
+          <div class="tags">
+  <i class="fas fa-tag"></i>
+    <a href="https://nametake.github.io/tags/vim/">Vim</a></div>
+
+        </div>
+      </header>
+
+      <div>
+        
+
+<p>ちまちまと<a href="https://github.com/nametake/dotfiles">dotfiles</a>を育ててきたが、Goの補完が動かなくなっていたり、中途半端にLSP対応しようとした痕跡だけ残っていたりしたので、断捨離も兼ねてガッツリプラグインを整理した。</p>
+
+<p>プラグインの構成は<a href="https://github.com/nametake/dotfiles/blob/master/vim/rc/plug.rc.vim">dotfiles/vim/rc/plug.rc.vim</a>に全部寄せている。</p>
+
+<p>あんまり凝った構成にしてもメンテナンスが大変なので、以下の基準でプラグインを選んだ。</p>
+
+<ul>
+<li>githubのStar数が多くてAPIが安定してそう</li>
+<li>少ない設定でも動く</li>
+</ul>
+
+<p>整理しているときに、<a href="https://github.com/neoclide/coc.nvim">coc.nvim</a>という良さげな補完プラグインを見つけたので軽く紹介してみる。</p>
+
+<h1 id="coc-nvim">coc.nvim</h1>
+
+<p>coc.nvimはREADMEに書いてあるとおり、VSCodeライクな補完をVim上で実現するために作られているらしい。</p>
+
+<p>高速と謳っているだけあり、Vim上で重たいファイルを開いて補完を実行しても重くなることはなかった。また、デフォルトでLSPに対応している上に、<a href="https://github.com/neoclide/coc.nvim/wiki/Language-servers#supported-features">非常に丁寧なドキュメント</a>も用意されているため、導入のハードルはとにかく低い。aleと共存するための設定もあったのも個人的には嬉しい。</p>
+
+<p>一部設定はJSONで管理することになるが、それさえ問題なければ強くおすすめできる。</p>
+
+<p>導入に際して、<a href="https://github.com/neoclide/coc-snippets">coc-snippets</a>を<code>CocInstall</code>ではなく、プラグインマネージャ(<a href="https://github.com/junegunn/vim-plug">vim-plug</a>)経由でインストールしようとしたときにちょっとだけ引っかかったので、それだけメモ。</p>
+
+<p>coc.nvimと連携するエクステンションをプラグインマネージャ経由でインストールするときには、以下のようにインストール後に<code>yarn</code>コマンドを実行するようにする必要がある。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-vim" data-lang="vim"><span style="color:#a6e22e">Plug</span> <span style="color:#e6db74">&#39;neoclide/coc-snippets&#39;</span>, {<span style="color:#e6db74">&#39;do&#39;</span>: <span style="color:#e6db74">&#39;yarn install --frozen-lockfile&#39;</span>}</code></pre></div>
+<p><del>(ちなみにちゃんと<a href="https://github.com/neoclide/coc.nvim/wiki/Using-coc-extensions#use-vims-plugin-manager-for-coc-extension">ドキュメントに書いてある</a>ので、ちゃんと全部読んでおけば引っかかるようなこともなかった)</del></p>
+
+      </div>
+
+      <footer>
+        
+
+
+        <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "nametake" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+      </footer>
+    </article>
+
+    
+  </section>
+
+      </div>
+
+      <footer class="footer">
+  <section class="container">
+    
+      <p>nametake.github.io</p>
+    
+     © 2019
+    
+       · 
+      Powered by <a href="https://gohugo.io/">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/">Coder</a>.
+    
+    
+  </section>
+</footer>
+
+    </main>
+
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-129739305-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+
+  </body>
+
+</html>

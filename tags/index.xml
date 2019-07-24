@@ -6,10 +6,19 @@
     <description>Recent content in Tags on nametake.info</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 22 Jul 2019 01:34:18 +0900</lastBuildDate>
+    <lastBuildDate>Thu, 25 Jul 2019 00:51:43 +0900</lastBuildDate>
     
 	<atom:link href="https://nametake.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Vim</title>
+      <link>https://nametake.github.io/tags/vim/</link>
+      <pubDate>Thu, 25 Jul 2019 00:51:43 +0900</pubDate>
+      
+      <guid>https://nametake.github.io/tags/vim/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>fish</title>
@@ -62,15 +71,6 @@
       <pubDate>Sun, 20 Jan 2019 21:05:06 +0900</pubDate>
       
       <guid>https://nametake.github.io/tags/intellij/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Vim</title>
-      <link>https://nametake.github.io/tags/vim/</link>
-      <pubDate>Sun, 20 Jan 2019 21:05:06 +0900</pubDate>
-      
-      <guid>https://nametake.github.io/tags/vim/</guid>
       <description></description>
     </item>
     

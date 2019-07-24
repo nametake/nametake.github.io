@@ -6,10 +6,28 @@
     <description>Recent content on nametake.info</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 22 Jul 2019 01:34:18 +0900</lastBuildDate>
+    <lastBuildDate>Thu, 25 Jul 2019 00:51:43 +0900</lastBuildDate>
     
 	<atom:link href="https://nametake.github.io/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Vimのプラグインを整理した(あとcoc.nvimの紹介)</title>
+      <link>https://nametake.github.io/posts/2019/07/25/change-vim-plugins/</link>
+      <pubDate>Thu, 25 Jul 2019 00:51:43 +0900</pubDate>
+      
+      <guid>https://nametake.github.io/posts/2019/07/25/change-vim-plugins/</guid>
+      <description>ちまちまとdotfilesを育ててきたが、Goの補完が動かなくなっていたり、中途半端にLSP対応しようとした痕跡だけ残っていたりしたので、断捨離も兼ねてガッツリプラグインを整理した。
+プラグインの構成はdotfiles/vim/rc/plug.rc.vimに全部寄せている。
+あんまり凝った構成にしてもメンテナンスが大変なので、以下の基準でプラグインを選んだ。
+ githubのStar数が多くてAPIが安定してそう 少ない設定でも動く  整理しているときに、coc.nvimという良さげな補完プラグインを見つけたので軽く紹介してみる。
+coc.nvim coc.nvimはREADMEに書いてあるとおり、VSCodeライクな補完をVim上で実現するために作られているらしい。
+高速と謳っているだけあり、Vim上で重たいファイルを開いて補完を実行しても重くなることはなかった。また、デフォルトでLSPに対応している上に、非常に丁寧なドキュメントも用意されているため、導入のハードルはとにかく低い。aleと共存するための設定もあったのも個人的には嬉しい。
+一部設定はJSONで管理することになるが、それさえ問題なければ強くおすすめできる。
+導入に際して、coc-snippetsをCocInstallではなく、プラグインマネージャ(vim-plug)経由でインストールしようとしたときにちょっとだけ引っかかったので、それだけメモ。
+coc.nvimと連携するエクステンションをプラグインマネージャ経由でインストールするときには、以下のようにインストール後にyarnコマンドを実行するようにする必要がある。
+Plug &amp;#39;neoclide/coc-snippets&amp;#39;, {&amp;#39;do&amp;#39;: &amp;#39;yarn install --frozen-lockfile&amp;#39;} (ちなみにちゃんとドキュメントに書いてあるので、ちゃんと全部読んでおけば引っかかるようなこともなかった)</description>
+    </item>
     
     <item>
       <title>zshのPATHの順番をfish shellに引き継ぐ</title>
