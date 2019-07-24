@@ -49,7 +49,6 @@ Plug &amp;#39;neoclide/coc-snippets&amp;#39;, {&amp;#39;do&amp;#39;: &amp;#39;ya
       <description>11月24日にあったVimConf2018に行ったので参加ブログを書きます。
 Keynote - What is the next feature?(o) スライド
 mattnさんの発表。
-vim-jpの起こりの話や
 Keynote - Vim: From hjkl to a platform for plugins 楽しみにしていたBram氏の発表。
 Vimの歴史とこれからのVimの話をされていた。
 非常に勝手ながらにあまりプラグインにはそこまで強い興味がないかと思っていたが、 発表で言及されていた「これからのVim」はプラグインに関することが多く、少し驚いた。
@@ -59,7 +58,8 @@ Migrating plugins to standard features  この発表の聽いたので帰って�
 Modes  デバッグのお話。
 この話を聽いてDelveのプラグインを思い出したのでちょっとあとで試そうと思う。
 A day in the life of (ordinary) Vimmer  1日1回プラグインのアップデートは私もやります。
-Modern editor-independent development environment for PHP Modern editor-independent development environment for PHP #vimconf / 黒點 さん - ニコナレ 宗教戦争好きですすみません。</description>
+Modern editor-independent development environment for PHP Modern editor-independent development environment for PHP #vimconf / 黒點 さん - ニコナレ 宗教戦争好きですすみません。
+Veonimは少し気になったので後で試す。</description>
     </item>
     
     <item>
