@@ -26,7 +26,7 @@ coc.nvim coc.nvimはREADMEに書いてあるとおり、VSCodeライクな補完
 一部設定はJSONで管理することになるが、それさえ問題なければ強くおすすめできる。
 導入に際して、coc-snippetsをCocInstallではなく、プラグインマネージャ(vim-plug)経由でインストールしようとしたときにちょっとだけ引っかかったのでそれだけメモ。
 coc.nvimと連携するエクステンションをプラグインマネージャ経由でインストールするときには、以下のようにインストール後にyarnコマンドを実行するようにする必要がある。
-Plug &amp;#39;neoclide/coc-snippets&amp;#39;, {&amp;#39;do&amp;#39;: &amp;#39;yarn install --frozen-lockfile&amp;#39;} (ちなみにちゃんとドキュメントに書いてあるので、ちゃんと全部読んでおけば引っかかるようなこともなかった)</description>
+Plug &amp;#39;neoclide/coc-snippets&amp;#39;, {&amp;#39;do&amp;#39;: &amp;#39;yarn install --frozen-lockfile&amp;#39;} (ちなみにちゃんとドキュメントに書いてあるので、全部読んでおけば引っかかるようなこともない)</description>
     </item>
     
     <item>
