@@ -11,26 +11,24 @@
 
     <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="zshのPATHの順番をfish shellに引き継ぐ"/>
-<meta name="twitter:description" content="自分はメインのターミナル環境をfishにしている。
-特に設定を細かくしなくてもサクサク動いてくれるので非常に助かっているが、POSIX準拠ではないためデフォルトシェルにするのは避けて、
- デフォルトシェルはzsh tmuxを自動起動 tmuxのデフォルトシェルとしてfish  という形で利用している。
-そのため、環境変数の設定は全てzshenvでしているが、fishを起動したときにzshenvで設定した環境変数の順番を維持してくれないという問題があった。
-普通にfishを起動するだけだと発生する問題のようだったので、以下のようにtmuxでfishを起動する際にzshのパスをそのままの順番でfishのパスに設定する変更することで対応した。
-set -g default-command /usr/local/bin/fish --init-command=&#34;set PATH &#39;string split : $PATH&#39;)&#34; 上記のやり方は直接的な解決方法ではないが、PATHの順序に関するissueは挙がっているので、そのうち直るかもしれない。(深く追う時間が確保できない……)
+<meta name="twitter:description" content="自分はメインのターミナル環境をfishにしています。
+特に設定を細かくしなくてもサクサク動いてくれるので非常に助かっているんですが、POSIX準拠ではないためデフォルトシェルにするのは避けて、以下のような形で理容師ています。
+ デフォルトシェルはzsh tmuxを自動起動 tmuxのデフォルトシェルとしてfish  そのため、環境変数の設定は全てzshenvでしているんですが、fishを起動したときにzshenvで設定した環境変数の順番を維持してくれないという問題がありました。
+普通にfishを起動するだけだと発生する問題のようだったので、以下のようにtmuxでfishを起動する際にzshのパスをそのままの順番でfishのパスに設定する変更することで対応しました。
+set -g default-command /usr/local/bin/fish --init-command=&#34;set PATH &#39;string split : $PATH&#39;)&#34; 上記のやり方は直接的な解決方法ではないが、PATHの順序に関するissueは挙がっているので、そのうち直るかもしれません。(深く追う時間が確保できない……)
 https://github.com/fish-shell/fish-shell/issues/5456"/>
 
     <meta property="og:title" content="zshのPATHの順番をfish shellに引き継ぐ" />
-<meta property="og:description" content="自分はメインのターミナル環境をfishにしている。
-特に設定を細かくしなくてもサクサク動いてくれるので非常に助かっているが、POSIX準拠ではないためデフォルトシェルにするのは避けて、
- デフォルトシェルはzsh tmuxを自動起動 tmuxのデフォルトシェルとしてfish  という形で利用している。
-そのため、環境変数の設定は全てzshenvでしているが、fishを起動したときにzshenvで設定した環境変数の順番を維持してくれないという問題があった。
-普通にfishを起動するだけだと発生する問題のようだったので、以下のようにtmuxでfishを起動する際にzshのパスをそのままの順番でfishのパスに設定する変更することで対応した。
-set -g default-command /usr/local/bin/fish --init-command=&#34;set PATH &#39;string split : $PATH&#39;)&#34; 上記のやり方は直接的な解決方法ではないが、PATHの順序に関するissueは挙がっているので、そのうち直るかもしれない。(深く追う時間が確保できない……)
+<meta property="og:description" content="自分はメインのターミナル環境をfishにしています。
+特に設定を細かくしなくてもサクサク動いてくれるので非常に助かっているんですが、POSIX準拠ではないためデフォルトシェルにするのは避けて、以下のような形で理容師ています。
+ デフォルトシェルはzsh tmuxを自動起動 tmuxのデフォルトシェルとしてfish  そのため、環境変数の設定は全てzshenvでしているんですが、fishを起動したときにzshenvで設定した環境変数の順番を維持してくれないという問題がありました。
+普通にfishを起動するだけだと発生する問題のようだったので、以下のようにtmuxでfishを起動する際にzshのパスをそのままの順番でfishのパスに設定する変更することで対応しました。
+set -g default-command /usr/local/bin/fish --init-command=&#34;set PATH &#39;string split : $PATH&#39;)&#34; 上記のやり方は直接的な解決方法ではないが、PATHの順序に関するissueは挙がっているので、そのうち直るかもしれません。(深く追う時間が確保できない……)
 https://github.com/fish-shell/fish-shell/issues/5456" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://nametake.github.io/posts/2019/07/22/pass-zsh-path-to-fish/" />
-<meta property="article:published_time" content="2019-07-22T01:34:18&#43;09:00"/>
-<meta property="article:modified_time" content="2019-07-22T01:34:18&#43;09:00"/>
+<meta property="article:published_time" content="2019-07-22T01:34:18+09:00" />
+<meta property="article:modified_time" content="2019-07-22T01:34:18+09:00" />
 
 
     
@@ -67,7 +65,7 @@ https://github.com/fish-shell/fish-shell/issues/5456" />
     <link rel="icon" type="image/png" href="https://nametake.github.io/images/favicon-32x32.png" sizes="32x32">
     <link rel="icon" type="image/png" href="https://nametake.github.io/images/favicon-16x16.png" sizes="16x16">
 
-    <meta name="generator" content="Hugo 0.55.6" />
+    <meta name="generator" content="Hugo 0.56.0" />
   </head>
 
   <body class=" ">
@@ -133,9 +131,9 @@ https://github.com/fish-shell/fish-shell/issues/5456" />
       </header>
 
       <div>
-        <p>自分はメインのターミナル環境をfishにしている。</p>
+        <p>自分はメインのターミナル環境をfishにしています。</p>
 
-<p>特に設定を細かくしなくてもサクサク動いてくれるので非常に助かっているが、POSIX準拠ではないためデフォルトシェルにするのは避けて、</p>
+<p>特に設定を細かくしなくてもサクサク動いてくれるので非常に助かっているんですが、POSIX準拠ではないためデフォルトシェルにするのは避けて、以下のような形で理容師ています。</p>
 
 <ol>
 <li>デフォルトシェルはzsh</li>
@@ -143,13 +141,11 @@ https://github.com/fish-shell/fish-shell/issues/5456" />
 <li>tmuxのデフォルトシェルとしてfish</li>
 </ol>
 
-<p>という形で利用している。</p>
+<p>そのため、環境変数の設定は全てzshenvでしているんですが、fishを起動したときにzshenvで設定した環境変数の順番を維持してくれないという問題がありました。</p>
 
-<p>そのため、環境変数の設定は全てzshenvでしているが、fishを起動したときにzshenvで設定した環境変数の順番を維持してくれないという問題があった。</p>
-
-<p>普通にfishを起動するだけだと発生する問題のようだったので、以下のようにtmuxでfishを起動する際にzshのパスをそのままの順番でfishのパスに設定する変更することで対応した。</p>
+<p>普通にfishを起動するだけだと発生する問題のようだったので、以下のようにtmuxでfishを起動する際にzshのパスをそのままの順番でfishのパスに設定する変更することで対応しました。</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-console" data-lang="console">set -g default-command /usr/local/bin/fish --init-command=&#34;set PATH &#39;string split : $PATH&#39;)&#34;</code></pre></div>
-<p>上記のやり方は直接的な解決方法ではないが、PATHの順序に関するissueは挙がっているので、そのうち直るかもしれない。(深く追う時間が確保できない……)</p>
+<p>上記のやり方は直接的な解決方法ではないが、PATHの順序に関するissueは挙がっているので、そのうち直るかもしれません。(深く追う時間が確保できない……)</p>
 
 <p><a href="https://github.com/fish-shell/fish-shell/issues/5456">https://github.com/fish-shell/fish-shell/issues/5456</a></p>
 

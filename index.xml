@@ -17,16 +17,16 @@
       <pubDate>Thu, 25 Jul 2019 00:51:43 +0900</pubDate>
       
       <guid>https://nametake.github.io/posts/2019/07/25/change-vim-plugins/</guid>
-      <description>ちまちまとdotfilesを育ててきたが、Goの補完が動かなくなっていたり、中途半端にLSP対応しようとした痕跡だけ残っていたりしたので、断捨離も兼ねてガッツリプラグインを整理した。
-プラグインの構成はdotfiles/vim/rc/plug.rc.vimに全部寄せている。
-あんまり凝った構成にしてもメンテナンスが大変なので、以下の基準でプラグインを選んだ。
- githubのStar数が多くてAPIが安定してそう 少ない設定でも動く  整理しているときに、coc.nvimという良さげな補完プラグインを見つけたので軽く紹介してみる。
+      <description>ちまちまとdotfilesを育ててきたんですが、Goの補完が動かなくなっていたり中途半端にLSP対応しようとした痕跡だけ残っていたりしたので、断捨離も兼ねてガッツリプラグインを整理しました。
+プラグインの構成はdotfiles/vim/rc/plug.rc.vimに全部寄せています。
+あんまり凝った構成にしてもメンテナンスが大変なので、以下の基準でプラグインを選びました。
+ githubのStar数が多くてAPIが安定してそう 少ない設定でも動く  整理しているときに、coc.nvimという良さげな補完プラグインを見つけたので軽く紹介してみます。
 coc.nvim coc.nvimはREADMEに書いてあるとおり、VSCodeライクな補完をVim上で実現するために作られているらしい。
-高速と謳っているだけあり、Vim上で重たいファイルを開いて補完を実行しても重くなることはなかった。また、デフォルトでLSPに対応している上に、非常に丁寧なドキュメントも用意されているため、導入のハードルはとにかく低い。aleと共存するための設定もあったのも個人的には嬉しい。
-一部設定はJSONで管理することになるが、それさえ問題なければ強くおすすめできる。
+高速と謳っているだけあり、重たいファイルを開いて補完を実行しても重くなりませでした。また、デフォルトでLSPに対応している上に、非常に丁寧なドキュメントも用意されているため、導入のハードルはとにかく低かったです。aleと共存するための設定があったのも個人的には嬉しい。
+一部設定はJSONで管理することになりますが、それさえ問題なければ強くおすすめできます。
 導入に際して、coc-snippetsをCocInstallではなく、プラグインマネージャ(vim-plug)経由でインストールしようとしたときにちょっとだけ引っかかったのでそれだけメモ。
-coc.nvimと連携するエクステンションをプラグインマネージャ経由でインストールするときには、以下のようにインストール後にyarnコマンドを実行するようにする必要がある。
-Plug &amp;#39;neoclide/coc-snippets&amp;#39;, {&amp;#39;do&amp;#39;: &amp;#39;yarn install --frozen-lockfile&amp;#39;} (ちなみにちゃんとドキュメントに書いてあるので、全部読んでおけば引っかかるようなこともない)</description>
+coc.nvimと連携するエクステンションをプラグインマネージャ経由でインストールするときには、以下のようにインストール後にyarnコマンドを実行するようにする必要があります。
+Plug &amp;#39;neoclide/coc-snippets&amp;#39;, {&amp;#39;do&amp;#39;: &amp;#39;yarn install --frozen-lockfile&amp;#39;} (ちなみにちゃんとドキュメントに書いてあるので、全部読んでおけば引っかかるようなこともないです)</description>
     </item>
     
     <item>
@@ -35,12 +35,11 @@ Plug &amp;#39;neoclide/coc-snippets&amp;#39;, {&amp;#39;do&amp;#39;: &amp;#39;ya
       <pubDate>Mon, 22 Jul 2019 01:34:18 +0900</pubDate>
       
       <guid>https://nametake.github.io/posts/2019/07/22/pass-zsh-path-to-fish/</guid>
-      <description>自分はメインのターミナル環境をfishにしている。
-特に設定を細かくしなくてもサクサク動いてくれるので非常に助かっているが、POSIX準拠ではないためデフォルトシェルにするのは避けて、
- デフォルトシェルはzsh tmuxを自動起動 tmuxのデフォルトシェルとしてfish  という形で利用している。
-そのため、環境変数の設定は全てzshenvでしているが、fishを起動したときにzshenvで設定した環境変数の順番を維持してくれないという問題があった。
-普通にfishを起動するだけだと発生する問題のようだったので、以下のようにtmuxでfishを起動する際にzshのパスをそのままの順番でfishのパスに設定する変更することで対応した。
-set -g default-command /usr/local/bin/fish --init-command=&amp;#34;set PATH &amp;#39;string split : $PATH&amp;#39;)&amp;#34; 上記のやり方は直接的な解決方法ではないが、PATHの順序に関するissueは挙がっているので、そのうち直るかもしれない。(深く追う時間が確保できない……)
+      <description>自分はメインのターミナル環境をfishにしています。
+特に設定を細かくしなくてもサクサク動いてくれるので非常に助かっているんですが、POSIX準拠ではないためデフォルトシェルにするのは避けて、以下のような形で理容師ています。
+ デフォルトシェルはzsh tmuxを自動起動 tmuxのデフォルトシェルとしてfish  そのため、環境変数の設定は全てzshenvでしているんですが、fishを起動したときにzshenvで設定した環境変数の順番を維持してくれないという問題がありました。
+普通にfishを起動するだけだと発生する問題のようだったので、以下のようにtmuxでfishを起動する際にzshのパスをそのままの順番でfishのパスに設定する変更することで対応しました。
+set -g default-command /usr/local/bin/fish --init-command=&amp;#34;set PATH &amp;#39;string split : $PATH&amp;#39;)&amp;#34; 上記のやり方は直接的な解決方法ではないが、PATHの順序に関するissueは挙がっているので、そのうち直るかもしれません。(深く追う時間が確保できない……)
 https://github.com/fish-shell/fish-shell/issues/5456</description>
     </item>
     
@@ -51,7 +50,7 @@ https://github.com/fish-shell/fish-shell/issues/5456</description>
       
       <guid>https://nametake.github.io/posts/2019/06/05/formik-yup-dynamic-validation/</guid>
       <description>Formikで動的なFormを作った時に、表示されるFormに応じてYupのバリデーションを切り替える方法でちょっと手間取ったのでメモ。
-結論から言うとYup.lazy()を使って遅延評価されるValidationSchemaを使えば解決した。Yup.lazy()に渡ってくるFormの値を元にValidationwSchemaを表示されるFormに対応したValidationSchemaを返せば狙った挙動が実現できた。
+結論から言うとYup.lazy()を使って遅延評価されるValidationSchemaを使えば解決した。Yup.lazy()に渡ってくるFormの値を元にValidationwSchemaを表示されるFormに対応したValidationSchemaを返せば狙った挙動が実現できました。
 サンプルコードは以下。
  </description>
     </item>
@@ -63,7 +62,7 @@ https://github.com/fish-shell/fish-shell/issues/5456</description>
       
       <guid>https://nametake.github.io/posts/2019/05/29/inline-center/</guid>
       <description>ラジオボタンとラベルの高さを合わせるCSS定義を何回も調べている気がするのでメモ。
-たぶん下の書き方が一番モダンな気がする。
+たぶん下の書き方が一番モダンだと思います。
 display: inline-flex; align-items: center;</description>
     </item>
     
@@ -73,9 +72,9 @@ display: inline-flex; align-items: center;</description>
       <pubDate>Sat, 18 May 2019 10:38:55 +0900</pubDate>
       
       <guid>https://nametake.github.io/posts/2019/05/18/type-safe-reducer/</guid>
-      <description>以前書いた記事で書いたReducerでは、受け取ったActionの型を判別するためには、switchで分岐した後にそれに対応したActionの型でキャストをする必要があった。
-const todoReducer: Reducer&amp;lt;ITodoState&amp;gt; = ( state: ITodoState = initTodoState, action: TodoAction ): ITodoState =&amp;gt; { switch (action.type) { case TodoActionType.ADD_TODO: const addTodoAction: IAddTodoAction = action; // &amp;lt;-- ここでキャストしている  return { ...state, todos: state.todos.concat([addTodoAction.payload.todo]) }; default: return state; } }; この方法だと、action.typeとそれに対応する型を実装者が気にしなければならず、型安全とは言い難かった。
-このあたりの話を某Slackで相談したら、以下のような Flux standard actionのtypeやpayloadをジェネリクスで指定するようにして、typeにenumを使うというやり方を教えてもらった。
+      <description>以前書いた記事で書いたReducerでは、受け取ったActionの型を判別するために、switchで分岐した後に対応したActionの型でキャストをする必要がありました。
+const todoReducer: Reducer&amp;lt;ITodoState&amp;gt; = ( state: ITodoState = initTodoState, action: TodoAction ): ITodoState =&amp;gt; { switch (action.type) { case TodoActionType.ADD_TODO: const addTodoAction: IAddTodoAction = action; // &amp;lt;-- ここでキャストしている  return { ...state, todos: state.todos.concat([addTodoAction.payload.todo]) }; default: return state; } }; この方法だと、action.typeとそれに対応する型を実装者が気にしなければならず、型安全とは言い切れませんでした。
+このあたりの話を某Slackで相談したら、以下のような Flux standard actionのtypeやpayloadをジェネリクスで指定するようにして、typeにenumを使うというやり方を教えてもらいました。
 import { Reducer } from &amp;#39;redux&amp;#39;; // Flux standard action interface Action&amp;lt;TType, TPayload = null, TMeta = undefined&amp;gt; { type: TType; payload: TPayload; meta?: TMeta; } enum ActionType { ADD, DELETE } type AddAction = Action&amp;lt;ActionType.</description>
     </item>
     
@@ -86,8 +85,8 @@ import { Reducer } from &amp;#39;redux&amp;#39;; // Flux standard action interfa
       
       <guid>https://nametake.github.io/posts/2019/01/20/intellij-popup-expand/</guid>
       <description>自分は普段Vimでの補完候補を&amp;lt;C-k&amp;gt;で展開しているがIntelliJでの補完候補も同じコマンドで展開したかったのでメモ。
-結論だけいうと、Editor Actions -&amp;gt; Choose Lookup ItemにKeymapを設定すればできた。
-本当は.ideavimrcだけに設定したかったが、ここまで調べるのに少し時間がかかったので後で調べる。</description>
+結論だけいうと、Editor Actions -&amp;gt; Choose Lookup ItemにKeymapを設定すればできました。
+本当は.ideavimrcだけに設定したかったんですが、ここまで調べるのに少し時間がかかったので後で調べます。</description>
     </item>
     
     <item>
@@ -111,7 +110,7 @@ import { Reducer } from &amp;#39;redux&amp;#39;; // Flux standard action interfa
 ということはそろそろ人類はprotocのプラグインをGoで書きたくなる時代がやってくると思います。
 そのときに世の中に生み出されるプラグインの品質が少しでも高くなればと思い、以前protoc-gen-gohttpというプラグイン作ったときにテストも書いたので、その知見を書こうと思います。
 プラグイン自体は@yuguiさんの「protocプラグインの書き方」がとても参考になったのでそちらを参照すると良いかもしれません。
-TL;DR  Goのコードでprotoファイルをplugin.CodeGeneratorRequestに変換することは(恐らく)できない プラグインの動作テストはテスト内でprotocコマンドを実行して行う 実行結果の確認はGolden testingで行う 細かいやり方はgithub.com/golang/protobuf/blob/master/protoc-gen-go/golden_test.goに書いてある  自分のプラグインのテストもそれを参考にして書いた   経緯(読み飛ばして大丈夫です) protocのプラグインは標準入力に入ってきたデータをproto.CodeGeneratorRequest型にUnmarshalしてprotoファイルの情報を取得します。
+TL;DR  細かいやり方はgithub.com/golang/protobuf/blob/master/protoc-gen-go/golden_test.goに書いてある  自分のプラグインのテストもそれを参考にして書いた  プラグインの動作テストはテスト内でprotocコマンドを実行して行う 実行結果の確認はGolden testingで行う Goのコードでprotoファイルをplugin.CodeGeneratorRequestに変換することは(恐らく)できない  経緯(読み飛ばして大丈夫です) protocのプラグインは標準入力に入ってきたデータをproto.CodeGeneratorRequest型にUnmarshalしてprotoファイルの情報を取得します。
 そのため、最初にテストを書こうとしたときにはGoだけでprotoファイルをproto.CodeGeneratorRequestに変換する仕組みがあるのかと思っていたのですが、この記事公開時点ではその仕組みは提供されていないようでした(知ってたらコメント等で教えていただけると助かります)。
 「それじゃあ有名なプラグインはどうやってるんだ?」と思いprotoc-gen-goのコードを見てみると、Goのコードの中で直接protocコマンドを実行していて、少し面白いテストをしていたので解説しようと思います。
 golden_test.goの解説 ファイル名から想像できる通り、いわゆるGolden testingと呼ばれるものです。テストの中からprotocコマンドを直接実行して、その結果の出力ファイルとtestdataディレクトリに入っている期待するファイルとを比較をしてテストしています。
@@ -164,25 +163,15 @@ Effective Modern Vim scripting スライド</description>
     </item>
     
     <item>
-      <title>Protobufのservice定義をhttp.Handler対応させるprotoc-gen-gohttpを作った</title>
+      <title>Protocol Buffersのservice定義をhttp.Handler対応させるprotoc-gen-gohttpを作った</title>
       <link>https://nametake.github.io/posts/2018/11/21/protoc-gen-gohttp/</link>
       <pubDate>Wed, 21 Nov 2018 16:32:07 +0900</pubDate>
       
       <guid>https://nametake.github.io/posts/2018/11/21/protoc-gen-gohttp/</guid>
-      <description>nametake/protoc-gen-gohttpというプラグインを作ったのでその話。 細かい使い方とかはREADMEに任せる。
-なんで作ったの? Protocol Buffersのファイルにはserviceというものを定義できるが、どちらかというとgRPC向けの定義なので、Protocol Buffer on HTTPの構成でAPIサーバを作っていると活用できなくて勿体無いな〜とか思ってた。
-protoc-gen-goのgRPCオプションを使ってビルドするとServerのinterfaceまでは吐き出してくれるので、「だったらこのinterfaceをhttp.Handlerに対応させればいいんじゃね？」という勢いで作ってみた。
-コンセプト  RequestのBodyにJSONとProtobufのバイナリのどちらでも使えるようにする 生成される物が標準パッケージとProtobuf関係のパッケージしかimportしない 呼び出し毎に自由な処理を挟める(ログ等のため) errorが発生したときに自由にハンドリングができる 無駄にMarshal/Unmarshalをしない できる限り型で守る(Contextに情報を詰めたりしない)  何が嬉しいの? Protobufの定義にserviceを書いてこのプラグインを使うと、gRPCのServerをhttp.HandlerFuncに変換してくれるConverterが生成される。このConverterはgRPCのServerのinterfaceを必要とするため、メソッド定義も型で守れるようになる。
-変換されたhttp.HandlerFuncはContent-Typeを見て、Marshal/Unmarshalするパッケージを切り替えるので、BodyにはJSONが詰められていてもProtobufのJSONが詰められていてもどっちでも大丈夫なようになっている(はず)(テストケース不足)。
-また、http.HandlerFuncを抜けるときには、必要な情報を全部渡してコールバックを呼んでくれるので、1リクエスト毎に行いたい処理(ログ出力とか)を自分で定義できるようになる。errorも渡ってくるのでエラーを見て処理を変えたりもできる。
-比較 このプラグインを作る前にいくつか調べたのでそれとの比較も書いてみる。
-twrip 同じようにProtocol Buffersの定義からhttp.Handler対応をした上にContent−TypeをみてMarshal/Unmarshalをするパッケージを切り替えるライブラリだが、 以下の点が気になったので採用を見送った。
- 生成されるものがtwripをimportしている エラー発生時のハンドリングの余地が少ない RPCの呼び出しに対するHookがContextに情報を詰める前提だった  個人的にはGoのライブラリなら、ライブラリに依存させる提供方法ではなく、標準パッケージに乗せられる提供方法のほうが良いと考えているので、生成したものがなにかに依存してしまうのは好ましくなかったため採用見送り。
-RussellLuo/protoc-go-plugins Protocol Buffersの定義からhttp.Handler対応の物を生成するプラグインだが、protoのMarshal/Unmarshalには対応していなかった。
-エラーハンドリングにも余地がなかったので採用見送り。
-moul/protoc-gen-gotemplate Protocol Buffersの定義からGoのテンプレート機能を使ってコードを生成するためのプラグイン。
-時間と労力をかけないならこれを使うのが一番早かった気はする。
-プラグインの作成にめちゃくちゃ時間がかかるようだったらこれも検討していたが、そこまで時間がかかりそうでもなかったので勉強も兼ねて自作することにした。</description>
+      <description>nametake/protoc-gen-gohttpというprotocのプラグインを作ったのでその話です。
+Protocol Buffersとは Protocol Buffersはインターフェース定義言語の1つでGoogleによって開発されているものです(ざっくりいうと、JSONやXMLの仲間)。以下のように、構造を表すmessageとそのmessageを使ったRPCのインターフェースのserviceというものを定義できます。
+syntax = &amp;#34;proto3&amp;#34;;package helloworld;option go_package = &amp;#34;main&amp;#34;;message HelloRequest { string name = 1;}message HelloReply { string message = 1;}service Greeter { rpc SayHello(HelloRequest) returns (HelloReply) {}} 上記の定義をprotocコマンドを使ってコンパイルすることで、対応した言語ならそのままコードを書き出せます。例えばGoなら以下のような構造体が書き出されます(長くなるのでコードは削っています)。以下の構造体はProtocol Bufferが用意しているライブラリを利用すればバイナリに変換できます。
+type HelloRequest struct { Name string `protobuf:&amp;#34;bytes,1,opt,name=name&amp;#34; json:&amp;#34;name,omitempty&amp;#34;` XXX_NoUnkeyedLiteral struct{} `json:&amp;#34;-&amp;#34;` XXX_unrecognized []byte `json:&amp;#34;-&amp;#34;` XXX_sizecache int32 `json:&amp;#34;-&amp;#34;` } type HelloReply struct { Message string `protobuf:&amp;#34;bytes,1,opt,name=message&amp;#34; json:&amp;#34;message,omitempty&amp;#34;` XXX_NoUnkeyedLiteral struct{} `json:&amp;#34;-&amp;#34;` XXX_unrecognized []byte `json:&amp;#34;-&amp;#34;` XXX_sizecache int32 `json:&amp;#34;-&amp;#34;` } また、protocコマンドはプラグイン機構も持っているため、例えばgRPCのためのコードを書き出したかったらprotoc --go_out=plugins=grpc:.</description>
     </item>
     
     <item>
@@ -192,8 +181,8 @@ moul/protoc-gen-gotemplate Protocol Buffersの定義からGoのテンプレー�
       
       <guid>https://nametake.github.io/posts/2018/11/09/auth-gcp-client/</guid>
       <description>GCPの認証済みのhttp.Clientが欲しいときにちょっとだけ調べたのでメモ。
-結論だけ言うと、golang.org/x/oauth2/googleのDefaultClientを使えばよかった。
-今回はDataflowのAPIを叩きたかったので以下のようにすればできた。
+結論だけ言うと、golang.org/x/oauth2/googleのDefaultClientを使えばいいみたいです。
+今回はDataflowのAPIを叩きたかったので以下のようにすればできました。
 client, err := google.DefaultClient(ctx, dataflow.CloudPlatformScope) if err != nil { return fmt.Errorf(&amp;#34;failed create client: %v&amp;#34;, err) }</description>
     </item>
     
@@ -203,14 +192,12 @@ client, err := google.DefaultClient(ctx, dataflow.CloudPlatformScope) if err != 
       <pubDate>Wed, 10 Oct 2018 11:44:32 +0900</pubDate>
       
       <guid>https://nametake.github.io/posts/2018/10/10/vim-shfmt-neoformat-indent/</guid>
-      <description>VimでShell scriptを書くにあたって、shfmtとneoformatで保存時に自動的にフォーマットされるように設定しているが、チームのコーディングルールでインデントをタブ文字にする必要があったときにちょっと引っかかったのでメモ。
-neoformatでのshfmtはデフォルトだとインデントはスペースになる。
-shfmtのヘルプの
--i uint indent: 0 for tabs (default), &amp;gt;0 for number of spaces という記述と、neoformatのshfmtの定義の
-function! neoformat#formatters#sh#shfmt() abort return { \ &amp;#39;exe&amp;#39;: &amp;#39;shfmt&amp;#39;, \ &amp;#39;args&amp;#39;: [&amp;#39;-i &amp;#39; . shiftwidth()], \ &amp;#39;stdin&amp;#39;: 1, \ }endfunction から、とりあえずshiftwidthを0にしたらタブ文字になるかと思い、プロジェクトでのVimの設定を以下のように設定してみた(プロジェクト固有の設定ができるようにしている)。
+      <description>neoformatで使うshfmtはデフォルトだとインデントがスペースなんですが、チームのコーディング規約に合わせてタブ文字にしたかったときにちょっと引っかかったのでメモ。
+まずは、shfmt のヘルプとneoformatのshfmtの定義を見てみます。
+-i uint indent: 0 for tabs (default), &amp;gt;0 for number of spacesfunction! neoformat#formatters#sh#shfmt() abort return { \ &amp;#39;exe&amp;#39;: &amp;#39;shfmt&amp;#39;, \ &amp;#39;args&amp;#39;: [&amp;#39;-i &amp;#39; . shiftwidth()], \ &amp;#39;stdin&amp;#39;: 1, \ }endfunction shfmtのヘルプから、インデントをタブにしたければ-i引数で0を渡せば良さそうで、neoformatの定義ではインデントの値にshiftwidthの値をしているようだったので、プロジェクトでのVimの設定を以下のように設定してみました(プロジェクト固有の設定ができるようにしている)。
 autocmd Filetype sh setlocal sw=0 sts=0 noexpandtab しかし、どうしてもインデントがスペースになってしまうためちゃんとshiftwidth()の挙動を調べてみると、shiftwidthが0に設定されているとtabstopの値を使うようになっているらしい。
 https://vim-jp.org/vimmagazine/2012/08/31/vimmagazine.html
-tabstopは0を設定できないため、以下のようにneoformatのshfmt設定をプロジェクト固有の設定で上書きして対処した。
+tabstopは0を設定できないため、結局以下のようにneoformatのshfmt設定をプロジェクト固有の設定で上書きして対処しました。
 let g:neoformat_sh_shfmt = { \ &amp;#39;exe&amp;#39;: &amp;#39;shfmt&amp;#39;, \ &amp;#39;args&amp;#39;: [&amp;#39;-i&amp;#39;, 0], \ &amp;#39;stdin&amp;#39;: 1, \ }</description>
     </item>
     
@@ -220,9 +207,9 @@ let g:neoformat_sh_shfmt = { \ &amp;#39;exe&amp;#39;: &amp;#39;shfmt&amp;#39;, \
       <pubDate>Thu, 20 Sep 2018 18:47:46 +0900</pubDate>
       
       <guid>https://nametake.github.io/posts/2018/09/20/dep-private-repo/</guid>
-      <description>Goをアップデートした後、dep updateをしたら以下のようなエラーが発生した。
-grouped write of manifest, lock and vendor: error while writing out vendor tree: failed to write dep tree: failed to export github.com/nametake/private-repo: unable to update repository: remote: Repository not found. fatal: repository &amp;#39;https://github.com/nametake/private-repo/&amp;#39; not found : command failed: [git fetch --tags --prune origin]: exit status 128 make: *** [dep] Error 1 どうもprivateリポジトリをhttps経由でcloneしてこようとしているため起こっているっぽい。
-以下のconfig設定をして、githubではhttpsで始まるURLをgitのURLを使うように書き換える設定を追加したら治った。
+      <description>Goをアップデートした後、dep updateをしたら以下のようなエラーが発生しました。
+grouped write of manifest, lock and vendor: error while writing out vendor tree: failed to write dep tree: failed to export github.com/nametake/private-repo: unable to update repository: remote: Repository not found. fatal: repository &amp;#39;https://github.com/nametake/private-repo/&amp;#39; not found : command failed: [git fetch --tags --prune origin]: exit status 128 make: *** [dep] Error 1 原因はprivateリポジトリをhttps経由でcloneしようとしたことだったみたいです。
+以下のconfig設定をして、githubではhttpsで始まるURLをgitのURLを使うように書き換える設定を追加したら治りました。
 [url &amp;#34;git@github.com:&amp;#34;] insteadOf = https://github.com/ https://git-scm.com/docs/git-config#git-config-urlltbasegtinsteadOf</description>
     </item>
     
@@ -236,7 +223,7 @@ grouped write of manifest, lock and vendor: error while writing out vendor tree:
 とは言うものの、ほとんどHugoの入門用ページの内容をそのままやっただけなのでその辺は割愛。
 最終的なディレクトリ構成は以下。
 blog ├── Makefile ├── archetypes │ ├── default.md │ └── posts.md ├── bin │ ├── deploy.sh │ └── new_post.sh ├── config.toml ├── content │ ├── about │ │ └── index.md │ └── posts │ └── 2018-09-15-hugo-github-pages │ └── index.md ├── public(submodule) ├── static │ ├── css │ │ └── index.css │ └── images │ └── avatar.jpg └── themes └── coder(submodule) config.toml 自分はパーマリンクを日付+自分で設定した英単語にしたかったので、以下のようにconfig.tomlに追記。
-slugは各postのfrontmatter(postの先頭にあるヘッダ部分)に設定すると反映される。
+slugは各postのfrontmatter(postの先頭にあるヘッダ部分)に設定すると反映されます。
 posts = &amp;quot;/posts/:year/:month/:day/:slug&amp;quot;のpostsの部分はcontentディレクトリにあるpostsディレクトリと同じ名前にする必要があるので注意。</description>
     </item>
     

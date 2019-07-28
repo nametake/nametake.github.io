@@ -21,7 +21,7 @@
 とは言うものの、ほとんどHugoの入門用ページの内容をそのままやっただけなのでその辺は割愛。
 最終的なディレクトリ構成は以下。
 blog ├── Makefile ├── archetypes │ ├── default.md │ └── posts.md ├── bin │ ├── deploy.sh │ └── new_post.sh ├── config.toml ├── content │ ├── about │ │ └── index.md │ └── posts │ └── 2018-09-15-hugo-github-pages │ └── index.md ├── public(submodule) ├── static │ ├── css │ │ └── index.css │ └── images │ └── avatar.jpg └── themes └── coder(submodule) config.toml 自分はパーマリンクを日付+自分で設定した英単語にしたかったので、以下のようにconfig.tomlに追記。
-slugは各postのfrontmatter(postの先頭にあるヘッダ部分)に設定すると反映される。
+slugは各postのfrontmatter(postの先頭にあるヘッダ部分)に設定すると反映されます。
 posts = &amp;quot;/posts/:year/:month/:day/:slug&amp;quot;のpostsの部分はcontentディレクトリにあるpostsディレクトリと同じ名前にする必要があるので注意。</description>
     </item>
     

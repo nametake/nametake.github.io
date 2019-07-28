@@ -18,8 +18,8 @@
       
       <guid>https://nametake.github.io/posts/2018/11/09/auth-gcp-client/</guid>
       <description>GCPの認証済みのhttp.Clientが欲しいときにちょっとだけ調べたのでメモ。
-結論だけ言うと、golang.org/x/oauth2/googleのDefaultClientを使えばよかった。
-今回はDataflowのAPIを叩きたかったので以下のようにすればできた。
+結論だけ言うと、golang.org/x/oauth2/googleのDefaultClientを使えばいいみたいです。
+今回はDataflowのAPIを叩きたかったので以下のようにすればできました。
 client, err := google.DefaultClient(ctx, dataflow.CloudPlatformScope) if err != nil { return fmt.Errorf(&amp;#34;failed create client: %v&amp;#34;, err) }</description>
     </item>
     
