@@ -10,13 +10,13 @@
     <meta name="keywords" content="blog,developer,personal">
 
     <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Protocol Buffersのservice定義をhttp.Handler対応させるprotoc-gen-gohttpを作った"/>
+<meta name="twitter:title" content="Protocol Buffersのserviceをnet/httpに対応させるprotoc-gen-gohttpを作った"/>
 <meta name="twitter:description" content="nametake/protoc-gen-gohttpというprotocのプラグインを作ったのでその話です。
 Protocol Buffersとは Protocol Buffersはインターフェース定義言語の1つでGoogleによって開発されているものです(ざっくりいうと、JSONやXMLの仲間)。以下のように、構造を表すmessageとそのmessageを使ったRPCのインターフェースのserviceというものを定義できます。
 syntax = &#34;proto3&#34;;package helloworld;option go_package = &#34;main&#34;;message HelloRequest { string name = 1;}message HelloReply { string message = 1;}service Greeter { rpc SayHello(HelloRequest) returns (HelloReply) {}} 上記の定義をprotocコマンドを使ってコンパイルすることで、対応した言語ならそのままコードを書き出せます。例えばGoなら以下のような構造体が書き出されます(長くなるのでコードは削っています)。以下の構造体はProtocol Bufferが用意しているライブラリを利用すればバイナリに変換できます。
 type HelloRequest struct { Name string `protobuf:&#34;bytes,1,opt,name=name&#34; json:&#34;name,omitempty&#34;` XXX_NoUnkeyedLiteral struct{} `json:&#34;-&#34;` XXX_unrecognized []byte `json:&#34;-&#34;` XXX_sizecache int32 `json:&#34;-&#34;` } type HelloReply struct { Message string `protobuf:&#34;bytes,1,opt,name=message&#34; json:&#34;message,omitempty&#34;` XXX_NoUnkeyedLiteral struct{} `json:&#34;-&#34;` XXX_unrecognized []byte `json:&#34;-&#34;` XXX_sizecache int32 `json:&#34;-&#34;` } また、protocコマンドはプラグイン機構も持っているため、例えばgRPCのためのコードを書き出したかったらprotoc --go_out=plugins=grpc:."/>
 
-    <meta property="og:title" content="Protocol Buffersのservice定義をhttp.Handler対応させるprotoc-gen-gohttpを作った" />
+    <meta property="og:title" content="Protocol Buffersのserviceをnet/httpに対応させるprotoc-gen-gohttpを作った" />
 <meta property="og:description" content="nametake/protoc-gen-gohttpというprotocのプラグインを作ったのでその話です。
 Protocol Buffersとは Protocol Buffersはインターフェース定義言語の1つでGoogleによって開発されているものです(ざっくりいうと、JSONやXMLの仲間)。以下のように、構造を表すmessageとそのmessageを使ったRPCのインターフェースのserviceというものを定義できます。
 syntax = &#34;proto3&#34;;package helloworld;option go_package = &#34;main&#34;;message HelloRequest { string name = 1;}message HelloReply { string message = 1;}service Greeter { rpc SayHello(HelloRequest) returns (HelloReply) {}} 上記の定義をprotocコマンドを使ってコンパイルすることで、対応した言語ならそのままコードを書き出せます。例えばGoなら以下のような構造体が書き出されます(長くなるのでコードは削っています)。以下の構造体はProtocol Bufferが用意しているライブラリを利用すればバイナリに変換できます。
@@ -31,7 +31,7 @@ type HelloRequest struct { Name string `protobuf:&#34;bytes,1,opt,name=name&#34;
       <base href="https://nametake.github.io/posts/2018/11/21/protoc-gen-gohttp/">
     
     <title>
-  Protocol Buffersのservice定義をhttp.Handler対応させるprotoc-gen-gohttpを作った · nametake.info
+  Protocol Buffersのserviceをnet/httpに対応させるprotoc-gen-gohttpを作った · nametake.info
 </title>
 
     
@@ -85,6 +85,10 @@ type HelloRequest struct { Name string `protobuf:&#34;bytes,1,opt,name=name&#34;
           </li>
         
           <li class="navigation-item">
+            <a class="navigation-link" href="https://nametake.github.io/project/">Project</a>
+          </li>
+        
+          <li class="navigation-item">
             <a class="navigation-link" href="https://nametake.github.io/tags/">Tags</a>
           </li>
         
@@ -101,7 +105,7 @@ type HelloRequest struct { Name string `protobuf:&#34;bytes,1,opt,name=name&#34;
     <article>
       <header>
         <div class="post-title">
-          <h1 class="title">Protocol Buffersのservice定義をhttp.Handler対応させるprotoc-gen-gohttpを作った</h1>
+          <h1 class="title">Protocol Buffersのserviceをnet/httpに対応させるprotoc-gen-gohttpを作った</h1>
         </div>
         <div class="post-meta">
           <div class="date">

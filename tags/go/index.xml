@@ -42,7 +42,7 @@ func protoc(t *testing.T, args []string) { cmd := exec.Command(&amp;#34;protoc&a
     </item>
     
     <item>
-      <title>Protocol Buffersのservice定義をhttp.Handler対応させるprotoc-gen-gohttpを作った</title>
+      <title>Protocol Buffersのserviceをnet/httpに対応させるprotoc-gen-gohttpを作った</title>
       <link>https://nametake.github.io/posts/2018/11/21/protoc-gen-gohttp/</link>
       <pubDate>Wed, 21 Nov 2018 16:32:07 +0900</pubDate>
       

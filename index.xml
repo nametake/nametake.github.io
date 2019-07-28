@@ -6,10 +6,20 @@
     <description>Recent content on nametake.info</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 25 Jul 2019 00:51:43 +0900</lastBuildDate>
+    <lastBuildDate>Mon, 29 Jul 2019 00:14:54 +0900</lastBuildDate>
     
 	<atom:link href="https://nametake.github.io/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Project</title>
+      <link>https://nametake.github.io/project/</link>
+      <pubDate>Mon, 29 Jul 2019 00:14:54 +0900</pubDate>
+      
+      <guid>https://nametake.github.io/project/</guid>
+      <description>作ったもの protoc-gen-gohttp Protocol Buffersの定義から生成されるGoのgRPC用interfaceをnet/http用に変換するコードを生成するprotocのプラグイン。詳しくは記事参照。
+suberr/labelerr Goのエラーハンドリングを拡張するライブラリ。golang.tokyo #20で発表しました。</description>
+    </item>
     
     <item>
       <title>Vimのプラグインを整理した(あとcoc.nvimの紹介)</title>
@@ -163,7 +173,7 @@ Effective Modern Vim scripting スライド</description>
     </item>
     
     <item>
-      <title>Protocol Buffersのservice定義をhttp.Handler対応させるprotoc-gen-gohttpを作った</title>
+      <title>Protocol Buffersのserviceをnet/httpに対応させるprotoc-gen-gohttpを作った</title>
       <link>https://nametake.github.io/posts/2018/11/21/protoc-gen-gohttp/</link>
       <pubDate>Wed, 21 Nov 2018 16:32:07 +0900</pubDate>
       
