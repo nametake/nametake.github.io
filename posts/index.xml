@@ -123,7 +123,7 @@ import { Reducer } from &amp;#39;redux&amp;#39;; // Flux standard action interfa
       
       <guid>https://nametake.github.io/posts/2018/12/14/protoc-plugin-test/</guid>
       <description>最近周りでProtocol Buffersの話題をよく聞くようになりました。
-ということはそろそろ人類はprotocのプラグインをGoで書きたくなる時代がやってくると思います。
+ということはそろそろ人類はprotocのプラグインを書きたくなる時代がやってくると思います。
 そのときに世の中に生み出されるプラグインの品質が少しでも高くなればと思い、以前protoc-gen-gohttpというプラグイン作ったときにテストも書いたので、その知見を書こうと思います。
 プラグイン自体は@yuguiさんの「protocプラグインの書き方」がとても参考になったのでそちらを参照すると良いかもしれません。
 TL;DR  細かいやり方はgithub.com/golang/protobuf/blob/master/protoc-gen-go/golden_test.goに書いてある  自分のプラグインのテストもそれを参考にして書いた  プラグインの動作テストはテスト内でprotocコマンドを実行して行う 実行結果の確認はGolden testingで行う Goのコードでprotoファイルをplugin.CodeGeneratorRequestに変換することは(恐らく)できない  経緯(読み飛ばして大丈夫です) protocのプラグインは標準入力に入ってきたデータをproto.CodeGeneratorRequest型にUnmarshalしてprotoファイルの情報を取得します。
