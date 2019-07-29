@@ -6,10 +6,26 @@
     <description>Recent content in Go on nametake.info</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 19 Dec 2018 11:37:17 +0900</lastBuildDate>
+    <lastBuildDate>Mon, 29 Jul 2019 22:57:06 +0900</lastBuildDate>
     
 	<atom:link href="https://nametake.github.io/tags/go/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Goの戻り値をいい感じに補完してくれるvim-snippetsを作った</title>
+      <link>https://nametake.github.io/posts/2019/07/29/vim-goiferr-snippets/</link>
+      <pubDate>Mon, 29 Jul 2019 22:57:06 +0900</pubDate>
+      
+      <guid>https://nametake.github.io/posts/2019/07/29/vim-goiferr-snippets/</guid>
+      <description>最近Vimの設定を整理してcoc.nvimに乗り換えるにあたり、snippetのプラグインもneosnippetからcoc-neosnippetに乗り換え、snippet集もvim-snippetsに変更しました。
+概ね問題はなかったのですが、Goを書くときにiferrで戻り値をいい感じに補完してくれる機能がなくなったのは若干不便でした(参考)。
+一応coc.nvimにneosnippetの機能を取り込む機能はついているようでしたがうまく動かなかったことと、もうちょっと高級な機能が欲しいと前々から思っていたのもあり、せっかくなのでsnippetを提供するプラグインを作りました。
+それで作ったのが、vim-goiferr-snippetsです。以下のgifのように動作します。
+iferrのsnippetに関して以下の機能を提供しています。
+ 戻り値の型を構造体でも補完してくれる 構造体がポインタかどうかを判別してくれる pkg/errorsのWrap関数でerrorをWrapする補完の提供 名前付き戻り値のときはreturnしか出力しない インラインのエラーハンドリング用snippetも提供 上記機能を持ったVimScirptの関数として提供している  pkg/errors以外のerrorライブラリ等でカスタマイズできる   また、作っている最中に「iferr用の正規表現はそのままreturnのsnippetとしても使えるのでは？」と思ったので、そのままreturnを補完するsnippetとしても提供しました。戻り地をいい感じに展開して、それぞれにジャンプ用のマーカーを付けているので、サクサク戻り地を設定できます。
+自分用に作ったのでオレオレ設定な部分もありますが、生暖かい見ていただければ幸いです。
+最後に、プラグイン内の正規表現部分は@pockeさんの「Vim で Go 言語を書いている時、Neosnippet でいい感じに if する」という記事を参考にさせていただきました！ありがとうございました！</description>
+    </item>
     
     <item>
       <title>labelerrとsuberrを作った話をLTしてきた</title>

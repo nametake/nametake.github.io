@@ -6,15 +6,24 @@
     <description>Recent content in Tags on nametake.info</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 25 Jul 2019 00:51:43 +0900</lastBuildDate>
+    <lastBuildDate>Mon, 29 Jul 2019 22:57:06 +0900</lastBuildDate>
     
 	<atom:link href="https://nametake.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
+      <title>Go</title>
+      <link>https://nametake.github.io/tags/go/</link>
+      <pubDate>Mon, 29 Jul 2019 22:57:06 +0900</pubDate>
+      
+      <guid>https://nametake.github.io/tags/go/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Vim</title>
       <link>https://nametake.github.io/tags/vim/</link>
-      <pubDate>Thu, 25 Jul 2019 00:51:43 +0900</pubDate>
+      <pubDate>Mon, 29 Jul 2019 22:57:06 +0900</pubDate>
       
       <guid>https://nametake.github.io/tags/vim/</guid>
       <description></description>
@@ -71,15 +80,6 @@
       <pubDate>Sun, 20 Jan 2019 21:05:06 +0900</pubDate>
       
       <guid>https://nametake.github.io/tags/intellij/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Go</title>
-      <link>https://nametake.github.io/tags/go/</link>
-      <pubDate>Wed, 19 Dec 2018 11:37:17 +0900</pubDate>
-      
-      <guid>https://nametake.github.io/tags/go/</guid>
       <description></description>
     </item>
     
