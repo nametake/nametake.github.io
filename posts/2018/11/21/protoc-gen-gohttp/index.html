@@ -61,7 +61,7 @@ type HelloRequest struct { Name string `protobuf:&#34;bytes,1,opt,name=name&#34;
     <link rel="icon" type="image/png" href="https://nametake.github.io/images/favicon-32x32.png" sizes="32x32">
     <link rel="icon" type="image/png" href="https://nametake.github.io/images/favicon-16x16.png" sizes="16x16">
 
-    <meta name="generator" content="Hugo 0.56.0" />
+    <meta name="generator" content="Hugo 0.56.1" />
   </head>
 
   <body class=" ">
@@ -202,8 +202,6 @@ type HelloRequest struct { Name string `protobuf:&#34;bytes,1,opt,name=name&#34;
 <p>ただ、Go言語のコードを書き出した際に出力されるのは<code>message</code>に対応した構造体のみで、<code>service</code>の定義はgRPC等のプラグインを使わないと無視されてしまうため、HTTPの上で取り扱うには意味のない定義でした。</p>
 
 <p>「せっかく構造体までは利用できるんだから、どうせならgRPCのプラグインで書き出されるinterfaceも使いたい！」という気持ちと「protocにプラグイン機能が用意されてるならそれを利用して<code>http.Handler</code>に対応できるコードを書き出せば良いのでは？」という発想から作ったプラグインが<a href="https://github.com/nametake/protoc-gen-gohttp">protoc-gen-gohttp</a>です。</p>
-
-<p><code>ほげ？</code>あいう。</p>
 
 <h2 id="使い方">使い方</h2>
 
