@@ -34,7 +34,8 @@ iferrのsnippetに関して以下の機能を提供しています。
       
       <guid>https://nametake.github.io/project/</guid>
       <description>作ったもの protoc-gen-gohttp Protocol Buffersの定義から生成されるGoのgRPC用interfaceをnet/http用に変換するコードを生成するprotocのプラグイン。詳しくは記事参照。
-suberr/labelerr Goのエラーハンドリングを拡張するライブラリ。golang.tokyo #20で発表しました。</description>
+suberr/labelerr Goのエラーハンドリングを拡張するライブラリ。golang.tokyo #20で発表しました。
+vim-goiferr-snippets/ctrlp-goimport GoのVimプラグインです。自分の使っているプラグインの足りない部分を補うような感じのものを作りました。</description>
     </item>
     
     <item>
