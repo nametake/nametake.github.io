@@ -6,10 +6,19 @@
     <description>Recent content in Tags on nametake.info</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 29 Jul 2019 22:57:06 +0900</lastBuildDate>
+    <lastBuildDate>Sat, 17 Aug 2019 10:44:03 +0900</lastBuildDate>
     
 	<atom:link href="https://nametake.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Protocol Buffers</title>
+      <link>https://nametake.github.io/tags/protocol-buffers/</link>
+      <pubDate>Sat, 17 Aug 2019 10:44:03 +0900</pubDate>
+      
+      <guid>https://nametake.github.io/tags/protocol-buffers/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>Go</title>
@@ -26,6 +35,15 @@
       <pubDate>Mon, 29 Jul 2019 22:57:06 +0900</pubDate>
       
       <guid>https://nametake.github.io/tags/vim/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>DDD</title>
+      <link>https://nametake.github.io/tags/ddd/</link>
+      <pubDate>Wed, 24 Jul 2019 01:33:56 +0900</pubDate>
+      
+      <guid>https://nametake.github.io/tags/ddd/</guid>
       <description></description>
     </item>
     
@@ -48,6 +66,24 @@
     </item>
     
     <item>
+      <title>Redux</title>
+      <link>https://nametake.github.io/tags/redux/</link>
+      <pubDate>Wed, 26 Jun 2019 16:14:46 +0900</pubDate>
+      
+      <guid>https://nametake.github.io/tags/redux/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>TypeScript</title>
+      <link>https://nametake.github.io/tags/typescript/</link>
+      <pubDate>Wed, 26 Jun 2019 16:14:46 +0900</pubDate>
+      
+      <guid>https://nametake.github.io/tags/typescript/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>React</title>
       <link>https://nametake.github.io/tags/react/</link>
       <pubDate>Wed, 05 Jun 2019 23:50:36 +0900</pubDate>
@@ -57,20 +93,20 @@
     </item>
     
     <item>
-      <title>TypeScript</title>
-      <link>https://nametake.github.io/tags/typescript/</link>
-      <pubDate>Wed, 05 Jun 2019 23:50:36 +0900</pubDate>
-      
-      <guid>https://nametake.github.io/tags/typescript/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>CSS</title>
       <link>https://nametake.github.io/tags/css/</link>
       <pubDate>Wed, 29 May 2019 15:47:35 +0900</pubDate>
       
       <guid>https://nametake.github.io/tags/css/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Poem</title>
+      <link>https://nametake.github.io/tags/poem/</link>
+      <pubDate>Tue, 22 Jan 2019 17:59:50 +0900</pubDate>
+      
+      <guid>https://nametake.github.io/tags/poem/</guid>
       <description></description>
     </item>
     
@@ -89,24 +125,6 @@
       <pubDate>Wed, 19 Dec 2018 11:37:17 +0900</pubDate>
       
       <guid>https://nametake.github.io/tags/slide/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Protocol Buffers</title>
-      <link>https://nametake.github.io/tags/protocol-buffers/</link>
-      <pubDate>Fri, 14 Dec 2018 00:00:00 +0900</pubDate>
-      
-      <guid>https://nametake.github.io/tags/protocol-buffers/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Redux</title>
-      <link>https://nametake.github.io/tags/redux/</link>
-      <pubDate>Wed, 05 Dec 2018 11:08:00 +0900</pubDate>
-      
-      <guid>https://nametake.github.io/tags/redux/</guid>
       <description></description>
     </item>
     

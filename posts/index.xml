@@ -6,10 +6,29 @@
     <description>Recent content in Posts on nametake.info</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 29 Jul 2019 22:57:06 +0900</lastBuildDate>
+    <lastBuildDate>Sat, 17 Aug 2019 10:44:03 +0900</lastBuildDate>
     
 	<atom:link href="https://nametake.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Protocol Buffersを使ったAPIでのNullの設計</title>
+      <link>https://nametake.github.io/posts/2019/08/17/protobuf-null-api/</link>
+      <pubDate>Sat, 17 Aug 2019 10:44:03 +0900</pubDate>
+      
+      <guid>https://nametake.github.io/posts/2019/08/17/protobuf-null-api/</guid>
+      <description>Protocol BuffersのNullの取り扱いの問題 Protocol Buffersのproto3の仕様ではmessageの中の値をOptionalで表現する記法がありません。値を詰めずに送ると入れ子の値がデフォルト値になってしまいます。
+しかし、アプリケーションの設計によってはOptionalな値を表現する必要が出てきます。
+そういった時、プリミティブな型ならgoogle/protobuf/wappers.protoを使う方法があります。
+以下のように使うことでmsgはOptionalな値として取り扱えます。
+syntax = &amp;#34;proto3&amp;#34;;package example;import &amp;#34;google/protobuf/wrappers.proto&amp;#34;;message Example { google.protobuf.StringValue msg = 1;} wappers.protoを読むと、google.protobuf.StringValueは内部にstringを持つmessageとして定義してあり、入れ子構造になったmessageはデフォルト値がnullになるという仕様を利用して擬似的にOptionalを表現する仕組みであるということがわかります。
+しかし、プリミティブな型ではないmessageを定義して、それを入れ子構造にするようなmessageを定義すると、入れ子になったmessageのデフォルト値はnullであるという特性から、それがOptionalなのかRequiredなのかが分かりづらくなるという問題があります。
+例えば、以下のようにDecimal 型が定義されたとき、それを入れ子構造にするようなOrder型があるとします。
+syntax = &amp;#34;proto3&amp;#34;;package example;message Decimal { int64 value = 1; int64 exp = 2;}// アプリケーションに注文をするメッセージ message Order { // 支払う金額(Required)  Decimal amount = 1; // 通貨単位(Required)。  int64 currency_unit = 2; // 使用するポイント(Optional)  Decimal point = 3;} Order型では金銭を表現しているため数値を正確に表現できるDecimal型を使って金額とポイントを定義しています。しかし、アプリケーションの都合でamountはRequiredにpointはOptionalにしたいとき、どちらもデフォルト値がnullになってしまうため、そのままだと両方を同時に表現できません。また、0ポイントなのかnullなのかで挙動に明確な違いがある場合は0を送るという手段も成立しません。
+Orderぐらいの定義量であればコメントやドキュメントで対応することもできます。しかし、生成されるコードがOptionalであるということは変わらないため、せっかく型付でコード生成をしてくれるProtocol Buffersのメリットが半減してしまいます。また、人類にドキュメントを書く読む管理するという行為は難しすぎるため、プロダクトの成長に従ってドキュメントは陳腐化していってしまいます。
+解決策 DecimalをOptionalで表現するために以下のようなNullDecimal型を定義してみます。
+message NullDecimal { bool hasValue = 1; Decimal decimal = 2;} 定義の通り、値を持っているかどうかを判別するhasValueと実際の値になるDecimal型を持っている型です。Goを書く方はピンとくるかもしれませんが、sql.</description>
+    </item>
     
     <item>
       <title>Goの戻り値をいい感じに補完してくれるvim-snippetsを作った</title>
