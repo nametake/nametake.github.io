@@ -12,7 +12,7 @@
     <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="zshのPATHの順番をfish shellに引き継ぐ"/>
 <meta name="twitter:description" content="自分はメインのターミナル環境をfishにしています。
-特に設定を細かくしなくてもサクサク動いてくれるので非常に助かっているんですが、POSIX準拠ではないためデフォルトシェルにするのは避けて、以下のような形で理容師ています。
+特に設定を細かくしなくてもサクサク動いてくれるので非常に助かっているんですが、POSIX準拠ではないためデフォルトシェルにするのは避けて、以下のような形で利用しています。
  デフォルトシェルはzsh tmuxを自動起動 tmuxのデフォルトシェルとしてfish  そのため、環境変数の設定は全てzshenvでしているんですが、fishを起動したときにzshenvで設定した環境変数の順番を維持してくれないという問題がありました。
 普通にfishを起動するだけだと発生する問題のようだったので、以下のようにtmuxでfishを起動する際にzshのパスをそのままの順番でfishのパスに設定する変更することで対応しました。
 set -g default-command /usr/local/bin/fish --init-command=&#34;set PATH &#39;string split : $PATH&#39;)&#34; 上記のやり方は直接的な解決方法ではないが、PATHの順序に関するissueは挙がっているので、そのうち直るかもしれません。(深く追う時間が確保できない……)
@@ -20,7 +20,7 @@ https://github.com/fish-shell/fish-shell/issues/5456"/>
 
     <meta property="og:title" content="zshのPATHの順番をfish shellに引き継ぐ" />
 <meta property="og:description" content="自分はメインのターミナル環境をfishにしています。
-特に設定を細かくしなくてもサクサク動いてくれるので非常に助かっているんですが、POSIX準拠ではないためデフォルトシェルにするのは避けて、以下のような形で理容師ています。
+特に設定を細かくしなくてもサクサク動いてくれるので非常に助かっているんですが、POSIX準拠ではないためデフォルトシェルにするのは避けて、以下のような形で利用しています。
  デフォルトシェルはzsh tmuxを自動起動 tmuxのデフォルトシェルとしてfish  そのため、環境変数の設定は全てzshenvでしているんですが、fishを起動したときにzshenvで設定した環境変数の順番を維持してくれないという問題がありました。
 普通にfishを起動するだけだと発生する問題のようだったので、以下のようにtmuxでfishを起動する際にzshのパスをそのままの順番でfishのパスに設定する変更することで対応しました。
 set -g default-command /usr/local/bin/fish --init-command=&#34;set PATH &#39;string split : $PATH&#39;)&#34; 上記のやり方は直接的な解決方法ではないが、PATHの順序に関するissueは挙がっているので、そのうち直るかもしれません。(深く追う時間が確保できない……)
@@ -137,7 +137,7 @@ https://github.com/fish-shell/fish-shell/issues/5456" />
       <div>
         <p>自分はメインのターミナル環境をfishにしています。</p>
 
-<p>特に設定を細かくしなくてもサクサク動いてくれるので非常に助かっているんですが、POSIX準拠ではないためデフォルトシェルにするのは避けて、以下のような形で理容師ています。</p>
+<p>特に設定を細かくしなくてもサクサク動いてくれるので非常に助かっているんですが、POSIX準拠ではないためデフォルトシェルにするのは避けて、以下のような形で利用しています。</p>
 
 <ol>
 <li>デフォルトシェルはzsh</li>
