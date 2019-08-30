@@ -6,10 +6,23 @@
     <description>Recent content in Posts on nametake.info</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 17 Aug 2019 10:44:03 +0900</lastBuildDate>
+    <lastBuildDate>Fri, 30 Aug 2019 01:52:26 +0900</lastBuildDate>
     
 	<atom:link href="https://nametake.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>protoc-gen-gohttpをHttpRule Optionに対応させた</title>
+      <link>https://nametake.github.io/posts/2019/08/30/protoc-gen-gohttp-httprule/</link>
+      <pubDate>Fri, 30 Aug 2019 01:52:26 +0900</pubDate>
+      
+      <guid>https://nametake.github.io/posts/2019/08/30/protoc-gen-gohttp-httprule/</guid>
+      <description>以前、Protocol Buffersのserviceの定義を利用してGoのnet/httpで利用できるようにするためのprotoc-gen-gohttpというprotocのプラグインを作成しました。
+ですが、protoc-gen-gohttpではURLのパス部分の定義はProtocol Buffersの定義には記述できないため、クライアント側がProtocol Buffersを見ただけでパスを読み取ることができませんでした。また、生成されたコードはHTTPのBodyしか参照しないため、情報を取得するだけのときもHTTPのメソッドをPOSTにする必要もありました。
+そこで、Googleが提供しているRPCの定義をHTTPのREST APIにマッピングするためのHttpRuleオプションを利用して、protoc-gen-gohttpがHttpRuleのマッピングどおりに動作するコードを生成するように改良しました。
+使い方 protoc-gen-gohttpをインストールしたら、以下のようにHttpRuleを使用したProtoの定義を用意します(annotations.protoのダウンロードの仕方はこの辺を参考にしてください)。この記事ではexample.protoに書いているとします。
+syntax = &amp;#34;proto3&amp;#34;;package main;option go_package = &amp;#34;main&amp;#34;;import &amp;#34;google/api/annotations.proto&amp;#34;;service Messaging { rpc GetMessage(GetMessageRequest) returns (GetMessageResponse) { option (google.api.http).get = &amp;#34;/v1/messages/{message_id}&amp;#34;; } rpc UpdateMessage(UpdateMessageRequest) returns (UpdateMessageResponse) { option (google.api.http) = { put: &amp;#34;/v1/messages/{message_id}/{sub.subfield}&amp;#34; body: &amp;#34;*&amp;#34; }; }}message GetMessageRequest { string message_id = 1; string message = 2; repeated string tags = 3;}message GetMessageResponse { string message_id = 1; string message = 2; repeated string tags = 4;}message SubMessage { string subfield = 1;}message UpdateMessageRequest { string message_id = 1; SubMessage sub = 2; string message = 3;}message UpdateMessageResponse { string message_id = 1; SubMessage sub = 2; string message = 3;} 用意できたら、以下のコマンドでGoのコードを生成します。</description>
+    </item>
     
     <item>
       <title>Protocol Buffersを使ったAPIでのNullの設計</title>
