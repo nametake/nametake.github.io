@@ -6,10 +6,20 @@
     <description>Recent content in Posts on nametake.info</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 30 Aug 2019 01:52:26 +0900</lastBuildDate>
+    <lastBuildDate>Tue, 10 Sep 2019 13:39:29 +0900</lastBuildDate>
     
 	<atom:link href="https://nametake.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Goのrelfectで構造体の変数にインスタンスを詰める方法</title>
+      <link>https://nametake.github.io/posts/2019/09/10/go-reflect-create-instance/</link>
+      <pubDate>Tue, 10 Sep 2019 13:39:29 +0900</pubDate>
+      
+      <guid>https://nametake.github.io/posts/2019/09/10/go-reflect-create-instance/</guid>
+      <description>構造体の変数にreflectでインスタンスを詰める方法メモ。
+package main import ( &amp;#34;fmt&amp;#34; &amp;#34;reflect&amp;#34; ) func main() { var foo *Foo fmt.Println(foo) // nil  fmt.Println(&amp;#34;------------&amp;#34;) // nilにアクセスしようとするのでエラー 	// foo.msg = &amp;#34;Hello&amp;#34;  // fooの型を取得 	typ := reflect.TypeOf(foo).Elem() // fooの型の実体を生成 	dst := reflect.New(typ).Interface() // foo変数への参照を取得 	src := reflect.ValueOf(&amp;amp;foo).Elem() fmt.Println(typ) // main.Foo 	fmt.Println(src) // nil 	fmt.Println(dst) // &amp;amp;{}  fmt.Println(&amp;#34;------------&amp;#34;) // foo変数の参照に実体化したfooの型のを設定 	src.Set(reflect.ValueOf(dst)) fmt.Println(typ) // main.Foo 	fmt.Println(src) // &amp;amp;{} 	fmt.</description>
+    </item>
     
     <item>
       <title>protoc-gen-gohttpをHttpRule Optionに対応させた</title>
