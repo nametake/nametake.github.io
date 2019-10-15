@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>DDD on nametake.info</title>
+    <link>https://nametake.github.io/tags/ddd/</link>
+    <description>Recent content in DDD on nametake.info</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 24 Jul 2019 01:33:56 +0900</lastBuildDate>
+    
+	<atom:link href="https://nametake.github.io/tags/ddd/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>集約におけるトランザクションのドメイン的関心と技術的関心</title>
+      <link></link>
+      <pubDate>Wed, 24 Jul 2019 01:33:56 +0900</pubDate>
+      
+      <guid></guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>ddd-aggregate-and-subject</title>
+      <link></link>
+      <pubDate>Mon, 03 Dec 2018 20:39:55 +0900</pubDate>
+      
+      <guid></guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>
