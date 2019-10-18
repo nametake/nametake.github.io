@@ -40,7 +40,7 @@ syntax = &amp;#34;proto3&amp;#34;;package example;import &amp;#34;google/protobu
 syntax = &amp;#34;proto3&amp;#34;;package example;message Decimal { int64 value = 1; int64 exp = 2;}// アプリケーションに注文をするメッセージ message Order { // 支払う金額(Required)  Decimal amount = 1; // 通貨単位(Required)。  int64 currency_unit = 2; // 使用するポイント(Optional)  Decimal point = 3;} Order型では金銭を表現しているため数値を正確に表現できるDecimal型を使って金額とポイントを定義しています。しかし、アプリケーションの都合でamountはRequiredにpointはOptionalにしたいとき、どちらもデフォルト値がnullになってしまうため、そのままだと両方を同時に表現できません。また、0ポイントなのかnullなのかで挙動に明確な違いがある場合は0を送るという手段も成立しません。
 Orderぐらいの定義量であればコメントやドキュメントで対応することもできます。しかし、生成されるコードがOptionalであるということは変わらないため、せっかく型付でコード生成をしてくれるProtocol Buffersのメリットが半減してしまいます。また、人類にドキュメントを書く読む管理するという行為は難しすぎるため、プロダクトの成長に従ってドキュメントは陳腐化していってしまいます。
 解決策 DecimalをOptionalで表現するために以下のようなNullDecimal型を定義してみます。
-message NullDecimal { bool hasValue = 1; Decimal decimal = 2;} 定義の通り、値を持っているかどうかを判別するhasValueと実際の値になるDecimal型を持っている型です。Goを書く方はピンとくるかもしれませんが、sql.</description>
+message NullDecimal { bool has_value = 1; Decimal decimal = 2;} 定義の通り、値を持っているかどうかを判別するhas_valueと実際の値になるDecimal型を持っている型です。Goを書く方はピンとくるかもしれませんが、sql.</description>
     </item>
     
     <item>
