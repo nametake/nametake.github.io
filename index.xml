@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>nametake.info</title>
@@ -6,10 +6,28 @@
     <description>Recent content on nametake.info</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 07 Oct 2019 00:15:35 +0900</lastBuildDate>
+    <lastBuildDate>Wed, 30 Oct 2019 00:52:57 +0900</lastBuildDate>
     
 	<atom:link href="https://nametake.github.io/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Go1.13のerrorsにWrapの機能が入ったので勉強がてらまとめる</title>
+      <link>https://nametake.github.io/posts/2019/10/30/unwrap-and-markerr/</link>
+      <pubDate>Wed, 30 Oct 2019 00:52:57 +0900</pubDate>
+      
+      <guid>https://nametake.github.io/posts/2019/10/30/unwrap-and-markerr/</guid>
+      <description>Go1.13からerrorsに色々機能が入りました(The Go Blog)。
+最近は新しいGoのことをインプットできていなかったので、リハビリがてらsonatardさんのまとめた記事も読みつつ、中の実装を眺めてまとめてみます。
+また、まとめた結果理解したことを利用してmarkerrみたいなライブラリを作りました。
+Unwrap interface 追加された機能は errors.As や errors.Is のようにいくつかありますが、一番のキモとなる追加機能は errors.Unwrap です。
+似たような機能はデファクトスタンダードとして使われているpkg/errorsの errors.Cause としてありましたが、公式で導入されたことは非常に大きいと思います。
+とりあえず公式ライブラリの中を見にいきましょう。
+func Unwrap(err error) error { u, ok := err.(interface { Unwrap() error }) if !ok { return nil } return u.Unwrap() } これだけです。
+やっていることを言葉にしても、「渡されたerrorがUnwrap interfaceを実装していればUnwrapの返り値を返して、そうでなければnilを返す」だけです。
+それでは、Wrapする側の errors.Errorf の中を見にいってみます。
+package fmt import &amp;#34;errors&amp;#34; func Errorf(format string, a ...interface{}) error { p := newPrinter() p.wrapErrs = true p.doPrintf(format, a) s := string(p.buf) var err error if p.</description>
+    </item>
     
     <item>
       <title>TypeScirptのプロジェクトにエイリアスを設定して絶対パスでimportするメモ</title>
@@ -21,7 +39,7 @@
 前提  Webpackでプロジェクトを管理している Linterはeslintを使用している  tsconfig.jsonの設定 tsconfig.jsonのcompilerOptionsを設定してsrc以下のディレクトリに対してエイリアスを貼ります。
 エイリアスになる文字は何でも良いですが、私はnpm経由でimportするmoduleと混同しないように @/ を使用しています。
 { &amp;#34;compilerOptions&amp;#34;: { ~~~ &amp;#34;baseUrl&amp;#34;: &amp;#34;./&amp;#34;, &amp;#34;paths&amp;#34;: { &amp;#34;@/*&amp;#34;: [&amp;#34;src/*&amp;#34;] }, ~~~ } } Webpackのresolveの設定 Webpackのmoduleの解決にtsconfigで設定したエイリアスが使われるように設定します。
-import { Configuration } from &amp;#39;webpack&amp;#39;; const config: Configuration = { ~~~ resolve: { extensions: [&amp;#39;.ts&amp;#39;, &amp;#39;.tsx&amp;#39;, &amp;#39;.js&amp;#39;, &amp;#39;.json&amp;#39;], alias: { &amp;#39;@&amp;#39;: path.resolve(__dirname, &amp;#39;src&amp;#39;) } }, ~~~ }; export default config; eslintの設定 Webpackでプロジェクトをビルドするだけなら上記2つの設定だけで大丈夫ですが、eslintでimport/no-unresolvedを設定しているとエイリアスが解決できずエラーになります。
+import { Configuration } from &amp;#39;webpack&amp;#39;; const config: Configuration = { ~~~ resolve: { extensions: [&amp;#39;.ts&amp;#39;, &amp;#39;.tsx&amp;#39;, &amp;#39;.js&amp;#39;, &amp;#39;.json&amp;#39;], alias: { &amp;#39;@&amp;#39;: path.resolve(__dirname, &amp;#39;src&amp;#39;) } }, ~~~ }; export default config;  eslintの設定 Webpackでプロジェクトをビルドするだけなら上記2つの設定だけで大丈夫ですが、eslintでimport/no-unresolvedを設定しているとエイリアスが解決できずエラーになります。
 そこでeslint-import-resolver-webpackを導入して、eslintのimportの解決にWebpackの設定を使用するようにeslintrcに設定を加えます。
 まずは以下のコマンドでeslint-import-resolver-webpackを追加します。
 yarn add -D eslint-import-resolver-webpack 次にeslintrcのsettingsに以下のようにWebpackの設定を使用するように設定を加えます。
@@ -159,9 +177,9 @@ display: inline-flex; align-items: center;</description>
       
       <guid>https://nametake.github.io/posts/2019/05/18/type-safe-reducer/</guid>
       <description>以前書いた記事で書いたReducerでは、受け取ったActionの型を判別するために、switchで分岐した後に対応したActionの型でキャストをする必要がありました。
-const todoReducer: Reducer&amp;lt;ITodoState&amp;gt; = ( state: ITodoState = initTodoState, action: TodoAction ): ITodoState =&amp;gt; { switch (action.type) { case TodoActionType.ADD_TODO: const addTodoAction: IAddTodoAction = action; // &amp;lt;-- ここでキャストしている  return { ...state, todos: state.todos.concat([addTodoAction.payload.todo]) }; default: return state; } }; この方法だと、action.typeとそれに対応する型を実装者が気にしなければならず、型安全とは言い切れませんでした。
+const todoReducer: Reducer&amp;lt;ITodoState&amp;gt; = ( state: ITodoState = initTodoState, action: TodoAction ): ITodoState =&amp;gt; { switch (action.type) { case TodoActionType.ADD_TODO: const addTodoAction: IAddTodoAction = action; // &amp;lt;-- ここでキャストしている  return { ...state, todos: state.todos.concat([addTodoAction.payload.todo]) }; default: return state; } };  この方法だと、action.typeとそれに対応する型を実装者が気にしなければならず、型安全とは言い切れませんでした。
 このあたりの話を某Slackで相談したら、以下のような Flux standard actionのtypeやpayloadをジェネリクスで指定するようにして、typeにenumを使うというやり方を教えてもらいました。
-import { Reducer } from &amp;#39;redux&amp;#39;; // Flux standard action interface Action&amp;lt;TType, TPayload = null, TMeta = undefined&amp;gt; { type: TType; payload: TPayload; meta?: TMeta; } enum ActionType { ADD, DELETE } type AddAction = Action&amp;lt;ActionType.</description>
+import { Reducer } from &amp;#39;redux&amp;#39;; // Flux standard action interface Action&amp;lt;TType, TPayload = null, TMeta = undefined&amp;gt; { type: TType; payload: TPayload; meta?</description>
     </item>
     
     <item>

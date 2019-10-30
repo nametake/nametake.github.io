@@ -12,15 +12,15 @@
     <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Type SafeなReducerの書き方"/>
 <meta name="twitter:description" content="以前書いた記事で書いたReducerでは、受け取ったActionの型を判別するために、switchで分岐した後に対応したActionの型でキャストをする必要がありました。
-const todoReducer: Reducer&lt;ITodoState&gt; = ( state: ITodoState = initTodoState, action: TodoAction ): ITodoState =&gt; { switch (action.type) { case TodoActionType.ADD_TODO: const addTodoAction: IAddTodoAction = action; // &lt;-- ここでキャストしている  return { ...state, todos: state.todos.concat([addTodoAction.payload.todo]) }; default: return state; } }; この方法だと、action.typeとそれに対応する型を実装者が気にしなければならず、型安全とは言い切れませんでした。
+const todoReducer: Reducer&lt;ITodoState&gt; = ( state: ITodoState = initTodoState, action: TodoAction ): ITodoState =&gt; { switch (action.type) { case TodoActionType.ADD_TODO: const addTodoAction: IAddTodoAction = action; // &lt;-- ここでキャストしている  return { ...state, todos: state.todos.concat([addTodoAction.payload.todo]) }; default: return state; } };  この方法だと、action.typeとそれに対応する型を実装者が気にしなければならず、型安全とは言い切れませんでした。
 このあたりの話を某Slackで相談したら、以下のような Flux standard actionのtypeやpayloadをジェネリクスで指定するようにして、typeにenumを使うというやり方を教えてもらいました。
-import { Reducer } from &#39;redux&#39;; // Flux standard action interface Action&lt;TType, TPayload = null, TMeta = undefined&gt; { type: TType; payload: TPayload; meta?: TMeta; } enum ActionType { ADD, DELETE } type AddAction = Action&lt;ActionType."/>
+import { Reducer } from &#39;redux&#39;; // Flux standard action interface Action&lt;TType, TPayload = null, TMeta = undefined&gt; { type: TType; payload: TPayload; meta?"/>
 
     <meta property="og:title" content="Type SafeなReducerの書き方" />
 <meta property="og:description" content="以前書いた記事で書いたReducerでは、受け取ったActionの型を判別するために、switchで分岐した後に対応したActionの型でキャストをする必要がありました。
-const todoReducer: Reducer&lt;ITodoState&gt; = ( state: ITodoState = initTodoState, action: TodoAction ): ITodoState =&gt; { switch (action.type) { case TodoActionType.ADD_TODO: const addTodoAction: IAddTodoAction = action; // &lt;-- ここでキャストしている  return { ...state, todos: state.todos.concat([addTodoAction.payload.todo]) }; default: return state; } }; この方法だと、action.typeとそれに対応する型を実装者が気にしなければならず、型安全とは言い切れませんでした。
+const todoReducer: Reducer&lt;ITodoState&gt; = ( state: ITodoState = initTodoState, action: TodoAction ): ITodoState =&gt; { switch (action.type) { case TodoActionType.ADD_TODO: const addTodoAction: IAddTodoAction = action; // &lt;-- ここでキャストしている  return { ...state, todos: state.todos.concat([addTodoAction.payload.todo]) }; default: return state; } };  この方法だと、action.typeとそれに対応する型を実装者が気にしなければならず、型安全とは言い切れませんでした。
 このあたりの話を某Slackで相談したら、以下のような Flux standard actionのtypeやpayloadをジェネリクスで指定するようにして、typeにenumを使うというやり方を教えてもらいました。
-import { Reducer } from &#39;redux&#39;; // Flux standard action interface Action&lt;TType, TPayload = null, TMeta = undefined&gt; { type: TType; payload: TPayload; meta?: TMeta; } enum ActionType { ADD, DELETE } type AddAction = Action&lt;ActionType." />
+import { Reducer } from &#39;redux&#39;; // Flux standard action interface Action&lt;TType, TPayload = null, TMeta = undefined&gt; { type: TType; payload: TPayload; meta?" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://nametake.github.io/posts/2019/05/18/type-safe-reducer/" />
 <meta property="article:published_time" content="2019-05-18T10:38:55+09:00" />
@@ -61,7 +61,7 @@ import { Reducer } from &#39;redux&#39;; // Flux standard action interface Actio
     <link rel="icon" type="image/png" href="https://nametake.github.io/images/favicon-32x32.png" sizes="32x32">
     <link rel="icon" type="image/png" href="https://nametake.github.io/images/favicon-16x16.png" sizes="16x16">
 
-    <meta name="generator" content="Hugo 0.58.3" />
+    <meta name="generator" content="Hugo 0.59.0" />
   </head>
 
   <body class=" ">
@@ -144,7 +144,8 @@ import { Reducer } from &#39;redux&#39;; // Flux standard action interface Actio
     <span style="color:#66d9ef">default</span><span style="color:#f92672">:</span>
       <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">state</span>;
   }
-};</code></pre></div>
+};
+</code></pre></div>
 <p>この方法だと、<code>action.type</code>とそれに対応する型を実装者が気にしなければならず、型安全とは言い切れませんでした。</p>
 
 <p>このあたりの話を某Slackで相談したら、以下のような Flux standard actionのtypeやpayloadをジェネリクスで指定するようにして、typeにenumを使うというやり方を教えてもらいました。</p>
@@ -198,7 +199,8 @@ import { Reducer } from &#39;redux&#39;; // Flux standard action interface Actio
   }
 };
 
-<span style="color:#66d9ef">export</span> <span style="color:#66d9ef">default</span> <span style="color:#a6e22e">reducer</span>;</code></pre></div>
+<span style="color:#66d9ef">export</span> <span style="color:#66d9ef">default</span> <span style="color:#a6e22e">reducer</span>;
+</code></pre></div>
 <p>こうするとSwitchでtypeを引っ掛けた時に型が推論されるため、caseのスコープの中でpayloadの型を確定できます。</p>
 
 <p>(これを知った後にちゃんと調べたらReduxの公式ドキュメント(<a href="https://redux.js.org/recipes/usage-with-typescript">Usage with TypeScript</a>)に型安全に各やり方が書いてあった……ちゃんとドキュメントは読みましょうということでした……)</p>

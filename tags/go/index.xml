@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Go on nametake.info</title>
@@ -6,10 +6,28 @@
     <description>Recent content in Go on nametake.info</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 10 Sep 2019 13:39:29 +0900</lastBuildDate>
+    <lastBuildDate>Wed, 30 Oct 2019 00:52:57 +0900</lastBuildDate>
     
 	<atom:link href="https://nametake.github.io/tags/go/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Go1.13のerrorsにWrapの機能が入ったので勉強がてらまとめる</title>
+      <link>https://nametake.github.io/posts/2019/10/30/unwrap-and-markerr/</link>
+      <pubDate>Wed, 30 Oct 2019 00:52:57 +0900</pubDate>
+      
+      <guid>https://nametake.github.io/posts/2019/10/30/unwrap-and-markerr/</guid>
+      <description>Go1.13からerrorsに色々機能が入りました(The Go Blog)。
+最近は新しいGoのことをインプットできていなかったので、リハビリがてらsonatardさんのまとめた記事も読みつつ、中の実装を眺めてまとめてみます。
+また、まとめた結果理解したことを利用してmarkerrみたいなライブラリを作りました。
+Unwrap interface 追加された機能は errors.As や errors.Is のようにいくつかありますが、一番のキモとなる追加機能は errors.Unwrap です。
+似たような機能はデファクトスタンダードとして使われているpkg/errorsの errors.Cause としてありましたが、公式で導入されたことは非常に大きいと思います。
+とりあえず公式ライブラリの中を見にいきましょう。
+func Unwrap(err error) error { u, ok := err.(interface { Unwrap() error }) if !ok { return nil } return u.Unwrap() } これだけです。
+やっていることを言葉にしても、「渡されたerrorがUnwrap interfaceを実装していればUnwrapの返り値を返して、そうでなければnilを返す」だけです。
+それでは、Wrapする側の errors.Errorf の中を見にいってみます。
+package fmt import &amp;#34;errors&amp;#34; func Errorf(format string, a ...interface{}) error { p := newPrinter() p.wrapErrs = true p.doPrintf(format, a) s := string(p.buf) var err error if p.</description>
+    </item>
     
     <item>
       <title>Goのrelfectで構造体の変数にインスタンスを詰める方法</title>

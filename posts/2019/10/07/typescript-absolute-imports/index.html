@@ -15,7 +15,7 @@
 前提  Webpackでプロジェクトを管理している Linterはeslintを使用している  tsconfig.jsonの設定 tsconfig.jsonのcompilerOptionsを設定してsrc以下のディレクトリに対してエイリアスを貼ります。
 エイリアスになる文字は何でも良いですが、私はnpm経由でimportするmoduleと混同しないように @/ を使用しています。
 { &#34;compilerOptions&#34;: { ~~~ &#34;baseUrl&#34;: &#34;./&#34;, &#34;paths&#34;: { &#34;@/*&#34;: [&#34;src/*&#34;] }, ~~~ } } Webpackのresolveの設定 Webpackのmoduleの解決にtsconfigで設定したエイリアスが使われるように設定します。
-import { Configuration } from &#39;webpack&#39;; const config: Configuration = { ~~~ resolve: { extensions: [&#39;.ts&#39;, &#39;.tsx&#39;, &#39;.js&#39;, &#39;.json&#39;], alias: { &#39;@&#39;: path.resolve(__dirname, &#39;src&#39;) } }, ~~~ }; export default config; eslintの設定 Webpackでプロジェクトをビルドするだけなら上記2つの設定だけで大丈夫ですが、eslintでimport/no-unresolvedを設定しているとエイリアスが解決できずエラーになります。
+import { Configuration } from &#39;webpack&#39;; const config: Configuration = { ~~~ resolve: { extensions: [&#39;.ts&#39;, &#39;.tsx&#39;, &#39;.js&#39;, &#39;.json&#39;], alias: { &#39;@&#39;: path.resolve(__dirname, &#39;src&#39;) } }, ~~~ }; export default config;  eslintの設定 Webpackでプロジェクトをビルドするだけなら上記2つの設定だけで大丈夫ですが、eslintでimport/no-unresolvedを設定しているとエイリアスが解決できずエラーになります。
 そこでeslint-import-resolver-webpackを導入して、eslintのimportの解決にWebpackの設定を使用するようにeslintrcに設定を加えます。
 まずは以下のコマンドでeslint-import-resolver-webpackを追加します。
 yarn add -D eslint-import-resolver-webpack 次にeslintrcのsettingsに以下のようにWebpackの設定を使用するように設定を加えます。
@@ -26,7 +26,7 @@ yarn add -D eslint-import-resolver-webpack 次にeslintrcのsettingsに以下の
 前提  Webpackでプロジェクトを管理している Linterはeslintを使用している  tsconfig.jsonの設定 tsconfig.jsonのcompilerOptionsを設定してsrc以下のディレクトリに対してエイリアスを貼ります。
 エイリアスになる文字は何でも良いですが、私はnpm経由でimportするmoduleと混同しないように @/ を使用しています。
 { &#34;compilerOptions&#34;: { ~~~ &#34;baseUrl&#34;: &#34;./&#34;, &#34;paths&#34;: { &#34;@/*&#34;: [&#34;src/*&#34;] }, ~~~ } } Webpackのresolveの設定 Webpackのmoduleの解決にtsconfigで設定したエイリアスが使われるように設定します。
-import { Configuration } from &#39;webpack&#39;; const config: Configuration = { ~~~ resolve: { extensions: [&#39;.ts&#39;, &#39;.tsx&#39;, &#39;.js&#39;, &#39;.json&#39;], alias: { &#39;@&#39;: path.resolve(__dirname, &#39;src&#39;) } }, ~~~ }; export default config; eslintの設定 Webpackでプロジェクトをビルドするだけなら上記2つの設定だけで大丈夫ですが、eslintでimport/no-unresolvedを設定しているとエイリアスが解決できずエラーになります。
+import { Configuration } from &#39;webpack&#39;; const config: Configuration = { ~~~ resolve: { extensions: [&#39;.ts&#39;, &#39;.tsx&#39;, &#39;.js&#39;, &#39;.json&#39;], alias: { &#39;@&#39;: path.resolve(__dirname, &#39;src&#39;) } }, ~~~ }; export default config;  eslintの設定 Webpackでプロジェクトをビルドするだけなら上記2つの設定だけで大丈夫ですが、eslintでimport/no-unresolvedを設定しているとエイリアスが解決できずエラーになります。
 そこでeslint-import-resolver-webpackを導入して、eslintのimportの解決にWebpackの設定を使用するようにeslintrcに設定を加えます。
 まずは以下のコマンドでeslint-import-resolver-webpackを追加します。
 yarn add -D eslint-import-resolver-webpack 次にeslintrcのsettingsに以下のようにWebpackの設定を使用するように設定を加えます。
@@ -71,7 +71,7 @@ yarn add -D eslint-import-resolver-webpack 次にeslintrcのsettingsに以下の
     <link rel="icon" type="image/png" href="https://nametake.github.io/images/favicon-32x32.png" sizes="32x32">
     <link rel="icon" type="image/png" href="https://nametake.github.io/images/favicon-16x16.png" sizes="16x16">
 
-    <meta name="generator" content="Hugo 0.58.3" />
+    <meta name="generator" content="Hugo 0.59.0" />
   </head>
 
   <body class=" ">
@@ -181,7 +181,8 @@ yarn add -D eslint-import-resolver-webpack 次にeslintrcのsettingsに以下の
   <span style="color:#f92672">~~~</span>
 };
 
-<span style="color:#66d9ef">export</span> <span style="color:#66d9ef">default</span> <span style="color:#a6e22e">config</span>;</code></pre></div>
+<span style="color:#66d9ef">export</span> <span style="color:#66d9ef">default</span> <span style="color:#a6e22e">config</span>;
+</code></pre></div>
 <h1 id="eslintの設定">eslintの設定</h1>
 
 <p>Webpackでプロジェクトをビルドするだけなら上記2つの設定だけで大丈夫ですが、eslintで<code>import/no-unresolved</code>を設定しているとエイリアスが解決できずエラーになります。</p>
