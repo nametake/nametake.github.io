@@ -211,7 +211,7 @@ package fmt import &#34;errors&#34; func Errorf(format string, a ...interface{})
 
 <p>上記のことから、<code>fmt.Errorf</code>経由でWrapされたエラーが<code>errors.Unwrap</code>に渡されたときには、<code>fmt.Errorf</code>に渡されたエラーが返ることになり、文字通り<code>fmt.Errorf</code>でWrapされたエラーをUnwrapできる事がわかります。</p>
 
-<h1 id="実用例">実用例</h1>
+<h1 id="unwrap-interface実用例">Unwrap interface実用例</h1>
 
 <h2 id="原因を取り出す">原因を取り出す</h2>
 
@@ -246,6 +246,8 @@ package fmt import &#34;errors&#34; func Errorf(format string, a ...interface{})
 	}
 	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">err</span>
 }</code></pre></div>
+<p>ただ、同一性を調べるためだったら <code>errors.Is</code> があるので、あまり上の例は出番がないかもしれません。</p>
+
 <h2 id="wrapの途中に独自のエラー型が入っていないか調べる">Wrapの途中に独自のエラー型が入っていないか調べる</h2>
 
 <p><code>fmt.Errorf</code> でWrapされたエラーは <code>errors.As</code> でWrapされてきた中に指定した方があった場合それを取り出すことができます。</p>
