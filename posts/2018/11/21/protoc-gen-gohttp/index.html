@@ -262,12 +262,12 @@ type HelloRequest struct { Name string `protobuf:&#34;bytes,1,opt,name=name&#34;
 
 <p>このプラグインは実際にプロジェクトで使おうと思って作ったのですが、作る前に似たようなものがないか調べたのでそれとの比較も書いてみます。</p>
 
-<h2 id="twrip-https-github-com-twitchtv-twirp"><a href="https://github.com/twitchtv/twirp">twrip</a></h2>
+<h2 id="twirp-https-github-com-twitchtv-twirp"><a href="https://github.com/twitchtv/twirp">twirp</a></h2>
 
 <p>同じようにProtocol Buffersの定義からhttp.Handler対応するコードを生成するフレームワークです。Content−TypeをみてJSONかバイナリかを判断することもしています。ただ、以下の点が気になったので自分たちのプロジェクトでは採用を見送りました。</p>
 
 <ul>
-<li><strong>生成されるものがtwripをimportしている</strong></li>
+<li><strong>生成されるものがtwirpをimportしている</strong></li>
 <li>エラー発生時のハンドリングの余地が少ない</li>
 <li>RPCの呼び出しに対するHookがContextに情報を詰めるようになっていて型で守るのが難しい</li>
 <li>フレームワークなのでピンポイントで使いづらい</li>
