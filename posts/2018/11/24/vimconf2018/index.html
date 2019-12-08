@@ -19,13 +19,18 @@ Vimの歴史とこれからのVimの話をされていた。
 非常に勝手ながらにプラグインにはそこまで興味がないかと思っていたが、発表で言及されていた「これからのVim」はプラグインに関することが多く、少し驚いた。
 発表の内容からも、終始開発者として「使う人」のことを強く意識しながらVimのこれからを考えていることが伝わった。
 個人的にはVSCodeのPopup Windowが羨ましいのでPopUp Windowがほしいです。
-Migrating plugins to standard features  この発表の聽いたので帰ってからVimのプラグインを10個削りました。
-Modes  デバッグのお話。
+Migrating plugins to standard features この発表の聽いたので帰ってからVimのプラグインを10個削りました。
+Modes デバッグのお話。
 この話を聽いてDelveのプラグインを思い出したのでちょっとあとで試そうと思う。
-A day in the life of (ordinary) Vimmer  1日1回プラグインのアップデートは私もやります。
-Modern editor-independent development environment for PHP Modern editor-independent development environment for PHP #vimconf / 黒點 さん - ニコナレ 宗教戦争好きですすみません。
+A day in the life of (ordinary) Vimmer 1日1回プラグインのアップデートは私もやります。
+Modern editor-independent development environment for PHP 宗教戦争好きですすみません。
 Veonimは少し気になったので後で試す。
-Effective Modern Vim scripting スライド"/>
+Effective Modern Vim scripting スライド
+今どきなVimプラグイン開発の方法がHelloWorldから始まっていてとても素晴らしい資料でした！
+Oni - The GUI-fication of Neovim スライド
+GUI版NeoVimの話。
+自分がVSCodeを見てて羨ましいと思った機能を全部入ってたので発表中に入れて試してみたが、なにか設定が悪いのか動かなかった。あとで動かせるところまで持っていきたいと思います。
+Vim ported to WebAssembly 軽めの話(大嘘)。"/>
 
     <meta property="og:title" content="VimConf2018感想" />
 <meta property="og:description" content="11月24日にあったVimConf2018に行ったので参加ブログを書きます。
@@ -36,13 +41,18 @@ Vimの歴史とこれからのVimの話をされていた。
 非常に勝手ながらにプラグインにはそこまで興味がないかと思っていたが、発表で言及されていた「これからのVim」はプラグインに関することが多く、少し驚いた。
 発表の内容からも、終始開発者として「使う人」のことを強く意識しながらVimのこれからを考えていることが伝わった。
 個人的にはVSCodeのPopup Windowが羨ましいのでPopUp Windowがほしいです。
-Migrating plugins to standard features  この発表の聽いたので帰ってからVimのプラグインを10個削りました。
-Modes  デバッグのお話。
+Migrating plugins to standard features この発表の聽いたので帰ってからVimのプラグインを10個削りました。
+Modes デバッグのお話。
 この話を聽いてDelveのプラグインを思い出したのでちょっとあとで試そうと思う。
-A day in the life of (ordinary) Vimmer  1日1回プラグインのアップデートは私もやります。
-Modern editor-independent development environment for PHP Modern editor-independent development environment for PHP #vimconf / 黒點 さん - ニコナレ 宗教戦争好きですすみません。
+A day in the life of (ordinary) Vimmer 1日1回プラグインのアップデートは私もやります。
+Modern editor-independent development environment for PHP 宗教戦争好きですすみません。
 Veonimは少し気になったので後で試す。
-Effective Modern Vim scripting スライド" />
+Effective Modern Vim scripting スライド
+今どきなVimプラグイン開発の方法がHelloWorldから始まっていてとても素晴らしい資料でした！
+Oni - The GUI-fication of Neovim スライド
+GUI版NeoVimの話。
+自分がVSCodeを見てて羨ましいと思った機能を全部入ってたので発表中に入れて試してみたが、なにか設定が悪いのか動かなかった。あとで動かせるところまで持っていきたいと思います。
+Vim ported to WebAssembly 軽めの話(大嘘)。" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://nametake.github.io/posts/2018/11/24/vimconf2018/" />
 <meta property="article:published_time" content="2018-11-24T10:15:34+09:00" />
@@ -83,7 +93,7 @@ Effective Modern Vim scripting スライド" />
     <link rel="icon" type="image/png" href="https://nametake.github.io/images/favicon-32x32.png" sizes="32x32">
     <link rel="icon" type="image/png" href="https://nametake.github.io/images/favicon-16x16.png" sizes="16x16">
 
-    <meta name="generator" content="Hugo 0.59.1" />
+    <meta name="generator" content="Hugo 0.60.1" />
   </head>
 
   <body class=" ">
@@ -151,84 +161,44 @@ Effective Modern Vim scripting スライド" />
       </header>
 
       <div>
-        
-
-<p>11月24日にあった<a href="https://vimconf.org/2018/">VimConf2018</a>に行ったので参加ブログを書きます。</p>
-
-<h3 id="keynote-what-is-the-next-feature-o">Keynote - What is the next feature?(o)</h3>
-
+        <p>11月24日にあった<a href="https://vimconf.org/2018/">VimConf2018</a>に行ったので参加ブログを書きます。</p>
+<h3 id="keynote--what-is-the-next-featureo">Keynote - What is the next feature?(o)</h3>
 <p><a href="https://docs.google.com/presentation/d/e/2PACX-1vTj2uCbuCffhaLVBZE6biI538GG6jMi1INbku-T9q5hu5W0zGLwuibN3m5xbEuqdUFTDnhdhtikPyTi/pub?start=false&amp;loop=false&amp;delayms=3000&amp;slide=id.p">スライド</a></p>
-
 <p>mattnさんの発表。</p>
-
-<h3 id="keynote-vim-from-hjkl-to-a-platform-for-plugins">Keynote - Vim: From hjkl to a platform for plugins</h3>
-
+<h3 id="keynote--vim-from-hjkl-to-a-platform-for-plugins">Keynote - Vim: From hjkl to a platform for plugins</h3>
 <p>楽しみにしていたBram氏の発表。</p>
-
 <p>Vimの歴史とこれからのVimの話をされていた。</p>
-
 <p>非常に勝手ながらにプラグインにはそこまで興味がないかと思っていたが、発表で言及されていた「これからのVim」はプラグインに関することが多く、少し驚いた。</p>
-
 <p>発表の内容からも、終始開発者として「使う人」のことを強く意識しながらVimのこれからを考えていることが伝わった。</p>
-
 <p>個人的にはVSCodeのPopup Windowが羨ましいのでPopUp Windowがほしいです。</p>
-
 <h3 id="migrating-plugins-to-standard-features">Migrating plugins to standard features</h3>
-
-<script async class="speakerdeck-embed" data-id="25e1b0e84d2d432d8a5792df8e578c5f" data-ratio="1.77777777777778" src="//speakerdeck.com/assets/embed.js"></script>
-
+<!-- raw HTML omitted -->
 <p>この発表の聽いたので帰ってからVimのプラグインを10個削りました。</p>
-
 <h3 id="modes">Modes</h3>
-
-<script async class="speakerdeck-embed" data-id="e3a98b1395ba4bdab15b3fa69324662b" data-ratio="1.77777777777778" src="//speakerdeck.com/assets/embed.js"></script>
-
+<!-- raw HTML omitted -->
 <p>デバッグのお話。</p>
-
 <p>この話を聽いてDelveのプラグインを思い出したのでちょっとあとで試そうと思う。</p>
-
 <h3 id="a-day-in-the-life-of-ordinary-vimmer">A day in the life of (ordinary) Vimmer</h3>
-
-<script async class="speakerdeck-embed" data-id="fdfb62e9c23043d4a910cc9e49526002" data-ratio="1.77777777777778" src="//speakerdeck.com/assets/embed.js"></script>
-
+<!-- raw HTML omitted -->
 <p>1日1回プラグインのアップデートは私もやります。</p>
-
-<h3 id="modern-editor-independent-development-environment-for-php">Modern editor-independent development environment for PHP</h3>
-
-<iframe allowfullscreen="allowfullscreen" frameborder="0" scrolling="no" src="https://niconare.nicovideo.jp/embed_works/kn3635" style="max-width: 100%;" width="485" height="413"><a href="https://niconare.nicovideo.jp/watch/kn3635" target="_blank">Modern editor-independent development environment for PHP #vimconf / 黒點 さん - ニコナレ</a></iframe>
-
+<h3 id="modern-editorindependent-development-environment-for-php">Modern editor-independent development environment for PHP</h3>
+<!-- raw HTML omitted -->
 <p>宗教戦争好きですすみません。</p>
-
 <p>Veonimは少し気になったので後で試す。</p>
-
 <h3 id="effective-modern-vim-scripting">Effective Modern Vim scripting</h3>
-
 <p><a href="https://docs.google.com/presentation/d/e/2PACX-1vQKaWJY8w6QJpebvuzg334RfLDbQHv4-J_06yFxdTzLrrjhE_y5iuzA-JxCCuFdUAZQB2QQsidF_mys/pub?start=false&amp;loop=false&amp;delayms=3000&amp;slide=id.p">スライド</a></p>
-
 <p>今どきなVimプラグイン開発の方法がHelloWorldから始まっていてとても素晴らしい資料でした！</p>
-
-<h3 id="oni-the-gui-fication-of-neovim">Oni - The GUI-fication of Neovim</h3>
-
+<h3 id="oni--the-guification-of-neovim">Oni - The GUI-fication of Neovim</h3>
 <p><a href="https://github.com/Akin909/Oni_the_guification_of_neovim">スライド</a></p>
-
 <p>GUI版NeoVimの話。</p>
-
 <p>自分がVSCodeを見てて羨ましいと思った機能を全部入ってたので発表中に入れて試してみたが、なにか設定が悪いのか動かなかった。あとで動かせるところまで持っていきたいと思います。</p>
-
 <h3 id="vim-ported-to-webassembly">Vim ported to WebAssembly</h3>
-
-<script async class="speakerdeck-embed" data-id="507c3c88e86143e1a09e33c951d5ac77" data-ratio="1.77777777777778" src="//speakerdeck.com/assets/embed.js"></script>
-
+<!-- raw HTML omitted -->
 <p>軽めの話(大嘘)。</p>
-
-<h3 id="全体の感想">全体の感想</h3>
-
+<h3 id="heading">全体の感想</h3>
 <p>今年も異常に濃い空間を共有できてとても楽しかった。</p>
-
 <p>Bram氏が来たことも感動的だったが、何よりもVimConfスタッフの方々や日本のVim開発者の方々が本当に嬉しそうに楽しそうにされているのを見て、もらい感動をしてしまった。</p>
-
 <p>懇親会でも普通の技術勉強会と違って様々な職種の方々とコミュニケーションができるので他の勉強会にはない楽しさがあった。</p>
-
 <p>来年も是非参加したいと思います。</p>
 
       </div>

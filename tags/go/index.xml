@@ -48,7 +48,7 @@ package main import ( &amp;#34;fmt&amp;#34; &amp;#34;reflect&amp;#34; ) func mai
 ですが、protoc-gen-gohttpではURLのパス部分の定義はProtocol Buffersの定義には記述できないため、クライアント側がProtocol Buffersを見ただけでパスを読み取ることができませんでした。また、生成されたコードはHTTPのBodyしか参照しないため、情報を取得するだけのときもHTTPのメソッドをPOSTにする必要もありました。
 そこで、Googleが提供しているRPCの定義をHTTPのREST APIにマッピングするためのHttpRuleオプションを利用して、protoc-gen-gohttpがHttpRuleのマッピングどおりに動作するコードを生成するように改良しました。
 使い方 protoc-gen-gohttpをインストールしたら、以下のようにHttpRuleを使用したProtoの定義を用意します(annotations.protoのダウンロードの仕方はこの辺を参考にしてください)。この記事ではexample.protoに書いているとします。
-syntax = &amp;#34;proto3&amp;#34;;package main;option go_package = &amp;#34;main&amp;#34;;import &amp;#34;google/api/annotations.proto&amp;#34;;service Messaging { rpc GetMessage(GetMessageRequest) returns (GetMessageResponse) { option (google.api.http).get = &amp;#34;/v1/messages/{message_id}&amp;#34;; } rpc UpdateMessage(UpdateMessageRequest) returns (UpdateMessageResponse) { option (google.api.http) = { put: &amp;#34;/v1/messages/{message_id}/{sub.subfield}&amp;#34; body: &amp;#34;*&amp;#34; }; }}message GetMessageRequest { string message_id = 1; string message = 2; repeated string tags = 3;}message GetMessageResponse { string message_id = 1; string message = 2; repeated string tags = 4;}message SubMessage { string subfield = 1;}message UpdateMessageRequest { string message_id = 1; SubMessage sub = 2; string message = 3;}message UpdateMessageResponse { string message_id = 1; SubMessage sub = 2; string message = 3;} 用意できたら、以下のコマンドでGoのコードを生成します。</description>
+syntax = &amp;#34;proto3&amp;#34;;package main;option go_package = &amp;#34;main&amp;#34;;import &amp;#34;google/api/annotations.proto&amp;#34;;service Messaging { rpc GetMessage(GetMessageRequest) returns (GetMessageResponse) { option (google.api.http).get = &amp;#34;/v1/messages/{message_id}&amp;#34;; } rpc UpdateMessage(UpdateMessageRequest) returns (UpdateMessageResponse) { option (google.api.http) = { put: &amp;#34;/v1/messages/{message_id}/{sub.subfield}&amp;#34; body: &amp;#34;*&amp;#34; }; }}message GetMessageRequest { string message_id = 1; string message = 2; repeated string tags = 3;}message GetMessageResponse { string message_id = 1; string message = 2; repeated string tags = 4;}message SubMessage { string subfield = 1;}message UpdateMessageRequest { string message_id = 1; SubMessage sub = 2; string message = 3;}message UpdateMessageResponse { string message_id = 1; SubMessage sub = 2; string message = 3;}用意できたら、以下のコマンドでGoのコードを生成します。</description>
     </item>
     
     <item>
@@ -62,7 +62,7 @@ syntax = &amp;#34;proto3&amp;#34;;package main;option go_package = &amp;#34;main
 一応coc.nvimにneosnippetの機能を取り込む機能はついているようでしたがうまく動かなかったことと、もうちょっと高級な機能が欲しいと前々から思っていたのもあり、せっかくなのでsnippetを提供するプラグインを作りました。
 それで作ったのが、vim-goiferr-snippetsです。以下のgifのように動作します。
 iferrのsnippetに関して以下の機能を提供しています。
- 戻り値の型を構造体でも補完してくれる 構造体がポインタかどうかを判別してくれる pkg/errorsのWrap関数でerrorをWrapする補完の提供 名前付き戻り値のときはreturnしか出力しない インラインのエラーハンドリング用snippetも提供 上記機能を持ったVimScirptの関数として提供している  pkg/errors以外のerrorライブラリ等でカスタマイズできる   また、作っている最中に「iferr用の正規表現はそのままreturnのsnippetとしても使えるのでは？」と思ったので、そのままreturnを補完するsnippetとしても提供しました。戻り値をいい感じに展開して、それぞれにジャンプ用のマーカーを付けているので、サクサク戻り値を設定できます。
+ 戻り値の型を構造体でも補完してくれる 構造体がポインタかどうかを判別してくれる pkg/errorsのWrap関数でerrorをWrapする補完の提供 名前付き戻り値のときはreturnしか出力しない インラインのエラーハンドリング用snippetも提供 上記機能を持ったVimScirptの関数として提供している  pkg/errors以外のerrorライブラリ等でカスタマイズできる    また、作っている最中に「iferr用の正規表現はそのままreturnのsnippetとしても使えるのでは？」と思ったので、そのままreturnを補完するsnippetとしても提供しました。戻り値をいい感じに展開して、それぞれにジャンプ用のマーカーを付けているので、サクサク戻り値を設定できます。
 自分用に作ったのでオレオレ設定な部分もありますが、生暖かい見ていただければ幸いです。
 最後に、プラグイン内の正規表現部分は@pockeさんの「Vim で Go 言語を書いている時、Neosnippet でいい感じに if する」という記事を参考にさせていただきました！ありがとうございました！</description>
     </item>
@@ -74,7 +74,7 @@ iferrのsnippetに関して以下の機能を提供しています。
       
       <guid>https://nametake.github.io/posts/2018/12/19/created-labelerr-and-suberr/</guid>
       <description>golang.tokyo #20のLT大会で、labelerrとsuberrを作った話をしてきました。
- 「Goのerrorは1種類というのは綺麗だとは思うけど、実運用上errorに重み付けをしたいよね」ってところからこのライブラリの出発点です。
+「Goのerrorは1種類というのは綺麗だとは思うけど、実運用上errorに重み付けをしたいよね」ってところからこのライブラリの出発点です。
 スライド内にもありますが、Primitiveな型しか取り扱わないように気をつけている上に、ライブラリ自体も難しいことはしてないので、なんとなく使ってみるか、ぐらいの感覚で使ってもらうと嬉しいです。</description>
     </item>
     
@@ -88,7 +88,7 @@ iferrのsnippetに関して以下の機能を提供しています。
 ということはそろそろ人類はprotocのプラグインを書きたくなる時代がやってくると思います。
 そのときに世の中に生み出されるプラグインの品質が少しでも高くなればと思い、以前protoc-gen-gohttpというプラグイン作ったときにテストも書いたので、その知見を書こうと思います。
 プラグイン自体は@yuguiさんの「protocプラグインの書き方」がとても参考になったのでそちらを参照すると良いかもしれません。
-TL;DR  細かいやり方はgithub.com/golang/protobuf/blob/master/protoc-gen-go/golden_test.goに書いてある  自分のプラグインのテストもそれを参考にして書いた  プラグインの動作テストはテスト内でprotocコマンドを実行して行う 実行結果の確認はGolden testingで行う Goのコードでprotoファイルをplugin.CodeGeneratorRequestに変換することは(恐らく)できない  経緯(読み飛ばして大丈夫です) protocのプラグインは標準入力に入ってきたデータをproto.CodeGeneratorRequest型にUnmarshalしてprotoファイルの情報を取得します。
+TL;DR  細かいやり方はgithub.com/golang/protobuf/blob/master/protoc-gen-go/golden_test.goに書いてある  自分のプラグインのテストもそれを参考にして書いた   プラグインの動作テストはテスト内でprotocコマンドを実行して行う 実行結果の確認はGolden testingで行う Goのコードでprotoファイルをplugin.CodeGeneratorRequestに変換することは(恐らく)できない  経緯(読み飛ばして大丈夫です) protocのプラグインは標準入力に入ってきたデータをproto.CodeGeneratorRequest型にUnmarshalしてprotoファイルの情報を取得します。
 そのため、最初にテストを書こうとしたときにはGoだけでprotoファイルをproto.CodeGeneratorRequestに変換する仕組みがあるのかと思っていたのですが、この記事公開時点ではその仕組みは提供されていないようでした(知ってたらコメント等で教えていただけると助かります)。
 「それじゃあ有名なプラグインはどうやってるんだ?」と思いprotoc-gen-goのコードを見てみると、Goのコードの中で直接protocコマンドを実行していて、少し面白いテストをしていたので解説しようと思います。
 golden_test.goの解説 ファイル名から想像できる通り、いわゆるGolden testingと呼ばれるものです。テストの中からprotocコマンドを直接実行して、その結果の出力ファイルとtestdataディレクトリに入っている期待するファイルとを比較をしてテストしています。
@@ -105,8 +105,8 @@ func protoc(t *testing.T, args []string) { cmd := exec.Command(&amp;#34;protoc&a
       <guid>https://nametake.github.io/posts/2018/11/21/protoc-gen-gohttp/</guid>
       <description>nametake/protoc-gen-gohttpというprotocのプラグインを作ったのでその話です。
 Protocol Buffersとは Protocol Buffersはインターフェース定義言語の1つでGoogleによって開発されているものです(ざっくりいうと、JSONやXMLの仲間)。以下のように、構造を表すmessageとそのmessageを使ったRPCのインターフェースのserviceというものを定義できます。
-syntax = &amp;#34;proto3&amp;#34;;package helloworld;option go_package = &amp;#34;main&amp;#34;;message HelloRequest { string name = 1;}message HelloReply { string message = 1;}service Greeter { rpc SayHello(HelloRequest) returns (HelloReply) {}} 上記の定義をprotocコマンドを使ってコンパイルすることで、対応した言語ならそのままコードを書き出せます。例えばGoなら以下のような構造体が書き出されます(長くなるのでコードは削っています)。以下の構造体はProtocol Bufferが用意しているライブラリを利用すればバイナリに変換できます。
-type HelloRequest struct { Name string `protobuf:&amp;#34;bytes,1,opt,name=name&amp;#34; json:&amp;#34;name,omitempty&amp;#34;` XXX_NoUnkeyedLiteral struct{} `json:&amp;#34;-&amp;#34;` XXX_unrecognized []byte `json:&amp;#34;-&amp;#34;` XXX_sizecache int32 `json:&amp;#34;-&amp;#34;` } type HelloReply struct { Message string `protobuf:&amp;#34;bytes,1,opt,name=message&amp;#34; json:&amp;#34;message,omitempty&amp;#34;` XXX_NoUnkeyedLiteral struct{} `json:&amp;#34;-&amp;#34;` XXX_unrecognized []byte `json:&amp;#34;-&amp;#34;` XXX_sizecache int32 `json:&amp;#34;-&amp;#34;` } また、protocコマンドはプラグイン機構も持っているため、例えばgRPCのためのコードを書き出したかったらprotoc --go_out=plugins=grpc:.</description>
+syntax = &amp;#34;proto3&amp;#34;;package helloworld;option go_package = &amp;#34;main&amp;#34;;message HelloRequest { string name = 1;}message HelloReply { string message = 1;}service Greeter { rpc SayHello(HelloRequest) returns (HelloReply) {}}上記の定義をprotocコマンドを使ってコンパイルすることで、対応した言語ならそのままコードを書き出せます。例えばGoなら以下のような構造体が書き出されます(長くなるのでコードは削っています)。以下の構造体はProtocol Bufferが用意しているライブラリを利用すればバイナリに変換できます。
+type HelloRequest struct { Name string `protobuf:&amp;#34;bytes,1,opt,name=name&amp;#34; json:&amp;#34;name,omitempty&amp;#34;` XXX_NoUnkeyedLiteral struct{} `json:&amp;#34;-&amp;#34;` XXX_unrecognized []byte `json:&amp;#34;-&amp;#34;` XXX_sizecache int32 `json:&amp;#34;-&amp;#34;` } type HelloReply struct { Message string `protobuf:&amp;#34;bytes,1,opt,name=message&amp;#34; json:&amp;#34;message,omitempty&amp;#34;` XXX_NoUnkeyedLiteral struct{} `json:&amp;#34;-&amp;#34;` XXX_unrecognized []byte `json:&amp;#34;-&amp;#34;` XXX_sizecache int32 `json:&amp;#34;-&amp;#34;` } また、protocコマンドはプラグイン機構も持っているため、例えばgRPCのためのコードを書き出したかったらprotoc --go_out=plugins=grpc:.のようにすることで以下のようにgRPC用のコードも同時に書き出してくれます(以下のコードも削ってます)。</description>
     </item>
     
     <item>
@@ -118,7 +118,7 @@ type HelloRequest struct { Name string `protobuf:&amp;#34;bytes,1,opt,name=name&
       <description>GCPの認証済みのhttp.Clientが欲しいときにちょっとだけ調べたのでメモ。
 結論だけ言うと、golang.org/x/oauth2/googleのDefaultClientを使えばいいみたいです。
 今回はDataflowのAPIを叩きたかったので以下のようにすればできました。
-client, err := google.DefaultClient(ctx, dataflow.CloudPlatformScope) if err != nil { return fmt.Errorf(&amp;#34;failed create client: %v&amp;#34;, err) }</description>
+client, err := google.DefaultClient(ctx, dataflow.CloudPlatformScope) if err != nil { return fmt.Errorf(&amp;#34;failed create client: %v&amp;#34;, err) } </description>
     </item>
     
     <item>
@@ -128,9 +128,9 @@ client, err := google.DefaultClient(ctx, dataflow.CloudPlatformScope) if err != 
       
       <guid>https://nametake.github.io/posts/2018/09/20/dep-private-repo/</guid>
       <description>Goをアップデートした後、dep updateをしたら以下のようなエラーが発生しました。
-grouped write of manifest, lock and vendor: error while writing out vendor tree: failed to write dep tree: failed to export github.com/nametake/private-repo: unable to update repository: remote: Repository not found. fatal: repository &amp;#39;https://github.com/nametake/private-repo/&amp;#39; not found : command failed: [git fetch --tags --prune origin]: exit status 128 make: *** [dep] Error 1 原因はprivateリポジトリをhttps経由でcloneしようとしたことだったみたいです。
+grouped write of manifest, lock and vendor: error while writing out vendor tree: failed to write dep tree: failed to export github.com/nametake/private-repo: unable to update repository: remote: Repository not found. fatal: repository &#39;https://github.com/nametake/private-repo/&#39; not found : command failed: [git fetch --tags --prune origin]: exit status 128 make: *** [dep] Error 1 原因はprivateリポジトリをhttps経由でcloneしようとしたことだったみたいです。
 以下のconfig設定をして、githubではhttpsで始まるURLをgitのURLを使うように書き換える設定を追加したら治りました。
-[url &amp;#34;git@github.com:&amp;#34;] insteadOf = https://github.com/ https://git-scm.com/docs/git-config#git-config-urlltbasegtinsteadOf</description>
+[url &amp;quot;git@github.com:&amp;quot;] insteadOf = https://github.com/ https://git-scm.com/docs/git-config#git-config-urlltbasegtinsteadOf</description>
     </item>
     
   </channel>

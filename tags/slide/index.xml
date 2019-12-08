@@ -18,7 +18,7 @@
       
       <guid>https://nametake.github.io/posts/2018/12/19/created-labelerr-and-suberr/</guid>
       <description>golang.tokyo #20のLT大会で、labelerrとsuberrを作った話をしてきました。
- 「Goのerrorは1種類というのは綺麗だとは思うけど、実運用上errorに重み付けをしたいよね」ってところからこのライブラリの出発点です。
+「Goのerrorは1種類というのは綺麗だとは思うけど、実運用上errorに重み付けをしたいよね」ってところからこのライブラリの出発点です。
 スライド内にもありますが、Primitiveな型しか取り扱わないように気をつけている上に、ライブラリ自体も難しいことはしてないので、なんとなく使ってみるか、ぐらいの感覚で使ってもらうと嬉しいです。</description>
     </item>
     

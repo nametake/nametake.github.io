@@ -22,7 +22,7 @@
 一応coc.nvimにneosnippetの機能を取り込む機能はついているようでしたがうまく動かなかったことと、もうちょっと高級な機能が欲しいと前々から思っていたのもあり、せっかくなのでsnippetを提供するプラグインを作りました。
 それで作ったのが、vim-goiferr-snippetsです。以下のgifのように動作します。
 iferrのsnippetに関して以下の機能を提供しています。
- 戻り値の型を構造体でも補完してくれる 構造体がポインタかどうかを判別してくれる pkg/errorsのWrap関数でerrorをWrapする補完の提供 名前付き戻り値のときはreturnしか出力しない インラインのエラーハンドリング用snippetも提供 上記機能を持ったVimScirptの関数として提供している  pkg/errors以外のerrorライブラリ等でカスタマイズできる   また、作っている最中に「iferr用の正規表現はそのままreturnのsnippetとしても使えるのでは？」と思ったので、そのままreturnを補完するsnippetとしても提供しました。戻り値をいい感じに展開して、それぞれにジャンプ用のマーカーを付けているので、サクサク戻り値を設定できます。
+ 戻り値の型を構造体でも補完してくれる 構造体がポインタかどうかを判別してくれる pkg/errorsのWrap関数でerrorをWrapする補完の提供 名前付き戻り値のときはreturnしか出力しない インラインのエラーハンドリング用snippetも提供 上記機能を持ったVimScirptの関数として提供している  pkg/errors以外のerrorライブラリ等でカスタマイズできる    また、作っている最中に「iferr用の正規表現はそのままreturnのsnippetとしても使えるのでは？」と思ったので、そのままreturnを補完するsnippetとしても提供しました。戻り値をいい感じに展開して、それぞれにジャンプ用のマーカーを付けているので、サクサク戻り値を設定できます。
 自分用に作ったのでオレオレ設定な部分もありますが、生暖かい見ていただければ幸いです。
 最後に、プラグイン内の正規表現部分は@pockeさんの「Vim で Go 言語を書いている時、Neosnippet でいい感じに if する」という記事を参考にさせていただきました！ありがとうございました！</description>
     </item>
@@ -42,7 +42,7 @@ coc.nvim coc.nvimはREADMEに書いてあるとおり、VSCodeライクな補完
 一部設定はJSONで管理することになりますが、それさえ問題なければ強くおすすめできます。
 導入に際して、coc-snippetsをCocInstallではなく、プラグインマネージャ(vim-plug)経由でインストールしようとしたときにちょっとだけ引っかかったのでそれだけメモ。
 coc.nvimと連携するエクステンションをプラグインマネージャ経由でインストールするときには、以下のようにインストール後にyarnコマンドを実行するようにする必要があります。
-Plug &amp;#39;neoclide/coc-snippets&amp;#39;, {&amp;#39;do&amp;#39;: &amp;#39;yarn install --frozen-lockfile&amp;#39;} (ちなみにちゃんとドキュメントに書いてあるので、全部読んでおけば引っかかるようなこともないです)</description>
+Plug &amp;#39;neoclide/coc-snippets&amp;#39;, {&amp;#39;do&amp;#39;: &amp;#39;yarn install --frozen-lockfile&amp;#39;}(ちなみにちゃんとドキュメントに書いてあるので、全部読んでおけば引っかかるようなこともないです)</description>
     </item>
     
     <item>
@@ -70,13 +70,18 @@ Vimの歴史とこれからのVimの話をされていた。
 非常に勝手ながらにプラグインにはそこまで興味がないかと思っていたが、発表で言及されていた「これからのVim」はプラグインに関することが多く、少し驚いた。
 発表の内容からも、終始開発者として「使う人」のことを強く意識しながらVimのこれからを考えていることが伝わった。
 個人的にはVSCodeのPopup Windowが羨ましいのでPopUp Windowがほしいです。
-Migrating plugins to standard features  この発表の聽いたので帰ってからVimのプラグインを10個削りました。
-Modes  デバッグのお話。
+Migrating plugins to standard features この発表の聽いたので帰ってからVimのプラグインを10個削りました。
+Modes デバッグのお話。
 この話を聽いてDelveのプラグインを思い出したのでちょっとあとで試そうと思う。
-A day in the life of (ordinary) Vimmer  1日1回プラグインのアップデートは私もやります。
-Modern editor-independent development environment for PHP Modern editor-independent development environment for PHP #vimconf / 黒點 さん - ニコナレ 宗教戦争好きですすみません。
+A day in the life of (ordinary) Vimmer 1日1回プラグインのアップデートは私もやります。
+Modern editor-independent development environment for PHP 宗教戦争好きですすみません。
 Veonimは少し気になったので後で試す。
-Effective Modern Vim scripting スライド</description>
+Effective Modern Vim scripting スライド
+今どきなVimプラグイン開発の方法がHelloWorldから始まっていてとても素晴らしい資料でした！
+Oni - The GUI-fication of Neovim スライド
+GUI版NeoVimの話。
+自分がVSCodeを見てて羨ましいと思った機能を全部入ってたので発表中に入れて試してみたが、なにか設定が悪いのか動かなかった。あとで動かせるところまで持っていきたいと思います。
+Vim ported to WebAssembly 軽めの話(大嘘)。</description>
     </item>
     
     <item>
@@ -87,8 +92,8 @@ Effective Modern Vim scripting スライド</description>
       <guid>https://nametake.github.io/posts/2018/10/10/vim-shfmt-neoformat-indent/</guid>
       <description>neoformatで使うshfmtはデフォルトだとインデントがスペースなんですが、チームのコーディング規約に合わせてタブ文字にしたかったときにちょっと引っかかったのでメモ。
 まずは、shfmt のヘルプとneoformatのshfmtの定義を見てみます。
--i uint indent: 0 for tabs (default), &amp;gt;0 for number of spacesfunction! neoformat#formatters#sh#shfmt() abort return { \ &amp;#39;exe&amp;#39;: &amp;#39;shfmt&amp;#39;, \ &amp;#39;args&amp;#39;: [&amp;#39;-i &amp;#39; . shiftwidth()], \ &amp;#39;stdin&amp;#39;: 1, \ }endfunction shfmtのヘルプから、インデントをタブにしたければ-i引数で0を渡せば良さそうで、neoformatの定義ではインデントの値にshiftwidthの値をしているようだったので、プロジェクトでのVimの設定を以下のように設定してみました(プロジェクト固有の設定ができるようにしている)。
-autocmd Filetype sh setlocal sw=0 sts=0 noexpandtab しかし、どうしてもインデントがスペースになってしまうためちゃんとshiftwidth()の挙動を調べてみると、shiftwidthが0に設定されているとtabstopの値を使うようになっているらしい。
+-i uint indent: 0 for tabs (default), &amp;gt;0 for number of spaces function! neoformat#formatters#sh#shfmt() abort return { \ &amp;#39;exe&amp;#39;: &amp;#39;shfmt&amp;#39;, \ &amp;#39;args&amp;#39;: [&amp;#39;-i &amp;#39; . shiftwidth()], \ &amp;#39;stdin&amp;#39;: 1, \ }endfunctionshfmtのヘルプから、インデントをタブにしたければ-i引数で0を渡せば良さそうで、neoformatの定義ではインデントの値にshiftwidthの値をしているようだったので、プロジェクトでのVimの設定を以下のように設定してみました(プロジェクト固有の設定ができるようにしている)。
+autocmd Filetype sh setlocal sw=0 sts=0 noexpandtabしかし、どうしてもインデントがスペースになってしまうためちゃんとshiftwidth()の挙動を調べてみると、shiftwidthが0に設定されているとtabstopの値を使うようになっているらしい。
 https://vim-jp.org/vimmagazine/2012/08/31/vimmagazine.html
 tabstopは0を設定できないため、結局以下のようにneoformatのshfmt設定をプロジェクト固有の設定で上書きして対処しました。
 let g:neoformat_sh_shfmt = { \ &amp;#39;exe&amp;#39;: &amp;#39;shfmt&amp;#39;, \ &amp;#39;args&amp;#39;: [&amp;#39;-i&amp;#39;, 0], \ &amp;#39;stdin&amp;#39;: 1, \ }</description>

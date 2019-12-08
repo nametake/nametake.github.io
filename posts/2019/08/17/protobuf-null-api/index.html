@@ -15,26 +15,26 @@
 しかし、アプリケーションの設計によってはOptionalな値を表現する必要が出てきます。
 そういった時、プリミティブな型ならgoogle/protobuf/wappers.protoを使う方法があります。
 以下のように使うことでmsgはOptionalな値として取り扱えます。
-syntax = &#34;proto3&#34;;package example;import &#34;google/protobuf/wrappers.proto&#34;;message Example { google.protobuf.StringValue msg = 1;} wappers.protoを読むと、google.protobuf.StringValueは内部にstringを持つmessageとして定義してあり、入れ子構造になったmessageはデフォルト値がnullになるという仕様を利用して擬似的にOptionalを表現する仕組みであるということがわかります。
+syntax = &#34;proto3&#34;;package example;import &#34;google/protobuf/wrappers.proto&#34;;message Example { google.protobuf.StringValue msg = 1;}wappers.protoを読むと、google.protobuf.StringValueは内部にstringを持つmessageとして定義してあり、入れ子構造になったmessageはデフォルト値がnullになるという仕様を利用して擬似的にOptionalを表現する仕組みであるということがわかります。
 しかし、プリミティブな型ではないmessageを定義して、それを入れ子構造にするようなmessageを定義すると、入れ子になったmessageのデフォルト値はnullであるという特性から、それがOptionalなのかRequiredなのかが分かりづらくなるという問題があります。
 例えば、以下のようにDecimal 型が定義されたとき、それを入れ子構造にするようなOrder型があるとします。
-syntax = &#34;proto3&#34;;package example;message Decimal { int64 value = 1; int64 exp = 2;}// アプリケーションに注文をするメッセージ message Order { // 支払う金額(Required)  Decimal amount = 1; // 通貨単位(Required)。  int64 currency_unit = 2; // 使用するポイント(Optional)  Decimal point = 3;} Order型では金銭を表現しているため数値を正確に表現できるDecimal型を使って金額とポイントを定義しています。しかし、アプリケーションの都合でamountはRequiredにpointはOptionalにしたいとき、どちらもデフォルト値がnullになってしまうため、そのままだと両方を同時に表現できません。また、0ポイントなのかnullなのかで挙動に明確な違いがある場合は0を送るという手段も成立しません。
+syntax = &#34;proto3&#34;;package example;message Decimal { int64 value = 1; int64 exp = 2;}// アプリケーションに注文をするメッセージ message Order { // 支払う金額(Required)  Decimal amount = 1; // 通貨単位(Required)。  int64 currency_unit = 2; // 使用するポイント(Optional)  Decimal point = 3;}Order型では金銭を表現しているため数値を正確に表現できるDecimal型を使って金額とポイントを定義しています。しかし、アプリケーションの都合でamountはRequiredにpointはOptionalにしたいとき、どちらもデフォルト値がnullになってしまうため、そのままだと両方を同時に表現できません。また、0ポイントなのかnullなのかで挙動に明確な違いがある場合は0を送るという手段も成立しません。
 Orderぐらいの定義量であればコメントやドキュメントで対応することもできます。しかし、生成されるコードがOptionalであるということは変わらないため、せっかく型付でコード生成をしてくれるProtocol Buffersのメリットが半減してしまいます。また、人類にドキュメントを書く読む管理するという行為は難しすぎるため、プロダクトの成長に従ってドキュメントは陳腐化していってしまいます。
 解決策 DecimalをOptionalで表現するために以下のようなNullDecimal型を定義してみます。
-message NullDecimal { bool has_value = 1; Decimal decimal = 2;} 定義の通り、値を持っているかどうかを判別するhas_valueと実際の値になるDecimal型を持っている型です。Goを書く方はピンとくるかもしれませんが、sql."/>
+message NullDecimal { bool has_value = 1; Decimal decimal = 2;}定義の通り、値を持っているかどうかを判別するhas_valueと実際の値になるDecimal型を持っている型です。Goを書く方はピンとくるかもしれませんが、sql."/>
 
     <meta property="og:title" content="Protocol Buffersを使ったAPIでのNullの設計" />
 <meta property="og:description" content="Protocol BuffersのNullの取り扱いの問題 Protocol Buffersのproto3の仕様ではmessageの中の値をOptionalで表現する記法がありません。値を詰めずに送ると入れ子の値がデフォルト値になってしまいます。
 しかし、アプリケーションの設計によってはOptionalな値を表現する必要が出てきます。
 そういった時、プリミティブな型ならgoogle/protobuf/wappers.protoを使う方法があります。
 以下のように使うことでmsgはOptionalな値として取り扱えます。
-syntax = &#34;proto3&#34;;package example;import &#34;google/protobuf/wrappers.proto&#34;;message Example { google.protobuf.StringValue msg = 1;} wappers.protoを読むと、google.protobuf.StringValueは内部にstringを持つmessageとして定義してあり、入れ子構造になったmessageはデフォルト値がnullになるという仕様を利用して擬似的にOptionalを表現する仕組みであるということがわかります。
+syntax = &#34;proto3&#34;;package example;import &#34;google/protobuf/wrappers.proto&#34;;message Example { google.protobuf.StringValue msg = 1;}wappers.protoを読むと、google.protobuf.StringValueは内部にstringを持つmessageとして定義してあり、入れ子構造になったmessageはデフォルト値がnullになるという仕様を利用して擬似的にOptionalを表現する仕組みであるということがわかります。
 しかし、プリミティブな型ではないmessageを定義して、それを入れ子構造にするようなmessageを定義すると、入れ子になったmessageのデフォルト値はnullであるという特性から、それがOptionalなのかRequiredなのかが分かりづらくなるという問題があります。
 例えば、以下のようにDecimal 型が定義されたとき、それを入れ子構造にするようなOrder型があるとします。
-syntax = &#34;proto3&#34;;package example;message Decimal { int64 value = 1; int64 exp = 2;}// アプリケーションに注文をするメッセージ message Order { // 支払う金額(Required)  Decimal amount = 1; // 通貨単位(Required)。  int64 currency_unit = 2; // 使用するポイント(Optional)  Decimal point = 3;} Order型では金銭を表現しているため数値を正確に表現できるDecimal型を使って金額とポイントを定義しています。しかし、アプリケーションの都合でamountはRequiredにpointはOptionalにしたいとき、どちらもデフォルト値がnullになってしまうため、そのままだと両方を同時に表現できません。また、0ポイントなのかnullなのかで挙動に明確な違いがある場合は0を送るという手段も成立しません。
+syntax = &#34;proto3&#34;;package example;message Decimal { int64 value = 1; int64 exp = 2;}// アプリケーションに注文をするメッセージ message Order { // 支払う金額(Required)  Decimal amount = 1; // 通貨単位(Required)。  int64 currency_unit = 2; // 使用するポイント(Optional)  Decimal point = 3;}Order型では金銭を表現しているため数値を正確に表現できるDecimal型を使って金額とポイントを定義しています。しかし、アプリケーションの都合でamountはRequiredにpointはOptionalにしたいとき、どちらもデフォルト値がnullになってしまうため、そのままだと両方を同時に表現できません。また、0ポイントなのかnullなのかで挙動に明確な違いがある場合は0を送るという手段も成立しません。
 Orderぐらいの定義量であればコメントやドキュメントで対応することもできます。しかし、生成されるコードがOptionalであるということは変わらないため、せっかく型付でコード生成をしてくれるProtocol Buffersのメリットが半減してしまいます。また、人類にドキュメントを書く読む管理するという行為は難しすぎるため、プロダクトの成長に従ってドキュメントは陳腐化していってしまいます。
 解決策 DecimalをOptionalで表現するために以下のようなNullDecimal型を定義してみます。
-message NullDecimal { bool has_value = 1; Decimal decimal = 2;} 定義の通り、値を持っているかどうかを判別するhas_valueと実際の値になるDecimal型を持っている型です。Goを書く方はピンとくるかもしれませんが、sql." />
+message NullDecimal { bool has_value = 1; Decimal decimal = 2;}定義の通り、値を持っているかどうかを判別するhas_valueと実際の値になるDecimal型を持っている型です。Goを書く方はピンとくるかもしれませんが、sql." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://nametake.github.io/posts/2019/08/17/protobuf-null-api/" />
 <meta property="article:published_time" content="2019-08-17T10:44:03+09:00" />
@@ -75,7 +75,7 @@ message NullDecimal { bool has_value = 1; Decimal decimal = 2;} 定義の通り�
     <link rel="icon" type="image/png" href="https://nametake.github.io/images/favicon-32x32.png" sizes="32x32">
     <link rel="icon" type="image/png" href="https://nametake.github.io/images/favicon-16x16.png" sizes="16x16">
 
-    <meta name="generator" content="Hugo 0.59.1" />
+    <meta name="generator" content="Hugo 0.60.1" />
   </head>
 
   <body class=" ">
@@ -143,40 +143,33 @@ message NullDecimal { bool has_value = 1; Decimal decimal = 2;} 定義の通り�
       </header>
 
       <div>
-        
-
-<h1 id="protocol-buffersのnullの取り扱いの問題">Protocol BuffersのNullの取り扱いの問題</h1>
-
+        <h1 id="protocol-buffersnull">Protocol BuffersのNullの取り扱いの問題</h1>
 <p>Protocol Buffersのproto3の仕様ではmessageの中の値をOptionalで表現する記法がありません。値を詰めずに送ると入れ子の値が<a href="https://developers.google.com/protocol-buffers/docs/proto3#default">デフォルト値</a>になってしまいます。</p>
-
 <p>しかし、アプリケーションの設計によってはOptionalな値を表現する必要が出てきます。</p>
-
 <p>そういった時、プリミティブな型なら<a href="https://github.com/protocolbuffers/protobuf/blob/master/src/google/protobuf/wrappers.proto"><code>google/protobuf/wappers.proto</code></a>を使う方法があります。</p>
-
 <p>以下のように使うことで<code>msg</code>はOptionalな値として取り扱えます。</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-proto" data-lang="proto">syntax <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;proto3&#34;</span>;<span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#960050;background-color:#1e0010">
 </span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#f92672">package</span> example;<span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#960050;background-color:#1e0010">
 </span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">import</span> <span style="color:#e6db74">&#34;google/protobuf/wrappers.proto&#34;</span>;<span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#960050;background-color:#1e0010">
 </span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">message</span> <span style="color:#a6e22e">Example</span> {<span style="color:#960050;background-color:#1e0010">
 </span><span style="color:#960050;background-color:#1e0010"></span>  google.protobuf.StringValue msg <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;<span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span>}</code></pre></div>
-<p><code>wappers.proto</code>を読むと、<code>google.protobuf.StringValue</code>は内部にstringを持つmessageとして定義してあり、入れ子構造になったmessageはデフォルト値がnullになるという仕様を利用して擬似的にOptionalを表現する仕組みであるということがわかります。</p>
-
+</span><span style="color:#960050;background-color:#1e0010"></span>}<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#960050;background-color:#1e0010">
+</span></code></pre></div><p><code>wappers.proto</code>を読むと、<code>google.protobuf.StringValue</code>は内部にstringを持つmessageとして定義してあり、入れ子構造になったmessageはデフォルト値がnullになるという仕様を利用して擬似的にOptionalを表現する仕組みであるということがわかります。</p>
 <p>しかし、プリミティブな型ではないmessageを定義して、それを入れ子構造にするようなmessageを定義すると、入れ子になったmessageのデフォルト値はnullであるという特性から、それがOptionalなのかRequiredなのかが分かりづらくなるという問題があります。</p>
-
 <p>例えば、以下のように<code>Decimal</code> 型が定義されたとき、それを入れ子構造にするような<code>Order</code>型があるとします。</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-proto" data-lang="proto">syntax <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;proto3&#34;</span>;<span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#960050;background-color:#1e0010">
 </span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#f92672">package</span> example;<span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#960050;background-color:#1e0010">
 </span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">message</span> <span style="color:#a6e22e">Decimal</span> {<span style="color:#960050;background-color:#1e0010">
 </span><span style="color:#960050;background-color:#1e0010"></span>  <span style="color:#66d9ef">int64</span> value <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;<span style="color:#960050;background-color:#1e0010">
 </span><span style="color:#960050;background-color:#1e0010"></span>  <span style="color:#66d9ef">int64</span> exp <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>;<span style="color:#960050;background-color:#1e0010">
 </span><span style="color:#960050;background-color:#1e0010"></span>}<span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#960050;background-color:#1e0010">
 </span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e">// アプリケーションに注文をするメッセージ
 </span><span style="color:#75715e"></span><span style="color:#66d9ef">message</span> <span style="color:#a6e22e">Order</span> {<span style="color:#960050;background-color:#1e0010">
 </span><span style="color:#960050;background-color:#1e0010"></span>  <span style="color:#75715e">// 支払う金額(Required)
@@ -185,35 +178,31 @@ message NullDecimal { bool has_value = 1; Decimal decimal = 2;} 定義の通り�
 </span><span style="color:#75715e"></span>  <span style="color:#66d9ef">int64</span> currency_unit <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>;<span style="color:#960050;background-color:#1e0010">
 </span><span style="color:#960050;background-color:#1e0010"></span>  <span style="color:#75715e">// 使用するポイント(Optional)
 </span><span style="color:#75715e"></span>  Decimal point <span style="color:#f92672">=</span> <span style="color:#ae81ff">3</span>;<span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span>}</code></pre></div>
-<p><code>Order</code>型では金銭を表現しているため数値を正確に表現できるDecimal型を使って金額とポイントを定義しています。しかし、アプリケーションの都合で<code>amount</code>はRequiredに<code>point</code>はOptionalにしたいとき、どちらもデフォルト値がnullになってしまうため、そのままだと両方を同時に表現できません。また、0ポイントなのかnullなのかで挙動に明確な違いがある場合は0を送るという手段も成立しません。</p>
-
+</span><span style="color:#960050;background-color:#1e0010"></span>}<span style="color:#960050;background-color:#1e0010">
+</span></code></pre></div><p><code>Order</code>型では金銭を表現しているため数値を正確に表現できるDecimal型を使って金額とポイントを定義しています。しかし、アプリケーションの都合で<code>amount</code>はRequiredに<code>point</code>はOptionalにしたいとき、どちらもデフォルト値がnullになってしまうため、そのままだと両方を同時に表現できません。また、0ポイントなのかnullなのかで挙動に明確な違いがある場合は0を送るという手段も成立しません。</p>
 <p><code>Order</code>ぐらいの定義量であればコメントやドキュメントで対応することもできます。しかし、生成されるコードがOptionalであるということは変わらないため、せっかく型付でコード生成をしてくれるProtocol Buffersのメリットが半減してしまいます。また、人類にドキュメントを書く読む管理するという行為は難しすぎるため、プロダクトの成長に従ってドキュメントは陳腐化していってしまいます。</p>
-
-<h1 id="解決策">解決策</h1>
-
+<h1 id="heading">解決策</h1>
 <p><code>Decimal</code>をOptionalで表現するために以下のような<code>NullDecimal</code>型を定義してみます。</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-proto" data-lang="proto"><span style="color:#66d9ef">message</span> <span style="color:#a6e22e">NullDecimal</span> {<span style="color:#960050;background-color:#1e0010">
 </span><span style="color:#960050;background-color:#1e0010"></span>  <span style="color:#66d9ef">bool</span> has_value <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;<span style="color:#960050;background-color:#1e0010">
 </span><span style="color:#960050;background-color:#1e0010"></span>  Decimal decimal <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>;<span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span>}</code></pre></div>
-<p>定義の通り、値を持っているかどうかを判別する<code>has_value</code>と実際の値になる<code>Decimal</code>型を持っている型です。Goを書く方はピンとくるかもしれませんが、<code>sql.Null~</code>型と同じ形です。</p>
-
+</span><span style="color:#960050;background-color:#1e0010"></span>}<span style="color:#960050;background-color:#1e0010">
+</span></code></pre></div><p>定義の通り、値を持っているかどうかを判別する<code>has_value</code>と実際の値になる<code>Decimal</code>型を持っている型です。Goを書く方はピンとくるかもしれませんが、<code>sql.Null~</code>型と同じ形です。</p>
 <p>上記の<code>NullDecimal</code>型を使用して<code>Order</code>型を再定義すると以下のようになります。</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-proto" data-lang="proto">syntax <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;proto3&#34;</span>;<span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#960050;background-color:#1e0010">
 </span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#f92672">package</span> example;<span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#960050;background-color:#1e0010">
 </span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">message</span> <span style="color:#a6e22e">Decimal</span> {<span style="color:#960050;background-color:#1e0010">
 </span><span style="color:#960050;background-color:#1e0010"></span>  <span style="color:#66d9ef">int64</span> value <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;<span style="color:#960050;background-color:#1e0010">
 </span><span style="color:#960050;background-color:#1e0010"></span>  <span style="color:#66d9ef">int64</span> exp <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>;<span style="color:#960050;background-color:#1e0010">
 </span><span style="color:#960050;background-color:#1e0010"></span>}<span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#960050;background-color:#1e0010">
 </span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">message</span> <span style="color:#a6e22e">NullDecimal</span> {<span style="color:#960050;background-color:#1e0010">
 </span><span style="color:#960050;background-color:#1e0010"></span>  <span style="color:#66d9ef">bool</span> has_value <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;<span style="color:#960050;background-color:#1e0010">
 </span><span style="color:#960050;background-color:#1e0010"></span>  Decimal decimal <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>;<span style="color:#960050;background-color:#1e0010">
 </span><span style="color:#960050;background-color:#1e0010"></span>}<span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#960050;background-color:#1e0010">
 </span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">message</span> <span style="color:#a6e22e">Order</span> {<span style="color:#960050;background-color:#1e0010">
 </span><span style="color:#960050;background-color:#1e0010"></span>  <span style="color:#75715e">// 支払う金額。Required
 </span><span style="color:#75715e"></span>  Decimal amount <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;<span style="color:#960050;background-color:#1e0010">
@@ -221,17 +210,12 @@ message NullDecimal { bool has_value = 1; Decimal decimal = 2;} 定義の通り�
 </span><span style="color:#75715e"></span>  <span style="color:#66d9ef">int64</span> currency_unit <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>;<span style="color:#960050;background-color:#1e0010">
 </span><span style="color:#960050;background-color:#1e0010"></span>  <span style="color:#75715e">// 使用するポイント。Optional
 </span><span style="color:#75715e"></span>  NullDecimal point <span style="color:#f92672">=</span> <span style="color:#ae81ff">3</span>;<span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span>}</code></pre></div>
-<p>Optionalにしたかった<code>point</code>を<code>NullDecimal</code>型にすることで、その属性を明示的にできました。</p>
-
+</span><span style="color:#960050;background-color:#1e0010"></span>}<span style="color:#960050;background-color:#1e0010">
+</span></code></pre></div><p>Optionalにしたかった<code>point</code>を<code>NullDecimal</code>型にすることで、その属性を明示的にできました。</p>
 <p>その上で「<strong>Protocol Buffersのmessageの値は全て情報を詰める</strong>」という取り決めを作っておくことで、もしアプリケーション都合で<code>point</code>がRequiredな属性になっても、コードを生成すれば属性が変わっていることに気づくことができます。</p>
-
 <p>デメリットとしては記述量が少し増えることですが、明示的に書くことによって減るコストに比べればだいぶ安く済むと思います。</p>
-
 <p>値しか持たないため同質のものかどうかは微妙ですが、NullをそのままNullとして扱わず特別な型を用意するという発想は<a href="https://martinfowler.com/eaaCatalog/specialCase.html">Special Case Pattern</a>として昔から提唱されているものでもあります。</p>
-
 <p>Protocol Buffersはシンプルな設計ですが、プログラミング言語的な表現力も兼ね備えているため、こういったOOPにおける原理原則を適用することが可能です。</p>
-
 <p>様々な先人の知恵と教えを駆使して、明確でシンプルなAPI設計をしていきましょう。</p>
 
       </div>

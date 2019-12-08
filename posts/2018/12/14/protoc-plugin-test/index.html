@@ -15,7 +15,7 @@
 ということはそろそろ人類はprotocのプラグインを書きたくなる時代がやってくると思います。
 そのときに世の中に生み出されるプラグインの品質が少しでも高くなればと思い、以前protoc-gen-gohttpというプラグイン作ったときにテストも書いたので、その知見を書こうと思います。
 プラグイン自体は@yuguiさんの「protocプラグインの書き方」がとても参考になったのでそちらを参照すると良いかもしれません。
-TL;DR  細かいやり方はgithub.com/golang/protobuf/blob/master/protoc-gen-go/golden_test.goに書いてある  自分のプラグインのテストもそれを参考にして書いた  プラグインの動作テストはテスト内でprotocコマンドを実行して行う 実行結果の確認はGolden testingで行う Goのコードでprotoファイルをplugin.CodeGeneratorRequestに変換することは(恐らく)できない  経緯(読み飛ばして大丈夫です) protocのプラグインは標準入力に入ってきたデータをproto.CodeGeneratorRequest型にUnmarshalしてprotoファイルの情報を取得します。
+TL;DR  細かいやり方はgithub.com/golang/protobuf/blob/master/protoc-gen-go/golden_test.goに書いてある  自分のプラグインのテストもそれを参考にして書いた   プラグインの動作テストはテスト内でprotocコマンドを実行して行う 実行結果の確認はGolden testingで行う Goのコードでprotoファイルをplugin.CodeGeneratorRequestに変換することは(恐らく)できない  経緯(読み飛ばして大丈夫です) protocのプラグインは標準入力に入ってきたデータをproto.CodeGeneratorRequest型にUnmarshalしてprotoファイルの情報を取得します。
 そのため、最初にテストを書こうとしたときにはGoだけでprotoファイルをproto.CodeGeneratorRequestに変換する仕組みがあるのかと思っていたのですが、この記事公開時点ではその仕組みは提供されていないようでした(知ってたらコメント等で教えていただけると助かります)。
 「それじゃあ有名なプラグインはどうやってるんだ?」と思いprotoc-gen-goのコードを見てみると、Goのコードの中で直接protocコマンドを実行していて、少し面白いテストをしていたので解説しようと思います。
 golden_test.goの解説 ファイル名から想像できる通り、いわゆるGolden testingと呼ばれるものです。テストの中からprotocコマンドを直接実行して、その結果の出力ファイルとtestdataディレクトリに入っている期待するファイルとを比較をしてテストしています。
@@ -28,7 +28,7 @@ func protoc(t *testing.T, args []string) { cmd := exec.Command(&#34;protoc&#34;,
 ということはそろそろ人類はprotocのプラグインを書きたくなる時代がやってくると思います。
 そのときに世の中に生み出されるプラグインの品質が少しでも高くなればと思い、以前protoc-gen-gohttpというプラグイン作ったときにテストも書いたので、その知見を書こうと思います。
 プラグイン自体は@yuguiさんの「protocプラグインの書き方」がとても参考になったのでそちらを参照すると良いかもしれません。
-TL;DR  細かいやり方はgithub.com/golang/protobuf/blob/master/protoc-gen-go/golden_test.goに書いてある  自分のプラグインのテストもそれを参考にして書いた  プラグインの動作テストはテスト内でprotocコマンドを実行して行う 実行結果の確認はGolden testingで行う Goのコードでprotoファイルをplugin.CodeGeneratorRequestに変換することは(恐らく)できない  経緯(読み飛ばして大丈夫です) protocのプラグインは標準入力に入ってきたデータをproto.CodeGeneratorRequest型にUnmarshalしてprotoファイルの情報を取得します。
+TL;DR  細かいやり方はgithub.com/golang/protobuf/blob/master/protoc-gen-go/golden_test.goに書いてある  自分のプラグインのテストもそれを参考にして書いた   プラグインの動作テストはテスト内でprotocコマンドを実行して行う 実行結果の確認はGolden testingで行う Goのコードでprotoファイルをplugin.CodeGeneratorRequestに変換することは(恐らく)できない  経緯(読み飛ばして大丈夫です) protocのプラグインは標準入力に入ってきたデータをproto.CodeGeneratorRequest型にUnmarshalしてprotoファイルの情報を取得します。
 そのため、最初にテストを書こうとしたときにはGoだけでprotoファイルをproto.CodeGeneratorRequestに変換する仕組みがあるのかと思っていたのですが、この記事公開時点ではその仕組みは提供されていないようでした(知ってたらコメント等で教えていただけると助かります)。
 「それじゃあ有名なプラグインはどうやってるんだ?」と思いprotoc-gen-goのコードを見てみると、Goのコードの中で直接protocコマンドを実行していて、少し面白いテストをしていたので解説しようと思います。
 golden_test.goの解説 ファイル名から想像できる通り、いわゆるGolden testingと呼ばれるものです。テストの中からprotocコマンドを直接実行して、その結果の出力ファイルとtestdataディレクトリに入っている期待するファイルとを比較をしてテストしています。
@@ -75,7 +75,7 @@ func protoc(t *testing.T, args []string) { cmd := exec.Command(&#34;protoc&#34;,
     <link rel="icon" type="image/png" href="https://nametake.github.io/images/favicon-32x32.png" sizes="32x32">
     <link rel="icon" type="image/png" href="https://nametake.github.io/images/favicon-16x16.png" sizes="16x16">
 
-    <meta name="generator" content="Hugo 0.59.1" />
+    <meta name="generator" content="Hugo 0.60.1" />
   </head>
 
   <body class=" ">
@@ -145,45 +145,29 @@ func protoc(t *testing.T, args []string) { cmd := exec.Command(&#34;protoc&#34;,
       </header>
 
       <div>
-        
-
-<p>最近周りでProtocol Buffersの話題をよく聞くようになりました。</p>
-
+        <p>最近周りでProtocol Buffersの話題をよく聞くようになりました。</p>
 <p>ということはそろそろ人類はprotocのプラグインを書きたくなる時代がやってくると思います。</p>
-
 <p>そのときに世の中に生み出されるプラグインの品質が少しでも高くなればと思い、以前<a href="https://nametake.github.io/posts/2018/11/21/protoc-gen-gohttp/">protoc-gen-gohttp</a>というプラグイン作ったときにテストも書いたので、その知見を書こうと思います。</p>
-
 <p>プラグイン自体は@yuguiさんの「<a href="https://qiita.com/yugui/items/87d00d77dee159e74886">protocプラグインの書き方</a>」がとても参考になったのでそちらを参照すると良いかもしれません。</p>
-
-<h2 id="tl-dr">TL;DR</h2>
-
+<h2 id="tldr">TL;DR</h2>
 <ul>
 <li>細かいやり方は<a href="https://github.com/golang/protobuf/blob/master/protoc-gen-go/golden_test.go">github.com/golang/protobuf/blob/master/protoc-gen-go/golden_test.go</a>に書いてある
-
 <ul>
 <li><a href="https://github.com/nametake/protoc-gen-gohttp/blob/master/main_test.go">自分のプラグインのテスト</a>もそれを参考にして書いた</li>
-</ul></li>
+</ul>
+</li>
 <li>プラグインの動作テストはテスト内でprotocコマンドを実行して行う</li>
 <li>実行結果の確認は<a href="https://medium.com/soon-london/testing-with-golden-files-in-go-7fccc71c43d3">Golden testing</a>で行う</li>
 <li>Goのコードでprotoファイルをplugin.CodeGeneratorRequestに変換することは(恐らく)できない</li>
 </ul>
-
-<h2 id="経緯-読み飛ばして大丈夫です">経緯(読み飛ばして大丈夫です)</h2>
-
+<h2 id="heading">経緯(読み飛ばして大丈夫です)</h2>
 <p>protocのプラグインは標準入力に入ってきたデータを<code>proto.CodeGeneratorRequest</code>型にUnmarshalしてprotoファイルの情報を取得します。</p>
-
 <p>そのため、最初にテストを書こうとしたときにはGoだけでprotoファイルを<code>proto.CodeGeneratorRequest</code>に変換する仕組みがあるのかと思っていたのですが、この記事公開時点ではその仕組みは提供されていないようでした(知ってたらコメント等で教えていただけると助かります)。</p>
-
 <p>「それじゃあ有名なプラグインはどうやってるんだ?」と思いprotoc-gen-goのコードを見てみると、Goのコードの中で直接protocコマンドを実行していて、少し面白いテストをしていたので解説しようと思います。</p>
-
-<h2 id="golden-test-goの解説">golden_test.goの解説</h2>
-
+<h2 id="goldentestgo">golden_test.goの解説</h2>
 <p>ファイル名から想像できる通り、いわゆる<a href="https://medium.com/soon-london/testing-with-golden-files-in-go-7fccc71c43d3">Golden testing</a>と呼ばれるものです。テストの中からprotocコマンドを直接実行して、その結果の出力ファイルと<a href="https://github.com/golang/protobuf/tree/master/protoc-gen-go/testdata">testdataディレクトリ</a>に入っている期待するファイルとを比較をしてテストしています。</p>
-
 <p>300行ぐらいなので全部読んでもそんなに時間はかからないと思いますが、簡単に解説をしてみようと思います。</p>
-
-<h3 id="コマンド実行部分">コマンド実行部分</h3>
-
+<h3 id="heading1">コマンド実行部分</h3>
 <p>以下のコードが直接コマンドを実行する部分です。<code>testing.T</code>構造体とprotocに与える引数を受け取って実際にコマンドを実行します。</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">protoc</span>(<span style="color:#a6e22e">t</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">testing</span>.<span style="color:#a6e22e">T</span>, <span style="color:#a6e22e">args</span> []<span style="color:#66d9ef">string</span>) {
 	<span style="color:#a6e22e">cmd</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">exec</span>.<span style="color:#a6e22e">Command</span>(<span style="color:#e6db74">&#34;protoc&#34;</span>, <span style="color:#e6db74">&#34;--plugin=protoc-gen-go=&#34;</span><span style="color:#f92672">+</span><span style="color:#a6e22e">os</span>.<span style="color:#a6e22e">Args</span>[<span style="color:#ae81ff">0</span>])
@@ -201,35 +185,27 @@ func protoc(t *testing.T, args []string) { cmd := exec.Command(&#34;protoc&#34;,
 	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
 		<span style="color:#a6e22e">t</span>.<span style="color:#a6e22e">Fatalf</span>(<span style="color:#e6db74">&#34;protoc: %v&#34;</span>, <span style="color:#a6e22e">err</span>)
 	}
-}</code></pre></div>
-<p>実装自体は標準パッケージに含まれる<code>exec.Command</code>を利用してprotocコマンドを実行しているだけです。</p>
-
+}
+</code></pre></div><p>実装自体は標準パッケージに含まれる<code>exec.Command</code>を利用してprotocコマンドを実行しているだけです。</p>
 <p>少し特殊な実装として、以下の2つがあります。</p>
-
 <ul>
 <li>protocの実行時引数に<code>os.Args[0]</code>を与えている</li>
 <li><code>RUN_AS_PROTOC_GEN_GO</code>という環境変数に1を設定している</li>
 </ul>
-
 <p>1つ目の<code>os.Args[0]</code>を与えている部分ですが、これはprotocの引数の仕様で、プラグインのバイナリファイルを指定して実行するための記述です。<code>os.Args</code>の0番目にはテスト実行時にビルドされたバイナリファイルのPATHが入っているため、<code>&quot;--plugin=protoc-gen-go=&quot;+os.Args[0]</code>とすることで、テストのバイナリをprotoc-gen-goプラグインとして実行することができます。</p>
-
 <p>2つ目の環境変数ですが、環境変数名通り、これがセットされたらそれ以降はテストバイナリ自体がprotoc-gen-goのバイナリのように動作するためにセットしています。詳細は次のinit関数の項目で解説します。</p>
-
-<h3 id="init関数">init関数</h3>
-
+<h3 id="init">init関数</h3>
 <p>golden_test.goのinit関数は以下のようにかかれています。</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#75715e">// tests and instead act as protoc-gen-go. This allows the test binary to
-</span><span style="color:#75715e">// pass itself to protoc.
+</span><span style="color:#75715e"></span><span style="color:#75715e">// pass itself to protoc.
 </span><span style="color:#75715e"></span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">init</span>() {
 	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">os</span>.<span style="color:#a6e22e">Getenv</span>(<span style="color:#e6db74">&#34;RUN_AS_PROTOC_GEN_GO&#34;</span>) <span style="color:#f92672">!=</span> <span style="color:#e6db74">&#34;&#34;</span> {
 		<span style="color:#a6e22e">main</span>()
 		<span style="color:#a6e22e">os</span>.<span style="color:#a6e22e">Exit</span>(<span style="color:#ae81ff">0</span>)
 	}
-}</code></pre></div>
-<p>関数内では<code>RUN_AS_PROTOC_GEN_GO</code>環境変数を確認し、それに文字列がセットされていたらmain関数を実行してそのまま終了させています。 このコードがあることで、<code>RUN_AS_PROTOC_GEN_GO</code>に何かしらがセットされているときにはテストバイナリはmain関数だけを実行してくれるようになります。</p>
-
+}
+</code></pre></div><p>関数内では<code>RUN_AS_PROTOC_GEN_GO</code>環境変数を確認し、それに文字列がセットされていたらmain関数を実行してそのまま終了させています。 このコードがあることで、<code>RUN_AS_PROTOC_GEN_GO</code>に何かしらがセットされているときにはテストバイナリはmain関数だけを実行してくれるようになります。</p>
 <p>このコードにより以下の流れでテスト内で自分自身をプラグインとして実行できるようにしています。</p>
-
 <ol>
 <li>テストコマンドによりバイナリとしてビルドされる</li>
 <li>通常のテストとして実行される</li>
@@ -240,34 +216,24 @@ func protoc(t *testing.T, args []string) { cmd := exec.Command(&#34;protoc&#34;,
 <li>コマンドを実行する</li>
 <li>5で環境変数をセットしたためコマンド実行時にテストバイナリはmain関数を実行する</li>
 </ol>
-
-<h3 id="testgolden関数">TestGolden関数</h3>
-
+<h3 id="testgolden">TestGolden関数</h3>
 <p>テストの実体が書かれているのが<a href="https://github.com/golang/protobuf/blob/master/protoc-gen-go/golden_test.go#L32-L115">TestGolden関数</a>です。</p>
-
 <p>やっていることは</p>
-
 <ol>
 <li><code>ioutil.TempDir</code>で作業ディレクトリを作成する</li>
 <li>testdataディレクトリにあるprotoファイルを取得する</li>
 <li>取得したprotoファイルを使ってprotocコマンドを実行する
-
 <ul>
 <li>出力先は作業ディレクトリ</li>
-</ul></li>
+</ul>
+</li>
 <li>作業ディレクトリ内のファイルとtestdataディレクトリにある*.pb.goファイルを比較する</li>
 </ol>
-
 <p>と、非常に単純なものです。</p>
-
 <p>この関数が実行されることで、プラグインが期待される出力をしているかどうかを判定しています。</p>
-
-<h3 id="所感">所感</h3>
-
+<h3 id="heading2">所感</h3>
 <p>自分自身を実行ファイルとしたり、init内部でmain関数を呼び出していたりと、Goらしくゴリ押しとスマートの中間ぐらいで実現されていて読んでいて非常に面白かったです。</p>
-
 <p>それほど長いコードでもない上に、コマンドを実行しないといけない(もしくはそのほうが早い)テストであれば応用が効く仕組みのため、一読して覚えておくと良いかもしれません。</p>
-
 <p>もしprotocのプラグインをGoで書きたくなったら、是非コードをちゃんと読んでテストが書かれたプラグインになるようにしていきましょう！</p>
 
       </div>

@@ -16,7 +16,7 @@
 一応coc.nvimにneosnippetの機能を取り込む機能はついているようでしたがうまく動かなかったことと、もうちょっと高級な機能が欲しいと前々から思っていたのもあり、せっかくなのでsnippetを提供するプラグインを作りました。
 それで作ったのが、vim-goiferr-snippetsです。以下のgifのように動作します。
 iferrのsnippetに関して以下の機能を提供しています。
- 戻り値の型を構造体でも補完してくれる 構造体がポインタかどうかを判別してくれる pkg/errorsのWrap関数でerrorをWrapする補完の提供 名前付き戻り値のときはreturnしか出力しない インラインのエラーハンドリング用snippetも提供 上記機能を持ったVimScirptの関数として提供している  pkg/errors以外のerrorライブラリ等でカスタマイズできる   また、作っている最中に「iferr用の正規表現はそのままreturnのsnippetとしても使えるのでは？」と思ったので、そのままreturnを補完するsnippetとしても提供しました。戻り値をいい感じに展開して、それぞれにジャンプ用のマーカーを付けているので、サクサク戻り値を設定できます。
+ 戻り値の型を構造体でも補完してくれる 構造体がポインタかどうかを判別してくれる pkg/errorsのWrap関数でerrorをWrapする補完の提供 名前付き戻り値のときはreturnしか出力しない インラインのエラーハンドリング用snippetも提供 上記機能を持ったVimScirptの関数として提供している  pkg/errors以外のerrorライブラリ等でカスタマイズできる    また、作っている最中に「iferr用の正規表現はそのままreturnのsnippetとしても使えるのでは？」と思ったので、そのままreturnを補完するsnippetとしても提供しました。戻り値をいい感じに展開して、それぞれにジャンプ用のマーカーを付けているので、サクサク戻り値を設定できます。
 自分用に作ったのでオレオレ設定な部分もありますが、生暖かい見ていただければ幸いです。
 最後に、プラグイン内の正規表現部分は@pockeさんの「Vim で Go 言語を書いている時、Neosnippet でいい感じに if する」という記事を参考にさせていただきました！ありがとうございました！"/>
 
@@ -26,7 +26,7 @@ iferrのsnippetに関して以下の機能を提供しています。
 一応coc.nvimにneosnippetの機能を取り込む機能はついているようでしたがうまく動かなかったことと、もうちょっと高級な機能が欲しいと前々から思っていたのもあり、せっかくなのでsnippetを提供するプラグインを作りました。
 それで作ったのが、vim-goiferr-snippetsです。以下のgifのように動作します。
 iferrのsnippetに関して以下の機能を提供しています。
- 戻り値の型を構造体でも補完してくれる 構造体がポインタかどうかを判別してくれる pkg/errorsのWrap関数でerrorをWrapする補完の提供 名前付き戻り値のときはreturnしか出力しない インラインのエラーハンドリング用snippetも提供 上記機能を持ったVimScirptの関数として提供している  pkg/errors以外のerrorライブラリ等でカスタマイズできる   また、作っている最中に「iferr用の正規表現はそのままreturnのsnippetとしても使えるのでは？」と思ったので、そのままreturnを補完するsnippetとしても提供しました。戻り値をいい感じに展開して、それぞれにジャンプ用のマーカーを付けているので、サクサク戻り値を設定できます。
+ 戻り値の型を構造体でも補完してくれる 構造体がポインタかどうかを判別してくれる pkg/errorsのWrap関数でerrorをWrapする補完の提供 名前付き戻り値のときはreturnしか出力しない インラインのエラーハンドリング用snippetも提供 上記機能を持ったVimScirptの関数として提供している  pkg/errors以外のerrorライブラリ等でカスタマイズできる    また、作っている最中に「iferr用の正規表現はそのままreturnのsnippetとしても使えるのでは？」と思ったので、そのままreturnを補完するsnippetとしても提供しました。戻り値をいい感じに展開して、それぞれにジャンプ用のマーカーを付けているので、サクサク戻り値を設定できます。
 自分用に作ったのでオレオレ設定な部分もありますが、生暖かい見ていただければ幸いです。
 最後に、プラグイン内の正規表現部分は@pockeさんの「Vim で Go 言語を書いている時、Neosnippet でいい感じに if する」という記事を参考にさせていただきました！ありがとうございました！" />
 <meta property="og:type" content="article" />
@@ -69,7 +69,7 @@ iferrのsnippetに関して以下の機能を提供しています。
     <link rel="icon" type="image/png" href="https://nametake.github.io/images/favicon-32x32.png" sizes="32x32">
     <link rel="icon" type="image/png" href="https://nametake.github.io/images/favicon-16x16.png" sizes="16x16">
 
-    <meta name="generator" content="Hugo 0.59.1" />
+    <meta name="generator" content="Hugo 0.60.1" />
   </head>
 
   <body class=" ">
@@ -140,17 +140,11 @@ iferrのsnippetに関して以下の機能を提供しています。
 
       <div>
         <p>最近Vimの設定を整理してcoc.nvimに乗り換えるにあたり、snippetのプラグインもneosnippetからcoc-neosnippetに乗り換え、snippet集もvim-snippetsに変更しました。</p>
-
 <p>概ね問題はなかったのですが、Goを書くときに<code>iferr</code>で戻り値をいい感じに補完してくれる機能がなくなったのは若干不便でした(<a href="https://pocke.hatenablog.com/entry/2015/12/20/133445">参考</a>)。</p>
-
 <p>一応coc.nvimにneosnippetの機能を取り込む機能はついているようでしたがうまく動かなかったことと、もうちょっと高級な機能が欲しいと前々から思っていたのもあり、せっかくなのでsnippetを提供するプラグインを作りました。</p>
-
 <p>それで作ったのが、<a href="https://github.com/nametake/vim-goiferr-snippets">vim-goiferr-snippets</a>です。以下のgifのように動作します。</p>
-
-<p><img src="https://raw.github.com/wiki/nametake/vim-goiferr-snippets/img/demo.gif" alt="demo" /></p>
-
+<p><img src="https://raw.github.com/wiki/nametake/vim-goiferr-snippets/img/demo.gif" alt="demo"></p>
 <p><code>iferr</code>のsnippetに関して以下の機能を提供しています。</p>
-
 <ul>
 <li>戻り値の型を構造体でも補完してくれる</li>
 <li>構造体がポインタかどうかを判別してくれる</li>
@@ -158,16 +152,13 @@ iferrのsnippetに関して以下の機能を提供しています。
 <li>名前付き戻り値のときは<code>return</code>しか出力しない</li>
 <li>インラインのエラーハンドリング用snippetも提供</li>
 <li>上記機能を持ったVimScirptの関数として提供している
-
 <ul>
 <li><code>pkg/errors</code>以外のerrorライブラリ等でカスタマイズできる</li>
-</ul></li>
 </ul>
-
+</li>
+</ul>
 <p>また、作っている最中に「<code>iferr</code>用の正規表現はそのまま<code>return</code>のsnippetとしても使えるのでは？」と思ったので、そのまま<code>return</code>を補完するsnippetとしても提供しました。戻り値をいい感じに展開して、それぞれにジャンプ用のマーカーを付けているので、サクサク戻り値を設定できます。</p>
-
 <p>自分用に作ったのでオレオレ設定な部分もありますが、生暖かい見ていただければ幸いです。</p>
-
 <p>最後に、プラグイン内の正規表現部分は<a href="https://github.com/pocke">@pocke</a>さんの「<a href="https://pocke.hatenablog.com/entry/2015/12/20/133445">Vim で Go 言語を書いている時、Neosnippet でいい感じに if する</a>」という記事を参考にさせていただきました！ありがとうございました！</p>
 
       </div>

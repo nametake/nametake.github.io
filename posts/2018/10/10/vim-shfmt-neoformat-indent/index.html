@@ -13,8 +13,8 @@
 <meta name="twitter:title" content="neoformatでshfmtを使うときにインデントをタブ文字にしたい時の設定"/>
 <meta name="twitter:description" content="neoformatで使うshfmtはデフォルトだとインデントがスペースなんですが、チームのコーディング規約に合わせてタブ文字にしたかったときにちょっと引っかかったのでメモ。
 まずは、shfmt のヘルプとneoformatのshfmtの定義を見てみます。
--i uint indent: 0 for tabs (default), &gt;0 for number of spacesfunction! neoformat#formatters#sh#shfmt() abort return { \ &#39;exe&#39;: &#39;shfmt&#39;, \ &#39;args&#39;: [&#39;-i &#39; . shiftwidth()], \ &#39;stdin&#39;: 1, \ }endfunction shfmtのヘルプから、インデントをタブにしたければ-i引数で0を渡せば良さそうで、neoformatの定義ではインデントの値にshiftwidthの値をしているようだったので、プロジェクトでのVimの設定を以下のように設定してみました(プロジェクト固有の設定ができるようにしている)。
-autocmd Filetype sh setlocal sw=0 sts=0 noexpandtab しかし、どうしてもインデントがスペースになってしまうためちゃんとshiftwidth()の挙動を調べてみると、shiftwidthが0に設定されているとtabstopの値を使うようになっているらしい。
+-i uint indent: 0 for tabs (default), &gt;0 for number of spaces function! neoformat#formatters#sh#shfmt() abort return { \ &#39;exe&#39;: &#39;shfmt&#39;, \ &#39;args&#39;: [&#39;-i &#39; . shiftwidth()], \ &#39;stdin&#39;: 1, \ }endfunctionshfmtのヘルプから、インデントをタブにしたければ-i引数で0を渡せば良さそうで、neoformatの定義ではインデントの値にshiftwidthの値をしているようだったので、プロジェクトでのVimの設定を以下のように設定してみました(プロジェクト固有の設定ができるようにしている)。
+autocmd Filetype sh setlocal sw=0 sts=0 noexpandtabしかし、どうしてもインデントがスペースになってしまうためちゃんとshiftwidth()の挙動を調べてみると、shiftwidthが0に設定されているとtabstopの値を使うようになっているらしい。
 https://vim-jp.org/vimmagazine/2012/08/31/vimmagazine.html
 tabstopは0を設定できないため、結局以下のようにneoformatのshfmt設定をプロジェクト固有の設定で上書きして対処しました。
 let g:neoformat_sh_shfmt = { \ &#39;exe&#39;: &#39;shfmt&#39;, \ &#39;args&#39;: [&#39;-i&#39;, 0], \ &#39;stdin&#39;: 1, \ }"/>
@@ -22,8 +22,8 @@ let g:neoformat_sh_shfmt = { \ &#39;exe&#39;: &#39;shfmt&#39;, \ &#39;args&#39;:
     <meta property="og:title" content="neoformatでshfmtを使うときにインデントをタブ文字にしたい時の設定" />
 <meta property="og:description" content="neoformatで使うshfmtはデフォルトだとインデントがスペースなんですが、チームのコーディング規約に合わせてタブ文字にしたかったときにちょっと引っかかったのでメモ。
 まずは、shfmt のヘルプとneoformatのshfmtの定義を見てみます。
--i uint indent: 0 for tabs (default), &gt;0 for number of spacesfunction! neoformat#formatters#sh#shfmt() abort return { \ &#39;exe&#39;: &#39;shfmt&#39;, \ &#39;args&#39;: [&#39;-i &#39; . shiftwidth()], \ &#39;stdin&#39;: 1, \ }endfunction shfmtのヘルプから、インデントをタブにしたければ-i引数で0を渡せば良さそうで、neoformatの定義ではインデントの値にshiftwidthの値をしているようだったので、プロジェクトでのVimの設定を以下のように設定してみました(プロジェクト固有の設定ができるようにしている)。
-autocmd Filetype sh setlocal sw=0 sts=0 noexpandtab しかし、どうしてもインデントがスペースになってしまうためちゃんとshiftwidth()の挙動を調べてみると、shiftwidthが0に設定されているとtabstopの値を使うようになっているらしい。
+-i uint indent: 0 for tabs (default), &gt;0 for number of spaces function! neoformat#formatters#sh#shfmt() abort return { \ &#39;exe&#39;: &#39;shfmt&#39;, \ &#39;args&#39;: [&#39;-i &#39; . shiftwidth()], \ &#39;stdin&#39;: 1, \ }endfunctionshfmtのヘルプから、インデントをタブにしたければ-i引数で0を渡せば良さそうで、neoformatの定義ではインデントの値にshiftwidthの値をしているようだったので、プロジェクトでのVimの設定を以下のように設定してみました(プロジェクト固有の設定ができるようにしている)。
+autocmd Filetype sh setlocal sw=0 sts=0 noexpandtabしかし、どうしてもインデントがスペースになってしまうためちゃんとshiftwidth()の挙動を調べてみると、shiftwidthが0に設定されているとtabstopの値を使うようになっているらしい。
 https://vim-jp.org/vimmagazine/2012/08/31/vimmagazine.html
 tabstopは0を設定できないため、結局以下のようにneoformatのshfmt設定をプロジェクト固有の設定で上書きして対処しました。
 let g:neoformat_sh_shfmt = { \ &#39;exe&#39;: &#39;shfmt&#39;, \ &#39;args&#39;: [&#39;-i&#39;, 0], \ &#39;stdin&#39;: 1, \ }" />
@@ -67,7 +67,7 @@ let g:neoformat_sh_shfmt = { \ &#39;exe&#39;: &#39;shfmt&#39;, \ &#39;args&#39;:
     <link rel="icon" type="image/png" href="https://nametake.github.io/images/favicon-32x32.png" sizes="32x32">
     <link rel="icon" type="image/png" href="https://nametake.github.io/images/favicon-16x16.png" sizes="16x16">
 
-    <meta name="generator" content="Hugo 0.59.1" />
+    <meta name="generator" content="Hugo 0.60.1" />
   </head>
 
   <body class=" ">
@@ -138,27 +138,26 @@ let g:neoformat_sh_shfmt = { \ &#39;exe&#39;: &#39;shfmt&#39;, \ &#39;args&#39;:
 
       <div>
         <p><a href="https://github.com/sbdchd/neoformat"><code>neoformat</code></a>で使う<a href="https://github.com/mvdan/sh"><code>shfmt</code></a>はデフォルトだとインデントがスペースなんですが、チームのコーディング規約に合わせてタブ文字にしたかったときにちょっと引っかかったのでメモ。</p>
-
 <p>まずは、<code>shfmt</code> のヘルプと<code>neoformat</code>の<code>shfmt</code>の定義を見てみます。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-console" data-lang="console">  -i uint   indent: 0 for tabs (default), &gt;0 for number of spaces</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-vim" data-lang="vim"><span style="color:#66d9ef">function</span>! <span style="color:#a6e22e">neoformat</span>#<span style="color:#a6e22e">formatters</span>#<span style="color:#a6e22e">sh</span>#<span style="color:#a6e22e">shfmt</span>() <span style="color:#a6e22e">abort</span><span style="color:#960050;background-color:#1e0010">
+<pre><code class="language-console" data-lang="console">  -i uint   indent: 0 for tabs (default), &gt;0 for number of spaces
+</code></pre><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-vim" data-lang="vim"><span style="color:#66d9ef">function</span>! <span style="color:#a6e22e">neoformat</span>#<span style="color:#a6e22e">formatters</span>#<span style="color:#a6e22e">sh</span>#<span style="color:#a6e22e">shfmt</span>() <span style="color:#a6e22e">abort</span><span style="color:#960050;background-color:#1e0010">
 </span><span style="color:#960050;background-color:#1e0010"></span>    <span style="color:#a6e22e">return</span> {<span style="color:#960050;background-color:#1e0010">
 </span><span style="color:#960050;background-color:#1e0010"></span>            \ <span style="color:#e6db74">&#39;exe&#39;</span>: <span style="color:#e6db74">&#39;shfmt&#39;</span>,<span style="color:#960050;background-color:#1e0010">
 </span><span style="color:#960050;background-color:#1e0010"></span>            \ <span style="color:#e6db74">&#39;args&#39;</span>: [<span style="color:#e6db74">&#39;-i &#39;</span> . <span style="color:#a6e22e">shiftwidth</span>()],<span style="color:#960050;background-color:#1e0010">
 </span><span style="color:#960050;background-color:#1e0010"></span>            \ <span style="color:#e6db74">&#39;stdin&#39;</span>: <span style="color:#ae81ff">1</span>,<span style="color:#960050;background-color:#1e0010">
 </span><span style="color:#960050;background-color:#1e0010"></span>            \ }<span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">endfunction</span></code></pre></div>
-<p><code>shfmt</code>のヘルプから、インデントをタブにしたければ<code>-i</code>引数で0を渡せば良さそうで、neoformatの定義ではインデントの値に<code>shiftwidth</code>の値をしているようだったので、プロジェクトでのVimの設定を以下のように設定してみました(<a href="https://qiita.com/unosk/items/43989b61eff48e0665f3">プロジェクト固有の設定</a>ができるようにしている)。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-vim" data-lang="vim"><span style="color:#a6e22e">autocmd</span> <span style="color:#a6e22e">Filetype</span> <span style="color:#a6e22e">sh</span> <span style="color:#a6e22e">setlocal</span> <span style="color:#a6e22e">sw</span>=<span style="color:#ae81ff">0</span> <span style="color:#a6e22e">sts</span>=<span style="color:#ae81ff">0</span> <span style="color:#a6e22e">noexpandtab</span></code></pre></div>
-<p>しかし、どうしてもインデントがスペースになってしまうためちゃんと<code>shiftwidth()</code>の挙動を調べてみると、<code>shiftwidth</code>が0に設定されていると<code>tabstop</code>の値を使うようになっているらしい。</p>
-
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">endfunction</span><span style="color:#960050;background-color:#1e0010">
+</span></code></pre></div><p><code>shfmt</code>のヘルプから、インデントをタブにしたければ<code>-i</code>引数で0を渡せば良さそうで、neoformatの定義ではインデントの値に<code>shiftwidth</code>の値をしているようだったので、プロジェクトでのVimの設定を以下のように設定してみました(<a href="https://qiita.com/unosk/items/43989b61eff48e0665f3">プロジェクト固有の設定</a>ができるようにしている)。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-vim" data-lang="vim"><span style="color:#a6e22e">autocmd</span> <span style="color:#a6e22e">Filetype</span> <span style="color:#a6e22e">sh</span> <span style="color:#a6e22e">setlocal</span> <span style="color:#a6e22e">sw</span>=<span style="color:#ae81ff">0</span> <span style="color:#a6e22e">sts</span>=<span style="color:#ae81ff">0</span> <span style="color:#a6e22e">noexpandtab</span><span style="color:#960050;background-color:#1e0010">
+</span></code></pre></div><p>しかし、どうしてもインデントがスペースになってしまうためちゃんと<code>shiftwidth()</code>の挙動を調べてみると、<code>shiftwidth</code>が0に設定されていると<code>tabstop</code>の値を使うようになっているらしい。</p>
 <p><a href="https://vim-jp.org/vimmagazine/2012/08/31/vimmagazine.html">https://vim-jp.org/vimmagazine/2012/08/31/vimmagazine.html</a></p>
-
 <p><code>tabstop</code>は0を設定できないため、結局以下のように<code>neoformat</code>の<code>shfmt</code>設定をプロジェクト固有の設定で上書きして対処しました。</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-vim" data-lang="vim"><span style="color:#66d9ef">let</span> <span style="color:#a6e22e">g</span>:<span style="color:#a6e22e">neoformat_sh_shfmt</span> = {<span style="color:#960050;background-color:#1e0010">
 </span><span style="color:#960050;background-color:#1e0010"></span>      \   <span style="color:#e6db74">&#39;exe&#39;</span>: <span style="color:#e6db74">&#39;shfmt&#39;</span>,<span style="color:#960050;background-color:#1e0010">
 </span><span style="color:#960050;background-color:#1e0010"></span>      \   <span style="color:#e6db74">&#39;args&#39;</span>: [<span style="color:#e6db74">&#39;-i&#39;</span>, <span style="color:#ae81ff">0</span>],<span style="color:#960050;background-color:#1e0010">
 </span><span style="color:#960050;background-color:#1e0010"></span>      \   <span style="color:#e6db74">&#39;stdin&#39;</span>: <span style="color:#ae81ff">1</span>,<span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span>      \ }</code></pre></div>
+</span><span style="color:#960050;background-color:#1e0010"></span>      \ }<span style="color:#960050;background-color:#1e0010">
+</span></code></pre></div>
       </div>
 
       <footer>

@@ -20,7 +20,7 @@ coc.nvim coc.nvimはREADMEに書いてあるとおり、VSCodeライクな補完
 一部設定はJSONで管理することになりますが、それさえ問題なければ強くおすすめできます。
 導入に際して、coc-snippetsをCocInstallではなく、プラグインマネージャ(vim-plug)経由でインストールしようとしたときにちょっとだけ引っかかったのでそれだけメモ。
 coc.nvimと連携するエクステンションをプラグインマネージャ経由でインストールするときには、以下のようにインストール後にyarnコマンドを実行するようにする必要があります。
-Plug &#39;neoclide/coc-snippets&#39;, {&#39;do&#39;: &#39;yarn install --frozen-lockfile&#39;} (ちなみにちゃんとドキュメントに書いてあるので、全部読んでおけば引っかかるようなこともないです)"/>
+Plug &#39;neoclide/coc-snippets&#39;, {&#39;do&#39;: &#39;yarn install --frozen-lockfile&#39;}(ちなみにちゃんとドキュメントに書いてあるので、全部読んでおけば引っかかるようなこともないです)"/>
 
     <meta property="og:title" content="Vimのプラグインを整理した(あとcoc.nvimの紹介)" />
 <meta property="og:description" content="ちまちまとdotfilesを育ててきたんですが、Goの補完が動かなくなっていたり中途半端にLSP対応しようとした痕跡だけ残っていたりしたので、断捨離も兼ねてガッツリプラグインを整理しました。
@@ -32,7 +32,7 @@ coc.nvim coc.nvimはREADMEに書いてあるとおり、VSCodeライクな補完
 一部設定はJSONで管理することになりますが、それさえ問題なければ強くおすすめできます。
 導入に際して、coc-snippetsをCocInstallではなく、プラグインマネージャ(vim-plug)経由でインストールしようとしたときにちょっとだけ引っかかったのでそれだけメモ。
 coc.nvimと連携するエクステンションをプラグインマネージャ経由でインストールするときには、以下のようにインストール後にyarnコマンドを実行するようにする必要があります。
-Plug &#39;neoclide/coc-snippets&#39;, {&#39;do&#39;: &#39;yarn install --frozen-lockfile&#39;} (ちなみにちゃんとドキュメントに書いてあるので、全部読んでおけば引っかかるようなこともないです)" />
+Plug &#39;neoclide/coc-snippets&#39;, {&#39;do&#39;: &#39;yarn install --frozen-lockfile&#39;}(ちなみにちゃんとドキュメントに書いてあるので、全部読んでおけば引っかかるようなこともないです)" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://nametake.github.io/posts/2019/07/25/change-vim-plugins/" />
 <meta property="article:published_time" content="2019-07-25T00:51:43+09:00" />
@@ -73,7 +73,7 @@ Plug &#39;neoclide/coc-snippets&#39;, {&#39;do&#39;: &#39;yarn install --frozen-
     <link rel="icon" type="image/png" href="https://nametake.github.io/images/favicon-32x32.png" sizes="32x32">
     <link rel="icon" type="image/png" href="https://nametake.github.io/images/favicon-16x16.png" sizes="16x16">
 
-    <meta name="generator" content="Hugo 0.59.1" />
+    <meta name="generator" content="Hugo 0.60.1" />
   </head>
 
   <body class=" ">
@@ -141,34 +141,22 @@ Plug &#39;neoclide/coc-snippets&#39;, {&#39;do&#39;: &#39;yarn install --frozen-
       </header>
 
       <div>
-        
-
-<p>ちまちまと<a href="https://github.com/nametake/dotfiles">dotfiles</a>を育ててきたんですが、Goの補完が動かなくなっていたり中途半端にLSP対応しようとした痕跡だけ残っていたりしたので、断捨離も兼ねてガッツリプラグインを整理しました。</p>
-
+        <p>ちまちまと<a href="https://github.com/nametake/dotfiles">dotfiles</a>を育ててきたんですが、Goの補完が動かなくなっていたり中途半端にLSP対応しようとした痕跡だけ残っていたりしたので、断捨離も兼ねてガッツリプラグインを整理しました。</p>
 <p>プラグインの構成は<a href="https://github.com/nametake/dotfiles/blob/master/vim/rc/plug.rc.vim">dotfiles/vim/rc/plug.rc.vim</a>に全部寄せています。</p>
-
 <p>あんまり凝った構成にしてもメンテナンスが大変なので、以下の基準でプラグインを選びました。</p>
-
 <ul>
 <li>githubのStar数が多くてAPIが安定してそう</li>
 <li>少ない設定でも動く</li>
 </ul>
-
 <p>整理しているときに、<a href="https://github.com/neoclide/coc.nvim">coc.nvim</a>という良さげな補完プラグインを見つけたので軽く紹介してみます。</p>
-
-<h1 id="coc-nvim">coc.nvim</h1>
-
+<h1 id="cocnvim">coc.nvim</h1>
 <p>coc.nvimはREADMEに書いてあるとおり、VSCodeライクな補完をVim上で実現するために作られているらしい。</p>
-
 <p>高速と謳っているだけあり、重たいファイルを開いて補完を実行しても重くなりませでした。また、デフォルトでLSPに対応している上に、<a href="https://github.com/neoclide/coc.nvim/wiki/Language-servers#supported-features">非常に丁寧なドキュメント</a>も用意されているため、導入のハードルはとにかく低かったです。aleと共存するための設定があったのも個人的には嬉しい。</p>
-
 <p>一部設定はJSONで管理することになりますが、それさえ問題なければ強くおすすめできます。</p>
-
 <p>導入に際して、<a href="https://github.com/neoclide/coc-snippets">coc-snippets</a>を<code>CocInstall</code>ではなく、プラグインマネージャ(<a href="https://github.com/junegunn/vim-plug">vim-plug</a>)経由でインストールしようとしたときにちょっとだけ引っかかったのでそれだけメモ。</p>
-
 <p>coc.nvimと連携するエクステンションをプラグインマネージャ経由でインストールするときには、以下のようにインストール後に<code>yarn</code>コマンドを実行するようにする必要があります。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-vim" data-lang="vim"><span style="color:#a6e22e">Plug</span> <span style="color:#e6db74">&#39;neoclide/coc-snippets&#39;</span>, {<span style="color:#e6db74">&#39;do&#39;</span>: <span style="color:#e6db74">&#39;yarn install --frozen-lockfile&#39;</span>}</code></pre></div>
-<p><del>(ちなみにちゃんと<a href="https://github.com/neoclide/coc.nvim/wiki/Using-coc-extensions#use-vims-plugin-manager-for-coc-extension">ドキュメントに書いてある</a>ので、全部読んでおけば引っかかるようなこともないです)</del></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-vim" data-lang="vim"><span style="color:#a6e22e">Plug</span> <span style="color:#e6db74">&#39;neoclide/coc-snippets&#39;</span>, {<span style="color:#e6db74">&#39;do&#39;</span>: <span style="color:#e6db74">&#39;yarn install --frozen-lockfile&#39;</span>}<span style="color:#960050;background-color:#1e0010">
+</span></code></pre></div><p><del>(ちなみにちゃんと<a href="https://github.com/neoclide/coc.nvim/wiki/Using-coc-extensions#use-vims-plugin-manager-for-coc-extension">ドキュメントに書いてある</a>ので、全部読んでおけば引っかかるようなこともないです)</del></p>
 
       </div>
 

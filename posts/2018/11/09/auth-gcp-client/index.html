@@ -14,13 +14,13 @@
 <meta name="twitter:description" content="GCPの認証済みのhttp.Clientが欲しいときにちょっとだけ調べたのでメモ。
 結論だけ言うと、golang.org/x/oauth2/googleのDefaultClientを使えばいいみたいです。
 今回はDataflowのAPIを叩きたかったので以下のようにすればできました。
-client, err := google.DefaultClient(ctx, dataflow.CloudPlatformScope) if err != nil { return fmt.Errorf(&#34;failed create client: %v&#34;, err) }"/>
+client, err := google.DefaultClient(ctx, dataflow.CloudPlatformScope) if err != nil { return fmt.Errorf(&#34;failed create client: %v&#34;, err) } "/>
 
     <meta property="og:title" content="GCPの認証済みのhttp.Clientの取得方法" />
 <meta property="og:description" content="GCPの認証済みのhttp.Clientが欲しいときにちょっとだけ調べたのでメモ。
 結論だけ言うと、golang.org/x/oauth2/googleのDefaultClientを使えばいいみたいです。
 今回はDataflowのAPIを叩きたかったので以下のようにすればできました。
-client, err := google.DefaultClient(ctx, dataflow.CloudPlatformScope) if err != nil { return fmt.Errorf(&#34;failed create client: %v&#34;, err) }" />
+client, err := google.DefaultClient(ctx, dataflow.CloudPlatformScope) if err != nil { return fmt.Errorf(&#34;failed create client: %v&#34;, err) } " />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://nametake.github.io/posts/2018/11/09/auth-gcp-client/" />
 <meta property="article:published_time" content="2018-11-09T11:15:24+09:00" />
@@ -61,7 +61,7 @@ client, err := google.DefaultClient(ctx, dataflow.CloudPlatformScope) if err != 
     <link rel="icon" type="image/png" href="https://nametake.github.io/images/favicon-32x32.png" sizes="32x32">
     <link rel="icon" type="image/png" href="https://nametake.github.io/images/favicon-16x16.png" sizes="16x16">
 
-    <meta name="generator" content="Hugo 0.59.1" />
+    <meta name="generator" content="Hugo 0.60.1" />
   </head>
 
   <body class=" ">
@@ -132,14 +132,13 @@ client, err := google.DefaultClient(ctx, dataflow.CloudPlatformScope) if err != 
 
       <div>
         <p>GCPの認証済みのhttp.Clientが欲しいときにちょっとだけ調べたのでメモ。</p>
-
 <p>結論だけ言うと、<a href="https://godoc.org/golang.org/x/oauth2/google#DefaultClient">golang.org/x/oauth2/googleのDefaultClient</a>を使えばいいみたいです。</p>
-
 <p>今回はDataflowのAPIを叩きたかったので以下のようにすればできました。</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#a6e22e">client</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">google</span>.<span style="color:#a6e22e">DefaultClient</span>(<span style="color:#a6e22e">ctx</span>, <span style="color:#a6e22e">dataflow</span>.<span style="color:#a6e22e">CloudPlatformScope</span>)
 <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
 	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Errorf</span>(<span style="color:#e6db74">&#34;failed create client: %v&#34;</span>, <span style="color:#a6e22e">err</span>)
-}</code></pre></div>
+}
+</code></pre></div>
       </div>
 
       <footer>

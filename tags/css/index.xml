@@ -19,7 +19,7 @@
       <guid>https://nametake.github.io/posts/2019/05/29/inline-center/</guid>
       <description>ラジオボタンとラベルの高さを合わせるCSS定義を何回も調べている気がするのでメモ。
 たぶん下の書き方が一番モダンだと思います。
-display: inline-flex; align-items: center;</description>
+display: inline-flex; align-items: center; </description>
     </item>
     
   </channel>

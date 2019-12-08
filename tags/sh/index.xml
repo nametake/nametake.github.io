@@ -19,8 +19,8 @@
       <guid>https://nametake.github.io/posts/2018/10/10/vim-shfmt-neoformat-indent/</guid>
       <description>neoformatで使うshfmtはデフォルトだとインデントがスペースなんですが、チームのコーディング規約に合わせてタブ文字にしたかったときにちょっと引っかかったのでメモ。
 まずは、shfmt のヘルプとneoformatのshfmtの定義を見てみます。
--i uint indent: 0 for tabs (default), &amp;gt;0 for number of spacesfunction! neoformat#formatters#sh#shfmt() abort return { \ &amp;#39;exe&amp;#39;: &amp;#39;shfmt&amp;#39;, \ &amp;#39;args&amp;#39;: [&amp;#39;-i &amp;#39; . shiftwidth()], \ &amp;#39;stdin&amp;#39;: 1, \ }endfunction shfmtのヘルプから、インデントをタブにしたければ-i引数で0を渡せば良さそうで、neoformatの定義ではインデントの値にshiftwidthの値をしているようだったので、プロジェクトでのVimの設定を以下のように設定してみました(プロジェクト固有の設定ができるようにしている)。
-autocmd Filetype sh setlocal sw=0 sts=0 noexpandtab しかし、どうしてもインデントがスペースになってしまうためちゃんとshiftwidth()の挙動を調べてみると、shiftwidthが0に設定されているとtabstopの値を使うようになっているらしい。
+-i uint indent: 0 for tabs (default), &amp;gt;0 for number of spaces function! neoformat#formatters#sh#shfmt() abort return { \ &amp;#39;exe&amp;#39;: &amp;#39;shfmt&amp;#39;, \ &amp;#39;args&amp;#39;: [&amp;#39;-i &amp;#39; . shiftwidth()], \ &amp;#39;stdin&amp;#39;: 1, \ }endfunctionshfmtのヘルプから、インデントをタブにしたければ-i引数で0を渡せば良さそうで、neoformatの定義ではインデントの値にshiftwidthの値をしているようだったので、プロジェクトでのVimの設定を以下のように設定してみました(プロジェクト固有の設定ができるようにしている)。
+autocmd Filetype sh setlocal sw=0 sts=0 noexpandtabしかし、どうしてもインデントがスペースになってしまうためちゃんとshiftwidth()の挙動を調べてみると、shiftwidthが0に設定されているとtabstopの値を使うようになっているらしい。
 https://vim-jp.org/vimmagazine/2012/08/31/vimmagazine.html
 tabstopは0を設定できないため、結局以下のようにneoformatのshfmt設定をプロジェクト固有の設定で上書きして対処しました。
 let g:neoformat_sh_shfmt = { \ &amp;#39;exe&amp;#39;: &amp;#39;shfmt&amp;#39;, \ &amp;#39;args&amp;#39;: [&amp;#39;-i&amp;#39;, 0], \ &amp;#39;stdin&amp;#39;: 1, \ }</description>
