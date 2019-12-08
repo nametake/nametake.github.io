@@ -6,10 +6,24 @@
     <description>Recent content in Posts on nametake.info</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 30 Oct 2019 00:52:57 +0900</lastBuildDate>
+    <lastBuildDate>Mon, 09 Dec 2019 00:05:29 +0900</lastBuildDate>
     
 	<atom:link href="https://nametake.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Goの関数内で呼び出される関数をインターセプトする方法</title>
+      <link>https://nametake.github.io/posts/2019/12/09/go-func-intercept/</link>
+      <pubDate>Mon, 09 Dec 2019 00:05:29 +0900</pubDate>
+      
+      <guid>https://nametake.github.io/posts/2019/12/09/go-func-intercept/</guid>
+      <description>この記事はGo2 Advent Calendar 2019の記事です。
+自分はprotoc-gen-gohttpというプラグインを作っているのですが、先日grpc.UnaryServerInterceptorに対応しました。
+その際、どうやればいいかを調査していたら、ChainUnaryServerという関数を見つけ、中身を読んでみると、「特定のinterfaceを受け取って内部でそのinterfaceで実行する」機能を持った関数に対して「内部でinterfaceを実行するときに複数の関数でインターセプトする」方法の知見を得られたので記事にしようと思います。
+コード例 まずはインターセプトしたいコードの例を書きます。
+type WrapStruct struct { pingServer pb.PingAPIServer } func (w *WrapStruct) Call() { ctx := context.Background() arg := &amp;amp;pb.PingRequest{ Msg: &amp;#34;PING&amp;#34;, } ret, err := w.pingServer.Ping(ctx, arg) fmt.Println(ret, err) } 上記例は以下のProtocol Buffersの定義をgRPCオプション付きでコンパイルすると生成されるコードを使用しています。
+syntax = &amp;#34;proto3&amp;#34;;package protobuf1;option go_package = &amp;#34;pb&amp;#34;;service PingAPI { rpc Ping(PingRequest) returns (PingResponse);}message PingRequest { string msg = 1;}message PingResponse { string msg = 1;}なんの変哲もない、ただ自身を実装している構造体がもつ PingAPIServer interfaceの Ping メソッドに PING の文字列を渡して実行し、その結果を出力しているだけのコードです。</description>
+    </item>
     
     <item>
       <title>Go1.13のerrorsにWrapの機能が入ったので勉強がてらまとめる</title>
