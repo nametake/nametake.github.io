@@ -21,7 +21,7 @@
 特に設定を細かくしなくてもサクサク動いてくれるので非常に助かっているんですが、POSIX準拠ではないためデフォルトシェルにするのは避けて、以下のような形で利用しています。
  デフォルトシェルはzsh tmuxを自動起動 tmuxのデフォルトシェルとしてfish  そのため、環境変数の設定は全てzshenvでしているんですが、fishを起動したときにzshenvで設定した環境変数の順番を維持してくれないという問題がありました。
 普通にfishを起動するだけだと発生する問題のようだったので、以下のようにtmuxでfishを起動する際にzshのパスをそのままの順番でfishのパスに設定する変更することで対応しました。
-set -g default-command /usr/local/bin/fish --init-command=&amp;quot;set PATH &#39;string split : $PATH&#39;)&amp;quot; 上記のやり方は直接的な解決方法ではないが、PATHの順序に関するissueは挙がっているので、そのうち直るかもしれません。(深く追う時間が確保できない……)
+set -g default-command /usr/local/bin/fish --init-command=&amp;#34;set PATH &amp;#39;string split : $PATH&amp;#39;)&amp;#34; 上記のやり方は直接的な解決方法ではないが、PATHの順序に関するissueは挙がっているので、そのうち直るかもしれません。(深く追う時間が確保できない……)
 https://github.com/fish-shell/fish-shell/issues/5456</description>
     </item>
     

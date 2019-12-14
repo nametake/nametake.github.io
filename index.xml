@@ -156,7 +156,7 @@ Plug &amp;#39;neoclide/coc-snippets&amp;#39;, {&amp;#39;do&amp;#39;: &amp;#39;ya
 特に設定を細かくしなくてもサクサク動いてくれるので非常に助かっているんですが、POSIX準拠ではないためデフォルトシェルにするのは避けて、以下のような形で利用しています。
  デフォルトシェルはzsh tmuxを自動起動 tmuxのデフォルトシェルとしてfish  そのため、環境変数の設定は全てzshenvでしているんですが、fishを起動したときにzshenvで設定した環境変数の順番を維持してくれないという問題がありました。
 普通にfishを起動するだけだと発生する問題のようだったので、以下のようにtmuxでfishを起動する際にzshのパスをそのままの順番でfishのパスに設定する変更することで対応しました。
-set -g default-command /usr/local/bin/fish --init-command=&amp;quot;set PATH &#39;string split : $PATH&#39;)&amp;quot; 上記のやり方は直接的な解決方法ではないが、PATHの順序に関するissueは挙がっているので、そのうち直るかもしれません。(深く追う時間が確保できない……)
+set -g default-command /usr/local/bin/fish --init-command=&amp;#34;set PATH &amp;#39;string split : $PATH&amp;#39;)&amp;#34; 上記のやり方は直接的な解決方法ではないが、PATHの順序に関するissueは挙がっているので、そのうち直るかもしれません。(深く追う時間が確保できない……)
 https://github.com/fish-shell/fish-shell/issues/5456</description>
     </item>
     
@@ -168,7 +168,8 @@ https://github.com/fish-shell/fish-shell/issues/5456</description>
       <guid>https://nametake.github.io/posts/2019/06/05/formik-yup-dynamic-validation/</guid>
       <description>Formikで動的なFormを作った時に、表示されるFormに応じてYupのバリデーションを切り替える方法でちょっと手間取ったのでメモ。
 結論から言うとYup.lazy()を使って遅延評価されるValidationSchemaを使えば解決した。Yup.lazy()に渡ってくるFormの値を元にValidationwSchemaを表示されるFormに対応したValidationSchemaを返せば狙った挙動が実現できました。
-サンプルコードは以下。</description>
+サンプルコードは以下。
+ </description>
     </item>
     
     <item>
@@ -212,7 +213,7 @@ import { Reducer } from &amp;#39;redux&amp;#39;; // Flux standard action interfa
       
       <guid>https://nametake.github.io/posts/2018/12/19/created-labelerr-and-suberr/</guid>
       <description>golang.tokyo #20のLT大会で、labelerrとsuberrを作った話をしてきました。
-「Goのerrorは1種類というのは綺麗だとは思うけど、実運用上errorに重み付けをしたいよね」ってところからこのライブラリの出発点です。
+ 「Goのerrorは1種類というのは綺麗だとは思うけど、実運用上errorに重み付けをしたいよね」ってところからこのライブラリの出発点です。
 スライド内にもありますが、Primitiveな型しか取り扱わないように気をつけている上に、ライブラリ自体も難しいことはしてないので、なんとなく使ってみるか、ぐらいの感覚で使ってもらうと嬉しいです。</description>
     </item>
     
@@ -269,18 +270,13 @@ Vimの歴史とこれからのVimの話をされていた。
 非常に勝手ながらにプラグインにはそこまで興味がないかと思っていたが、発表で言及されていた「これからのVim」はプラグインに関することが多く、少し驚いた。
 発表の内容からも、終始開発者として「使う人」のことを強く意識しながらVimのこれからを考えていることが伝わった。
 個人的にはVSCodeのPopup Windowが羨ましいのでPopUp Windowがほしいです。
-Migrating plugins to standard features この発表の聽いたので帰ってからVimのプラグインを10個削りました。
-Modes デバッグのお話。
+Migrating plugins to standard features  この発表の聽いたので帰ってからVimのプラグインを10個削りました。
+Modes  デバッグのお話。
 この話を聽いてDelveのプラグインを思い出したのでちょっとあとで試そうと思う。
-A day in the life of (ordinary) Vimmer 1日1回プラグインのアップデートは私もやります。
-Modern editor-independent development environment for PHP 宗教戦争好きですすみません。
+A day in the life of (ordinary) Vimmer  1日1回プラグインのアップデートは私もやります。
+Modern editor-independent development environment for PHP Modern editor-independent development environment for PHP #vimconf / 黒點 さん - ニコナレ 宗教戦争好きですすみません。
 Veonimは少し気になったので後で試す。
-Effective Modern Vim scripting スライド
-今どきなVimプラグイン開発の方法がHelloWorldから始まっていてとても素晴らしい資料でした！
-Oni - The GUI-fication of Neovim スライド
-GUI版NeoVimの話。
-自分がVSCodeを見てて羨ましいと思った機能を全部入ってたので発表中に入れて試してみたが、なにか設定が悪いのか動かなかった。あとで動かせるところまで持っていきたいと思います。
-Vim ported to WebAssembly 軽めの話(大嘘)。</description>
+Effective Modern Vim scripting スライド</description>
     </item>
     
     <item>
@@ -329,9 +325,9 @@ let g:neoformat_sh_shfmt = { \ &amp;#39;exe&amp;#39;: &amp;#39;shfmt&amp;#39;, \
       
       <guid>https://nametake.github.io/posts/2018/09/20/dep-private-repo/</guid>
       <description>Goをアップデートした後、dep updateをしたら以下のようなエラーが発生しました。
-grouped write of manifest, lock and vendor: error while writing out vendor tree: failed to write dep tree: failed to export github.com/nametake/private-repo: unable to update repository: remote: Repository not found. fatal: repository &#39;https://github.com/nametake/private-repo/&#39; not found : command failed: [git fetch --tags --prune origin]: exit status 128 make: *** [dep] Error 1 原因はprivateリポジトリをhttps経由でcloneしようとしたことだったみたいです。
+grouped write of manifest, lock and vendor: error while writing out vendor tree: failed to write dep tree: failed to export github.com/nametake/private-repo: unable to update repository: remote: Repository not found. fatal: repository &amp;#39;https://github.com/nametake/private-repo/&amp;#39; not found : command failed: [git fetch --tags --prune origin]: exit status 128 make: *** [dep] Error 1 原因はprivateリポジトリをhttps経由でcloneしようとしたことだったみたいです。
 以下のconfig設定をして、githubではhttpsで始まるURLをgitのURLを使うように書き換える設定を追加したら治りました。
-[url &amp;quot;git@github.com:&amp;quot;] insteadOf = https://github.com/ https://git-scm.com/docs/git-config#git-config-urlltbasegtinsteadOf</description>
+[url &amp;#34;git@github.com:&amp;#34;] insteadOf = https://github.com/ https://git-scm.com/docs/git-config#git-config-urlltbasegtinsteadOf</description>
     </item>
     
     <item>

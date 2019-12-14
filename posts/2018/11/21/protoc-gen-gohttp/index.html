@@ -61,7 +61,7 @@ type HelloRequest struct { Name string `protobuf:&#34;bytes,1,opt,name=name&#34;
     <link rel="icon" type="image/png" href="https://nametake.github.io/images/favicon-32x32.png" sizes="32x32">
     <link rel="icon" type="image/png" href="https://nametake.github.io/images/favicon-16x16.png" sizes="16x16">
 
-    <meta name="generator" content="Hugo 0.60.1" />
+    <meta name="generator" content="Hugo 0.61.0" />
   </head>
 
   <body class=" ">
@@ -193,7 +193,7 @@ type HelloRequest struct { Name string `protobuf:&#34;bytes,1,opt,name=name&#34;
 <p>クライアントとサーバ間で同じ定義を利用できて、かつその定義もシンプルなため、gRPCを使わないでProtocol Buffersだけを利用するだけでもかなり便利です。</p>
 <p>ただ、Go言語のコードを書き出した際に出力されるのは<code>message</code>に対応した構造体のみで、<code>service</code>の定義はgRPC等のプラグインを使わないと無視されてしまうため、HTTPの上で取り扱うには意味のない定義でした。</p>
 <p>「せっかく構造体までは利用できるんだから、どうせならgRPCのプラグインで書き出されるinterfaceも使いたい！」という気持ちと「protocにプラグイン機能が用意されてるならそれを利用して<code>http.Handler</code>に対応できるコードを書き出せば良いのでは？」という発想から作ったプラグインが<a href="https://github.com/nametake/protoc-gen-gohttp">protoc-gen-gohttp</a>です。</p>
-<h2 id="heading1">使い方</h2>
+<h2 id="heading-1">使い方</h2>
 <p>このプラグインはgRPCのプラグインと一緒に使うことを想定しています。Protocol Buffersの定義に<code>service</code>を書いてこのプラグインを使うと、以下のようなコードが生成されます。</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">GreeterHTTPConverter</span> <span style="color:#66d9ef">struct</span> {
 	<span style="color:#a6e22e">srv</span> <span style="color:#a6e22e">GreeterServer</span>
@@ -230,7 +230,7 @@ type HelloRequest struct { Name string `protobuf:&#34;bytes,1,opt,name=name&#34;
 </span><span style="color:#75715e"></span><span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">Handle</span>(<span style="color:#e6db74">&#34;/sayhello&#34;</span>, <span style="color:#a6e22e">conv</span>.<span style="color:#a6e22e">SayHello</span>(<span style="color:#a6e22e">logCallback</span>))
 </code></pre></div><p><code>SayHello</code>メソッドに渡すCallbackは<code>http.HandlerFunc</code>を抜けるときに必ず呼び出されるため、Callbackの引数をハンドリングすることで呼び出し時の挟み込む処理やエラーハンドリングをできます。</p>
 <p>細かい使い方や動かし方は<a href="https://github.com/nametake/protoc-gen-gohttp#readme">README</a>を見てください。</p>
-<h2 id="heading2">コンセプト</h2>
+<h2 id="heading-2">コンセプト</h2>
 <p>作成にあたって以下のことに気をつけています。</p>
 <ul>
 <li>生成される物が標準パッケージとProtobuf関係のパッケージしかimportしない</li>
@@ -240,7 +240,7 @@ type HelloRequest struct { Name string `protobuf:&#34;bytes,1,opt,name=name&#34;
 <li>無駄にMarshal/Unmarshalをしない</li>
 <li>できる限り型で守る(Contextに情報を詰めたりしない)</li>
 </ul>
-<h1 id="heading3">比較</h1>
+<h1 id="heading-3">比較</h1>
 <p>このプラグインは実際にプロジェクトで使おうと思って作ったのですが、作る前に似たようなものがないか調べたのでそれとの比較も書いてみます。</p>
 <h2 id="twirphttpsgithubcomtwitchtvtwirp"><a href="https://github.com/twitchtv/twirp">twirp</a></h2>
 <p>同じようにProtocol Buffersの定義からhttp.Handler対応するコードを生成するフレームワークです。Content−TypeをみてJSONかバイナリかを判断することもしています。ただ、以下の点が気になったので自分たちのプロジェクトでは採用を見送りました。</p>
@@ -250,12 +250,12 @@ type HelloRequest struct { Name string `protobuf:&#34;bytes,1,opt,name=name&#34;
 <li>RPCの呼び出しに対するHookがContextに情報を詰めるようになっていて型で守るのが難しい</li>
 <li>フレームワークなのでピンポイントで使いづらい</li>
 </ul>
-<h2 id="russellluoprotocgopluginshttpsgithubcomrussellluoprotocgoplugins"><a href="https://github.com/RussellLuo/protoc-go-plugins">RussellLuo/protoc-go-plugins</a></h2>
+<h2 id="russellluoprotoc-go-pluginshttpsgithubcomrussellluoprotoc-go-plugins"><a href="https://github.com/RussellLuo/protoc-go-plugins">RussellLuo/protoc-go-plugins</a></h2>
 <p>Protocol Buffersの定義からhttp.Handler対応の物を生成するプラグインです。JSONには対応していたのですが、バイナリのMarshal/Unmarshalには対応しておらず、エラーハンドリングにも余地がありませんでした。</p>
-<h2 id="moulprotocgengotemplatehttpsgithubcommoulprotocgengotemplate"><a href="https://github.com/moul/protoc-gen-gotemplate">moul/protoc-gen-gotemplate</a></h2>
-<!-- raw HTML omitted -->
+<h2 id="moulprotoc-gen-gotemplatehttpsgithubcommoulprotoc-gen-gotemplate"><a href="https://github.com/moul/protoc-gen-gotemplate">moul/protoc-gen-gotemplate</a></h2>
+<!-- textlint-disable ja-technical-writing/ja-no-weak-phrase -->
 <p>他の物とは毛色が違うのですがProtocol Buffersの定義からGoのテンプレート機能を使ってコードを生成するためのプラグインです。時間と労力をかけないなら、テンプレートを用意してこれを使うのが一番早かったと思います。</p>
-<!-- raw HTML omitted -->
+<!-- textlint-enable ja-technical-writing/ja-no-weak-phrase -->
 <p>プラグインの作成にめちゃくちゃ時間がかかるようだったらこれも検討していたんですが、そこまで時間がかかりそうでもなかったので勉強も兼ねて自作することにしました。</p>
 
       </div>

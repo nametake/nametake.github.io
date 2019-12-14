@@ -65,7 +65,7 @@ posts = &quot;/posts/:year/:month/:day/:slug&quot;のpostsの部分はcontentデ
     <link rel="icon" type="image/png" href="https://nametake.github.io/images/favicon-32x32.png" sizes="32x32">
     <link rel="icon" type="image/png" href="https://nametake.github.io/images/favicon-16x16.png" sizes="16x16">
 
-    <meta name="generator" content="Hugo 0.60.1" />
+    <meta name="generator" content="Hugo 0.61.0" />
   </head>
 
   <body class=" ">
@@ -136,7 +136,7 @@ posts = &quot;/posts/:year/:month/:day/:slug&quot;のpostsの部分はcontentデ
         <p>大して書いていなかったブログをgithub pages+hugoの組み合わせに移行したのでそのメモ。</p>
 <p>とは言うものの、ほとんど<a href="https://gohugo.io/categories/getting-started">Hugoの入門用ページ</a>の内容をそのままやっただけなのでその辺は割愛。</p>
 <p>最終的なディレクトリ構成は以下。</p>
-<pre><code>blog
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">blog
  ├── Makefile
  ├── archetypes
  │   ├── default.md
@@ -159,7 +159,7 @@ posts = &quot;/posts/:year/:month/:day/:slug&quot;のpostsの部分はcontentデ
  │       └── avatar.jpg
  └── themes
      └── coder(submodule)
-</code></pre><h2 id="configtoml">config.toml</h2>
+</code></pre></div><h2 id="configtoml">config.toml</h2>
 <p>自分はパーマリンクを<code>日付+自分で設定した英単語</code>にしたかったので、以下のようにconfig.tomlに追記。</p>
 <p>slugは各postのfrontmatter(postの先頭にあるヘッダ部分)に設定すると反映されます。</p>
 <p><code>posts = &quot;/posts/:year/:month/:day/:slug&quot;</code>の<code>posts</code>の部分はcontentディレクトリにある<code>posts</code>ディレクトリと同じ名前にする必要があるので注意。</p>
@@ -229,7 +229,7 @@ cd ..
 git add public
 git commit -m <span style="color:#e6db74">&#34;</span>$msg<span style="color:#e6db74">&#34;</span>
 git push
-</code></pre></div><h2 id="newpostsh">new_post.sh</h2>
+</code></pre></div><h2 id="new-postsh">new_post.sh</h2>
 <p>postのディレクトリに新しく記事を追加するとき、ディレクトリには<code>content/posts/2018-09-15-my-fist-post/index.md</code>のように日付を設定したかったので、postを作成するためのscriptを用意。</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e">#!/bin/bash
 </span><span style="color:#75715e"></span>TITLE<span style="color:#f92672">=</span><span style="color:#e6db74">${</span>1<span style="color:#e6db74">}</span>

@@ -67,7 +67,7 @@ let g:neoformat_sh_shfmt = { \ &#39;exe&#39;: &#39;shfmt&#39;, \ &#39;args&#39;:
     <link rel="icon" type="image/png" href="https://nametake.github.io/images/favicon-32x32.png" sizes="32x32">
     <link rel="icon" type="image/png" href="https://nametake.github.io/images/favicon-16x16.png" sizes="16x16">
 
-    <meta name="generator" content="Hugo 0.60.1" />
+    <meta name="generator" content="Hugo 0.61.0" />
   </head>
 
   <body class=" ">
@@ -139,8 +139,8 @@ let g:neoformat_sh_shfmt = { \ &#39;exe&#39;: &#39;shfmt&#39;, \ &#39;args&#39;:
       <div>
         <p><a href="https://github.com/sbdchd/neoformat"><code>neoformat</code></a>で使う<a href="https://github.com/mvdan/sh"><code>shfmt</code></a>はデフォルトだとインデントがスペースなんですが、チームのコーディング規約に合わせてタブ文字にしたかったときにちょっと引っかかったのでメモ。</p>
 <p>まずは、<code>shfmt</code> のヘルプと<code>neoformat</code>の<code>shfmt</code>の定義を見てみます。</p>
-<pre><code class="language-console" data-lang="console">  -i uint   indent: 0 for tabs (default), &gt;0 for number of spaces
-</code></pre><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-vim" data-lang="vim"><span style="color:#66d9ef">function</span>! <span style="color:#a6e22e">neoformat</span>#<span style="color:#a6e22e">formatters</span>#<span style="color:#a6e22e">sh</span>#<span style="color:#a6e22e">shfmt</span>() <span style="color:#a6e22e">abort</span><span style="color:#960050;background-color:#1e0010">
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">  -i uint   indent: 0 for tabs (default), &gt;0 for number of spaces
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-vim" data-lang="vim"><span style="color:#66d9ef">function</span>! <span style="color:#a6e22e">neoformat</span>#<span style="color:#a6e22e">formatters</span>#<span style="color:#a6e22e">sh</span>#<span style="color:#a6e22e">shfmt</span>() <span style="color:#a6e22e">abort</span><span style="color:#960050;background-color:#1e0010">
 </span><span style="color:#960050;background-color:#1e0010"></span>    <span style="color:#a6e22e">return</span> {<span style="color:#960050;background-color:#1e0010">
 </span><span style="color:#960050;background-color:#1e0010"></span>            \ <span style="color:#e6db74">&#39;exe&#39;</span>: <span style="color:#e6db74">&#39;shfmt&#39;</span>,<span style="color:#960050;background-color:#1e0010">
 </span><span style="color:#960050;background-color:#1e0010"></span>            \ <span style="color:#e6db74">&#39;args&#39;</span>: [<span style="color:#e6db74">&#39;-i &#39;</span> . <span style="color:#a6e22e">shiftwidth</span>()],<span style="color:#960050;background-color:#1e0010">

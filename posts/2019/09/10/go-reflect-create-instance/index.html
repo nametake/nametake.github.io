@@ -57,7 +57,7 @@ package main import ( &#34;fmt&#34; &#34;reflect&#34; ) func main() { var foo *F
     <link rel="icon" type="image/png" href="https://nametake.github.io/images/favicon-32x32.png" sizes="32x32">
     <link rel="icon" type="image/png" href="https://nametake.github.io/images/favicon-16x16.png" sizes="16x16">
 
-    <meta name="generator" content="Hugo 0.60.1" />
+    <meta name="generator" content="Hugo 0.61.0" />
   </head>
 
   <body class=" ">
@@ -177,27 +177,27 @@ package main import ( &#34;fmt&#34; &#34;reflect&#34; ) func main() { var foo *F
 	<span style="color:#a6e22e">msg</span> <span style="color:#66d9ef">string</span>
 }
 </code></pre></div><p>上記ではわかりやすく分割していますが、以下のように一行で書くことも可能。</p>
-<pre><code>package main
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
 
-import (
-	&quot;fmt&quot;
-	&quot;reflect&quot;
+<span style="color:#f92672">import</span> (
+	<span style="color:#e6db74">&#34;fmt&#34;</span>
+	<span style="color:#e6db74">&#34;reflect&#34;</span>
 )
 
-func main() {
-	var foo *Foo
-	fmt.Println(foo) // nil
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
+	<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">foo</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">Foo</span>
+	<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">foo</span>) <span style="color:#75715e">// nil
+</span><span style="color:#75715e"></span>
+	<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;------------&#34;</span>)
 
-	fmt.Println(&quot;------------&quot;)
-
-	reflect.ValueOf(&amp;foo).Elem().Set(reflect.ValueOf(reflect.New(reflect.TypeOf(foo).Elem()).Interface()))
-	fmt.Println(foo)
+	<span style="color:#a6e22e">reflect</span>.<span style="color:#a6e22e">ValueOf</span>(<span style="color:#f92672">&amp;</span><span style="color:#a6e22e">foo</span>).<span style="color:#a6e22e">Elem</span>().<span style="color:#a6e22e">Set</span>(<span style="color:#a6e22e">reflect</span>.<span style="color:#a6e22e">ValueOf</span>(<span style="color:#a6e22e">reflect</span>.<span style="color:#a6e22e">New</span>(<span style="color:#a6e22e">reflect</span>.<span style="color:#a6e22e">TypeOf</span>(<span style="color:#a6e22e">foo</span>).<span style="color:#a6e22e">Elem</span>()).<span style="color:#a6e22e">Interface</span>()))
+	<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">foo</span>)
 }
 
-type Foo struct {
-	msg string
+<span style="color:#66d9ef">type</span> <span style="color:#a6e22e">Foo</span> <span style="color:#66d9ef">struct</span> {
+	<span style="color:#a6e22e">msg</span> <span style="color:#66d9ef">string</span>
 }
-</code></pre><p>基本的には使わないほうが良いですが、コード生成時にnilの可能性のある構造体のメンバにアクセスしないといけないようなとき等に使えると思います。</p>
+</code></pre></div><p>基本的には使わないほうが良いですが、コード生成時にnilの可能性のある構造体のメンバにアクセスしないといけないようなとき等に使えると思います。</p>
 
       </div>
 

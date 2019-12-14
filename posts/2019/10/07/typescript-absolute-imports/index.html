@@ -71,7 +71,7 @@ yarn add -D eslint-import-resolver-webpack 次にeslintrcのsettingsに以下の
     <link rel="icon" type="image/png" href="https://nametake.github.io/images/favicon-32x32.png" sizes="32x32">
     <link rel="icon" type="image/png" href="https://nametake.github.io/images/favicon-16x16.png" sizes="16x16">
 
-    <meta name="generator" content="Hugo 0.60.1" />
+    <meta name="generator" content="Hugo 0.61.0" />
   </head>
 
   <body class=" ">
@@ -178,8 +178,8 @@ yarn add -D eslint-import-resolver-webpack 次にeslintrcのsettingsに以下の
 <p>Webpackでプロジェクトをビルドするだけなら上記2つの設定だけで大丈夫ですが、eslintで<code>import/no-unresolved</code>を設定しているとエイリアスが解決できずエラーになります。</p>
 <p>そこで<a href="https://www.npmjs.com/package/eslint-import-resolver-webpack">eslint-import-resolver-webpack</a>を導入して、eslintのimportの解決にWebpackの設定を使用するようにeslintrcに設定を加えます。</p>
 <p>まずは以下のコマンドで<a href="https://www.npmjs.com/package/eslint-import-resolver-webpack">eslint-import-resolver-webpack</a>を追加します。</p>
-<pre><code>yarn add -D eslint-import-resolver-webpack
-</code></pre><p>次にeslintrcの<code>settings</code>に以下のようにWebpackの設定を使用するように設定を加えます。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">yarn add -D eslint-import-resolver-webpack
+</code></pre></div><p>次にeslintrcの<code>settings</code>に以下のようにWebpackの設定を使用するように設定を加えます。</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
   <span style="color:#960050;background-color:#1e0010">~</span><span style="color:#960050;background-color:#1e0010">~</span><span style="color:#960050;background-color:#1e0010">~</span>
   <span style="color:#f92672">&#34;settings&#34;</span>: {
@@ -188,16 +188,16 @@ yarn add -D eslint-import-resolver-webpack 次にeslintrcのsettingsに以下の
   <span style="color:#960050;background-color:#1e0010">~</span><span style="color:#960050;background-color:#1e0010">~</span><span style="color:#960050;background-color:#1e0010">~</span>
 }
 </code></pre></div><p>これでeslintでもエイリアスを認識して、エラーも出なくなります。</p>
-<h1 id="heading1">おまけ</h1>
+<h1 id="heading-1">おまけ</h1>
 <p>せっかくエイリアスを設定したので、親を指定した相対パスでのimportがあるとエラーになるように以下のruleをeslintrcに設定します(子を指定した相対パスはmodule内では使用したいので禁止しません)。</p>
-<pre><code>{
-  &quot;rules&quot;: {
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">{
+  &#34;rules&#34;: {
     ~~~
-    &quot;import/no-relative-parent-imports&quot;: &quot;error&quot;,
+    &#34;import/no-relative-parent-imports&#34;: &#34;error&#34;,
     ~~~
   }
 }
-</code></pre><p>これで親を指定した相対パスでのimportがあった場合eslintをかけたときにエラーで怒られるようになりました。</p>
+</code></pre></div><p>これで親を指定した相対パスでのimportがあった場合eslintをかけたときにエラーで怒られるようになりました。</p>
 
       </div>
 

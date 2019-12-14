@@ -65,7 +65,7 @@ syntax = &#34;proto3&#34;;package protobuf1;option go_package = &#34;pb&#34;;ser
     <link rel="icon" type="image/png" href="https://nametake.github.io/images/favicon-32x32.png" sizes="32x32">
     <link rel="icon" type="image/png" href="https://nametake.github.io/images/favicon-16x16.png" sizes="16x16">
 
-    <meta name="generator" content="Hugo 0.60.1" />
+    <meta name="generator" content="Hugo 0.61.0" />
   </head>
 
   <body class=" ">
@@ -190,9 +190,9 @@ syntax = &#34;proto3&#34;;package protobuf1;option go_package = &#34;pb&#34;;ser
 	}, <span style="color:#66d9ef">nil</span>
 }
 </code></pre></div><p>実行結果は以下のようになります。</p>
-<pre><code>CALLED PING
-msg:&quot;PONG: PING&quot;  &lt;nil&gt;
-</code></pre><p>さて、今回インターセプトしたい部分は最初のコードの以下の部分です。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">CALLED PING
+msg:&#34;PONG: PING&#34;  &lt;nil&gt;
+</code></pre></div><p>さて、今回インターセプトしたい部分は最初のコードの以下の部分です。</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go">	<span style="color:#a6e22e">ret</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">w</span>.<span style="color:#a6e22e">pingServer</span>.<span style="color:#a6e22e">Ping</span>(<span style="color:#a6e22e">ctx</span>, <span style="color:#a6e22e">arg</span>)
 </code></pre></div><p>このコードの前後に、 <code>WrapStruct.Call</code> に関数を渡すことで処理をインターセプトできるようにしたいと思います。</p>
 <p>いきなりですがインターセプトできるようにしたコードを以下に貼ります。</p>
@@ -261,22 +261,22 @@ msg:&quot;PONG: PING&quot;  &lt;nil&gt;
 	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">ret</span>, <span style="color:#a6e22e">err</span>
 }
 </code></pre></div><p>上記コードの実行結果は以下です。</p>
-<pre><code>CALLED PING
-msg:&quot;PONG: PING&quot;  &lt;nil&gt;
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">CALLED PING
+msg:&#34;PONG: PING&#34;  &lt;nil&gt;
 -------------------
 BEFORE
 CALLED PING
 AFTER
-msg:&quot;PONG: PING&quot;  &lt;nil&gt;
+msg:&#34;PONG: PING&#34;  &lt;nil&gt;
 -------------------
 BEFORE
 BEFORE2
 CALLED PING
 AFTER2
 AFTER
-msg:&quot;PONG: PING&quot;  &lt;nil&gt;
-</code></pre><p>Pingメソッドが内部で出力している <code>CALLED PING</code> の前後に任意の文字列を出力できています。</p>
-<h1 id="heading1">解説</h1>
+msg:&#34;PONG: PING&#34;  &lt;nil&gt;
+</code></pre></div><p>Pingメソッドが内部で出力している <code>CALLED PING</code> の前後に任意の文字列を出力できています。</p>
+<h1 id="heading-1">解説</h1>
 <p>さて、コードを見ればわかりはするのですが、一応どういう変更を入れたのか簡単に解説をしようと思います。</p>
 <p>まずは下記のintrafaceです。</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">RPC</span> <span style="color:#66d9ef">func</span>(<span style="color:#a6e22e">context</span>.<span style="color:#a6e22e">Context</span>, <span style="color:#f92672">*</span><span style="color:#a6e22e">pb</span>.<span style="color:#a6e22e">PingRequest</span>) (<span style="color:#f92672">*</span><span style="color:#a6e22e">pb</span>.<span style="color:#a6e22e">PingResponse</span>, <span style="color:#66d9ef">error</span>)
@@ -316,10 +316,10 @@ msg:&quot;PONG: PING&quot;  &lt;nil&gt;
 <p><code>chained</code> の引数で受け取った <code>RPC</code> を起点にして、forループで <code>chainer</code> を実行し、受け取った <code>Interceptor</code> を <code>RPC</code> に変換していきます。逆順に回している理由は、 最初に渡した <code>Interceptor</code> を最後に変換することで、渡した順に <code>Interceptor</code> を実行するためです。</p>
 <p>最後に、変換が終わった <code>RPC</code> を <code>chained</code> が受け取った <code>RPC</code> の引数を渡して実行することで、 <code>chained</code> の処理は終わりです。</p>
 <p>こうすることで、 例えば <code>Call</code> メソッドに1つの <code>Interceptor</code> が渡された場合、その渡された <code>Interceptor</code> には <code>Ping</code> メソッドが渡された状態で <code>RPC</code> に変換され、その <code>RPC</code> を実行することでインターセプトを可能にできるわけです。</p>
-<h1 id="heading2">まとめ</h1>
+<h1 id="heading-2">まとめ</h1>
 <p>このテクニックを知っていると「特定のinterfaceを受け取って内部でそのinterfaceで実行する」機能を持ったものを内部でインターセプトして任意の処理を挟むことができるようになります。</p>
 <p>あまり業務のコードで使えるようなテクニックではないですが、上記のような構造を持つライブラリやコードジェネレータを作るときに知っておくと、使う側にある程度の自由度を与えることができるようになると思います。</p>
-<h2 id="heading3">おまけ</h2>
+<h2 id="heading-3">おまけ</h2>
 <p>今回の例では出てこなかったテクニックとして、Interceptorに追加の情報を渡すということができます。</p>
 <p>上記の例では <code>Interceptor</code> は引数に、「<code>RPC</code> の引数」と「<code>RPC</code> そのもの」を受け取るようになっていますが、これは最低限の定義でしかないため、追加で別のものを受け取るように定義することで実現できます。</p>
 <p>実際に<a href="https://godoc.org/google.golang.org/grpc#UnaryServerInterceptor">grpc.UnaryServerInterceptor</a>は、ctxとreqとhandlerの他に、 <code>UnaryServerInfo</code> という構造体も渡されるように作られています。</p>

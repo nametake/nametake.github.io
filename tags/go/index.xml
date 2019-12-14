@@ -88,7 +88,7 @@ iferrのsnippetに関して以下の機能を提供しています。
       
       <guid>https://nametake.github.io/posts/2018/12/19/created-labelerr-and-suberr/</guid>
       <description>golang.tokyo #20のLT大会で、labelerrとsuberrを作った話をしてきました。
-「Goのerrorは1種類というのは綺麗だとは思うけど、実運用上errorに重み付けをしたいよね」ってところからこのライブラリの出発点です。
+ 「Goのerrorは1種類というのは綺麗だとは思うけど、実運用上errorに重み付けをしたいよね」ってところからこのライブラリの出発点です。
 スライド内にもありますが、Primitiveな型しか取り扱わないように気をつけている上に、ライブラリ自体も難しいことはしてないので、なんとなく使ってみるか、ぐらいの感覚で使ってもらうと嬉しいです。</description>
     </item>
     
@@ -142,9 +142,9 @@ client, err := google.DefaultClient(ctx, dataflow.CloudPlatformScope) if err != 
       
       <guid>https://nametake.github.io/posts/2018/09/20/dep-private-repo/</guid>
       <description>Goをアップデートした後、dep updateをしたら以下のようなエラーが発生しました。
-grouped write of manifest, lock and vendor: error while writing out vendor tree: failed to write dep tree: failed to export github.com/nametake/private-repo: unable to update repository: remote: Repository not found. fatal: repository &#39;https://github.com/nametake/private-repo/&#39; not found : command failed: [git fetch --tags --prune origin]: exit status 128 make: *** [dep] Error 1 原因はprivateリポジトリをhttps経由でcloneしようとしたことだったみたいです。
+grouped write of manifest, lock and vendor: error while writing out vendor tree: failed to write dep tree: failed to export github.com/nametake/private-repo: unable to update repository: remote: Repository not found. fatal: repository &amp;#39;https://github.com/nametake/private-repo/&amp;#39; not found : command failed: [git fetch --tags --prune origin]: exit status 128 make: *** [dep] Error 1 原因はprivateリポジトリをhttps経由でcloneしようとしたことだったみたいです。
 以下のconfig設定をして、githubではhttpsで始まるURLをgitのURLを使うように書き換える設定を追加したら治りました。
-[url &amp;quot;git@github.com:&amp;quot;] insteadOf = https://github.com/ https://git-scm.com/docs/git-config#git-config-urlltbasegtinsteadOf</description>
+[url &amp;#34;git@github.com:&amp;#34;] insteadOf = https://github.com/ https://git-scm.com/docs/git-config#git-config-urlltbasegtinsteadOf</description>
     </item>
     
   </channel>

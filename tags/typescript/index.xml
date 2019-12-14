@@ -36,7 +36,8 @@ yarn add -D eslint-import-resolver-webpack 次にeslintrcのsettingsに以下の
       <guid>https://nametake.github.io/posts/2019/06/05/formik-yup-dynamic-validation/</guid>
       <description>Formikで動的なFormを作った時に、表示されるFormに応じてYupのバリデーションを切り替える方法でちょっと手間取ったのでメモ。
 結論から言うとYup.lazy()を使って遅延評価されるValidationSchemaを使えば解決した。Yup.lazy()に渡ってくるFormの値を元にValidationwSchemaを表示されるFormに対応したValidationSchemaを返せば狙った挙動が実現できました。
-サンプルコードは以下。</description>
+サンプルコードは以下。
+ </description>
     </item>
     
     <item>
