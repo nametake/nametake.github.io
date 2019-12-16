@@ -6,10 +6,32 @@
     <description>Recent content in React on nametake.info</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 05 Jun 2019 23:50:36 +0900</lastBuildDate>
+    <lastBuildDate>Mon, 16 Dec 2019 00:00:00 +0900</lastBuildDate>
     
 	<atom:link href="https://nametake.github.io/tags/react/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Hooks対応したreact-tableをTypeScriptで使う</title>
+      <link>https://nametake.github.io/posts/2019/12/16/react-table/</link>
+      <pubDate>Mon, 16 Dec 2019 00:00:00 +0900</pubDate>
+      
+      <guid>https://nametake.github.io/posts/2019/12/16/react-table/</guid>
+      <description>この記事はReact Advent Calendar 2019の記事です。
+みなさまテーブルComponentは作成していますか?
+サービスにもよるとは思いますが、業務系のサービスではほぼ確実に登場するUIです。
+しかも、よく登場する上にたくさんの機能を求められるUIでもあります。パッと思いつく限りでも、ソート、フィルター、検索、ページネーション等多岐にわたります。
+これらの機能はUIと分離して1から作るは大変です。あり物のUIライブラリのテーブルComponentにオリジナルのスタイルを当てるという手もありますが、それだとUIライブラリの仕様に引っ張られたり、UIとロジックの分離がうまくできなかったりすることがあります。
+そこで、今回は「テーブルで必要になる機能」だけをHooksとし、UIとロジックを完全に分離できるるreact-table v7を紹介しようと思います。
+注意点 この記事執筆時点ではreact-table自体はRCになっていますが、react-tableの型定義はまだマージされていません。
+https://github.com/DefinitelyTyped/DefinitelyTyped/pull/40816
+また、議論の末、現段階最新バージョンのrc.9ではreact-table側で型定義を管理しないことになっています。
+そのため、この記事の紹介ではTypeScriptを使って紹介をする都合上、以下のコマンドで入るバージョンを使用して紹介をします。
+yarn add react-table@7.0.0-beta.23 大きく使い勝手が変わるようなことはないと思いますが、react-tableは開発が活発なため、この記事の内容が陳腐化している可能性があります。
+本番で使う際は必ず公式のドキュメントを参照してください。
+シンプルなテーブル まずは最もシンプルにテーブルを表示する例です。
+import * as React from &amp;#39;react&amp;#39;; import { render } from &amp;#39;react-dom&amp;#39;; import { useTable, Column } from &amp;#39;react-table&amp;#39;; import &amp;#39;./styles.css&amp;#39;; const columns: Column&amp;lt;Data&amp;gt;[] = [ { Header: &amp;#39;名前&amp;#39;, accessor: &amp;#39;name&amp;#39; }, { Header: &amp;#39;年齢&amp;#39;, accessor: &amp;#39;age&amp;#39; } ]; interface Data { name: string; age: number; } const data: Data[] = [ { name: &amp;#39;John&amp;#39;, age: 23 }, { name: &amp;#39;Jane&amp;#39;, age: 26 } ]; function App() { const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } = useTable&amp;lt;Data&amp;gt;({ columns, data }); return ( &amp;lt;table {.</description>
+    </item>
     
     <item>
       <title>FormikとYupを使った動的フォームのバリデーション</title>
