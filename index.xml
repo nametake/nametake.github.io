@@ -6,10 +6,30 @@
     <description>Recent content on nametake.info</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 17 Dec 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 31 Dec 2019 00:00:00 +0900</lastBuildDate>
     
 	<atom:link href="https://nametake.github.io/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Go言語でジェネリクスない理由の考察</title>
+      <link>https://nametake.github.io/posts/2019/12/31/go-no-generics/</link>
+      <pubDate>Tue, 31 Dec 2019 00:00:00 +0900</pubDate>
+      
+      <guid>https://nametake.github.io/posts/2019/12/31/go-no-generics/</guid>
+      <description>Go言語にはジェネリクスがありません。
+他言語から入ってきた方はかなりこの部分に戸惑うことが多いようです。
+そこで、そういった方々になぜジェネリクスがないのかを説明するにあたって、自分の中でいい感じに言語化できたのでログとして残しておこうと思います。
+なぜジェネリクスがないか ジェネリクスがない理由を説明するには以下の2つが必要だと思っています。
+ 言語としてのスタンスの話 ジェネリクスが効果を発揮する場面  それぞれ細かく説明していこうと思います。
+言語としてのスタンスの話 何かが新しく作られるときには何かしら課題を解決しようとして生まれてきます。
+Goが解決しようとした課題についてはGoの作者の生みの親の一人でもあるRob Pike氏が2012年の公演で話されています。
+リンク先の講演の記事の中に、以下の点が既存の開発の辛い部分で、Goはそれらに対処しているという部分があります。
+ slow builds (遅いビルド) uncontrolled dependencies (制御されていない依存関係) each programmer using a different subset of the language(言語の異なるサブセットを使用する各プログラマ) poor program understanding (code hard to read, poorly documented, and so on) (不十分なプログラムの理解(読みにくいコード、不十分な文書化など)) duplication of effort (努力の重複) cost of updates (更新のコスト) version skew (バージョンスキュー) difficulty of writing automatic tools (自動ツールの作成の難しさ) cross-language builds (言語間ビルド)  上記に挙げられている対処している課題を見ると、Go言語は「プログラム言語としての正しさ」という点ではなく「(言語仕様も含む)開発のしやすさ」に強くフォーカスを当てられている言語だとわかります。
+そのため、新しい機能を言語に追加にあたり「プログラミング言語としての正しさ」が強くあったとしても、それを代替する手段がありかつ全体として「開発のしやすさ」が損なわれる場合は導入されない傾向があります。
+ジェネリクスが効果を発揮する場面 ジェネリクスは便利な機能です。型を値のように取り扱い、抽象化された処理を型安全に取り扱うことができます。
+ですが、便利に使うためには1つ条件があります。</description>
+    </item>
     
     <item>
       <title>Hooks対応したreact-tableをTypeScriptで使う</title>
@@ -45,26 +65,6 @@ import * as React from &amp;#39;react&amp;#39;; import { render } from &amp;#39;
 コード例 まずはインターセプトしたいコードの例を書きます。
 type WrapStruct struct { pingServer pb.PingAPIServer } func (w *WrapStruct) Call() { ctx := context.Background() arg := &amp;amp;pb.PingRequest{ Msg: &amp;#34;PING&amp;#34;, } ret, err := w.pingServer.Ping(ctx, arg) fmt.Println(ret, err) } 上記例は以下のProtocol Buffersの定義をgRPCオプション付きでコンパイルすると生成されるコードを使用しています。
 syntax = &amp;#34;proto3&amp;#34;;package protobuf1;option go_package = &amp;#34;pb&amp;#34;;service PingAPI { rpc Ping(PingRequest) returns (PingResponse);}message PingRequest { string msg = 1;}message PingResponse { string msg = 1;}なんの変哲もない、ただ自身を実装している構造体がもつ PingAPIServer interfaceの Ping メソッドに PING の文字列を渡して実行し、その結果を出力しているだけのコードです。</description>
-    </item>
-    
-    <item>
-      <title>Go言語でジェネリクスない理由の考察</title>
-      <link>https://nametake.github.io/posts/2019/11/25/go-no-generics/</link>
-      <pubDate>Mon, 25 Nov 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://nametake.github.io/posts/2019/11/25/go-no-generics/</guid>
-      <description>Go言語にはジェネリクスがありません。
-他言語から入ってきた方はかなりこの部分に戸惑うことが多いようです。
-そこで、そういった方々になぜジェネリクスがないのかを説明するにあたって、自分の中でいい感じに言語化できたのでログとして残しておこうと思います。
-なぜジェネリクスがないか ジェネリクスがない理由を説明するには以下の2つが必要だと思っています。
- 言語としてのスタンスの話 ジェネリクスが効果を発揮する場面  それぞれ細かく説明していこうと思います。
-言語としてのスタンスの話 何かが新しく作られるときには何かしら課題を解決しようとして生まれてきます。
-Goが解決しようとした課題についてはGoの作者の生みの親の一人でもあるRob Pike氏が2012年の公演で話されています。
-リンク先の講演の記事の中に、以下の点が既存の開発の辛い部分で、Goはそれらに対処しているという部分があります。
- slow builds (遅いビルド) uncontrolled dependencies (制御されていない依存関係) each programmer using a different subset of the language(言語の異なるサブセットを使用する各プログラマ) poor program understanding (code hard to read, poorly documented, and so on) (不十分なプログラムの理解(読みにくいコード、不十分な文書化など)) duplication of effort (努力の重複) cost of updates (更新のコスト) version skew (バージョンスキュー) difficulty of writing automatic tools (自動ツールの作成の難しさ) cross-language builds (言語間ビルド)  上記に挙げられている対処している課題を見ると、Go言語は「プログラム言語としての正しさ」という点ではなく「(言語仕様も含む)開発のしやすさ」に強くフォーカスを当てられている言語だとわかります。
-そのため、新しい機能を言語に追加にあたり「プログラミング言語としての正しさ」が強くあったとしても、それを代替する手段がありかつ全体として「開発のしやすさ」が損なわれる場合は導入されない傾向があります。
-ジェネリクスが効果を発揮する場面 ジェネリクスは便利な機能です。型を値のように取り扱い、抽象化された処理を型安全に取り扱うことができます。
-ですが、便利に使うためには1つ条件があります。</description>
     </item>
     
     <item>

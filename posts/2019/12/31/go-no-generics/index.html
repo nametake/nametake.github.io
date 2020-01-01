@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="author" content="nametake">
+    <meta name="description" content="nametake&#39;s personal website">
+    <meta name="keywords" content="blog,developer,personal">
+
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Go言語でジェネリクスない理由の考察"/>
+<meta name="twitter:description" content="Go言語にはジェネリクスがありません。
+他言語から入ってきた方はかなりこの部分に戸惑うことが多いようです。
+そこで、そういった方々になぜジェネリクスがないのかを説明するにあたって、自分の中でいい感じに言語化できたのでログとして残しておこうと思います。
+なぜジェネリクスがないか ジェネリクスがない理由を説明するには以下の2つが必要だと思っています。
+ 言語としてのスタンスの話 ジェネリクスが効果を発揮する場面  それぞれ細かく説明していこうと思います。
+言語としてのスタンスの話 何かが新しく作られるときには何かしら課題を解決しようとして生まれてきます。
+Goが解決しようとした課題についてはGoの作者の生みの親の一人でもあるRob Pike氏が2012年の公演で話されています。
+リンク先の講演の記事の中に、以下の点が既存の開発の辛い部分で、Goはそれらに対処しているという部分があります。
+ slow builds (遅いビルド) uncontrolled dependencies (制御されていない依存関係) each programmer using a different subset of the language(言語の異なるサブセットを使用する各プログラマ) poor program understanding (code hard to read, poorly documented, and so on) (不十分なプログラムの理解(読みにくいコード、不十分な文書化など)) duplication of effort (努力の重複) cost of updates (更新のコスト) version skew (バージョンスキュー) difficulty of writing automatic tools (自動ツールの作成の難しさ) cross-language builds (言語間ビルド)  上記に挙げられている対処している課題を見ると、Go言語は「プログラム言語としての正しさ」という点ではなく「(言語仕様も含む)開発のしやすさ」に強くフォーカスを当てられている言語だとわかります。
+そのため、新しい機能を言語に追加にあたり「プログラミング言語としての正しさ」が強くあったとしても、それを代替する手段がありかつ全体として「開発のしやすさ」が損なわれる場合は導入されない傾向があります。
+ジェネリクスが効果を発揮する場面 ジェネリクスは便利な機能です。型を値のように取り扱い、抽象化された処理を型安全に取り扱うことができます。
+ですが、便利に使うためには1つ条件があります。"/>
+
+    <meta property="og:title" content="Go言語でジェネリクスない理由の考察" />
+<meta property="og:description" content="Go言語にはジェネリクスがありません。
+他言語から入ってきた方はかなりこの部分に戸惑うことが多いようです。
+そこで、そういった方々になぜジェネリクスがないのかを説明するにあたって、自分の中でいい感じに言語化できたのでログとして残しておこうと思います。
+なぜジェネリクスがないか ジェネリクスがない理由を説明するには以下の2つが必要だと思っています。
+ 言語としてのスタンスの話 ジェネリクスが効果を発揮する場面  それぞれ細かく説明していこうと思います。
+言語としてのスタンスの話 何かが新しく作られるときには何かしら課題を解決しようとして生まれてきます。
+Goが解決しようとした課題についてはGoの作者の生みの親の一人でもあるRob Pike氏が2012年の公演で話されています。
+リンク先の講演の記事の中に、以下の点が既存の開発の辛い部分で、Goはそれらに対処しているという部分があります。
+ slow builds (遅いビルド) uncontrolled dependencies (制御されていない依存関係) each programmer using a different subset of the language(言語の異なるサブセットを使用する各プログラマ) poor program understanding (code hard to read, poorly documented, and so on) (不十分なプログラムの理解(読みにくいコード、不十分な文書化など)) duplication of effort (努力の重複) cost of updates (更新のコスト) version skew (バージョンスキュー) difficulty of writing automatic tools (自動ツールの作成の難しさ) cross-language builds (言語間ビルド)  上記に挙げられている対処している課題を見ると、Go言語は「プログラム言語としての正しさ」という点ではなく「(言語仕様も含む)開発のしやすさ」に強くフォーカスを当てられている言語だとわかります。
+そのため、新しい機能を言語に追加にあたり「プログラミング言語としての正しさ」が強くあったとしても、それを代替する手段がありかつ全体として「開発のしやすさ」が損なわれる場合は導入されない傾向があります。
+ジェネリクスが効果を発揮する場面 ジェネリクスは便利な機能です。型を値のように取り扱い、抽象化された処理を型安全に取り扱うことができます。
+ですが、便利に使うためには1つ条件があります。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://nametake.github.io/posts/2019/12/31/go-no-generics/" />
+<meta property="article:published_time" content="2019-12-31T00:00:00+09:00" />
+<meta property="article:modified_time" content="2019-12-31T00:00:00+09:00" />
+
+
+    
+      <base href="https://nametake.github.io/posts/2019/12/31/go-no-generics/">
+    
+    <title>
+  Go言語でジェネリクスない理由の考察 · nametake.info
+</title>
+
+    
+      <link rel="canonical" href="https://nametake.github.io/posts/2019/12/31/go-no-generics/">
+    
+
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700%7CMerriweather:300,700%7CSource+Code+Pro:400,700" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" integrity="sha256-l85OmPOjvil/SOvVt3HnSSjzF1TUMyT9eV0c2BzEGzU=" crossorigin="anonymous" />
+
+    
+      
+      
+      <link rel="stylesheet" href="https://nametake.github.io/css/coder.min.28d751104f30c16da1aa1bb04015cbe662cacfe0d1b01af4f2240ad58580069c.css" integrity="sha256-KNdREE8wwW2hqhuwQBXL5mLKz&#43;DRsBr08iQK1YWABpw=" crossorigin="anonymous" media="screen" />
+    
+
+    
+
+    
+
+    
+      <link rel="stylesheet" href="https://nametake.github.io/css/index.css" />
+    
+
+    
+    
+    <link rel="icon" type="image/png" href="https://nametake.github.io/images/favicon-32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="https://nametake.github.io/images/favicon-16x16.png" sizes="16x16">
+
+    <meta name="generator" content="Hugo 0.62.0" />
+  </head>
+
+  <body class=" ">
+    <main class="wrapper">
+      <nav class="navigation">
+  <section class="container">
+    <a class="navigation-title" href="https://nametake.github.io/">
+      nametake.info
+    </a>
+    <input type="checkbox" id="menu-toggle" />
+    <label class="menu-button float-right" for="menu-toggle"><i class="fas fa-bars"></i></label>
+    <ul class="navigation-list">
+      
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="https://nametake.github.io/about/">About</a>
+          </li>
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="https://nametake.github.io/posts/">Blog</a>
+          </li>
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="https://nametake.github.io/project/">Project</a>
+          </li>
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="https://nametake.github.io/tags/">Tags</a>
+          </li>
+        
+      
+      
+    </ul>
+  </section>
+</nav>
+
+
+      <div class="content">
+        
+  <section class="container post">
+    <article>
+      <header>
+        <div class="post-title">
+          <h1 class="title">Go言語でジェネリクスない理由の考察</h1>
+        </div>
+        <div class="post-meta">
+          <div class="date">
+            <span class="posted-on">
+              <i class="fas fa-calendar"></i>
+              <time datetime='2019-12-31T00:00:00&#43;09:00'>
+                December 31, 2019
+              </time>
+            </span>
+            <span class="reading-time">
+              <i class="fas fa-clock"></i>
+              One minute read
+            </span>
+          </div>
+          
+          <div class="tags">
+  <i class="fas fa-tag"></i>
+    <a href="https://nametake.github.io/tags/go/">Go</a></div>
+
+        </div>
+      </header>
+
+      <div>
+        <p>Go言語にはジェネリクスがありません。</p>
+<p>他言語から入ってきた方はかなりこの部分に戸惑うことが多いようです。</p>
+<p>そこで、そういった方々になぜジェネリクスがないのかを説明するにあたって、自分の中でいい感じに言語化できたのでログとして残しておこうと思います。</p>
+<h1 id="heading">なぜジェネリクスがないか</h1>
+<p>ジェネリクスがない理由を説明するには以下の2つが必要だと思っています。</p>
+<ul>
+<li>言語としてのスタンスの話</li>
+<li>ジェネリクスが効果を発揮する場面</li>
+</ul>
+<p>それぞれ細かく説明していこうと思います。</p>
+<h2 id="heading-1">言語としてのスタンスの話</h2>
+<p>何かが新しく作られるときには何かしら課題を解決しようとして生まれてきます。</p>
+<p>Goが解決しようとした課題についてはGoの作者の生みの親の一人でもあるRob Pike氏が<a href="https://talks.golang.org/2012/splash.article">2012年の公演</a>で話されています。</p>
+<p>リンク先の講演の記事の中に、以下の点が既存の開発の辛い部分で、Goはそれらに対処しているという部分があります。</p>
+<ul>
+<li>slow builds (遅いビルド)</li>
+<li>uncontrolled dependencies (制御されていない依存関係)</li>
+<li>each programmer using a different subset of the language(言語の異なるサブセットを使用する各プログラマ)</li>
+<li>poor program understanding (code hard to read, poorly documented, and so on) (不十分なプログラムの理解(読みにくいコード、不十分な文書化など))</li>
+<li>duplication of effort (努力の重複)</li>
+<li>cost of updates (更新のコスト)</li>
+<li>version skew (バージョンスキュー)</li>
+<li>difficulty of writing automatic tools (自動ツールの作成の難しさ)</li>
+<li>cross-language builds (言語間ビルド)</li>
+</ul>
+<p>上記に挙げられている対処している課題を見ると、Go言語は「プログラム言語としての正しさ」という点ではなく「(言語仕様も含む)開発のしやすさ」に強くフォーカスを当てられている言語だとわかります。</p>
+<p>そのため、新しい機能を言語に追加にあたり「プログラミング言語としての正しさ」が強くあったとしても、それを代替する手段がありかつ全体として「開発のしやすさ」が損なわれる場合は導入されない傾向があります。</p>
+<h2 id="heading-2">ジェネリクスが効果を発揮する場面</h2>
+<p>ジェネリクスは便利な機能です。型を値のように取り扱い、抽象化された処理を型安全に取り扱うことができます。</p>
+<p>ですが、便利に使うためには1つ条件があります。</p>
+<p>それは、「高度に抽象化された振る舞い」が定義できる場合です。</p>
+<p>それでは「高度に抽象化された振る舞い」とは何でしょうか。</p>
+<p>例えばGUI開発におけるViewの振る舞いがあります。</p>
+<p>Androidの<code>ListView</code>は「アイテムが一覧で並んでいる」という振る舞いを抽象化したViewクラスです。<code>ListView</code> は内部で表示するものをAdapter経由で受け取りますが、Adapterには型パラメータを与えることができるため、一覧の中に表示する項目を型安全に取り扱うことができます。</p>
+<p>これは「一覧で並んでいる」という振る舞いを高度に抽象化できているため、内部で表示する項目はジェネリクスの型パラメータとして与えても違和感のない設計にできます。</p>
+<p>GUIの開発では「羅列されたデータの中から1つ選択する」「テーブルとして表示する」の様に文字通り触る人の「振る舞い」を抽象化し、取り扱うデータを型パラメータを用いて安全に取り扱うとができるため、ジェネリクスとの相性はとてもよいでしょう。</p>
+<p>もう1つの例としてはデータコンテナとしての振る舞いがあります。</p>
+<p>種類は色々ありますが、ざっくりと以下の3つに大別できると思います。</p>
+<ul>
+<li>Collection</li>
+<li>Nullable</li>
+<li>非同期</li>
+</ul>
+<p>これらはコードを書く上で頻出する振舞いでありながら、データの構造そのものには依存しません。</p>
+<p>そのため、振舞いを抽出して定義しつつ、ジェネリクスとして型パラメータを与えるようにすることで、抽象化された振舞いを型安全に行うことが出来ます。</p>
+<h2 id="go">Goにおけるジェネリクス</h2>
+<p>さて、Goでのジェネリクスの話です。</p>
+<p>GoのユースケースとしてGUIを開発はあまりメジャーな対象になっていないのでデータコンテナだけの話になります。</p>
+<p>先程ジェネリクスのメリットを説明しましたが、それらの機能を言語に組み込もうとするとどうしても言語として複雑になります(大小の話ではなく入れる入れないだと入れたほうが複雑になるという話です)。</p>
+<p>Goの言語のスタンスとしての部分で解説したとおり、Goは開発のしやすさに重点を置いており、そのしやすさは言語そのものも対象になっています。</p>
+<p>とはいえ、同じような操作は発生するため何かしらの手段で解決はしなくてはいけません。</p>
+<p>Goはそれらの操作に対して以下の様に対応しています。</p>
+<ul>
+<li>Collection -&gt; for文とif文</li>
+<li>Nullable -&gt; if文</li>
+<li>非同期 -&gt; goroutineとchannel</li>
+</ul>
+<p>CollectionとNullableに対する解決策は非常にシンプルです。基本構文で対応できるならそれで良いじゃないかという解決策を取っています。</p>
+<p>言語として機能が足りないように感じるかもしれませんが、少なくともデータコンテナに対する操作としては過不足なく実現することが出来ます。</p>
+<p>また、特にNullableのチェック漏れ等の問題には、GoはLinterを使って解決するという文化になっています。</p>
+<p>言語仕様をシンプルに保つ理由の1つに静的解析ツールを作りやすくする目的も有るため、デファクトスタンダードのものを使いつつ、自分の目的にあった解析ツールを作ることも出来ます。</p>
+<p>そういった文化により、言語の仕様自体はシンプルに保ちつつ、安全で漏れの無いコードを書くことを可能にしています。</p>
+<p>非同期に対するgoroutineですがこれはGoの解決したかった課題というのもあり非常に高度に抽象化されています。</p>
+<p>使い方の詳細はここでは解説しませんが、goroutineはOSのThreadを完全に隠蔽しつつ、goroutine間でデータをやり取りするためのchannelには型をつけることが出来ます。</p>
+<p>ジェネリクスとしては実装していませんが、型安全に並行処理を取り扱えるようになっています。</p>
+<p>上記の様にGoはジェネリクスがなかったとしても言語として十分に使うことができる機能を備えています。</p>
+<p>また、一般的な開発で使うような機能は全て標準パッケージがinterfaceとして提供しているため、それらと組み合わせることで他のプログラミングでできることと過不足ない実装を実現することが出来ます。</p>
+<p>ただ、最近は <a href="https://golang.org/doc/faq#generics">GoのFAQにも書いてあるとおり</a>、コミュニティや言語が成熟してきたのでジェネリクスの議論も進んできています。</p>
+<p>気になる方は是非こちらを見てどういった議論が行われているのかを確認してみてください。</p>
+
+      </div>
+
+      <footer>
+        
+
+
+        <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "nametake" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+        
+        
+      </footer>
+    </article>
+
+    
+  </section>
+
+      </div>
+
+      <footer class="footer">
+  <section class="container">
+    
+      <p>nametake.github.io</p>
+    
+     © 2020
+    
+       · 
+      Powered by <a href="https://gohugo.io/">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/">Coder</a>.
+    
+    
+  </section>
+</footer>
+
+    </main>
+
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-129739305-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+
+  </body>
+
+</html>
