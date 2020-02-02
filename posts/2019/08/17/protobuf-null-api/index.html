@@ -85,7 +85,7 @@ message NullDecimal { bool has_value = 1; Decimal decimal = 2;}定義の通り�
     <link rel="icon" type="image/png" href="https://nametake.github.io/images/favicon-32x32.png" sizes="32x32">
     <link rel="icon" type="image/png" href="https://nametake.github.io/images/favicon-16x16.png" sizes="16x16">
 
-    <meta name="generator" content="Hugo 0.62.0" />
+    <meta name="generator" content="Hugo 0.63.2" />
   </head>
 
   
@@ -157,7 +157,7 @@ message NullDecimal { bool has_value = 1; Decimal decimal = 2;}定義の通り�
       </header>
 
       <div>
-        <h1 id="protocol-buffersnull">Protocol BuffersのNullの取り扱いの問題</h1>
+        <h1 id="protocol-buffersのnullの取り扱いの問題">Protocol BuffersのNullの取り扱いの問題</h1>
 <p>Protocol Buffersのproto3の仕様ではmessageの中の値をOptionalで表現する記法がありません。値を詰めずに送ると入れ子の値が<a href="https://developers.google.com/protocol-buffers/docs/proto3#default">デフォルト値</a>になってしまいます。</p>
 <p>しかし、アプリケーションの設計によってはOptionalな値を表現する必要が出てきます。</p>
 <p>そういった時、プリミティブな型なら<a href="https://github.com/protocolbuffers/protobuf/blob/master/src/google/protobuf/wrappers.proto"><code>google/protobuf/wappers.proto</code></a>を使う方法があります。</p>
@@ -195,7 +195,7 @@ message NullDecimal { bool has_value = 1; Decimal decimal = 2;}定義の通り�
 </span><span style="color:#960050;background-color:#1e0010"></span>}<span style="color:#960050;background-color:#1e0010">
 </span></code></pre></div><p><code>Order</code>型では金銭を表現しているため数値を正確に表現できるDecimal型を使って金額とポイントを定義しています。しかし、アプリケーションの都合で<code>amount</code>はRequiredに<code>point</code>はOptionalにしたいとき、どちらもデフォルト値がnullになってしまうため、そのままだと両方を同時に表現できません。また、0ポイントなのかnullなのかで挙動に明確な違いがある場合は0を送るという手段も成立しません。</p>
 <p><code>Order</code>ぐらいの定義量であればコメントやドキュメントで対応することもできます。しかし、生成されるコードがOptionalであるということは変わらないため、せっかく型付でコード生成をしてくれるProtocol Buffersのメリットが半減してしまいます。また、人類にドキュメントを書く読む管理するという行為は難しすぎるため、プロダクトの成長に従ってドキュメントは陳腐化していってしまいます。</p>
-<h1 id="heading">解決策</h1>
+<h1 id="解決策">解決策</h1>
 <p><code>Decimal</code>をOptionalで表現するために以下のような<code>NullDecimal</code>型を定義してみます。</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-proto" data-lang="proto"><span style="color:#66d9ef">message</span> <span style="color:#a6e22e">NullDecimal</span> {<span style="color:#960050;background-color:#1e0010">
 </span><span style="color:#960050;background-color:#1e0010"></span>  <span style="color:#66d9ef">bool</span> has_value <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;<span style="color:#960050;background-color:#1e0010">

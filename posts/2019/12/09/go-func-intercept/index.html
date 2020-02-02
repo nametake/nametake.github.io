@@ -75,7 +75,7 @@ syntax = &#34;proto3&#34;;package protobuf1;option go_package = &#34;pb&#34;;ser
     <link rel="icon" type="image/png" href="https://nametake.github.io/images/favicon-32x32.png" sizes="32x32">
     <link rel="icon" type="image/png" href="https://nametake.github.io/images/favicon-16x16.png" sizes="16x16">
 
-    <meta name="generator" content="Hugo 0.62.0" />
+    <meta name="generator" content="Hugo 0.63.2" />
   </head>
 
   
@@ -150,7 +150,7 @@ syntax = &#34;proto3&#34;;package protobuf1;option go_package = &#34;pb&#34;;ser
         <p>この記事は<a href="https://qiita.com/advent-calendar/2019/go2">Go2 Advent Calendar 2019</a>の記事です。</p>
 <p>自分は<a href="https://github.com/nametake/protoc-gen-gohttp">protoc-gen-gohttp</a>というプラグインを作っているのですが、先日<a href="https://godoc.org/google.golang.org/grpc#UnaryServerInterceptor">grpc.UnaryServerInterceptor</a>に対応しました。</p>
 <p>その際、どうやればいいかを調査していたら、<a href="https://godoc.org/github.com/grpc-ecosystem/go-grpc-middleware#ChainUnaryServer">ChainUnaryServer</a>という関数を見つけ、中身を読んでみると、「特定のinterfaceを受け取って内部でそのinterfaceで実行する」機能を持った関数に対して「内部でinterfaceを実行するときに複数の関数でインターセプトする」方法の知見を得られたので記事にしようと思います。</p>
-<h1 id="heading">コード例</h1>
+<h1 id="コード例">コード例</h1>
 <p>まずはインターセプトしたいコードの例を書きます。</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">WrapStruct</span> <span style="color:#66d9ef">struct</span> {
 	<span style="color:#a6e22e">pingServer</span> <span style="color:#a6e22e">pb</span>.<span style="color:#a6e22e">PingAPIServer</span>
@@ -290,7 +290,7 @@ AFTER2
 AFTER
 msg:&#34;PONG: PING&#34;  &lt;nil&gt;
 </code></pre></div><p>Pingメソッドが内部で出力している <code>CALLED PING</code> の前後に任意の文字列を出力できています。</p>
-<h1 id="heading-1">解説</h1>
+<h1 id="解説">解説</h1>
 <p>さて、コードを見ればわかりはするのですが、一応どういう変更を入れたのか簡単に解説をしようと思います。</p>
 <p>まずは下記のintrafaceです。</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">RPC</span> <span style="color:#66d9ef">func</span>(<span style="color:#a6e22e">context</span>.<span style="color:#a6e22e">Context</span>, <span style="color:#f92672">*</span><span style="color:#a6e22e">pb</span>.<span style="color:#a6e22e">PingRequest</span>) (<span style="color:#f92672">*</span><span style="color:#a6e22e">pb</span>.<span style="color:#a6e22e">PingResponse</span>, <span style="color:#66d9ef">error</span>)
@@ -330,10 +330,10 @@ msg:&#34;PONG: PING&#34;  &lt;nil&gt;
 <p><code>chained</code> の引数で受け取った <code>RPC</code> を起点にして、forループで <code>chainer</code> を実行し、受け取った <code>Interceptor</code> を <code>RPC</code> に変換していきます。逆順に回している理由は、 最初に渡した <code>Interceptor</code> を最後に変換することで、渡した順に <code>Interceptor</code> を実行するためです。</p>
 <p>最後に、変換が終わった <code>RPC</code> を <code>chained</code> が受け取った <code>RPC</code> の引数を渡して実行することで、 <code>chained</code> の処理は終わりです。</p>
 <p>こうすることで、 例えば <code>Call</code> メソッドに1つの <code>Interceptor</code> が渡された場合、その渡された <code>Interceptor</code> には <code>Ping</code> メソッドが渡された状態で <code>RPC</code> に変換され、その <code>RPC</code> を実行することでインターセプトを可能にできるわけです。</p>
-<h1 id="heading-2">まとめ</h1>
+<h1 id="まとめ">まとめ</h1>
 <p>このテクニックを知っていると「特定のinterfaceを受け取って内部でそのinterfaceで実行する」機能を持ったものを内部でインターセプトして任意の処理を挟むことができるようになります。</p>
 <p>あまり業務のコードで使えるようなテクニックではないですが、上記のような構造を持つライブラリやコードジェネレータを作るときに知っておくと、使う側にある程度の自由度を与えることができるようになると思います。</p>
-<h2 id="heading-3">おまけ</h2>
+<h2 id="おまけ">おまけ</h2>
 <p>今回の例では出てこなかったテクニックとして、Interceptorに追加の情報を渡すということができます。</p>
 <p>上記の例では <code>Interceptor</code> は引数に、「<code>RPC</code> の引数」と「<code>RPC</code> そのもの」を受け取るようになっていますが、これは最低限の定義でしかないため、追加で別のものを受け取るように定義することで実現できます。</p>
 <p>実際に<a href="https://godoc.org/google.golang.org/grpc#UnaryServerInterceptor">grpc.UnaryServerInterceptor</a>は、ctxとreqとhandlerの他に、 <code>UnaryServerInfo</code> という構造体も渡されるように作られています。</p>

@@ -75,7 +75,7 @@ posts = &quot;/posts/:year/:month/:day/:slug&quot;のpostsの部分はcontentデ
     <link rel="icon" type="image/png" href="https://nametake.github.io/images/favicon-32x32.png" sizes="32x32">
     <link rel="icon" type="image/png" href="https://nametake.github.io/images/favicon-16x16.png" sizes="16x16">
 
-    <meta name="generator" content="Hugo 0.62.0" />
+    <meta name="generator" content="Hugo 0.63.2" />
   </head>
 
   
@@ -243,7 +243,7 @@ cd ..
 git add public
 git commit -m <span style="color:#e6db74">&#34;</span>$msg<span style="color:#e6db74">&#34;</span>
 git push
-</code></pre></div><h2 id="new-postsh">new_post.sh</h2>
+</code></pre></div><h2 id="new_postsh">new_post.sh</h2>
 <p>postのディレクトリに新しく記事を追加するとき、ディレクトリには<code>content/posts/2018-09-15-my-fist-post/index.md</code>のように日付を設定したかったので、postを作成するためのscriptを用意。</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e">#!/bin/bash
 </span><span style="color:#75715e"></span>TITLE<span style="color:#f92672">=</span><span style="color:#e6db74">${</span>1<span style="color:#e6db74">}</span>

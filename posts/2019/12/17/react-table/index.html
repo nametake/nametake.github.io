@@ -91,7 +91,7 @@ import * as React from &#39;react&#39;; import { render } from &#39;react-dom&#3
     <link rel="icon" type="image/png" href="https://nametake.github.io/images/favicon-32x32.png" sizes="32x32">
     <link rel="icon" type="image/png" href="https://nametake.github.io/images/favicon-16x16.png" sizes="16x16">
 
-    <meta name="generator" content="Hugo 0.62.0" />
+    <meta name="generator" content="Hugo 0.63.2" />
   </head>
 
   
@@ -169,7 +169,7 @@ import * as React from &#39;react&#39;; import { render } from &#39;react-dom&#3
 <p>しかも、よく登場する上にたくさんの機能を求められるUIでもあります。パッと思いつく限りでも、ソート、フィルター、検索、ページネーション等多岐にわたります。</p>
 <p>これらの機能はUIと分離して1から作るは大変です。あり物のUIライブラリのテーブルComponentにオリジナルのスタイルを当てるという手もありますが、それだとUIライブラリの仕様に引っ張られたり、UIとロジックの分離がうまくできなかったりすることがあります。</p>
 <p>そこで、今回は「テーブルで必要になる機能」だけをHooksとし、UIとロジックを完全に分離できるる<a href="https://github.com/tannerlinsley/react-table">react-table v7</a>を紹介しようと思います。</p>
-<h1 id="heading">注意点</h1>
+<h1 id="注意点">注意点</h1>
 <p>この記事執筆時点ではreact-table自体はRCになっていますが、react-tableの型定義はまだマージされていません。</p>
 <p><a href="https://github.com/DefinitelyTyped/DefinitelyTyped/pull/40816">https://github.com/DefinitelyTyped/DefinitelyTyped/pull/40816</a></p>
 <p>また、議論の末、現段階最新バージョンのrc.9ではreact-table側で型定義を管理しないことになっています。</p>
@@ -177,7 +177,7 @@ import * as React from &#39;react&#39;; import { render } from &#39;react-dom&#3
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">yarn add react-table@7.0.0-beta.23
 </code></pre></div><p>大きく使い勝手が変わるようなことはないと思いますが、react-tableは開発が活発なため、この記事の内容が陳腐化している可能性があります。</p>
 <p>本番で使う際は必ず公式のドキュメントを参照してください。</p>
-<h1 id="heading-1">シンプルなテーブル</h1>
+<h1 id="シンプルなテーブル">シンプルなテーブル</h1>
 <p>まずは最もシンプルにテーブルを表示する例です。</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-tsx" data-lang="tsx"><span style="color:#66d9ef">import</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">as</span> <span style="color:#a6e22e">React</span> <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;react&#39;</span>;
 <span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">render</span> } <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;react-dom&#39;</span>;
@@ -262,7 +262,7 @@ import * as React from &#39;react&#39;; import { render } from &#39;react-dom&#3
 </code></pre></div><p><code>useTable</code> はColumnとそれに対応した情報 <code>data</code> を受け取って <code>TableInstance</code> を返します。</p>
 <p><code>TableInstance</code> はTableを描画するのに必要な情報をすべて持っており、Tableの内部で変更があったときに更新されるようになっています。</p>
 <p>描画に使っているTableタグは、完全にreact-tableからは独立しており、 <code>TableInstance</code> と組み合わせて使うことで完全に描画とロジックを独立させることが可能になっています。</p>
-<h1 id="sort">Sortの機能を追加する</h1>
+<h1 id="sortの機能を追加する">Sortの機能を追加する</h1>
 <p>上記例では特に複雑な機能がないため、テーブルを作る上でありがちなSortの機能を追加してみましょう。</p>
 <p>まず、TypeScriptでreact-tableの機能を使うためには以下の型定義ファイル設置する必要があります。</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ts" data-lang="ts"><span style="color:#66d9ef">import</span> {
@@ -403,7 +403,7 @@ import * as React from &#39;react&#39;; import { render } from &#39;react-dom&#3
  allow="geolocation; microphone; camera; midi; vr; accelerometer; gyroscope; payment; ambient-light-sensor; encrypted-media; usb"
  sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"
 > </iframe>
-<h1 id="2">注意点その2</h1>
+<h1 id="注意点その2">注意点その2</h1>
 <p>react-tableはHooksとして提供されているため、渡すときにメモ化されていないと正常に動作しない機能があります(自分も2回ほど引っかかった)。</p>
 <p><a href="https://github.com/tannerlinsley/react-table/tree/master/docs/api">公式のドキュメント</a>にメモ化が必要なものについてはその旨が書いてあるので、自分が使いたいプラグインの部分は熟読することをおすすめします。</p>
 

@@ -87,7 +87,7 @@ Component の実装 何はともあれ何かが表示されてないとモチベ
     <link rel="icon" type="image/png" href="https://nametake.github.io/images/favicon-32x32.png" sizes="32x32">
     <link rel="icon" type="image/png" href="https://nametake.github.io/images/favicon-16x16.png" sizes="16x16">
 
-    <meta name="generator" content="Hugo 0.62.0" />
+    <meta name="generator" content="Hugo 0.63.2" />
   </head>
 
   
@@ -188,7 +188,7 @@ Component の実装 何はともあれ何かが表示されてないとモチベ
 <li>JSX の記法</li>
 <li>React+Redux の概念</li>
 </ul>
-<h3 id="heading">プロジェクトの準備</h3>
+<h3 id="プロジェクトの準備">プロジェクトの準備</h3>
 <p>まずはプロジェクトを準備します。</p>
 <p>node と yarn は入っている前提で進めます。</p>
 <p>Facebook が公式で用意しているアプリケーション作成ツールを使用してプロジェクトテンプレートを作ります。</p>
@@ -201,7 +201,7 @@ yarn add -D @types/redux @types/react-redux
 <p>以下のコマンドでローカルサーバが立ち上がり、ブラウザに画面が表示されれば問題ありません。</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">yarn start
 </code></pre></div><p>チュートリアルのコードは作成されたプロジェクト内部の src ディレクトリに記述していきます。</p>
-<h3 id="component-">Component の実装</h3>
+<h3 id="component-の実装">Component の実装</h3>
 <p>何はともあれ何かが表示されてないとモチベーションが上がらないのでブラウザに見た目を表示させます。</p>
 <p>以下のコードを TodoComponent.tsx として src 以下に記述します。JSX 記法が含まれるファイルは tsx 拡張子にします。</p>
 <p>ちなみに以下のコードは React と TypeScript の要素しか出てきていません。</p>
@@ -291,7 +291,7 @@ yarn add -D @types/redux @types/react-redux
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ts" data-lang="ts">          {<span style="color:#a6e22e">todos</span>.<span style="color:#a6e22e">map</span>((<span style="color:#a6e22e">todo</span>, <span style="color:#a6e22e">i</span>) <span style="color:#f92672">=</span><span style="color:#f92672">&gt;</span> (
             <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">li</span> <span style="color:#a6e22e">key</span><span style="color:#f92672">=</span>{<span style="color:#a6e22e">i</span>}<span style="color:#f92672">&gt;</span>{<span style="color:#a6e22e">todo</span>}<span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/</span><span style="color:#960050;background-color:#1e0010">l</span><span style="color:#960050;background-color:#1e0010">i</span><span style="color:#960050;background-color:#1e0010">&gt;</span>
           ))}
-</code></pre></div><h4 id="react-todo">React のみでTodoアプリケーションを作る場合</h4>
+</code></pre></div><h4 id="react-のみでtodoアプリケーションを作る場合">React のみでTodoアプリケーションを作る場合</h4>
 <p>Redux はアプリケーションの全体で使う状態( Component の状態ではなく)を外出しすることで、アプリケーションの状態とUIを分離するためのフレームワークのことです。</p>
 <p>今回は Redux のチュートリアルのため、<code>todos</code> は外から渡される props に配置しましたが、この Component の状態( state )とすることで、React のみで完結させることができます。</p>
 <p>以下のように書き換えることで React のみで Todo リストを作成することができます。</p>
@@ -375,7 +375,7 @@ yarn add -D @types/redux @types/react-redux
 </code></pre></div><p>コンポーネントがネストしておらず、データフローが複雑ではないならこれで十分なのが理解できたかと思います。</p>
 <p>このあたりのことは Redux の作者である、Dan Abramov 氏が<a href="https://medium.com/@dan_abramov/you-might-not-need-redux-be46360cf367">You Might Not Need Redux</a>という記事を書いていますので一読しておくと良いかもしれません。</p>
 <p>とは言うものの、この記事は React+Redux のチュートリアル記事なので、Redux を使う方向で進めます。</p>
-<h3 id="store--state-">Store の State の定義</h3>
+<h3 id="store-の-state-の定義">Store の State の定義</h3>
 <p>次に Store の State を定義します。</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ts" data-lang="ts"><span style="color:#75715e">// store.ts
 </span><span style="color:#75715e"></span>
@@ -391,7 +391,7 @@ yarn add -D @types/redux @types/react-redux
 </code></pre></div><p>Store とは Redux における役割の一つで、<a href="https://redux.js.org/api/store">公式ドキュメント</a>にあるとおり、そのアプリケーションにおける全ての状態(State)を持ちます。この State は後述する Action-&gt;Reducer 経由でしか更新されません。</p>
 <p>ちなみに上記のコードにはまだ Store は定義されておらず、Store が持つ State しか定義されていません。また、少し冗長ですが、いくつか State が出てくることを想定して、<code>IRootState</code> を用意しています。これぐらいのアプリケーションなら <code>ITodoState</code> だけでも十分です。</p>
 <p>少し厄介なのですが、ここにおける &ldquo;State&rdquo; は先程出てきた &ldquo;Component の state&rdquo; とは<strong>全くの別物</strong>です。Redux における State はアプリケーション全体の状態を表し、React の state はその Component の状態を表しています。</p>
-<h3 id="action-">Action の追加</h3>
+<h3 id="action-の追加">Action の追加</h3>
 <p>次に&quot;Add Todo&quot;ボタンを押したときに発火される Action を定義します。</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ts" data-lang="ts"><span style="color:#75715e">// action.ts
 </span><span style="color:#75715e"></span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">Action</span> } <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;redux&#39;</span>; <span style="color:#75715e">// reduxで定義されているAction interfaceだけimport
@@ -438,7 +438,7 @@ yarn add -D @types/redux @types/react-redux
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ts" data-lang="ts"><span style="color:#66d9ef">export</span> <span style="color:#a6e22e">type</span> <span style="color:#a6e22e">TodoAction</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">IAddTodoAction</span>;
 </code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ts" data-lang="ts"><span style="color:#75715e">// TodoActionはITodoActionかIDeleteTodoActionのどちらかを受け取れる
 </span><span style="color:#75715e"></span><span style="color:#66d9ef">export</span> <span style="color:#a6e22e">type</span> <span style="color:#a6e22e">TodoAction</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">IAddTodoAction</span> <span style="color:#f92672">|</span> <span style="color:#a6e22e">IDeleteTodoAction</span>;
-</code></pre></div><h3 id="reducer-">Reducer の追加</h3>
+</code></pre></div><h3 id="reducer-の追加">Reducer の追加</h3>
 <p>Action が発火したあと、その Action に応じて Store の State を更新する Reducer を作成します。</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ts" data-lang="ts"><span style="color:#75715e">// reducer.ts
 </span><span style="color:#75715e"></span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">combineReducers</span>, <span style="color:#a6e22e">Reducer</span> } <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;redux&#39;</span>;
@@ -482,7 +482,7 @@ yarn add -D @types/redux @types/react-redux
 <p>ここで気をつけなくてはいけないのは、<strong>Reducer が返す State は必ず新しいオブジェクトにする</strong>ということです。</p>
 <p>React+Redux では <strong>Reducer が返す State と現在の State を比較して差分がある時</strong>に UI を更新します。そのため Reducer のなかで State を直接操作してしまうと Reducer の返り値との差分がなくなり、正常に UI が更新されなくなってしまいます。</p>
 <p>今回の場合だと「 Action の <code>payload.todo</code> を <code>state.todos</code> に追加する」という点から <code>state.todos.push(payload.todo)</code> のようにしてしまうと UI が正常に更新されなくなってしまうので気をつけましょう。</p>
-<h3 id="reducer--store-">Reducer を使って Store の作成</h3>
+<h3 id="reducer-を使って-store-の作成">Reducer を使って Store の作成</h3>
 <p>reducer.ts に定義した<code>reducer</code>を使用して、store.ts に<code>store</code>を以下のように追記して定義します。</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ts" data-lang="ts"><span style="color:#75715e">// store.ts
 </span><span style="color:#75715e"></span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">Action</span>, <span style="color:#a6e22e">createStore</span>, <span style="color:#a6e22e">Store</span> } <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;redux&#39;</span>;
@@ -505,7 +505,7 @@ yarn add -D @types/redux @types/react-redux
 <span style="color:#66d9ef">export</span> <span style="color:#66d9ef">default</span> <span style="color:#a6e22e">store</span>;
 </code></pre></div><p>上記の定義をすることで、 Action が発火されるとそれに対応した Reducer が起動して Store の State が更新されるようになります。</p>
 <p>しかし、まだ Action の発火部分と Store が更新されたときの描画については記述されていないので、それを行う Container というものを作成します。</p>
-<h3 id="container-">Container を作成</h3>
+<h3 id="container-を作成">Container を作成</h3>
 <p>最後に、最初に定義した Component と Redux の世界をつなぐための Container を作成します。</p>
 <p>以下のように TodoContainer.tsx を作成します。</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-tsx" data-lang="tsx"><span style="color:#75715e">// TodoContainer.tsx
@@ -634,7 +634,7 @@ yarn add -D @types/redux @types/react-redux
 <p>これらは Redux の概念であるため React とは特に関係のない機能です。その関係のない Redux の Store と、描画のための React の世界をつなげるために、 <code>react-redux</code> の <code>connect</code> 関数を使います。</p>
 <p><code>connect</code> の1つ目の引数には、「Store の subscribe が発火したときに、更新された State をどのように React の props に割り当てるのか」という記述がされた <code>mapStateToProps</code> を渡し、2つ目の引数には「 Action を伝える dispatch を実行するメソッドをどのように props に割り当てるのか」という記述がされた <code>mapDispatchToProps</code> が渡されています。</p>
 <p><code>connect</code> の返り値には Redux の Store の挙動をどのように React に割り当てるのか、という情報を持った関数が返ってくるため、それに <code>TodoContainer</code> を渡すことで React と Redux の世界をつなげています。</p>
-<h3 id="heading-1">開発にあたって</h3>
+<h3 id="開発にあたって">開発にあたって</h3>
 <p>今回のチュートリアルでは使いませんでしたが、<a href="https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi/related">ReactのDeveloper Tools</a>や<a href="https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd?hl=ja">ReduxのDeveloper Tools</a>が用意されています。Componentの構造やStoreの状態をChromeのDeveloper Toolsでできるようになります。</p>
 <p>それらを使いながら、このチュートリアルにDeleteやDoneの処理を追加すると理解が更に深まるかもしれません。</p>
 <p>それでは良いTypeScript+React+Reduxライフを！</p>

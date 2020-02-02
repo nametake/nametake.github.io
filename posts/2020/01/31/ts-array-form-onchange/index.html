@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="author" content="nametake">
+    <meta name="description" content="nametake&#39;s personal website">
+    <meta name="keywords" content="blog,developer,personal">
+
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="TypeScriptでFormのComponentを配列で管理する"/>
+<meta name="twitter:description" content="TypeScriptでFormのComponentを配列で管理する toB向けのサービスや管理画面のように情報量の多いのプロダクトを作っていると、FormをまとめたComponentを作りたくなるケースがあります。
+単体で使っているときにはそこまで問題ないのですが、それを複数リスト上に管理して増減させたいときにonChangeをどうやって設計するのかを色々考えたのでまとめておきます。
+サンプルForm 以下のようなFormを題材にします。
+1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58  interface HumanFormValue { firstName: string; lastName: string; } interface HumanFormProps { defaultValue: HumanFormValue; onChange: (value: HumanFormValue) =&gt; void; } const HumanForm: React."/>
+
+    <meta property="og:title" content="TypeScriptでFormのComponentを配列で管理する" />
+<meta property="og:description" content="TypeScriptでFormのComponentを配列で管理する toB向けのサービスや管理画面のように情報量の多いのプロダクトを作っていると、FormをまとめたComponentを作りたくなるケースがあります。
+単体で使っているときにはそこまで問題ないのですが、それを複数リスト上に管理して増減させたいときにonChangeをどうやって設計するのかを色々考えたのでまとめておきます。
+サンプルForm 以下のようなFormを題材にします。
+1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58  interface HumanFormValue { firstName: string; lastName: string; } interface HumanFormProps { defaultValue: HumanFormValue; onChange: (value: HumanFormValue) =&gt; void; } const HumanForm: React." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://nametake.github.io/posts/2020/01/31/ts-array-form-onchange/" />
+<meta property="article:published_time" content="2020-01-31T00:00:00+09:00" />
+<meta property="article:modified_time" content="2020-01-31T00:00:00+09:00" />
+
+
+    
+      <base href="https://nametake.github.io/posts/2020/01/31/ts-array-form-onchange/">
+    
+    <title>
+  TypeScriptでFormのComponentを配列で管理する · nametake.info
+</title>
+
+    
+      <link rel="canonical" href="https://nametake.github.io/posts/2020/01/31/ts-array-form-onchange/">
+    
+
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700%7CMerriweather:300,700%7CSource+Code+Pro:400,700" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css" integrity="sha384-KA6wR/X5RY4zFAHpv/CnoG2UW1uogYfdnP67Uv7eULvTveboZJg0qUpmJZb5VqzN" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" integrity="sha256-l85OmPOjvil/SOvVt3HnSSjzF1TUMyT9eV0c2BzEGzU=" crossorigin="anonymous" />
+
+    
+      
+      
+      <link rel="stylesheet" href="https://nametake.github.io/css/coder.min.28d751104f30c16da1aa1bb04015cbe662cacfe0d1b01af4f2240ad58580069c.css" integrity="sha256-KNdREE8wwW2hqhuwQBXL5mLKz&#43;DRsBr08iQK1YWABpw=" crossorigin="anonymous" media="screen" />
+    
+
+    
+
+    
+      
+        
+        
+        <link rel="stylesheet" href="https://nametake.github.io/css/coder-dark.min.83a2010dac9f59f943b3004cd6c4f230507ad036da635d3621401d42ec4e2835.css" integrity="sha256-g6IBDayfWflDswBM1sTyMFB60DbaY102IUAdQuxOKDU=" crossorigin="anonymous" media="screen" />
+      
+    
+
+    
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto&#43;Sans&#43;JP&amp;display=swap" />
+    
+      <link rel="stylesheet" href="https://nametake.github.io/css/index.css" />
+    
+      <link rel="stylesheet" href="https://nametake.github.io/css/syntax.css" />
+    
+
+    
+    
+    <link rel="icon" type="image/png" href="https://nametake.github.io/images/favicon-32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="https://nametake.github.io/images/favicon-16x16.png" sizes="16x16">
+
+    <meta name="generator" content="Hugo 0.63.2" />
+  </head>
+
+  
+  
+    
+  
+  <body class="colorscheme-auto">
+    <main class="wrapper">
+      <nav class="navigation">
+  <section class="container">
+    <a class="navigation-title" href="https://nametake.github.io/">
+      nametake.info
+    </a>
+    <input type="checkbox" id="menu-toggle" />
+    <label class="menu-button float-right" for="menu-toggle"><i class="fas fa-bars"></i></label>
+    <ul class="navigation-list">
+      
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="https://nametake.github.io/about/">About</a>
+          </li>
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="https://nametake.github.io/posts/">Blog</a>
+          </li>
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="https://nametake.github.io/project/">Project</a>
+          </li>
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="https://nametake.github.io/tags/">Tags</a>
+          </li>
+        
+      
+      
+    </ul>
+  </section>
+</nav>
+
+
+      <div class="content">
+        
+  <section class="container post">
+    <article>
+      <header>
+        <div class="post-title">
+          <h1 class="title">TypeScriptでFormのComponentを配列で管理する</h1>
+        </div>
+        <div class="post-meta">
+          <div class="date">
+            <span class="posted-on">
+              <i class="fas fa-calendar"></i>
+              <time datetime='2020-01-31T00:00:00&#43;09:00'>
+                January 31, 2020
+              </time>
+            </span>
+            <span class="reading-time">
+              <i class="fas fa-clock"></i>
+              One minute read
+            </span>
+          </div>
+          
+          <div class="tags">
+  <i class="fas fa-tag"></i>
+    <a href="https://nametake.github.io/tags/typescript/">TypeScript</a>
+      <span class="separator">•</span>
+    <a href="https://nametake.github.io/tags/react/">React</a></div>
+
+        </div>
+      </header>
+
+      <div>
+        <h1 id="typescriptでformのcomponentを配列で管理する">TypeScriptでFormのComponentを配列で管理する</h1>
+<p>toB向けのサービスや管理画面のように情報量の多いのプロダクトを作っていると、FormをまとめたComponentを作りたくなるケースがあります。</p>
+<p>単体で使っているときにはそこまで問題ないのですが、それを複数リスト上に管理して増減させたいときにonChangeをどうやって設計するのかを色々考えたのでまとめておきます。</p>
+<h2 id="サンプルform">サンプルForm</h2>
+<p>以下のようなFormを題材にします。</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">25
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">26
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">27
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">28
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">29
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">30
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">31
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">32
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">33
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">34
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">35
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">36
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">37
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">38
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">39
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">40
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">41
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">42
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">43
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">44
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">45
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">46
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">47
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">48
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">49
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">50
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">51
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">52
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">53
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">54
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">55
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">56
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">57
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">58
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-jsx" data-lang="jsx"><span style="color:#66d9ef">interface</span> <span style="color:#a6e22e">HumanFormValue</span> {
+  <span style="color:#a6e22e">firstName</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">string</span>;
+  <span style="color:#a6e22e">lastName</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">string</span>;
+}
+
+<span style="color:#66d9ef">interface</span> <span style="color:#a6e22e">HumanFormProps</span> {
+  <span style="color:#a6e22e">defaultValue</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">HumanFormValue</span>;
+  <span style="color:#a6e22e">onChange</span><span style="color:#f92672">:</span> (<span style="color:#a6e22e">value</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">HumanFormValue</span>) =&gt; <span style="color:#66d9ef">void</span>;
+}
+
+<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">HumanForm</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">React</span>.<span style="color:#a6e22e">FC</span>&lt;<span style="color:#f92672">HumanFormProps</span>&gt; <span style="color:#f92672">=</span> ({ <span style="color:#a6e22e">defaultValue</span>, <span style="color:#a6e22e">onChange</span> }) =&gt; {
+  <span style="color:#66d9ef">const</span> [<span style="color:#a6e22e">value</span>, <span style="color:#a6e22e">setValue</span>] <span style="color:#f92672">=</span> <span style="color:#a6e22e">React</span>.<span style="color:#a6e22e">useState</span>&lt;<span style="color:#f92672">HumanFormValue</span>&gt;(<span style="color:#a6e22e">defaultValue</span>);
+
+  <span style="color:#a6e22e">React</span>.<span style="color:#a6e22e">useEffect</span>(() =&gt; {
+    <span style="color:#a6e22e">onChange</span>(<span style="color:#a6e22e">value</span>);
+  }, [<span style="color:#a6e22e">value</span>, <span style="color:#a6e22e">onChange</span>]);
+
+  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">handleChangeFirstName</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">React</span>.<span style="color:#a6e22e">useCallback</span>(
+    (<span style="color:#a6e22e">e</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">React</span>.<span style="color:#a6e22e">ChangeEvent</span>&lt;<span style="color:#f92672">HTMLInputElement</span>&gt;) =&gt; {
+      <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">firstName</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">e</span>.<span style="color:#a6e22e">target</span>.<span style="color:#a6e22e">value</span>;
+      <span style="color:#a6e22e">setValue</span>(<span style="color:#a6e22e">value</span> =&gt; ({
+        ...<span style="color:#a6e22e">value</span>,
+        <span style="color:#a6e22e">firstName</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">typeof</span> <span style="color:#a6e22e">firstName</span> <span style="color:#f92672">===</span> <span style="color:#e6db74">&#34;string&#34;</span> <span style="color:#f92672">?</span> <span style="color:#a6e22e">firstName</span> <span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;&#34;</span>
+      }));
+    },
+    []
+  );
+
+  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">handleChangeLastName</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">React</span>.<span style="color:#a6e22e">useCallback</span>(
+    (<span style="color:#a6e22e">e</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">React</span>.<span style="color:#a6e22e">ChangeEvent</span>&lt;<span style="color:#f92672">HTMLInputElement</span>&gt;) =&gt; {
+      <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">lastName</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">e</span>.<span style="color:#a6e22e">target</span>.<span style="color:#a6e22e">value</span>;
+      <span style="color:#a6e22e">setValue</span>(<span style="color:#a6e22e">value</span> =&gt; ({
+        ...<span style="color:#a6e22e">value</span>,
+        <span style="color:#a6e22e">lastName</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">typeof</span> <span style="color:#a6e22e">lastName</span> <span style="color:#f92672">===</span> <span style="color:#e6db74">&#34;string&#34;</span> <span style="color:#f92672">?</span> <span style="color:#a6e22e">lastName</span> <span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;&#34;</span>
+      }));
+    },
+    []
+  );
+
+  <span style="color:#66d9ef">return</span> (
+    &lt;<span style="color:#f92672">div</span>&gt;
+      &lt;<span style="color:#f92672">div</span>&gt;
+        &lt;<span style="color:#f92672">span</span>&gt;<span style="color:#a6e22e">first</span> <span style="color:#a6e22e">name</span><span style="color:#f92672">:</span> &lt;/<span style="color:#f92672">span</span>&gt;
+        &lt;<span style="color:#f92672">input</span>
+          <span style="color:#a6e22e">defaultValue</span><span style="color:#f92672">=</span>{<span style="color:#a6e22e">defaultValue</span>.<span style="color:#a6e22e">firstName</span>}
+          <span style="color:#a6e22e">onChange</span><span style="color:#f92672">=</span>{<span style="color:#a6e22e">handleChangeFirstName</span>}
+        /&gt;
+      &lt;/<span style="color:#f92672">div</span>&gt;
+      &lt;<span style="color:#f92672">div</span>&gt;
+        &lt;<span style="color:#f92672">span</span>&gt;<span style="color:#a6e22e">last</span> <span style="color:#a6e22e">name</span> <span style="color:#f92672">:</span> &lt;/<span style="color:#f92672">span</span>&gt;
+        &lt;<span style="color:#f92672">input</span>
+          <span style="color:#a6e22e">defaultValue</span><span style="color:#f92672">=</span>{<span style="color:#a6e22e">defaultValue</span>.<span style="color:#a6e22e">lastName</span>}
+          <span style="color:#a6e22e">onChange</span><span style="color:#f92672">=</span>{<span style="color:#a6e22e">handleChangeLastName</span>}
+        /&gt;
+      &lt;/<span style="color:#f92672">div</span>&gt;
+    &lt;/<span style="color:#f92672">div</span>&gt;
+  );
+};
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="検討">検討</h2>
+<p>配列で扱うにあたり、以下の方法を検討しました。</p>
+<ol>
+<li><code>HumanFormValue</code> にidとなるもの付与する</li>
+<li>onChangeのCurry化を行う</li>
+<li>valuesのlengthをみて関数の増減を行う</li>
+<li>使う側で <code>HumanFormValue</code> にidとなるもの付与する</li>
+</ol>
+<p>1は確実にできるのですが、リストで扱われるかはComponentの責務として違うと思ったので除外。</p>
+<p>最初は2でいけると思ったのですが、useEffectに引っかかってしまい無限ループが発生したのでこの方法では出来なかったです。</p>
+<p>3は出来たのですが、もう少し別の方法を考えてみた結果4が出てきました。</p>
+<p>4の方法が以下です。</p>
+<iframe
+     src="https://codesandbox.io/embed/ts-array-form-b3bo0?fontsize=14&hidenavigation=1&theme=dark"
+     style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;"
+     title="ts-array-form"
+     allow="geolocation; microphone; camera; midi; vr; accelerometer; gyroscope; payment; ambient-light-sensor; encrypted-media; usb"
+     sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"
+   ></iframe>
+<p>以下の点に気をつけないといけないですが、個人的には一番しっくり来たので他にいい方法が見つかるまではこの方法で配列管理していきたいと思います。</p>
+<ul>
+<li>HumanFormのonChangeの型とHumanFormValueWithKeyの型が合わないのでlintを少し緩くする必要がある</li>
+<li>以下のように不用意なsetValuesをするとkeyが消える
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-jsx" data-lang="jsx"><span style="color:#a6e22e">setValue</span>({<span style="color:#a6e22e">firstName</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;&#39;</span>, <span style="color:#a6e22e">lastName</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;&#39;</span>})
+</code></pre></div></li>
+</ul>
+
+      </div>
+
+      <footer>
+        
+
+
+        <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "nametake" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+        
+        
+      </footer>
+    </article>
+
+    
+  </section>
+
+      </div>
+
+      <footer class="footer">
+  <section class="container">
+    
+      <p>nametake.github.io</p>
+    
+     © 2020
+    
+       · 
+      Powered by <a href="https://gohugo.io/">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/">Coder</a>.
+    
+    
+  </section>
+</footer>
+
+    </main>
+
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-129739305-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+
+  </body>
+
+</html>

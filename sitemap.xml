@@ -3,6 +3,36 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://nametake.github.io/</loc>
+    <lastmod>2020-01-31T00:00:00+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://nametake.github.io/posts/</loc>
+    <lastmod>2020-01-31T00:00:00+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://nametake.github.io/tags/react/</loc>
+    <lastmod>2020-01-31T00:00:00+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://nametake.github.io/tags/</loc>
+    <lastmod>2020-01-31T00:00:00+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://nametake.github.io/tags/typescript/</loc>
+    <lastmod>2020-01-31T00:00:00+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://nametake.github.io/posts/2020/01/31/ts-array-form-onchange/</loc>
+    <lastmod>2020-01-31T00:00:00+09:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://nametake.github.io/tags/go/</loc>
     <lastmod>2019-12-31T00:00:00+09:00</lastmod>
   </url>
@@ -13,27 +43,7 @@
   </url>
   
   <url>
-    <loc>https://nametake.github.io/</loc>
-    <lastmod>2019-12-31T00:00:00+09:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://nametake.github.io/posts/</loc>
-    <lastmod>2019-12-31T00:00:00+09:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://nametake.github.io/tags/</loc>
-    <lastmod>2019-12-31T00:00:00+09:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://nametake.github.io/posts/2019/12/17/react-table/</loc>
-    <lastmod>2019-12-17T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://nametake.github.io/tags/react/</loc>
     <lastmod>2019-12-17T00:00:00+00:00</lastmod>
   </url>
   
@@ -49,11 +59,6 @@
   
   <url>
     <loc>https://nametake.github.io/posts/2019/10/07/typescript-absolute-imports/</loc>
-    <lastmod>2019-10-07T00:15:35+09:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://nametake.github.io/tags/typescript/</loc>
     <lastmod>2019-10-07T00:15:35+09:00</lastmod>
   </url>
   

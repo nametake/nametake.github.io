@@ -81,7 +81,7 @@ package fmt import &#34;errors&#34; func Errorf(format string, a ...interface{})
     <link rel="icon" type="image/png" href="https://nametake.github.io/images/favicon-32x32.png" sizes="32x32">
     <link rel="icon" type="image/png" href="https://nametake.github.io/images/favicon-16x16.png" sizes="16x16">
 
-    <meta name="generator" content="Hugo 0.62.0" />
+    <meta name="generator" content="Hugo 0.63.2" />
   </head>
 
   
@@ -209,8 +209,8 @@ package fmt import &#34;errors&#34; func Errorf(format string, a ...interface{})
 <p>さて、ここで重要になるのは <code>wrapError</code> 構造体です。</p>
 <p><code>wrapError</code> 構造体はerror interfaceとUnwrap interfaceを実装しています。<code>Unwrap()</code>の中では <code>wrapError</code> が持っている<code>err</code>を返していますが、この<code>err</code>は<code>pp</code>の<code>wrapedErr</code>を確認して詰められています。また、3行目の<code>doPrintf</code>の中を追いかけていくと、<code>wrapedErr</code> は<code>fmt.Errorf</code>の第2引数に渡されたエラーが入っている事がわかります。</p>
 <p>上記のことから、<code>fmt.Errorf</code>経由でWrapされたエラーが<code>errors.Unwrap</code>に渡されたときには、<code>fmt.Errorf</code>に渡されたエラーが返ることになり、文字通り<code>fmt.Errorf</code>でWrapされたエラーをUnwrapできる事がわかります。</p>
-<h1 id="unwrap-interface-1">Unwrap interface実用例</h1>
-<h2 id="heading">原因を取り出す</h2>
+<h1 id="unwrap-interface実用例">Unwrap interface実用例</h1>
+<h2 id="原因を取り出す">原因を取り出す</h2>
 <p><code>pkg/errors</code>の<code>Cause</code>と全く同じ挙動をする実装です。<code>pkg/errors</code>ではCause interfaceが使われていましたが、それをUnwrap interfaceに置き換えただけです。</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
 
@@ -243,7 +243,7 @@ package fmt import &#34;errors&#34; func Errorf(format string, a ...interface{})
 	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">err</span>
 }
 </code></pre></div><p>ただ、同一性を調べるためだったら <code>errors.Is</code> があるので、あまり上の例は出番がないかもしれません。</p>
-<h2 id="wrap">Wrapの途中に独自のエラー型が入っていないか調べる</h2>
+<h2 id="wrapの途中に独自のエラー型が入っていないか調べる">Wrapの途中に独自のエラー型が入っていないか調べる</h2>
 <p><code>fmt.Errorf</code> でWrapされたエラーは <code>errors.As</code> でWrapされてきた中に指定した方があった場合それを取り出すことができます。</p>
 <p>以下の例だと途中でエラーにMarkをして、GetMarkerでそのMarkerを取り出しています。</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>

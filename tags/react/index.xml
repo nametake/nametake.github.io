@@ -6,10 +6,22 @@
     <description>Recent content in React on nametake.info</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 17 Dec 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 31 Jan 2020 00:00:00 +0900</lastBuildDate>
     
 	<atom:link href="https://nametake.github.io/tags/react/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>TypeScriptでFormのComponentを配列で管理する</title>
+      <link>https://nametake.github.io/posts/2020/01/31/ts-array-form-onchange/</link>
+      <pubDate>Fri, 31 Jan 2020 00:00:00 +0900</pubDate>
+      
+      <guid>https://nametake.github.io/posts/2020/01/31/ts-array-form-onchange/</guid>
+      <description>TypeScriptでFormのComponentを配列で管理する toB向けのサービスや管理画面のように情報量の多いのプロダクトを作っていると、FormをまとめたComponentを作りたくなるケースがあります。
+単体で使っているときにはそこまで問題ないのですが、それを複数リスト上に管理して増減させたいときにonChangeをどうやって設計するのかを色々考えたのでまとめておきます。
+サンプルForm 以下のようなFormを題材にします。
+1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58  interface HumanFormValue { firstName: string; lastName: string; } interface HumanFormProps { defaultValue: HumanFormValue; onChange: (value: HumanFormValue) =&amp;gt; void; } const HumanForm: React.</description>
+    </item>
     
     <item>
       <title>Hooks対応したreact-tableをTypeScriptで使う</title>
