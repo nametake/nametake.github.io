@@ -6,10 +6,21 @@
     <description>Recent content in Vim on nametake.info</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 29 Jul 2019 22:57:06 +0900</lastBuildDate>
+    <lastBuildDate>Wed, 26 Feb 2020 00:00:00 +0900</lastBuildDate>
     
 	<atom:link href="https://nametake.github.io/tags/vim/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>aleやneoformatからdiagnostic-languageserverに移行した</title>
+      <link>https://nametake.github.io/posts/2020/02/26/migration-diagnostic-languageserver/</link>
+      <pubDate>Wed, 26 Feb 2020 00:00:00 +0900</pubDate>
+      
+      <guid>https://nametake.github.io/posts/2020/02/26/migration-diagnostic-languageserver/</guid>
+      <description>Vimのプラグインとしてaleとneoformatをずっと利用して来たのですが、LinterやFormatterも全てLanguage Serverに移行しようと思い、 diagnostic-languageserver に移行しました。
+aleやneoformatで使っていたLinterやFormatterも全て移行させたのでその設定のJSONもおいておきます。
+1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84 85 86 87 88 89 90 91 92 93 94 95 96 97 98 99 100 101 102 103 104 105 106 107 108 109 110 111 112 113 114 115 116 117 118 119 120 121 122 123 124 125 126 127 128 129 130 131 132 133 134 135 136 137 138 139 140 141 142 143 144 145 146 147 148 149 150 151 152 153 154 155 156 157 158 159 160 161 162 163 164 165 166 167 168 169 170 171 172 173 174 175 176 177 178 179 180 181 182 183 184 185 186 187 188 189 190 191 192 193 194 195 196 197 198 199 200 201 202 203 204 205 206 207 208 209 210 211 212 213 214 215 216 217 218 219 220 221 222 223 224 225 226 227 228 229 230 231 232 233 234 235 236 237 238 239 240 241 242 243 244 245 246 247 248 249 250 251 252 253 254 255  { &amp;#34;languageserver&amp;#34;: { &amp;#34;dls&amp;#34;: { &amp;#34;args&amp;#34;: [ &amp;#34;--stdio&amp;#34; ], &amp;#34;command&amp;#34;: &amp;#34;diagnostic-languageserver&amp;#34;, &amp;#34;filetypes&amp;#34;: [ &amp;#34;dockerfile&amp;#34;, &amp;#34;go&amp;#34;, &amp;#34;json&amp;#34;, &amp;#34;markdown&amp;#34;, &amp;#34;sh&amp;#34;, &amp;#34;yaml&amp;#34;, &amp;#34;vim&amp;#34; ], &amp;#34;initializationOptions&amp;#34;: { &amp;#34;filetypes&amp;#34;: { &amp;#34;dockerfile&amp;#34;: [ &amp;#34;dockerfile-hadolint&amp;#34; ], &amp;#34;go&amp;#34;: [], &amp;#34;markdown&amp;#34;: [ &amp;#34;markdown-remark-lint&amp;#34;, &amp;#34;markdown-textlint&amp;#34; ], &amp;#34;sh&amp;#34;: [ &amp;#34;sh-shellcheck&amp;#34; ], &amp;#34;vim&amp;#34;: [ &amp;#34;vim-vint&amp;#34; ], &amp;#34;yaml&amp;#34;: [ &amp;#34;yaml-yamllint&amp;#34; ] }, &amp;#34;formatFiletypes&amp;#34;: { &amp;#34;go&amp;#34;: [ &amp;#34;go-gofmtrlx&amp;#34;, &amp;#34;go-goimports&amp;#34; ], &amp;#34;json&amp;#34;: [ &amp;#34;json-fixjson&amp;#34;, &amp;#34;json-jq&amp;#34; ], &amp;#34;markdown&amp;#34;: [ &amp;#34;markdown-remark&amp;#34; ], &amp;#34;sh&amp;#34;: [ &amp;#34;sh-shfmt&amp;#34; ] }, &amp;#34;formatters&amp;#34;: { &amp;#34;go-gofmtrlx&amp;#34;: { &amp;#34;command&amp;#34;: &amp;#34;gofmtrlx&amp;#34; }, &amp;#34;go-goimports&amp;#34;: { &amp;#34;command&amp;#34;: &amp;#34;goimports&amp;#34; }, &amp;#34;json-fixjson&amp;#34;: { &amp;#34;command&amp;#34;: &amp;#34;fixjson&amp;#34;, &amp;#34;isStderr&amp;#34;: false, &amp;#34;isStdout&amp;#34;: true }, &amp;#34;json-jq&amp;#34;: { &amp;#34;args&amp;#34;: [ &amp;#34;.</description>
+    </item>
     
     <item>
       <title>Goの戻り値をいい感じに補完してくれるvim-snippetsを作った</title>

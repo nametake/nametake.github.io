@@ -71,7 +71,7 @@ type HelloRequest struct { Name string `protobuf:&#34;bytes,1,opt,name=name&#34;
     <link rel="icon" type="image/png" href="https://nametake.github.io/images/favicon-32x32.png" sizes="32x32">
     <link rel="icon" type="image/png" href="https://nametake.github.io/images/favicon-16x16.png" sizes="16x16">
 
-    <meta name="generator" content="Hugo 0.63.2" />
+    <meta name="generator" content="Hugo 0.65.3" />
   </head>
 
   
@@ -149,35 +149,35 @@ type HelloRequest struct { Name string `protobuf:&#34;bytes,1,opt,name=name&#34;
 <h1 id="protocol-buffersとは">Protocol Buffersとは</h1>
 <p>Protocol Buffersはインターフェース定義言語の1つでGoogleによって開発されているものです(ざっくりいうと、JSONやXMLの仲間)。以下のように、構造を表す<code>message</code>とその<code>message</code>を使ったRPCのインターフェースの<code>service</code>というものを定義できます。</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-proto" data-lang="proto">syntax <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;proto3&#34;</span>;<span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010">
 </span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#f92672">package</span> helloworld;<span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010">
 </span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">option</span> go_package <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;main&#34;</span>;<span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010">
 </span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">message</span> <span style="color:#a6e22e">HelloRequest</span> {<span style="color:#960050;background-color:#1e0010">
 </span><span style="color:#960050;background-color:#1e0010"></span>  <span style="color:#66d9ef">string</span> name <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;<span style="color:#960050;background-color:#1e0010">
 </span><span style="color:#960050;background-color:#1e0010"></span>}<span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010">
 </span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">message</span> <span style="color:#a6e22e">HelloReply</span> {<span style="color:#960050;background-color:#1e0010">
 </span><span style="color:#960050;background-color:#1e0010"></span>  <span style="color:#66d9ef">string</span> <span style="color:#66d9ef">message</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;<span style="color:#960050;background-color:#1e0010">
 </span><span style="color:#960050;background-color:#1e0010"></span>}<span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010">
 </span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">service</span> Greeter {<span style="color:#960050;background-color:#1e0010">
 </span><span style="color:#960050;background-color:#1e0010"></span>  <span style="color:#66d9ef">rpc</span> SayHello(HelloRequest) <span style="color:#66d9ef">returns</span> (HelloReply) {}<span style="color:#960050;background-color:#1e0010">
 </span><span style="color:#960050;background-color:#1e0010"></span>}<span style="color:#960050;background-color:#1e0010">
 </span></code></pre></div><p>上記の定義を<code>protoc</code>コマンドを使ってコンパイルすることで、対応した言語ならそのままコードを書き出せます。例えばGoなら以下のような構造体が書き出されます(長くなるのでコードは削っています)。以下の構造体はProtocol Bufferが用意しているライブラリを利用すればバイナリに変換できます。</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">HelloRequest</span> <span style="color:#66d9ef">struct</span> {
-	<span style="color:#a6e22e">Name</span>                 <span style="color:#66d9ef">string</span>   <span style="color:#e6db74">`</span><span style="color:#e6db74">protobuf:&#34;bytes,1,opt,name=name&#34; json:&#34;name,omitempty&#34;</span><span style="color:#e6db74">`</span>
-	<span style="color:#a6e22e">XXX_NoUnkeyedLiteral</span> <span style="color:#66d9ef">struct</span>{} <span style="color:#e6db74">`</span><span style="color:#e6db74">json:&#34;-&#34;</span><span style="color:#e6db74">`</span>
-	<span style="color:#a6e22e">XXX_unrecognized</span>     []<span style="color:#66d9ef">byte</span>   <span style="color:#e6db74">`</span><span style="color:#e6db74">json:&#34;-&#34;</span><span style="color:#e6db74">`</span>
-	<span style="color:#a6e22e">XXX_sizecache</span>        <span style="color:#66d9ef">int32</span>    <span style="color:#e6db74">`</span><span style="color:#e6db74">json:&#34;-&#34;</span><span style="color:#e6db74">`</span>
+	<span style="color:#a6e22e">Name</span>                 <span style="color:#66d9ef">string</span>   <span style="color:#e6db74">`protobuf:&#34;bytes,1,opt,name=name&#34; json:&#34;name,omitempty&#34;`</span>
+	<span style="color:#a6e22e">XXX_NoUnkeyedLiteral</span> <span style="color:#66d9ef">struct</span>{} <span style="color:#e6db74">`json:&#34;-&#34;`</span>
+	<span style="color:#a6e22e">XXX_unrecognized</span>     []<span style="color:#66d9ef">byte</span>   <span style="color:#e6db74">`json:&#34;-&#34;`</span>
+	<span style="color:#a6e22e">XXX_sizecache</span>        <span style="color:#66d9ef">int32</span>    <span style="color:#e6db74">`json:&#34;-&#34;`</span>
 }
 
 <span style="color:#66d9ef">type</span> <span style="color:#a6e22e">HelloReply</span> <span style="color:#66d9ef">struct</span> {
-	<span style="color:#a6e22e">Message</span>              <span style="color:#66d9ef">string</span>   <span style="color:#e6db74">`</span><span style="color:#e6db74">protobuf:&#34;bytes,1,opt,name=message&#34; json:&#34;message,omitempty&#34;</span><span style="color:#e6db74">`</span>
-	<span style="color:#a6e22e">XXX_NoUnkeyedLiteral</span> <span style="color:#66d9ef">struct</span>{} <span style="color:#e6db74">`</span><span style="color:#e6db74">json:&#34;-&#34;</span><span style="color:#e6db74">`</span>
-	<span style="color:#a6e22e">XXX_unrecognized</span>     []<span style="color:#66d9ef">byte</span>   <span style="color:#e6db74">`</span><span style="color:#e6db74">json:&#34;-&#34;</span><span style="color:#e6db74">`</span>
-	<span style="color:#a6e22e">XXX_sizecache</span>        <span style="color:#66d9ef">int32</span>    <span style="color:#e6db74">`</span><span style="color:#e6db74">json:&#34;-&#34;</span><span style="color:#e6db74">`</span>
+	<span style="color:#a6e22e">Message</span>              <span style="color:#66d9ef">string</span>   <span style="color:#e6db74">`protobuf:&#34;bytes,1,opt,name=message&#34; json:&#34;message,omitempty&#34;`</span>
+	<span style="color:#a6e22e">XXX_NoUnkeyedLiteral</span> <span style="color:#66d9ef">struct</span>{} <span style="color:#e6db74">`json:&#34;-&#34;`</span>
+	<span style="color:#a6e22e">XXX_unrecognized</span>     []<span style="color:#66d9ef">byte</span>   <span style="color:#e6db74">`json:&#34;-&#34;`</span>
+	<span style="color:#a6e22e">XXX_sizecache</span>        <span style="color:#66d9ef">int32</span>    <span style="color:#e6db74">`json:&#34;-&#34;`</span>
 }
 </code></pre></div><p>また、<code>protoc</code>コマンドはプラグイン機構も持っているため、例えばgRPCのためのコードを書き出したかったら<code>protoc --go_out=plugins=grpc:.</code>のようにすることで以下のようにgRPC用のコードも同時に書き出してくれます(以下のコードも削ってます)。</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">NewGreeterClient</span>(<span style="color:#a6e22e">cc</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">grpc</span>.<span style="color:#a6e22e">ClientConn</span>) <span style="color:#a6e22e">GreeterClient</span> {

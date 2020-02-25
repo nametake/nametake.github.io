@@ -81,7 +81,7 @@ yarn add -D eslint-import-resolver-webpack 次にeslintrcのsettingsに以下の
     <link rel="icon" type="image/png" href="https://nametake.github.io/images/favicon-32x32.png" sizes="32x32">
     <link rel="icon" type="image/png" href="https://nametake.github.io/images/favicon-16x16.png" sizes="16x16">
 
-    <meta name="generator" content="Hugo 0.63.2" />
+    <meta name="generator" content="Hugo 0.65.3" />
   </head>
 
   
@@ -164,12 +164,12 @@ yarn add -D eslint-import-resolver-webpack 次にeslintrcのsettingsに以下の
 <p>エイリアスになる文字は何でも良いですが、私はnpm経由でimportするmoduleと混同しないように <code>@/</code> を使用しています。</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
   <span style="color:#f92672">&#34;compilerOptions&#34;</span>: {
-    <span style="color:#960050;background-color:#1e0010">~</span><span style="color:#960050;background-color:#1e0010">~</span><span style="color:#960050;background-color:#1e0010">~</span>
+    <span style="color:#960050;background-color:#1e0010">~~~</span>
     <span style="color:#f92672">&#34;baseUrl&#34;</span>: <span style="color:#e6db74">&#34;./&#34;</span>,
     <span style="color:#f92672">&#34;paths&#34;</span>: {
       <span style="color:#f92672">&#34;@/*&#34;</span>: [<span style="color:#e6db74">&#34;src/*&#34;</span>]
     },
-    <span style="color:#960050;background-color:#1e0010">~</span><span style="color:#960050;background-color:#1e0010">~</span><span style="color:#960050;background-color:#1e0010">~</span>
+    <span style="color:#960050;background-color:#1e0010">~~~</span>
   }
 }
 </code></pre></div><h1 id="webpackのresolveの設定">Webpackのresolveの設定</h1>
@@ -177,14 +177,14 @@ yarn add -D eslint-import-resolver-webpack 次にeslintrcのsettingsに以下の
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ts" data-lang="ts"><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">Configuration</span> } <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;webpack&#39;</span>;
 
 <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">config</span>: <span style="color:#66d9ef">Configuration</span> <span style="color:#f92672">=</span> {
-  <span style="color:#f92672">~</span><span style="color:#f92672">~</span><span style="color:#f92672">~</span>
+  <span style="color:#f92672">~~~</span>
   <span style="color:#a6e22e">resolve</span><span style="color:#f92672">:</span> {
     <span style="color:#a6e22e">extensions</span><span style="color:#f92672">:</span> [<span style="color:#e6db74">&#39;.ts&#39;</span>, <span style="color:#e6db74">&#39;.tsx&#39;</span>, <span style="color:#e6db74">&#39;.js&#39;</span>, <span style="color:#e6db74">&#39;.json&#39;</span>],
     <span style="color:#a6e22e">alias</span><span style="color:#f92672">:</span> {
       <span style="color:#e6db74">&#39;@&#39;</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">path</span>.<span style="color:#a6e22e">resolve</span>(<span style="color:#a6e22e">__dirname</span>, <span style="color:#e6db74">&#39;src&#39;</span>)
     }
   },
-  <span style="color:#f92672">~</span><span style="color:#f92672">~</span><span style="color:#f92672">~</span>
+  <span style="color:#f92672">~~~</span>
 };
 
 <span style="color:#66d9ef">export</span> <span style="color:#66d9ef">default</span> <span style="color:#a6e22e">config</span>;
@@ -195,11 +195,11 @@ yarn add -D eslint-import-resolver-webpack 次にeslintrcのsettingsに以下の
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">yarn add -D eslint-import-resolver-webpack
 </code></pre></div><p>次にeslintrcの<code>settings</code>に以下のようにWebpackの設定を使用するように設定を加えます。</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
-  <span style="color:#960050;background-color:#1e0010">~</span><span style="color:#960050;background-color:#1e0010">~</span><span style="color:#960050;background-color:#1e0010">~</span>
+  <span style="color:#960050;background-color:#1e0010">~~~</span>
   <span style="color:#f92672">&#34;settings&#34;</span>: {
     <span style="color:#f92672">&#34;import/resolver&#34;</span>: <span style="color:#e6db74">&#34;webpack&#34;</span>
   }
-  <span style="color:#960050;background-color:#1e0010">~</span><span style="color:#960050;background-color:#1e0010">~</span><span style="color:#960050;background-color:#1e0010">~</span>
+  <span style="color:#960050;background-color:#1e0010">~~~</span>
 }
 </code></pre></div><p>これでeslintでもエイリアスを認識して、エラーも出なくなります。</p>
 <h1 id="おまけ">おまけ</h1>

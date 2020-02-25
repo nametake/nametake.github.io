@@ -91,7 +91,7 @@ import * as React from &#39;react&#39;; import { render } from &#39;react-dom&#3
     <link rel="icon" type="image/png" href="https://nametake.github.io/images/favicon-32x32.png" sizes="32x32">
     <link rel="icon" type="image/png" href="https://nametake.github.io/images/favicon-16x16.png" sizes="16x16">
 
-    <meta name="generator" content="Hugo 0.63.2" />
+    <meta name="generator" content="Hugo 0.65.3" />
   </head>
 
   
@@ -225,32 +225,32 @@ import * as React from &#39;react&#39;; import { render } from &#39;react-dom&#3
   <span style="color:#66d9ef">return</span> (
     <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">table</span> {...<span style="color:#a6e22e">getTableProps</span>()}<span style="color:#f92672">&gt;</span>
       <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">thead</span><span style="color:#f92672">&gt;</span>
-        {<span style="color:#a6e22e">headerGroups</span>.<span style="color:#a6e22e">map</span>(<span style="color:#a6e22e">headerGroup</span> <span style="color:#f92672">=</span><span style="color:#f92672">&gt;</span> (
+        {<span style="color:#a6e22e">headerGroups</span>.<span style="color:#a6e22e">map</span>(<span style="color:#a6e22e">headerGroup</span> <span style="color:#f92672">=&gt;</span> (
           <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">tr</span> {...<span style="color:#a6e22e">headerGroup</span>.<span style="color:#a6e22e">getHeaderGroupProps</span>()}<span style="color:#f92672">&gt;</span>
-            {<span style="color:#a6e22e">headerGroup</span>.<span style="color:#a6e22e">headers</span>.<span style="color:#a6e22e">map</span>(<span style="color:#a6e22e">column</span> <span style="color:#f92672">=</span><span style="color:#f92672">&gt;</span> (
-              <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">th</span> {...<span style="color:#a6e22e">column</span>.<span style="color:#a6e22e">getHeaderProps</span>()}<span style="color:#f92672">&gt;</span>{<span style="color:#a6e22e">column</span>.<span style="color:#a6e22e">render</span>(<span style="color:#e6db74">&#39;Header&#39;</span>)}<span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/</span><span style="color:#960050;background-color:#1e0010">t</span><span style="color:#960050;background-color:#1e0010">h</span><span style="color:#960050;background-color:#1e0010">&gt;</span>
+            {<span style="color:#a6e22e">headerGroup</span>.<span style="color:#a6e22e">headers</span>.<span style="color:#a6e22e">map</span>(<span style="color:#a6e22e">column</span> <span style="color:#f92672">=&gt;</span> (
+              <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">th</span> {...<span style="color:#a6e22e">column</span>.<span style="color:#a6e22e">getHeaderProps</span>()}<span style="color:#f92672">&gt;</span>{<span style="color:#a6e22e">column</span>.<span style="color:#a6e22e">render</span>(<span style="color:#e6db74">&#39;Header&#39;</span>)}<span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/th&gt;</span>
             ))}
-          <span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/</span><span style="color:#960050;background-color:#1e0010">t</span><span style="color:#960050;background-color:#1e0010">r</span><span style="color:#960050;background-color:#1e0010">&gt;</span>
+          <span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/tr&gt;</span>
         ))}
-      <span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/</span><span style="color:#960050;background-color:#1e0010">t</span><span style="color:#960050;background-color:#1e0010">h</span><span style="color:#960050;background-color:#1e0010">e</span><span style="color:#960050;background-color:#1e0010">a</span><span style="color:#960050;background-color:#1e0010">d</span><span style="color:#960050;background-color:#1e0010">&gt;</span>
+      <span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/thead&gt;</span>
       <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">tbody</span> {...<span style="color:#a6e22e">getTableBodyProps</span>()}<span style="color:#f92672">&gt;</span>
-        {<span style="color:#a6e22e">rows</span>.<span style="color:#a6e22e">map</span>((<span style="color:#a6e22e">row</span>, <span style="color:#a6e22e">i</span>) <span style="color:#f92672">=</span><span style="color:#f92672">&gt;</span> {
+        {<span style="color:#a6e22e">rows</span>.<span style="color:#a6e22e">map</span>((<span style="color:#a6e22e">row</span>, <span style="color:#a6e22e">i</span>) <span style="color:#f92672">=&gt;</span> {
           <span style="color:#a6e22e">prepareRow</span>(<span style="color:#a6e22e">row</span>);
           <span style="color:#66d9ef">return</span> (
             <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">tr</span> {...<span style="color:#a6e22e">row</span>.<span style="color:#a6e22e">getRowProps</span>()}<span style="color:#f92672">&gt;</span>
-              {<span style="color:#a6e22e">row</span>.<span style="color:#a6e22e">cells</span>.<span style="color:#a6e22e">map</span>(<span style="color:#a6e22e">cell</span> <span style="color:#f92672">=</span><span style="color:#f92672">&gt;</span> {
-                <span style="color:#66d9ef">return</span> <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">td</span> {...<span style="color:#a6e22e">cell</span>.<span style="color:#a6e22e">getCellProps</span>()}<span style="color:#f92672">&gt;</span>{<span style="color:#a6e22e">cell</span>.<span style="color:#a6e22e">render</span>(<span style="color:#e6db74">&#39;Cell&#39;</span>)}<span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/</span><span style="color:#960050;background-color:#1e0010">t</span><span style="color:#960050;background-color:#1e0010">d</span><span style="color:#960050;background-color:#1e0010">&gt;</span><span style="color:#960050;background-color:#1e0010">;</span>
+              {<span style="color:#a6e22e">row</span>.<span style="color:#a6e22e">cells</span>.<span style="color:#a6e22e">map</span>(<span style="color:#a6e22e">cell</span> <span style="color:#f92672">=&gt;</span> {
+                <span style="color:#66d9ef">return</span> <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">td</span> {...<span style="color:#a6e22e">cell</span>.<span style="color:#a6e22e">getCellProps</span>()}<span style="color:#f92672">&gt;</span>{<span style="color:#a6e22e">cell</span>.<span style="color:#a6e22e">render</span>(<span style="color:#e6db74">&#39;Cell&#39;</span>)}<span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/td&gt;;</span>
               })}
-            <span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/</span><span style="color:#960050;background-color:#1e0010">t</span><span style="color:#960050;background-color:#1e0010">r</span><span style="color:#960050;background-color:#1e0010">&gt;</span>
+            <span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/tr&gt;</span>
           );
         })}
-      <span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/</span><span style="color:#960050;background-color:#1e0010">t</span><span style="color:#960050;background-color:#1e0010">b</span><span style="color:#960050;background-color:#1e0010">o</span><span style="color:#960050;background-color:#1e0010">d</span><span style="color:#960050;background-color:#1e0010">y</span><span style="color:#960050;background-color:#1e0010">&gt;</span>
-    <span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/</span><span style="color:#960050;background-color:#1e0010">t</span><span style="color:#960050;background-color:#1e0010">a</span><span style="color:#960050;background-color:#1e0010">b</span><span style="color:#960050;background-color:#1e0010">l</span><span style="color:#960050;background-color:#1e0010">e</span><span style="color:#960050;background-color:#1e0010">&gt;</span>
+      <span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/tbody&gt;</span>
+    <span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/table&gt;</span>
   );
 }
 
 <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">rootElement</span> <span style="color:#f92672">=</span> document.<span style="color:#a6e22e">getElementById</span>(<span style="color:#e6db74">&#39;root&#39;</span>);
-<span style="color:#a6e22e">render</span>(<span style="color:#f92672">&lt;</span><span style="color:#a6e22e">App</span> <span style="color:#f92672">/</span><span style="color:#f92672">&gt;</span>, <span style="color:#a6e22e">rootElement</span>);
+<span style="color:#a6e22e">render</span>(<span style="color:#f92672">&lt;</span><span style="color:#a6e22e">App</span> <span style="color:#f92672">/&gt;</span>, <span style="color:#a6e22e">rootElement</span>);
 </code></pre></div><p>キモとなるのは以下の部分です。</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-tsx" data-lang="tsx">  <span style="color:#66d9ef">const</span> {
     <span style="color:#a6e22e">getTableProps</span>,
@@ -337,9 +337,9 @@ import * as React from &#39;react&#39;; import { render } from &#39;react-dom&#3
   <span style="color:#66d9ef">return</span> (
     <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">table</span> {...<span style="color:#a6e22e">getTableProps</span>()}<span style="color:#f92672">&gt;</span>
       <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">thead</span><span style="color:#f92672">&gt;</span>
-        {<span style="color:#a6e22e">headerGroups</span>.<span style="color:#a6e22e">map</span>(<span style="color:#a6e22e">headerGroup</span> <span style="color:#f92672">=</span><span style="color:#f92672">&gt;</span> (
+        {<span style="color:#a6e22e">headerGroups</span>.<span style="color:#a6e22e">map</span>(<span style="color:#a6e22e">headerGroup</span> <span style="color:#f92672">=&gt;</span> (
           <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">tr</span> {...<span style="color:#a6e22e">headerGroup</span>.<span style="color:#a6e22e">getHeaderGroupProps</span>()}<span style="color:#f92672">&gt;</span>
-            {<span style="color:#a6e22e">headerGroup</span>.<span style="color:#a6e22e">headers</span>.<span style="color:#a6e22e">map</span>(<span style="color:#a6e22e">column</span> <span style="color:#f92672">=</span><span style="color:#f92672">&gt;</span> (
+            {<span style="color:#a6e22e">headerGroup</span>.<span style="color:#a6e22e">headers</span>.<span style="color:#a6e22e">map</span>(<span style="color:#a6e22e">column</span> <span style="color:#f92672">=&gt;</span> (
               <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">th</span> {...<span style="color:#a6e22e">column</span>.<span style="color:#a6e22e">getHeaderProps</span>(<span style="color:#a6e22e">column</span>.<span style="color:#a6e22e">getSortByToggleProps</span>())}<span style="color:#f92672">&gt;</span>
                 {<span style="color:#a6e22e">column</span>.<span style="color:#a6e22e">render</span>(<span style="color:#e6db74">&#39;Header&#39;</span>)}
                 <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">span</span><span style="color:#f92672">&gt;</span>
@@ -349,30 +349,30 @@ import * as React from &#39;react&#39;; import { render } from &#39;react-dom&#3
                       <span style="color:#f92672">?</span> <span style="color:#e6db74">&#39; 🔽&#39;</span>
                       <span style="color:#f92672">:</span> <span style="color:#e6db74">&#39; 🔼&#39;</span>
                     <span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;&#39;</span>}{<span style="color:#e6db74">&#39; &#39;</span>}
-                <span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/</span><span style="color:#960050;background-color:#1e0010">s</span><span style="color:#960050;background-color:#1e0010">p</span><span style="color:#960050;background-color:#1e0010">a</span><span style="color:#960050;background-color:#1e0010">n</span><span style="color:#960050;background-color:#1e0010">&gt;</span>
-              <span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/</span><span style="color:#960050;background-color:#1e0010">t</span><span style="color:#960050;background-color:#1e0010">h</span><span style="color:#960050;background-color:#1e0010">&gt;</span>
+                <span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/span&gt;</span>
+              <span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/th&gt;</span>
             ))}
-          <span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/</span><span style="color:#960050;background-color:#1e0010">t</span><span style="color:#960050;background-color:#1e0010">r</span><span style="color:#960050;background-color:#1e0010">&gt;</span>
+          <span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/tr&gt;</span>
         ))}
-      <span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/</span><span style="color:#960050;background-color:#1e0010">t</span><span style="color:#960050;background-color:#1e0010">h</span><span style="color:#960050;background-color:#1e0010">e</span><span style="color:#960050;background-color:#1e0010">a</span><span style="color:#960050;background-color:#1e0010">d</span><span style="color:#960050;background-color:#1e0010">&gt;</span>
+      <span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/thead&gt;</span>
       <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">tbody</span> {...<span style="color:#a6e22e">getTableBodyProps</span>()}<span style="color:#f92672">&gt;</span>
-        {<span style="color:#a6e22e">rows</span>.<span style="color:#a6e22e">map</span>((<span style="color:#a6e22e">row</span>, <span style="color:#a6e22e">i</span>) <span style="color:#f92672">=</span><span style="color:#f92672">&gt;</span> {
+        {<span style="color:#a6e22e">rows</span>.<span style="color:#a6e22e">map</span>((<span style="color:#a6e22e">row</span>, <span style="color:#a6e22e">i</span>) <span style="color:#f92672">=&gt;</span> {
           <span style="color:#a6e22e">prepareRow</span>(<span style="color:#a6e22e">row</span>);
           <span style="color:#66d9ef">return</span> (
             <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">tr</span> {...<span style="color:#a6e22e">row</span>.<span style="color:#a6e22e">getRowProps</span>()}<span style="color:#f92672">&gt;</span>
-              {<span style="color:#a6e22e">row</span>.<span style="color:#a6e22e">cells</span>.<span style="color:#a6e22e">map</span>(<span style="color:#a6e22e">cell</span> <span style="color:#f92672">=</span><span style="color:#f92672">&gt;</span> {
-                <span style="color:#66d9ef">return</span> <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">td</span> {...<span style="color:#a6e22e">cell</span>.<span style="color:#a6e22e">getCellProps</span>()}<span style="color:#f92672">&gt;</span>{<span style="color:#a6e22e">cell</span>.<span style="color:#a6e22e">render</span>(<span style="color:#e6db74">&#39;Cell&#39;</span>)}<span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/</span><span style="color:#960050;background-color:#1e0010">t</span><span style="color:#960050;background-color:#1e0010">d</span><span style="color:#960050;background-color:#1e0010">&gt;</span><span style="color:#960050;background-color:#1e0010">;</span>
+              {<span style="color:#a6e22e">row</span>.<span style="color:#a6e22e">cells</span>.<span style="color:#a6e22e">map</span>(<span style="color:#a6e22e">cell</span> <span style="color:#f92672">=&gt;</span> {
+                <span style="color:#66d9ef">return</span> <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">td</span> {...<span style="color:#a6e22e">cell</span>.<span style="color:#a6e22e">getCellProps</span>()}<span style="color:#f92672">&gt;</span>{<span style="color:#a6e22e">cell</span>.<span style="color:#a6e22e">render</span>(<span style="color:#e6db74">&#39;Cell&#39;</span>)}<span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/td&gt;;</span>
               })}
-            <span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/</span><span style="color:#960050;background-color:#1e0010">t</span><span style="color:#960050;background-color:#1e0010">r</span><span style="color:#960050;background-color:#1e0010">&gt;</span>
+            <span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/tr&gt;</span>
           );
         })}
-      <span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/</span><span style="color:#960050;background-color:#1e0010">t</span><span style="color:#960050;background-color:#1e0010">b</span><span style="color:#960050;background-color:#1e0010">o</span><span style="color:#960050;background-color:#1e0010">d</span><span style="color:#960050;background-color:#1e0010">y</span><span style="color:#960050;background-color:#1e0010">&gt;</span>
-    <span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/</span><span style="color:#960050;background-color:#1e0010">t</span><span style="color:#960050;background-color:#1e0010">a</span><span style="color:#960050;background-color:#1e0010">b</span><span style="color:#960050;background-color:#1e0010">l</span><span style="color:#960050;background-color:#1e0010">e</span><span style="color:#960050;background-color:#1e0010">&gt;</span>
+      <span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/tbody&gt;</span>
+    <span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/table&gt;</span>
   );
 }
 
 <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">rootElement</span> <span style="color:#f92672">=</span> document.<span style="color:#a6e22e">getElementById</span>(<span style="color:#e6db74">&#39;root&#39;</span>);
-<span style="color:#a6e22e">render</span>(<span style="color:#f92672">&lt;</span><span style="color:#a6e22e">App</span> <span style="color:#f92672">/</span><span style="color:#f92672">&gt;</span>, <span style="color:#a6e22e">rootElement</span>);
+<span style="color:#a6e22e">render</span>(<span style="color:#f92672">&lt;</span><span style="color:#a6e22e">App</span> <span style="color:#f92672">/&gt;</span>, <span style="color:#a6e22e">rootElement</span>);
 </code></pre></div><p>差分は以下の2箇所です。</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-tsx" data-lang="tsx">  <span style="color:#66d9ef">const</span> {
     <span style="color:#a6e22e">getTableProps</span>,
@@ -390,8 +390,8 @@ import * as React from &#39;react&#39;; import { render } from &#39;react-dom&#3
                       <span style="color:#f92672">?</span> <span style="color:#e6db74">&#39; 🔽&#39;</span>
                       <span style="color:#f92672">:</span> <span style="color:#e6db74">&#39; 🔼&#39;</span>
                     <span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;&#39;</span>}{<span style="color:#e6db74">&#39; &#39;</span>}
-                <span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/</span><span style="color:#960050;background-color:#1e0010">s</span><span style="color:#960050;background-color:#1e0010">p</span><span style="color:#960050;background-color:#1e0010">a</span><span style="color:#960050;background-color:#1e0010">n</span><span style="color:#960050;background-color:#1e0010">&gt;</span>
-              <span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/</span><span style="color:#960050;background-color:#1e0010">t</span><span style="color:#960050;background-color:#1e0010">h</span><span style="color:#960050;background-color:#1e0010">&gt;</span>
+                <span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/span&gt;</span>
+              <span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/th&gt;</span>
 </code></pre></div><p><code>useTable</code> に <code>useSortBy</code> を渡し、 <code>column</code> に新たに含まれた <code>getSortByToggleProps</code> を使って列をソート可能な状態にして、 <code>isSorted</code> と <code>isSortedDesc</code> を利用して現在のソートの状態を描画するようにしています。</p>
 <p>このパターンでも、基本的にはSortしたかどうかの状態はすべてreact-table側が握り、使う側は <code>useTable</code> の戻り値を利用して描画するだけでいい状態を維持することができます。</p>
 <p>フィルターや行選択といった機能も提供されているため、必要に応じて型定義ファイルを更新しつつプラグインを追加することで、自分のプロダクトで必要なテーブルの機能だけを使えるようになります。</p>

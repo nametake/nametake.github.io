@@ -87,7 +87,7 @@ Component の実装 何はともあれ何かが表示されてないとモチベ
     <link rel="icon" type="image/png" href="https://nametake.github.io/images/favicon-32x32.png" sizes="32x32">
     <link rel="icon" type="image/png" href="https://nametake.github.io/images/favicon-16x16.png" sizes="16x16">
 
-    <meta name="generator" content="Hugo 0.63.2" />
+    <meta name="generator" content="Hugo 0.65.3" />
   </head>
 
   
@@ -210,7 +210,7 @@ yarn add -D @types/redux @types/react-redux
 
 <span style="color:#66d9ef">interface</span> <span style="color:#a6e22e">IProps</span> {
   <span style="color:#a6e22e">todos</span>: <span style="color:#66d9ef">string</span>[];
-  <span style="color:#a6e22e">onClickAddButton</span><span style="color:#f92672">:</span> (<span style="color:#a6e22e">todo</span>: <span style="color:#66d9ef">string</span>) <span style="color:#f92672">=</span><span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">void</span>;
+  <span style="color:#a6e22e">onClickAddButton</span><span style="color:#f92672">:</span> (<span style="color:#a6e22e">todo</span>: <span style="color:#66d9ef">string</span>) <span style="color:#f92672">=&gt;</span> <span style="color:#66d9ef">void</span>;
 }
 
 <span style="color:#66d9ef">interface</span> <span style="color:#a6e22e">IState</span> {
@@ -233,26 +233,26 @@ yarn add -D @types/redux @types/react-redux
     <span style="color:#66d9ef">const</span> { <span style="color:#a6e22e">text</span> } <span style="color:#f92672">=</span> <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">state</span>;
     <span style="color:#66d9ef">return</span> (
       <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">div</span> <span style="color:#a6e22e">style</span><span style="color:#f92672">=</span>{{ <span style="color:#a6e22e">width</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;500px&#39;</span>, <span style="color:#a6e22e">margin</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;0 auto&#39;</span> }}<span style="color:#f92672">&gt;</span>
-        <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">h1</span><span style="color:#f92672">&gt;</span><span style="color:#a6e22e">TODO</span> <span style="color:#a6e22e">LIST</span><span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/</span><span style="color:#960050;background-color:#1e0010">h</span><span style="color:#960050;background-color:#1e0010">1</span><span style="color:#960050;background-color:#1e0010">&gt;</span>
-        <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">input</span> <span style="color:#a6e22e">type</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;text&#34;</span> <span style="color:#a6e22e">value</span><span style="color:#f92672">=</span>{<span style="color:#a6e22e">text</span>} <span style="color:#a6e22e">onChange</span><span style="color:#f92672">=</span>{<span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">onTextChange</span>} <span style="color:#f92672">/</span><span style="color:#f92672">&gt;</span>
-        <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">button</span> <span style="color:#a6e22e">onClick</span><span style="color:#f92672">=</span>{<span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">onClickAddButton</span>}<span style="color:#f92672">&gt;</span><span style="color:#a6e22e">Add</span> <span style="color:#a6e22e">Todo</span><span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/</span><span style="color:#960050;background-color:#1e0010">b</span><span style="color:#960050;background-color:#1e0010">u</span><span style="color:#960050;background-color:#1e0010">t</span><span style="color:#960050;background-color:#1e0010">t</span><span style="color:#960050;background-color:#1e0010">o</span><span style="color:#960050;background-color:#1e0010">n</span><span style="color:#960050;background-color:#1e0010">&gt;</span>
+        <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">h1</span><span style="color:#f92672">&gt;</span><span style="color:#a6e22e">TODO</span> <span style="color:#a6e22e">LIST</span><span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/h1&gt;</span>
+        <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">input</span> <span style="color:#a6e22e">type</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;text&#34;</span> <span style="color:#a6e22e">value</span><span style="color:#f92672">=</span>{<span style="color:#a6e22e">text</span>} <span style="color:#a6e22e">onChange</span><span style="color:#f92672">=</span>{<span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">onTextChange</span>} <span style="color:#f92672">/&gt;</span>
+        <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">button</span> <span style="color:#a6e22e">onClick</span><span style="color:#f92672">=</span>{<span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">onClickAddButton</span>}<span style="color:#f92672">&gt;</span><span style="color:#a6e22e">Add</span> <span style="color:#a6e22e">Todo</span><span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/button&gt;</span>
         <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">ul</span><span style="color:#f92672">&gt;</span>
-          {<span style="color:#a6e22e">todos</span>.<span style="color:#a6e22e">map</span>((<span style="color:#a6e22e">todo</span>, <span style="color:#a6e22e">i</span>) <span style="color:#f92672">=</span><span style="color:#f92672">&gt;</span> (
-            <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">li</span> <span style="color:#a6e22e">key</span><span style="color:#f92672">=</span>{<span style="color:#a6e22e">i</span>}<span style="color:#f92672">&gt;</span>{<span style="color:#a6e22e">todo</span>}<span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/</span><span style="color:#960050;background-color:#1e0010">l</span><span style="color:#960050;background-color:#1e0010">i</span><span style="color:#960050;background-color:#1e0010">&gt;</span>
+          {<span style="color:#a6e22e">todos</span>.<span style="color:#a6e22e">map</span>((<span style="color:#a6e22e">todo</span>, <span style="color:#a6e22e">i</span>) <span style="color:#f92672">=&gt;</span> (
+            <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">li</span> <span style="color:#a6e22e">key</span><span style="color:#f92672">=</span>{<span style="color:#a6e22e">i</span>}<span style="color:#f92672">&gt;</span>{<span style="color:#a6e22e">todo</span>}<span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/li&gt;</span>
           ))}
-        <span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/</span><span style="color:#960050;background-color:#1e0010">u</span><span style="color:#960050;background-color:#1e0010">l</span><span style="color:#960050;background-color:#1e0010">&gt;</span>
-      <span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/</span><span style="color:#960050;background-color:#1e0010">d</span><span style="color:#960050;background-color:#1e0010">i</span><span style="color:#960050;background-color:#1e0010">v</span><span style="color:#960050;background-color:#1e0010">&gt;</span>
+        <span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/ul&gt;</span>
+      <span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/div&gt;</span>
     );
   }
 
   <span style="color:#75715e">// テキストが更新されたときのイベント関数
-</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">private</span> <span style="color:#a6e22e">onTextChange</span> <span style="color:#f92672">=</span> (<span style="color:#a6e22e">e</span>: <span style="color:#66d9ef">React.ChangeEvent</span><span style="color:#f92672">&lt;</span><span style="color:#a6e22e">HTMLInputElement</span><span style="color:#f92672">&gt;</span>) <span style="color:#f92672">=</span><span style="color:#f92672">&gt;</span> {
+</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">private</span> <span style="color:#a6e22e">onTextChange</span> <span style="color:#f92672">=</span> (<span style="color:#a6e22e">e</span>: <span style="color:#66d9ef">React.ChangeEvent</span><span style="color:#f92672">&lt;</span><span style="color:#a6e22e">HTMLInputElement</span><span style="color:#f92672">&gt;</span>) <span style="color:#f92672">=&gt;</span> {
     <span style="color:#75715e">// text inputに文字が入力されるたびに入力内容をinputに反映させている
 </span><span style="color:#75715e"></span>    <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">setState</span>({ <span style="color:#a6e22e">text</span>: <span style="color:#66d9ef">e.currentTarget.value</span> });
   };
 
   <span style="color:#75715e">// ボタンがクリックされたときのイベント関数
-</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">private</span> <span style="color:#a6e22e">onClickAddButton</span> <span style="color:#f92672">=</span> () <span style="color:#f92672">=</span><span style="color:#f92672">&gt;</span> {
+</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">private</span> <span style="color:#a6e22e">onClickAddButton</span> <span style="color:#f92672">=</span> () <span style="color:#f92672">=&gt;</span> {
     <span style="color:#66d9ef">const</span> { <span style="color:#a6e22e">onClickAddButton</span> } <span style="color:#f92672">=</span> <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">props</span>;
     <span style="color:#66d9ef">const</span> { <span style="color:#a6e22e">text</span> } <span style="color:#f92672">=</span> <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">state</span>;
     <span style="color:#a6e22e">onClickAddButton</span>(<span style="color:#a6e22e">text</span>);
@@ -272,11 +272,11 @@ yarn add -D @types/redux @types/react-redux
       <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">div</span><span style="color:#f92672">&gt;</span>
         <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">TodoComponent</span>
           <span style="color:#a6e22e">todos</span><span style="color:#f92672">=</span>{[<span style="color:#e6db74">&#39;foo&#39;</span>, <span style="color:#e6db74">&#39;bar&#39;</span>]}
-          <span style="color:#a6e22e">onClickAddButton</span><span style="color:#f92672">=</span>{(<span style="color:#a6e22e">todo</span>: <span style="color:#66d9ef">string</span>)<span style="color:#f92672">:</span> <span style="color:#66d9ef">void</span> <span style="color:#f92672">=</span><span style="color:#f92672">&gt;</span> {
+          <span style="color:#a6e22e">onClickAddButton</span><span style="color:#f92672">=</span>{(<span style="color:#a6e22e">todo</span>: <span style="color:#66d9ef">string</span>)<span style="color:#f92672">:</span> <span style="color:#66d9ef">void</span> <span style="color:#f92672">=&gt;</span> {
             <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">todo</span>);
           }}
-        <span style="color:#f92672">/</span><span style="color:#f92672">&gt;</span>
-      <span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/</span><span style="color:#960050;background-color:#1e0010">d</span><span style="color:#960050;background-color:#1e0010">i</span><span style="color:#960050;background-color:#1e0010">v</span><span style="color:#960050;background-color:#1e0010">&gt;</span>
+        <span style="color:#f92672">/&gt;</span>
+      <span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/div&gt;</span>
     );
   }
 }
@@ -288,8 +288,8 @@ yarn add -D @types/redux @types/react-redux
 <p>IState は React における state を明示的に型として定義したものです。React における state は<strong>この Component の状態(主に UI)を表す</strong>ものです。 型を定義することで、この Component は<code>text</code>という文字列を状態として持つことを明示します。</p>
 <p>onTextChangeやonClickAddButtonのようなコールバック関数はクラスのメンバとして定義します。こうすることで描画のたびに関数が生成されるのを防ぎます。</p>
 <p>あとは補足なのですが、 <code>render()</code> に含まれているリストの処理で<code>key</code>にリストのindexを使っているのはあまりいい方法ではありません。 Reactではリストの描画の際、key属性を見てその要素が追加されたのか削除されたのかを判別しています。そのため、keyはそのリストで一意になる値を使うほうが良いです。しかし、そこまでカバーしようとするとTodoオブジェクトを定義する必要があり実装の範囲が広がるため、今回はそこまでしていません。indexを使うのはIDがない場合の最終手段なので、そのことは覚えておくと良いと思います。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ts" data-lang="ts">          {<span style="color:#a6e22e">todos</span>.<span style="color:#a6e22e">map</span>((<span style="color:#a6e22e">todo</span>, <span style="color:#a6e22e">i</span>) <span style="color:#f92672">=</span><span style="color:#f92672">&gt;</span> (
-            <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">li</span> <span style="color:#a6e22e">key</span><span style="color:#f92672">=</span>{<span style="color:#a6e22e">i</span>}<span style="color:#f92672">&gt;</span>{<span style="color:#a6e22e">todo</span>}<span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/</span><span style="color:#960050;background-color:#1e0010">l</span><span style="color:#960050;background-color:#1e0010">i</span><span style="color:#960050;background-color:#1e0010">&gt;</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ts" data-lang="ts">          {<span style="color:#a6e22e">todos</span>.<span style="color:#a6e22e">map</span>((<span style="color:#a6e22e">todo</span>, <span style="color:#a6e22e">i</span>) <span style="color:#f92672">=&gt;</span> (
+            <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">li</span> <span style="color:#a6e22e">key</span><span style="color:#f92672">=</span>{<span style="color:#a6e22e">i</span>}<span style="color:#f92672">&gt;</span>{<span style="color:#a6e22e">todo</span>}<span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/li&gt;</span>
           ))}
 </code></pre></div><h4 id="react-のみでtodoアプリケーションを作る場合">React のみでTodoアプリケーションを作る場合</h4>
 <p>Redux はアプリケーションの全体で使う状態( Component の状態ではなく)を外出しすることで、アプリケーションの状態とUIを分離するためのフレームワークのことです。</p>
@@ -299,7 +299,7 @@ yarn add -D @types/redux @types/react-redux
 </span><span style="color:#75715e"></span><span style="color:#66d9ef">import</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">as</span> <span style="color:#a6e22e">React</span> <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;react&#39;</span>;
 
 <span style="color:#66d9ef">interface</span> <span style="color:#a6e22e">IProps</span> {
-  <span style="color:#a6e22e">onClickAddButton</span><span style="color:#f92672">:</span> (<span style="color:#a6e22e">todo</span>: <span style="color:#66d9ef">string</span>) <span style="color:#f92672">=</span><span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">void</span>;
+  <span style="color:#a6e22e">onClickAddButton</span><span style="color:#f92672">:</span> (<span style="color:#a6e22e">todo</span>: <span style="color:#66d9ef">string</span>) <span style="color:#f92672">=&gt;</span> <span style="color:#66d9ef">void</span>;
 }
 
 <span style="color:#66d9ef">interface</span> <span style="color:#a6e22e">IState</span> {
@@ -323,26 +323,26 @@ yarn add -D @types/redux @types/react-redux
     <span style="color:#66d9ef">const</span> { <span style="color:#a6e22e">todos</span>, <span style="color:#a6e22e">text</span> } <span style="color:#f92672">=</span> <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">state</span>;
     <span style="color:#66d9ef">return</span> (
       <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">div</span> <span style="color:#a6e22e">style</span><span style="color:#f92672">=</span>{{ <span style="color:#a6e22e">width</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;500px&#39;</span>, <span style="color:#a6e22e">margin</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;0 auto&#39;</span> }}<span style="color:#f92672">&gt;</span>
-        <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">h1</span><span style="color:#f92672">&gt;</span><span style="color:#a6e22e">TODO</span> <span style="color:#a6e22e">LIST</span><span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/</span><span style="color:#960050;background-color:#1e0010">h</span><span style="color:#960050;background-color:#1e0010">1</span><span style="color:#960050;background-color:#1e0010">&gt;</span>
-        <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">input</span> <span style="color:#a6e22e">type</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;text&#34;</span> <span style="color:#a6e22e">value</span><span style="color:#f92672">=</span>{<span style="color:#a6e22e">text</span>} <span style="color:#a6e22e">onChange</span><span style="color:#f92672">=</span>{<span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">onTextChange</span>} <span style="color:#f92672">/</span><span style="color:#f92672">&gt;</span>
-        <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">button</span> <span style="color:#a6e22e">onClick</span><span style="color:#f92672">=</span>{<span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">onClickAddButton</span>}<span style="color:#f92672">&gt;</span><span style="color:#a6e22e">Add</span> <span style="color:#a6e22e">Todo</span><span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/</span><span style="color:#960050;background-color:#1e0010">b</span><span style="color:#960050;background-color:#1e0010">u</span><span style="color:#960050;background-color:#1e0010">t</span><span style="color:#960050;background-color:#1e0010">t</span><span style="color:#960050;background-color:#1e0010">o</span><span style="color:#960050;background-color:#1e0010">n</span><span style="color:#960050;background-color:#1e0010">&gt;</span>
+        <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">h1</span><span style="color:#f92672">&gt;</span><span style="color:#a6e22e">TODO</span> <span style="color:#a6e22e">LIST</span><span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/h1&gt;</span>
+        <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">input</span> <span style="color:#a6e22e">type</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;text&#34;</span> <span style="color:#a6e22e">value</span><span style="color:#f92672">=</span>{<span style="color:#a6e22e">text</span>} <span style="color:#a6e22e">onChange</span><span style="color:#f92672">=</span>{<span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">onTextChange</span>} <span style="color:#f92672">/&gt;</span>
+        <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">button</span> <span style="color:#a6e22e">onClick</span><span style="color:#f92672">=</span>{<span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">onClickAddButton</span>}<span style="color:#f92672">&gt;</span><span style="color:#a6e22e">Add</span> <span style="color:#a6e22e">Todo</span><span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/button&gt;</span>
         <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">ul</span><span style="color:#f92672">&gt;</span>
-          {<span style="color:#a6e22e">todos</span>.<span style="color:#a6e22e">map</span>((<span style="color:#a6e22e">todo</span>, <span style="color:#a6e22e">i</span>) <span style="color:#f92672">=</span><span style="color:#f92672">&gt;</span> (
-            <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">li</span> <span style="color:#a6e22e">key</span><span style="color:#f92672">=</span>{<span style="color:#a6e22e">i</span>}<span style="color:#f92672">&gt;</span>{<span style="color:#a6e22e">todo</span>}<span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/</span><span style="color:#960050;background-color:#1e0010">l</span><span style="color:#960050;background-color:#1e0010">i</span><span style="color:#960050;background-color:#1e0010">&gt;</span>
+          {<span style="color:#a6e22e">todos</span>.<span style="color:#a6e22e">map</span>((<span style="color:#a6e22e">todo</span>, <span style="color:#a6e22e">i</span>) <span style="color:#f92672">=&gt;</span> (
+            <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">li</span> <span style="color:#a6e22e">key</span><span style="color:#f92672">=</span>{<span style="color:#a6e22e">i</span>}<span style="color:#f92672">&gt;</span>{<span style="color:#a6e22e">todo</span>}<span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/li&gt;</span>
           ))}
-        <span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/</span><span style="color:#960050;background-color:#1e0010">u</span><span style="color:#960050;background-color:#1e0010">l</span><span style="color:#960050;background-color:#1e0010">&gt;</span>
-      <span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/</span><span style="color:#960050;background-color:#1e0010">d</span><span style="color:#960050;background-color:#1e0010">i</span><span style="color:#960050;background-color:#1e0010">v</span><span style="color:#960050;background-color:#1e0010">&gt;</span>
+        <span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/ul&gt;</span>
+      <span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/div&gt;</span>
     );
   }
 
   <span style="color:#75715e">// テキストが更新されたときのイベント関数
-</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">private</span> <span style="color:#a6e22e">onTextChange</span> <span style="color:#f92672">=</span> (<span style="color:#a6e22e">e</span>: <span style="color:#66d9ef">React.ChangeEvent</span><span style="color:#f92672">&lt;</span><span style="color:#a6e22e">HTMLInputElement</span><span style="color:#f92672">&gt;</span>) <span style="color:#f92672">=</span><span style="color:#f92672">&gt;</span> {
+</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">private</span> <span style="color:#a6e22e">onTextChange</span> <span style="color:#f92672">=</span> (<span style="color:#a6e22e">e</span>: <span style="color:#66d9ef">React.ChangeEvent</span><span style="color:#f92672">&lt;</span><span style="color:#a6e22e">HTMLInputElement</span><span style="color:#f92672">&gt;</span>) <span style="color:#f92672">=&gt;</span> {
     <span style="color:#75715e">// text inputに文字が入力されるたびに入力内容をinputに反映させている
 </span><span style="color:#75715e"></span>    <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">setState</span>({ <span style="color:#a6e22e">text</span>: <span style="color:#66d9ef">e.currentTarget.value</span> });
   };
 
   <span style="color:#75715e">// ボタンがクリックされたときのイベント関数
-</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">private</span> <span style="color:#a6e22e">onClickAddButton</span> <span style="color:#f92672">=</span> () <span style="color:#f92672">=</span><span style="color:#f92672">&gt;</span> {
+</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">private</span> <span style="color:#a6e22e">onClickAddButton</span> <span style="color:#f92672">=</span> () <span style="color:#f92672">=&gt;</span> {
     <span style="color:#66d9ef">const</span> { <span style="color:#a6e22e">text</span>, <span style="color:#a6e22e">todos</span> } <span style="color:#f92672">=</span> <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">state</span>;
     <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">setState</span>({
       <span style="color:#a6e22e">todos</span>: <span style="color:#66d9ef">todos.concat</span>([<span style="color:#a6e22e">text</span>])
@@ -362,11 +362,11 @@ yarn add -D @types/redux @types/react-redux
     <span style="color:#66d9ef">return</span> (
       <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">div</span><span style="color:#f92672">&gt;</span>
         <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">TodoComponent</span>
-          <span style="color:#a6e22e">onClickAddButton</span><span style="color:#f92672">=</span>{(<span style="color:#a6e22e">todo</span>: <span style="color:#66d9ef">string</span>)<span style="color:#f92672">:</span> <span style="color:#66d9ef">void</span> <span style="color:#f92672">=</span><span style="color:#f92672">&gt;</span> {
+          <span style="color:#a6e22e">onClickAddButton</span><span style="color:#f92672">=</span>{(<span style="color:#a6e22e">todo</span>: <span style="color:#66d9ef">string</span>)<span style="color:#f92672">:</span> <span style="color:#66d9ef">void</span> <span style="color:#f92672">=&gt;</span> {
             <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">todo</span>);
           }}
-        <span style="color:#f92672">/</span><span style="color:#f92672">&gt;</span>
-      <span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/</span><span style="color:#960050;background-color:#1e0010">d</span><span style="color:#960050;background-color:#1e0010">i</span><span style="color:#960050;background-color:#1e0010">v</span><span style="color:#960050;background-color:#1e0010">&gt;</span>
+        <span style="color:#f92672">/&gt;</span>
+      <span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/div&gt;</span>
     );
   }
 }
@@ -402,7 +402,7 @@ yarn add -D @types/redux @types/react-redux
 }
 
 <span style="color:#75715e">// Todoを追加するActionとして、Actionを継承したinterfaceを定義
-</span><span style="color:#75715e"></span><span style="color:#75715e">// 追加するPayloadの情報も同時に持つ
+</span><span style="color:#75715e">// 追加するPayloadの情報も同時に持つ
 </span><span style="color:#75715e"></span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">interface</span> <span style="color:#a6e22e">IAddTodoAction</span> <span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">Action</span> {
   <span style="color:#a6e22e">type</span>: <span style="color:#66d9ef">TodoActionType.ADD_TODO</span>;
   <span style="color:#a6e22e">payload</span><span style="color:#f92672">:</span> {
@@ -420,7 +420,7 @@ yarn add -D @types/redux @types/react-redux
 
 <span style="color:#75715e">// 定義したCreatorの実装を定義(exportをつけてないので外からは見えない)
 </span><span style="color:#75715e"></span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">TodoActionCreator</span> <span style="color:#66d9ef">implements</span> <span style="color:#a6e22e">ITodoActionCreator</span> {
-  <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">addTodoAction</span> <span style="color:#f92672">=</span> (<span style="color:#a6e22e">todo</span>: <span style="color:#66d9ef">string</span>)<span style="color:#f92672">:</span> <span style="color:#a6e22e">IAddTodoAction</span> <span style="color:#f92672">=</span><span style="color:#f92672">&gt;</span> {
+  <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">addTodoAction</span> <span style="color:#f92672">=</span> (<span style="color:#a6e22e">todo</span>: <span style="color:#66d9ef">string</span>)<span style="color:#f92672">:</span> <span style="color:#a6e22e">IAddTodoAction</span> <span style="color:#f92672">=&gt;</span> {
     <span style="color:#66d9ef">return</span> {
       <span style="color:#a6e22e">payload</span><span style="color:#f92672">:</span> {
         <span style="color:#a6e22e">todo</span>
@@ -455,7 +455,7 @@ yarn add -D @types/redux @types/react-redux
 </span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">todoReducer</span>: <span style="color:#66d9ef">Reducer</span><span style="color:#f92672">&lt;</span><span style="color:#a6e22e">ITodoState</span><span style="color:#f92672">&gt;</span> <span style="color:#f92672">=</span> (
   <span style="color:#a6e22e">state</span>: <span style="color:#66d9ef">ITodoState</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">initTodoState</span>,
   <span style="color:#a6e22e">action</span>: <span style="color:#66d9ef">TodoAction</span>
-)<span style="color:#f92672">:</span> <span style="color:#a6e22e">ITodoState</span> <span style="color:#f92672">=</span><span style="color:#f92672">&gt;</span> {
+)<span style="color:#f92672">:</span> <span style="color:#a6e22e">ITodoState</span> <span style="color:#f92672">=&gt;</span> {
   <span style="color:#75715e">// 関数の引数として渡されてきたactionのtypeを見てReduxのstateを返す
 </span><span style="color:#75715e"></span>  <span style="color:#66d9ef">switch</span> (<span style="color:#a6e22e">action</span>.<span style="color:#a6e22e">type</span>) {
     <span style="color:#66d9ef">case</span> <span style="color:#a6e22e">TodoActionType</span>.<span style="color:#a6e22e">ADD_TODO</span><span style="color:#f92672">:</span>
@@ -523,16 +523,16 @@ yarn add -D @types/redux @types/react-redux
 }
 
 <span style="color:#75715e">// ReduxのDispatchをPropsに変換するinterfaceを定義
-</span><span style="color:#75715e"></span><span style="color:#75715e">// メンバにはどのアクションを実行するのかを定義する
+</span><span style="color:#75715e">// メンバにはどのアクションを実行するのかを定義する
 </span><span style="color:#75715e"></span><span style="color:#66d9ef">interface</span> <span style="color:#a6e22e">IDispatchToProps</span> {
-  <span style="color:#a6e22e">addTodo</span><span style="color:#f92672">:</span> (<span style="color:#a6e22e">todo</span>: <span style="color:#66d9ef">string</span>) <span style="color:#f92672">=</span><span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">void</span>;
+  <span style="color:#a6e22e">addTodo</span><span style="color:#f92672">:</span> (<span style="color:#a6e22e">todo</span>: <span style="color:#66d9ef">string</span>) <span style="color:#f92672">=&gt;</span> <span style="color:#66d9ef">void</span>;
 }
 
 <span style="color:#75715e">// IStateToPropsとIDispatchToPropsの複合型を定義
 </span><span style="color:#75715e"></span><span style="color:#a6e22e">type</span> <span style="color:#a6e22e">IProps</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">IStateToProps</span> <span style="color:#f92672">&amp;</span> <span style="color:#a6e22e">IDispatchToProps</span>;
 
 <span style="color:#75715e">// IPropsを受け取るContainerを定義
-</span><span style="color:#75715e"></span><span style="color:#75715e">// Stateは持たないので空の定義を渡す
+</span><span style="color:#75715e">// Stateは持たないので空の定義を渡す
 </span><span style="color:#75715e"></span><span style="color:#75715e">/* tslint:disable:jsx-no-lambda */</span>
 <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">TodoContainer</span> <span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">React</span>.<span style="color:#a6e22e">Component</span><span style="color:#f92672">&lt;</span><span style="color:#a6e22e">IProps</span>, {}<span style="color:#f92672">&gt;</span> {
   <span style="color:#66d9ef">constructor</span>(<span style="color:#a6e22e">props</span>: <span style="color:#66d9ef">IProps</span>) {
@@ -543,20 +543,20 @@ yarn add -D @types/redux @types/react-redux
     <span style="color:#75715e">// TodoComponentにpropsの値を詰めて返す
 </span><span style="color:#75715e"></span>    <span style="color:#66d9ef">const</span> { <span style="color:#a6e22e">todos</span> } <span style="color:#f92672">=</span> <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">props</span>;
     <span style="color:#66d9ef">return</span> (
-      <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">TodoComponent</span> <span style="color:#a6e22e">todos</span><span style="color:#f92672">=</span>{<span style="color:#a6e22e">todos</span>} <span style="color:#a6e22e">onClickAddButton</span><span style="color:#f92672">=</span>{<span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">onClickAddButton</span>} <span style="color:#f92672">/</span><span style="color:#f92672">&gt;</span>
+      <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">TodoComponent</span> <span style="color:#a6e22e">todos</span><span style="color:#f92672">=</span>{<span style="color:#a6e22e">todos</span>} <span style="color:#a6e22e">onClickAddButton</span><span style="color:#f92672">=</span>{<span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">onClickAddButton</span>} <span style="color:#f92672">/&gt;</span>
     );
   }
 
   <span style="color:#75715e">// TodoComponentにわたすコールバック関数
-</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">private</span> <span style="color:#a6e22e">onClickAddButton</span> <span style="color:#f92672">=</span> (<span style="color:#a6e22e">todo</span>: <span style="color:#66d9ef">string</span>)<span style="color:#f92672">:</span> <span style="color:#66d9ef">void</span> <span style="color:#f92672">=</span><span style="color:#f92672">&gt;</span> {
+</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">private</span> <span style="color:#a6e22e">onClickAddButton</span> <span style="color:#f92672">=</span> (<span style="color:#a6e22e">todo</span>: <span style="color:#66d9ef">string</span>)<span style="color:#f92672">:</span> <span style="color:#66d9ef">void</span> <span style="color:#f92672">=&gt;</span> {
     <span style="color:#66d9ef">const</span> { <span style="color:#a6e22e">addTodo</span> } <span style="color:#f92672">=</span> <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">props</span>;
     <span style="color:#a6e22e">addTodo</span>(<span style="color:#a6e22e">todo</span>);
   };
 }
 
 <span style="color:#75715e">// Storeが更新されたときに送られてくるStateを受け取り、
-</span><span style="color:#75715e"></span><span style="color:#75715e">// IStateToPropsに変換して返す関数を定義
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">mapStateToProps</span> <span style="color:#f92672">=</span> (<span style="color:#a6e22e">state</span>: <span style="color:#66d9ef">IRootState</span>)<span style="color:#f92672">:</span> <span style="color:#a6e22e">IStateToProps</span> <span style="color:#f92672">=</span><span style="color:#f92672">&gt;</span> {
+</span><span style="color:#75715e">// IStateToPropsに変換して返す関数を定義
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">mapStateToProps</span> <span style="color:#f92672">=</span> (<span style="color:#a6e22e">state</span>: <span style="color:#66d9ef">IRootState</span>)<span style="color:#f92672">:</span> <span style="color:#a6e22e">IStateToProps</span> <span style="color:#f92672">=&gt;</span> {
   <span style="color:#66d9ef">const</span> { <span style="color:#a6e22e">todoState</span> } <span style="color:#f92672">=</span> <span style="color:#a6e22e">state</span>;
   <span style="color:#66d9ef">return</span> {
     <span style="color:#a6e22e">todos</span>: <span style="color:#66d9ef">todoState.todos</span>
@@ -564,16 +564,16 @@ yarn add -D @types/redux @types/react-redux
 };
 
 <span style="color:#75715e">// Dispatchを受け取り、IDispatchToPropsの関数でどのアクションをDispatchするのかを定義する
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">mapDispatchToProps</span> <span style="color:#f92672">=</span> (<span style="color:#a6e22e">dispatch</span>: <span style="color:#66d9ef">Dispatch</span><span style="color:#f92672">&lt;</span><span style="color:#a6e22e">Action</span><span style="color:#f92672">&gt;</span>)<span style="color:#f92672">:</span> <span style="color:#a6e22e">IDispatchToProps</span> <span style="color:#f92672">=</span><span style="color:#f92672">&gt;</span> {
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">mapDispatchToProps</span> <span style="color:#f92672">=</span> (<span style="color:#a6e22e">dispatch</span>: <span style="color:#66d9ef">Dispatch</span><span style="color:#f92672">&lt;</span><span style="color:#a6e22e">Action</span><span style="color:#f92672">&gt;</span>)<span style="color:#f92672">:</span> <span style="color:#a6e22e">IDispatchToProps</span> <span style="color:#f92672">=&gt;</span> {
   <span style="color:#66d9ef">return</span> {
-    <span style="color:#a6e22e">addTodo</span><span style="color:#f92672">:</span> (<span style="color:#a6e22e">todo</span>: <span style="color:#66d9ef">string</span>) <span style="color:#f92672">=</span><span style="color:#f92672">&gt;</span> {
+    <span style="color:#a6e22e">addTodo</span><span style="color:#f92672">:</span> (<span style="color:#a6e22e">todo</span>: <span style="color:#66d9ef">string</span>) <span style="color:#f92672">=&gt;</span> {
       <span style="color:#a6e22e">dispatch</span>(<span style="color:#a6e22e">todoActionCreator</span>.<span style="color:#a6e22e">addTodoAction</span>(<span style="color:#a6e22e">todo</span>));
     }
   };
 };
 
 <span style="color:#75715e">// Storeが更新されたときの挙動が詰められたIStatePropsと、
-</span><span style="color:#75715e"></span><span style="color:#75715e">// Storeを更新するためのメソッドが詰められたIDispatchToPropsをTodoContainerと繋ぎこむ
+</span><span style="color:#75715e">// Storeを更新するためのメソッドが詰められたIDispatchToPropsをTodoContainerと繋ぎこむ
 </span><span style="color:#75715e"></span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">default</span> <span style="color:#a6e22e">connect</span><span style="color:#f92672">&lt;</span><span style="color:#a6e22e">IStateToProps</span>, <span style="color:#a6e22e">IDispatchToProps</span><span style="color:#f92672">&gt;</span>(
   <span style="color:#a6e22e">mapStateToProps</span>,
   <span style="color:#a6e22e">mapDispatchToProps</span>
@@ -590,8 +590,8 @@ yarn add -D @types/redux @types/react-redux
   <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">render() {</span>
     <span style="color:#66d9ef">return</span> (
       <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">Provider</span> <span style="color:#a6e22e">store</span><span style="color:#f92672">=</span>{<span style="color:#a6e22e">store</span>}<span style="color:#f92672">&gt;</span>
-        <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">TodoContainer</span> <span style="color:#f92672">/</span><span style="color:#f92672">&gt;</span>
-      <span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/</span><span style="color:#960050;background-color:#1e0010">P</span><span style="color:#960050;background-color:#1e0010">r</span><span style="color:#960050;background-color:#1e0010">o</span><span style="color:#960050;background-color:#1e0010">v</span><span style="color:#960050;background-color:#1e0010">i</span><span style="color:#960050;background-color:#1e0010">d</span><span style="color:#960050;background-color:#1e0010">e</span><span style="color:#960050;background-color:#1e0010">r</span><span style="color:#960050;background-color:#1e0010">&gt;</span>
+        <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">TodoContainer</span> <span style="color:#f92672">/&gt;</span>
+      <span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/Provider&gt;</span>
     );
   }
 }
@@ -602,8 +602,8 @@ yarn add -D @types/redux @types/react-redux
 <p>&ldquo;Container Component&rdquo; は &ldquo;Presentational Component&rdquo; にデータやコールバック関数を与える役割を持ちます。また、基本的には UI を持ちません。通常 Component が描画を行うための <code>render()</code> メソッドは &ldquo;Presentational Component&rdquo; の組み立てと、それらにデータとコールバックを与えるのが役割になります。</p>
 <p>さて、 Containerで で一番理解しづらいのは以下の部分になると思います。</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ts" data-lang="ts"><span style="color:#75715e">// Storeが更新されたときに送られてくるStateを受け取り、
-</span><span style="color:#75715e"></span><span style="color:#75715e">// IStateToPropsに変換して返す関数を定義
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">mapStateToProps</span> <span style="color:#f92672">=</span> (<span style="color:#a6e22e">state</span>: <span style="color:#66d9ef">IRootState</span>)<span style="color:#f92672">:</span> <span style="color:#a6e22e">IStateToProps</span> <span style="color:#f92672">=</span><span style="color:#f92672">&gt;</span> {
+</span><span style="color:#75715e">// IStateToPropsに変換して返す関数を定義
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">mapStateToProps</span> <span style="color:#f92672">=</span> (<span style="color:#a6e22e">state</span>: <span style="color:#66d9ef">IRootState</span>)<span style="color:#f92672">:</span> <span style="color:#a6e22e">IStateToProps</span> <span style="color:#f92672">=&gt;</span> {
   <span style="color:#66d9ef">const</span> { <span style="color:#a6e22e">todoState</span> } <span style="color:#f92672">=</span> <span style="color:#a6e22e">state</span>;
   <span style="color:#66d9ef">return</span> {
     <span style="color:#a6e22e">todos</span>: <span style="color:#66d9ef">todoState.todos</span>
@@ -611,16 +611,16 @@ yarn add -D @types/redux @types/react-redux
 };
 
 <span style="color:#75715e">// Dispatchを受け取り、IDispatchToPropsの関数でどのアクションをDispatchするのかを定義する
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">mapDispatchToProps</span> <span style="color:#f92672">=</span> (<span style="color:#a6e22e">dispatch</span>: <span style="color:#66d9ef">Dispatch</span><span style="color:#f92672">&lt;</span><span style="color:#a6e22e">Action</span><span style="color:#f92672">&gt;</span>)<span style="color:#f92672">:</span> <span style="color:#a6e22e">IDispatchToProps</span> <span style="color:#f92672">=</span><span style="color:#f92672">&gt;</span> {
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">mapDispatchToProps</span> <span style="color:#f92672">=</span> (<span style="color:#a6e22e">dispatch</span>: <span style="color:#66d9ef">Dispatch</span><span style="color:#f92672">&lt;</span><span style="color:#a6e22e">Action</span><span style="color:#f92672">&gt;</span>)<span style="color:#f92672">:</span> <span style="color:#a6e22e">IDispatchToProps</span> <span style="color:#f92672">=&gt;</span> {
   <span style="color:#66d9ef">return</span> {
-    <span style="color:#a6e22e">addTodo</span><span style="color:#f92672">:</span> (<span style="color:#a6e22e">todo</span>: <span style="color:#66d9ef">string</span>) <span style="color:#f92672">=</span><span style="color:#f92672">&gt;</span> {
+    <span style="color:#a6e22e">addTodo</span><span style="color:#f92672">:</span> (<span style="color:#a6e22e">todo</span>: <span style="color:#66d9ef">string</span>) <span style="color:#f92672">=&gt;</span> {
       <span style="color:#a6e22e">dispatch</span>(<span style="color:#a6e22e">todoActionCreator</span>.<span style="color:#a6e22e">addTodoAction</span>(<span style="color:#a6e22e">todo</span>));
     }
   };
 };
 
 <span style="color:#75715e">// Storeが更新されたときの挙動が詰められたIStatePropsと、
-</span><span style="color:#75715e"></span><span style="color:#75715e">// Storeを更新するためのメソッドが詰められたIDispatchToPropsをTodoContainerと繋ぎこむ
+</span><span style="color:#75715e">// Storeを更新するためのメソッドが詰められたIDispatchToPropsをTodoContainerと繋ぎこむ
 </span><span style="color:#75715e"></span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">default</span> <span style="color:#a6e22e">connect</span><span style="color:#f92672">&lt;</span><span style="color:#a6e22e">IStateToProps</span>, <span style="color:#a6e22e">IDispatchToProps</span><span style="color:#f92672">&gt;</span>(
   <span style="color:#a6e22e">mapStateToProps</span>,
   <span style="color:#a6e22e">mapDispatchToProps</span>

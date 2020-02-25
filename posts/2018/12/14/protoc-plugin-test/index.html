@@ -85,7 +85,7 @@ func protoc(t *testing.T, args []string) { cmd := exec.Command(&#34;protoc&#34;,
     <link rel="icon" type="image/png" href="https://nametake.github.io/images/favicon-32x32.png" sizes="32x32">
     <link rel="icon" type="image/png" href="https://nametake.github.io/images/favicon-16x16.png" sizes="16x16">
 
-    <meta name="generator" content="Hugo 0.63.2" />
+    <meta name="generator" content="Hugo 0.65.3" />
   </head>
 
   
@@ -211,7 +211,7 @@ func protoc(t *testing.T, args []string) { cmd := exec.Command(&#34;protoc&#34;,
 <h3 id="init関数">init関数</h3>
 <p>golden_test.goのinit関数は以下のようにかかれています。</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#75715e">// tests and instead act as protoc-gen-go. This allows the test binary to
-</span><span style="color:#75715e"></span><span style="color:#75715e">// pass itself to protoc.
+</span><span style="color:#75715e">// pass itself to protoc.
 </span><span style="color:#75715e"></span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">init</span>() {
 	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">os</span>.<span style="color:#a6e22e">Getenv</span>(<span style="color:#e6db74">&#34;RUN_AS_PROTOC_GEN_GO&#34;</span>) <span style="color:#f92672">!=</span> <span style="color:#e6db74">&#34;&#34;</span> {
 		<span style="color:#a6e22e">main</span>()
