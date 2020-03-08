@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="author" content="nametake">
+    <meta name="description" content="nametake&#39;s personal website">
+    <meta name="keywords" content="blog,developer,personal">
+
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="golangci-lint-langserverを作った話"/>
+<meta name="twitter:description" content="最近VimのLinterのプラグインをaleからすべてlanguage serverに移行しました。
+殆どのCLIツールはdiagnostic-languageserver経由で使うことでいい感じに動いてくれています。
+ただ、golangci-lintだけはGoのスコープとの相性の関係ではうまく動作させることができませんでした。
+そこで、golangci-lint専用のlanguage server、golangci-lint-langserverを作成してみました。
+LSPクライアントに読み込ませるとファイルを開いたときと保存したときに以下のようにgolangci-lintの結果を返してくれます。
+ 自分が使うために作ったためWindows対応や細かいエラーハンドリング等はしていませんが、個人的には割とちゃんと動いたので満足しています。
+もし機能追加等あったらPRお待ちしています。
+制作動機 一応制作動機も書いておこうと思います。
+今回aleの移行先として検討したdiagnostic-languageserverやefm-langserverなのですが、基本的には開いているファイルにlintをかけてその結果を返す仕組みになっています。
+しかし、Goはパッケージ単位(ディレクトリ単位)のスコープになっているためgolangci-lintはうまく動かない場合がありました。
+例えばunusedやdeadcodeのような使っていない変数や関数をチェックするようなものは、そのパッケージ内の別ファイルで使っていたとしてもそれがチェックされず、lintに引っかかってしまいます。
+また、別ファイルで定義されている関数や変数を使おうとした場合はそもそもビルド失敗扱いになりチェックすることすらできませんでした。
+かといって、ファイルが開かれるたびにパッケージ全体に対してgolangci-lintをかけると今度は関係ないファイルの結果も含まれてしまいます。
+この問題を解決するには、language server側で以下の流れのようにlinterが返した結果をLSPクライアントが送ってきた情報でフィルタをする必要がありました。
+ LSPクライアントのNotificationを受け取る golangci-lintを実行する 結果の中から1の情報を使って対象ファイルの結果だけをフィルタする LSPクライアントに結果を伝える  最初はdiagnostic-languageserverやefm-langserverにコントリビュートしようとも考えました。
+ただ、そこそこ大きな機能を追加しないと実現できそうになく、かつgolangci-lintのためだけにその機能を追加するのもシンプルではないと思ったため、完全に独立したlanguage serverとして実装してしまうことにしました。
+efm-langserverの実装を参考にして書いたため、かなり重複したコードにはなっています。ただ、そのおかげで実装を大きくせずに書けたのでシンプルな状態は保つことができました。
+個人的にこのlanguage serverは一時的な実装のつもりなので、goplsやdiagnostic-languageserver、efm-langserverが対応したらすぐにdeprecatedな状態にしようと思っています。
+それまではgolangci-lint-langserverはある程度メンテするつもりなので、PRお待ちしています。"/>
+
+    <meta property="og:title" content="golangci-lint-langserverを作った話" />
+<meta property="og:description" content="最近VimのLinterのプラグインをaleからすべてlanguage serverに移行しました。
+殆どのCLIツールはdiagnostic-languageserver経由で使うことでいい感じに動いてくれています。
+ただ、golangci-lintだけはGoのスコープとの相性の関係ではうまく動作させることができませんでした。
+そこで、golangci-lint専用のlanguage server、golangci-lint-langserverを作成してみました。
+LSPクライアントに読み込ませるとファイルを開いたときと保存したときに以下のようにgolangci-lintの結果を返してくれます。
+ 自分が使うために作ったためWindows対応や細かいエラーハンドリング等はしていませんが、個人的には割とちゃんと動いたので満足しています。
+もし機能追加等あったらPRお待ちしています。
+制作動機 一応制作動機も書いておこうと思います。
+今回aleの移行先として検討したdiagnostic-languageserverやefm-langserverなのですが、基本的には開いているファイルにlintをかけてその結果を返す仕組みになっています。
+しかし、Goはパッケージ単位(ディレクトリ単位)のスコープになっているためgolangci-lintはうまく動かない場合がありました。
+例えばunusedやdeadcodeのような使っていない変数や関数をチェックするようなものは、そのパッケージ内の別ファイルで使っていたとしてもそれがチェックされず、lintに引っかかってしまいます。
+また、別ファイルで定義されている関数や変数を使おうとした場合はそもそもビルド失敗扱いになりチェックすることすらできませんでした。
+かといって、ファイルが開かれるたびにパッケージ全体に対してgolangci-lintをかけると今度は関係ないファイルの結果も含まれてしまいます。
+この問題を解決するには、language server側で以下の流れのようにlinterが返した結果をLSPクライアントが送ってきた情報でフィルタをする必要がありました。
+ LSPクライアントのNotificationを受け取る golangci-lintを実行する 結果の中から1の情報を使って対象ファイルの結果だけをフィルタする LSPクライアントに結果を伝える  最初はdiagnostic-languageserverやefm-langserverにコントリビュートしようとも考えました。
+ただ、そこそこ大きな機能を追加しないと実現できそうになく、かつgolangci-lintのためだけにその機能を追加するのもシンプルではないと思ったため、完全に独立したlanguage serverとして実装してしまうことにしました。
+efm-langserverの実装を参考にして書いたため、かなり重複したコードにはなっています。ただ、そのおかげで実装を大きくせずに書けたのでシンプルな状態は保つことができました。
+個人的にこのlanguage serverは一時的な実装のつもりなので、goplsやdiagnostic-languageserver、efm-langserverが対応したらすぐにdeprecatedな状態にしようと思っています。
+それまではgolangci-lint-langserverはある程度メンテするつもりなので、PRお待ちしています。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://nametake.github.io/posts/2020/03/08/golangci-lint-langserver/" />
+<meta property="article:published_time" content="2020-03-08T00:00:00+09:00" />
+<meta property="article:modified_time" content="2020-03-08T00:00:00+09:00" />
+
+
+    
+      <base href="https://nametake.github.io/posts/2020/03/08/golangci-lint-langserver/">
+    
+    <title>
+  golangci-lint-langserverを作った話 · nametake.info
+</title>
+
+    
+      <link rel="canonical" href="https://nametake.github.io/posts/2020/03/08/golangci-lint-langserver/">
+    
+
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700%7CMerriweather:300,700%7CSource+Code+Pro:400,700" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css" integrity="sha384-KA6wR/X5RY4zFAHpv/CnoG2UW1uogYfdnP67Uv7eULvTveboZJg0qUpmJZb5VqzN" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" integrity="sha256-l85OmPOjvil/SOvVt3HnSSjzF1TUMyT9eV0c2BzEGzU=" crossorigin="anonymous" />
+
+    
+      
+      
+      <link rel="stylesheet" href="https://nametake.github.io/css/coder.min.28d751104f30c16da1aa1bb04015cbe662cacfe0d1b01af4f2240ad58580069c.css" integrity="sha256-KNdREE8wwW2hqhuwQBXL5mLKz&#43;DRsBr08iQK1YWABpw=" crossorigin="anonymous" media="screen" />
+    
+
+    
+
+    
+      
+        
+        
+        <link rel="stylesheet" href="https://nametake.github.io/css/coder-dark.min.83a2010dac9f59f943b3004cd6c4f230507ad036da635d3621401d42ec4e2835.css" integrity="sha256-g6IBDayfWflDswBM1sTyMFB60DbaY102IUAdQuxOKDU=" crossorigin="anonymous" media="screen" />
+      
+    
+
+    
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto&#43;Sans&#43;JP&amp;display=swap" />
+    
+      <link rel="stylesheet" href="https://nametake.github.io/css/index.css" />
+    
+      <link rel="stylesheet" href="https://nametake.github.io/css/syntax.css" />
+    
+
+    
+    
+    <link rel="icon" type="image/png" href="https://nametake.github.io/images/favicon-32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="https://nametake.github.io/images/favicon-16x16.png" sizes="16x16">
+
+    <meta name="generator" content="Hugo 0.66.0" />
+  </head>
+
+  
+  
+    
+  
+  <body class="colorscheme-auto">
+    <main class="wrapper">
+      <nav class="navigation">
+  <section class="container">
+    <a class="navigation-title" href="https://nametake.github.io/">
+      nametake.info
+    </a>
+    <input type="checkbox" id="menu-toggle" />
+    <label class="menu-button float-right" for="menu-toggle"><i class="fas fa-bars"></i></label>
+    <ul class="navigation-list">
+      
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="https://nametake.github.io/about/">About</a>
+          </li>
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="https://nametake.github.io/posts/">Blog</a>
+          </li>
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="https://nametake.github.io/project/">Project</a>
+          </li>
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="https://nametake.github.io/tags/">Tags</a>
+          </li>
+        
+      
+      
+    </ul>
+  </section>
+</nav>
+
+
+      <div class="content">
+        
+  <section class="container post">
+    <article>
+      <header>
+        <div class="post-title">
+          <h1 class="title">golangci-lint-langserverを作った話</h1>
+        </div>
+        <div class="post-meta">
+          <div class="date">
+            <span class="posted-on">
+              <i class="fas fa-calendar"></i>
+              <time datetime='2020-03-08T00:00:00&#43;09:00'>
+                March 8, 2020
+              </time>
+            </span>
+            <span class="reading-time">
+              <i class="fas fa-clock"></i>
+              One minute read
+            </span>
+          </div>
+          
+          <div class="tags">
+  <i class="fas fa-tag"></i>
+    <a href="https://nametake.github.io/tags/go/">Go</a>
+      <span class="separator">•</span>
+    <a href="https://nametake.github.io/tags/vim/">Vim</a></div>
+
+        </div>
+      </header>
+
+      <div>
+        <p>最近VimのLinterのプラグインをaleからすべてlanguage serverに移行しました。</p>
+<p>殆どのCLIツールは<a href="https://github.com/iamcco/diagnostic-languageserver">diagnostic-languageserver</a>経由で使うことでいい感じに動いてくれています。</p>
+<p>ただ、<a href="https://github.com/golangci/golangci-lint">golangci-lint</a>だけはGoのスコープとの相性の関係ではうまく動作させることができませんでした。</p>
+<p>そこで、golangci-lint専用のlanguage server、<a href="https://github.com/nametake/golangci-lint-langserver">golangci-lint-langserver</a>を作成してみました。</p>
+<p>LSPクライアントに読み込ませるとファイルを開いたときと保存したときに以下のようにgolangci-lintの結果を返してくれます。</p>
+<script id="asciicast-308369" src="https://asciinema.org/a/308369.js" async></script>
+<p>自分が使うために作ったためWindows対応や細かいエラーハンドリング等はしていませんが、個人的には割とちゃんと動いたので満足しています。</p>
+<p>もし機能追加等あったらPRお待ちしています。</p>
+<h2 id="制作動機">制作動機</h2>
+<p>一応制作動機も書いておこうと思います。</p>
+<p>今回aleの移行先として検討した<a href="https://github.com/iamcco/diagnostic-languageserver">diagnostic-languageserver</a>や<a href="https://github.com/mattn/efm-langserver">efm-langserver</a>なのですが、基本的には開いているファイルにlintをかけてその結果を返す仕組みになっています。</p>
+<p>しかし、Goはパッケージ単位(ディレクトリ単位)のスコープになっているためgolangci-lintはうまく動かない場合がありました。</p>
+<p>例えばunusedやdeadcodeのような使っていない変数や関数をチェックするようなものは、そのパッケージ内の別ファイルで使っていたとしてもそれがチェックされず、lintに引っかかってしまいます。</p>
+<p>また、別ファイルで定義されている関数や変数を使おうとした場合はそもそもビルド失敗扱いになりチェックすることすらできませんでした。</p>
+<p>かといって、ファイルが開かれるたびにパッケージ全体に対してgolangci-lintをかけると今度は関係ないファイルの結果も含まれてしまいます。</p>
+<p>この問題を解決するには、language server側で以下の流れのようにlinterが返した結果をLSPクライアントが送ってきた情報でフィルタをする必要がありました。</p>
+<ol>
+<li>LSPクライアントのNotificationを受け取る</li>
+<li>golangci-lintを実行する</li>
+<li>結果の中から1の情報を使って対象ファイルの結果だけをフィルタする</li>
+<li>LSPクライアントに結果を伝える</li>
+</ol>
+<p>最初はdiagnostic-languageserverやefm-langserverにコントリビュートしようとも考えました。</p>
+<p>ただ、そこそこ大きな機能を追加しないと実現できそうになく、かつgolangci-lintのためだけにその機能を追加するのもシンプルではないと思ったため、完全に独立したlanguage serverとして実装してしまうことにしました。</p>
+<p>efm-langserverの実装を参考にして書いたため、かなり重複したコードにはなっています。ただ、そのおかげで実装を大きくせずに書けたのでシンプルな状態は保つことができました。</p>
+<p>個人的にこのlanguage serverは一時的な実装のつもりなので、goplsやdiagnostic-languageserver、efm-langserverが対応したらすぐにdeprecatedな状態にしようと思っています。</p>
+<p>それまではgolangci-lint-langserverはある程度メンテするつもりなので、PRお待ちしています。</p>
+
+      </div>
+
+      <footer>
+        
+
+
+        <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "nametake" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+        
+        
+      </footer>
+    </article>
+
+    
+  </section>
+
+      </div>
+
+      <footer class="footer">
+  <section class="container">
+    
+      <p>nametake.github.io</p>
+    
+     © 2020
+    
+       · 
+      Powered by <a href="https://gohugo.io/">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/">Coder</a>.
+    
+    
+  </section>
+</footer>
+
+    </main>
+
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-129739305-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+
+  </body>
+
+</html>

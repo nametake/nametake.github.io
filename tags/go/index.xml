@@ -6,10 +6,37 @@
     <description>Recent content in Go on nametake.info</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 31 Dec 2019 00:00:00 +0900</lastBuildDate>
+    <lastBuildDate>Sun, 08 Mar 2020 00:00:00 +0900</lastBuildDate>
     
 	<atom:link href="https://nametake.github.io/tags/go/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>golangci-lint-langserverを作った話</title>
+      <link>https://nametake.github.io/posts/2020/03/08/golangci-lint-langserver/</link>
+      <pubDate>Sun, 08 Mar 2020 00:00:00 +0900</pubDate>
+      
+      <guid>https://nametake.github.io/posts/2020/03/08/golangci-lint-langserver/</guid>
+      <description>最近VimのLinterのプラグインをaleからすべてlanguage serverに移行しました。
+殆どのCLIツールはdiagnostic-languageserver経由で使うことでいい感じに動いてくれています。
+ただ、golangci-lintだけはGoのスコープとの相性の関係ではうまく動作させることができませんでした。
+そこで、golangci-lint専用のlanguage server、golangci-lint-langserverを作成してみました。
+LSPクライアントに読み込ませるとファイルを開いたときと保存したときに以下のようにgolangci-lintの結果を返してくれます。
+ 自分が使うために作ったためWindows対応や細かいエラーハンドリング等はしていませんが、個人的には割とちゃんと動いたので満足しています。
+もし機能追加等あったらPRお待ちしています。
+制作動機 一応制作動機も書いておこうと思います。
+今回aleの移行先として検討したdiagnostic-languageserverやefm-langserverなのですが、基本的には開いているファイルにlintをかけてその結果を返す仕組みになっています。
+しかし、Goはパッケージ単位(ディレクトリ単位)のスコープになっているためgolangci-lintはうまく動かない場合がありました。
+例えばunusedやdeadcodeのような使っていない変数や関数をチェックするようなものは、そのパッケージ内の別ファイルで使っていたとしてもそれがチェックされず、lintに引っかかってしまいます。
+また、別ファイルで定義されている関数や変数を使おうとした場合はそもそもビルド失敗扱いになりチェックすることすらできませんでした。
+かといって、ファイルが開かれるたびにパッケージ全体に対してgolangci-lintをかけると今度は関係ないファイルの結果も含まれてしまいます。
+この問題を解決するには、language server側で以下の流れのようにlinterが返した結果をLSPクライアントが送ってきた情報でフィルタをする必要がありました。
+ LSPクライアントのNotificationを受け取る golangci-lintを実行する 結果の中から1の情報を使って対象ファイルの結果だけをフィルタする LSPクライアントに結果を伝える  最初はdiagnostic-languageserverやefm-langserverにコントリビュートしようとも考えました。
+ただ、そこそこ大きな機能を追加しないと実現できそうになく、かつgolangci-lintのためだけにその機能を追加するのもシンプルではないと思ったため、完全に独立したlanguage serverとして実装してしまうことにしました。
+efm-langserverの実装を参考にして書いたため、かなり重複したコードにはなっています。ただ、そのおかげで実装を大きくせずに書けたのでシンプルな状態は保つことができました。
+個人的にこのlanguage serverは一時的な実装のつもりなので、goplsやdiagnostic-languageserver、efm-langserverが対応したらすぐにdeprecatedな状態にしようと思っています。
+それまではgolangci-lint-langserverはある程度メンテするつもりなので、PRお待ちしています。</description>
+    </item>
     
     <item>
       <title>Go言語でジェネリクスない理由の考察</title>
