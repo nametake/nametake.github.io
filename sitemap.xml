@@ -3,22 +3,32 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://nametake.github.io/tags/ddd/</loc>
+    <lastmod>2020-04-30T00:00:00+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://nametake.github.io/posts/</loc>
+    <lastmod>2020-04-30T00:00:00+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://nametake.github.io/tags/</loc>
+    <lastmod>2020-04-30T00:00:00+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://nametake.github.io/posts/2020/04/30/ddd-aggregate/</loc>
+    <lastmod>2020-04-30T00:00:00+09:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://nametake.github.io/tags/go/</loc>
     <lastmod>2020-03-08T00:00:00+09:00</lastmod>
   </url>
   
   <url>
     <loc>https://nametake.github.io/posts/2020/03/08/golangci-lint-langserver/</loc>
-    <lastmod>2020-03-08T00:00:00+09:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://nametake.github.io/posts/</loc>
-    <lastmod>2020-03-08T00:00:00+09:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://nametake.github.io/tags/</loc>
     <lastmod>2020-03-08T00:00:00+09:00</lastmod>
   </url>
   
