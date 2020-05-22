@@ -15,7 +15,7 @@
 ということはそろそろ人類はprotocのプラグインを書きたくなる時代がやってくると思います。
 そのときに世の中に生み出されるプラグインの品質が少しでも高くなればと思い、以前protoc-gen-gohttpというプラグイン作ったときにテストも書いたので、その知見を書こうと思います。
 プラグイン自体は@yuguiさんの「protocプラグインの書き方」がとても参考になったのでそちらを参照すると良いかもしれません。
-TL;DR  細かいやり方はgithub.com/golang/protobuf/blob/master/protoc-gen-go/golden_test.goに書いてある  自分のプラグインのテストもそれを参考にして書いた   プラグインの動作テストはテスト内でprotocコマンドを実行して行う 実行結果の確認はGolden testingで行う Goのコードでprotoファイルをplugin.CodeGeneratorRequestに変換することは(恐らく)できない  経緯(読み飛ばして大丈夫です) protocのプラグインは標準入力に入ってきたデータをproto.CodeGeneratorRequest型にUnmarshalしてprotoファイルの情報を取得します。
+TL;DR  細かいやり方はprotoc-gen-goのgolden_test.goに書いてある  自分のプラグインのテストもそれを参考にして書いた   プラグインの動作テストはテスト内でprotocコマンドを実行して行う 実行結果の確認はGolden testingで行う Goのコードでprotoファイルをplugin.CodeGeneratorRequestに変換することは(恐らく)できない  経緯(読み飛ばして大丈夫です) protocのプラグインは標準入力に入ってきたデータをproto.CodeGeneratorRequest型にUnmarshalしてprotoファイルの情報を取得します。
 そのため、最初にテストを書こうとしたときにはGoだけでprotoファイルをproto.CodeGeneratorRequestに変換する仕組みがあるのかと思っていたのですが、この記事公開時点ではその仕組みは提供されていないようでした(知ってたらコメント等で教えていただけると助かります)。
 「それじゃあ有名なプラグインはどうやってるんだ?」と思いprotoc-gen-goのコードを見てみると、Goのコードの中で直接protocコマンドを実行していて、少し面白いテストをしていたので解説しようと思います。
 golden_test.goの解説 ファイル名から想像できる通り、いわゆるGolden testingと呼ばれるものです。テストの中からprotocコマンドを直接実行して、その結果の出力ファイルとtestdataディレクトリに入っている期待するファイルとを比較をしてテストしています。
@@ -28,7 +28,7 @@ func protoc(t *testing.T, args []string) { cmd := exec.Command(&#34;protoc&#34;,
 ということはそろそろ人類はprotocのプラグインを書きたくなる時代がやってくると思います。
 そのときに世の中に生み出されるプラグインの品質が少しでも高くなればと思い、以前protoc-gen-gohttpというプラグイン作ったときにテストも書いたので、その知見を書こうと思います。
 プラグイン自体は@yuguiさんの「protocプラグインの書き方」がとても参考になったのでそちらを参照すると良いかもしれません。
-TL;DR  細かいやり方はgithub.com/golang/protobuf/blob/master/protoc-gen-go/golden_test.goに書いてある  自分のプラグインのテストもそれを参考にして書いた   プラグインの動作テストはテスト内でprotocコマンドを実行して行う 実行結果の確認はGolden testingで行う Goのコードでprotoファイルをplugin.CodeGeneratorRequestに変換することは(恐らく)できない  経緯(読み飛ばして大丈夫です) protocのプラグインは標準入力に入ってきたデータをproto.CodeGeneratorRequest型にUnmarshalしてprotoファイルの情報を取得します。
+TL;DR  細かいやり方はprotoc-gen-goのgolden_test.goに書いてある  自分のプラグインのテストもそれを参考にして書いた   プラグインの動作テストはテスト内でprotocコマンドを実行して行う 実行結果の確認はGolden testingで行う Goのコードでprotoファイルをplugin.CodeGeneratorRequestに変換することは(恐らく)できない  経緯(読み飛ばして大丈夫です) protocのプラグインは標準入力に入ってきたデータをproto.CodeGeneratorRequest型にUnmarshalしてprotoファイルの情報を取得します。
 そのため、最初にテストを書こうとしたときにはGoだけでprotoファイルをproto.CodeGeneratorRequestに変換する仕組みがあるのかと思っていたのですが、この記事公開時点ではその仕組みは提供されていないようでした(知ってたらコメント等で教えていただけると助かります)。
 「それじゃあ有名なプラグインはどうやってるんだ?」と思いprotoc-gen-goのコードを見てみると、Goのコードの中で直接protocコマンドを実行していて、少し面白いテストをしていたので解説しようと思います。
 golden_test.goの解説 ファイル名から想像できる通り、いわゆるGolden testingと呼ばれるものです。テストの中からprotocコマンドを直接実行して、その結果の出力ファイルとtestdataディレクトリに入っている期待するファイルとを比較をしてテストしています。
@@ -85,7 +85,7 @@ func protoc(t *testing.T, args []string) { cmd := exec.Command(&#34;protoc&#34;,
     <link rel="icon" type="image/png" href="https://nametake.github.io/images/favicon-32x32.png" sizes="32x32">
     <link rel="icon" type="image/png" href="https://nametake.github.io/images/favicon-16x16.png" sizes="16x16">
 
-    <meta name="generator" content="Hugo 0.69.2" />
+    <meta name="generator" content="Hugo 0.71.0" />
   </head>
 
   
@@ -165,7 +165,7 @@ func protoc(t *testing.T, args []string) { cmd := exec.Command(&#34;protoc&#34;,
 <p>プラグイン自体は@yuguiさんの「<a href="https://qiita.com/yugui/items/87d00d77dee159e74886">protocプラグインの書き方</a>」がとても参考になったのでそちらを参照すると良いかもしれません。</p>
 <h2 id="tldr">TL;DR</h2>
 <ul>
-<li>細かいやり方は<a href="https://github.com/golang/protobuf/blob/master/protoc-gen-go/golden_test.go">github.com/golang/protobuf/blob/master/protoc-gen-go/golden_test.go</a>に書いてある
+<li>細かいやり方は<a href="https://github.com/golang/protobuf/blob/a4da01d008d8b6b778c2766d7ae1c04843898bc6/protoc-gen-go/golden_test.go">protoc-gen-goのgolden_test.go</a>に書いてある
 <ul>
 <li><a href="https://github.com/nametake/protoc-gen-gohttp/blob/master/main_test.go">自分のプラグインのテスト</a>もそれを参考にして書いた</li>
 </ul>

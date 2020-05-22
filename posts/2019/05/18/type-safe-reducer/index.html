@@ -71,7 +71,7 @@ import { Reducer } from &#39;redux&#39;; // Flux standard action interface Actio
     <link rel="icon" type="image/png" href="https://nametake.github.io/images/favicon-32x32.png" sizes="32x32">
     <link rel="icon" type="image/png" href="https://nametake.github.io/images/favicon-16x16.png" sizes="16x16">
 
-    <meta name="generator" content="Hugo 0.69.2" />
+    <meta name="generator" content="Hugo 0.71.0" />
   </head>
 
   
@@ -144,7 +144,7 @@ import { Reducer } from &#39;redux&#39;; // Flux standard action interface Actio
 
       <div>
         <p><a href="https://nametake.github.io/posts/2018/12/05/typescript-react-redux-tutorial/">以前書いた記事</a>で書いたReducerでは、受け取ったActionの型を判別するために、<code>switch</code>で分岐した後に対応したActionの型でキャストをする必要がありました。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ts" data-lang="ts"><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">todoReducer</span>: <span style="color:#66d9ef">Reducer</span><span style="color:#f92672">&lt;</span><span style="color:#a6e22e">ITodoState</span><span style="color:#f92672">&gt;</span> <span style="color:#f92672">=</span> (
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ts" data-lang="ts"><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">todoReducer</span>: <span style="color:#66d9ef">Reducer</span>&lt;<span style="color:#f92672">ITodoState</span>&gt; <span style="color:#f92672">=</span> (
   <span style="color:#a6e22e">state</span>: <span style="color:#66d9ef">ITodoState</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">initTodoState</span>,
   <span style="color:#a6e22e">action</span>: <span style="color:#66d9ef">TodoAction</span>
 )<span style="color:#f92672">:</span> <span style="color:#a6e22e">ITodoState</span> <span style="color:#f92672">=&gt;</span> {
@@ -164,7 +164,7 @@ import { Reducer } from &#39;redux&#39;; // Flux standard action interface Actio
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ts" data-lang="ts"><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">Reducer</span> } <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;redux&#39;</span>;
 
 <span style="color:#75715e">// Flux standard action
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">interface</span> <span style="color:#a6e22e">Action</span><span style="color:#f92672">&lt;</span><span style="color:#a6e22e">TType</span>, <span style="color:#a6e22e">TPayload</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">null</span>, <span style="color:#a6e22e">TMeta</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">undefined</span><span style="color:#f92672">&gt;</span> {
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">interface</span> <span style="color:#a6e22e">Action</span>&lt;<span style="color:#f92672">TType</span><span style="color:#960050;background-color:#1e0010">,</span> <span style="color:#a6e22e">TPayload </span><span style="color:#f92672">=</span> <span style="color:#a6e22e">null</span><span style="color:#960050;background-color:#1e0010">,</span> <span style="color:#a6e22e">TMeta </span><span style="color:#f92672">=</span> <span style="color:#a6e22e">undefined</span>&gt; {
   <span style="color:#a6e22e">type</span>: <span style="color:#66d9ef">TType</span>;
   <span style="color:#a6e22e">payload</span>: <span style="color:#66d9ef">TPayload</span>;
   <span style="color:#a6e22e">meta?</span>: <span style="color:#66d9ef">TMeta</span>;
@@ -175,8 +175,8 @@ import { Reducer } from &#39;redux&#39;; // Flux standard action interface Actio
   <span style="color:#a6e22e">DELETE</span>
 }
 
-<span style="color:#a6e22e">type</span> <span style="color:#a6e22e">AddAction</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">Action</span><span style="color:#f92672">&lt;</span><span style="color:#a6e22e">ActionType</span>.<span style="color:#a6e22e">ADD</span>, { <span style="color:#a6e22e">todo</span>: <span style="color:#66d9ef">string</span> }<span style="color:#f92672">&gt;</span>;
-<span style="color:#a6e22e">type</span> <span style="color:#a6e22e">DeleteAction</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">Action</span><span style="color:#f92672">&lt;</span><span style="color:#a6e22e">ActionType</span>.<span style="color:#a6e22e">DELETE</span>, { <span style="color:#a6e22e">todo</span>: <span style="color:#66d9ef">string</span> }<span style="color:#f92672">&gt;</span>;
+<span style="color:#a6e22e">type</span> <span style="color:#a6e22e">AddAction</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">Action</span>&lt;<span style="color:#f92672">ActionType.ADD</span><span style="color:#960050;background-color:#1e0010">,</span> { <span style="color:#a6e22e">todo</span><span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#a6e22e">string</span> }&gt;;
+<span style="color:#a6e22e">type</span> <span style="color:#a6e22e">DeleteAction</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">Action</span>&lt;<span style="color:#f92672">ActionType.DELETE</span><span style="color:#960050;background-color:#1e0010">,</span> { <span style="color:#a6e22e">todo</span><span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#a6e22e">string</span> }&gt;;
 
 <span style="color:#a6e22e">type</span> <span style="color:#a6e22e">TodoAction</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">AddAction</span> <span style="color:#f92672">|</span> <span style="color:#a6e22e">DeleteAction</span>;
 
@@ -185,7 +185,7 @@ import { Reducer } from &#39;redux&#39;; // Flux standard action interface Actio
 }
 
 <span style="color:#75715e">// Reducer
-</span><span style="color:#75715e"></span><span style="color:#a6e22e">type</span> <span style="color:#a6e22e">TodoReducer</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">Reducer</span><span style="color:#f92672">&lt;</span><span style="color:#a6e22e">TodoState</span>, <span style="color:#a6e22e">TodoAction</span><span style="color:#f92672">&gt;</span>;
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">type</span> <span style="color:#a6e22e">TodoReducer</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">Reducer</span>&lt;<span style="color:#f92672">TodoState</span><span style="color:#960050;background-color:#1e0010">,</span> <span style="color:#a6e22e">TodoAction</span>&gt;;
 
 <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">initialState</span> <span style="color:#f92672">=</span> {
   <span style="color:#a6e22e">todos</span><span style="color:#f92672">:</span> []
