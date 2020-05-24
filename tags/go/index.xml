@@ -6,10 +6,21 @@
     <description>Recent content in Go on nametake.info</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 08 Mar 2020 00:00:00 +0900</lastBuildDate>
+    <lastBuildDate>Sun, 24 May 2020 00:00:00 +0900</lastBuildDate>
     
 	<atom:link href="https://nametake.github.io/tags/go/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Protocol Buffersのgo_packageの;の仕様</title>
+      <link>https://nametake.github.io/posts/2020/05/24/protobuf-go-package-semicolon/</link>
+      <pubDate>Sun, 24 May 2020 00:00:00 +0900</pubDate>
+      
+      <guid>https://nametake.github.io/posts/2020/05/24/protobuf-go-package-semicolon/</guid>
+      <description>先日protoc-gen-gohttpの依存パッケージをしようと思って色々触っていたら以下のようなWARNINGが出てきました。
+2020/05/24 11:36:51 WARNING: Deprecated use of &amp;#39;go_package&amp;#39; option without a full import path in &amp;#34;greeter.proto&amp;#34;, please specify: option go_package = &amp;#34;.;main&amp;#34;; A future release of protoc-gen-go will require the import path be specified. See https://developers.google.com/protocol-buffers/docs/reference/go-generated#package for more information. 以下のファイルのように go_package のオプションにGoのimport pathを記述しなかったことが問題のようです。
+1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17  syntax = &amp;#34;proto3&amp;#34;;package helloworld;option go_package = &amp;#34;main&amp;#34;;service Greeter { rpc SayHello(HelloRequest) returns (HelloReply);}message HelloRequest { string name = 1;}message HelloReply { string message = 1;}  一応WARNINGには「go_package = &amp;quot;.</description>
+    </item>
     
     <item>
       <title>golangci-lint-langserverを作った話</title>
