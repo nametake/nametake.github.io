@@ -4,10 +4,21 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Language" content="en">
 
     <meta name="author" content="nametake">
-    <meta name="description" content="nametake&#39;s personal website">
+    <meta name="description" content="Go1.13からerrorsに色々機能が入りました(The Go Blog)。
+最近は新しいGoのことをインプットできていなかったので、リハビリがてらsonatardさんのまとめた記事も読みつつ、中の実装を眺めてまとめてみます。
+Unwrap interface 追加された機能は errors.As や errors.Is のようにいくつかありますが、一番のキモとなる追加機能は errors.Unwrap です。
+似たような機能はデファクトスタンダードとして使われているpkg/errorsの errors.Cause としてありましたが、公式で導入されたことは非常に大きいと思います。
+とりあえず公式ライブラリの中を見にいきましょう。
+func Unwrap(err error) error { u, ok := err.(interface { Unwrap() error }) if !ok { return nil } return u.Unwrap() } これだけです。
+やっていることを言葉にしても、「渡されたerrorがUnwrap interfaceを実装していればUnwrapの返り値を返して、そうでなければnilを返す」だけです。
+それでは、Wrapする側の errors.Errorf の中を見にいってみます。
+package fmt import &#34;errors&#34; func Errorf(format string, a ...interface{}) error { p := newPrinter() p.wrapErrs = true p.doPrintf(format, a) s := string(p.buf) var err error if p.">
     <meta name="keywords" content="blog,developer,personal">
+
+    
 
     <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Go1.13のerrorsにWrapの機能が入ったので勉強がてらまとめる"/>
@@ -48,14 +59,14 @@ package fmt import &#34;errors&#34; func Errorf(format string, a ...interface{})
       <link rel="canonical" href="https://nametake.github.io/posts/2019/10/30/unwrap-interface/">
     
 
-    <link href="https://fonts.googleapis.com/css?family=Lato:400,700%7CMerriweather:300,700%7CSource+Code+Pro:400,700" rel="stylesheet">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css" integrity="sha384-KA6wR/X5RY4zFAHpv/CnoG2UW1uogYfdnP67Uv7eULvTveboZJg0qUpmJZb5VqzN" crossorigin="anonymous" />
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700%7CMerriweather:300,700%7CSource+Code+Pro:400,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/all.css" integrity="sha384-Bfad6CLCknfcloXFOyFnlgtENryhrpZCe29RTifKEixXQZ38WheV+i/6YWSzkz3V" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" integrity="sha256-l85OmPOjvil/SOvVt3HnSSjzF1TUMyT9eV0c2BzEGzU=" crossorigin="anonymous" />
 
     
       
       
-      <link rel="stylesheet" href="https://nametake.github.io/css/coder.min.28d751104f30c16da1aa1bb04015cbe662cacfe0d1b01af4f2240ad58580069c.css" integrity="sha256-KNdREE8wwW2hqhuwQBXL5mLKz&#43;DRsBr08iQK1YWABpw=" crossorigin="anonymous" media="screen" />
+      <link rel="stylesheet" href="https://nametake.github.io/css/coder.min.3219ef62ae52679b7a9c19043171c3cd9f523628c2a65f3ef247ee18836bc90b.css" integrity="sha256-MhnvYq5SZ5t6nBkEMXHDzZ9SNijCpl8&#43;8kfuGINryQs=" crossorigin="anonymous" media="screen" />
     
 
     
@@ -64,7 +75,7 @@ package fmt import &#34;errors&#34; func Errorf(format string, a ...interface{})
       
         
         
-        <link rel="stylesheet" href="https://nametake.github.io/css/coder-dark.min.83a2010dac9f59f943b3004cd6c4f230507ad036da635d3621401d42ec4e2835.css" integrity="sha256-g6IBDayfWflDswBM1sTyMFB60DbaY102IUAdQuxOKDU=" crossorigin="anonymous" media="screen" />
+        <link rel="stylesheet" href="https://nametake.github.io/css/coder-dark.min.e78e80fc3a585a4d1c8fc7f58623b6ff852411e38431a9cd1792877ecaa160f6.css" integrity="sha256-546A/DpYWk0cj8f1hiO2/4UkEeOEManNF5KHfsqhYPY=" crossorigin="anonymous" media="screen" />
       
     
 
@@ -77,7 +88,7 @@ package fmt import &#34;errors&#34; func Errorf(format string, a ...interface{})
     
 
     
-    
+
     <link rel="icon" type="image/png" href="https://nametake.github.io/images/favicon-32x32.png" sizes="32x32">
     <link rel="icon" type="image/png" href="https://nametake.github.io/images/favicon-16x16.png" sizes="16x16">
 
@@ -88,13 +99,16 @@ package fmt import &#34;errors&#34; func Errorf(format string, a ...interface{})
   
     
   
-  <body class="colorscheme-auto">
+  <body class="colorscheme-auto"
+        onload=""
+  >
     <main class="wrapper">
       <nav class="navigation">
   <section class="container">
     <a class="navigation-title" href="https://nametake.github.io/">
       nametake.info
     </a>
+    
     <input type="checkbox" id="menu-toggle" />
     <label class="menu-button float-right" for="menu-toggle"><i class="fas fa-bars"></i></label>
     <ul class="navigation-list">
@@ -119,6 +133,7 @@ package fmt import &#34;errors&#34; func Errorf(format string, a ...interface{})
       
       
     </ul>
+    
   </section>
 </nav>
 
@@ -141,7 +156,7 @@ package fmt import &#34;errors&#34; func Errorf(format string, a ...interface{})
             </span>
             <span class="reading-time">
               <i class="fas fa-clock"></i>
-              3 minutes read
+              3-minute read
             </span>
           </div>
           
@@ -153,6 +168,7 @@ package fmt import &#34;errors&#34; func Errorf(format string, a ...interface{})
       </header>
 
       <div>
+        
         <p>Go1.13からerrorsに色々機能が入りました(<a href="https://blog.golang.org/go1.13-errors">The Go Blog</a>)。</p>
 <p>最近は新しいGoのことをインプットできていなかったので、リハビリがてら<a href="https://qiita.com/sonatard/items/9c9faf79ac03c20f4ae1">sonatardさんのまとめた記事</a>も読みつつ、中の実装を眺めてまとめてみます。</p>
 <h1 id="unwrap-interface">Unwrap interface</h1>
@@ -423,6 +439,7 @@ package fmt import &#34;errors&#34; func Errorf(format string, a ...interface{})
 
       </div>
 
+
       <footer>
         
 
@@ -457,21 +474,29 @@ package fmt import &#34;errors&#34; func Errorf(format string, a ...interface{})
 
       </div>
 
-      <footer class="footer">
-  <section class="container">
-    
-      <p>nametake.github.io</p>
-    
-     © 2020
-    
-       · 
-      Powered by <a href="https://gohugo.io/">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/">Coder</a>.
-    
-    
-  </section>
-</footer>
+      
+  <footer class="footer">
+    <section class="container">
+      
+        <p>nametake.github.io</p>
+      
+      
+        ©
+        
+        2020
+         nametake 
+      
+      
+         · 
+        Powered by <a href="https://gohugo.io/">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/">Coder</a>.
+      
+      
+    </section>
+  </footer>
 
     </main>
+
+    
 
     
 <script type="application/javascript">
@@ -487,6 +512,8 @@ if (!doNotTrack) {
 }
 </script>
 
+
+    
 
   </body>
 
