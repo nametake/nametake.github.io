@@ -6,10 +6,35 @@
     <description>Recent content in Posts on nametake.info</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 24 May 2020 00:00:00 +0900</lastBuildDate>
+    <lastBuildDate>Sun, 28 Jun 2020 00:00:00 +0900</lastBuildDate>
     
 	<atom:link href="https://nametake.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>組み合わせテストでの直交表とPICTの利用</title>
+      <link>https://nametake.github.io/posts/2020/06/28/combination-test-pict-and-orthogonal-array/</link>
+      <pubDate>Sun, 28 Jun 2020 00:00:00 +0900</pubDate>
+      
+      <guid>https://nametake.github.io/posts/2020/06/28/combination-test-pict-and-orthogonal-array/</guid>
+      <description>結合テストの組み合わせについてある程度知見が溜まったのでメモ的に。
+結合テストの組み合わせ問題 システムのリリース前には開発した機能や既存の機能を組み合わせてバグが発生していないかテストをする必要があります。
+ですが、開発した機能が増えていけば組み合わせの数は指数関数的に増えていき、それらを全てテストするのは非現実的です。
+となると、何かしらの方法でテストする組み合わせを絞る必要があります。
+絞るにあたって「システムのバグは2つパラメータの組み合わせで発生する確率が高い」というデータから、2つの異なるパラメータ(因子)の組み合わせが必ず全て登場する最小の表を作る、という手法があります。
+この記事ではその手法のうち、直交表とPICTというツールの使い方をメモして残しておこうと思います。
+直交表 直交表は、因子の組み合わせが効率的になるよう作られた表です。
+基本的には誰かがすでに定義しているものにテストしたいシステムの因子を割り当てるという使い方になります。
+例を挙げてみます。
+とあるWebシステムを作っていて、下記のような環境に対応しているかテストを行う必要があります。
+   因子 水準1 水準2     OS Windows macOS   ブラウザ Chrome Firefox   端末 ラップトップ モバイル    3因子2通りのため、全ての組み合わせは8パターンになります。
+8パターンであれば全てテストするのもそこまで大変でもないですが、試しに直交表に適用してみます。
+以下のページのように、すでにある直交表からテストしたい項目の形に近いものを選びます。
+タグチ計画のカタログ
+今回は2^3通りのため、L4(2^3)の表が使えそうです。
+上記のテスト項目をL4(2^3)の表に当てはめてみます。
+   テスト番号 OS ブラウザ 端末     1 Windows Chrome ラップトップ   2 Windows Firefox モバイル   3 macOS Chrome モバイル   4 macOS Firefox ラップトップ    全パターン行うと8パターンだったものが4パターンで済むようになりました。</description>
+    </item>
     
     <item>
       <title>Protocol Buffersのgo_packageの;の仕様</title>
