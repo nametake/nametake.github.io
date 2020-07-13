@@ -6,10 +6,19 @@
     <description>Recent content in Tags on nametake.info</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 28 Jun 2020 00:00:00 +0900</lastBuildDate>
+    <lastBuildDate>Mon, 13 Jul 2020 00:00:00 +0900</lastBuildDate>
     
 	<atom:link href="https://nametake.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>TypeScript</title>
+      <link>https://nametake.github.io/tags/typescript/</link>
+      <pubDate>Mon, 13 Jul 2020 00:00:00 +0900</pubDate>
+      
+      <guid>https://nametake.github.io/tags/typescript/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>testing</title>
@@ -62,15 +71,6 @@
       <pubDate>Fri, 31 Jan 2020 00:00:00 +0900</pubDate>
       
       <guid>https://nametake.github.io/tags/react/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>TypeScript</title>
-      <link>https://nametake.github.io/tags/typescript/</link>
-      <pubDate>Fri, 31 Jan 2020 00:00:00 +0900</pubDate>
-      
-      <guid>https://nametake.github.io/tags/typescript/</guid>
       <description></description>
     </item>
     

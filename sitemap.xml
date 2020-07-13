@@ -3,18 +3,28 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://nametake.github.io/posts/2020/07/13/conditional-types/</loc>
+    <lastmod>2020-07-13T00:00:00+09:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://nametake.github.io/</loc>
-    <lastmod>2020-06-28T00:00:00+09:00</lastmod>
+    <lastmod>2020-07-13T00:00:00+09:00</lastmod>
   </url>
   
   <url>
     <loc>https://nametake.github.io/posts/</loc>
-    <lastmod>2020-06-28T00:00:00+09:00</lastmod>
+    <lastmod>2020-07-13T00:00:00+09:00</lastmod>
   </url>
   
   <url>
     <loc>https://nametake.github.io/tags/</loc>
-    <lastmod>2020-06-28T00:00:00+09:00</lastmod>
+    <lastmod>2020-07-13T00:00:00+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://nametake.github.io/tags/typescript/</loc>
+    <lastmod>2020-07-13T00:00:00+09:00</lastmod>
   </url>
   
   <url>
@@ -69,11 +79,6 @@
   
   <url>
     <loc>https://nametake.github.io/tags/react/</loc>
-    <lastmod>2020-01-31T00:00:00+09:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://nametake.github.io/tags/typescript/</loc>
     <lastmod>2020-01-31T00:00:00+09:00</lastmod>
   </url>
   
