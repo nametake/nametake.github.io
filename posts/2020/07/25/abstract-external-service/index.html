@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Language" content="en">
+
+    <meta name="author" content="nametake">
+    <meta name="description" content="ビジネス要件で外部サービスとの連携が決まっている場合、勝手に抽象化せずにドメイン層にそれを定義していくことで正しくDDDが実践できるのではないかという話">
+    <meta name="keywords" content="blog,developer,personal">
+
+    
+
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="DDDにおける外部サービスの抽象化"/>
+<meta name="twitter:description" content="ビジネス要件で外部サービスとの連携が決まっている場合、勝手に抽象化せずにドメイン層にそれを定義していくことで正しくDDDが実践できるのではないかという話"/>
+
+    <meta property="og:title" content="DDDにおける外部サービスの抽象化" />
+<meta property="og:description" content="ビジネス要件で外部サービスとの連携が決まっている場合、勝手に抽象化せずにドメイン層にそれを定義していくことで正しくDDDが実践できるのではないかという話" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://nametake.github.io/posts/2020/07/25/abstract-external-service/" />
+<meta property="article:published_time" content="2020-07-25T00:00:00+09:00" />
+<meta property="article:modified_time" content="2020-07-25T00:00:00+09:00" />
+
+
+    
+      <base href="https://nametake.github.io/posts/2020/07/25/abstract-external-service/">
+    
+    <title>
+  DDDにおける外部サービスの抽象化 · nametake.info
+</title>
+
+    
+      <link rel="canonical" href="https://nametake.github.io/posts/2020/07/25/abstract-external-service/">
+    
+
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700%7CMerriweather:300,700%7CSource+Code+Pro:400,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/all.css" integrity="sha384-Bfad6CLCknfcloXFOyFnlgtENryhrpZCe29RTifKEixXQZ38WheV+i/6YWSzkz3V" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" integrity="sha256-l85OmPOjvil/SOvVt3HnSSjzF1TUMyT9eV0c2BzEGzU=" crossorigin="anonymous" />
+
+    
+      
+      
+      <link rel="stylesheet" href="https://nametake.github.io/css/coder.min.3219ef62ae52679b7a9c19043171c3cd9f523628c2a65f3ef247ee18836bc90b.css" integrity="sha256-MhnvYq5SZ5t6nBkEMXHDzZ9SNijCpl8&#43;8kfuGINryQs=" crossorigin="anonymous" media="screen" />
+    
+
+    
+
+    
+      
+        
+        
+        <link rel="stylesheet" href="https://nametake.github.io/css/coder-dark.min.e78e80fc3a585a4d1c8fc7f58623b6ff852411e38431a9cd1792877ecaa160f6.css" integrity="sha256-546A/DpYWk0cj8f1hiO2/4UkEeOEManNF5KHfsqhYPY=" crossorigin="anonymous" media="screen" />
+      
+    
+
+    
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto&#43;Sans&#43;JP&amp;display=swap" />
+    
+      <link rel="stylesheet" href="https://nametake.github.io/css/index.css" />
+    
+      <link rel="stylesheet" href="https://nametake.github.io/css/syntax.css" />
+    
+
+    
+
+    <link rel="icon" type="image/png" href="https://nametake.github.io/images/favicon-32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="https://nametake.github.io/images/favicon-16x16.png" sizes="16x16">
+
+    <meta name="generator" content="Hugo 0.74.3" />
+  </head>
+
+  
+  
+    
+  
+  <body class="colorscheme-auto"
+        onload=""
+  >
+    <main class="wrapper">
+      <nav class="navigation">
+  <section class="container">
+    <a class="navigation-title" href="https://nametake.github.io/">
+      nametake.info
+    </a>
+    
+    <input type="checkbox" id="menu-toggle" />
+    <label class="menu-button float-right" for="menu-toggle"><i class="fas fa-bars"></i></label>
+    <ul class="navigation-list">
+      
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="https://nametake.github.io/about/">About</a>
+          </li>
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="https://nametake.github.io/posts/">Blog</a>
+          </li>
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="https://nametake.github.io/project/">Project</a>
+          </li>
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="https://nametake.github.io/tags/">Tags</a>
+          </li>
+        
+      
+      
+    </ul>
+    
+  </section>
+</nav>
+
+
+      <div class="content">
+        
+  <section class="container post">
+    <article>
+      <header>
+        <div class="post-title">
+          <h1 class="title">DDDにおける外部サービスの抽象化</h1>
+        </div>
+        <div class="post-meta">
+          <div class="date">
+            <span class="posted-on">
+              <i class="fas fa-calendar"></i>
+              <time datetime='2020-07-25T00:00:00&#43;09:00'>
+                July 25, 2020
+              </time>
+            </span>
+            <span class="reading-time">
+              <i class="fas fa-clock"></i>
+              2-minute read
+            </span>
+          </div>
+          
+          <div class="tags">
+  <i class="fas fa-tag"></i>
+    <a href="https://nametake.github.io/tags/ddd/">DDD</a></div>
+
+        </div>
+      </header>
+
+      <div>
+        
+        <h1 id="外部サービスの抽象化">外部サービスの抽象化</h1>
+<p>最近のシステムはその複雑さの上昇に伴い、様々な外部サービスと連携する機会が多くあります。</p>
+<p>その際、ドメインとして外部サービスをどう取り扱うといいのか、という個人的なプラクティスを過去の失敗例も含めて記事にしようと思います。</p>
+<h2 id="過去の失敗">過去の失敗</h2>
+<p>昔私が関わっていた仮想通貨の販売所の価格判定ロジックを例にあげます。</p>
+<p>自社の販売所における仮想通貨の価格を決定する仕組みを作っていました。</p>
+<p>複数の外部取引所のAPIから価格情報を取り出してそれらの値を使って自社の販売価格を計算をします。</p>
+<p>販売所の価格の構造体は以下のようにドメイン層に定義していました。</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">Tick</span> <span style="color:#66d9ef">struct</span> {
+	<span style="color:#a6e22e">Amount</span> <span style="color:#66d9ef">int</span>
+	<span style="color:#a6e22e">Market</span> <span style="color:#a6e22e">Currency</span>
+	<span style="color:#a6e22e">Base</span>   <span style="color:#a6e22e">Currency</span>
+}
+</code></pre></td></tr></table>
+</div>
+</div><p>また、それらの<code>Tick</code> を取り出すために各取引所のサービスごとに以下のようにinterfaceを定義していました。</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">FooService</span> <span style="color:#66d9ef">interface</span> {
+	<span style="color:#a6e22e">GetTick</span>() (<span style="color:#f92672">*</span><span style="color:#a6e22e">Tick</span>, <span style="color:#66d9ef">error</span>)
+}
+
+<span style="color:#66d9ef">type</span> <span style="color:#a6e22e">BarService</span> <span style="color:#66d9ef">interface</span> {
+	<span style="color:#a6e22e">GetTick</span>() (<span style="color:#f92672">*</span><span style="color:#a6e22e">Tick</span>, <span style="color:#66d9ef">error</span>)
+}
+</code></pre></td></tr></table>
+</div>
+</div><p>FooやBarは取引所の名前だと思ってください。</p>
+<p>これらもドメイン層に定義しています。</p>
+<p>また、上記interfaceを満たす実装はインフラストラクチャ層等で定義してDIするようにしています。</p>
+<p>さて、勘の良い方はもうお気づきかもしれませんが上記interfaceの定義が失敗です。</p>
+<p>一見、 <code>Tick</code> を取り出せるinterfaceをサービス分定義したことで問題なく動くように見えます。</p>
+<p>しかし、 <code>GetTick</code> からいきなり <code>Tick</code> 取り出そうとしているため、「外部サービスの値を使って <code>Tick</code> を計算する」というロジックがインフラストラクチャ層に流出するという問題が発生してしまいました。</p>
+<p>具体的な例をあげます。</p>
+<p>取引所Fooは以下のようなResponseを返すAPIを提供していました。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
+  <span style="color:#f92672">&#34;currentTick&#34;</span>: <span style="color:#e6db74">&#34;1000000&#34;</span>,
+  <span style="color:#f92672">&#34;market&#34;</span>: <span style="color:#e6db74">&#34;btc-jpy&#34;</span>
+}
+</code></pre></div><p>上記の構造を <code>Tick</code> に割り当てるのは難しくありません。</p>
+<p><code>currentTick</code> をそのまま <code>Amount</code> に使い、 <code>market</code> の文字列を定義を分解して <code>Market</code> と <code>Base</code> に割り当てれば良さそうです。</p>
+<p>しかし取引所Barは以下のような取引の板情報だけしか返さないAPIの設計になっていました。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
+  <span style="color:#f92672">&#34;asks&#34;</span>: [
+    {
+      <span style="color:#f92672">&#34;rate&#34;</span>: <span style="color:#ae81ff">120000</span>,
+      <span style="color:#f92672">&#34;amount&#34;</span>: <span style="color:#ae81ff">0.1</span>
+    },
+    {
+      <span style="color:#f92672">&#34;rate&#34;</span>: <span style="color:#ae81ff">110000</span>,
+      <span style="color:#f92672">&#34;amount&#34;</span>: <span style="color:#ae81ff">0.22</span>
+    }
+  ],
+  <span style="color:#f92672">&#34;bids&#34;</span>: [
+    {
+      <span style="color:#f92672">&#34;rate&#34;</span>: <span style="color:#ae81ff">99000</span>,
+      <span style="color:#f92672">&#34;amount&#34;</span>: <span style="color:#ae81ff">0.6</span>
+    },
+    {
+      <span style="color:#f92672">&#34;rate&#34;</span>: <span style="color:#ae81ff">100000</span>,
+      <span style="color:#f92672">&#34;amount&#34;</span>: <span style="color:#ae81ff">0.18</span>
+    }
+  ]
+}
+</code></pre></div><p>ここから価格を決定するには <code>asks</code> と <code>bids</code> の情報を利用して決定する必要があります。</p>
+<p>しかし、上記の <code>BarService</code> interfaceに合わせて実装するとその価格を決定するロジックをどこに書くかが問題になります。</p>
+<p>板情報から加重平均で価格決定をしたりする場合は完全にドメインロジックですが、interfaceに合わせようとするとそれをインフラストラクチャ層に書かなくてはいけなくなり、ドメイン知識が流出してしまいます。</p>
+<p>結果、ドメイン層のテストではビジネスロジックが正しいのかを担保するのかが難しくなり、インフラストラクチャ層でもドメインのロジックを気にしながらテストを書くことになってしまいました。</p>
+<h2 id="どうすればよかったか">どうすればよかったか</h2>
+<p>以下のようにFoo取引所とBar取引所が提供している構造をそのままドメイン層に定義し、それらを取得できるinterfaceを定義します。</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">25
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">26
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">27
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">28
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">29
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">30
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">31
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">32
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">33
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">FooService</span> <span style="color:#66d9ef">interface</span> {
+	<span style="color:#a6e22e">GetFooTick</span>() (<span style="color:#f92672">*</span><span style="color:#a6e22e">FooTick</span>, <span style="color:#66d9ef">error</span>)
+}
+
+<span style="color:#66d9ef">type</span> <span style="color:#a6e22e">FooTick</span> <span style="color:#66d9ef">struct</span> {
+	<span style="color:#a6e22e">CurrentTick</span> <span style="color:#66d9ef">string</span>
+	<span style="color:#a6e22e">Market</span>      <span style="color:#66d9ef">string</span>
+}
+
+<span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">t</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">FooTick</span>) <span style="color:#a6e22e">GetTick</span>() (<span style="color:#f92672">*</span><span style="color:#a6e22e">Tick</span>, <span style="color:#66d9ef">error</span>) {
+	<span style="color:#75715e">// Tick計算ロジック
+</span><span style="color:#75715e"></span>}
+
+<span style="color:#66d9ef">type</span> <span style="color:#a6e22e">BarService</span> <span style="color:#66d9ef">interface</span> {
+	<span style="color:#a6e22e">GetBarTick</span>() (<span style="color:#f92672">*</span><span style="color:#a6e22e">BarTick</span>, <span style="color:#66d9ef">error</span>)
+}
+
+<span style="color:#66d9ef">type</span> <span style="color:#a6e22e">BarTick</span> <span style="color:#66d9ef">struct</span> {
+	<span style="color:#a6e22e">Asks</span> []<span style="color:#a6e22e">Order</span>
+	<span style="color:#a6e22e">Bid</span>  []<span style="color:#a6e22e">Order</span>
+}
+<span style="color:#66d9ef">type</span> <span style="color:#a6e22e">Order</span> <span style="color:#66d9ef">struct</span> {
+	<span style="color:#a6e22e">Rate</span>   <span style="color:#66d9ef">float64</span>
+	<span style="color:#a6e22e">Amount</span> <span style="color:#66d9ef">float64</span>
+}
+
+<span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">t</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">BarTick</span>) <span style="color:#a6e22e">GetTick</span>() (<span style="color:#f92672">*</span><span style="color:#a6e22e">Tick</span>, <span style="color:#66d9ef">error</span>) {
+	<span style="color:#75715e">// Tick計算ロジック
+</span><span style="color:#75715e"></span>}
+
+<span style="color:#66d9ef">type</span> <span style="color:#a6e22e">GetTicker</span> <span style="color:#66d9ef">interface</span> {
+	<span style="color:#a6e22e">GetTick</span>() (<span style="color:#f92672">*</span><span style="color:#a6e22e">Tick</span>, <span style="color:#66d9ef">error</span>)
+}
+</code></pre></td></tr></table>
+</div>
+</div><p>また、FooTickやBarTickがGetTickを実装することで、その計算ロジックをドメイン層に寄せてオンメモリのテストを書くことが可能にしています。</p>
+<h2 id="失敗から得たこと">失敗から得たこと</h2>
+<p>結局の所「ビジネスの要件(ドメイン)をコードに落とし込む」というDDDの基本中の基本を抑えましょうということでした。</p>
+<p>ですが、エンジニアは抽象と具象の間を行き来する必要もあるため、意外とハマりがちな落とし穴かなとも思います(普段DBの抽象化をしているので余計に)。</p>
+<p>例えば、ビジネス上「クラウドストレージにファイルを保存する」ということを表現する必要があれば以下のようなinterfaceを定義する人は多いでしょう。</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">CloudStorageService</span> <span style="color:#66d9ef">interface</span> {
+    <span style="color:#a6e22e">Save</span>(<span style="color:#f92672">*</span><span style="color:#a6e22e">os</span>.<span style="color:#a6e22e">File</span>) <span style="color:#66d9ef">error</span>
+}
+</code></pre></td></tr></table>
+</div>
+</div><p>上記のように定義しておけば、S3でもGCSでもクラウドストレージは技術者の自由にできます。</p>
+<p>ですが、ビジネス上「S3に保存をする」ということが非常に重要な場合、上記の定義では十分ではなく <code>S3Service</code> のような定義をする必要があるかもしれません。</p>
+<p>「S3に保存をする」だけなら問題なさそうですが、ビジネスの展開として「S3とGCSのどちらかを選べるようにする」となった時点で、上記のinterfaceではビジネス要件の表現がコード上で難しくなっていく可能性があります。</p>
+<p>自分の失敗に関しても全く同じで、ビジネスの要件として「取引所Fooと取引所Barから価格を決定する」というものだったにも関わらず、それらを表現していなかったのが大きな失敗でした。</p>
+<p>これは当時の私が「各取引所からTickを取り出す」という言葉から外と中を勝手に切り分けてinterfaceを定義し、ドメインの境界を勘違いしてしまったのが原因です。</p>
+<p>外部サービスとシステムの連携はビジネス要件として決まっていることが多いと思います。</p>
+<p>その場合それらの単語を勝手に抽象化せず、きちんとドメイン層に必要な情報を定義していくことでビジネスサイドとの認識差を減らすことができ、DDDとしての旨味を大きく得られるのではないかなと思っています。</p>
+
+      </div>
+
+
+      <footer>
+        
+
+
+        <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "nametake" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+        
+        
+      </footer>
+    </article>
+
+    
+  </section>
+
+      </div>
+
+      
+  <footer class="footer">
+    <section class="container">
+      
+        <p>nametake.github.io</p>
+      
+      
+        ©
+        
+        2020
+         nametake 
+      
+      
+         · 
+        Powered by <a href="https://gohugo.io/">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/">Coder</a>.
+      
+      
+    </section>
+  </footer>
+
+    </main>
+
+    
+
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-129739305-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+
+    
+
+  </body>
+
+</html>

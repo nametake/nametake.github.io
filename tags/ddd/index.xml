@@ -6,10 +6,32 @@
     <description>Recent content in DDD on nametake.info</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 30 Apr 2020 00:00:00 +0900</lastBuildDate>
+    <lastBuildDate>Sat, 25 Jul 2020 00:00:00 +0900</lastBuildDate>
     
 	<atom:link href="https://nametake.github.io/tags/ddd/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>DDDにおける外部サービスの抽象化</title>
+      <link>https://nametake.github.io/posts/2020/07/25/abstract-external-service/</link>
+      <pubDate>Sat, 25 Jul 2020 00:00:00 +0900</pubDate>
+      
+      <guid>https://nametake.github.io/posts/2020/07/25/abstract-external-service/</guid>
+      <description>外部サービスの抽象化 最近のシステムはその複雑さの上昇に伴い、様々な外部サービスと連携する機会が多くあります。
+その際、ドメインとして外部サービスをどう取り扱うといいのか、という個人的なプラクティスを過去の失敗例も含めて記事にしようと思います。
+過去の失敗 昔私が関わっていた仮想通貨の販売所の価格判定ロジックを例にあげます。
+自社の販売所における仮想通貨の価格を決定する仕組みを作っていました。
+複数の外部取引所のAPIから価格情報を取り出してそれらの値を使って自社の販売価格を計算をします。
+販売所の価格の構造体は以下のようにドメイン層に定義していました。
+1 2 3 4 5  type Tick struct { Amount int Market Currency Base Currency }   また、それらのTick を取り出すために各取引所のサービスごとに以下のようにinterfaceを定義していました。
+1 2 3 4 5 6 7  type FooService interface { GetTick() (*Tick, error) } type BarService interface { GetTick() (*Tick, error) }   FooやBarは取引所の名前だと思ってください。
+これらもドメイン層に定義しています。
+また、上記interfaceを満たす実装はインフラストラクチャ層等で定義してDIするようにしています。
+さて、勘の良い方はもうお気づきかもしれませんが上記interfaceの定義が失敗です。
+一見、 Tick を取り出せるinterfaceをサービス分定義したことで問題なく動くように見えます。
+しかし、 GetTick からいきなり Tick 取り出そうとしているため、「外部サービスの値を使って Tick を計算する」というロジックがインフラストラクチャ層に流出するという問題が発生してしまいました。
+具体的な例をあげます。</description>
+    </item>
     
     <item>
       <title>集約におけるトランザクションのドメイン的関心と技術的関心</title>
