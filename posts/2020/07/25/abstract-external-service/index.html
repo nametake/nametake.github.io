@@ -147,7 +147,9 @@
         
         <h1 id="外部サービスの抽象化">外部サービスの抽象化</h1>
 <p>最近のシステムはその複雑さの上昇に伴い、様々な外部サービスと連携する機会が多くあります。</p>
+<!-- textlint-disable ja-technical-writing/ja-no-weak-phrase -->
 <p>その際、ドメインとして外部サービスをどう取り扱うといいのか、という個人的なプラクティスを過去の失敗例も含めて記事にしようと思います。</p>
+<!-- textlint-enable ja-technical-writing/ja-no-weak-phrase -->
 <h2 id="過去の失敗">過去の失敗</h2>
 <p>昔私が関わっていた仮想通貨の販売所の価格判定ロジックを例にあげます。</p>
 <p>自社の販売所における仮想通貨の価格を決定する仕組みを作っていました。</p>
@@ -193,7 +195,9 @@
 </div><p>FooやBarは取引所の名前だと思ってください。</p>
 <p>これらもドメイン層に定義しています。</p>
 <p>また、上記interfaceを満たす実装はインフラストラクチャ層等で定義してDIするようにしています。</p>
+<!-- textlint-disable ja-technical-writing/ja-no-weak-phrase -->
 <p>さて、勘の良い方はもうお気づきかもしれませんが上記interfaceの定義が失敗です。</p>
+<!-- textlint-enable ja-technical-writing/ja-no-weak-phrase -->
 <p>一見、 <code>Tick</code> を取り出せるinterfaceをサービス分定義したことで問題なく動くように見えます。</p>
 <p>しかし、 <code>GetTick</code> からいきなり <code>Tick</code> 取り出そうとしているため、「外部サービスの値を使って <code>Tick</code> を計算する」というロジックがインフラストラクチャ層に流出するという問題が発生してしまいました。</p>
 <p>具体的な例をあげます。</p>
@@ -308,7 +312,9 @@
 </div><p>また、FooTickやBarTickがGetTickを実装することで、その計算ロジックをドメイン層に寄せてオンメモリのテストを書くことが可能にしています。</p>
 <h2 id="失敗から得たこと">失敗から得たこと</h2>
 <p>結局の所「ビジネスの要件(ドメイン)をコードに落とし込む」というDDDの基本中の基本を抑えましょうということでした。</p>
+<!-- textlint-disable ja-technical-writing/ja-no-weak-phrase -->
 <p>ですが、エンジニアは抽象と具象の間を行き来する必要もあるため、意外とハマりがちな落とし穴かなとも思います(普段DBの抽象化をしているので余計に)。</p>
+<!-- textlint-enable ja-technical-writing/ja-no-weak-phrase -->
 <p>例えば、ビジネス上「クラウドストレージにファイルを保存する」ということを表現する必要があれば以下のようなinterfaceを定義する人は多いでしょう。</p>
 <div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
@@ -323,11 +329,15 @@
 </code></pre></td></tr></table>
 </div>
 </div><p>上記のように定義しておけば、S3でもGCSでもクラウドストレージは技術者の自由にできます。</p>
+<!-- textlint-disable ja-technical-writing/ja-no-weak-phrase -->
 <p>ですが、ビジネス上「S3に保存をする」ということが非常に重要な場合、上記の定義では十分ではなく <code>S3Service</code> のような定義をする必要があるかもしれません。</p>
+<!-- textlint-enable ja-technical-writing/ja-no-weak-phrase -->
 <p>「S3に保存をする」だけなら問題なさそうですが、ビジネスの展開として「S3とGCSのどちらかを選べるようにする」となった時点で、上記のinterfaceではビジネス要件の表現がコード上で難しくなっていく可能性があります。</p>
 <p>自分の失敗に関しても全く同じで、ビジネスの要件として「取引所Fooと取引所Barから価格を決定する」というものだったにも関わらず、それらを表現していなかったのが大きな失敗でした。</p>
 <p>これは当時の私が「各取引所からTickを取り出す」という言葉から外と中を勝手に切り分けてinterfaceを定義し、ドメインの境界を勘違いしてしまったのが原因です。</p>
+<!-- textlint-disable ja-technical-writing/ja-no-weak-phrase -->
 <p>外部サービスとシステムの連携はビジネス要件として決まっていることが多いと思います。</p>
+<!-- textlint-enable ja-technical-writing/ja-no-weak-phrase -->
 <p>その場合それらの単語を勝手に抽象化せず、きちんとドメイン層に必要な情報を定義していくことでビジネスサイドとの認識差を減らすことができ、DDDとしての旨味を大きく得られるのではないかなと思っています。</p>
 
       </div>

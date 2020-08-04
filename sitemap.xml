@@ -3,27 +3,42 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://nametake.github.io/tags/electron/</loc>
+    <lastmod>2020-08-04T00:00:00+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://nametake.github.io/</loc>
+    <lastmod>2020-08-04T00:00:00+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://nametake.github.io/posts/</loc>
+    <lastmod>2020-08-04T00:00:00+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://nametake.github.io/tags/react/</loc>
+    <lastmod>2020-08-04T00:00:00+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://nametake.github.io/tags/</loc>
+    <lastmod>2020-08-04T00:00:00+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://nametake.github.io/posts/2020/08/04/typescript-electron-webpack-emotion/</loc>
+    <lastmod>2020-08-04T00:00:00+09:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://nametake.github.io/tags/ddd/</loc>
     <lastmod>2020-07-25T00:00:00+09:00</lastmod>
   </url>
   
   <url>
     <loc>https://nametake.github.io/posts/2020/07/25/abstract-external-service/</loc>
-    <lastmod>2020-07-25T00:00:00+09:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://nametake.github.io/</loc>
-    <lastmod>2020-07-25T00:00:00+09:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://nametake.github.io/posts/</loc>
-    <lastmod>2020-07-25T00:00:00+09:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://nametake.github.io/tags/</loc>
     <lastmod>2020-07-25T00:00:00+09:00</lastmod>
   </url>
   
@@ -80,11 +95,6 @@
   <url>
     <loc>https://nametake.github.io/posts/2020/02/26/migration-diagnostic-languageserver/</loc>
     <lastmod>2020-02-26T00:00:00+09:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://nametake.github.io/tags/react/</loc>
-    <lastmod>2020-01-31T00:00:00+09:00</lastmod>
   </url>
   
   <url>
