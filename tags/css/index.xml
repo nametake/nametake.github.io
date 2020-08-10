@@ -6,10 +6,25 @@
     <description>Recent content in CSS on nametake.info</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 29 May 2019 15:47:35 +0900</lastBuildDate>
+    <lastBuildDate>Mon, 10 Aug 2020 00:00:00 +0900</lastBuildDate>
     
 	<atom:link href="https://nametake.github.io/tags/css/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>SVGが特定のサイズ以下でずれる現象の原因と解決策</title>
+      <link>https://nametake.github.io/posts/2020/08/10/css-svg-inline-descender/</link>
+      <pubDate>Mon, 10 Aug 2020 00:00:00 +0900</pubDate>
+      
+      <guid>https://nametake.github.io/posts/2020/08/10/css-svg-inline-descender/</guid>
+      <description>下記ブログを参考にしてアクセシビリティを維持したままCheckboxやRadioボタンを作ろうとしたのですが、特定のサイズ以下でずれる問題に遭遇しました。
+Building a Checkbox Component with React and styled-components
+以下がそのずれているときの画像です。16pxにしたとき親要素に対して少し下側にずれています。
+しかし、20pxにしたときには以下のように親要素とぴったり揃います。
+サイズによって変わるので割と謎だったのですが、調べてみるとtextの descender が原因だったようです。
+inline要素は g や y といったベースラインより下に突き抜ける文字用のために下側のスペースを確保してしまうようで、それが原因でSVGが下側にずれていました。
+原因がわかったので、上記の問題は line-height: 0; をSVGをラップしている要素に当て、 descender が確保されないようにすることで解決しました。</description>
+    </item>
     
     <item>
       <title>インライン要素の高さを合わせるCSS定義</title>

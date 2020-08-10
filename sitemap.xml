@@ -3,27 +3,37 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://nametake.github.io/tags/css/</loc>
+    <lastmod>2020-08-10T00:00:00+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://nametake.github.io/</loc>
+    <lastmod>2020-08-10T00:00:00+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://nametake.github.io/posts/</loc>
+    <lastmod>2020-08-10T00:00:00+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://nametake.github.io/posts/2020/08/10/css-svg-inline-descender/</loc>
+    <lastmod>2020-08-10T00:00:00+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://nametake.github.io/tags/</loc>
+    <lastmod>2020-08-10T00:00:00+09:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://nametake.github.io/tags/electron/</loc>
     <lastmod>2020-08-04T00:00:00+09:00</lastmod>
   </url>
   
   <url>
-    <loc>https://nametake.github.io/</loc>
-    <lastmod>2020-08-04T00:00:00+09:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://nametake.github.io/posts/</loc>
-    <lastmod>2020-08-04T00:00:00+09:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://nametake.github.io/tags/react/</loc>
-    <lastmod>2020-08-04T00:00:00+09:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://nametake.github.io/tags/</loc>
     <lastmod>2020-08-04T00:00:00+09:00</lastmod>
   </url>
   
@@ -175,11 +185,6 @@
   <url>
     <loc>https://nametake.github.io/posts/2019/06/05/formik-yup-dynamic-validation/</loc>
     <lastmod>2019-06-05T23:50:36+09:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://nametake.github.io/tags/css/</loc>
-    <lastmod>2019-05-29T15:47:35+09:00</lastmod>
   </url>
   
   <url>
