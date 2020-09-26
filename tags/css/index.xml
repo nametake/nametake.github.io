@@ -6,11 +6,7 @@
     <description>Recent content in CSS on nametake.info</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 10 Aug 2020 00:00:00 +0900</lastBuildDate>
-    
-	<atom:link href="https://nametake.github.io/tags/css/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Mon, 10 Aug 2020 00:00:00 +0900</lastBuildDate><atom:link href="https://nametake.github.io/tags/css/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>SVGが特定のサイズ以下でずれる現象の原因と解決策</title>
       <link>https://nametake.github.io/posts/2020/08/10/css-svg-inline-descender/</link>

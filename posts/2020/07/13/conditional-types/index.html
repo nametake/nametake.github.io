@@ -68,7 +68,7 @@
     <link rel="icon" type="image/png" href="https://nametake.github.io/images/favicon-32x32.png" sizes="32x32">
     <link rel="icon" type="image/png" href="https://nametake.github.io/images/favicon-16x16.png" sizes="16x16">
 
-    <meta name="generator" content="Hugo 0.74.3" />
+    <meta name="generator" content="Hugo 0.75.1" />
   </head>
 
   
@@ -165,8 +165,8 @@
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ts" data-lang="ts"><span style="color:#66d9ef">export</span> <span style="color:#a6e22e">type</span> <span style="color:#a6e22e">Action</span>&lt;<span style="color:#f92672">T</span><span style="color:#960050;background-color:#1e0010">,</span> <span style="color:#a6e22e">P </span><span style="color:#f92672">=</span> <span style="color:#a6e22e">undefined</span>&gt; <span style="color:#f92672">=</span> {
-  <span style="color:#a6e22e">type</span>: <span style="color:#66d9ef">T</span>;
+<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ts" data-lang="ts"><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">type</span> <span style="color:#a6e22e">Action</span>&lt;<span style="color:#f92672">T</span><span style="color:#960050;background-color:#1e0010">,</span> <span style="color:#a6e22e">P </span><span style="color:#f92672">=</span> <span style="color:#a6e22e">undefined</span>&gt; <span style="color:#f92672">=</span> {
+  <span style="color:#66d9ef">type</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">T</span>;
   <span style="color:#a6e22e">payload</span>: <span style="color:#66d9ef">P</span>;
 }
 
@@ -175,7 +175,7 @@
   <span style="color:#a6e22e">GET_TASKS</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;GET_TASKS&#39;</span>,
 }
 
-<span style="color:#66d9ef">export</span> <span style="color:#a6e22e">type</span> <span style="color:#a6e22e">ApiAction</span> <span style="color:#f92672">=</span>
+<span style="color:#66d9ef">export</span> <span style="color:#66d9ef">type</span> <span style="color:#a6e22e">ApiAction</span> <span style="color:#f92672">=</span>
   <span style="color:#f92672">|</span> <span style="color:#a6e22e">Action</span>&lt;<span style="color:#f92672">ApiType.GET_ACCOUNT</span>&gt;
   <span style="color:#f92672">|</span> <span style="color:#a6e22e">Action</span>&lt;<span style="color:#f92672">ApiType.GET_TASKS</span><span style="color:#960050;background-color:#1e0010">,</span> <span style="color:#a6e22e">GetTasksRequest</span>&gt;;
 </code></pre></td></tr></table>
@@ -186,7 +186,7 @@
 <pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ts" data-lang="ts"><span style="color:#a6e22e">invokeApi</span>({<span style="color:#a6e22e">type</span>: <span style="color:#66d9ef">ApiType.GET_ACCOUNT</span>, <span style="color:#a6e22e">payload</span>: <span style="color:#66d9ef">undefined</span>});
+<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ts" data-lang="ts"><span style="color:#a6e22e">invokeApi</span>({<span style="color:#66d9ef">type</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">ApiType</span>.<span style="color:#a6e22e">GET_ACCOUNT</span>, <span style="color:#a6e22e">payload</span>: <span style="color:#66d9ef">undefined</span>});
 </code></pre></td></tr></table>
 </div>
 </div><p>そこで、以下のように <code>Action</code> の <code>payload</code> をConditional Typesで定義することにより、 <code>P</code> に型が与えられてないときは何もしないようにすることで呼び出し時にundefinedを与えなくてもいいようにしました。</p>
@@ -197,9 +197,9 @@
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ts" data-lang="ts"><span style="color:#66d9ef">export</span> <span style="color:#a6e22e">type</span> <span style="color:#a6e22e">Action</span>&lt;<span style="color:#f92672">T</span><span style="color:#960050;background-color:#1e0010">,</span> <span style="color:#a6e22e">P </span><span style="color:#f92672">=</span> <span style="color:#a6e22e">undefined</span>&gt; <span style="color:#f92672">=</span> {
-  <span style="color:#a6e22e">type</span>: <span style="color:#66d9ef">T</span>;
-} <span style="color:#f92672">&amp;</span> (<span style="color:#a6e22e">P</span> <span style="color:#66d9ef">extends</span> <span style="color:#66d9ef">undefined</span> <span style="color:#f92672">?</span> <span style="color:#a6e22e">unknown</span> <span style="color:#f92672">:</span> { <span style="color:#a6e22e">payload</span>: <span style="color:#66d9ef">P</span> });
+<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ts" data-lang="ts"><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">type</span> <span style="color:#a6e22e">Action</span>&lt;<span style="color:#f92672">T</span><span style="color:#960050;background-color:#1e0010">,</span> <span style="color:#a6e22e">P </span><span style="color:#f92672">=</span> <span style="color:#a6e22e">undefined</span>&gt; <span style="color:#f92672">=</span> {
+  <span style="color:#66d9ef">type</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">T</span>;
+} <span style="color:#f92672">&amp;</span> (<span style="color:#a6e22e">P</span> <span style="color:#66d9ef">extends</span> <span style="color:#66d9ef">undefined</span> <span style="color:#f92672">?</span> <span style="color:#66d9ef">unknown</span> <span style="color:#f92672">:</span> { <span style="color:#a6e22e">payload</span>: <span style="color:#66d9ef">P</span> });
 </code></pre></td></tr></table>
 </div>
 </div><div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
@@ -207,7 +207,7 @@
 <pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ts" data-lang="ts"><span style="color:#a6e22e">invokeApi</span>({<span style="color:#a6e22e">type</span>: <span style="color:#66d9ef">ApiType.GET_ACCOUNT</span>});
+<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ts" data-lang="ts"><span style="color:#a6e22e">invokeApi</span>({<span style="color:#66d9ef">type</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">ApiType</span>.<span style="color:#a6e22e">GET_ACCOUNT</span>});
 </code></pre></td></tr></table>
 </div>
 </div><p>ライブラリ等を作らないと自分で使うシーンはあまりないのかなぁと思っていましたが、こういうテクニックを知っているときれいにコードが書けるものだなぁと思ったので記録しておきます。</p>

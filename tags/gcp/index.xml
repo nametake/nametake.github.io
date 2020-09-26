@@ -6,11 +6,7 @@
     <description>Recent content in GCP on nametake.info</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 09 Nov 2018 11:15:24 +0900</lastBuildDate>
-    
-	<atom:link href="https://nametake.github.io/tags/gcp/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Fri, 09 Nov 2018 11:15:24 +0900</lastBuildDate><atom:link href="https://nametake.github.io/tags/gcp/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>GCPの認証済みのhttp.Clientの取得方法</title>
       <link>https://nametake.github.io/posts/2018/11/09/auth-gcp-client/</link>

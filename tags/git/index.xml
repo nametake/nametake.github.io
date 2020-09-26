@@ -6,11 +6,7 @@
     <description>Recent content in git on nametake.info</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 20 Sep 2018 18:47:46 +0900</lastBuildDate>
-    
-	<atom:link href="https://nametake.github.io/tags/git/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Thu, 20 Sep 2018 18:47:46 +0900</lastBuildDate><atom:link href="https://nametake.github.io/tags/git/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>depでprivateリポジトリがupdateできなかったときの解決策</title>
       <link>https://nametake.github.io/posts/2018/09/20/dep-private-repo/</link>

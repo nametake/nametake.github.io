@@ -107,7 +107,7 @@ import * as React from &#39;react&#39;; import { render } from &#39;react-dom&#3
     <link rel="icon" type="image/png" href="https://nametake.github.io/images/favicon-32x32.png" sizes="32x32">
     <link rel="icon" type="image/png" href="https://nametake.github.io/images/favicon-16x16.png" sizes="16x16">
 
-    <meta name="generator" content="Hugo 0.74.3" />
+    <meta name="generator" content="Hugo 0.75.1" />
   </head>
 
   
@@ -200,10 +200,10 @@ import * as React from &#39;react&#39;; import { render } from &#39;react-dom&#3
 <p>本番で使う際は必ず公式のドキュメントを参照してください。</p>
 <h1 id="シンプルなテーブル">シンプルなテーブル</h1>
 <p>まずは最もシンプルにテーブルを表示する例です。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-tsx" data-lang="tsx"><span style="color:#66d9ef">import</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">as</span> <span style="color:#a6e22e">React</span> <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;react&#39;</span>;
-<span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">render</span> } <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;react-dom&#39;</span>;
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-tsx" data-lang="tsx"><span style="color:#66d9ef">import</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">as</span> <span style="color:#a6e22e">React</span> <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;react&#39;</span>;
+<span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">render</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;react-dom&#39;</span>;
 
-<span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">useTable</span>, <span style="color:#a6e22e">Column</span> } <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;react-table&#39;</span>;
+<span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">useTable</span>, <span style="color:#a6e22e">Column</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;react-table&#39;</span>;
 
 <span style="color:#66d9ef">import</span> <span style="color:#e6db74">&#39;./styles.css&#39;</span>;
 
@@ -292,7 +292,7 @@ import * as React from &#39;react&#39;; import { render } from &#39;react-dom&#3
   <span style="color:#a6e22e">UseSortByInstanceProps</span>,
   <span style="color:#a6e22e">UseSortByOptions</span>,
   <span style="color:#a6e22e">UseSortByState</span>
-} <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;react-table&#39;</span>;
+} <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;react-table&#39;</span>;
 
 <span style="color:#66d9ef">declare</span> <span style="color:#a6e22e">module</span> <span style="color:#e6db74">&#39;react-table&#39;</span> {
   <span style="color:#66d9ef">export</span> <span style="color:#66d9ef">interface</span> <span style="color:#a6e22e">TableOptions</span>&lt;<span style="color:#f92672">D</span> <span style="color:#a6e22e">extends</span> <span style="color:#a6e22e">object</span>&gt; <span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">UseSortByOptions</span>&lt;<span style="color:#f92672">D</span>&gt; {}
@@ -312,10 +312,10 @@ import * as React from &#39;react&#39;; import { render } from &#39;react-dom&#3
 </code></pre></div><p>これはreact-tableがもともとJSベースで作られており、使いたい機能をプラグインとして使えるようにするという設計だったため、ライブラリ側で型定義を提供することが難しいため必要になっています(<a href="https://github.com/tannerlinsley/react-table/blob/v7.0.0-beta.24/TYPESCRIPT.md">参考</a>)。</p>
 <p>この定義自体はコミュニティの型定義が進んだら変わるかもしれないので、公式を参照するようにしてください。</p>
 <p>さて、上記定義ができたら次はSortの実装をします。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-tsx" data-lang="tsx"><span style="color:#66d9ef">import</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">as</span> <span style="color:#a6e22e">React</span> <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;react&#39;</span>;
-<span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">render</span> } <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;react-dom&#39;</span>;
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-tsx" data-lang="tsx"><span style="color:#66d9ef">import</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">as</span> <span style="color:#a6e22e">React</span> <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;react&#39;</span>;
+<span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">render</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;react-dom&#39;</span>;
 
-<span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">useTable</span>, <span style="color:#a6e22e">Column</span>, <span style="color:#a6e22e">useSortBy</span> } <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;react-table&#39;</span>;
+<span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">useTable</span>, <span style="color:#a6e22e">Column</span>, <span style="color:#a6e22e">useSortBy</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;react-table&#39;</span>;
 
 <span style="color:#66d9ef">import</span> <span style="color:#e6db74">&#39;./styles.css&#39;</span>;
 

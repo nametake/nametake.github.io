@@ -101,7 +101,7 @@ Component の実装 何はともあれ何かが表示されてないとモチベ
     <link rel="icon" type="image/png" href="https://nametake.github.io/images/favicon-32x32.png" sizes="32x32">
     <link rel="icon" type="image/png" href="https://nametake.github.io/images/favicon-16x16.png" sizes="16x16">
 
-    <meta name="generator" content="Hugo 0.74.3" />
+    <meta name="generator" content="Hugo 0.75.1" />
   </head>
 
   
@@ -225,7 +225,7 @@ yarn add -D @types/redux @types/react-redux
 <p>以下のコードを TodoComponent.tsx として src 以下に記述します。JSX 記法が含まれるファイルは tsx 拡張子にします。</p>
 <p>ちなみに以下のコードは React と TypeScript の要素しか出てきていません。</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-tsx" data-lang="tsx"><span style="color:#75715e">// TodoComponent.tsx
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">import</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">as</span> <span style="color:#a6e22e">React</span> <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;react&#39;</span>;
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">import</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">as</span> <span style="color:#a6e22e">React</span> <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;react&#39;</span>;
 
 <span style="color:#66d9ef">interface</span> <span style="color:#a6e22e">IProps</span> {
   <span style="color:#a6e22e">todos</span>: <span style="color:#66d9ef">string</span>[];
@@ -279,9 +279,9 @@ yarn add -D @types/redux @types/react-redux
 }
 </code></pre></div><p>作成した TodoComponent を表示させるために、元からあった App.tsx を以下のように書き換えます。</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-tsx" data-lang="tsx"><span style="color:#75715e">// App.tsx
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">import</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">as</span> <span style="color:#a6e22e">React</span> <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;react&#39;</span>;
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">import</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">as</span> <span style="color:#a6e22e">React</span> <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;react&#39;</span>;
 
-<span style="color:#66d9ef">import</span> <span style="color:#a6e22e">TodoComponent</span> <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;./TodoComponent&#39;</span>;
+<span style="color:#66d9ef">import</span> <span style="color:#a6e22e">TodoComponent</span> <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;./TodoComponent&#39;</span>;
 
 <span style="color:#75715e">/* tslint:disable:no-console */</span>
 <span style="color:#75715e">/* tslint:disable:jsx-no-lambda */</span>
@@ -315,7 +315,7 @@ yarn add -D @types/redux @types/react-redux
 <p>今回は Redux のチュートリアルのため、<code>todos</code> は外から渡される props に配置しましたが、この Component の状態( state )とすることで、React のみで完結させることができます。</p>
 <p>以下のように書き換えることで React のみで Todo リストを作成することができます。</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-tsx" data-lang="tsx"><span style="color:#75715e">// TodoComponent.tsx
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">import</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">as</span> <span style="color:#a6e22e">React</span> <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;react&#39;</span>;
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">import</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">as</span> <span style="color:#a6e22e">React</span> <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;react&#39;</span>;
 
 <span style="color:#66d9ef">interface</span> <span style="color:#a6e22e">IProps</span> {
   <span style="color:#a6e22e">onClickAddButton</span><span style="color:#f92672">:</span> (<span style="color:#a6e22e">todo</span>: <span style="color:#66d9ef">string</span>) <span style="color:#f92672">=&gt;</span> <span style="color:#66d9ef">void</span>;
@@ -370,9 +370,9 @@ yarn add -D @types/redux @types/react-redux
 }
 </code></pre></div><p><code>IProps</code>の<code>todos</code>がなくなったので App.tsx は以下のように書き換えます。</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-tsx" data-lang="tsx"><span style="color:#75715e">// App.tsx
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">import</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">as</span> <span style="color:#a6e22e">React</span> <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;react&#39;</span>;
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">import</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">as</span> <span style="color:#a6e22e">React</span> <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;react&#39;</span>;
 
-<span style="color:#66d9ef">import</span> <span style="color:#a6e22e">TodoComponent</span> <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;./TodoComponent&#39;</span>;
+<span style="color:#66d9ef">import</span> <span style="color:#a6e22e">TodoComponent</span> <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;./TodoComponent&#39;</span>;
 
 <span style="color:#75715e">/* tslint:disable:no-console */</span>
 <span style="color:#75715e">/* tslint:disable:jsx-no-lambda */</span>
@@ -413,7 +413,7 @@ yarn add -D @types/redux @types/react-redux
 <h3 id="action-の追加">Action の追加</h3>
 <p>次に&quot;Add Todo&quot;ボタンを押したときに発火される Action を定義します。</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ts" data-lang="ts"><span style="color:#75715e">// action.ts
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">Action</span> } <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;redux&#39;</span>; <span style="color:#75715e">// reduxで定義されているAction interfaceだけimport
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">Action</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;redux&#39;</span>; <span style="color:#75715e">// reduxで定義されているAction interfaceだけimport
 </span><span style="color:#75715e"></span>
 <span style="color:#75715e">// reduxのActionとして判別するための識別子をenumとして定義
 </span><span style="color:#75715e"></span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">enum</span> <span style="color:#a6e22e">TodoActionType</span> {
@@ -423,14 +423,14 @@ yarn add -D @types/redux @types/react-redux
 <span style="color:#75715e">// Todoを追加するActionとして、Actionを継承したinterfaceを定義
 </span><span style="color:#75715e">// 追加するPayloadの情報も同時に持つ
 </span><span style="color:#75715e"></span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">interface</span> <span style="color:#a6e22e">IAddTodoAction</span> <span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">Action</span> {
-  <span style="color:#a6e22e">type</span>: <span style="color:#66d9ef">TodoActionType.ADD_TODO</span>;
+  <span style="color:#66d9ef">type</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">TodoActionType</span>.<span style="color:#a6e22e">ADD_TODO</span>;
   <span style="color:#a6e22e">payload</span><span style="color:#f92672">:</span> {
     <span style="color:#a6e22e">todo</span>: <span style="color:#66d9ef">string</span>;
   };
 }
 
 <span style="color:#75715e">// Actionを表現したinterfaceを一つの型として取り扱うためにTodoAction型を定義
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">export</span> <span style="color:#a6e22e">type</span> <span style="color:#a6e22e">TodoAction</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">IAddTodoAction</span>;
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">type</span> <span style="color:#a6e22e">TodoAction</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">IAddTodoAction</span>;
 
 <span style="color:#75715e">// 定義したActionのinterfaceを作成するCreatorのinterfaceを定義
 </span><span style="color:#75715e"></span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">interface</span> <span style="color:#a6e22e">ITodoActionCreator</span> {
@@ -444,7 +444,7 @@ yarn add -D @types/redux @types/react-redux
       <span style="color:#a6e22e">payload</span><span style="color:#f92672">:</span> {
         <span style="color:#a6e22e">todo</span>
       },
-      <span style="color:#a6e22e">type</span>: <span style="color:#66d9ef">TodoActionType.ADD_TODO</span>
+      <span style="color:#66d9ef">type</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">TodoActionType</span>.<span style="color:#a6e22e">ADD_TODO</span>
     };
   };
 }
@@ -454,16 +454,16 @@ yarn add -D @types/redux @types/react-redux
 </code></pre></div><p>少し冗長ですが書いてあることはシンプルで、Action の型の定義とそれを作成する Creator を作成しています。</p>
 <p><code>redux</code> パッケージの <code>Action</code> の interface 定義には <code>type</code> しか定義されていませが、 Action と一緒にデータを渡したいため<a href="https://github.com/redux-utilities/flux-standard-action">Action のコーディング規約</a>に則って<code>payload</code>を付与しています。このコーディング規約自体は非公式ですが、これに則っているライブラリも多いためこのチュートリアルではそれに従います。</p>
 <p>以下の記述は TodoAction 型を作成するためのものです。今後 Action の interface が増えたときに<code>|</code>記述を使って TodoAction と一致する型を増やすことができます。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ts" data-lang="ts"><span style="color:#66d9ef">export</span> <span style="color:#a6e22e">type</span> <span style="color:#a6e22e">TodoAction</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">IAddTodoAction</span>;
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ts" data-lang="ts"><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">type</span> <span style="color:#a6e22e">TodoAction</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">IAddTodoAction</span>;
 </code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ts" data-lang="ts"><span style="color:#75715e">// TodoActionはITodoActionかIDeleteTodoActionのどちらかを受け取れる
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">export</span> <span style="color:#a6e22e">type</span> <span style="color:#a6e22e">TodoAction</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">IAddTodoAction</span> <span style="color:#f92672">|</span> <span style="color:#a6e22e">IDeleteTodoAction</span>;
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">type</span> <span style="color:#a6e22e">TodoAction</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">IAddTodoAction</span> <span style="color:#f92672">|</span> <span style="color:#a6e22e">IDeleteTodoAction</span>;
 </code></pre></div><h3 id="reducer-の追加">Reducer の追加</h3>
 <p>Action が発火したあと、その Action に応じて Store の State を更新する Reducer を作成します。</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ts" data-lang="ts"><span style="color:#75715e">// reducer.ts
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">combineReducers</span>, <span style="color:#a6e22e">Reducer</span> } <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;redux&#39;</span>;
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">combineReducers</span>, <span style="color:#a6e22e">Reducer</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;redux&#39;</span>;
 
-<span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">IAddTodoAction</span>, <span style="color:#a6e22e">TodoAction</span>, <span style="color:#a6e22e">TodoActionType</span> } <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;./action&#39;</span>;
-<span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">IRootState</span>, <span style="color:#a6e22e">ITodoState</span> } <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;./store&#39;</span>;
+<span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">IAddTodoAction</span>, <span style="color:#a6e22e">TodoAction</span>, <span style="color:#a6e22e">TodoActionType</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;./action&#39;</span>;
+<span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">IRootState</span>, <span style="color:#a6e22e">ITodoState</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;./store&#39;</span>;
 
 <span style="color:#75715e">// ITodoStateの初期データを作成
 </span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">initTodoState</span>: <span style="color:#66d9ef">ITodoState</span> <span style="color:#f92672">=</span> {
@@ -476,7 +476,7 @@ yarn add -D @types/redux @types/react-redux
   <span style="color:#a6e22e">action</span>: <span style="color:#66d9ef">TodoAction</span>
 )<span style="color:#f92672">:</span> <span style="color:#a6e22e">ITodoState</span> <span style="color:#f92672">=&gt;</span> {
   <span style="color:#75715e">// 関数の引数として渡されてきたactionのtypeを見てReduxのstateを返す
-</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">switch</span> (<span style="color:#a6e22e">action</span>.<span style="color:#a6e22e">type</span>) {
+</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">switch</span> (<span style="color:#a6e22e">action</span>.<span style="color:#66d9ef">type</span>) {
     <span style="color:#66d9ef">case</span> <span style="color:#a6e22e">TodoActionType</span>.<span style="color:#a6e22e">ADD_TODO</span><span style="color:#f92672">:</span>
       <span style="color:#75715e">// ADD_TODOの場合はactionのpayloadに新しいtodoが詰められているので
 </span><span style="color:#75715e"></span>      <span style="color:#75715e">// それを取り出してtodosに追加して新しいstateとして返す
@@ -504,9 +504,9 @@ yarn add -D @types/redux @types/react-redux
 <h3 id="reducer-を使って-store-の作成">Reducer を使って Store の作成</h3>
 <p>reducer.ts に定義した<code>reducer</code>を使用して、store.ts に<code>store</code>を以下のように追記して定義します。</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ts" data-lang="ts"><span style="color:#75715e">// store.ts
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">Action</span>, <span style="color:#a6e22e">createStore</span>, <span style="color:#a6e22e">Store</span> } <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;redux&#39;</span>;
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">Action</span>, <span style="color:#a6e22e">createStore</span>, <span style="color:#a6e22e">Store</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;redux&#39;</span>;
 
-<span style="color:#66d9ef">import</span> <span style="color:#a6e22e">reducer</span> <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;./reducer&#39;</span>;
+<span style="color:#66d9ef">import</span> <span style="color:#a6e22e">reducer</span> <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;./reducer&#39;</span>;
 
 <span style="color:#75715e">// Storeが持つTodoにの状態を定義
 </span><span style="color:#75715e"></span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">interface</span> <span style="color:#a6e22e">ITodoState</span> {
@@ -528,13 +528,13 @@ yarn add -D @types/redux @types/react-redux
 <p>最後に、最初に定義した Component と Redux の世界をつなぐための Container を作成します。</p>
 <p>以下のように TodoContainer.tsx を作成します。</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-tsx" data-lang="tsx"><span style="color:#75715e">// TodoContainer.tsx
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">import</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">as</span> <span style="color:#a6e22e">React</span> <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;react&#39;</span>;
-<span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">connect</span> } <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;react-redux&#39;</span>;
-<span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">Action</span>, <span style="color:#a6e22e">Dispatch</span> } <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;redux&#39;</span>;
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">import</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">as</span> <span style="color:#a6e22e">React</span> <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;react&#39;</span>;
+<span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">connect</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;react-redux&#39;</span>;
+<span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">Action</span>, <span style="color:#a6e22e">Dispatch</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;redux&#39;</span>;
 
-<span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">todoActionCreator</span> } <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;./action&#39;</span>;
-<span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">IRootState</span> } <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;./store&#39;</span>;
-<span style="color:#66d9ef">import</span> <span style="color:#a6e22e">TodoComponent</span> <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;./TodoComponent&#39;</span>;
+<span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">todoActionCreator</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;./action&#39;</span>;
+<span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">IRootState</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;./store&#39;</span>;
+<span style="color:#66d9ef">import</span> <span style="color:#a6e22e">TodoComponent</span> <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;./TodoComponent&#39;</span>;
 
 <span style="color:#75715e">// ReduxのStoreをReactのContainerのPropsに変換するinterfaceを定義
 </span><span style="color:#75715e"></span><span style="color:#66d9ef">interface</span> <span style="color:#a6e22e">IStateToProps</span> {
@@ -548,7 +548,7 @@ yarn add -D @types/redux @types/react-redux
 }
 
 <span style="color:#75715e">// IStateToPropsとIDispatchToPropsの複合型を定義
-</span><span style="color:#75715e"></span><span style="color:#a6e22e">type</span> <span style="color:#a6e22e">IProps</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">IStateToProps</span> <span style="color:#f92672">&amp;</span> <span style="color:#a6e22e">IDispatchToProps</span>;
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">IProps</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">IStateToProps</span> <span style="color:#f92672">&amp;</span> <span style="color:#a6e22e">IDispatchToProps</span>;
 
 <span style="color:#75715e">// IPropsを受け取るContainerを定義
 </span><span style="color:#75715e">// Stateは持たないので空の定義を渡す
@@ -599,11 +599,11 @@ yarn add -D @types/redux @types/react-redux
 )(<span style="color:#a6e22e">TodoContainer</span>);
 </code></pre></div><p>次に App.tsx を以下のように変更します。</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-tsx" data-lang="tsx"><span style="color:#75715e">// App.tsx
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">import</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">as</span> <span style="color:#a6e22e">React</span> <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;react&#39;</span>;
-<span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">Provider</span> } <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;react-redux&#39;</span>;
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">import</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">as</span> <span style="color:#a6e22e">React</span> <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;react&#39;</span>;
+<span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">Provider</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;react-redux&#39;</span>;
 
-<span style="color:#66d9ef">import</span> <span style="color:#a6e22e">store</span> <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;./store&#39;</span>;
-<span style="color:#66d9ef">import</span> <span style="color:#a6e22e">TodoContainer</span> <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;./TodoContainer&#39;</span>;
+<span style="color:#66d9ef">import</span> <span style="color:#a6e22e">store</span> <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;./store&#39;</span>;
+<span style="color:#66d9ef">import</span> <span style="color:#a6e22e">TodoContainer</span> <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;./TodoContainer&#39;</span>;
 
 <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">App</span> <span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">React</span>.<span style="color:#a6e22e">Component</span> {
   <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">render() {</span>

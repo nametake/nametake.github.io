@@ -92,7 +92,7 @@ yarn add -D eslint-import-resolver-webpack 次にeslintrcのsettingsに以下の
     <link rel="icon" type="image/png" href="https://nametake.github.io/images/favicon-32x32.png" sizes="32x32">
     <link rel="icon" type="image/png" href="https://nametake.github.io/images/favicon-16x16.png" sizes="16x16">
 
-    <meta name="generator" content="Hugo 0.74.3" />
+    <meta name="generator" content="Hugo 0.75.1" />
   </head>
 
   
@@ -190,7 +190,7 @@ yarn add -D eslint-import-resolver-webpack 次にeslintrcのsettingsに以下の
 }
 </code></pre></div><h1 id="webpackのresolveの設定">Webpackのresolveの設定</h1>
 <p>Webpackのmoduleの解決にtsconfigで設定したエイリアスが使われるように設定します。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ts" data-lang="ts"><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">Configuration</span> } <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;webpack&#39;</span>;
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ts" data-lang="ts"><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">Configuration</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;webpack&#39;</span>;
 
 <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">config</span>: <span style="color:#66d9ef">Configuration</span> <span style="color:#f92672">=</span> {
   <span style="color:#f92672">~~~</span>

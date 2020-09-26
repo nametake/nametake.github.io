@@ -6,11 +6,7 @@
     <description>Recent content in Vim on nametake.info</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 08 Mar 2020 00:00:00 +0900</lastBuildDate>
-    
-	<atom:link href="https://nametake.github.io/tags/vim/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Sun, 08 Mar 2020 00:00:00 +0900</lastBuildDate><atom:link href="https://nametake.github.io/tags/vim/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>golangci-lint-langserverを作った話</title>
       <link>https://nametake.github.io/posts/2020/03/08/golangci-lint-langserver/</link>

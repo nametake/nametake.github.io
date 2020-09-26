@@ -6,11 +6,7 @@
     <description>Recent content in DDD on nametake.info</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 25 Jul 2020 00:00:00 +0900</lastBuildDate>
-    
-	<atom:link href="https://nametake.github.io/tags/ddd/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Sat, 25 Jul 2020 00:00:00 +0900</lastBuildDate><atom:link href="https://nametake.github.io/tags/ddd/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>DDDにおける外部サービスの抽象化</title>
       <link>https://nametake.github.io/posts/2020/07/25/abstract-external-service/</link>

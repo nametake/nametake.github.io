@@ -77,7 +77,7 @@ import { Reducer } from &#39;redux&#39;; // Flux standard action interface Actio
     <link rel="icon" type="image/png" href="https://nametake.github.io/images/favicon-32x32.png" sizes="32x32">
     <link rel="icon" type="image/png" href="https://nametake.github.io/images/favicon-16x16.png" sizes="16x16">
 
-    <meta name="generator" content="Hugo 0.74.3" />
+    <meta name="generator" content="Hugo 0.75.1" />
   </head>
 
   
@@ -159,7 +159,7 @@ import { Reducer } from &#39;redux&#39;; // Flux standard action interface Actio
   <span style="color:#a6e22e">state</span>: <span style="color:#66d9ef">ITodoState</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">initTodoState</span>,
   <span style="color:#a6e22e">action</span>: <span style="color:#66d9ef">TodoAction</span>
 )<span style="color:#f92672">:</span> <span style="color:#a6e22e">ITodoState</span> <span style="color:#f92672">=&gt;</span> {
-  <span style="color:#66d9ef">switch</span> (<span style="color:#a6e22e">action</span>.<span style="color:#a6e22e">type</span>) {
+  <span style="color:#66d9ef">switch</span> (<span style="color:#a6e22e">action</span>.<span style="color:#66d9ef">type</span>) {
     <span style="color:#66d9ef">case</span> <span style="color:#a6e22e">TodoActionType.ADD_TODO</span>:
       <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">addTodoAction</span>: <span style="color:#66d9ef">IAddTodoAction</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">action</span>; <span style="color:#75715e">// &lt;-- ここでキャストしている
 </span><span style="color:#75715e"></span>      <span style="color:#66d9ef">return</span> {
@@ -172,11 +172,11 @@ import { Reducer } from &#39;redux&#39;; // Flux standard action interface Actio
 };
 </code></pre></div><p>この方法だと、<code>action.type</code>とそれに対応する型を実装者が気にしなければならず、型安全とは言い切れませんでした。</p>
 <p>このあたりの話を某Slackで相談したら、以下のような Flux standard actionのtypeやpayloadをジェネリクスで指定するようにして、typeにenumを使うというやり方を教えてもらいました。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ts" data-lang="ts"><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">Reducer</span> } <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;redux&#39;</span>;
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ts" data-lang="ts"><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">Reducer</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;redux&#39;</span>;
 
 <span style="color:#75715e">// Flux standard action
 </span><span style="color:#75715e"></span><span style="color:#66d9ef">interface</span> <span style="color:#a6e22e">Action</span>&lt;<span style="color:#f92672">TType</span><span style="color:#960050;background-color:#1e0010">,</span> <span style="color:#a6e22e">TPayload </span><span style="color:#f92672">=</span> <span style="color:#a6e22e">null</span><span style="color:#960050;background-color:#1e0010">,</span> <span style="color:#a6e22e">TMeta </span><span style="color:#f92672">=</span> <span style="color:#a6e22e">undefined</span>&gt; {
-  <span style="color:#a6e22e">type</span>: <span style="color:#66d9ef">TType</span>;
+  <span style="color:#66d9ef">type</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">TType</span>;
   <span style="color:#a6e22e">payload</span>: <span style="color:#66d9ef">TPayload</span>;
   <span style="color:#a6e22e">meta?</span>: <span style="color:#66d9ef">TMeta</span>;
 }
@@ -186,17 +186,17 @@ import { Reducer } from &#39;redux&#39;; // Flux standard action interface Actio
   <span style="color:#a6e22e">DELETE</span>
 }
 
-<span style="color:#a6e22e">type</span> <span style="color:#a6e22e">AddAction</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">Action</span>&lt;<span style="color:#f92672">ActionType.ADD</span><span style="color:#960050;background-color:#1e0010">,</span> { <span style="color:#a6e22e">todo</span><span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#a6e22e">string</span> }&gt;;
-<span style="color:#a6e22e">type</span> <span style="color:#a6e22e">DeleteAction</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">Action</span>&lt;<span style="color:#f92672">ActionType.DELETE</span><span style="color:#960050;background-color:#1e0010">,</span> { <span style="color:#a6e22e">todo</span><span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#a6e22e">string</span> }&gt;;
+<span style="color:#66d9ef">type</span> <span style="color:#a6e22e">AddAction</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">Action</span>&lt;<span style="color:#f92672">ActionType.ADD</span><span style="color:#960050;background-color:#1e0010">,</span> { <span style="color:#a6e22e">todo</span><span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#a6e22e">string</span> }&gt;;
+<span style="color:#66d9ef">type</span> <span style="color:#a6e22e">DeleteAction</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">Action</span>&lt;<span style="color:#f92672">ActionType.DELETE</span><span style="color:#960050;background-color:#1e0010">,</span> { <span style="color:#a6e22e">todo</span><span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#a6e22e">string</span> }&gt;;
 
-<span style="color:#a6e22e">type</span> <span style="color:#a6e22e">TodoAction</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">AddAction</span> <span style="color:#f92672">|</span> <span style="color:#a6e22e">DeleteAction</span>;
+<span style="color:#66d9ef">type</span> <span style="color:#a6e22e">TodoAction</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">AddAction</span> <span style="color:#f92672">|</span> <span style="color:#a6e22e">DeleteAction</span>;
 
 <span style="color:#66d9ef">interface</span> <span style="color:#a6e22e">TodoState</span> {
   <span style="color:#a6e22e">todos</span>: <span style="color:#66d9ef">string</span>[];
 }
 
 <span style="color:#75715e">// Reducer
-</span><span style="color:#75715e"></span><span style="color:#a6e22e">type</span> <span style="color:#a6e22e">TodoReducer</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">Reducer</span>&lt;<span style="color:#f92672">TodoState</span><span style="color:#960050;background-color:#1e0010">,</span> <span style="color:#a6e22e">TodoAction</span>&gt;;
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">TodoReducer</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">Reducer</span>&lt;<span style="color:#f92672">TodoState</span><span style="color:#960050;background-color:#1e0010">,</span> <span style="color:#a6e22e">TodoAction</span>&gt;;
 
 <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">initialState</span> <span style="color:#f92672">=</span> {
   <span style="color:#a6e22e">todos</span><span style="color:#f92672">:</span> []
@@ -206,7 +206,7 @@ import { Reducer } from &#39;redux&#39;; // Flux standard action interface Actio
   <span style="color:#a6e22e">state</span>: <span style="color:#66d9ef">TodoState</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">initialState</span>,
   <span style="color:#a6e22e">action</span>: <span style="color:#66d9ef">TodoAction</span>
 )<span style="color:#f92672">:</span> <span style="color:#a6e22e">TodoState</span> <span style="color:#f92672">=&gt;</span> {
-  <span style="color:#66d9ef">switch</span> (<span style="color:#a6e22e">action</span>.<span style="color:#a6e22e">type</span>) {
+  <span style="color:#66d9ef">switch</span> (<span style="color:#a6e22e">action</span>.<span style="color:#66d9ef">type</span>) {
     <span style="color:#66d9ef">case</span> <span style="color:#a6e22e">ActionType</span>.<span style="color:#a6e22e">ADD</span><span style="color:#f92672">:</span> {
       <span style="color:#66d9ef">return</span> {
         ...<span style="color:#a6e22e">state</span>,

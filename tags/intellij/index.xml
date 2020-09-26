@@ -6,11 +6,7 @@
     <description>Recent content in IntelliJ on nametake.info</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 20 Jan 2019 21:05:06 +0900</lastBuildDate>
-    
-	<atom:link href="https://nametake.github.io/tags/intellij/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Sun, 20 Jan 2019 21:05:06 +0900</lastBuildDate><atom:link href="https://nametake.github.io/tags/intellij/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>IntelliJのPopupの候補を展開するKeymap</title>
       <link>https://nametake.github.io/posts/2019/01/20/intellij-popup-expand/</link>
