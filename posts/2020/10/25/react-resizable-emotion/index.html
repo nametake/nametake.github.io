@@ -7,41 +7,32 @@
     <meta http-equiv="Content-Language" content="en">
 
     <meta name="author" content="nametake">
-    <meta name="description" content="Formikで動的なFormを作った時に、表示されるFormに応じてYupのバリデーションを切り替える方法でちょっと手間取ったのでメモ。
-結論から言うとYup.lazy()を使って遅延評価されるValidationSchemaを使えば解決した。Yup.lazy()に渡ってくるFormの値を元にValidationwSchemaを表示されるFormに対応したValidationSchemaを返せば狙った挙動が実現できました。
-サンプルコードは以下。
- ">
+    <meta name="description" content="react-resizableにemotionでスタイルを当てたときにちょっと調べたのでそのメモ">
     <meta name="keywords" content="blog,developer,personal">
 
     
 
     <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="FormikとYupを使った動的フォームのバリデーション"/>
-<meta name="twitter:description" content="Formikで動的なFormを作った時に、表示されるFormに応じてYupのバリデーションを切り替える方法でちょっと手間取ったのでメモ。
-結論から言うとYup.lazy()を使って遅延評価されるValidationSchemaを使えば解決した。Yup.lazy()に渡ってくるFormの値を元にValidationwSchemaを表示されるFormに対応したValidationSchemaを返せば狙った挙動が実現できました。
-サンプルコードは以下。
- "/>
+<meta name="twitter:title" content="react-resizableにemotionでスタイルを当てる"/>
+<meta name="twitter:description" content="react-resizableにemotionでスタイルを当てたときにちょっと調べたのでそのメモ"/>
 
-    <meta property="og:title" content="FormikとYupを使った動的フォームのバリデーション" />
-<meta property="og:description" content="Formikで動的なFormを作った時に、表示されるFormに応じてYupのバリデーションを切り替える方法でちょっと手間取ったのでメモ。
-結論から言うとYup.lazy()を使って遅延評価されるValidationSchemaを使えば解決した。Yup.lazy()に渡ってくるFormの値を元にValidationwSchemaを表示されるFormに対応したValidationSchemaを返せば狙った挙動が実現できました。
-サンプルコードは以下。
- " />
+    <meta property="og:title" content="react-resizableにemotionでスタイルを当てる" />
+<meta property="og:description" content="react-resizableにemotionでスタイルを当てたときにちょっと調べたのでそのメモ" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://nametake.github.io/posts/2019/06/05/formik-yup-dynamic-validation/" />
-<meta property="article:published_time" content="2019-06-05T23:50:36+09:00" />
-<meta property="article:modified_time" content="2019-06-05T23:50:36+09:00" />
+<meta property="og:url" content="https://nametake.github.io/posts/2020/10/25/react-resizable-emotion/" />
+<meta property="article:published_time" content="2020-10-25T00:00:00+09:00" />
+<meta property="article:modified_time" content="2020-10-25T00:00:00+09:00" />
 
 
     
-      <base href="https://nametake.github.io/posts/2019/06/05/formik-yup-dynamic-validation/">
+      <base href="https://nametake.github.io/posts/2020/10/25/react-resizable-emotion/">
     
     <title>
-  FormikとYupを使った動的フォームのバリデーション · nametake.info
+  react-resizableにemotionでスタイルを当てる · nametake.info
 </title>
 
     
-      <link rel="canonical" href="https://nametake.github.io/posts/2019/06/05/formik-yup-dynamic-validation/">
+      <link rel="canonical" href="https://nametake.github.io/posts/2020/10/25/react-resizable-emotion/">
     
 
     <link href="https://fonts.googleapis.com/css?family=Lato:400,700%7CMerriweather:300,700%7CSource+Code+Pro:400,700&display=swap" rel="stylesheet">
@@ -129,14 +120,14 @@
     <article>
       <header>
         <div class="post-title">
-          <h1 class="title">FormikとYupを使った動的フォームのバリデーション</h1>
+          <h1 class="title">react-resizableにemotionでスタイルを当てる</h1>
         </div>
         <div class="post-meta">
           <div class="date">
             <span class="posted-on">
               <i class="fas fa-calendar"></i>
-              <time datetime='2019-06-05T23:50:36&#43;09:00'>
-                June 5, 2019
+              <time datetime='2020-10-25T00:00:00&#43;09:00'>
+                October 25, 2020
               </time>
             </span>
             <span class="reading-time">
@@ -147,8 +138,6 @@
           
           <div class="tags">
   <i class="fas fa-tag"></i>
-    <a href="https://nametake.github.io/tags/typescript/">TypeScript</a>
-      <span class="separator">•</span>
     <a href="https://nametake.github.io/tags/react/">React</a></div>
 
         </div>
@@ -156,10 +145,63 @@
 
       <div>
         
-        <p>Formikで動的なFormを作った時に、表示されるFormに応じてYupのバリデーションを切り替える方法でちょっと手間取ったのでメモ。</p>
-<p>結論から言うと<code>Yup.lazy()</code>を使って遅延評価されるValidationSchemaを使えば解決した。<code>Yup.lazy()</code>に渡ってくるFormの値を元にValidationwSchemaを表示されるFormに対応したValidationSchemaを返せば狙った挙動が実現できました。</p>
-<p>サンプルコードは以下。</p>
-<iframe src="https://codesandbox.io/embed/github/nametake/formik-dynamic-form-validation/tree/master/?fontsize=14" title="formik-dynamic-form-validation" allow="geolocation; microphone; camera; midi; vr; accelerometer; gyroscope; payment; ambient-light-sensor; encrypted-media" style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;" sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"></iframe>
+        <p><a href="https://github.com/STRML/react-resizable">react-resizable</a> に <a href="https://emotion.sh/">emotion</a> でスタイルを当てた時のメモ。</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-tsx" data-lang="tsx"><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">ResizableBox</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;react-resizable&#39;</span>;
+
+<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">StyledResizableBox</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">styled</span>(<span style="color:#a6e22e">ResizableBox</span>)<span style="color:#e6db74">`
+</span><span style="color:#e6db74">  position: relative;
+</span><span style="color:#e6db74">  display: inline-flex;
+</span><span style="color:#e6db74">  flex-direction: column;
+</span><span style="color:#e6db74">  align-items: right;
+</span><span style="color:#e6db74">  justify-content: center;
+</span><span style="color:#e6db74">  padding-left: 20px;
+</span><span style="color:#e6db74">  overflow: hidden;
+</span><span style="color:#e6db74">  border: 1px solid black;
+</span><span style="color:#e6db74">
+</span><span style="color:#e6db74">  .react-resizable-handle {
+</span><span style="color:#e6db74">    position: absolute;
+</span><span style="color:#e6db74">    right: 0;
+</span><span style="color:#e6db74">    width: 4px;
+</span><span style="color:#e6db74">    height: 90%;
+</span><span style="color:#e6db74">    border-left: 1px solid black;
+</span><span style="color:#e6db74">
+</span><span style="color:#e6db74">    :hover {
+</span><span style="color:#e6db74">      cursor: col-resize;
+</span><span style="color:#e6db74">    }
+</span><span style="color:#e6db74">  }
+</span><span style="color:#e6db74">`</span>;
+</code></pre></td></tr></table>
+</div>
+</div><p>上記の例だと以下のように右端にサイズ変更用のバーが出るようなスタイルになります。</p>
+<p><img src="./image.png" alt="image"></p>
 
       </div>
 
