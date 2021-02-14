@@ -6,7 +6,19 @@
     <description>Recent content in Posts on nametake.info</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 25 Oct 2020 00:00:00 +0900</lastBuildDate><atom:link href="https://nametake.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 14 Feb 2021 00:00:00 +0900</lastBuildDate><atom:link href="https://nametake.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>display: gridでテーブルをスタイリングする時にdisplay: contentsを使う</title>
+      <link>https://nametake.github.io/posts/2021/02/14/grid-with-display-contents/</link>
+      <pubDate>Sun, 14 Feb 2021 00:00:00 +0900</pubDate>
+      
+      <guid>https://nametake.github.io/posts/2021/02/14/grid-with-display-contents/</guid>
+      <description>両端のborderがないテーブルをgridでスタイリングしようとすると、 :not(:first-of-type) をただ使うだけではうまくいきません。
+gridにまかせて以下のようにすると、 :not(:first-of-type) は最初のcellにしかかかってくれません。
+また、HTMLのマークアップとしても行が表現されておらずあまりきれいな状態とはいえません。
+1 2 3 4 5 6 7 8 9 10 11  &amp;lt;div class=&amp;#34;table&amp;#34;&amp;gt; &amp;lt;div class=&amp;#34;cell&amp;#34;&amp;gt;One&amp;lt;/div&amp;gt; &amp;lt;div class=&amp;#34;cell&amp;#34;&amp;gt;Two&amp;lt;/div&amp;gt; &amp;lt;div class=&amp;#34;cell&amp;#34;&amp;gt;Three&amp;lt;/div&amp;gt; &amp;lt;div class=&amp;#34;cell&amp;#34;&amp;gt;Four&amp;lt;/div&amp;gt; &amp;lt;div class=&amp;#34;cell&amp;#34;&amp;gt;Five&amp;lt;/div&amp;gt; &amp;lt;div class=&amp;#34;cell&amp;#34;&amp;gt;Six&amp;lt;/div&amp;gt; &amp;lt;div class=&amp;#34;cell&amp;#34;&amp;gt;Seven&amp;lt;/div&amp;gt; &amp;lt;div class=&amp;#34;cell&amp;#34;&amp;gt;Eight&amp;lt;/div&amp;gt; &amp;lt;div class=&amp;#34;cell&amp;#34;&amp;gt;Nine&amp;lt;/div&amp;gt; &amp;lt;/div&amp;gt;   1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16  .table { display: grid; grid-template-columns: repeat(3, auto); margin: 32px; border-top: solid 1px black; } .</description>
+    </item>
+    
     <item>
       <title>react-resizableにemotionでスタイルを当てる</title>
       <link>https://nametake.github.io/posts/2020/10/25/react-resizable-emotion/</link>
