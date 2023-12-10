@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Redux on nametake.info</title>
+    <title>Redux on nametake.dev</title>
     <link>https://nametake.github.io/tags/redux/</link>
-    <description>Recent content in Redux on nametake.info</description>
+    <description>Recent content in Redux on nametake.dev</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
     <lastBuildDate>Wed, 05 Dec 2018 11:08:00 +0900</lastBuildDate>
