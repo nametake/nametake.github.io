@@ -9,25 +9,25 @@
     <meta name="author" content="nametake">
     <meta name="description" content="先日protoc-gen-gohttpの依存パッケージをしようと思って色々触っていたら以下のようなWARNINGが出てきました。
 2020/05/24 11:36:51 WARNING: Deprecated use of &#39;go_package&#39; option without a full import path in &#34;greeter.proto&#34;, please specify: option go_package = &#34;.;main&#34;; A future release of protoc-gen-go will require the import path be specified. See https://developers.google.com/protocol-buffers/docs/reference/go-generated#package for more information. 以下のファイルのように go_package のオプションにGoのimport pathを記述しなかったことが問題のようです。
-1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17  syntax = &#34;proto3&#34;;package helloworld;option go_package = &#34;main&#34;;service Greeter { rpc SayHello(HelloRequest) returns (HelloReply);}message HelloRequest { string name = 1;}message HelloReply { string message = 1;}  一応WARNINGには「go_package = &quot;.">
+1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 syntax = &#34;proto3&#34;; package helloworld; option go_package = &#34;main&#34;; service Greeter { rpc SayHello(HelloRequest) returns (HelloReply); } message HelloRequest { string name = 1; } message HelloReply { string message = 1; } 一応WARNINGには「go_package = &quot;.">
     <meta name="keywords" content="blog,developer,personal">
 
     
 
-    <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Protocol Buffersのgo_packageの;の仕様"/>
+    <meta name="twitter:card" content="summary"/><meta name="twitter:title" content="Protocol Buffersのgo_packageの;の仕様"/>
 <meta name="twitter:description" content="先日protoc-gen-gohttpの依存パッケージをしようと思って色々触っていたら以下のようなWARNINGが出てきました。
 2020/05/24 11:36:51 WARNING: Deprecated use of &#39;go_package&#39; option without a full import path in &#34;greeter.proto&#34;, please specify: option go_package = &#34;.;main&#34;; A future release of protoc-gen-go will require the import path be specified. See https://developers.google.com/protocol-buffers/docs/reference/go-generated#package for more information. 以下のファイルのように go_package のオプションにGoのimport pathを記述しなかったことが問題のようです。
-1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17  syntax = &#34;proto3&#34;;package helloworld;option go_package = &#34;main&#34;;service Greeter { rpc SayHello(HelloRequest) returns (HelloReply);}message HelloRequest { string name = 1;}message HelloReply { string message = 1;}  一応WARNINGには「go_package = &quot;."/>
+1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 syntax = &#34;proto3&#34;; package helloworld; option go_package = &#34;main&#34;; service Greeter { rpc SayHello(HelloRequest) returns (HelloReply); } message HelloRequest { string name = 1; } message HelloReply { string message = 1; } 一応WARNINGには「go_package = &quot;."/>
 
     <meta property="og:title" content="Protocol Buffersのgo_packageの;の仕様" />
 <meta property="og:description" content="先日protoc-gen-gohttpの依存パッケージをしようと思って色々触っていたら以下のようなWARNINGが出てきました。
 2020/05/24 11:36:51 WARNING: Deprecated use of &#39;go_package&#39; option without a full import path in &#34;greeter.proto&#34;, please specify: option go_package = &#34;.;main&#34;; A future release of protoc-gen-go will require the import path be specified. See https://developers.google.com/protocol-buffers/docs/reference/go-generated#package for more information. 以下のファイルのように go_package のオプションにGoのimport pathを記述しなかったことが問題のようです。
-1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17  syntax = &#34;proto3&#34;;package helloworld;option go_package = &#34;main&#34;;service Greeter { rpc SayHello(HelloRequest) returns (HelloReply);}message HelloRequest { string name = 1;}message HelloReply { string message = 1;}  一応WARNINGには「go_package = &quot;." />
+1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 syntax = &#34;proto3&#34;; package helloworld; option go_package = &#34;main&#34;; service Greeter { rpc SayHello(HelloRequest) returns (HelloReply); } message HelloRequest { string name = 1; } message HelloReply { string message = 1; } 一応WARNINGには「go_package = &quot;." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://nametake.github.io/posts/2020/05/24/protobuf-go-package-semicolon/" />
+<meta property="og:url" content="https://nametake.github.io/posts/2020/05/24/protobuf-go-package-semicolon/" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2020-05-24T00:00:00+09:00" />
 <meta property="article:modified_time" content="2020-05-24T00:00:00+09:00" />
+
 
 
     
@@ -74,7 +74,7 @@
     <link rel="icon" type="image/png" href="https://nametake.github.io/images/favicon-32x32.png" sizes="32x32">
     <link rel="icon" type="image/png" href="https://nametake.github.io/images/favicon-16x16.png" sizes="16x16">
 
-    <meta name="generator" content="Hugo 0.80.0" />
+    <meta name="generator" content="Hugo 0.121.1">
   </head>
 
   
@@ -154,50 +154,50 @@
       <div>
         
         <p>先日<a href="https://github.com/nametake/protoc-gen-gohttp">protoc-gen-gohttp</a>の依存パッケージをしようと思って色々触っていたら以下のようなWARNINGが出てきました。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">2020/05/24 11:36:51 WARNING: Deprecated use of <span style="color:#e6db74">&#39;go_package&#39;</span> option without a full import path in <span style="color:#e6db74">&#34;greeter.proto&#34;</span>, please specify:
-        option go_package <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;.;main&#34;</span>;
-A future release of protoc-gen-go will require the import path be specified.
-See https://developers.google.com/protocol-buffers/docs/reference/go-generated#package <span style="color:#66d9ef">for</span> more information.
-</code></pre></div><p>以下のファイルのように <code>go_package</code> のオプションにGoのimport pathを記述しなかったことが問題のようです。</p>
-<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>2020/05/24 11:36:51 WARNING: Deprecated use of <span style="color:#e6db74">&#39;go_package&#39;</span> option without a full import path in <span style="color:#e6db74">&#34;greeter.proto&#34;</span>, please specify:
+</span></span><span style="display:flex;"><span>        option go_package <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;.;main&#34;</span>;
+</span></span><span style="display:flex;"><span>A future release of protoc-gen-go will require the import path be specified.
+</span></span><span style="display:flex;"><span>See https://developers.google.com/protocol-buffers/docs/reference/go-generated#package <span style="color:#66d9ef">for</span> more information.
+</span></span></code></pre></div><p>以下のファイルのように <code>go_package</code> のオプションにGoのimport pathを記述しなかったことが問題のようです。</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-proto" data-lang="proto">syntax <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;proto3&#34;</span>;<span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#f92672">package</span> helloworld;<span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">option</span> go_package <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;main&#34;</span>;<span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">service</span> Greeter {<span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span>  <span style="color:#66d9ef">rpc</span> SayHello(HelloRequest) <span style="color:#66d9ef">returns</span> (HelloReply);<span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span>}<span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">message</span> <span style="color:#a6e22e">HelloRequest</span> {<span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span>  <span style="color:#66d9ef">string</span> name <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;<span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span>}<span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">message</span> <span style="color:#a6e22e">HelloReply</span> {<span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span>  <span style="color:#66d9ef">string</span> <span style="color:#66d9ef">message</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;<span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span>}<span style="color:#960050;background-color:#1e0010">
-</span></code></pre></td></tr></table>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-proto" data-lang="proto"><span style="display:flex;"><span>syntax <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;proto3&#34;</span>;<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#f92672">package</span> helloworld;<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">option</span> go_package <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;main&#34;</span>;<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">service</span> Greeter {<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>  <span style="color:#66d9ef">rpc</span> SayHello(HelloRequest) <span style="color:#66d9ef">returns</span> (HelloReply);<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>}<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">message</span> <span style="color:#a6e22e">HelloRequest</span> {<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>  <span style="color:#66d9ef">string</span> name <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>}<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">message</span> <span style="color:#a6e22e">HelloReply</span> {<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>  <span style="color:#66d9ef">string</span> <span style="color:#66d9ef">message</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>}<span style="color:#960050;background-color:#1e0010">
+</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>一応WARNINGには「<code>go_package = &quot;.;main&quot;;</code> みたいに指定してください」と書いてあり、そのとおりに指定すると問題なく生成はできました。</p>
 <p>しかし、その下にあるLinkには <code>;</code> に関する情報が記載されていません(執筆時点)。</p>
@@ -231,8 +231,8 @@ See https://developers.google.com/protocol-buffers/docs/reference/go-generated#p
 
 
         <div id="disqus_thread"></div>
-<script type="application/javascript">
-    var disqus_config = function () {
+<script>
+    window.disqus_config = function () {
     
     
     
@@ -269,7 +269,7 @@ See https://developers.google.com/protocol-buffers/docs/reference/go-generated#p
       
         ©
         
-        2021
+        2023
          nametake 
       
       
@@ -285,7 +285,7 @@ See https://developers.google.com/protocol-buffers/docs/reference/go-generated#p
     
 
     
-<script type="application/javascript">
+<script>
 var doNotTrack = false;
 if (!doNotTrack) {
 	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -297,7 +297,6 @@ if (!doNotTrack) {
 	ga('send', 'pageview');
 }
 </script>
-
 
     
 

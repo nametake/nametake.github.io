@@ -6,20 +6,14 @@
     <description>Recent content in fish on nametake.info</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 22 Jul 2019 01:34:18 +0900</lastBuildDate><atom:link href="https://nametake.github.io/tags/fish/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 22 Jul 2019 01:34:18 +0900</lastBuildDate>
+    <atom:link href="https://nametake.github.io/tags/fish/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>zshのPATHの順番をfish shellに引き継ぐ</title>
       <link>https://nametake.github.io/posts/2019/07/22/pass-zsh-path-to-fish/</link>
       <pubDate>Mon, 22 Jul 2019 01:34:18 +0900</pubDate>
-      
       <guid>https://nametake.github.io/posts/2019/07/22/pass-zsh-path-to-fish/</guid>
-      <description>自分はメインのターミナル環境をfishにしています。
-特に設定を細かくしなくてもサクサク動いてくれるので非常に助かっているんですが、POSIX準拠ではないためデフォルトシェルにするのは避けて、以下のような形で利用しています。
- デフォルトシェルはzsh tmuxを自動起動 tmuxのデフォルトシェルとしてfish  そのため、環境変数の設定は全てzshenvでしているんですが、fishを起動したときにzshenvで設定した環境変数の順番を維持してくれないという問題がありました。
-普通にfishを起動するだけだと発生する問題のようだったので、以下のようにtmuxでfishを起動する際にzshのパスをそのままの順番でfishのパスに設定する変更することで対応しました。
-set -g default-command /usr/local/bin/fish --init-command=&amp;#34;set PATH &amp;#39;string split : $PATH&amp;#39;)&amp;#34; 上記のやり方は直接的な解決方法ではないが、PATHの順序に関するissueは挙がっているので、そのうち直るかもしれません。(深く追う時間が確保できない……)
-https://github.com/fish-shell/fish-shell/issues/5456</description>
+      <description>自分はメインのターミナル環境をfishにしています。&#xA;特に設定を細かくしなくてもサクサク動いてくれるので非常に助かっているんですが、POSIX準拠ではないためデフォルトシェルにするのは避けて、以下のような形で利用しています。&#xA;デフォルトシェルはzsh tmuxを自動起動 tmuxのデフォルトシェルとしてfish そのため、環境変数の設定は全てzshenvでしているんですが、fishを起動したときにzshenvで設定した環境変数の順番を維持してくれないという問題がありました。&#xA;普通にfishを起動するだけだと発生する問題のようだったので、以下のようにtmuxでfishを起動する際にzshのパスをそのままの順番でfishのパスに設定する変更することで対応しました。&#xA;set -g default-command /usr/local/bin/fish --init-command=&amp;#34;set PATH &amp;#39;string split : $PATH&amp;#39;)&amp;#34; 上記のやり方は直接的な解決方法ではないが、PATHの順序に関するissueは挙がっているので、そのうち直るかもしれません。(深く追う時間が確保できない……)&#xA;https://github.com/fish-shell/fish-shell/issues/5456</description>
     </item>
-    
   </channel>
 </rss>

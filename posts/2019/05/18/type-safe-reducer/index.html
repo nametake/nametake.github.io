@@ -8,29 +8,29 @@
 
     <meta name="author" content="nametake">
     <meta name="description" content="以前書いた記事で書いたReducerでは、受け取ったActionの型を判別するために、switchで分岐した後に対応したActionの型でキャストをする必要がありました。
-const todoReducer: Reducer&lt;ITodoState&gt; = ( state: ITodoState = initTodoState, action: TodoAction ): ITodoState =&gt; { switch (action.type) { case TodoActionType.ADD_TODO: const addTodoAction: IAddTodoAction = action; // &lt;-- ここでキャストしている  return { ...state, todos: state.todos.concat([addTodoAction.payload.todo]) }; default: return state; } }; この方法だと、action.typeとそれに対応する型を実装者が気にしなければならず、型安全とは言い切れませんでした。
+const todoReducer: Reducer&lt;ITodoState&gt; = ( state: ITodoState = initTodoState, action: TodoAction ): ITodoState =&gt; { switch (action.type) { case TodoActionType.ADD_TODO: const addTodoAction: IAddTodoAction = action; // &lt;-- ここでキャストしている return { ...state, todos: state.todos.concat([addTodoAction.payload.todo]) }; default: return state; } }; この方法だと、action.typeとそれに対応する型を実装者が気にしなければならず、型安全とは言い切れませんでした。
 このあたりの話を某Slackで相談したら、以下のような Flux standard actionのtypeやpayloadをジェネリクスで指定するようにして、typeにenumを使うというやり方を教えてもらいました。
 import { Reducer } from &#39;redux&#39;; // Flux standard action interface Action&lt;TType, TPayload = null, TMeta = undefined&gt; { type: TType; payload: TPayload; meta?: TMeta; } enum ActionType { ADD, DELETE } type AddAction = Action&lt;ActionType.">
     <meta name="keywords" content="blog,developer,personal">
 
     
 
-    <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Type SafeなReducerの書き方"/>
+    <meta name="twitter:card" content="summary"/><meta name="twitter:title" content="Type SafeなReducerの書き方"/>
 <meta name="twitter:description" content="以前書いた記事で書いたReducerでは、受け取ったActionの型を判別するために、switchで分岐した後に対応したActionの型でキャストをする必要がありました。
-const todoReducer: Reducer&lt;ITodoState&gt; = ( state: ITodoState = initTodoState, action: TodoAction ): ITodoState =&gt; { switch (action.type) { case TodoActionType.ADD_TODO: const addTodoAction: IAddTodoAction = action; // &lt;-- ここでキャストしている  return { ...state, todos: state.todos.concat([addTodoAction.payload.todo]) }; default: return state; } }; この方法だと、action.typeとそれに対応する型を実装者が気にしなければならず、型安全とは言い切れませんでした。
+const todoReducer: Reducer&lt;ITodoState&gt; = ( state: ITodoState = initTodoState, action: TodoAction ): ITodoState =&gt; { switch (action.type) { case TodoActionType.ADD_TODO: const addTodoAction: IAddTodoAction = action; // &lt;-- ここでキャストしている return { ...state, todos: state.todos.concat([addTodoAction.payload.todo]) }; default: return state; } }; この方法だと、action.typeとそれに対応する型を実装者が気にしなければならず、型安全とは言い切れませんでした。
 このあたりの話を某Slackで相談したら、以下のような Flux standard actionのtypeやpayloadをジェネリクスで指定するようにして、typeにenumを使うというやり方を教えてもらいました。
 import { Reducer } from &#39;redux&#39;; // Flux standard action interface Action&lt;TType, TPayload = null, TMeta = undefined&gt; { type: TType; payload: TPayload; meta?: TMeta; } enum ActionType { ADD, DELETE } type AddAction = Action&lt;ActionType."/>
 
     <meta property="og:title" content="Type SafeなReducerの書き方" />
 <meta property="og:description" content="以前書いた記事で書いたReducerでは、受け取ったActionの型を判別するために、switchで分岐した後に対応したActionの型でキャストをする必要がありました。
-const todoReducer: Reducer&lt;ITodoState&gt; = ( state: ITodoState = initTodoState, action: TodoAction ): ITodoState =&gt; { switch (action.type) { case TodoActionType.ADD_TODO: const addTodoAction: IAddTodoAction = action; // &lt;-- ここでキャストしている  return { ...state, todos: state.todos.concat([addTodoAction.payload.todo]) }; default: return state; } }; この方法だと、action.typeとそれに対応する型を実装者が気にしなければならず、型安全とは言い切れませんでした。
+const todoReducer: Reducer&lt;ITodoState&gt; = ( state: ITodoState = initTodoState, action: TodoAction ): ITodoState =&gt; { switch (action.type) { case TodoActionType.ADD_TODO: const addTodoAction: IAddTodoAction = action; // &lt;-- ここでキャストしている return { ...state, todos: state.todos.concat([addTodoAction.payload.todo]) }; default: return state; } }; この方法だと、action.typeとそれに対応する型を実装者が気にしなければならず、型安全とは言い切れませんでした。
 このあたりの話を某Slackで相談したら、以下のような Flux standard actionのtypeやpayloadをジェネリクスで指定するようにして、typeにenumを使うというやり方を教えてもらいました。
 import { Reducer } from &#39;redux&#39;; // Flux standard action interface Action&lt;TType, TPayload = null, TMeta = undefined&gt; { type: TType; payload: TPayload; meta?: TMeta; } enum ActionType { ADD, DELETE } type AddAction = Action&lt;ActionType." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://nametake.github.io/posts/2019/05/18/type-safe-reducer/" />
+<meta property="og:url" content="https://nametake.github.io/posts/2019/05/18/type-safe-reducer/" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2019-05-18T10:38:55+09:00" />
 <meta property="article:modified_time" content="2019-05-18T10:38:55+09:00" />
+
 
 
     
@@ -77,7 +77,7 @@ import { Reducer } from &#39;redux&#39;; // Flux standard action interface Actio
     <link rel="icon" type="image/png" href="https://nametake.github.io/images/favicon-32x32.png" sizes="32x32">
     <link rel="icon" type="image/png" href="https://nametake.github.io/images/favicon-16x16.png" sizes="16x16">
 
-    <meta name="generator" content="Hugo 0.80.0" />
+    <meta name="generator" content="Hugo 0.121.1">
   </head>
 
   
@@ -155,75 +155,75 @@ import { Reducer } from &#39;redux&#39;; // Flux standard action interface Actio
       <div>
         
         <p><a href="https://nametake.github.io/posts/2018/12/05/typescript-react-redux-tutorial/">以前書いた記事</a>で書いたReducerでは、受け取ったActionの型を判別するために、<code>switch</code>で分岐した後に対応したActionの型でキャストをする必要がありました。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ts" data-lang="ts"><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">todoReducer</span>: <span style="color:#66d9ef">Reducer</span>&lt;<span style="color:#f92672">ITodoState</span>&gt; <span style="color:#f92672">=</span> (
-  <span style="color:#a6e22e">state</span>: <span style="color:#66d9ef">ITodoState</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">initTodoState</span>,
-  <span style="color:#a6e22e">action</span>: <span style="color:#66d9ef">TodoAction</span>
-)<span style="color:#f92672">:</span> <span style="color:#a6e22e">ITodoState</span> <span style="color:#f92672">=&gt;</span> {
-  <span style="color:#66d9ef">switch</span> (<span style="color:#a6e22e">action</span>.<span style="color:#66d9ef">type</span>) {
-    <span style="color:#66d9ef">case</span> <span style="color:#a6e22e">TodoActionType.ADD_TODO</span>:
-      <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">addTodoAction</span>: <span style="color:#66d9ef">IAddTodoAction</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">action</span>; <span style="color:#75715e">// &lt;-- ここでキャストしている
-</span><span style="color:#75715e"></span>      <span style="color:#66d9ef">return</span> {
-        ...<span style="color:#a6e22e">state</span>,
-        <span style="color:#a6e22e">todos</span>: <span style="color:#66d9ef">state.todos.concat</span>([<span style="color:#a6e22e">addTodoAction</span>.<span style="color:#a6e22e">payload</span>.<span style="color:#a6e22e">todo</span>])
-      };
-    <span style="color:#66d9ef">default</span><span style="color:#f92672">:</span>
-      <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">state</span>;
-  }
-};
-</code></pre></div><p>この方法だと、<code>action.type</code>とそれに対応する型を実装者が気にしなければならず、型安全とは言い切れませんでした。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ts" data-lang="ts"><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">todoReducer</span>: <span style="color:#66d9ef">Reducer</span>&lt;<span style="color:#f92672">ITodoState</span>&gt; <span style="color:#f92672">=</span> (
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">state</span>: <span style="color:#66d9ef">ITodoState</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">initTodoState</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">action</span>: <span style="color:#66d9ef">TodoAction</span>
+</span></span><span style="display:flex;"><span>)<span style="color:#f92672">:</span> <span style="color:#a6e22e">ITodoState</span> <span style="color:#f92672">=&gt;</span> {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">switch</span> (<span style="color:#a6e22e">action</span>.<span style="color:#66d9ef">type</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">case</span> <span style="color:#a6e22e">TodoActionType.ADD_TODO</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">addTodoAction</span>: <span style="color:#66d9ef">IAddTodoAction</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">action</span>; <span style="color:#75715e">// &lt;-- ここでキャストしている
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>      <span style="color:#66d9ef">return</span> {
+</span></span><span style="display:flex;"><span>        ...<span style="color:#a6e22e">state</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">todos</span>: <span style="color:#66d9ef">state.todos.concat</span>([<span style="color:#a6e22e">addTodoAction</span>.<span style="color:#a6e22e">payload</span>.<span style="color:#a6e22e">todo</span>])
+</span></span><span style="display:flex;"><span>      };
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">default</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">state</span>;
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><p>この方法だと、<code>action.type</code>とそれに対応する型を実装者が気にしなければならず、型安全とは言い切れませんでした。</p>
 <p>このあたりの話を某Slackで相談したら、以下のような Flux standard actionのtypeやpayloadをジェネリクスで指定するようにして、typeにenumを使うというやり方を教えてもらいました。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ts" data-lang="ts"><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">Reducer</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;redux&#39;</span>;
-
-<span style="color:#75715e">// Flux standard action
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">interface</span> <span style="color:#a6e22e">Action</span>&lt;<span style="color:#f92672">TType</span><span style="color:#960050;background-color:#1e0010">,</span> <span style="color:#a6e22e">TPayload </span><span style="color:#f92672">=</span> <span style="color:#a6e22e">null</span><span style="color:#960050;background-color:#1e0010">,</span> <span style="color:#a6e22e">TMeta </span><span style="color:#f92672">=</span> <span style="color:#a6e22e">undefined</span>&gt; {
-  <span style="color:#66d9ef">type</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">TType</span>;
-  <span style="color:#a6e22e">payload</span>: <span style="color:#66d9ef">TPayload</span>;
-  <span style="color:#a6e22e">meta?</span>: <span style="color:#66d9ef">TMeta</span>;
-}
-
-<span style="color:#66d9ef">enum</span> <span style="color:#a6e22e">ActionType</span> {
-  <span style="color:#a6e22e">ADD</span>,
-  <span style="color:#a6e22e">DELETE</span>
-}
-
-<span style="color:#66d9ef">type</span> <span style="color:#a6e22e">AddAction</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">Action</span>&lt;<span style="color:#f92672">ActionType.ADD</span><span style="color:#960050;background-color:#1e0010">,</span> { <span style="color:#a6e22e">todo</span><span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#a6e22e">string</span> }&gt;;
-<span style="color:#66d9ef">type</span> <span style="color:#a6e22e">DeleteAction</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">Action</span>&lt;<span style="color:#f92672">ActionType.DELETE</span><span style="color:#960050;background-color:#1e0010">,</span> { <span style="color:#a6e22e">todo</span><span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#a6e22e">string</span> }&gt;;
-
-<span style="color:#66d9ef">type</span> <span style="color:#a6e22e">TodoAction</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">AddAction</span> <span style="color:#f92672">|</span> <span style="color:#a6e22e">DeleteAction</span>;
-
-<span style="color:#66d9ef">interface</span> <span style="color:#a6e22e">TodoState</span> {
-  <span style="color:#a6e22e">todos</span>: <span style="color:#66d9ef">string</span>[];
-}
-
-<span style="color:#75715e">// Reducer
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">TodoReducer</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">Reducer</span>&lt;<span style="color:#f92672">TodoState</span><span style="color:#960050;background-color:#1e0010">,</span> <span style="color:#a6e22e">TodoAction</span>&gt;;
-
-<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">initialState</span> <span style="color:#f92672">=</span> {
-  <span style="color:#a6e22e">todos</span><span style="color:#f92672">:</span> []
-};
-
-<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">reducer</span>: <span style="color:#66d9ef">TodoReducer</span> <span style="color:#f92672">=</span> (
-  <span style="color:#a6e22e">state</span>: <span style="color:#66d9ef">TodoState</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">initialState</span>,
-  <span style="color:#a6e22e">action</span>: <span style="color:#66d9ef">TodoAction</span>
-)<span style="color:#f92672">:</span> <span style="color:#a6e22e">TodoState</span> <span style="color:#f92672">=&gt;</span> {
-  <span style="color:#66d9ef">switch</span> (<span style="color:#a6e22e">action</span>.<span style="color:#66d9ef">type</span>) {
-    <span style="color:#66d9ef">case</span> <span style="color:#a6e22e">ActionType</span>.<span style="color:#a6e22e">ADD</span><span style="color:#f92672">:</span> {
-      <span style="color:#66d9ef">return</span> {
-        ...<span style="color:#a6e22e">state</span>,
-        <span style="color:#a6e22e">todos</span><span style="color:#f92672">:</span> [...<span style="color:#a6e22e">state</span>.<span style="color:#a6e22e">todos</span>, <span style="color:#a6e22e">action</span>.<span style="color:#a6e22e">payload</span>.<span style="color:#a6e22e">todo</span>]
-      };
-    }
-    <span style="color:#66d9ef">case</span> <span style="color:#a6e22e">ActionType</span>.<span style="color:#a6e22e">DELETE</span><span style="color:#f92672">:</span> {
-      <span style="color:#66d9ef">return</span> {
-        ...<span style="color:#a6e22e">state</span>,
-        <span style="color:#a6e22e">todos</span>: <span style="color:#66d9ef">state.todos.filter</span>(<span style="color:#a6e22e">todo</span> <span style="color:#f92672">=&gt;</span> <span style="color:#a6e22e">todo</span> <span style="color:#f92672">!==</span> <span style="color:#a6e22e">action</span>.<span style="color:#a6e22e">payload</span>.<span style="color:#a6e22e">todo</span>)
-      };
-    }
-  }
-};
-
-<span style="color:#66d9ef">export</span> <span style="color:#66d9ef">default</span> <span style="color:#a6e22e">reducer</span>;
-</code></pre></div><p>こうするとSwitchでtypeを引っ掛けた時に型が推論されるため、caseのスコープの中でpayloadの型を確定できます。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ts" data-lang="ts"><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">Reducer</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;redux&#39;</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Flux standard action
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">interface</span> <span style="color:#a6e22e">Action</span>&lt;<span style="color:#f92672">TType</span><span style="color:#960050;background-color:#1e0010">,</span> <span style="color:#a6e22e">TPayload </span><span style="color:#f92672">=</span> <span style="color:#a6e22e">null</span><span style="color:#960050;background-color:#1e0010">,</span> <span style="color:#a6e22e">TMeta </span><span style="color:#f92672">=</span> <span style="color:#a6e22e">undefined</span>&gt; {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">type</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">TType</span>;
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">payload</span>: <span style="color:#66d9ef">TPayload</span>;
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">meta?</span>: <span style="color:#66d9ef">TMeta</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">enum</span> <span style="color:#a6e22e">ActionType</span> {
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">ADD</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">DELETE</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">AddAction</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">Action</span>&lt;<span style="color:#f92672">ActionType.ADD</span><span style="color:#960050;background-color:#1e0010">,</span> { <span style="color:#a6e22e">todo</span><span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#a6e22e">string</span> }&gt;;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">DeleteAction</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">Action</span>&lt;<span style="color:#f92672">ActionType.DELETE</span><span style="color:#960050;background-color:#1e0010">,</span> { <span style="color:#a6e22e">todo</span><span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#a6e22e">string</span> }&gt;;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">TodoAction</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">AddAction</span> <span style="color:#f92672">|</span> <span style="color:#a6e22e">DeleteAction</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">interface</span> <span style="color:#a6e22e">TodoState</span> {
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">todos</span>: <span style="color:#66d9ef">string</span>[];
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Reducer
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">TodoReducer</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">Reducer</span>&lt;<span style="color:#f92672">TodoState</span><span style="color:#960050;background-color:#1e0010">,</span> <span style="color:#a6e22e">TodoAction</span>&gt;;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">initialState</span> <span style="color:#f92672">=</span> {
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">todos</span><span style="color:#f92672">:</span> []
+</span></span><span style="display:flex;"><span>};
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">reducer</span>: <span style="color:#66d9ef">TodoReducer</span> <span style="color:#f92672">=</span> (
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">state</span>: <span style="color:#66d9ef">TodoState</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">initialState</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">action</span>: <span style="color:#66d9ef">TodoAction</span>
+</span></span><span style="display:flex;"><span>)<span style="color:#f92672">:</span> <span style="color:#a6e22e">TodoState</span> <span style="color:#f92672">=&gt;</span> {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">switch</span> (<span style="color:#a6e22e">action</span>.<span style="color:#66d9ef">type</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">case</span> <span style="color:#a6e22e">ActionType</span>.<span style="color:#a6e22e">ADD</span><span style="color:#f92672">:</span> {
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">return</span> {
+</span></span><span style="display:flex;"><span>        ...<span style="color:#a6e22e">state</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">todos</span><span style="color:#f92672">:</span> [...<span style="color:#a6e22e">state</span>.<span style="color:#a6e22e">todos</span>, <span style="color:#a6e22e">action</span>.<span style="color:#a6e22e">payload</span>.<span style="color:#a6e22e">todo</span>]
+</span></span><span style="display:flex;"><span>      };
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">case</span> <span style="color:#a6e22e">ActionType</span>.<span style="color:#a6e22e">DELETE</span><span style="color:#f92672">:</span> {
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">return</span> {
+</span></span><span style="display:flex;"><span>        ...<span style="color:#a6e22e">state</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">todos</span>: <span style="color:#66d9ef">state.todos.filter</span>(<span style="color:#a6e22e">todo</span> <span style="color:#f92672">=&gt;</span> <span style="color:#a6e22e">todo</span> <span style="color:#f92672">!==</span> <span style="color:#a6e22e">action</span>.<span style="color:#a6e22e">payload</span>.<span style="color:#a6e22e">todo</span>)
+</span></span><span style="display:flex;"><span>      };
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>};
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">default</span> <span style="color:#a6e22e">reducer</span>;
+</span></span></code></pre></div><p>こうするとSwitchでtypeを引っ掛けた時に型が推論されるため、caseのスコープの中でpayloadの型を確定できます。</p>
 <p>(これを知った後にちゃんと調べたらReduxの公式ドキュメント(<a href="https://redux.js.org/recipes/usage-with-typescript">Usage with TypeScript</a>)に型安全に各やり方が書いてあった……ちゃんとドキュメントは読みましょうということでした……)</p>
 
       </div>
@@ -234,8 +234,8 @@ import { Reducer } from &#39;redux&#39;; // Flux standard action interface Actio
 
 
         <div id="disqus_thread"></div>
-<script type="application/javascript">
-    var disqus_config = function () {
+<script>
+    window.disqus_config = function () {
     
     
     
@@ -272,7 +272,7 @@ import { Reducer } from &#39;redux&#39;; // Flux standard action interface Actio
       
         ©
         
-        2021
+        2023
          nametake 
       
       
@@ -288,7 +288,7 @@ import { Reducer } from &#39;redux&#39;; // Flux standard action interface Actio
     
 
     
-<script type="application/javascript">
+<script>
 var doNotTrack = false;
 if (!doNotTrack) {
 	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -300,7 +300,6 @@ if (!doNotTrack) {
 	ga('send', 'pageview');
 }
 </script>
-
 
     
 

@@ -6,92 +6,49 @@
     <description>Recent content in TypeScript on nametake.info</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 13 Jul 2020 00:00:00 +0900</lastBuildDate><atom:link href="https://nametake.github.io/tags/typescript/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 13 Jul 2020 00:00:00 +0900</lastBuildDate>
+    <atom:link href="https://nametake.github.io/tags/typescript/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Conditional Typesを使った話</title>
       <link>https://nametake.github.io/posts/2020/07/13/conditional-types/</link>
       <pubDate>Mon, 13 Jul 2020 00:00:00 +0900</pubDate>
-      
       <guid>https://nametake.github.io/posts/2020/07/13/conditional-types/</guid>
-      <description>機能としては知っていたものの使う機会がなかった Conditional Types を使ったのでメモ。
-ElectronのMainプロセスでAPIを叩く際、API毎にchannelを用意するのは手間だと思い以下のようなIPC通信用の型を用意しました。
-同時にEnumも定義してMainプロセスとRendererプロセスで共有し、ReduxのActionとReducerと同じ要領で型安全にするのが目的です。
-1 2 3 4 5 6 7 8 9 10 11 12 13  export type Action&amp;lt;T, P = undefined&amp;gt; = { type: T; payload: P; } export enum ApiType { GET_ACCOUNT = &amp;#39;GET_ACCOUNT&amp;#39;, GET_TASKS = &amp;#39;GET_TASKS&amp;#39;, } export type ApiAction = | Action&amp;lt;ApiType.GET_ACCOUNT&amp;gt; | Action&amp;lt;ApiType.GET_TASKS, GetTasksRequest&amp;gt;;   しかし、上記の Action の定義では payload がないAPIを叩くときにも以下のように undefined を与えなければいけません。
-1  invokeApi({type: ApiType.GET_ACCOUNT, payload: undefined});   そこで、以下のように Action の payload をConditional Typesで定義することにより、 P に型が与えられてないときは何もしないようにすることで呼び出し時にundefinedを与えなくてもいいようにしました。</description>
+      <description>機能としては知っていたものの使う機会がなかった Conditional Types を使ったのでメモ。&#xA;ElectronのMainプロセスでAPIを叩く際、API毎にchannelを用意するのは手間だと思い以下のようなIPC通信用の型を用意しました。&#xA;同時にEnumも定義してMainプロセスとRendererプロセスで共有し、ReduxのActionとReducerと同じ要領で型安全にするのが目的です。&#xA;1 2 3 4 5 6 7 8 9 10 11 12 13 export type Action&amp;lt;T, P = undefined&amp;gt; = { type: T; payload: P; } export enum ApiType { GET_ACCOUNT = &amp;#39;GET_ACCOUNT&amp;#39;, GET_TASKS = &amp;#39;GET_TASKS&amp;#39;, } export type ApiAction = | Action&amp;lt;ApiType.GET_ACCOUNT&amp;gt; | Action&amp;lt;ApiType.GET_TASKS, GetTasksRequest&amp;gt;; しかし、上記の Action の定義では payload がないAPIを叩くときにも以下のように undefined を与えなければいけません。&#xA;1 invokeApi({type: ApiType.GET_ACCOUNT, payload: undefined}); そこで、以下のように Action の payload をConditional Typesで定義することにより、 P に型が与えられてないときは何もしないようにすることで呼び出し時にundefinedを与えなくてもいいようにしました。</description>
     </item>
-    
     <item>
       <title>TypeScriptでFormのComponentを配列で管理する</title>
       <link>https://nametake.github.io/posts/2020/01/31/ts-array-form-onchange/</link>
       <pubDate>Fri, 31 Jan 2020 00:00:00 +0900</pubDate>
-      
       <guid>https://nametake.github.io/posts/2020/01/31/ts-array-form-onchange/</guid>
-      <description>TypeScriptでFormのComponentを配列で管理する toB向けのサービスや管理画面のように情報量の多いのプロダクトを作っていると、FormをまとめたComponentを作りたくなるケースがあります。
-単体で使っているときにはそこまで問題ないのですが、それを複数リスト上に管理して増減させたいときにonChangeをどうやって設計するのかを色々考えたのでまとめておきます。
-サンプルForm 以下のようなFormを題材にします。
-1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58  interface HumanFormValue { firstName: string; lastName: string; } interface HumanFormProps { defaultValue: HumanFormValue; onChange: (value: HumanFormValue) =&amp;gt; void; } const HumanForm: React.</description>
+      <description>TypeScriptでFormのComponentを配列で管理する toB向けのサービスや管理画面のように情報量の多いのプロダクトを作っていると、FormをまとめたComponentを作りたくなるケースがあります。&#xA;単体で使っているときにはそこまで問題ないのですが、それを複数リスト上に管理して増減させたいときにonChangeをどうやって設計するのかを色々考えたのでまとめておきます。&#xA;サンプルForm 以下のようなFormを題材にします。&#xA;1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 interface HumanFormValue { firstName: string; lastName: string; } interface HumanFormProps { defaultValue: HumanFormValue; onChange: (value: HumanFormValue) =&amp;gt; void; } const HumanForm: React.</description>
     </item>
-    
     <item>
       <title>TypeScirptのプロジェクトにエイリアスを設定して絶対パスでimportするメモ</title>
       <link>https://nametake.github.io/posts/2019/10/07/typescript-absolute-imports/</link>
       <pubDate>Mon, 07 Oct 2019 00:15:35 +0900</pubDate>
-      
       <guid>https://nametake.github.io/posts/2019/10/07/typescript-absolute-imports/</guid>
-      <description>TypeScriptのプロジェクトを作る度に設定すると思うのでメモ。
-前提  Webpackでプロジェクトを管理している Linterはeslintを使用している  tsconfig.jsonの設定 tsconfig.jsonのcompilerOptionsを設定してsrc以下のディレクトリに対してエイリアスを貼ります。
-エイリアスになる文字は何でも良いですが、私はnpm経由でimportするmoduleと混同しないように @/ を使用しています。
-{ &amp;#34;compilerOptions&amp;#34;: { ~~~ &amp;#34;baseUrl&amp;#34;: &amp;#34;./&amp;#34;, &amp;#34;paths&amp;#34;: { &amp;#34;@/*&amp;#34;: [&amp;#34;src/*&amp;#34;] }, ~~~ } } Webpackのresolveの設定 Webpackのmoduleの解決にtsconfigで設定したエイリアスが使われるように設定します。
-import { Configuration } from &amp;#39;webpack&amp;#39;; const config: Configuration = { ~~~ resolve: { extensions: [&amp;#39;.ts&amp;#39;, &amp;#39;.tsx&amp;#39;, &amp;#39;.js&amp;#39;, &amp;#39;.json&amp;#39;], alias: { &amp;#39;@&amp;#39;: path.resolve(__dirname, &amp;#39;src&amp;#39;) } }, ~~~ }; export default config; eslintの設定 Webpackでプロジェクトをビルドするだけなら上記2つの設定だけで大丈夫ですが、eslintでimport/no-unresolvedを設定しているとエイリアスが解決できずエラーになります。
-そこでeslint-import-resolver-webpackを導入して、eslintのimportの解決にWebpackの設定を使用するようにeslintrcに設定を加えます。
-まずは以下のコマンドでeslint-import-resolver-webpackを追加します。
-yarn add -D eslint-import-resolver-webpack 次にeslintrcのsettingsに以下のようにWebpackの設定を使用するように設定を加えます。
-{ ~~~ &amp;#34;settings&amp;#34;: { &amp;#34;import/resolver&amp;#34;: &amp;#34;webpack&amp;#34; } ~~~ } これでeslintでもエイリアスを認識して、エラーも出なくなります。</description>
+      <description>TypeScriptのプロジェクトを作る度に設定すると思うのでメモ。&#xA;前提 Webpackでプロジェクトを管理している Linterはeslintを使用している tsconfig.jsonの設定 tsconfig.jsonのcompilerOptionsを設定してsrc以下のディレクトリに対してエイリアスを貼ります。&#xA;エイリアスになる文字は何でも良いですが、私はnpm経由でimportするmoduleと混同しないように @/ を使用しています。&#xA;{ &amp;#34;compilerOptions&amp;#34;: { ~~~ &amp;#34;baseUrl&amp;#34;: &amp;#34;./&amp;#34;, &amp;#34;paths&amp;#34;: { &amp;#34;@/*&amp;#34;: [&amp;#34;src/*&amp;#34;] }, ~~~ } } Webpackのresolveの設定 Webpackのmoduleの解決にtsconfigで設定したエイリアスが使われるように設定します。&#xA;import { Configuration } from &amp;#39;webpack&amp;#39;; const config: Configuration = { ~~~ resolve: { extensions: [&amp;#39;.ts&amp;#39;, &amp;#39;.tsx&amp;#39;, &amp;#39;.js&amp;#39;, &amp;#39;.json&amp;#39;], alias: { &amp;#39;@&amp;#39;: path.resolve(__dirname, &amp;#39;src&amp;#39;) } }, ~~~ }; export default config; eslintの設定 Webpackでプロジェクトをビルドするだけなら上記2つの設定だけで大丈夫ですが、eslintでimport/no-unresolvedを設定しているとエイリアスが解決できずエラーになります。&#xA;そこでeslint-import-resolver-webpackを導入して、eslintのimportの解決にWebpackの設定を使用するようにeslintrcに設定を加えます。&#xA;まずは以下のコマンドでeslint-import-resolver-webpackを追加します。&#xA;yarn add -D eslint-import-resolver-webpack 次にeslintrcのsettingsに以下のようにWebpackの設定を使用するように設定を加えます。&#xA;{ ~~~ &amp;#34;settings&amp;#34;: { &amp;#34;import/resolver&amp;#34;: &amp;#34;webpack&amp;#34; } ~~~ } これでeslintでもエイリアスを認識して、エラーも出なくなります。</description>
     </item>
-    
     <item>
       <title>FormikとYupを使った動的フォームのバリデーション</title>
       <link>https://nametake.github.io/posts/2019/06/05/formik-yup-dynamic-validation/</link>
       <pubDate>Wed, 05 Jun 2019 23:50:36 +0900</pubDate>
-      
       <guid>https://nametake.github.io/posts/2019/06/05/formik-yup-dynamic-validation/</guid>
-      <description>Formikで動的なFormを作った時に、表示されるFormに応じてYupのバリデーションを切り替える方法でちょっと手間取ったのでメモ。
-結論から言うとYup.lazy()を使って遅延評価されるValidationSchemaを使えば解決した。Yup.lazy()に渡ってくるFormの値を元にValidationwSchemaを表示されるFormに対応したValidationSchemaを返せば狙った挙動が実現できました。
-サンプルコードは以下。
- </description>
+      <description>Formikで動的なFormを作った時に、表示されるFormに応じてYupのバリデーションを切り替える方法でちょっと手間取ったのでメモ。&#xA;結論から言うとYup.lazy()を使って遅延評価されるValidationSchemaを使えば解決した。Yup.lazy()に渡ってくるFormの値を元にValidationwSchemaを表示されるFormに対応したValidationSchemaを返せば狙った挙動が実現できました。&#xA;サンプルコードは以下。</description>
     </item>
-    
     <item>
       <title>Type SafeなReducerの書き方</title>
       <link>https://nametake.github.io/posts/2019/05/18/type-safe-reducer/</link>
       <pubDate>Sat, 18 May 2019 10:38:55 +0900</pubDate>
-      
       <guid>https://nametake.github.io/posts/2019/05/18/type-safe-reducer/</guid>
-      <description>以前書いた記事で書いたReducerでは、受け取ったActionの型を判別するために、switchで分岐した後に対応したActionの型でキャストをする必要がありました。
-const todoReducer: Reducer&amp;lt;ITodoState&amp;gt; = ( state: ITodoState = initTodoState, action: TodoAction ): ITodoState =&amp;gt; { switch (action.type) { case TodoActionType.ADD_TODO: const addTodoAction: IAddTodoAction = action; // &amp;lt;-- ここでキャストしている  return { ...state, todos: state.todos.concat([addTodoAction.payload.todo]) }; default: return state; } }; この方法だと、action.typeとそれに対応する型を実装者が気にしなければならず、型安全とは言い切れませんでした。
-このあたりの話を某Slackで相談したら、以下のような Flux standard actionのtypeやpayloadをジェネリクスで指定するようにして、typeにenumを使うというやり方を教えてもらいました。
-import { Reducer } from &amp;#39;redux&amp;#39;; // Flux standard action interface Action&amp;lt;TType, TPayload = null, TMeta = undefined&amp;gt; { type: TType; payload: TPayload; meta?: TMeta; } enum ActionType { ADD, DELETE } type AddAction = Action&amp;lt;ActionType.</description>
+      <description>以前書いた記事で書いたReducerでは、受け取ったActionの型を判別するために、switchで分岐した後に対応したActionの型でキャストをする必要がありました。&#xA;const todoReducer: Reducer&amp;lt;ITodoState&amp;gt; = ( state: ITodoState = initTodoState, action: TodoAction ): ITodoState =&amp;gt; { switch (action.type) { case TodoActionType.ADD_TODO: const addTodoAction: IAddTodoAction = action; // &amp;lt;-- ここでキャストしている return { ...state, todos: state.todos.concat([addTodoAction.payload.todo]) }; default: return state; } }; この方法だと、action.typeとそれに対応する型を実装者が気にしなければならず、型安全とは言い切れませんでした。&#xA;このあたりの話を某Slackで相談したら、以下のような Flux standard actionのtypeやpayloadをジェネリクスで指定するようにして、typeにenumを使うというやり方を教えてもらいました。&#xA;import { Reducer } from &amp;#39;redux&amp;#39;; // Flux standard action interface Action&amp;lt;TType, TPayload = null, TMeta = undefined&amp;gt; { type: TType; payload: TPayload; meta?: TMeta; } enum ActionType { ADD, DELETE } type AddAction = Action&amp;lt;ActionType.</description>
     </item>
-    
     <item>
       <title>TypeScript&#43;React&#43;Reduxチュートリアル</title>
       <link>https://nametake.github.io/posts/2018/12/05/typescript-react-redux-tutorial/</link>
       <pubDate>Wed, 05 Dec 2018 11:08:00 +0900</pubDate>
-      
       <guid>https://nametake.github.io/posts/2018/12/05/typescript-react-redux-tutorial/</guid>
-      <description>普段は Go でサーバサイドのコードを書いているのですが、TypeScript+React+Redux を勉強する機会がありました。
-その際、巷に溢れているチュートリアルやサンプルコードで型で縛っているものが少なすぎて、理解にかなり苦労したので自分なりに Todo アプリケーションを作るチュートリアルを書いておきます。
-このチュートリアルは以下のことを意識して書かれています。
- 引数や返り値は型で縛る  データフローの理解を重視する   外部ライブラリは以下の 3 つしか import しない  react redux react-redux   標準の設計になるべく則る  また、この記事では以下のことについては深く言及はしません
- nodeのツールのエコシステム TypeScript の記法 JSX の記法 React+Redux の概念  プロジェクトの準備 まずはプロジェクトを準備します。
-node と yarn は入っている前提で進めます。
-Facebook が公式で用意しているアプリケーション作成ツールを使用してプロジェクトテンプレートを作ります。
-npx create-react-app todo-app --scripts-version=react-scripts-ts 次にプロジェクトのディレクトリに移動して以下のツールをインストールします。
-cd todo-app yarn add redux react-redux yarn add -D @types/redux @types/react-redux @types がついているパッケージは、/以下のパッケージの型情報が記述されているパッケージです。開発時しか使用しないので-Dオプションを付けてインストールします。
-以下のコマンドでローカルサーバが立ち上がり、ブラウザに画面が表示されれば問題ありません。
-yarn start チュートリアルのコードは作成されたプロジェクト内部の src ディレクトリに記述していきます。
-Component の実装 何はともあれ何かが表示されてないとモチベーションが上がらないのでブラウザに見た目を表示させます。</description>
+      <description>普段は Go でサーバサイドのコードを書いているのですが、TypeScript+React+Redux を勉強する機会がありました。&#xA;その際、巷に溢れているチュートリアルやサンプルコードで型で縛っているものが少なすぎて、理解にかなり苦労したので自分なりに Todo アプリケーションを作るチュートリアルを書いておきます。&#xA;このチュートリアルは以下のことを意識して書かれています。&#xA;引数や返り値は型で縛る データフローの理解を重視する 外部ライブラリは以下の 3 つしか import しない react redux react-redux 標準の設計になるべく則る また、この記事では以下のことについては深く言及はしません&#xA;nodeのツールのエコシステム TypeScript の記法 JSX の記法 React+Redux の概念 プロジェクトの準備 まずはプロジェクトを準備します。&#xA;node と yarn は入っている前提で進めます。&#xA;Facebook が公式で用意しているアプリケーション作成ツールを使用してプロジェクトテンプレートを作ります。&#xA;npx create-react-app todo-app --scripts-version=react-scripts-ts 次にプロジェクトのディレクトリに移動して以下のツールをインストールします。&#xA;cd todo-app yarn add redux react-redux yarn add -D @types/redux @types/react-redux @types がついているパッケージは、/以下のパッケージの型情報が記述されているパッケージです。開発時しか使用しないので-Dオプションを付けてインストールします。&#xA;以下のコマンドでローカルサーバが立ち上がり、ブラウザに画面が表示されれば問題ありません。&#xA;yarn start チュートリアルのコードは作成されたプロジェクト内部の src ディレクトリに記述していきます。&#xA;Component の実装 何はともあれ何かが表示されてないとモチベーションが上がらないのでブラウザに見た目を表示させます。&#xA;以下のコードを TodoComponent.tsx として src 以下に記述します。JSX 記法が含まれるファイルは tsx 拡張子にします。</description>
     </item>
-    
   </channel>
 </rss>

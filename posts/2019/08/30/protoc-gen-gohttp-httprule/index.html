@@ -11,29 +11,29 @@
 ですが、protoc-gen-gohttpではURLのパス部分の定義はProtocol Buffersの定義には記述できないため、クライアント側がProtocol Buffersを見ただけでパスを読み取ることができませんでした。また、生成されたコードはHTTPのBodyしか参照しないため、情報を取得するだけのときもHTTPのメソッドをPOSTにする必要もありました。
 そこで、Googleが提供しているRPCの定義をHTTPのREST APIにマッピングするためのHttpRuleオプションを利用して、protoc-gen-gohttpがHttpRuleのマッピングどおりに動作するコードを生成するように改良しました。
 使い方 protoc-gen-gohttpをインストールしたら、以下のようにHttpRuleを使用したProtoの定義を用意します(annotations.protoのダウンロードの仕方はこの辺を参考にしてください)。この記事ではexample.protoに書いているとします。
-syntax = &#34;proto3&#34;;package main;option go_package = &#34;main&#34;;import &#34;google/api/annotations.proto&#34;;service Messaging { rpc GetMessage(GetMessageRequest) returns (GetMessageResponse) { option (google.api.http).get = &#34;/v1/messages/{message_id}&#34;; } rpc UpdateMessage(UpdateMessageRequest) returns (UpdateMessageResponse) { option (google.api.http) = { put: &#34;/v1/messages/{message_id}/{sub.subfield}&#34; body: &#34;*&#34; }; }}message GetMessageRequest { string message_id = 1; string message = 2; repeated string tags = 3;}message GetMessageResponse { string message_id = 1; string message = 2; repeated string tags = 4;}message SubMessage { string subfield = 1;}message UpdateMessageRequest { string message_id = 1; SubMessage sub = 2; string message = 3;}message UpdateMessageResponse { string message_id = 1; SubMessage sub = 2; string message = 3;}用意できたら、以下のコマンドでGoのコードを生成します。">
+syntax = &#34;proto3&#34;; package main; option go_package = &#34;main&#34;; import &#34;google/api/annotations.proto&#34;; service Messaging { rpc GetMessage(GetMessageRequest) returns (GetMessageResponse) { option (google.api.http).get = &#34;/v1/messages/{message_id}&#34;; } rpc UpdateMessage(UpdateMessageRequest) returns (UpdateMessageResponse) { option (google.api.http) = { put: &#34;/v1/messages/{message_id}/{sub.subfield}&#34; body: &#34;*&#34; }; } } message GetMessageRequest { string message_id = 1; string message = 2; repeated string tags = 3; } message GetMessageResponse { string message_id = 1; string message = 2; repeated string tags = 4; } message SubMessage { string subfield = 1; } message UpdateMessageRequest { string message_id = 1; SubMessage sub = 2; string message = 3; } message UpdateMessageResponse { string message_id = 1; SubMessage sub = 2; string message = 3; } 用意できたら、以下のコマンドでGoのコードを生成します。">
     <meta name="keywords" content="blog,developer,personal">
 
     
 
-    <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="protoc-gen-gohttpをHttpRule Optionに対応させた"/>
+    <meta name="twitter:card" content="summary"/><meta name="twitter:title" content="protoc-gen-gohttpをHttpRule Optionに対応させた"/>
 <meta name="twitter:description" content="以前、Protocol Buffersのserviceの定義を利用してGoのnet/httpで利用できるようにするためのprotoc-gen-gohttpというprotocのプラグインを作成しました。
 ですが、protoc-gen-gohttpではURLのパス部分の定義はProtocol Buffersの定義には記述できないため、クライアント側がProtocol Buffersを見ただけでパスを読み取ることができませんでした。また、生成されたコードはHTTPのBodyしか参照しないため、情報を取得するだけのときもHTTPのメソッドをPOSTにする必要もありました。
 そこで、Googleが提供しているRPCの定義をHTTPのREST APIにマッピングするためのHttpRuleオプションを利用して、protoc-gen-gohttpがHttpRuleのマッピングどおりに動作するコードを生成するように改良しました。
 使い方 protoc-gen-gohttpをインストールしたら、以下のようにHttpRuleを使用したProtoの定義を用意します(annotations.protoのダウンロードの仕方はこの辺を参考にしてください)。この記事ではexample.protoに書いているとします。
-syntax = &#34;proto3&#34;;package main;option go_package = &#34;main&#34;;import &#34;google/api/annotations.proto&#34;;service Messaging { rpc GetMessage(GetMessageRequest) returns (GetMessageResponse) { option (google.api.http).get = &#34;/v1/messages/{message_id}&#34;; } rpc UpdateMessage(UpdateMessageRequest) returns (UpdateMessageResponse) { option (google.api.http) = { put: &#34;/v1/messages/{message_id}/{sub.subfield}&#34; body: &#34;*&#34; }; }}message GetMessageRequest { string message_id = 1; string message = 2; repeated string tags = 3;}message GetMessageResponse { string message_id = 1; string message = 2; repeated string tags = 4;}message SubMessage { string subfield = 1;}message UpdateMessageRequest { string message_id = 1; SubMessage sub = 2; string message = 3;}message UpdateMessageResponse { string message_id = 1; SubMessage sub = 2; string message = 3;}用意できたら、以下のコマンドでGoのコードを生成します。"/>
+syntax = &#34;proto3&#34;; package main; option go_package = &#34;main&#34;; import &#34;google/api/annotations.proto&#34;; service Messaging { rpc GetMessage(GetMessageRequest) returns (GetMessageResponse) { option (google.api.http).get = &#34;/v1/messages/{message_id}&#34;; } rpc UpdateMessage(UpdateMessageRequest) returns (UpdateMessageResponse) { option (google.api.http) = { put: &#34;/v1/messages/{message_id}/{sub.subfield}&#34; body: &#34;*&#34; }; } } message GetMessageRequest { string message_id = 1; string message = 2; repeated string tags = 3; } message GetMessageResponse { string message_id = 1; string message = 2; repeated string tags = 4; } message SubMessage { string subfield = 1; } message UpdateMessageRequest { string message_id = 1; SubMessage sub = 2; string message = 3; } message UpdateMessageResponse { string message_id = 1; SubMessage sub = 2; string message = 3; } 用意できたら、以下のコマンドでGoのコードを生成します。"/>
 
     <meta property="og:title" content="protoc-gen-gohttpをHttpRule Optionに対応させた" />
 <meta property="og:description" content="以前、Protocol Buffersのserviceの定義を利用してGoのnet/httpで利用できるようにするためのprotoc-gen-gohttpというprotocのプラグインを作成しました。
 ですが、protoc-gen-gohttpではURLのパス部分の定義はProtocol Buffersの定義には記述できないため、クライアント側がProtocol Buffersを見ただけでパスを読み取ることができませんでした。また、生成されたコードはHTTPのBodyしか参照しないため、情報を取得するだけのときもHTTPのメソッドをPOSTにする必要もありました。
 そこで、Googleが提供しているRPCの定義をHTTPのREST APIにマッピングするためのHttpRuleオプションを利用して、protoc-gen-gohttpがHttpRuleのマッピングどおりに動作するコードを生成するように改良しました。
 使い方 protoc-gen-gohttpをインストールしたら、以下のようにHttpRuleを使用したProtoの定義を用意します(annotations.protoのダウンロードの仕方はこの辺を参考にしてください)。この記事ではexample.protoに書いているとします。
-syntax = &#34;proto3&#34;;package main;option go_package = &#34;main&#34;;import &#34;google/api/annotations.proto&#34;;service Messaging { rpc GetMessage(GetMessageRequest) returns (GetMessageResponse) { option (google.api.http).get = &#34;/v1/messages/{message_id}&#34;; } rpc UpdateMessage(UpdateMessageRequest) returns (UpdateMessageResponse) { option (google.api.http) = { put: &#34;/v1/messages/{message_id}/{sub.subfield}&#34; body: &#34;*&#34; }; }}message GetMessageRequest { string message_id = 1; string message = 2; repeated string tags = 3;}message GetMessageResponse { string message_id = 1; string message = 2; repeated string tags = 4;}message SubMessage { string subfield = 1;}message UpdateMessageRequest { string message_id = 1; SubMessage sub = 2; string message = 3;}message UpdateMessageResponse { string message_id = 1; SubMessage sub = 2; string message = 3;}用意できたら、以下のコマンドでGoのコードを生成します。" />
+syntax = &#34;proto3&#34;; package main; option go_package = &#34;main&#34;; import &#34;google/api/annotations.proto&#34;; service Messaging { rpc GetMessage(GetMessageRequest) returns (GetMessageResponse) { option (google.api.http).get = &#34;/v1/messages/{message_id}&#34;; } rpc UpdateMessage(UpdateMessageRequest) returns (UpdateMessageResponse) { option (google.api.http) = { put: &#34;/v1/messages/{message_id}/{sub.subfield}&#34; body: &#34;*&#34; }; } } message GetMessageRequest { string message_id = 1; string message = 2; repeated string tags = 3; } message GetMessageResponse { string message_id = 1; string message = 2; repeated string tags = 4; } message SubMessage { string subfield = 1; } message UpdateMessageRequest { string message_id = 1; SubMessage sub = 2; string message = 3; } message UpdateMessageResponse { string message_id = 1; SubMessage sub = 2; string message = 3; } 用意できたら、以下のコマンドでGoのコードを生成します。" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://nametake.github.io/posts/2019/08/30/protoc-gen-gohttp-httprule/" />
+<meta property="og:url" content="https://nametake.github.io/posts/2019/08/30/protoc-gen-gohttp-httprule/" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2019-08-30T01:52:26+09:00" />
 <meta property="article:modified_time" content="2019-08-30T01:52:26+09:00" />
+
 
 
     
@@ -80,7 +80,7 @@ syntax = &#34;proto3&#34;;package main;option go_package = &#34;main&#34;;import
     <link rel="icon" type="image/png" href="https://nametake.github.io/images/favicon-32x32.png" sizes="32x32">
     <link rel="icon" type="image/png" href="https://nametake.github.io/images/favicon-16x16.png" sizes="16x16">
 
-    <meta name="generator" content="Hugo 0.80.0" />
+    <meta name="generator" content="Hugo 0.121.1">
   </head>
 
   
@@ -164,100 +164,100 @@ syntax = &#34;proto3&#34;;package main;option go_package = &#34;main&#34;;import
 <p>そこで、Googleが提供しているRPCの定義をHTTPのREST APIにマッピングするための<a href="https://cloud.google.com/endpoints/docs/grpc-service-config/reference/rpc/google.api#httprule">HttpRule</a>オプションを利用して、protoc-gen-gohttpがHttpRuleのマッピングどおりに動作するコードを生成するように改良しました。</p>
 <h1 id="使い方">使い方</h1>
 <p><a href="https://github.com/nametake/protoc-gen-gohttp">protoc-gen-gohttp</a>をインストールしたら、以下のようにHttpRuleを使用したProtoの定義を用意します(annotations.protoのダウンロードの仕方は<a href="https://cloud.google.com/solutions/exposing-grpc-services-using-cloud-endpoints-pt1#configure_rest_transcoding">この辺</a>を参考にしてください)。この記事では<code>example.proto</code>に書いているとします。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-proto" data-lang="proto">syntax <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;proto3&#34;</span>;<span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#f92672">package</span> main;<span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">option</span> go_package <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;main&#34;</span>;<span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">import</span> <span style="color:#e6db74">&#34;google/api/annotations.proto&#34;</span>;<span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">service</span> Messaging {<span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span>  <span style="color:#66d9ef">rpc</span> GetMessage(GetMessageRequest) <span style="color:#66d9ef">returns</span> (GetMessageResponse) {<span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span>    <span style="color:#66d9ef">option</span> (google.api.http)<span style="color:#f92672">.</span>get <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;/v1/messages/{message_id}&#34;</span>;<span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span>  }<span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span>  <span style="color:#66d9ef">rpc</span> UpdateMessage(UpdateMessageRequest) <span style="color:#66d9ef">returns</span> (UpdateMessageResponse) {<span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span>    <span style="color:#66d9ef">option</span> (google.api.http) <span style="color:#f92672">=</span> {<span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span>      put<span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;/v1/messages/{message_id}/{sub.subfield}&#34;</span><span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span>      body<span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;*&#34;</span><span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span>    };<span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span>  }<span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span>}<span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">message</span> <span style="color:#a6e22e">GetMessageRequest</span> {<span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span>  <span style="color:#66d9ef">string</span> message_id <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;<span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span>  <span style="color:#66d9ef">string</span> <span style="color:#66d9ef">message</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>;<span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span>  <span style="color:#66d9ef">repeated</span> <span style="color:#66d9ef">string</span> tags <span style="color:#f92672">=</span> <span style="color:#ae81ff">3</span>;<span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span>}<span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">message</span> <span style="color:#a6e22e">GetMessageResponse</span> {<span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span>  <span style="color:#66d9ef">string</span> message_id <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;<span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span>  <span style="color:#66d9ef">string</span> <span style="color:#66d9ef">message</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>;<span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span>  <span style="color:#66d9ef">repeated</span> <span style="color:#66d9ef">string</span> tags <span style="color:#f92672">=</span> <span style="color:#ae81ff">4</span>;<span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span>}<span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">message</span> <span style="color:#a6e22e">SubMessage</span> {<span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span>  <span style="color:#66d9ef">string</span> subfield <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;<span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span>}<span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">message</span> <span style="color:#a6e22e">UpdateMessageRequest</span> {<span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span>  <span style="color:#66d9ef">string</span> message_id <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;<span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span>  SubMessage sub <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>;<span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span>  <span style="color:#66d9ef">string</span> <span style="color:#66d9ef">message</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">3</span>;<span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span>}<span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">message</span> <span style="color:#a6e22e">UpdateMessageResponse</span> {<span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span>  <span style="color:#66d9ef">string</span> message_id <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;<span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span>  SubMessage sub <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>;<span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span>  <span style="color:#66d9ef">string</span> <span style="color:#66d9ef">message</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">3</span>;<span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span>}<span style="color:#960050;background-color:#1e0010">
-</span></code></pre></div><p>用意できたら、以下のコマンドでGoのコードを生成します。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">protoc --go_out=plugins=grpc:. --gohttp_out=. *.proto
-</code></pre></div><p>生成されたコードを利用して、以下のように受け取ったものをただ返すだけのHTTPのWebサーバ実装します。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
-
-<span style="color:#f92672">import</span> (
-	<span style="color:#e6db74">&#34;context&#34;</span>
-	<span style="color:#e6db74">&#34;log&#34;</span>
-	<span style="color:#e6db74">&#34;net/http&#34;</span>
-
-	<span style="color:#e6db74">&#34;github.com/go-chi/chi&#34;</span>
-)
-
-<span style="color:#66d9ef">type</span> <span style="color:#a6e22e">Messaging</span> <span style="color:#66d9ef">struct</span>{}
-
-<span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">m</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">Messaging</span>) <span style="color:#a6e22e">GetMessage</span>(<span style="color:#a6e22e">ctx</span> <span style="color:#a6e22e">context</span>.<span style="color:#a6e22e">Context</span>, <span style="color:#a6e22e">req</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">GetMessageRequest</span>) (<span style="color:#f92672">*</span><span style="color:#a6e22e">GetMessageResponse</span>, <span style="color:#66d9ef">error</span>) {
-	<span style="color:#66d9ef">return</span> <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">GetMessageResponse</span>{
-		<span style="color:#a6e22e">MessageId</span>: <span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">MessageId</span>,
-		<span style="color:#a6e22e">Message</span>:   <span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">Message</span>,
-		<span style="color:#a6e22e">Tags</span>:      <span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">Tags</span>,
-	}, <span style="color:#66d9ef">nil</span>
-}
-
-<span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">m</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">Messaging</span>) <span style="color:#a6e22e">UpdateMessage</span>(<span style="color:#a6e22e">ctx</span> <span style="color:#a6e22e">context</span>.<span style="color:#a6e22e">Context</span>, <span style="color:#a6e22e">req</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">UpdateMessageRequest</span>) (<span style="color:#f92672">*</span><span style="color:#a6e22e">UpdateMessageResponse</span>, <span style="color:#66d9ef">error</span>) {
-	<span style="color:#66d9ef">return</span> <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">UpdateMessageResponse</span>{
-		<span style="color:#a6e22e">MessageId</span>: <span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">MessageId</span>,
-		<span style="color:#a6e22e">Sub</span>: <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">SubMessage</span>{
-			<span style="color:#a6e22e">Subfield</span>: <span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">Sub</span>.<span style="color:#a6e22e">Subfield</span>,
-		},
-		<span style="color:#a6e22e">Message</span>: <span style="color:#e6db74">&#34;Hello World!&#34;</span>,
-	}, <span style="color:#66d9ef">nil</span>
-}
-
-<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
-	<span style="color:#a6e22e">conv</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">NewMessagingHTTPConverter</span>(<span style="color:#f92672">&amp;</span><span style="color:#a6e22e">Messaging</span>{})
-	<span style="color:#a6e22e">r</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">chi</span>.<span style="color:#a6e22e">NewRouter</span>()
-
-	<span style="color:#a6e22e">r</span>.<span style="color:#a6e22e">Method</span>(<span style="color:#a6e22e">conv</span>.<span style="color:#a6e22e">GetMessageHTTPRule</span>(<span style="color:#66d9ef">nil</span>))
-	<span style="color:#a6e22e">r</span>.<span style="color:#a6e22e">Method</span>(<span style="color:#a6e22e">conv</span>.<span style="color:#a6e22e">UpdateMessageHTTPRule</span>(<span style="color:#66d9ef">nil</span>))
-
-	<span style="color:#a6e22e">log</span>.<span style="color:#a6e22e">Fatal</span>(<span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">ListenAndServe</span>(<span style="color:#e6db74">&#34;:8080&#34;</span>, <span style="color:#a6e22e">r</span>))
-
-}
-</code></pre></div><p>実装したサーバを起動したら、以下のようにAPIを叩くことで動作を確認できます。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">curl -X GET -H &#39;Content-Type: application/json&#39; &#39;localhost:8080/v1/messages/abc1234?message=hello&amp;tags=a&amp;tags=b&#39;
-</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">curl -X PUT -H &#39;Content-Type: application/json&#39; &#39;localhost:8080/v1/messages/abc1234/submsg&#39; -d &#39;{&#34;messageId&#34;:&#34;abc1234&#34;,&#34;sub&#34;:{&#34;subfield&#34;:&#34;submsg&#34;},&#34;message&#34;:&#34;Hello World!&#34;}&#39;
-</code></pre></div><h1 id="簡単な解説">簡単な解説</h1>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-proto" data-lang="proto"><span style="display:flex;"><span>syntax <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;proto3&#34;</span>;<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#f92672">package</span> main;<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">option</span> go_package <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;main&#34;</span>;<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">import</span> <span style="color:#e6db74">&#34;google/api/annotations.proto&#34;</span>;<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">service</span> Messaging {<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>  <span style="color:#66d9ef">rpc</span> GetMessage(GetMessageRequest) <span style="color:#66d9ef">returns</span> (GetMessageResponse) {<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>    <span style="color:#66d9ef">option</span> (google.api.http)<span style="color:#f92672">.</span>get <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;/v1/messages/{message_id}&#34;</span>;<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>  }<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>  <span style="color:#66d9ef">rpc</span> UpdateMessage(UpdateMessageRequest) <span style="color:#66d9ef">returns</span> (UpdateMessageResponse) {<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>    <span style="color:#66d9ef">option</span> (google.api.http) <span style="color:#f92672">=</span> {<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>      put<span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;/v1/messages/{message_id}/{sub.subfield}&#34;</span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>      body<span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;*&#34;</span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>    };<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>  }<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>}<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">message</span> <span style="color:#a6e22e">GetMessageRequest</span> {<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>  <span style="color:#66d9ef">string</span> message_id <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>  <span style="color:#66d9ef">string</span> <span style="color:#66d9ef">message</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>;<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>  <span style="color:#66d9ef">repeated</span> <span style="color:#66d9ef">string</span> tags <span style="color:#f92672">=</span> <span style="color:#ae81ff">3</span>;<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>}<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">message</span> <span style="color:#a6e22e">GetMessageResponse</span> {<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>  <span style="color:#66d9ef">string</span> message_id <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>  <span style="color:#66d9ef">string</span> <span style="color:#66d9ef">message</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>;<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>  <span style="color:#66d9ef">repeated</span> <span style="color:#66d9ef">string</span> tags <span style="color:#f92672">=</span> <span style="color:#ae81ff">4</span>;<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>}<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">message</span> <span style="color:#a6e22e">SubMessage</span> {<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>  <span style="color:#66d9ef">string</span> subfield <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>}<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">message</span> <span style="color:#a6e22e">UpdateMessageRequest</span> {<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>  <span style="color:#66d9ef">string</span> message_id <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>  SubMessage sub <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>;<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>  <span style="color:#66d9ef">string</span> <span style="color:#66d9ef">message</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">3</span>;<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>}<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">message</span> <span style="color:#a6e22e">UpdateMessageResponse</span> {<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>  <span style="color:#66d9ef">string</span> message_id <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>  SubMessage sub <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>;<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>  <span style="color:#66d9ef">string</span> <span style="color:#66d9ef">message</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">3</span>;<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>}<span style="color:#960050;background-color:#1e0010">
+</span></span></span></code></pre></div><p>用意できたら、以下のコマンドでGoのコードを生成します。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>protoc --go_out=plugins=grpc:. --gohttp_out=. *.proto
+</span></span></code></pre></div><p>生成されたコードを利用して、以下のように受け取ったものをただ返すだけのHTTPのWebサーバ実装します。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> (
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#34;context&#34;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#34;log&#34;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#34;net/http&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#34;github.com/go-chi/chi&#34;</span>
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">Messaging</span> <span style="color:#66d9ef">struct</span>{}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">m</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">Messaging</span>) <span style="color:#a6e22e">GetMessage</span>(<span style="color:#a6e22e">ctx</span> <span style="color:#a6e22e">context</span>.<span style="color:#a6e22e">Context</span>, <span style="color:#a6e22e">req</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">GetMessageRequest</span>) (<span style="color:#f92672">*</span><span style="color:#a6e22e">GetMessageResponse</span>, <span style="color:#66d9ef">error</span>) {
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span> <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">GetMessageResponse</span>{
+</span></span><span style="display:flex;"><span>		<span style="color:#a6e22e">MessageId</span>: <span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">MessageId</span>,
+</span></span><span style="display:flex;"><span>		<span style="color:#a6e22e">Message</span>:   <span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">Message</span>,
+</span></span><span style="display:flex;"><span>		<span style="color:#a6e22e">Tags</span>:      <span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">Tags</span>,
+</span></span><span style="display:flex;"><span>	}, <span style="color:#66d9ef">nil</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">m</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">Messaging</span>) <span style="color:#a6e22e">UpdateMessage</span>(<span style="color:#a6e22e">ctx</span> <span style="color:#a6e22e">context</span>.<span style="color:#a6e22e">Context</span>, <span style="color:#a6e22e">req</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">UpdateMessageRequest</span>) (<span style="color:#f92672">*</span><span style="color:#a6e22e">UpdateMessageResponse</span>, <span style="color:#66d9ef">error</span>) {
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span> <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">UpdateMessageResponse</span>{
+</span></span><span style="display:flex;"><span>		<span style="color:#a6e22e">MessageId</span>: <span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">MessageId</span>,
+</span></span><span style="display:flex;"><span>		<span style="color:#a6e22e">Sub</span>: <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">SubMessage</span>{
+</span></span><span style="display:flex;"><span>			<span style="color:#a6e22e">Subfield</span>: <span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">Sub</span>.<span style="color:#a6e22e">Subfield</span>,
+</span></span><span style="display:flex;"><span>		},
+</span></span><span style="display:flex;"><span>		<span style="color:#a6e22e">Message</span>: <span style="color:#e6db74">&#34;Hello World!&#34;</span>,
+</span></span><span style="display:flex;"><span>	}, <span style="color:#66d9ef">nil</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">conv</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">NewMessagingHTTPConverter</span>(<span style="color:#f92672">&amp;</span><span style="color:#a6e22e">Messaging</span>{})
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">r</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">chi</span>.<span style="color:#a6e22e">NewRouter</span>()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">r</span>.<span style="color:#a6e22e">Method</span>(<span style="color:#a6e22e">conv</span>.<span style="color:#a6e22e">GetMessageHTTPRule</span>(<span style="color:#66d9ef">nil</span>))
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">r</span>.<span style="color:#a6e22e">Method</span>(<span style="color:#a6e22e">conv</span>.<span style="color:#a6e22e">UpdateMessageHTTPRule</span>(<span style="color:#66d9ef">nil</span>))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">log</span>.<span style="color:#a6e22e">Fatal</span>(<span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">ListenAndServe</span>(<span style="color:#e6db74">&#34;:8080&#34;</span>, <span style="color:#a6e22e">r</span>))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>実装したサーバを起動したら、以下のようにAPIを叩くことで動作を確認できます。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>curl -X GET -H &#39;Content-Type: application/json&#39; &#39;localhost:8080/v1/messages/abc1234?message=hello&amp;tags=a&amp;tags=b&#39;
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>curl -X PUT -H &#39;Content-Type: application/json&#39; &#39;localhost:8080/v1/messages/abc1234/submsg&#39; -d &#39;{&#34;messageId&#34;:&#34;abc1234&#34;,&#34;sub&#34;:{&#34;subfield&#34;:&#34;submsg&#34;},&#34;message&#34;:&#34;Hello World!&#34;}&#39;
+</span></span></code></pre></div><h1 id="簡単な解説">簡単な解説</h1>
 <p>今まではprotoc-gen-gohttpは<code>GetMessage</code>メソッドや<code>GetMessageWithName</code>メソッドのような2つのパターンしか生成しませんでしたが、今回の修正で、HttpRuleオプションをRPCに記述していたら<code>GetMessageHTTPRule</code>というメソッドも生成するようになりました。</p>
 <p><code>HTTPRule</code>という接尾語がついたメソッドは、Protocol Buffersに定義されているHttpRuleのオプションのうち、メソッド名(string)、パス名(string)及びhttp.HandlerFuncを返すようになっています。</p>
 <p><code>GetMessageHTTPRule</code>の場合、返り値は<code>&quot;GET&quot;</code>、<code>&quot;/v1/messages/{message_id}&quot;</code>及び<code>http.HandlerFunc</code>を返します。また、GetMessageは<code>GET</code>メソッドをOptionで指定されているため、<code>http.HandlerFunc</code>はQuery Stringを解析して<code>GetMessageRequest</code>に情報を詰めるようになっています。</p>
@@ -274,8 +274,8 @@ syntax = &#34;proto3&#34;;package main;option go_package = &#34;main&#34;;import
 
 
         <div id="disqus_thread"></div>
-<script type="application/javascript">
-    var disqus_config = function () {
+<script>
+    window.disqus_config = function () {
     
     
     
@@ -312,7 +312,7 @@ syntax = &#34;proto3&#34;;package main;option go_package = &#34;main&#34;;import
       
         ©
         
-        2021
+        2023
          nametake 
       
       
@@ -328,7 +328,7 @@ syntax = &#34;proto3&#34;;package main;option go_package = &#34;main&#34;;import
     
 
     
-<script type="application/javascript">
+<script>
 var doNotTrack = false;
 if (!doNotTrack) {
 	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -340,7 +340,6 @@ if (!doNotTrack) {
 	ga('send', 'pageview');
 }
 </script>
-
 
     
 

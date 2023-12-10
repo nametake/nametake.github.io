@@ -15,8 +15,7 @@ grouped write of manifest, lock and vendor: error while writing out vendor tree:
 
     
 
-    <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="depでprivateリポジトリがupdateできなかったときの解決策"/>
+    <meta name="twitter:card" content="summary"/><meta name="twitter:title" content="depでprivateリポジトリがupdateできなかったときの解決策"/>
 <meta name="twitter:description" content="Goをアップデートした後、dep updateをしたら以下のようなエラーが発生しました。
 grouped write of manifest, lock and vendor: error while writing out vendor tree: failed to write dep tree: failed to export github.com/nametake/private-repo: unable to update repository: remote: Repository not found. fatal: repository &#39;https://github.com/nametake/private-repo/&#39; not found : command failed: [git fetch --tags --prune origin]: exit status 128 make: *** [dep] Error 1 原因はprivateリポジトリをhttps経由でcloneしようとしたことだったみたいです。
 以下のconfig設定をして、githubではhttpsで始まるURLをgitのURLを使うように書き換える設定を追加したら治りました。
@@ -28,9 +27,10 @@ grouped write of manifest, lock and vendor: error while writing out vendor tree:
 以下のconfig設定をして、githubではhttpsで始まるURLをgitのURLを使うように書き換える設定を追加したら治りました。
 [url &#34;git@github.com:&#34;] insteadOf = https://github.com/ https://git-scm.com/docs/git-config#git-config-urlltbasegtinsteadOf" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://nametake.github.io/posts/2018/09/20/dep-private-repo/" />
+<meta property="og:url" content="https://nametake.github.io/posts/2018/09/20/dep-private-repo/" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2018-09-20T18:47:46+09:00" />
 <meta property="article:modified_time" content="2018-09-20T18:47:46+09:00" />
+
 
 
     
@@ -77,7 +77,7 @@ grouped write of manifest, lock and vendor: error while writing out vendor tree:
     <link rel="icon" type="image/png" href="https://nametake.github.io/images/favicon-32x32.png" sizes="32x32">
     <link rel="icon" type="image/png" href="https://nametake.github.io/images/favicon-16x16.png" sizes="16x16">
 
-    <meta name="generator" content="Hugo 0.80.0" />
+    <meta name="generator" content="Hugo 0.121.1">
   </head>
 
   
@@ -157,15 +157,15 @@ grouped write of manifest, lock and vendor: error while writing out vendor tree:
       <div>
         
         <p>Goをアップデートした後、<code>dep update</code>をしたら以下のようなエラーが発生しました。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">grouped write of manifest, lock and vendor: error while writing out vendor tree: failed to write dep tree: failed to export github.com/nametake/private-repo: unable to update repository: remote: Repository not found.
-fatal: repository &#39;https://github.com/nametake/private-repo/&#39; not found
-: command failed: [git fetch --tags --prune origin]: exit status 128
-make: *** [dep] Error 1
-</code></pre></div><p>原因はprivateリポジトリをhttps経由でcloneしようとしたことだったみたいです。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-gdscript3" data-lang="gdscript3"><span style="display:flex;"><span>grouped write of manifest, lock <span style="color:#f92672">and</span> vendor: error <span style="color:#66d9ef">while</span> writing out vendor tree: failed to write dep tree: failed to <span style="color:#66d9ef">export</span> github<span style="color:#f92672">.</span>com<span style="color:#f92672">/</span>nametake<span style="color:#f92672">/</span>private<span style="color:#f92672">-</span>repo: unable to update repository: remote: Repository <span style="color:#f92672">not</span> found<span style="color:#f92672">.</span>
+</span></span><span style="display:flex;"><span>fatal: repository <span style="color:#e6db74">&#39;https://github.com/nametake/private-repo/&#39;</span> <span style="color:#f92672">not</span> found
+</span></span><span style="display:flex;"><span>: command failed: [git fetch <span style="color:#f92672">--</span>tags <span style="color:#f92672">--</span>prune origin]: exit status <span style="color:#ae81ff">128</span>
+</span></span><span style="display:flex;"><span>make: <span style="color:#f92672">***</span> [dep] Error <span style="color:#ae81ff">1</span>
+</span></span></code></pre></div><p>原因はprivateリポジトリをhttps経由でcloneしようとしたことだったみたいです。</p>
 <p>以下のconfig設定をして、githubではhttpsで始まるURLをgitのURLを使うように書き換える設定を追加したら治りました。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">[url &#34;git@github.com:&#34;]
-  insteadOf = https://github.com/
-</code></pre></div><p><a href="https://git-scm.com/docs/git-config#git-config-urlltbasegtinsteadOf">https://git-scm.com/docs/git-config#git-config-urlltbasegtinsteadOf</a></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>[url &#34;git@github.com:&#34;]
+</span></span><span style="display:flex;"><span>  insteadOf = https://github.com/
+</span></span></code></pre></div><p><a href="https://git-scm.com/docs/git-config#git-config-urlltbasegtinsteadOf">https://git-scm.com/docs/git-config#git-config-urlltbasegtinsteadOf</a></p>
 
       </div>
 
@@ -175,8 +175,8 @@ make: *** [dep] Error 1
 
 
         <div id="disqus_thread"></div>
-<script type="application/javascript">
-    var disqus_config = function () {
+<script>
+    window.disqus_config = function () {
     
     
     
@@ -213,7 +213,7 @@ make: *** [dep] Error 1
       
         ©
         
-        2021
+        2023
          nametake 
       
       
@@ -229,7 +229,7 @@ make: *** [dep] Error 1
     
 
     
-<script type="application/javascript">
+<script>
 var doNotTrack = false;
 if (!doNotTrack) {
 	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -241,7 +241,6 @@ if (!doNotTrack) {
 	ga('send', 'pageview');
 }
 </script>
-
 
     
 

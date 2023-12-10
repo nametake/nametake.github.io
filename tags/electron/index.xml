@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Electron on nametake.info</title>
+    <link>https://nametake.github.io/tags/electron/</link>
+    <description>Recent content in Electron on nametake.info</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 04 Aug 2020 00:00:00 +0900</lastBuildDate>
+    <atom:link href="https://nametake.github.io/tags/electron/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>TypeScript &#43; electron-webpackでemotionを動かしたときのメモ</title>
+      <link>https://nametake.github.io/posts/2020/08/04/typescript-electron-webpack-emotion/</link>
+      <pubDate>Tue, 04 Aug 2020 00:00:00 +0900</pubDate>
+      <guid>https://nametake.github.io/posts/2020/08/04/typescript-electron-webpack-emotion/</guid>
+      <description>electron-webpack で emotion を動かそうとして試行錯誤したのでその結果のメモ。&#xA;ライブラリとバージョン TypeScript(3.9.5) electron-webpack(2.8.2) emotion(10.0.27) ts-loader(7.0.5) babel-loader(8.1.0) babel-plugin-emotion(10.0.33) 起きた問題 styled-componentsのselectorに別のComponentsを指定しようとしたときに、 babel-plugin-emotion が必要というエラーが発生しました。&#xA;1 2 3 4 5 6 7 8 9 10 const StyledCheckbox = styled.div&amp;lt;StyledCheckboxProps&amp;gt;` display: inline-block; background: ${(props) =&amp;gt; (props.checked ? &amp;#39;salmon&amp;#39; : &amp;#39;papayawhip&amp;#39;)}; border-radius: 3px; transition: all 150ms; ${/* sc-selector */ HiddenCheckbox}:focus + &amp;amp; { box-shadow: 0 0 0 3px pink; } ` Component selectors can only be used in conjunction with babel-plugin-emotion electron-webpackのドキュメントに、 babel-plugin-* は自動で設定されると書いてあったため指示通りに babel-plugin-emotion をインストールしたのですが、それだけでは上手く動きませんでした。</description>
+    </item>
+  </channel>
+</rss>

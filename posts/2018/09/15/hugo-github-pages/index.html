@@ -17,8 +17,7 @@ posts = &quot;/posts/:year/:month/:day/:slug&quot;のpostsの部分はcontentデ
 
     
 
-    <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="hugo&#43;github pagesにブログを移転したメモ"/>
+    <meta name="twitter:card" content="summary"/><meta name="twitter:title" content="hugo&#43;github pagesにブログを移転したメモ"/>
 <meta name="twitter:description" content="大して書いていなかったブログをgithub pages&#43;hugoの組み合わせに移行したのでそのメモ。
 とは言うものの、ほとんどHugoの入門用ページの内容をそのままやっただけなのでその辺は割愛。
 最終的なディレクトリ構成は以下。
@@ -34,9 +33,10 @@ blog ├── Makefile ├── archetypes │ ├── default.md │ └─
 slugは各postのfrontmatter(postの先頭にあるヘッダ部分)に設定すると反映されます。
 posts = &quot;/posts/:year/:month/:day/:slug&quot;のpostsの部分はcontentディレクトリにあるpostsディレクトリと同じ名前にする必要があるので注意。" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://nametake.github.io/posts/2018/09/15/hugo-github-pages/" />
+<meta property="og:url" content="https://nametake.github.io/posts/2018/09/15/hugo-github-pages/" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2018-09-15T12:20:26+09:00" />
 <meta property="article:modified_time" content="2018-09-15T12:20:26+09:00" />
+
 
 
     
@@ -83,7 +83,7 @@ posts = &quot;/posts/:year/:month/:day/:slug&quot;のpostsの部分はcontentデ
     <link rel="icon" type="image/png" href="https://nametake.github.io/images/favicon-32x32.png" sizes="32x32">
     <link rel="icon" type="image/png" href="https://nametake.github.io/images/favicon-16x16.png" sizes="16x16">
 
-    <meta name="generator" content="Hugo 0.80.0" />
+    <meta name="generator" content="Hugo 0.121.1">
   </head>
 
   
@@ -163,67 +163,66 @@ posts = &quot;/posts/:year/:month/:day/:slug&quot;のpostsの部分はcontentデ
         <p>大して書いていなかったブログをgithub pages+hugoの組み合わせに移行したのでそのメモ。</p>
 <p>とは言うものの、ほとんど<a href="https://gohugo.io/categories/getting-started">Hugoの入門用ページ</a>の内容をそのままやっただけなのでその辺は割愛。</p>
 <p>最終的なディレクトリ構成は以下。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">blog
- ├── Makefile
- ├── archetypes
- │   ├── default.md
- │   └── posts.md
- ├── bin
- │   ├── deploy.sh
- │   └── new_post.sh
- ├── config.toml
- ├── content
- │   ├── about
- │   │   └── index.md
- │   └── posts
- │       └── 2018-09-15-hugo-github-pages
- │           └── index.md
- ├── public(submodule)
- ├── static
- │   ├── css
- │   │   └── index.css
- │   └── images
- │       └── avatar.jpg
- └── themes
-     └── coder(submodule)
-</code></pre></div><h2 id="configtoml">config.toml</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>blog
+</span></span><span style="display:flex;"><span> ├── Makefile
+</span></span><span style="display:flex;"><span> ├── archetypes
+</span></span><span style="display:flex;"><span> │   ├── default.md
+</span></span><span style="display:flex;"><span> │   └── posts.md
+</span></span><span style="display:flex;"><span> ├── bin
+</span></span><span style="display:flex;"><span> │   ├── deploy.sh
+</span></span><span style="display:flex;"><span> │   └── new_post.sh
+</span></span><span style="display:flex;"><span> ├── config.toml
+</span></span><span style="display:flex;"><span> ├── content
+</span></span><span style="display:flex;"><span> │   ├── about
+</span></span><span style="display:flex;"><span> │   │   └── index.md
+</span></span><span style="display:flex;"><span> │   └── posts
+</span></span><span style="display:flex;"><span> │       └── 2018-09-15-hugo-github-pages
+</span></span><span style="display:flex;"><span> │           └── index.md
+</span></span><span style="display:flex;"><span> ├── public(submodule)
+</span></span><span style="display:flex;"><span> ├── static
+</span></span><span style="display:flex;"><span> │   ├── css
+</span></span><span style="display:flex;"><span> │   │   └── index.css
+</span></span><span style="display:flex;"><span> │   └── images
+</span></span><span style="display:flex;"><span> │       └── avatar.jpg
+</span></span><span style="display:flex;"><span> └── themes
+</span></span><span style="display:flex;"><span>     └── coder(submodule)
+</span></span></code></pre></div><h2 id="configtoml">config.toml</h2>
 <p>自分はパーマリンクを<code>日付+自分で設定した英単語</code>にしたかったので、以下のようにconfig.tomlに追記。</p>
 <p>slugは各postのfrontmatter(postの先頭にあるヘッダ部分)に設定すると反映されます。</p>
 <p><code>posts = &quot;/posts/:year/:month/:day/:slug&quot;</code>の<code>posts</code>の部分はcontentディレクトリにある<code>posts</code>ディレクトリと同じ名前にする必要があるので注意。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-toml" data-lang="toml">[<span style="color:#a6e22e">permalinks</span>]
-  <span style="color:#a6e22e">posts</span> = <span style="color:#e6db74">&#34;/posts/:year/:month/:day/:slug&#34;</span>
-</code></pre></div><h2 id="makefile">Makefile</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-toml" data-lang="toml"><span style="display:flex;"><span>[<span style="color:#a6e22e">permalinks</span>]
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">posts</span> = <span style="color:#e6db74">&#34;/posts/:year/:month/:day/:slug&#34;</span>
+</span></span></code></pre></div><h2 id="makefile">Makefile</h2>
 <p>makeコマンドだけでいろいろな作業を完結させたかったので、以下のようにMakefileを作成。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-make" data-lang="make"><span style="color:#75715e"># new post title
-</span><span style="color:#75715e"></span>title<span style="color:#f92672">=</span>
-
-<span style="color:#a6e22e">init</span><span style="color:#f92672">:</span>
-	@git submodule update --init
-
-<span style="color:#a6e22e">update</span><span style="color:#f92672">:</span>
-	@git submodule foreach git checkout master
-	@git submodule foreach git pull
-
-<span style="color:#a6e22e">post</span><span style="color:#f92672">:</span>
-	@./bin/new_post.sh <span style="color:#e6db74">${</span>title<span style="color:#e6db74">}</span>
-
-<span style="color:#a6e22e">server</span><span style="color:#f92672">:</span> init
-	@hugo server --buildDrafts
-
-<span style="color:#a6e22e">server_prod</span><span style="color:#f92672">:</span> init
-	@hugo server
-
-<span style="color:#a6e22e">pull</span><span style="color:#f92672">:</span>
-	@git pull
-	@cd public; git checkout master; git pull;
-
-<span style="color:#a6e22e">build</span><span style="color:#f92672">:</span> init pull
-	@hugo
-
-<span style="color:#a6e22e">deploy</span><span style="color:#f92672">:</span> build
-	@./bin/deploy.sh
-
-</code></pre></div><h2 id="deploysh">deploy.sh</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-make" data-lang="make"><span style="display:flex;"><span><span style="color:#75715e"># new post title
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>title<span style="color:#f92672">=</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">init</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>	@git submodule update --init
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">update</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>	@git submodule foreach git checkout master
+</span></span><span style="display:flex;"><span>	@git submodule foreach git pull
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">post</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>	@./bin/new_post.sh <span style="color:#e6db74">${</span>title<span style="color:#e6db74">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">server</span><span style="color:#f92672">:</span> init
+</span></span><span style="display:flex;"><span>	@hugo server --buildDrafts
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">server_prod</span><span style="color:#f92672">:</span> init
+</span></span><span style="display:flex;"><span>	@hugo server
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">pull</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>	@git pull
+</span></span><span style="display:flex;"><span>	@cd public; git checkout master; git pull;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">build</span><span style="color:#f92672">:</span> init pull
+</span></span><span style="display:flex;"><span>	@hugo
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">deploy</span><span style="color:#f92672">:</span> build
+</span></span><span style="display:flex;"><span>	@./bin/deploy.sh
+</span></span></code></pre></div><h2 id="deploysh">deploy.sh</h2>
 <p><a href="https://gohugo.io/hosting-and-deployment/hosting-on-github/#put-it-into-a-script">公式のデプロイ方法</a>に書いてあることに、少し自分に必要な要件を足して以下のようなスクリプトを用意しました。</p>
 <p>追加したことは以下。</p>
 <ul>
@@ -232,44 +231,44 @@ posts = &quot;/posts/:year/:month/:day/:slug&quot;のpostsの部分はcontentデ
 <li>dateコマンドで出力されるフォーマットを英語表記になるようLANG=Cを追記</li>
 <li>デプロイ後のcommit hashをブログリポジトリに反映させるためcommit &amp; push</li>
 </ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e">#!/bin/bash
-</span><span style="color:#75715e"></span>LANG<span style="color:#f92672">=</span>C
-
-echo -e <span style="color:#e6db74">&#34;\033[0;32mDeploying updates to GitHub...\033[0m&#34;</span>
-
-<span style="color:#75715e"># Go To Public folder.</span>
-cd public
-<span style="color:#75715e"># Add changes to git.</span>
-git add .
-
-<span style="color:#75715e"># Commit changes.</span>
-msg<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;rebuilding site </span><span style="color:#66d9ef">$(</span>date<span style="color:#66d9ef">)</span><span style="color:#e6db74">&#34;</span>
-git commit -m <span style="color:#e6db74">&#34;</span>$msg<span style="color:#e6db74">&#34;</span>
-
-<span style="color:#75715e"># Push source and build repos.</span>
-git push origin master
-
-<span style="color:#75715e"># Come Back up to the Project Root.</span>
-cd ..
-
-<span style="color:#75715e"># Follows update of public.</span>
-git add public
-git commit -m <span style="color:#e6db74">&#34;</span>$msg<span style="color:#e6db74">&#34;</span>
-git push
-</code></pre></div><h2 id="new_postsh">new_post.sh</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e">#!/bin/bash
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>LANG<span style="color:#f92672">=</span>C
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>echo -e <span style="color:#e6db74">&#34;\033[0;32mDeploying updates to GitHub...\033[0m&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Go To Public folder.</span>
+</span></span><span style="display:flex;"><span>cd public
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Add changes to git.</span>
+</span></span><span style="display:flex;"><span>git add .
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Commit changes.</span>
+</span></span><span style="display:flex;"><span>msg<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;rebuilding site </span><span style="color:#66d9ef">$(</span>date<span style="color:#66d9ef">)</span><span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>git commit -m <span style="color:#e6db74">&#34;</span>$msg<span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Push source and build repos.</span>
+</span></span><span style="display:flex;"><span>git push origin master
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Come Back up to the Project Root.</span>
+</span></span><span style="display:flex;"><span>cd ..
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Follows update of public.</span>
+</span></span><span style="display:flex;"><span>git add public
+</span></span><span style="display:flex;"><span>git commit -m <span style="color:#e6db74">&#34;</span>$msg<span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>git push
+</span></span></code></pre></div><h2 id="new_postsh">new_post.sh</h2>
 <p>postのディレクトリに新しく記事を追加するとき、ディレクトリには<code>content/posts/2018-09-15-my-fist-post/index.md</code>のように日付を設定したかったので、postを作成するためのscriptを用意。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e">#!/bin/bash
-</span><span style="color:#75715e"></span>TITLE<span style="color:#f92672">=</span><span style="color:#e6db74">${</span>1<span style="color:#e6db74">}</span>
-
-<span style="color:#66d9ef">if</span> <span style="color:#f92672">[</span> -z <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>TITLE<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">]</span>; <span style="color:#66d9ef">then</span>
-  echo <span style="color:#e6db74">&#34;Please give the post title!&#34;</span>
-  exit <span style="color:#ae81ff">1</span>
-<span style="color:#66d9ef">fi</span>
-
-dirname<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span><span style="color:#66d9ef">$(</span>date <span style="color:#e6db74">&#39;+%Y-%m-%d&#39;</span><span style="color:#66d9ef">)</span><span style="color:#e6db74">-</span><span style="color:#e6db74">${</span>TITLE<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>
-
-hugo new posts/<span style="color:#e6db74">${</span>dirname<span style="color:#e6db74">}</span>/index.md --editor nvim
-</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e">#!/bin/bash
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>TITLE<span style="color:#f92672">=</span><span style="color:#e6db74">${</span>1<span style="color:#e6db74">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> <span style="color:#f92672">[</span> -z <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>TITLE<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">]</span>; <span style="color:#66d9ef">then</span>
+</span></span><span style="display:flex;"><span>  echo <span style="color:#e6db74">&#34;Please give the post title!&#34;</span>
+</span></span><span style="display:flex;"><span>  exit <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">fi</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>dirname<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span><span style="color:#66d9ef">$(</span>date <span style="color:#e6db74">&#39;+%Y-%m-%d&#39;</span><span style="color:#66d9ef">)</span><span style="color:#e6db74">-</span><span style="color:#e6db74">${</span>TITLE<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>hugo new posts/<span style="color:#e6db74">${</span>dirname<span style="color:#e6db74">}</span>/index.md --editor nvim
+</span></span></code></pre></div>
       </div>
 
 
@@ -278,8 +277,8 @@ hugo new posts/<span style="color:#e6db74">${</span>dirname<span style="color:#e
 
 
         <div id="disqus_thread"></div>
-<script type="application/javascript">
-    var disqus_config = function () {
+<script>
+    window.disqus_config = function () {
     
     
     
@@ -316,7 +315,7 @@ hugo new posts/<span style="color:#e6db74">${</span>dirname<span style="color:#e
       
         ©
         
-        2021
+        2023
          nametake 
       
       
@@ -332,7 +331,7 @@ hugo new posts/<span style="color:#e6db74">${</span>dirname<span style="color:#e
     
 
     
-<script type="application/javascript">
+<script>
 var doNotTrack = false;
 if (!doNotTrack) {
 	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -344,7 +343,6 @@ if (!doNotTrack) {
 	ga('send', 'pageview');
 }
 </script>
-
 
     
 

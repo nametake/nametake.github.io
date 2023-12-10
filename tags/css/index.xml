@@ -6,44 +6,28 @@
     <description>Recent content in CSS on nametake.info</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 14 Feb 2021 00:00:00 +0900</lastBuildDate><atom:link href="https://nametake.github.io/tags/css/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 14 Feb 2021 00:00:00 +0900</lastBuildDate>
+    <atom:link href="https://nametake.github.io/tags/css/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>display: gridでテーブルをスタイリングする時にdisplay: contentsを使う</title>
       <link>https://nametake.github.io/posts/2021/02/14/grid-with-display-contents/</link>
       <pubDate>Sun, 14 Feb 2021 00:00:00 +0900</pubDate>
-      
       <guid>https://nametake.github.io/posts/2021/02/14/grid-with-display-contents/</guid>
-      <description>両端のborderがないテーブルをgridでスタイリングしようとすると、 :not(:first-of-type) をただ使うだけではうまくいきません。
-gridにまかせて以下のようにすると、 :not(:first-of-type) は最初のcellにしかかかってくれません。
-また、HTMLのマークアップとしても行が表現されておらずあまりきれいな状態とはいえません。
-1 2 3 4 5 6 7 8 9 10 11  &amp;lt;div class=&amp;#34;table&amp;#34;&amp;gt; &amp;lt;div class=&amp;#34;cell&amp;#34;&amp;gt;One&amp;lt;/div&amp;gt; &amp;lt;div class=&amp;#34;cell&amp;#34;&amp;gt;Two&amp;lt;/div&amp;gt; &amp;lt;div class=&amp;#34;cell&amp;#34;&amp;gt;Three&amp;lt;/div&amp;gt; &amp;lt;div class=&amp;#34;cell&amp;#34;&amp;gt;Four&amp;lt;/div&amp;gt; &amp;lt;div class=&amp;#34;cell&amp;#34;&amp;gt;Five&amp;lt;/div&amp;gt; &amp;lt;div class=&amp;#34;cell&amp;#34;&amp;gt;Six&amp;lt;/div&amp;gt; &amp;lt;div class=&amp;#34;cell&amp;#34;&amp;gt;Seven&amp;lt;/div&amp;gt; &amp;lt;div class=&amp;#34;cell&amp;#34;&amp;gt;Eight&amp;lt;/div&amp;gt; &amp;lt;div class=&amp;#34;cell&amp;#34;&amp;gt;Nine&amp;lt;/div&amp;gt; &amp;lt;/div&amp;gt;   1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16  .table { display: grid; grid-template-columns: repeat(3, auto); margin: 32px; border-top: solid 1px black; } .</description>
+      <description>両端のborderがないテーブルをgridでスタイリングしようとすると、 :not(:first-of-type) をただ使うだけではうまくいきません。&#xA;gridにまかせて以下のようにすると、 :not(:first-of-type) は最初のcellにしかかかってくれません。&#xA;また、HTMLのマークアップとしても行が表現されておらずあまりきれいな状態とはいえません。&#xA;1 2 3 4 5 6 7 8 9 10 11 &amp;lt;div class=&amp;#34;table&amp;#34;&amp;gt; &amp;lt;div class=&amp;#34;cell&amp;#34;&amp;gt;One&amp;lt;/div&amp;gt; &amp;lt;div class=&amp;#34;cell&amp;#34;&amp;gt;Two&amp;lt;/div&amp;gt; &amp;lt;div class=&amp;#34;cell&amp;#34;&amp;gt;Three&amp;lt;/div&amp;gt; &amp;lt;div class=&amp;#34;cell&amp;#34;&amp;gt;Four&amp;lt;/div&amp;gt; &amp;lt;div class=&amp;#34;cell&amp;#34;&amp;gt;Five&amp;lt;/div&amp;gt; &amp;lt;div class=&amp;#34;cell&amp;#34;&amp;gt;Six&amp;lt;/div&amp;gt; &amp;lt;div class=&amp;#34;cell&amp;#34;&amp;gt;Seven&amp;lt;/div&amp;gt; &amp;lt;div class=&amp;#34;cell&amp;#34;&amp;gt;Eight&amp;lt;/div&amp;gt; &amp;lt;div class=&amp;#34;cell&amp;#34;&amp;gt;Nine&amp;lt;/div&amp;gt; &amp;lt;/div&amp;gt; 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 .table { display: grid; grid-template-columns: repeat(3, auto); margin: 32px; border-top: solid 1px black; } .cell { padding: 4px; text-align: center; border-bottom: solid 1px black; } .</description>
     </item>
-    
     <item>
       <title>SVGが特定のサイズ以下でずれる現象の原因と解決策</title>
       <link>https://nametake.github.io/posts/2020/08/10/css-svg-inline-descender/</link>
       <pubDate>Mon, 10 Aug 2020 00:00:00 +0900</pubDate>
-      
       <guid>https://nametake.github.io/posts/2020/08/10/css-svg-inline-descender/</guid>
-      <description>下記ブログを参考にしてアクセシビリティを維持したままCheckboxやRadioボタンを作ろうとしたのですが、特定のサイズ以下でずれる問題に遭遇しました。
-Building a Checkbox Component with React and styled-components
-以下がそのずれているときの画像です。16pxにしたとき親要素に対して少し下側にずれています。
-しかし、20pxにしたときには以下のように親要素とぴったり揃います。
-サイズによって変わるので割と謎だったのですが、調べてみるとtextの descender が原因だったようです。
-inline要素は g や y といったベースラインより下に突き抜ける文字用のために下側のスペースを確保してしまうようで、それが原因でSVGが下側にずれていました。
-原因がわかったので、上記の問題は line-height: 0; をSVGをラップしている要素に当て、 descender が確保されないようにすることで解決しました。</description>
+      <description>下記ブログを参考にしてアクセシビリティを維持したままCheckboxやRadioボタンを作ろうとしたのですが、特定のサイズ以下でずれる問題に遭遇しました。&#xA;Building a Checkbox Component with React and styled-components&#xA;以下がそのずれているときの画像です。16pxにしたとき親要素に対して少し下側にずれています。&#xA;しかし、20pxにしたときには以下のように親要素とぴったり揃います。&#xA;サイズによって変わるので割と謎だったのですが、調べてみるとtextの descender が原因だったようです。&#xA;inline要素は g や y といったベースラインより下に突き抜ける文字用のために下側のスペースを確保してしまうようで、それが原因でSVGが下側にずれていました。&#xA;原因がわかったので、上記の問題は line-height: 0; をSVGをラップしている要素に当て、 descender が確保されないようにすることで解決しました。</description>
     </item>
-    
     <item>
       <title>インライン要素の高さを合わせるCSS定義</title>
       <link>https://nametake.github.io/posts/2019/05/29/inline-center/</link>
       <pubDate>Wed, 29 May 2019 15:47:35 +0900</pubDate>
-      
       <guid>https://nametake.github.io/posts/2019/05/29/inline-center/</guid>
-      <description>ラジオボタンとラベルの高さを合わせるCSS定義を何回も調べている気がするのでメモ。
-たぶん下の書き方が一番モダンだと思います。
-display: inline-flex; align-items: center; </description>
+      <description>ラジオボタンとラベルの高さを合わせるCSS定義を何回も調べている気がするのでメモ。&#xA;たぶん下の書き方が一番モダンだと思います。&#xA;display: inline-flex; align-items: center; </description>
     </item>
-    
   </channel>
 </rss>

@@ -12,16 +12,16 @@
 
     
 
-    <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="組み合わせテストでの直交表とPICTの利用"/>
+    <meta name="twitter:card" content="summary"/><meta name="twitter:title" content="組み合わせテストでの直交表とPICTの利用"/>
 <meta name="twitter:description" content="組み合わせテストで数が指数関数的に増えてしまう問題を直交表とPICTを使って解決するメモ"/>
 
     <meta property="og:title" content="組み合わせテストでの直交表とPICTの利用" />
 <meta property="og:description" content="組み合わせテストで数が指数関数的に増えてしまう問題を直交表とPICTを使って解決するメモ" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://nametake.github.io/posts/2020/06/28/combination-test-pict-and-orthogonal-array/" />
+<meta property="og:url" content="https://nametake.github.io/posts/2020/06/28/combination-test-pict-and-orthogonal-array/" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2020-06-28T00:00:00+09:00" />
 <meta property="article:modified_time" content="2020-06-28T00:00:00+09:00" />
+
 
 
     
@@ -68,7 +68,7 @@
     <link rel="icon" type="image/png" href="https://nametake.github.io/images/favicon-32x32.png" sizes="32x32">
     <link rel="icon" type="image/png" href="https://nametake.github.io/images/favicon-16x16.png" sizes="16x16">
 
-    <meta name="generator" content="Hugo 0.80.0" />
+    <meta name="generator" content="Hugo 0.121.1">
   </head>
 
   
@@ -234,19 +234,19 @@
 <p>直交表では静的な表に因子と水準を当てはめていましたが、PICTでは動的に表を生成します。</p>
 <p>PICTでも例を挙げてみます。</p>
 <p>直交表のときと同じ因子と水準を使うと仮定して、以下のようなテキストファイルを用意します。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">OS: Windows, macOS
-ブラウザ: Chrome, Firefox
-端末: ラップトップ, モバイル
-</code></pre></div><p><code>因子: 水準1, 水準2</code> という構造を一行ずつ定義します。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>OS: Windows, macOS
+</span></span><span style="display:flex;"><span>ブラウザ: Chrome, Firefox
+</span></span><span style="display:flex;"><span>端末: ラップトップ, モバイル
+</span></span></code></pre></div><p><code>因子: 水準1, 水準2</code> という構造を一行ずつ定義します。</p>
 <p>上記ファイルを <code>factor.txt</code> という名前で保存して、以下のコマンドを実行します。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">pict factor.txt
-</code></pre></div><p>すると、以下のような出力を得られます。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">OS      ブラウザ   端末
-macOS   Firefox  モバイル
-macOS   Chrome   ラップトップ
-Windows Chrome   モバイル
-Windows Firefox  ラップトップ
-</code></pre></div><p>組み合わせの構造は違いますが、直交表と同じように2因子ごとの組み合わせが全て登場するテストケースが得られます。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>pict factor.txt
+</span></span></code></pre></div><p>すると、以下のような出力を得られます。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>OS      ブラウザ   端末
+</span></span><span style="display:flex;"><span>macOS   Firefox  モバイル
+</span></span><span style="display:flex;"><span>macOS   Chrome   ラップトップ
+</span></span><span style="display:flex;"><span>Windows Chrome   モバイル
+</span></span><span style="display:flex;"><span>Windows Firefox  ラップトップ
+</span></span></code></pre></div><p>組み合わせの構造は違いますが、直交表と同じように2因子ごとの組み合わせが全て登場するテストケースが得られます。</p>
 <p>動的に作成するため、直交表では因子と水準の数から表を探す必要がありましたが、PICTではそれをする必要がありません。</p>
 <p>また、最も効率の良い形で表を作るため、因子と水準の数が増えたときの組み合わせの数は直交表より少なくなります。</p>
 <p>ただし、PICTで作った表は、組み合わせ数が減ることと直交表が他の因子の組み合わせもある程度考慮されて作成されていることから、3因子間の網羅率はあまり高くありません。</p>
@@ -261,8 +261,8 @@ Windows Firefox  ラップトップ
 
 
         <div id="disqus_thread"></div>
-<script type="application/javascript">
-    var disqus_config = function () {
+<script>
+    window.disqus_config = function () {
     
     
     
@@ -299,7 +299,7 @@ Windows Firefox  ラップトップ
       
         ©
         
-        2021
+        2023
          nametake 
       
       
@@ -315,7 +315,7 @@ Windows Firefox  ラップトップ
     
 
     
-<script type="application/javascript">
+<script>
 var doNotTrack = false;
 if (!doNotTrack) {
 	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -327,7 +327,6 @@ if (!doNotTrack) {
 	ga('send', 'pageview');
 }
 </script>
-
 
     
 

@@ -12,19 +12,18 @@
 その際、どうやればいいかを調査していたら、ChainUnaryServerという関数を見つけ、中身を読んでみると、「特定のinterfaceを受け取って内部でそのinterfaceで実行する」機能を持った関数に対して「内部でinterfaceを実行するときに複数の関数でインターセプトする」方法の知見を得られたので記事にしようと思います。
 コード例 まずはインターセプトしたいコードの例を書きます。
 type WrapStruct struct { pingServer pb.PingAPIServer } func (w *WrapStruct) Call() { ctx := context.Background() arg := &amp;pb.PingRequest{ Msg: &#34;PING&#34;, } ret, err := w.pingServer.Ping(ctx, arg) fmt.Println(ret, err) } 上記例は以下のProtocol Buffersの定義をgRPCオプション付きでコンパイルすると生成されるコードを使用しています。
-syntax = &#34;proto3&#34;;package protobuf1;option go_package = &#34;pb&#34;;service PingAPI { rpc Ping(PingRequest) returns (PingResponse);}message PingRequest { string msg = 1;}message PingResponse { string msg = 1;}なんの変哲もない、ただ自身を実装している構造体がもつ PingAPIServer interfaceの Ping メソッドに PING の文字列を渡して実行し、その結果を出力しているだけのコードです。">
+syntax = &#34;proto3&#34;; package protobuf1; option go_package = &#34;pb&#34;; service PingAPI { rpc Ping(PingRequest) returns (PingResponse); } message PingRequest { string msg = 1; } message PingResponse { string msg = 1; } なんの変哲もない、ただ自身を実装している構造体がもつ PingAPIServer interfaceの Ping メソッドに PING の文字列を渡して実行し、その結果を出力しているだけのコードです。">
     <meta name="keywords" content="blog,developer,personal">
 
     
 
-    <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Goの関数内で呼び出される関数をインターセプトする方法"/>
+    <meta name="twitter:card" content="summary"/><meta name="twitter:title" content="Goの関数内で呼び出される関数をインターセプトする方法"/>
 <meta name="twitter:description" content="この記事はGo2 Advent Calendar 2019の記事です。
 自分はprotoc-gen-gohttpというプラグインを作っているのですが、先日grpc.UnaryServerInterceptorに対応しました。
 その際、どうやればいいかを調査していたら、ChainUnaryServerという関数を見つけ、中身を読んでみると、「特定のinterfaceを受け取って内部でそのinterfaceで実行する」機能を持った関数に対して「内部でinterfaceを実行するときに複数の関数でインターセプトする」方法の知見を得られたので記事にしようと思います。
 コード例 まずはインターセプトしたいコードの例を書きます。
 type WrapStruct struct { pingServer pb.PingAPIServer } func (w *WrapStruct) Call() { ctx := context.Background() arg := &amp;pb.PingRequest{ Msg: &#34;PING&#34;, } ret, err := w.pingServer.Ping(ctx, arg) fmt.Println(ret, err) } 上記例は以下のProtocol Buffersの定義をgRPCオプション付きでコンパイルすると生成されるコードを使用しています。
-syntax = &#34;proto3&#34;;package protobuf1;option go_package = &#34;pb&#34;;service PingAPI { rpc Ping(PingRequest) returns (PingResponse);}message PingRequest { string msg = 1;}message PingResponse { string msg = 1;}なんの変哲もない、ただ自身を実装している構造体がもつ PingAPIServer interfaceの Ping メソッドに PING の文字列を渡して実行し、その結果を出力しているだけのコードです。"/>
+syntax = &#34;proto3&#34;; package protobuf1; option go_package = &#34;pb&#34;; service PingAPI { rpc Ping(PingRequest) returns (PingResponse); } message PingRequest { string msg = 1; } message PingResponse { string msg = 1; } なんの変哲もない、ただ自身を実装している構造体がもつ PingAPIServer interfaceの Ping メソッドに PING の文字列を渡して実行し、その結果を出力しているだけのコードです。"/>
 
     <meta property="og:title" content="Goの関数内で呼び出される関数をインターセプトする方法" />
 <meta property="og:description" content="この記事はGo2 Advent Calendar 2019の記事です。
@@ -32,11 +31,12 @@ syntax = &#34;proto3&#34;;package protobuf1;option go_package = &#34;pb&#34;;ser
 その際、どうやればいいかを調査していたら、ChainUnaryServerという関数を見つけ、中身を読んでみると、「特定のinterfaceを受け取って内部でそのinterfaceで実行する」機能を持った関数に対して「内部でinterfaceを実行するときに複数の関数でインターセプトする」方法の知見を得られたので記事にしようと思います。
 コード例 まずはインターセプトしたいコードの例を書きます。
 type WrapStruct struct { pingServer pb.PingAPIServer } func (w *WrapStruct) Call() { ctx := context.Background() arg := &amp;pb.PingRequest{ Msg: &#34;PING&#34;, } ret, err := w.pingServer.Ping(ctx, arg) fmt.Println(ret, err) } 上記例は以下のProtocol Buffersの定義をgRPCオプション付きでコンパイルすると生成されるコードを使用しています。
-syntax = &#34;proto3&#34;;package protobuf1;option go_package = &#34;pb&#34;;service PingAPI { rpc Ping(PingRequest) returns (PingResponse);}message PingRequest { string msg = 1;}message PingResponse { string msg = 1;}なんの変哲もない、ただ自身を実装している構造体がもつ PingAPIServer interfaceの Ping メソッドに PING の文字列を渡して実行し、その結果を出力しているだけのコードです。" />
+syntax = &#34;proto3&#34;; package protobuf1; option go_package = &#34;pb&#34;; service PingAPI { rpc Ping(PingRequest) returns (PingResponse); } message PingRequest { string msg = 1; } message PingResponse { string msg = 1; } なんの変哲もない、ただ自身を実装している構造体がもつ PingAPIServer interfaceの Ping メソッドに PING の文字列を渡して実行し、その結果を出力しているだけのコードです。" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://nametake.github.io/posts/2019/12/09/go-func-intercept/" />
+<meta property="og:url" content="https://nametake.github.io/posts/2019/12/09/go-func-intercept/" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2019-12-09T00:05:29+09:00" />
 <meta property="article:modified_time" content="2019-12-09T00:05:29+09:00" />
+
 
 
     
@@ -83,7 +83,7 @@ syntax = &#34;proto3&#34;;package protobuf1;option go_package = &#34;pb&#34;;ser
     <link rel="icon" type="image/png" href="https://nametake.github.io/images/favicon-32x32.png" sizes="32x32">
     <link rel="icon" type="image/png" href="https://nametake.github.io/images/favicon-16x16.png" sizes="16x16">
 
-    <meta name="generator" content="Hugo 0.80.0" />
+    <meta name="generator" content="Hugo 0.121.1">
   </head>
 
   
@@ -165,175 +165,175 @@ syntax = &#34;proto3&#34;;package protobuf1;option go_package = &#34;pb&#34;;ser
 <p>その際、どうやればいいかを調査していたら、<a href="https://godoc.org/github.com/grpc-ecosystem/go-grpc-middleware#ChainUnaryServer">ChainUnaryServer</a>という関数を見つけ、中身を読んでみると、「特定のinterfaceを受け取って内部でそのinterfaceで実行する」機能を持った関数に対して「内部でinterfaceを実行するときに複数の関数でインターセプトする」方法の知見を得られたので記事にしようと思います。</p>
 <h1 id="コード例">コード例</h1>
 <p>まずはインターセプトしたいコードの例を書きます。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">WrapStruct</span> <span style="color:#66d9ef">struct</span> {
-	<span style="color:#a6e22e">pingServer</span> <span style="color:#a6e22e">pb</span>.<span style="color:#a6e22e">PingAPIServer</span>
-}
-
-<span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">w</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">WrapStruct</span>) <span style="color:#a6e22e">Call</span>() {
-	<span style="color:#a6e22e">ctx</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">context</span>.<span style="color:#a6e22e">Background</span>()
-	<span style="color:#a6e22e">arg</span> <span style="color:#f92672">:=</span> <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">pb</span>.<span style="color:#a6e22e">PingRequest</span>{
-		<span style="color:#a6e22e">Msg</span>: <span style="color:#e6db74">&#34;PING&#34;</span>,
-	}
-
-	<span style="color:#a6e22e">ret</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">w</span>.<span style="color:#a6e22e">pingServer</span>.<span style="color:#a6e22e">Ping</span>(<span style="color:#a6e22e">ctx</span>, <span style="color:#a6e22e">arg</span>)
-
-	<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">ret</span>, <span style="color:#a6e22e">err</span>)
-}
-</code></pre></div><p>上記例は以下のProtocol Buffersの定義をgRPCオプション付きでコンパイルすると生成されるコードを使用しています。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-proto" data-lang="proto">syntax <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;proto3&#34;</span>;<span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#f92672">package</span> protobuf1;<span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">option</span> go_package <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;pb&#34;</span>;<span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">service</span> PingAPI {<span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span>  <span style="color:#66d9ef">rpc</span> Ping(PingRequest) <span style="color:#66d9ef">returns</span> (PingResponse);<span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span>}<span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">message</span> <span style="color:#a6e22e">PingRequest</span> {<span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span>  <span style="color:#66d9ef">string</span> msg <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;<span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span>}<span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">message</span> <span style="color:#a6e22e">PingResponse</span> {<span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span>  <span style="color:#66d9ef">string</span> msg <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;<span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span>}<span style="color:#960050;background-color:#1e0010">
-</span></code></pre></div><p>なんの変哲もない、ただ自身を実装している構造体がもつ <code>PingAPIServer</code> interfaceの <code>Ping</code> メソッドに <code>PING</code> の文字列を渡して実行し、その結果を出力しているだけのコードです。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">WrapStruct</span> <span style="color:#66d9ef">struct</span> {
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">pingServer</span> <span style="color:#a6e22e">pb</span>.<span style="color:#a6e22e">PingAPIServer</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">w</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">WrapStruct</span>) <span style="color:#a6e22e">Call</span>() {
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">ctx</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">context</span>.<span style="color:#a6e22e">Background</span>()
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">arg</span> <span style="color:#f92672">:=</span> <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">pb</span>.<span style="color:#a6e22e">PingRequest</span>{
+</span></span><span style="display:flex;"><span>		<span style="color:#a6e22e">Msg</span>: <span style="color:#e6db74">&#34;PING&#34;</span>,
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">ret</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">w</span>.<span style="color:#a6e22e">pingServer</span>.<span style="color:#a6e22e">Ping</span>(<span style="color:#a6e22e">ctx</span>, <span style="color:#a6e22e">arg</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">ret</span>, <span style="color:#a6e22e">err</span>)
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>上記例は以下のProtocol Buffersの定義をgRPCオプション付きでコンパイルすると生成されるコードを使用しています。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-proto" data-lang="proto"><span style="display:flex;"><span>syntax <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;proto3&#34;</span>;<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#f92672">package</span> protobuf1;<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">option</span> go_package <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;pb&#34;</span>;<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">service</span> PingAPI {<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>  <span style="color:#66d9ef">rpc</span> Ping(PingRequest) <span style="color:#66d9ef">returns</span> (PingResponse);<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>}<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">message</span> <span style="color:#a6e22e">PingRequest</span> {<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>  <span style="color:#66d9ef">string</span> msg <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>}<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">message</span> <span style="color:#a6e22e">PingResponse</span> {<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>  <span style="color:#66d9ef">string</span> msg <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>}<span style="color:#960050;background-color:#1e0010">
+</span></span></span></code></pre></div><p>なんの変哲もない、ただ自身を実装している構造体がもつ <code>PingAPIServer</code> interfaceの <code>Ping</code> メソッドに <code>PING</code> の文字列を渡して実行し、その結果を出力しているだけのコードです。</p>
 <p>以下のように、 <code>PingAPIServer</code> interfaceを実装した構造体を渡すことで実行できます。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
-	<span style="color:#a6e22e">pingServer</span> <span style="color:#f92672">:=</span> <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">PingAPIServer</span>{}
-	<span style="color:#a6e22e">wrapStruct</span> <span style="color:#f92672">:=</span> <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">WrapStruct</span>{
-		<span style="color:#a6e22e">pingServer</span>: <span style="color:#a6e22e">pingServer</span>,
-	}
-
-	<span style="color:#a6e22e">wrapStruct</span>.<span style="color:#a6e22e">Call</span>()
-}
-
-<span style="color:#66d9ef">type</span> <span style="color:#a6e22e">PingAPIServer</span> <span style="color:#66d9ef">struct</span>{}
-
-<span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">p</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">PingAPIServer</span>) <span style="color:#a6e22e">Ping</span>(<span style="color:#a6e22e">ctx</span> <span style="color:#a6e22e">context</span>.<span style="color:#a6e22e">Context</span>, <span style="color:#a6e22e">arg</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">pb</span>.<span style="color:#a6e22e">PingRequest</span>) (<span style="color:#f92672">*</span><span style="color:#a6e22e">pb</span>.<span style="color:#a6e22e">PingResponse</span>, <span style="color:#66d9ef">error</span>) {
-	<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;CALLED PING&#34;</span>)
-	<span style="color:#66d9ef">return</span> <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">pb</span>.<span style="color:#a6e22e">PingResponse</span>{
-		<span style="color:#a6e22e">Msg</span>: <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Sprintf</span>(<span style="color:#e6db74">&#34;PONG: %s&#34;</span>, <span style="color:#a6e22e">arg</span>.<span style="color:#a6e22e">GetMsg</span>()),
-	}, <span style="color:#66d9ef">nil</span>
-}
-</code></pre></div><p>実行結果は以下のようになります。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">CALLED PING
-msg:&#34;PONG: PING&#34;  &lt;nil&gt;
-</code></pre></div><p>さて、今回インターセプトしたい部分は最初のコードの以下の部分です。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go">	<span style="color:#a6e22e">ret</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">w</span>.<span style="color:#a6e22e">pingServer</span>.<span style="color:#a6e22e">Ping</span>(<span style="color:#a6e22e">ctx</span>, <span style="color:#a6e22e">arg</span>)
-</code></pre></div><p>このコードの前後に、 <code>WrapStruct.Call</code> に関数を渡すことで処理をインターセプトできるようにしたいと思います。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">pingServer</span> <span style="color:#f92672">:=</span> <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">PingAPIServer</span>{}
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">wrapStruct</span> <span style="color:#f92672">:=</span> <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">WrapStruct</span>{
+</span></span><span style="display:flex;"><span>		<span style="color:#a6e22e">pingServer</span>: <span style="color:#a6e22e">pingServer</span>,
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">wrapStruct</span>.<span style="color:#a6e22e">Call</span>()
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">PingAPIServer</span> <span style="color:#66d9ef">struct</span>{}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">p</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">PingAPIServer</span>) <span style="color:#a6e22e">Ping</span>(<span style="color:#a6e22e">ctx</span> <span style="color:#a6e22e">context</span>.<span style="color:#a6e22e">Context</span>, <span style="color:#a6e22e">arg</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">pb</span>.<span style="color:#a6e22e">PingRequest</span>) (<span style="color:#f92672">*</span><span style="color:#a6e22e">pb</span>.<span style="color:#a6e22e">PingResponse</span>, <span style="color:#66d9ef">error</span>) {
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;CALLED PING&#34;</span>)
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span> <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">pb</span>.<span style="color:#a6e22e">PingResponse</span>{
+</span></span><span style="display:flex;"><span>		<span style="color:#a6e22e">Msg</span>: <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Sprintf</span>(<span style="color:#e6db74">&#34;PONG: %s&#34;</span>, <span style="color:#a6e22e">arg</span>.<span style="color:#a6e22e">GetMsg</span>()),
+</span></span><span style="display:flex;"><span>	}, <span style="color:#66d9ef">nil</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>実行結果は以下のようになります。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>CALLED PING
+</span></span><span style="display:flex;"><span>msg:&#34;PONG: PING&#34;  &lt;nil&gt;
+</span></span></code></pre></div><p>さて、今回インターセプトしたい部分は最初のコードの以下の部分です。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span>	<span style="color:#a6e22e">ret</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">w</span>.<span style="color:#a6e22e">pingServer</span>.<span style="color:#a6e22e">Ping</span>(<span style="color:#a6e22e">ctx</span>, <span style="color:#a6e22e">arg</span>)
+</span></span></code></pre></div><p>このコードの前後に、 <code>WrapStruct.Call</code> に関数を渡すことで処理をインターセプトできるようにしたいと思います。</p>
 <p>いきなりですがインターセプトできるようにしたコードを以下に貼ります。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">RPC</span> <span style="color:#66d9ef">func</span>(<span style="color:#a6e22e">context</span>.<span style="color:#a6e22e">Context</span>, <span style="color:#f92672">*</span><span style="color:#a6e22e">pb</span>.<span style="color:#a6e22e">PingRequest</span>) (<span style="color:#f92672">*</span><span style="color:#a6e22e">pb</span>.<span style="color:#a6e22e">PingResponse</span>, <span style="color:#66d9ef">error</span>)
-<span style="color:#66d9ef">type</span> <span style="color:#a6e22e">Interceptor</span> <span style="color:#66d9ef">func</span>(<span style="color:#a6e22e">context</span>.<span style="color:#a6e22e">Context</span>, <span style="color:#f92672">*</span><span style="color:#a6e22e">pb</span>.<span style="color:#a6e22e">PingRequest</span>, <span style="color:#a6e22e">RPC</span>) (<span style="color:#f92672">*</span><span style="color:#a6e22e">pb</span>.<span style="color:#a6e22e">PingResponse</span>, <span style="color:#66d9ef">error</span>)
-
-<span style="color:#66d9ef">type</span> <span style="color:#a6e22e">WrapStruct</span> <span style="color:#66d9ef">struct</span> {
-	<span style="color:#a6e22e">pingServer</span> <span style="color:#a6e22e">pb</span>.<span style="color:#a6e22e">PingAPIServer</span>
-}
-
-<span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">w</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">WrapStruct</span>) <span style="color:#a6e22e">Call</span>(<span style="color:#a6e22e">interceptors</span> <span style="color:#f92672">...</span><span style="color:#a6e22e">Interceptor</span>) {
-	<span style="color:#a6e22e">ctx</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">context</span>.<span style="color:#a6e22e">Background</span>()
-	<span style="color:#a6e22e">arg</span> <span style="color:#f92672">:=</span> <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">pb</span>.<span style="color:#a6e22e">PingRequest</span>{
-		<span style="color:#a6e22e">Msg</span>: <span style="color:#e6db74">&#34;PING&#34;</span>,
-	}
-
-	<span style="color:#a6e22e">n</span> <span style="color:#f92672">:=</span> len(<span style="color:#a6e22e">interceptors</span>)
-	<span style="color:#a6e22e">chained</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">func</span>(<span style="color:#a6e22e">ctx</span> <span style="color:#a6e22e">context</span>.<span style="color:#a6e22e">Context</span>, <span style="color:#a6e22e">arg</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">pb</span>.<span style="color:#a6e22e">PingRequest</span>, <span style="color:#a6e22e">rpc</span> <span style="color:#a6e22e">RPC</span>) (<span style="color:#f92672">*</span><span style="color:#a6e22e">pb</span>.<span style="color:#a6e22e">PingResponse</span>, <span style="color:#66d9ef">error</span>) {
-		<span style="color:#a6e22e">chainer</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">func</span>(<span style="color:#a6e22e">currentInter</span> <span style="color:#a6e22e">Interceptor</span>, <span style="color:#a6e22e">currentRPC</span> <span style="color:#a6e22e">RPC</span>) <span style="color:#a6e22e">RPC</span> {
-			<span style="color:#66d9ef">return</span> <span style="color:#66d9ef">func</span>(<span style="color:#a6e22e">currentCtx</span> <span style="color:#a6e22e">context</span>.<span style="color:#a6e22e">Context</span>, <span style="color:#a6e22e">currentReq</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">pb</span>.<span style="color:#a6e22e">PingRequest</span>) (<span style="color:#f92672">*</span><span style="color:#a6e22e">pb</span>.<span style="color:#a6e22e">PingResponse</span>, <span style="color:#66d9ef">error</span>) {
-				<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">currentInter</span>(<span style="color:#a6e22e">currentCtx</span>, <span style="color:#a6e22e">currentReq</span>, <span style="color:#a6e22e">currentRPC</span>)
-			}
-		}
-
-		<span style="color:#a6e22e">chainedRPC</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">rpc</span>
-		<span style="color:#66d9ef">for</span> <span style="color:#a6e22e">i</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">n</span> <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>; <span style="color:#a6e22e">i</span> <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">0</span>; <span style="color:#a6e22e">i</span><span style="color:#f92672">--</span> {
-			<span style="color:#a6e22e">chainedRPC</span> = <span style="color:#a6e22e">chainer</span>(<span style="color:#a6e22e">interceptors</span>[<span style="color:#a6e22e">i</span>], <span style="color:#a6e22e">chainedRPC</span>)
-		}
-		<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">chainedRPC</span>(<span style="color:#a6e22e">ctx</span>, <span style="color:#a6e22e">arg</span>)
-	}
-
-	<span style="color:#a6e22e">ret</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">chained</span>(<span style="color:#a6e22e">ctx</span>, <span style="color:#a6e22e">arg</span>, <span style="color:#a6e22e">w</span>.<span style="color:#a6e22e">pingServer</span>.<span style="color:#a6e22e">Ping</span>)
-
-	<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">ret</span>, <span style="color:#a6e22e">err</span>)
-}
-</code></pre></div><p>以下のようにして実行することで内部の <code>Ping</code> をインターセプトできます。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
-	<span style="color:#a6e22e">pingServer</span> <span style="color:#f92672">:=</span> <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">PingAPIServer</span>{}
-	<span style="color:#a6e22e">wrapStruct</span> <span style="color:#f92672">:=</span> <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">WrapStruct</span>{
-		<span style="color:#a6e22e">pingServer</span>: <span style="color:#a6e22e">pingServer</span>,
-	}
-
-	<span style="color:#a6e22e">wrapStruct</span>.<span style="color:#a6e22e">Call</span>()
-	<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;-------------------&#34;</span>)
-	<span style="color:#a6e22e">wrapStruct</span>.<span style="color:#a6e22e">Call</span>(
-		<span style="color:#a6e22e">printInterceptor</span>,
-	)
-	<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;-------------------&#34;</span>)
-	<span style="color:#a6e22e">wrapStruct</span>.<span style="color:#a6e22e">Call</span>(
-		<span style="color:#a6e22e">printInterceptor</span>,
-		<span style="color:#a6e22e">printInterceptor2</span>,
-	)
-}
-
-<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">printInterceptor</span>(<span style="color:#a6e22e">ctx</span> <span style="color:#a6e22e">context</span>.<span style="color:#a6e22e">Context</span>, <span style="color:#a6e22e">arg</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">pb</span>.<span style="color:#a6e22e">PingRequest</span>, <span style="color:#a6e22e">rpc</span> <span style="color:#a6e22e">RPC</span>) (<span style="color:#f92672">*</span><span style="color:#a6e22e">pb</span>.<span style="color:#a6e22e">PingResponse</span>, <span style="color:#66d9ef">error</span>) {
-	<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;BEFORE&#34;</span>)
-	<span style="color:#a6e22e">ret</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">rpc</span>(<span style="color:#a6e22e">ctx</span>, <span style="color:#a6e22e">arg</span>)
-	<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;AFTER&#34;</span>)
-	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">ret</span>, <span style="color:#a6e22e">err</span>
-}
-
-<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">printInterceptor2</span>(<span style="color:#a6e22e">ctx</span> <span style="color:#a6e22e">context</span>.<span style="color:#a6e22e">Context</span>, <span style="color:#a6e22e">arg</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">pb</span>.<span style="color:#a6e22e">PingRequest</span>, <span style="color:#a6e22e">rpc</span> <span style="color:#a6e22e">RPC</span>) (<span style="color:#f92672">*</span><span style="color:#a6e22e">pb</span>.<span style="color:#a6e22e">PingResponse</span>, <span style="color:#66d9ef">error</span>) {
-	<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;BEFORE2&#34;</span>)
-	<span style="color:#a6e22e">ret</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">rpc</span>(<span style="color:#a6e22e">ctx</span>, <span style="color:#a6e22e">arg</span>)
-	<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;AFTER2&#34;</span>)
-	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">ret</span>, <span style="color:#a6e22e">err</span>
-}
-</code></pre></div><p>上記コードの実行結果は以下です。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">CALLED PING
-msg:&#34;PONG: PING&#34;  &lt;nil&gt;
--------------------
-BEFORE
-CALLED PING
-AFTER
-msg:&#34;PONG: PING&#34;  &lt;nil&gt;
--------------------
-BEFORE
-BEFORE2
-CALLED PING
-AFTER2
-AFTER
-msg:&#34;PONG: PING&#34;  &lt;nil&gt;
-</code></pre></div><p>Pingメソッドが内部で出力している <code>CALLED PING</code> の前後に任意の文字列を出力できています。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">RPC</span> <span style="color:#66d9ef">func</span>(<span style="color:#a6e22e">context</span>.<span style="color:#a6e22e">Context</span>, <span style="color:#f92672">*</span><span style="color:#a6e22e">pb</span>.<span style="color:#a6e22e">PingRequest</span>) (<span style="color:#f92672">*</span><span style="color:#a6e22e">pb</span>.<span style="color:#a6e22e">PingResponse</span>, <span style="color:#66d9ef">error</span>)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">Interceptor</span> <span style="color:#66d9ef">func</span>(<span style="color:#a6e22e">context</span>.<span style="color:#a6e22e">Context</span>, <span style="color:#f92672">*</span><span style="color:#a6e22e">pb</span>.<span style="color:#a6e22e">PingRequest</span>, <span style="color:#a6e22e">RPC</span>) (<span style="color:#f92672">*</span><span style="color:#a6e22e">pb</span>.<span style="color:#a6e22e">PingResponse</span>, <span style="color:#66d9ef">error</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">WrapStruct</span> <span style="color:#66d9ef">struct</span> {
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">pingServer</span> <span style="color:#a6e22e">pb</span>.<span style="color:#a6e22e">PingAPIServer</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">w</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">WrapStruct</span>) <span style="color:#a6e22e">Call</span>(<span style="color:#a6e22e">interceptors</span> <span style="color:#f92672">...</span><span style="color:#a6e22e">Interceptor</span>) {
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">ctx</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">context</span>.<span style="color:#a6e22e">Background</span>()
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">arg</span> <span style="color:#f92672">:=</span> <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">pb</span>.<span style="color:#a6e22e">PingRequest</span>{
+</span></span><span style="display:flex;"><span>		<span style="color:#a6e22e">Msg</span>: <span style="color:#e6db74">&#34;PING&#34;</span>,
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">n</span> <span style="color:#f92672">:=</span> len(<span style="color:#a6e22e">interceptors</span>)
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">chained</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">func</span>(<span style="color:#a6e22e">ctx</span> <span style="color:#a6e22e">context</span>.<span style="color:#a6e22e">Context</span>, <span style="color:#a6e22e">arg</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">pb</span>.<span style="color:#a6e22e">PingRequest</span>, <span style="color:#a6e22e">rpc</span> <span style="color:#a6e22e">RPC</span>) (<span style="color:#f92672">*</span><span style="color:#a6e22e">pb</span>.<span style="color:#a6e22e">PingResponse</span>, <span style="color:#66d9ef">error</span>) {
+</span></span><span style="display:flex;"><span>		<span style="color:#a6e22e">chainer</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">func</span>(<span style="color:#a6e22e">currentInter</span> <span style="color:#a6e22e">Interceptor</span>, <span style="color:#a6e22e">currentRPC</span> <span style="color:#a6e22e">RPC</span>) <span style="color:#a6e22e">RPC</span> {
+</span></span><span style="display:flex;"><span>			<span style="color:#66d9ef">return</span> <span style="color:#66d9ef">func</span>(<span style="color:#a6e22e">currentCtx</span> <span style="color:#a6e22e">context</span>.<span style="color:#a6e22e">Context</span>, <span style="color:#a6e22e">currentReq</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">pb</span>.<span style="color:#a6e22e">PingRequest</span>) (<span style="color:#f92672">*</span><span style="color:#a6e22e">pb</span>.<span style="color:#a6e22e">PingResponse</span>, <span style="color:#66d9ef">error</span>) {
+</span></span><span style="display:flex;"><span>				<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">currentInter</span>(<span style="color:#a6e22e">currentCtx</span>, <span style="color:#a6e22e">currentReq</span>, <span style="color:#a6e22e">currentRPC</span>)
+</span></span><span style="display:flex;"><span>			}
+</span></span><span style="display:flex;"><span>		}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>		<span style="color:#a6e22e">chainedRPC</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">rpc</span>
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">for</span> <span style="color:#a6e22e">i</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">n</span> <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>; <span style="color:#a6e22e">i</span> <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">0</span>; <span style="color:#a6e22e">i</span><span style="color:#f92672">--</span> {
+</span></span><span style="display:flex;"><span>			<span style="color:#a6e22e">chainedRPC</span> = <span style="color:#a6e22e">chainer</span>(<span style="color:#a6e22e">interceptors</span>[<span style="color:#a6e22e">i</span>], <span style="color:#a6e22e">chainedRPC</span>)
+</span></span><span style="display:flex;"><span>		}
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">chainedRPC</span>(<span style="color:#a6e22e">ctx</span>, <span style="color:#a6e22e">arg</span>)
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">ret</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">chained</span>(<span style="color:#a6e22e">ctx</span>, <span style="color:#a6e22e">arg</span>, <span style="color:#a6e22e">w</span>.<span style="color:#a6e22e">pingServer</span>.<span style="color:#a6e22e">Ping</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">ret</span>, <span style="color:#a6e22e">err</span>)
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>以下のようにして実行することで内部の <code>Ping</code> をインターセプトできます。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">pingServer</span> <span style="color:#f92672">:=</span> <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">PingAPIServer</span>{}
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">wrapStruct</span> <span style="color:#f92672">:=</span> <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">WrapStruct</span>{
+</span></span><span style="display:flex;"><span>		<span style="color:#a6e22e">pingServer</span>: <span style="color:#a6e22e">pingServer</span>,
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">wrapStruct</span>.<span style="color:#a6e22e">Call</span>()
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;-------------------&#34;</span>)
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">wrapStruct</span>.<span style="color:#a6e22e">Call</span>(
+</span></span><span style="display:flex;"><span>		<span style="color:#a6e22e">printInterceptor</span>,
+</span></span><span style="display:flex;"><span>	)
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;-------------------&#34;</span>)
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">wrapStruct</span>.<span style="color:#a6e22e">Call</span>(
+</span></span><span style="display:flex;"><span>		<span style="color:#a6e22e">printInterceptor</span>,
+</span></span><span style="display:flex;"><span>		<span style="color:#a6e22e">printInterceptor2</span>,
+</span></span><span style="display:flex;"><span>	)
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">printInterceptor</span>(<span style="color:#a6e22e">ctx</span> <span style="color:#a6e22e">context</span>.<span style="color:#a6e22e">Context</span>, <span style="color:#a6e22e">arg</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">pb</span>.<span style="color:#a6e22e">PingRequest</span>, <span style="color:#a6e22e">rpc</span> <span style="color:#a6e22e">RPC</span>) (<span style="color:#f92672">*</span><span style="color:#a6e22e">pb</span>.<span style="color:#a6e22e">PingResponse</span>, <span style="color:#66d9ef">error</span>) {
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;BEFORE&#34;</span>)
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">ret</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">rpc</span>(<span style="color:#a6e22e">ctx</span>, <span style="color:#a6e22e">arg</span>)
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;AFTER&#34;</span>)
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">ret</span>, <span style="color:#a6e22e">err</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">printInterceptor2</span>(<span style="color:#a6e22e">ctx</span> <span style="color:#a6e22e">context</span>.<span style="color:#a6e22e">Context</span>, <span style="color:#a6e22e">arg</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">pb</span>.<span style="color:#a6e22e">PingRequest</span>, <span style="color:#a6e22e">rpc</span> <span style="color:#a6e22e">RPC</span>) (<span style="color:#f92672">*</span><span style="color:#a6e22e">pb</span>.<span style="color:#a6e22e">PingResponse</span>, <span style="color:#66d9ef">error</span>) {
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;BEFORE2&#34;</span>)
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">ret</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">rpc</span>(<span style="color:#a6e22e">ctx</span>, <span style="color:#a6e22e">arg</span>)
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;AFTER2&#34;</span>)
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">ret</span>, <span style="color:#a6e22e">err</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>上記コードの実行結果は以下です。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>CALLED PING
+</span></span><span style="display:flex;"><span>msg:&#34;PONG: PING&#34;  &lt;nil&gt;
+</span></span><span style="display:flex;"><span>-------------------
+</span></span><span style="display:flex;"><span>BEFORE
+</span></span><span style="display:flex;"><span>CALLED PING
+</span></span><span style="display:flex;"><span>AFTER
+</span></span><span style="display:flex;"><span>msg:&#34;PONG: PING&#34;  &lt;nil&gt;
+</span></span><span style="display:flex;"><span>-------------------
+</span></span><span style="display:flex;"><span>BEFORE
+</span></span><span style="display:flex;"><span>BEFORE2
+</span></span><span style="display:flex;"><span>CALLED PING
+</span></span><span style="display:flex;"><span>AFTER2
+</span></span><span style="display:flex;"><span>AFTER
+</span></span><span style="display:flex;"><span>msg:&#34;PONG: PING&#34;  &lt;nil&gt;
+</span></span></code></pre></div><p>Pingメソッドが内部で出力している <code>CALLED PING</code> の前後に任意の文字列を出力できています。</p>
 <h1 id="解説">解説</h1>
 <p>さて、コードを見ればわかりはするのですが、一応どういう変更を入れたのか簡単に解説をしようと思います。</p>
 <p>まずは下記のintrafaceです。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">RPC</span> <span style="color:#66d9ef">func</span>(<span style="color:#a6e22e">context</span>.<span style="color:#a6e22e">Context</span>, <span style="color:#f92672">*</span><span style="color:#a6e22e">pb</span>.<span style="color:#a6e22e">PingRequest</span>) (<span style="color:#f92672">*</span><span style="color:#a6e22e">pb</span>.<span style="color:#a6e22e">PingResponse</span>, <span style="color:#66d9ef">error</span>)
-<span style="color:#66d9ef">type</span> <span style="color:#a6e22e">Interceptor</span> <span style="color:#66d9ef">func</span>(<span style="color:#a6e22e">context</span>.<span style="color:#a6e22e">Context</span>, <span style="color:#f92672">*</span><span style="color:#a6e22e">pb</span>.<span style="color:#a6e22e">PingRequest</span>, <span style="color:#a6e22e">RPC</span>) (<span style="color:#f92672">*</span><span style="color:#a6e22e">pb</span>.<span style="color:#a6e22e">PingResponse</span>, <span style="color:#66d9ef">error</span>)
-</code></pre></div><p><code>RPC</code> は内部でインターセプトされる側のメソッドを表現したものです。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">RPC</span> <span style="color:#66d9ef">func</span>(<span style="color:#a6e22e">context</span>.<span style="color:#a6e22e">Context</span>, <span style="color:#f92672">*</span><span style="color:#a6e22e">pb</span>.<span style="color:#a6e22e">PingRequest</span>) (<span style="color:#f92672">*</span><span style="color:#a6e22e">pb</span>.<span style="color:#a6e22e">PingResponse</span>, <span style="color:#66d9ef">error</span>)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">Interceptor</span> <span style="color:#66d9ef">func</span>(<span style="color:#a6e22e">context</span>.<span style="color:#a6e22e">Context</span>, <span style="color:#f92672">*</span><span style="color:#a6e22e">pb</span>.<span style="color:#a6e22e">PingRequest</span>, <span style="color:#a6e22e">RPC</span>) (<span style="color:#f92672">*</span><span style="color:#a6e22e">pb</span>.<span style="color:#a6e22e">PingResponse</span>, <span style="color:#66d9ef">error</span>)
+</span></span></code></pre></div><p><code>RPC</code> は内部でインターセプトされる側のメソッドを表現したものです。</p>
 <p>今回は例のため型をベタに書いていますが、汎用性が必要な場合は <code>interface{}</code> 型にしたり、引数や返り値にinterfaceを使うほうがよいでしょう。今回の例も <code>proto.Message</code> 型で抽象化できるのですが、わかりやすさのために構造体を直に書いています。</p>
 <p><code>Interceptor</code> は文字通りインターセプトをするための関数の定義です。</p>
 <p>引数に、「<code>RPC</code>の引数」と「<code>RPC</code>そのもの」を受け取り、「<code>RPC</code>の戻り値」を返す定義になっています。</p>
 <p>次に <code>Call</code> メソッドの引数です。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">w</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">WrapStruct</span>) <span style="color:#a6e22e">Call</span>(<span style="color:#a6e22e">interceptors</span> <span style="color:#f92672">...</span><span style="color:#a6e22e">Interceptor</span>) {
-</code></pre></div><p>ここは単純に、可変長引数でInterceptorを受け取っています。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">w</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">WrapStruct</span>) <span style="color:#a6e22e">Call</span>(<span style="color:#a6e22e">interceptors</span> <span style="color:#f92672">...</span><span style="color:#a6e22e">Interceptor</span>) {
+</span></span></code></pre></div><p>ここは単純に、可変長引数でInterceptorを受け取っています。</p>
 <p>必須なら可変長引数にしないほうがいいですが、ここでは渡さなくても動く例を示せるよう可変長引数にしています。</p>
 <p>さて、一番重要なところです。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go">	<span style="color:#a6e22e">n</span> <span style="color:#f92672">:=</span> len(<span style="color:#a6e22e">interceptors</span>)
-	<span style="color:#a6e22e">chained</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">func</span>(<span style="color:#a6e22e">ctx</span> <span style="color:#a6e22e">context</span>.<span style="color:#a6e22e">Context</span>, <span style="color:#a6e22e">arg</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">pb</span>.<span style="color:#a6e22e">PingRequest</span>, <span style="color:#a6e22e">rpc</span> <span style="color:#a6e22e">RPC</span>) (<span style="color:#f92672">*</span><span style="color:#a6e22e">pb</span>.<span style="color:#a6e22e">PingResponse</span>, <span style="color:#66d9ef">error</span>) {
-		<span style="color:#a6e22e">chainer</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">func</span>(<span style="color:#a6e22e">currentInter</span> <span style="color:#a6e22e">Interceptor</span>, <span style="color:#a6e22e">currentRPC</span> <span style="color:#a6e22e">RPC</span>) <span style="color:#a6e22e">RPC</span> {
-			<span style="color:#66d9ef">return</span> <span style="color:#66d9ef">func</span>(<span style="color:#a6e22e">currentCtx</span> <span style="color:#a6e22e">context</span>.<span style="color:#a6e22e">Context</span>, <span style="color:#a6e22e">currentReq</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">pb</span>.<span style="color:#a6e22e">PingRequest</span>) (<span style="color:#f92672">*</span><span style="color:#a6e22e">pb</span>.<span style="color:#a6e22e">PingResponse</span>, <span style="color:#66d9ef">error</span>) {
-				<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">currentInter</span>(<span style="color:#a6e22e">currentCtx</span>, <span style="color:#a6e22e">currentReq</span>, <span style="color:#a6e22e">currentRPC</span>)
-			}
-		}
-
-		<span style="color:#a6e22e">chainedRPC</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">rpc</span>
-		<span style="color:#66d9ef">for</span> <span style="color:#a6e22e">i</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">n</span> <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>; <span style="color:#a6e22e">i</span> <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">0</span>; <span style="color:#a6e22e">i</span><span style="color:#f92672">--</span> {
-			<span style="color:#a6e22e">chainedRPC</span> = <span style="color:#a6e22e">chainer</span>(<span style="color:#a6e22e">interceptors</span>[<span style="color:#a6e22e">i</span>], <span style="color:#a6e22e">chainedRPC</span>)
-		}
-		<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">chainedRPC</span>(<span style="color:#a6e22e">ctx</span>, <span style="color:#a6e22e">arg</span>)
-	}
-
-	<span style="color:#a6e22e">ret</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">chained</span>(<span style="color:#a6e22e">ctx</span>, <span style="color:#a6e22e">arg</span>, <span style="color:#a6e22e">w</span>.<span style="color:#a6e22e">pingServer</span>.<span style="color:#a6e22e">Ping</span>)
-</code></pre></div><p>1つずつ分解してみていきます。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span>	<span style="color:#a6e22e">n</span> <span style="color:#f92672">:=</span> len(<span style="color:#a6e22e">interceptors</span>)
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">chained</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">func</span>(<span style="color:#a6e22e">ctx</span> <span style="color:#a6e22e">context</span>.<span style="color:#a6e22e">Context</span>, <span style="color:#a6e22e">arg</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">pb</span>.<span style="color:#a6e22e">PingRequest</span>, <span style="color:#a6e22e">rpc</span> <span style="color:#a6e22e">RPC</span>) (<span style="color:#f92672">*</span><span style="color:#a6e22e">pb</span>.<span style="color:#a6e22e">PingResponse</span>, <span style="color:#66d9ef">error</span>) {
+</span></span><span style="display:flex;"><span>		<span style="color:#a6e22e">chainer</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">func</span>(<span style="color:#a6e22e">currentInter</span> <span style="color:#a6e22e">Interceptor</span>, <span style="color:#a6e22e">currentRPC</span> <span style="color:#a6e22e">RPC</span>) <span style="color:#a6e22e">RPC</span> {
+</span></span><span style="display:flex;"><span>			<span style="color:#66d9ef">return</span> <span style="color:#66d9ef">func</span>(<span style="color:#a6e22e">currentCtx</span> <span style="color:#a6e22e">context</span>.<span style="color:#a6e22e">Context</span>, <span style="color:#a6e22e">currentReq</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">pb</span>.<span style="color:#a6e22e">PingRequest</span>) (<span style="color:#f92672">*</span><span style="color:#a6e22e">pb</span>.<span style="color:#a6e22e">PingResponse</span>, <span style="color:#66d9ef">error</span>) {
+</span></span><span style="display:flex;"><span>				<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">currentInter</span>(<span style="color:#a6e22e">currentCtx</span>, <span style="color:#a6e22e">currentReq</span>, <span style="color:#a6e22e">currentRPC</span>)
+</span></span><span style="display:flex;"><span>			}
+</span></span><span style="display:flex;"><span>		}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>		<span style="color:#a6e22e">chainedRPC</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">rpc</span>
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">for</span> <span style="color:#a6e22e">i</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">n</span> <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>; <span style="color:#a6e22e">i</span> <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">0</span>; <span style="color:#a6e22e">i</span><span style="color:#f92672">--</span> {
+</span></span><span style="display:flex;"><span>			<span style="color:#a6e22e">chainedRPC</span> = <span style="color:#a6e22e">chainer</span>(<span style="color:#a6e22e">interceptors</span>[<span style="color:#a6e22e">i</span>], <span style="color:#a6e22e">chainedRPC</span>)
+</span></span><span style="display:flex;"><span>		}
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">chainedRPC</span>(<span style="color:#a6e22e">ctx</span>, <span style="color:#a6e22e">arg</span>)
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">ret</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">chained</span>(<span style="color:#a6e22e">ctx</span>, <span style="color:#a6e22e">arg</span>, <span style="color:#a6e22e">w</span>.<span style="color:#a6e22e">pingServer</span>.<span style="color:#a6e22e">Ping</span>)
+</span></span></code></pre></div><p>1つずつ分解してみていきます。</p>
 <p><code>chained</code> 関数は <code>Interceptor</code> と同じ引数戻り値をしています。</p>
 <p>重要なのは <code>chained</code> 関数の内部です。</p>
 <p>内部で定義されている <code>chainer</code> は <code>Interceptor</code> と <code>RPC</code> を受け取り、 <code>RPC</code> を返す関数です。</p>
@@ -360,8 +360,8 @@ msg:&#34;PONG: PING&#34;  &lt;nil&gt;
 
 
         <div id="disqus_thread"></div>
-<script type="application/javascript">
-    var disqus_config = function () {
+<script>
+    window.disqus_config = function () {
     
     
     
@@ -398,7 +398,7 @@ msg:&#34;PONG: PING&#34;  &lt;nil&gt;
       
         ©
         
-        2021
+        2023
          nametake 
       
       
@@ -414,7 +414,7 @@ msg:&#34;PONG: PING&#34;  &lt;nil&gt;
     
 
     
-<script type="application/javascript">
+<script>
 var doNotTrack = false;
 if (!doNotTrack) {
 	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -426,7 +426,6 @@ if (!doNotTrack) {
 	ga('send', 'pageview');
 }
 </script>
-
 
     
 

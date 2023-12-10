@@ -9,25 +9,25 @@
     <meta name="author" content="nametake">
     <meta name="description" content="Vimのプラグインとしてaleとneoformatをずっと利用して来たのですが、LinterやFormatterも全てLanguage Serverに移行しようと思い、 diagnostic-languageserver に移行しました。
 aleやneoformatで使っていたLinterやFormatterも全て移行させたのでその設定のJSONもおいておきます。
-1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84 85 86 87 88 89 90 91 92 93 94 95 96 97 98 99 100 101 102 103 104 105 106 107 108 109 110 111 112 113 114 115 116 117 118 119 120 121 122 123 124 125 126 127 128 129 130 131 132 133 134 135 136 137 138 139 140 141 142 143 144 145 146 147 148 149 150 151 152 153 154 155 156 157 158 159 160 161 162 163 164 165 166 167 168 169 170 171 172 173 174 175 176 177 178 179 180 181 182 183 184 185 186 187 188 189 190 191 192 193 194 195 196 197 198 199 200 201 202 203 204 205 206 207 208 209 210 211 212 213 214 215 216 217 218 219 220 221 222 223 224 225 226 227 228 229 230 231 232 233 234 235 236 237 238 239 240 241 242 243 244 245 246 247 248 249 250 251 252 253 254 255  { &#34;languageserver&#34;: { &#34;dls&#34;: { &#34;args&#34;: [ &#34;--stdio&#34; ], &#34;command&#34;: &#34;diagnostic-languageserver&#34;, &#34;filetypes&#34;: [ &#34;dockerfile&#34;, &#34;go&#34;, &#34;json&#34;, &#34;markdown&#34;, &#34;sh&#34;, &#34;yaml&#34;, &#34;vim&#34; ], &#34;initializationOptions&#34;: { &#34;filetypes&#34;: { &#34;dockerfile&#34;: [ &#34;dockerfile-hadolint&#34; ], &#34;go&#34;: [], &#34;markdown&#34;: [ &#34;markdown-remark-lint&#34;, &#34;markdown-textlint&#34; ], &#34;sh&#34;: [ &#34;sh-shellcheck&#34; ], &#34;vim&#34;: [ &#34;vim-vint&#34; ], &#34;yaml&#34;: [ &#34;yaml-yamllint&#34; ] }, &#34;formatFiletypes&#34;: { &#34;go&#34;: [ &#34;go-gofmtrlx&#34;, &#34;go-goimports&#34; ], &#34;json&#34;: [ &#34;json-fixjson&#34;, &#34;json-jq&#34; ], &#34;markdown&#34;: [ &#34;markdown-remark&#34; ], &#34;sh&#34;: [ &#34;sh-shfmt&#34; ] }, &#34;formatters&#34;: { &#34;go-gofmtrlx&#34;: { &#34;command&#34;: &#34;gofmtrlx&#34; }, &#34;go-goimports&#34;: { &#34;command&#34;: &#34;goimports&#34; }, &#34;json-fixjson&#34;: { &#34;command&#34;: &#34;fixjson&#34;, &#34;isStderr&#34;: false, &#34;isStdout&#34;: true }, &#34;json-jq&#34;: { &#34;args&#34;: [ &#34;.">
+1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84 85 86 87 88 89 90 91 92 93 94 95 96 97 98 99 100 101 102 103 104 105 106 107 108 109 110 111 112 113 114 115 116 117 118 119 120 121 122 123 124 125 126 127 128 129 130 131 132 133 134 135 136 137 138 139 140 141 142 143 144 145 146 147 148 149 150 151 152 153 154 155 156 157 158 159 160 161 162 163 164 165 166 167 168 169 170 171 172 173 174 175 176 177 178 179 180 181 182 183 184 185 186 187 188 189 190 191 192 193 194 195 196 197 198 199 200 201 202 203 204 205 206 207 208 209 210 211 212 213 214 215 216 217 218 219 220 221 222 223 224 225 226 227 228 229 230 231 232 233 234 235 236 237 238 239 240 241 242 243 244 245 246 247 248 249 250 251 252 253 254 255 { &#34;languageserver&#34;: { &#34;dls&#34;: { &#34;args&#34;: [ &#34;--stdio&#34; ], &#34;command&#34;: &#34;diagnostic-languageserver&#34;, &#34;filetypes&#34;: [ &#34;dockerfile&#34;, &#34;go&#34;, &#34;json&#34;, &#34;markdown&#34;, &#34;sh&#34;, &#34;yaml&#34;, &#34;vim&#34; ], &#34;initializationOptions&#34;: { &#34;filetypes&#34;: { &#34;dockerfile&#34;: [ &#34;dockerfile-hadolint&#34; ], &#34;go&#34;: [], &#34;markdown&#34;: [ &#34;markdown-remark-lint&#34;, &#34;markdown-textlint&#34; ], &#34;sh&#34;: [ &#34;sh-shellcheck&#34; ], &#34;vim&#34;: [ &#34;vim-vint&#34; ], &#34;yaml&#34;: [ &#34;yaml-yamllint&#34; ] }, &#34;formatFiletypes&#34;: { &#34;go&#34;: [ &#34;go-gofmtrlx&#34;, &#34;go-goimports&#34; ], &#34;json&#34;: [ &#34;json-fixjson&#34;, &#34;json-jq&#34; ], &#34;markdown&#34;: [ &#34;markdown-remark&#34; ], &#34;sh&#34;: [ &#34;sh-shfmt&#34; ] }, &#34;formatters&#34;: { &#34;go-gofmtrlx&#34;: { &#34;command&#34;: &#34;gofmtrlx&#34; }, &#34;go-goimports&#34;: { &#34;command&#34;: &#34;goimports&#34; }, &#34;json-fixjson&#34;: { &#34;command&#34;: &#34;fixjson&#34;, &#34;isStderr&#34;: false, &#34;isStdout&#34;: true }, &#34;json-jq&#34;: { &#34;args&#34;: [ &#34;.">
     <meta name="keywords" content="blog,developer,personal">
 
     
 
-    <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="aleとneoformatからdiagnostic-languageserverに移行した"/>
+    <meta name="twitter:card" content="summary"/><meta name="twitter:title" content="aleとneoformatからdiagnostic-languageserverに移行した"/>
 <meta name="twitter:description" content="Vimのプラグインとしてaleとneoformatをずっと利用して来たのですが、LinterやFormatterも全てLanguage Serverに移行しようと思い、 diagnostic-languageserver に移行しました。
 aleやneoformatで使っていたLinterやFormatterも全て移行させたのでその設定のJSONもおいておきます。
-1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84 85 86 87 88 89 90 91 92 93 94 95 96 97 98 99 100 101 102 103 104 105 106 107 108 109 110 111 112 113 114 115 116 117 118 119 120 121 122 123 124 125 126 127 128 129 130 131 132 133 134 135 136 137 138 139 140 141 142 143 144 145 146 147 148 149 150 151 152 153 154 155 156 157 158 159 160 161 162 163 164 165 166 167 168 169 170 171 172 173 174 175 176 177 178 179 180 181 182 183 184 185 186 187 188 189 190 191 192 193 194 195 196 197 198 199 200 201 202 203 204 205 206 207 208 209 210 211 212 213 214 215 216 217 218 219 220 221 222 223 224 225 226 227 228 229 230 231 232 233 234 235 236 237 238 239 240 241 242 243 244 245 246 247 248 249 250 251 252 253 254 255  { &#34;languageserver&#34;: { &#34;dls&#34;: { &#34;args&#34;: [ &#34;--stdio&#34; ], &#34;command&#34;: &#34;diagnostic-languageserver&#34;, &#34;filetypes&#34;: [ &#34;dockerfile&#34;, &#34;go&#34;, &#34;json&#34;, &#34;markdown&#34;, &#34;sh&#34;, &#34;yaml&#34;, &#34;vim&#34; ], &#34;initializationOptions&#34;: { &#34;filetypes&#34;: { &#34;dockerfile&#34;: [ &#34;dockerfile-hadolint&#34; ], &#34;go&#34;: [], &#34;markdown&#34;: [ &#34;markdown-remark-lint&#34;, &#34;markdown-textlint&#34; ], &#34;sh&#34;: [ &#34;sh-shellcheck&#34; ], &#34;vim&#34;: [ &#34;vim-vint&#34; ], &#34;yaml&#34;: [ &#34;yaml-yamllint&#34; ] }, &#34;formatFiletypes&#34;: { &#34;go&#34;: [ &#34;go-gofmtrlx&#34;, &#34;go-goimports&#34; ], &#34;json&#34;: [ &#34;json-fixjson&#34;, &#34;json-jq&#34; ], &#34;markdown&#34;: [ &#34;markdown-remark&#34; ], &#34;sh&#34;: [ &#34;sh-shfmt&#34; ] }, &#34;formatters&#34;: { &#34;go-gofmtrlx&#34;: { &#34;command&#34;: &#34;gofmtrlx&#34; }, &#34;go-goimports&#34;: { &#34;command&#34;: &#34;goimports&#34; }, &#34;json-fixjson&#34;: { &#34;command&#34;: &#34;fixjson&#34;, &#34;isStderr&#34;: false, &#34;isStdout&#34;: true }, &#34;json-jq&#34;: { &#34;args&#34;: [ &#34;."/>
+1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84 85 86 87 88 89 90 91 92 93 94 95 96 97 98 99 100 101 102 103 104 105 106 107 108 109 110 111 112 113 114 115 116 117 118 119 120 121 122 123 124 125 126 127 128 129 130 131 132 133 134 135 136 137 138 139 140 141 142 143 144 145 146 147 148 149 150 151 152 153 154 155 156 157 158 159 160 161 162 163 164 165 166 167 168 169 170 171 172 173 174 175 176 177 178 179 180 181 182 183 184 185 186 187 188 189 190 191 192 193 194 195 196 197 198 199 200 201 202 203 204 205 206 207 208 209 210 211 212 213 214 215 216 217 218 219 220 221 222 223 224 225 226 227 228 229 230 231 232 233 234 235 236 237 238 239 240 241 242 243 244 245 246 247 248 249 250 251 252 253 254 255 { &#34;languageserver&#34;: { &#34;dls&#34;: { &#34;args&#34;: [ &#34;--stdio&#34; ], &#34;command&#34;: &#34;diagnostic-languageserver&#34;, &#34;filetypes&#34;: [ &#34;dockerfile&#34;, &#34;go&#34;, &#34;json&#34;, &#34;markdown&#34;, &#34;sh&#34;, &#34;yaml&#34;, &#34;vim&#34; ], &#34;initializationOptions&#34;: { &#34;filetypes&#34;: { &#34;dockerfile&#34;: [ &#34;dockerfile-hadolint&#34; ], &#34;go&#34;: [], &#34;markdown&#34;: [ &#34;markdown-remark-lint&#34;, &#34;markdown-textlint&#34; ], &#34;sh&#34;: [ &#34;sh-shellcheck&#34; ], &#34;vim&#34;: [ &#34;vim-vint&#34; ], &#34;yaml&#34;: [ &#34;yaml-yamllint&#34; ] }, &#34;formatFiletypes&#34;: { &#34;go&#34;: [ &#34;go-gofmtrlx&#34;, &#34;go-goimports&#34; ], &#34;json&#34;: [ &#34;json-fixjson&#34;, &#34;json-jq&#34; ], &#34;markdown&#34;: [ &#34;markdown-remark&#34; ], &#34;sh&#34;: [ &#34;sh-shfmt&#34; ] }, &#34;formatters&#34;: { &#34;go-gofmtrlx&#34;: { &#34;command&#34;: &#34;gofmtrlx&#34; }, &#34;go-goimports&#34;: { &#34;command&#34;: &#34;goimports&#34; }, &#34;json-fixjson&#34;: { &#34;command&#34;: &#34;fixjson&#34;, &#34;isStderr&#34;: false, &#34;isStdout&#34;: true }, &#34;json-jq&#34;: { &#34;args&#34;: [ &#34;."/>
 
     <meta property="og:title" content="aleとneoformatからdiagnostic-languageserverに移行した" />
 <meta property="og:description" content="Vimのプラグインとしてaleとneoformatをずっと利用して来たのですが、LinterやFormatterも全てLanguage Serverに移行しようと思い、 diagnostic-languageserver に移行しました。
 aleやneoformatで使っていたLinterやFormatterも全て移行させたのでその設定のJSONもおいておきます。
-1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84 85 86 87 88 89 90 91 92 93 94 95 96 97 98 99 100 101 102 103 104 105 106 107 108 109 110 111 112 113 114 115 116 117 118 119 120 121 122 123 124 125 126 127 128 129 130 131 132 133 134 135 136 137 138 139 140 141 142 143 144 145 146 147 148 149 150 151 152 153 154 155 156 157 158 159 160 161 162 163 164 165 166 167 168 169 170 171 172 173 174 175 176 177 178 179 180 181 182 183 184 185 186 187 188 189 190 191 192 193 194 195 196 197 198 199 200 201 202 203 204 205 206 207 208 209 210 211 212 213 214 215 216 217 218 219 220 221 222 223 224 225 226 227 228 229 230 231 232 233 234 235 236 237 238 239 240 241 242 243 244 245 246 247 248 249 250 251 252 253 254 255  { &#34;languageserver&#34;: { &#34;dls&#34;: { &#34;args&#34;: [ &#34;--stdio&#34; ], &#34;command&#34;: &#34;diagnostic-languageserver&#34;, &#34;filetypes&#34;: [ &#34;dockerfile&#34;, &#34;go&#34;, &#34;json&#34;, &#34;markdown&#34;, &#34;sh&#34;, &#34;yaml&#34;, &#34;vim&#34; ], &#34;initializationOptions&#34;: { &#34;filetypes&#34;: { &#34;dockerfile&#34;: [ &#34;dockerfile-hadolint&#34; ], &#34;go&#34;: [], &#34;markdown&#34;: [ &#34;markdown-remark-lint&#34;, &#34;markdown-textlint&#34; ], &#34;sh&#34;: [ &#34;sh-shellcheck&#34; ], &#34;vim&#34;: [ &#34;vim-vint&#34; ], &#34;yaml&#34;: [ &#34;yaml-yamllint&#34; ] }, &#34;formatFiletypes&#34;: { &#34;go&#34;: [ &#34;go-gofmtrlx&#34;, &#34;go-goimports&#34; ], &#34;json&#34;: [ &#34;json-fixjson&#34;, &#34;json-jq&#34; ], &#34;markdown&#34;: [ &#34;markdown-remark&#34; ], &#34;sh&#34;: [ &#34;sh-shfmt&#34; ] }, &#34;formatters&#34;: { &#34;go-gofmtrlx&#34;: { &#34;command&#34;: &#34;gofmtrlx&#34; }, &#34;go-goimports&#34;: { &#34;command&#34;: &#34;goimports&#34; }, &#34;json-fixjson&#34;: { &#34;command&#34;: &#34;fixjson&#34;, &#34;isStderr&#34;: false, &#34;isStdout&#34;: true }, &#34;json-jq&#34;: { &#34;args&#34;: [ &#34;." />
+1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84 85 86 87 88 89 90 91 92 93 94 95 96 97 98 99 100 101 102 103 104 105 106 107 108 109 110 111 112 113 114 115 116 117 118 119 120 121 122 123 124 125 126 127 128 129 130 131 132 133 134 135 136 137 138 139 140 141 142 143 144 145 146 147 148 149 150 151 152 153 154 155 156 157 158 159 160 161 162 163 164 165 166 167 168 169 170 171 172 173 174 175 176 177 178 179 180 181 182 183 184 185 186 187 188 189 190 191 192 193 194 195 196 197 198 199 200 201 202 203 204 205 206 207 208 209 210 211 212 213 214 215 216 217 218 219 220 221 222 223 224 225 226 227 228 229 230 231 232 233 234 235 236 237 238 239 240 241 242 243 244 245 246 247 248 249 250 251 252 253 254 255 { &#34;languageserver&#34;: { &#34;dls&#34;: { &#34;args&#34;: [ &#34;--stdio&#34; ], &#34;command&#34;: &#34;diagnostic-languageserver&#34;, &#34;filetypes&#34;: [ &#34;dockerfile&#34;, &#34;go&#34;, &#34;json&#34;, &#34;markdown&#34;, &#34;sh&#34;, &#34;yaml&#34;, &#34;vim&#34; ], &#34;initializationOptions&#34;: { &#34;filetypes&#34;: { &#34;dockerfile&#34;: [ &#34;dockerfile-hadolint&#34; ], &#34;go&#34;: [], &#34;markdown&#34;: [ &#34;markdown-remark-lint&#34;, &#34;markdown-textlint&#34; ], &#34;sh&#34;: [ &#34;sh-shellcheck&#34; ], &#34;vim&#34;: [ &#34;vim-vint&#34; ], &#34;yaml&#34;: [ &#34;yaml-yamllint&#34; ] }, &#34;formatFiletypes&#34;: { &#34;go&#34;: [ &#34;go-gofmtrlx&#34;, &#34;go-goimports&#34; ], &#34;json&#34;: [ &#34;json-fixjson&#34;, &#34;json-jq&#34; ], &#34;markdown&#34;: [ &#34;markdown-remark&#34; ], &#34;sh&#34;: [ &#34;sh-shfmt&#34; ] }, &#34;formatters&#34;: { &#34;go-gofmtrlx&#34;: { &#34;command&#34;: &#34;gofmtrlx&#34; }, &#34;go-goimports&#34;: { &#34;command&#34;: &#34;goimports&#34; }, &#34;json-fixjson&#34;: { &#34;command&#34;: &#34;fixjson&#34;, &#34;isStderr&#34;: false, &#34;isStdout&#34;: true }, &#34;json-jq&#34;: { &#34;args&#34;: [ &#34;." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://nametake.github.io/posts/2020/02/26/migration-diagnostic-languageserver/" />
+<meta property="og:url" content="https://nametake.github.io/posts/2020/02/26/migration-diagnostic-languageserver/" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2020-02-26T00:00:00+09:00" />
 <meta property="article:modified_time" content="2020-02-26T00:00:00+09:00" />
+
 
 
     
@@ -74,7 +74,7 @@ aleやneoformatで使っていたLinterやFormatterも全て移行させたの�
     <link rel="icon" type="image/png" href="https://nametake.github.io/images/favicon-32x32.png" sizes="32x32">
     <link rel="icon" type="image/png" href="https://nametake.github.io/images/favicon-16x16.png" sizes="16x16">
 
-    <meta name="generator" content="Hugo 0.80.0" />
+    <meta name="generator" content="Hugo 0.121.1">
   </head>
 
   
@@ -153,521 +153,521 @@ aleやneoformatで使っていたLinterやFormatterも全て移行させたの�
         
         <p>Vimのプラグインとしてaleとneoformatをずっと利用して来たのですが、LinterやFormatterも全てLanguage Serverに移行しようと思い、 <a href="https://github.com/iamcco/diagnostic-languageserver">diagnostic-languageserver</a> に移行しました。</p>
 <p>aleやneoformatで使っていたLinterやFormatterも全て移行させたのでその設定のJSONもおいておきます。</p>
-<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  3
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  4
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  5
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  6
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  7
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  8
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  9
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 10
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 11
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 12
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 13
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 14
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 15
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 16
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 17
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 18
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 19
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 20
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 21
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 22
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 23
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 24
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 25
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 26
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 27
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 28
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 29
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 30
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 31
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 32
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 33
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 34
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 35
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 36
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 37
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 38
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 39
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 40
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 41
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 42
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 43
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 44
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 45
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 46
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 47
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 48
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 49
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 50
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 51
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 52
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 53
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 54
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 55
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 56
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 57
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 58
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 59
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 60
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 61
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 62
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 63
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 64
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 65
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 66
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 67
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 68
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 69
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 70
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 71
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 72
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 73
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 74
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 75
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 76
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 77
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 78
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 79
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 80
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 81
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 82
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 83
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 84
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 85
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 86
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 87
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 88
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 89
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 90
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 91
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 92
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 93
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 94
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 95
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 96
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 97
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 98
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 99
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">100
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">101
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">102
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">103
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">104
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">105
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">106
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">107
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">108
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">109
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">110
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">111
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">112
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">113
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">114
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">115
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">116
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">117
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">118
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">119
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">120
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">121
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">122
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">123
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">124
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">125
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">126
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">127
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">128
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">129
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">130
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">131
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">132
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">133
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">134
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">135
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">136
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">137
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">138
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">139
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">140
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">141
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">142
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">143
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">144
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">145
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">146
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">147
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">148
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">149
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">150
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">151
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">152
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">153
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">154
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">155
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">156
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">157
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">158
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">159
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">160
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">161
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">162
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">163
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">164
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">165
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">166
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">167
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">168
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">169
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">170
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">171
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">172
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">173
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">174
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">175
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">176
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">177
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">178
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">179
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">180
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">181
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">182
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">183
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">184
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">185
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">186
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">187
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">188
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">189
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">190
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">191
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">192
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">193
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">194
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">195
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">196
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">197
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">198
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">199
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">200
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">201
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">202
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">203
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">204
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">205
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">206
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">207
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">208
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">209
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">210
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">211
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">212
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">213
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">214
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">215
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">216
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">217
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">218
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">219
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">220
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">221
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">222
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">223
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">224
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">225
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">226
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">227
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">228
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">229
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">230
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">231
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">232
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">233
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">234
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">235
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">236
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">237
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">238
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">239
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">240
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">241
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">242
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">243
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">244
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">245
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">246
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">247
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">248
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">249
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">250
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">251
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">252
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">253
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">254
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">255
+<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  7
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  8
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  9
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 10
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 11
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 12
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 13
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 14
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 15
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 16
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 17
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 18
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 19
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 20
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 21
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 22
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 23
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 24
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 25
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 26
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 27
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 28
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 29
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 30
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 31
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 32
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 33
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 34
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 35
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 36
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 37
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 38
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 39
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 40
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 41
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 42
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 43
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 44
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 45
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 46
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 47
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 48
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 49
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 50
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 51
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 52
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 53
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 54
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 55
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 56
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 57
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 58
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 59
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 60
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 61
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 62
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 63
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 64
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 65
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 66
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 67
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 68
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 69
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 70
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 71
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 72
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 73
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 74
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 75
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 76
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 77
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 78
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 79
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 80
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 81
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 82
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 83
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 84
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 85
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 86
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 87
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 88
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 89
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 90
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 91
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 92
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 93
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 94
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 95
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 96
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 97
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 98
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 99
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">100
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">101
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">102
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">103
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">104
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">105
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">106
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">107
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">108
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">109
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">110
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">111
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">112
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">113
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">114
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">115
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">116
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">117
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">118
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">119
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">120
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">121
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">122
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">123
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">124
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">125
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">126
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">127
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">128
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">129
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">130
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">131
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">132
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">133
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">134
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">135
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">136
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">137
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">138
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">139
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">140
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">141
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">142
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">143
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">144
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">145
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">146
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">147
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">148
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">149
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">150
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">151
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">152
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">153
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">154
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">155
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">156
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">157
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">158
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">159
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">160
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">161
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">162
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">163
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">164
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">165
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">166
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">167
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">168
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">169
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">170
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">171
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">172
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">173
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">174
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">175
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">176
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">177
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">178
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">179
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">180
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">181
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">182
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">183
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">184
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">185
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">186
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">187
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">188
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">189
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">190
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">191
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">192
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">193
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">194
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">195
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">196
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">197
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">198
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">199
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">200
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">201
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">202
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">203
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">204
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">205
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">206
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">207
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">208
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">209
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">210
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">211
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">212
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">213
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">214
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">215
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">216
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">217
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">218
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">219
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">220
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">221
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">222
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">223
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">224
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">225
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">226
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">227
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">228
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">229
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">230
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">231
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">232
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">233
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">234
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">235
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">236
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">237
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">238
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">239
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">240
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">241
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">242
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">243
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">244
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">245
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">246
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">247
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">248
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">249
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">250
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">251
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">252
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">253
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">254
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">255
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
-  <span style="color:#f92672">&#34;languageserver&#34;</span>: {
-    <span style="color:#f92672">&#34;dls&#34;</span>: {
-      <span style="color:#f92672">&#34;args&#34;</span>: [
-        <span style="color:#e6db74">&#34;--stdio&#34;</span>
-      ],
-      <span style="color:#f92672">&#34;command&#34;</span>: <span style="color:#e6db74">&#34;diagnostic-languageserver&#34;</span>,
-      <span style="color:#f92672">&#34;filetypes&#34;</span>: [
-        <span style="color:#e6db74">&#34;dockerfile&#34;</span>,
-        <span style="color:#e6db74">&#34;go&#34;</span>,
-        <span style="color:#e6db74">&#34;json&#34;</span>,
-        <span style="color:#e6db74">&#34;markdown&#34;</span>,
-        <span style="color:#e6db74">&#34;sh&#34;</span>,
-        <span style="color:#e6db74">&#34;yaml&#34;</span>,
-        <span style="color:#e6db74">&#34;vim&#34;</span>
-      ],
-      <span style="color:#f92672">&#34;initializationOptions&#34;</span>: {
-        <span style="color:#f92672">&#34;filetypes&#34;</span>: {
-          <span style="color:#f92672">&#34;dockerfile&#34;</span>: [
-            <span style="color:#e6db74">&#34;dockerfile-hadolint&#34;</span>
-          ],
-          <span style="color:#f92672">&#34;go&#34;</span>: [],
-          <span style="color:#f92672">&#34;markdown&#34;</span>: [
-            <span style="color:#e6db74">&#34;markdown-remark-lint&#34;</span>,
-            <span style="color:#e6db74">&#34;markdown-textlint&#34;</span>
-          ],
-          <span style="color:#f92672">&#34;sh&#34;</span>: [
-            <span style="color:#e6db74">&#34;sh-shellcheck&#34;</span>
-          ],
-          <span style="color:#f92672">&#34;vim&#34;</span>: [
-            <span style="color:#e6db74">&#34;vim-vint&#34;</span>
-          ],
-          <span style="color:#f92672">&#34;yaml&#34;</span>: [
-            <span style="color:#e6db74">&#34;yaml-yamllint&#34;</span>
-          ]
-        },
-        <span style="color:#f92672">&#34;formatFiletypes&#34;</span>: {
-          <span style="color:#f92672">&#34;go&#34;</span>: [
-            <span style="color:#e6db74">&#34;go-gofmtrlx&#34;</span>,
-            <span style="color:#e6db74">&#34;go-goimports&#34;</span>
-          ],
-          <span style="color:#f92672">&#34;json&#34;</span>: [
-            <span style="color:#e6db74">&#34;json-fixjson&#34;</span>,
-            <span style="color:#e6db74">&#34;json-jq&#34;</span>
-          ],
-          <span style="color:#f92672">&#34;markdown&#34;</span>: [
-            <span style="color:#e6db74">&#34;markdown-remark&#34;</span>
-          ],
-          <span style="color:#f92672">&#34;sh&#34;</span>: [
-            <span style="color:#e6db74">&#34;sh-shfmt&#34;</span>
-          ]
-        },
-        <span style="color:#f92672">&#34;formatters&#34;</span>: {
-          <span style="color:#f92672">&#34;go-gofmtrlx&#34;</span>: {
-            <span style="color:#f92672">&#34;command&#34;</span>: <span style="color:#e6db74">&#34;gofmtrlx&#34;</span>
-          },
-          <span style="color:#f92672">&#34;go-goimports&#34;</span>: {
-            <span style="color:#f92672">&#34;command&#34;</span>: <span style="color:#e6db74">&#34;goimports&#34;</span>
-          },
-          <span style="color:#f92672">&#34;json-fixjson&#34;</span>: {
-            <span style="color:#f92672">&#34;command&#34;</span>: <span style="color:#e6db74">&#34;fixjson&#34;</span>,
-            <span style="color:#f92672">&#34;isStderr&#34;</span>: <span style="color:#66d9ef">false</span>,
-            <span style="color:#f92672">&#34;isStdout&#34;</span>: <span style="color:#66d9ef">true</span>
-          },
-          <span style="color:#f92672">&#34;json-jq&#34;</span>: {
-            <span style="color:#f92672">&#34;args&#34;</span>: [
-              <span style="color:#e6db74">&#34;.&#34;</span>,
-              <span style="color:#e6db74">&#34;--sort-keys&#34;</span>
-            ],
-            <span style="color:#f92672">&#34;command&#34;</span>: <span style="color:#e6db74">&#34;jq&#34;</span>,
-            <span style="color:#f92672">&#34;isStderr&#34;</span>: <span style="color:#66d9ef">false</span>,
-            <span style="color:#f92672">&#34;isStdout&#34;</span>: <span style="color:#66d9ef">true</span>
-          },
-          <span style="color:#f92672">&#34;markdown-remark&#34;</span>: {
-            <span style="color:#f92672">&#34;args&#34;</span>: [
-              <span style="color:#e6db74">&#34;--no-color&#34;</span>,
-              <span style="color:#e6db74">&#34;--silent&#34;</span>
-            ],
-            <span style="color:#f92672">&#34;command&#34;</span>: <span style="color:#e6db74">&#34;remark&#34;</span>
-          },
-          <span style="color:#f92672">&#34;sh-shfmt&#34;</span>: {
-            <span style="color:#f92672">&#34;command&#34;</span>: <span style="color:#e6db74">&#34;shfmt&#34;</span>
-          }
-        },
-        <span style="color:#f92672">&#34;linters&#34;</span>: {
-          <span style="color:#f92672">&#34;dockerfile-hadolint&#34;</span>: {
-            <span style="color:#f92672">&#34;args&#34;</span>: [
-              <span style="color:#e6db74">&#34;-f&#34;</span>,
-              <span style="color:#e6db74">&#34;json&#34;</span>,
-              <span style="color:#e6db74">&#34;-&#34;</span>
-            ],
-            <span style="color:#f92672">&#34;command&#34;</span>: <span style="color:#e6db74">&#34;hadolint&#34;</span>,
-            <span style="color:#f92672">&#34;parseJson&#34;</span>: {
-              <span style="color:#f92672">&#34;column&#34;</span>: <span style="color:#e6db74">&#34;column&#34;</span>,
-              <span style="color:#f92672">&#34;line&#34;</span>: <span style="color:#e6db74">&#34;line&#34;</span>,
-              <span style="color:#f92672">&#34;message&#34;</span>: <span style="color:#e6db74">&#34;${message} [${code}]&#34;</span>,
-              <span style="color:#f92672">&#34;security&#34;</span>: <span style="color:#e6db74">&#34;level&#34;</span>
-            },
-            <span style="color:#f92672">&#34;securities&#34;</span>: {
-              <span style="color:#f92672">&#34;error&#34;</span>: <span style="color:#e6db74">&#34;error&#34;</span>,
-              <span style="color:#f92672">&#34;info&#34;</span>: <span style="color:#e6db74">&#34;info&#34;</span>,
-              <span style="color:#f92672">&#34;style&#34;</span>: <span style="color:#e6db74">&#34;hint&#34;</span>,
-              <span style="color:#f92672">&#34;warning&#34;</span>: <span style="color:#e6db74">&#34;warning&#34;</span>
-            },
-            <span style="color:#f92672">&#34;sourceName&#34;</span>: <span style="color:#e6db74">&#34;hadolint&#34;</span>
-          },
-          <span style="color:#f92672">&#34;go-golangci-lint&#34;</span>: {
-            <span style="color:#f92672">&#34;args&#34;</span>: [
-              <span style="color:#e6db74">&#34;run&#34;</span>,
-              <span style="color:#e6db74">&#34;--enable-all&#34;</span>,
-              <span style="color:#e6db74">&#34;--out-format&#34;</span>,
-              <span style="color:#e6db74">&#34;json&#34;</span>,
-              <span style="color:#e6db74">&#34;%filename&#34;</span>
-            ],
-            <span style="color:#f92672">&#34;command&#34;</span>: <span style="color:#e6db74">&#34;golangci-lint&#34;</span>,
-            <span style="color:#f92672">&#34;debounce&#34;</span>: <span style="color:#ae81ff">100</span>,
-            <span style="color:#f92672">&#34;parseJson&#34;</span>: {
-              <span style="color:#f92672">&#34;column&#34;</span>: <span style="color:#e6db74">&#34;Pos.Column&#34;</span>,
-              <span style="color:#f92672">&#34;errorsRoot&#34;</span>: <span style="color:#e6db74">&#34;Issues&#34;</span>,
-              <span style="color:#f92672">&#34;line&#34;</span>: <span style="color:#e6db74">&#34;Pos.Line&#34;</span>,
-              <span style="color:#f92672">&#34;message&#34;</span>: <span style="color:#e6db74">&#34;${Text} [${FromLinter}]&#34;</span>
-            },
-            <span style="color:#f92672">&#34;rootPatterns&#34;</span>: [
-              <span style="color:#e6db74">&#34;.git&#34;</span>,
-              <span style="color:#e6db74">&#34;go.mod&#34;</span>
-            ],
-            <span style="color:#f92672">&#34;sourceName&#34;</span>: <span style="color:#e6db74">&#34;golangci-lint&#34;</span>
-          },
-          <span style="color:#f92672">&#34;markdown-remark-lint&#34;</span>: {
-            <span style="color:#f92672">&#34;args&#34;</span>: [
-              <span style="color:#e6db74">&#34;--quiet&#34;</span>,
-              <span style="color:#e6db74">&#34;--no-stdout&#34;</span>,
-              <span style="color:#e6db74">&#34;--no-color&#34;</span>
-            ],
-            <span style="color:#f92672">&#34;command&#34;</span>: <span style="color:#e6db74">&#34;remark&#34;</span>,
-            <span style="color:#f92672">&#34;formatPattern&#34;</span>: [
-              <span style="color:#e6db74">&#34;^ +(\\d+):(\\d+)-(\\d+):(\\d+)  (warning|error)  (.+?(?=  +)) +(.+?(?=  +)) +(.+)$&#34;</span>,
-              {
-                <span style="color:#f92672">&#34;column&#34;</span>: <span style="color:#ae81ff">2</span>,
-                <span style="color:#f92672">&#34;endColumn&#34;</span>: <span style="color:#ae81ff">4</span>,
-                <span style="color:#f92672">&#34;endLine&#34;</span>: <span style="color:#ae81ff">3</span>,
-                <span style="color:#f92672">&#34;line&#34;</span>: <span style="color:#ae81ff">1</span>,
-                <span style="color:#f92672">&#34;message&#34;</span>: [
-                  <span style="color:#ae81ff">6</span>,
-                  <span style="color:#e6db74">&#34; &#34;</span>,
-                  <span style="color:#ae81ff">7</span>,
-                  <span style="color:#e6db74">&#34; &#34;</span>,
-                  <span style="color:#ae81ff">8</span>
-                ],
-                <span style="color:#f92672">&#34;security&#34;</span>: <span style="color:#ae81ff">5</span>
-              }
-            ],
-            <span style="color:#f92672">&#34;isStderr&#34;</span>: <span style="color:#66d9ef">true</span>,
-            <span style="color:#f92672">&#34;securities&#34;</span>: {
-              <span style="color:#f92672">&#34;error&#34;</span>: <span style="color:#e6db74">&#34;error&#34;</span>,
-              <span style="color:#f92672">&#34;note&#34;</span>: <span style="color:#e6db74">&#34;info&#34;</span>,
-              <span style="color:#f92672">&#34;warning&#34;</span>: <span style="color:#e6db74">&#34;warning&#34;</span>
-            },
-            <span style="color:#f92672">&#34;sourceName&#34;</span>: <span style="color:#e6db74">&#34;remark&#34;</span>
-          },
-          <span style="color:#f92672">&#34;markdown-textlint&#34;</span>: {
-            <span style="color:#f92672">&#34;args&#34;</span>: [
-              <span style="color:#e6db74">&#34;-f&#34;</span>,
-              <span style="color:#e6db74">&#34;json&#34;</span>,
-              <span style="color:#e6db74">&#34;--stdin --stdin-filename&#34;</span>,
-              <span style="color:#e6db74">&#34;%file&#34;</span>
-            ],
-            <span style="color:#f92672">&#34;command&#34;</span>: <span style="color:#e6db74">&#34;textlint&#34;</span>,
-            <span style="color:#f92672">&#34;isStdout&#34;</span>: <span style="color:#66d9ef">true</span>,
-            <span style="color:#f92672">&#34;parseJson&#34;</span>: {
-              <span style="color:#f92672">&#34;column&#34;</span>: <span style="color:#e6db74">&#34;column&#34;</span>,
-              <span style="color:#f92672">&#34;errorsRoot&#34;</span>: <span style="color:#e6db74">&#34;[0].messages&#34;</span>,
-              <span style="color:#f92672">&#34;line&#34;</span>: <span style="color:#e6db74">&#34;line&#34;</span>,
-              <span style="color:#f92672">&#34;message&#34;</span>: <span style="color:#e6db74">&#34;${message} ${ruleId}&#34;</span>,
-              <span style="color:#f92672">&#34;security&#34;</span>: <span style="color:#e6db74">&#34;severity&#34;</span>
-            },
-            <span style="color:#f92672">&#34;securities&#34;</span>: {
-              <span style="color:#f92672">&#34;error&#34;</span>: <span style="color:#e6db74">&#34;2&#34;</span>,
-              <span style="color:#f92672">&#34;warning&#34;</span>: <span style="color:#e6db74">&#34;1&#34;</span>
-            },
-            <span style="color:#f92672">&#34;sourceName&#34;</span>: <span style="color:#e6db74">&#34;textlint&#34;</span>
-          },
-          <span style="color:#f92672">&#34;sh-shellcheck&#34;</span>: {
-            <span style="color:#f92672">&#34;args&#34;</span>: [
-              <span style="color:#e6db74">&#34;--format=gcc&#34;</span>,
-              <span style="color:#e6db74">&#34;-&#34;</span>
-            ],
-            <span style="color:#f92672">&#34;command&#34;</span>: <span style="color:#e6db74">&#34;shellcheck&#34;</span>,
-            <span style="color:#f92672">&#34;debounce&#34;</span>: <span style="color:#ae81ff">100</span>,
-            <span style="color:#f92672">&#34;formatLines&#34;</span>: <span style="color:#ae81ff">1</span>,
-            <span style="color:#f92672">&#34;formatPattern&#34;</span>: [
-              <span style="color:#e6db74">&#34;^[^:]+:(\\d+):(\\d+):\\s+([^:]+):\\s+(.*)$&#34;</span>,
-              {
-                <span style="color:#f92672">&#34;column&#34;</span>: <span style="color:#ae81ff">2</span>,
-                <span style="color:#f92672">&#34;line&#34;</span>: <span style="color:#ae81ff">1</span>,
-                <span style="color:#f92672">&#34;message&#34;</span>: <span style="color:#ae81ff">4</span>,
-                <span style="color:#f92672">&#34;security&#34;</span>: <span style="color:#ae81ff">3</span>
-              }
-            ],
-            <span style="color:#f92672">&#34;offsetColumn&#34;</span>: <span style="color:#ae81ff">0</span>,
-            <span style="color:#f92672">&#34;offsetLine&#34;</span>: <span style="color:#ae81ff">0</span>,
-            <span style="color:#f92672">&#34;securities&#34;</span>: {
-              <span style="color:#f92672">&#34;error&#34;</span>: <span style="color:#e6db74">&#34;error&#34;</span>,
-              <span style="color:#f92672">&#34;note&#34;</span>: <span style="color:#e6db74">&#34;info&#34;</span>,
-              <span style="color:#f92672">&#34;warning&#34;</span>: <span style="color:#e6db74">&#34;warning&#34;</span>
-            },
-            <span style="color:#f92672">&#34;sourceName&#34;</span>: <span style="color:#e6db74">&#34;shellcheck&#34;</span>
-          },
-          <span style="color:#f92672">&#34;vim-vint&#34;</span>: {
-            <span style="color:#f92672">&#34;args&#34;</span>: [
-              <span style="color:#e6db74">&#34;--enable-neovim&#34;</span>,
-              <span style="color:#e6db74">&#34;-&#34;</span>
-            ],
-            <span style="color:#f92672">&#34;command&#34;</span>: <span style="color:#e6db74">&#34;vint&#34;</span>,
-            <span style="color:#f92672">&#34;debounce&#34;</span>: <span style="color:#ae81ff">100</span>,
-            <span style="color:#f92672">&#34;formatLines&#34;</span>: <span style="color:#ae81ff">1</span>,
-            <span style="color:#f92672">&#34;formatPattern&#34;</span>: [
-              <span style="color:#e6db74">&#34;[^:]+:(\\d+):(\\d+):\\s*(.*)(\\r|\\n)*$&#34;</span>,
-              {
-                <span style="color:#f92672">&#34;column&#34;</span>: <span style="color:#ae81ff">2</span>,
-                <span style="color:#f92672">&#34;line&#34;</span>: <span style="color:#ae81ff">1</span>,
-                <span style="color:#f92672">&#34;message&#34;</span>: <span style="color:#ae81ff">3</span>
-              }
-            ],
-            <span style="color:#f92672">&#34;offsetColumn&#34;</span>: <span style="color:#ae81ff">0</span>,
-            <span style="color:#f92672">&#34;offsetLine&#34;</span>: <span style="color:#ae81ff">0</span>,
-            <span style="color:#f92672">&#34;sourceName&#34;</span>: <span style="color:#e6db74">&#34;vint&#34;</span>
-          },
-          <span style="color:#f92672">&#34;yaml-yamllint&#34;</span>: {
-            <span style="color:#f92672">&#34;args&#34;</span>: [
-              <span style="color:#e6db74">&#34;--format&#34;</span>,
-              <span style="color:#e6db74">&#34;parsable&#34;</span>,
-              <span style="color:#e6db74">&#34;%file&#34;</span>
-            ],
-            <span style="color:#f92672">&#34;command&#34;</span>: <span style="color:#e6db74">&#34;yamllint&#34;</span>,
-            <span style="color:#f92672">&#34;formatPattern&#34;</span>: [
-              <span style="color:#e6db74">&#34;^.*:(\\d+):(\\d+): \\[(error|warning)\\] (.+)$&#34;</span>,
-              {
-                <span style="color:#f92672">&#34;column&#34;</span>: <span style="color:#ae81ff">2</span>,
-                <span style="color:#f92672">&#34;line&#34;</span>: <span style="color:#ae81ff">1</span>,
-                <span style="color:#f92672">&#34;message&#34;</span>: <span style="color:#ae81ff">4</span>,
-                <span style="color:#f92672">&#34;security&#34;</span>: <span style="color:#ae81ff">3</span>
-              }
-            ],
-            <span style="color:#f92672">&#34;securities&#34;</span>: {
-              <span style="color:#f92672">&#34;error&#34;</span>: <span style="color:#e6db74">&#34;error&#34;</span>,
-              <span style="color:#f92672">&#34;warning&#34;</span>: <span style="color:#e6db74">&#34;warning&#34;</span>
-            },
-            <span style="color:#f92672">&#34;sourceName&#34;</span>: <span style="color:#e6db74">&#34;yamllint&#34;</span>
-          }
-        }
-      }
-    }
-  }
-}
-</code></pre></td></tr></table>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;languageserver&#34;</span>: {
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;dls&#34;</span>: {
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;args&#34;</span>: [
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;--stdio&#34;</span>
+</span></span><span style="display:flex;"><span>      ],
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;command&#34;</span>: <span style="color:#e6db74">&#34;diagnostic-languageserver&#34;</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;filetypes&#34;</span>: [
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;dockerfile&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;go&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;json&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;markdown&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;sh&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;yaml&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;vim&#34;</span>
+</span></span><span style="display:flex;"><span>      ],
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;initializationOptions&#34;</span>: {
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;filetypes&#34;</span>: {
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;dockerfile&#34;</span>: [
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#34;dockerfile-hadolint&#34;</span>
+</span></span><span style="display:flex;"><span>          ],
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;go&#34;</span>: [],
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;markdown&#34;</span>: [
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#34;markdown-remark-lint&#34;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#34;markdown-textlint&#34;</span>
+</span></span><span style="display:flex;"><span>          ],
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;sh&#34;</span>: [
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#34;sh-shellcheck&#34;</span>
+</span></span><span style="display:flex;"><span>          ],
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;vim&#34;</span>: [
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#34;vim-vint&#34;</span>
+</span></span><span style="display:flex;"><span>          ],
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;yaml&#34;</span>: [
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#34;yaml-yamllint&#34;</span>
+</span></span><span style="display:flex;"><span>          ]
+</span></span><span style="display:flex;"><span>        },
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;formatFiletypes&#34;</span>: {
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;go&#34;</span>: [
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#34;go-gofmtrlx&#34;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#34;go-goimports&#34;</span>
+</span></span><span style="display:flex;"><span>          ],
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;json&#34;</span>: [
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#34;json-fixjson&#34;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#34;json-jq&#34;</span>
+</span></span><span style="display:flex;"><span>          ],
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;markdown&#34;</span>: [
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#34;markdown-remark&#34;</span>
+</span></span><span style="display:flex;"><span>          ],
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;sh&#34;</span>: [
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#34;sh-shfmt&#34;</span>
+</span></span><span style="display:flex;"><span>          ]
+</span></span><span style="display:flex;"><span>        },
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;formatters&#34;</span>: {
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;go-gofmtrlx&#34;</span>: {
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;command&#34;</span>: <span style="color:#e6db74">&#34;gofmtrlx&#34;</span>
+</span></span><span style="display:flex;"><span>          },
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;go-goimports&#34;</span>: {
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;command&#34;</span>: <span style="color:#e6db74">&#34;goimports&#34;</span>
+</span></span><span style="display:flex;"><span>          },
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;json-fixjson&#34;</span>: {
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;command&#34;</span>: <span style="color:#e6db74">&#34;fixjson&#34;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;isStderr&#34;</span>: <span style="color:#66d9ef">false</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;isStdout&#34;</span>: <span style="color:#66d9ef">true</span>
+</span></span><span style="display:flex;"><span>          },
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;json-jq&#34;</span>: {
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;args&#34;</span>: [
+</span></span><span style="display:flex;"><span>              <span style="color:#e6db74">&#34;.&#34;</span>,
+</span></span><span style="display:flex;"><span>              <span style="color:#e6db74">&#34;--sort-keys&#34;</span>
+</span></span><span style="display:flex;"><span>            ],
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;command&#34;</span>: <span style="color:#e6db74">&#34;jq&#34;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;isStderr&#34;</span>: <span style="color:#66d9ef">false</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;isStdout&#34;</span>: <span style="color:#66d9ef">true</span>
+</span></span><span style="display:flex;"><span>          },
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;markdown-remark&#34;</span>: {
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;args&#34;</span>: [
+</span></span><span style="display:flex;"><span>              <span style="color:#e6db74">&#34;--no-color&#34;</span>,
+</span></span><span style="display:flex;"><span>              <span style="color:#e6db74">&#34;--silent&#34;</span>
+</span></span><span style="display:flex;"><span>            ],
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;command&#34;</span>: <span style="color:#e6db74">&#34;remark&#34;</span>
+</span></span><span style="display:flex;"><span>          },
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;sh-shfmt&#34;</span>: {
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;command&#34;</span>: <span style="color:#e6db74">&#34;shfmt&#34;</span>
+</span></span><span style="display:flex;"><span>          }
+</span></span><span style="display:flex;"><span>        },
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;linters&#34;</span>: {
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;dockerfile-hadolint&#34;</span>: {
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;args&#34;</span>: [
+</span></span><span style="display:flex;"><span>              <span style="color:#e6db74">&#34;-f&#34;</span>,
+</span></span><span style="display:flex;"><span>              <span style="color:#e6db74">&#34;json&#34;</span>,
+</span></span><span style="display:flex;"><span>              <span style="color:#e6db74">&#34;-&#34;</span>
+</span></span><span style="display:flex;"><span>            ],
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;command&#34;</span>: <span style="color:#e6db74">&#34;hadolint&#34;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;parseJson&#34;</span>: {
+</span></span><span style="display:flex;"><span>              <span style="color:#f92672">&#34;column&#34;</span>: <span style="color:#e6db74">&#34;column&#34;</span>,
+</span></span><span style="display:flex;"><span>              <span style="color:#f92672">&#34;line&#34;</span>: <span style="color:#e6db74">&#34;line&#34;</span>,
+</span></span><span style="display:flex;"><span>              <span style="color:#f92672">&#34;message&#34;</span>: <span style="color:#e6db74">&#34;${message} [${code}]&#34;</span>,
+</span></span><span style="display:flex;"><span>              <span style="color:#f92672">&#34;security&#34;</span>: <span style="color:#e6db74">&#34;level&#34;</span>
+</span></span><span style="display:flex;"><span>            },
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;securities&#34;</span>: {
+</span></span><span style="display:flex;"><span>              <span style="color:#f92672">&#34;error&#34;</span>: <span style="color:#e6db74">&#34;error&#34;</span>,
+</span></span><span style="display:flex;"><span>              <span style="color:#f92672">&#34;info&#34;</span>: <span style="color:#e6db74">&#34;info&#34;</span>,
+</span></span><span style="display:flex;"><span>              <span style="color:#f92672">&#34;style&#34;</span>: <span style="color:#e6db74">&#34;hint&#34;</span>,
+</span></span><span style="display:flex;"><span>              <span style="color:#f92672">&#34;warning&#34;</span>: <span style="color:#e6db74">&#34;warning&#34;</span>
+</span></span><span style="display:flex;"><span>            },
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;sourceName&#34;</span>: <span style="color:#e6db74">&#34;hadolint&#34;</span>
+</span></span><span style="display:flex;"><span>          },
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;go-golangci-lint&#34;</span>: {
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;args&#34;</span>: [
+</span></span><span style="display:flex;"><span>              <span style="color:#e6db74">&#34;run&#34;</span>,
+</span></span><span style="display:flex;"><span>              <span style="color:#e6db74">&#34;--enable-all&#34;</span>,
+</span></span><span style="display:flex;"><span>              <span style="color:#e6db74">&#34;--out-format&#34;</span>,
+</span></span><span style="display:flex;"><span>              <span style="color:#e6db74">&#34;json&#34;</span>,
+</span></span><span style="display:flex;"><span>              <span style="color:#e6db74">&#34;%filename&#34;</span>
+</span></span><span style="display:flex;"><span>            ],
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;command&#34;</span>: <span style="color:#e6db74">&#34;golangci-lint&#34;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;debounce&#34;</span>: <span style="color:#ae81ff">100</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;parseJson&#34;</span>: {
+</span></span><span style="display:flex;"><span>              <span style="color:#f92672">&#34;column&#34;</span>: <span style="color:#e6db74">&#34;Pos.Column&#34;</span>,
+</span></span><span style="display:flex;"><span>              <span style="color:#f92672">&#34;errorsRoot&#34;</span>: <span style="color:#e6db74">&#34;Issues&#34;</span>,
+</span></span><span style="display:flex;"><span>              <span style="color:#f92672">&#34;line&#34;</span>: <span style="color:#e6db74">&#34;Pos.Line&#34;</span>,
+</span></span><span style="display:flex;"><span>              <span style="color:#f92672">&#34;message&#34;</span>: <span style="color:#e6db74">&#34;${Text} [${FromLinter}]&#34;</span>
+</span></span><span style="display:flex;"><span>            },
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;rootPatterns&#34;</span>: [
+</span></span><span style="display:flex;"><span>              <span style="color:#e6db74">&#34;.git&#34;</span>,
+</span></span><span style="display:flex;"><span>              <span style="color:#e6db74">&#34;go.mod&#34;</span>
+</span></span><span style="display:flex;"><span>            ],
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;sourceName&#34;</span>: <span style="color:#e6db74">&#34;golangci-lint&#34;</span>
+</span></span><span style="display:flex;"><span>          },
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;markdown-remark-lint&#34;</span>: {
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;args&#34;</span>: [
+</span></span><span style="display:flex;"><span>              <span style="color:#e6db74">&#34;--quiet&#34;</span>,
+</span></span><span style="display:flex;"><span>              <span style="color:#e6db74">&#34;--no-stdout&#34;</span>,
+</span></span><span style="display:flex;"><span>              <span style="color:#e6db74">&#34;--no-color&#34;</span>
+</span></span><span style="display:flex;"><span>            ],
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;command&#34;</span>: <span style="color:#e6db74">&#34;remark&#34;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;formatPattern&#34;</span>: [
+</span></span><span style="display:flex;"><span>              <span style="color:#e6db74">&#34;^ +(\\d+):(\\d+)-(\\d+):(\\d+)  (warning|error)  (.+?(?=  +)) +(.+?(?=  +)) +(.+)$&#34;</span>,
+</span></span><span style="display:flex;"><span>              {
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">&#34;column&#34;</span>: <span style="color:#ae81ff">2</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">&#34;endColumn&#34;</span>: <span style="color:#ae81ff">4</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">&#34;endLine&#34;</span>: <span style="color:#ae81ff">3</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">&#34;line&#34;</span>: <span style="color:#ae81ff">1</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">&#34;message&#34;</span>: [
+</span></span><span style="display:flex;"><span>                  <span style="color:#ae81ff">6</span>,
+</span></span><span style="display:flex;"><span>                  <span style="color:#e6db74">&#34; &#34;</span>,
+</span></span><span style="display:flex;"><span>                  <span style="color:#ae81ff">7</span>,
+</span></span><span style="display:flex;"><span>                  <span style="color:#e6db74">&#34; &#34;</span>,
+</span></span><span style="display:flex;"><span>                  <span style="color:#ae81ff">8</span>
+</span></span><span style="display:flex;"><span>                ],
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">&#34;security&#34;</span>: <span style="color:#ae81ff">5</span>
+</span></span><span style="display:flex;"><span>              }
+</span></span><span style="display:flex;"><span>            ],
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;isStderr&#34;</span>: <span style="color:#66d9ef">true</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;securities&#34;</span>: {
+</span></span><span style="display:flex;"><span>              <span style="color:#f92672">&#34;error&#34;</span>: <span style="color:#e6db74">&#34;error&#34;</span>,
+</span></span><span style="display:flex;"><span>              <span style="color:#f92672">&#34;note&#34;</span>: <span style="color:#e6db74">&#34;info&#34;</span>,
+</span></span><span style="display:flex;"><span>              <span style="color:#f92672">&#34;warning&#34;</span>: <span style="color:#e6db74">&#34;warning&#34;</span>
+</span></span><span style="display:flex;"><span>            },
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;sourceName&#34;</span>: <span style="color:#e6db74">&#34;remark&#34;</span>
+</span></span><span style="display:flex;"><span>          },
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;markdown-textlint&#34;</span>: {
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;args&#34;</span>: [
+</span></span><span style="display:flex;"><span>              <span style="color:#e6db74">&#34;-f&#34;</span>,
+</span></span><span style="display:flex;"><span>              <span style="color:#e6db74">&#34;json&#34;</span>,
+</span></span><span style="display:flex;"><span>              <span style="color:#e6db74">&#34;--stdin --stdin-filename&#34;</span>,
+</span></span><span style="display:flex;"><span>              <span style="color:#e6db74">&#34;%file&#34;</span>
+</span></span><span style="display:flex;"><span>            ],
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;command&#34;</span>: <span style="color:#e6db74">&#34;textlint&#34;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;isStdout&#34;</span>: <span style="color:#66d9ef">true</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;parseJson&#34;</span>: {
+</span></span><span style="display:flex;"><span>              <span style="color:#f92672">&#34;column&#34;</span>: <span style="color:#e6db74">&#34;column&#34;</span>,
+</span></span><span style="display:flex;"><span>              <span style="color:#f92672">&#34;errorsRoot&#34;</span>: <span style="color:#e6db74">&#34;[0].messages&#34;</span>,
+</span></span><span style="display:flex;"><span>              <span style="color:#f92672">&#34;line&#34;</span>: <span style="color:#e6db74">&#34;line&#34;</span>,
+</span></span><span style="display:flex;"><span>              <span style="color:#f92672">&#34;message&#34;</span>: <span style="color:#e6db74">&#34;${message} ${ruleId}&#34;</span>,
+</span></span><span style="display:flex;"><span>              <span style="color:#f92672">&#34;security&#34;</span>: <span style="color:#e6db74">&#34;severity&#34;</span>
+</span></span><span style="display:flex;"><span>            },
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;securities&#34;</span>: {
+</span></span><span style="display:flex;"><span>              <span style="color:#f92672">&#34;error&#34;</span>: <span style="color:#e6db74">&#34;2&#34;</span>,
+</span></span><span style="display:flex;"><span>              <span style="color:#f92672">&#34;warning&#34;</span>: <span style="color:#e6db74">&#34;1&#34;</span>
+</span></span><span style="display:flex;"><span>            },
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;sourceName&#34;</span>: <span style="color:#e6db74">&#34;textlint&#34;</span>
+</span></span><span style="display:flex;"><span>          },
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;sh-shellcheck&#34;</span>: {
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;args&#34;</span>: [
+</span></span><span style="display:flex;"><span>              <span style="color:#e6db74">&#34;--format=gcc&#34;</span>,
+</span></span><span style="display:flex;"><span>              <span style="color:#e6db74">&#34;-&#34;</span>
+</span></span><span style="display:flex;"><span>            ],
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;command&#34;</span>: <span style="color:#e6db74">&#34;shellcheck&#34;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;debounce&#34;</span>: <span style="color:#ae81ff">100</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;formatLines&#34;</span>: <span style="color:#ae81ff">1</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;formatPattern&#34;</span>: [
+</span></span><span style="display:flex;"><span>              <span style="color:#e6db74">&#34;^[^:]+:(\\d+):(\\d+):\\s+([^:]+):\\s+(.*)$&#34;</span>,
+</span></span><span style="display:flex;"><span>              {
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">&#34;column&#34;</span>: <span style="color:#ae81ff">2</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">&#34;line&#34;</span>: <span style="color:#ae81ff">1</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">&#34;message&#34;</span>: <span style="color:#ae81ff">4</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">&#34;security&#34;</span>: <span style="color:#ae81ff">3</span>
+</span></span><span style="display:flex;"><span>              }
+</span></span><span style="display:flex;"><span>            ],
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;offsetColumn&#34;</span>: <span style="color:#ae81ff">0</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;offsetLine&#34;</span>: <span style="color:#ae81ff">0</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;securities&#34;</span>: {
+</span></span><span style="display:flex;"><span>              <span style="color:#f92672">&#34;error&#34;</span>: <span style="color:#e6db74">&#34;error&#34;</span>,
+</span></span><span style="display:flex;"><span>              <span style="color:#f92672">&#34;note&#34;</span>: <span style="color:#e6db74">&#34;info&#34;</span>,
+</span></span><span style="display:flex;"><span>              <span style="color:#f92672">&#34;warning&#34;</span>: <span style="color:#e6db74">&#34;warning&#34;</span>
+</span></span><span style="display:flex;"><span>            },
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;sourceName&#34;</span>: <span style="color:#e6db74">&#34;shellcheck&#34;</span>
+</span></span><span style="display:flex;"><span>          },
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;vim-vint&#34;</span>: {
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;args&#34;</span>: [
+</span></span><span style="display:flex;"><span>              <span style="color:#e6db74">&#34;--enable-neovim&#34;</span>,
+</span></span><span style="display:flex;"><span>              <span style="color:#e6db74">&#34;-&#34;</span>
+</span></span><span style="display:flex;"><span>            ],
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;command&#34;</span>: <span style="color:#e6db74">&#34;vint&#34;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;debounce&#34;</span>: <span style="color:#ae81ff">100</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;formatLines&#34;</span>: <span style="color:#ae81ff">1</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;formatPattern&#34;</span>: [
+</span></span><span style="display:flex;"><span>              <span style="color:#e6db74">&#34;[^:]+:(\\d+):(\\d+):\\s*(.*)(\\r|\\n)*$&#34;</span>,
+</span></span><span style="display:flex;"><span>              {
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">&#34;column&#34;</span>: <span style="color:#ae81ff">2</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">&#34;line&#34;</span>: <span style="color:#ae81ff">1</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">&#34;message&#34;</span>: <span style="color:#ae81ff">3</span>
+</span></span><span style="display:flex;"><span>              }
+</span></span><span style="display:flex;"><span>            ],
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;offsetColumn&#34;</span>: <span style="color:#ae81ff">0</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;offsetLine&#34;</span>: <span style="color:#ae81ff">0</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;sourceName&#34;</span>: <span style="color:#e6db74">&#34;vint&#34;</span>
+</span></span><span style="display:flex;"><span>          },
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">&#34;yaml-yamllint&#34;</span>: {
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;args&#34;</span>: [
+</span></span><span style="display:flex;"><span>              <span style="color:#e6db74">&#34;--format&#34;</span>,
+</span></span><span style="display:flex;"><span>              <span style="color:#e6db74">&#34;parsable&#34;</span>,
+</span></span><span style="display:flex;"><span>              <span style="color:#e6db74">&#34;%file&#34;</span>
+</span></span><span style="display:flex;"><span>            ],
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;command&#34;</span>: <span style="color:#e6db74">&#34;yamllint&#34;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;formatPattern&#34;</span>: [
+</span></span><span style="display:flex;"><span>              <span style="color:#e6db74">&#34;^.*:(\\d+):(\\d+): \\[(error|warning)\\] (.+)$&#34;</span>,
+</span></span><span style="display:flex;"><span>              {
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">&#34;column&#34;</span>: <span style="color:#ae81ff">2</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">&#34;line&#34;</span>: <span style="color:#ae81ff">1</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">&#34;message&#34;</span>: <span style="color:#ae81ff">4</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">&#34;security&#34;</span>: <span style="color:#ae81ff">3</span>
+</span></span><span style="display:flex;"><span>              }
+</span></span><span style="display:flex;"><span>            ],
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;securities&#34;</span>: {
+</span></span><span style="display:flex;"><span>              <span style="color:#f92672">&#34;error&#34;</span>: <span style="color:#e6db74">&#34;error&#34;</span>,
+</span></span><span style="display:flex;"><span>              <span style="color:#f92672">&#34;warning&#34;</span>: <span style="color:#e6db74">&#34;warning&#34;</span>
+</span></span><span style="display:flex;"><span>            },
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;sourceName&#34;</span>: <span style="color:#e6db74">&#34;yamllint&#34;</span>
+</span></span><span style="display:flex;"><span>          }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>      }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></td></tr></table>
 </div>
 </div>
       </div>
@@ -678,8 +678,8 @@ aleやneoformatで使っていたLinterやFormatterも全て移行させたの�
 
 
         <div id="disqus_thread"></div>
-<script type="application/javascript">
-    var disqus_config = function () {
+<script>
+    window.disqus_config = function () {
     
     
     
@@ -716,7 +716,7 @@ aleやneoformatで使っていたLinterやFormatterも全て移行させたの�
       
         ©
         
-        2021
+        2023
          nametake 
       
       
@@ -732,7 +732,7 @@ aleやneoformatで使っていたLinterやFormatterも全て移行させたの�
     
 
     
-<script type="application/javascript">
+<script>
 var doNotTrack = false;
 if (!doNotTrack) {
 	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -744,7 +744,6 @@ if (!doNotTrack) {
 	ga('send', 'pageview');
 }
 </script>
-
 
     
 

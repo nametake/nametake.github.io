@@ -11,50 +11,62 @@
 他言語から入ってきた方はかなりこの部分に戸惑うことが多いようです。
 そこで、そういった方々になぜジェネリクスがないのかを説明するにあたって、自分の中でいい感じに言語化できたのでログとして残しておこうと思います。
 なぜジェネリクスがないか ジェネリクスがない理由を説明するには以下の2つが必要だと思っています。
- 言語としてのスタンスの話 ジェネリクスが効果を発揮する場面  それぞれ細かく説明していこうと思います。
+言語としてのスタンスの話 ジェネリクスが効果を発揮する場面 それぞれ細かく説明していこうと思います。
 言語としてのスタンスの話 何かが新しく作られるときには何かしら課題を解決しようとして生まれてきます。
 Goが解決しようとした課題についてはGoの作者の生みの親の一人でもあるRob Pike氏が2012年の公演で話されています。
 リンク先の講演の記事の中に、以下の点が既存の開発の辛い部分で、Goはそれらに対処しているという部分があります。
- slow builds (遅いビルド) uncontrolled dependencies (制御されていない依存関係) each programmer using a different subset of the language(言語の異なるサブセットを使用する各プログラマ) poor program understanding (code hard to read, poorly documented, and so on) (不十分なプログラムの理解(読みにくいコード、不十分な文書化など)) duplication of effort (努力の重複) cost of updates (更新のコスト) version skew (バージョンスキュー) difficulty of writing automatic tools (自動ツールの作成の難しさ) cross-language builds (言語間ビルド)  上記に挙げられている対処している課題を見ると、Go言語は「プログラム言語としての正しさ」という点ではなく「(言語仕様も含む)開発のしやすさ」に強くフォーカスを当てられている言語だとわかります。
+slow builds (遅いビルド) uncontrolled dependencies (制御されていない依存関係) each programmer using a different subset of the language(言語の異なるサブセットを使用する各プログラマ) poor program understanding (code hard to read, poorly documented, and so on) (不十分なプログラムの理解(読みにくいコード、不十分な文書化など)) duplication of effort (努力の重複) cost of updates (更新のコスト) version skew (バージョンスキュー) difficulty of writing automatic tools (自動ツールの作成の難しさ) cross-language builds (言語間ビルド) 上記に挙げられている対処している課題を見ると、Go言語は「プログラム言語としての正しさ」という点ではなく「(言語仕様も含む)開発のしやすさ」に強くフォーカスを当てられている言語だとわかります。
 そのため、新しい機能を言語に追加にあたり「プログラミング言語としての正しさ」が強くあったとしても、それを代替する手段がありかつ全体として「開発のしやすさ」が損なわれる場合は導入されない傾向があります。
 ジェネリクスが効果を発揮する場面 ジェネリクスは便利な機能です。型を値のように取り扱い、抽象化された処理を型安全に取り扱うことができます。
-ですが、便利に使うためには1つ条件があります。">
+ですが、便利に使うためには1つ条件があります。
+それは、「高度に抽象化された振る舞い」が定義できる場合です。
+それでは「高度に抽象化された振る舞い」とは何でしょうか。
+例えばGUI開発におけるViewの振る舞いがあります。
+AndroidのListViewは「アイテムが一覧で並んでいる」という振る舞いを抽象化したViewクラスです。ListView は内部で表示するものをAdapter経由で受け取りますが、Adapterには型パラメータを与えることができるため、一覧の中に表示する項目を型安全に取り扱うことができます。">
     <meta name="keywords" content="blog,developer,personal">
 
     
 
-    <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Go言語でジェネリクスない理由の考察"/>
+    <meta name="twitter:card" content="summary"/><meta name="twitter:title" content="Go言語でジェネリクスない理由の考察"/>
 <meta name="twitter:description" content="Go言語にはジェネリクスがありません。
 他言語から入ってきた方はかなりこの部分に戸惑うことが多いようです。
 そこで、そういった方々になぜジェネリクスがないのかを説明するにあたって、自分の中でいい感じに言語化できたのでログとして残しておこうと思います。
 なぜジェネリクスがないか ジェネリクスがない理由を説明するには以下の2つが必要だと思っています。
- 言語としてのスタンスの話 ジェネリクスが効果を発揮する場面  それぞれ細かく説明していこうと思います。
+言語としてのスタンスの話 ジェネリクスが効果を発揮する場面 それぞれ細かく説明していこうと思います。
 言語としてのスタンスの話 何かが新しく作られるときには何かしら課題を解決しようとして生まれてきます。
 Goが解決しようとした課題についてはGoの作者の生みの親の一人でもあるRob Pike氏が2012年の公演で話されています。
 リンク先の講演の記事の中に、以下の点が既存の開発の辛い部分で、Goはそれらに対処しているという部分があります。
- slow builds (遅いビルド) uncontrolled dependencies (制御されていない依存関係) each programmer using a different subset of the language(言語の異なるサブセットを使用する各プログラマ) poor program understanding (code hard to read, poorly documented, and so on) (不十分なプログラムの理解(読みにくいコード、不十分な文書化など)) duplication of effort (努力の重複) cost of updates (更新のコスト) version skew (バージョンスキュー) difficulty of writing automatic tools (自動ツールの作成の難しさ) cross-language builds (言語間ビルド)  上記に挙げられている対処している課題を見ると、Go言語は「プログラム言語としての正しさ」という点ではなく「(言語仕様も含む)開発のしやすさ」に強くフォーカスを当てられている言語だとわかります。
+slow builds (遅いビルド) uncontrolled dependencies (制御されていない依存関係) each programmer using a different subset of the language(言語の異なるサブセットを使用する各プログラマ) poor program understanding (code hard to read, poorly documented, and so on) (不十分なプログラムの理解(読みにくいコード、不十分な文書化など)) duplication of effort (努力の重複) cost of updates (更新のコスト) version skew (バージョンスキュー) difficulty of writing automatic tools (自動ツールの作成の難しさ) cross-language builds (言語間ビルド) 上記に挙げられている対処している課題を見ると、Go言語は「プログラム言語としての正しさ」という点ではなく「(言語仕様も含む)開発のしやすさ」に強くフォーカスを当てられている言語だとわかります。
 そのため、新しい機能を言語に追加にあたり「プログラミング言語としての正しさ」が強くあったとしても、それを代替する手段がありかつ全体として「開発のしやすさ」が損なわれる場合は導入されない傾向があります。
 ジェネリクスが効果を発揮する場面 ジェネリクスは便利な機能です。型を値のように取り扱い、抽象化された処理を型安全に取り扱うことができます。
-ですが、便利に使うためには1つ条件があります。"/>
+ですが、便利に使うためには1つ条件があります。
+それは、「高度に抽象化された振る舞い」が定義できる場合です。
+それでは「高度に抽象化された振る舞い」とは何でしょうか。
+例えばGUI開発におけるViewの振る舞いがあります。
+AndroidのListViewは「アイテムが一覧で並んでいる」という振る舞いを抽象化したViewクラスです。ListView は内部で表示するものをAdapter経由で受け取りますが、Adapterには型パラメータを与えることができるため、一覧の中に表示する項目を型安全に取り扱うことができます。"/>
 
     <meta property="og:title" content="Go言語でジェネリクスない理由の考察" />
 <meta property="og:description" content="Go言語にはジェネリクスがありません。
 他言語から入ってきた方はかなりこの部分に戸惑うことが多いようです。
 そこで、そういった方々になぜジェネリクスがないのかを説明するにあたって、自分の中でいい感じに言語化できたのでログとして残しておこうと思います。
 なぜジェネリクスがないか ジェネリクスがない理由を説明するには以下の2つが必要だと思っています。
- 言語としてのスタンスの話 ジェネリクスが効果を発揮する場面  それぞれ細かく説明していこうと思います。
+言語としてのスタンスの話 ジェネリクスが効果を発揮する場面 それぞれ細かく説明していこうと思います。
 言語としてのスタンスの話 何かが新しく作られるときには何かしら課題を解決しようとして生まれてきます。
 Goが解決しようとした課題についてはGoの作者の生みの親の一人でもあるRob Pike氏が2012年の公演で話されています。
 リンク先の講演の記事の中に、以下の点が既存の開発の辛い部分で、Goはそれらに対処しているという部分があります。
- slow builds (遅いビルド) uncontrolled dependencies (制御されていない依存関係) each programmer using a different subset of the language(言語の異なるサブセットを使用する各プログラマ) poor program understanding (code hard to read, poorly documented, and so on) (不十分なプログラムの理解(読みにくいコード、不十分な文書化など)) duplication of effort (努力の重複) cost of updates (更新のコスト) version skew (バージョンスキュー) difficulty of writing automatic tools (自動ツールの作成の難しさ) cross-language builds (言語間ビルド)  上記に挙げられている対処している課題を見ると、Go言語は「プログラム言語としての正しさ」という点ではなく「(言語仕様も含む)開発のしやすさ」に強くフォーカスを当てられている言語だとわかります。
+slow builds (遅いビルド) uncontrolled dependencies (制御されていない依存関係) each programmer using a different subset of the language(言語の異なるサブセットを使用する各プログラマ) poor program understanding (code hard to read, poorly documented, and so on) (不十分なプログラムの理解(読みにくいコード、不十分な文書化など)) duplication of effort (努力の重複) cost of updates (更新のコスト) version skew (バージョンスキュー) difficulty of writing automatic tools (自動ツールの作成の難しさ) cross-language builds (言語間ビルド) 上記に挙げられている対処している課題を見ると、Go言語は「プログラム言語としての正しさ」という点ではなく「(言語仕様も含む)開発のしやすさ」に強くフォーカスを当てられている言語だとわかります。
 そのため、新しい機能を言語に追加にあたり「プログラミング言語としての正しさ」が強くあったとしても、それを代替する手段がありかつ全体として「開発のしやすさ」が損なわれる場合は導入されない傾向があります。
 ジェネリクスが効果を発揮する場面 ジェネリクスは便利な機能です。型を値のように取り扱い、抽象化された処理を型安全に取り扱うことができます。
-ですが、便利に使うためには1つ条件があります。" />
+ですが、便利に使うためには1つ条件があります。
+それは、「高度に抽象化された振る舞い」が定義できる場合です。
+それでは「高度に抽象化された振る舞い」とは何でしょうか。
+例えばGUI開発におけるViewの振る舞いがあります。
+AndroidのListViewは「アイテムが一覧で並んでいる」という振る舞いを抽象化したViewクラスです。ListView は内部で表示するものをAdapter経由で受け取りますが、Adapterには型パラメータを与えることができるため、一覧の中に表示する項目を型安全に取り扱うことができます。" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://nametake.github.io/posts/2019/12/31/go-no-generics/" />
+<meta property="og:url" content="https://nametake.github.io/posts/2019/12/31/go-no-generics/" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2019-12-31T00:00:00+09:00" />
 <meta property="article:modified_time" content="2019-12-31T00:00:00+09:00" />
+
 
 
     
@@ -101,7 +113,7 @@ Goが解決しようとした課題についてはGoの作者の生みの親の�
     <link rel="icon" type="image/png" href="https://nametake.github.io/images/favicon-32x32.png" sizes="32x32">
     <link rel="icon" type="image/png" href="https://nametake.github.io/images/favicon-16x16.png" sizes="16x16">
 
-    <meta name="generator" content="Hugo 0.80.0" />
+    <meta name="generator" content="Hugo 0.121.1">
   </head>
 
   
@@ -256,8 +268,8 @@ Goが解決しようとした課題についてはGoの作者の生みの親の�
 
 
         <div id="disqus_thread"></div>
-<script type="application/javascript">
-    var disqus_config = function () {
+<script>
+    window.disqus_config = function () {
     
     
     
@@ -294,7 +306,7 @@ Goが解決しようとした課題についてはGoの作者の生みの親の�
       
         ©
         
-        2021
+        2023
          nametake 
       
       
@@ -310,7 +322,7 @@ Goが解決しようとした課題についてはGoの作者の生みの親の�
     
 
     
-<script type="application/javascript">
+<script>
 var doNotTrack = false;
 if (!doNotTrack) {
 	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -322,7 +334,6 @@ if (!doNotTrack) {
 	ga('send', 'pageview');
 }
 </script>
-
 
     
 

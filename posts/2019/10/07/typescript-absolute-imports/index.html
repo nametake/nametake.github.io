@@ -8,7 +8,7 @@
 
     <meta name="author" content="nametake">
     <meta name="description" content="TypeScriptのプロジェクトを作る度に設定すると思うのでメモ。
-前提  Webpackでプロジェクトを管理している Linterはeslintを使用している  tsconfig.jsonの設定 tsconfig.jsonのcompilerOptionsを設定してsrc以下のディレクトリに対してエイリアスを貼ります。
+前提 Webpackでプロジェクトを管理している Linterはeslintを使用している tsconfig.jsonの設定 tsconfig.jsonのcompilerOptionsを設定してsrc以下のディレクトリに対してエイリアスを貼ります。
 エイリアスになる文字は何でも良いですが、私はnpm経由でimportするmoduleと混同しないように @/ を使用しています。
 { &#34;compilerOptions&#34;: { ~~~ &#34;baseUrl&#34;: &#34;./&#34;, &#34;paths&#34;: { &#34;@/*&#34;: [&#34;src/*&#34;] }, ~~~ } } Webpackのresolveの設定 Webpackのmoduleの解決にtsconfigで設定したエイリアスが使われるように設定します。
 import { Configuration } from &#39;webpack&#39;; const config: Configuration = { ~~~ resolve: { extensions: [&#39;.ts&#39;, &#39;.tsx&#39;, &#39;.js&#39;, &#39;.json&#39;], alias: { &#39;@&#39;: path.resolve(__dirname, &#39;src&#39;) } }, ~~~ }; export default config; eslintの設定 Webpackでプロジェクトをビルドするだけなら上記2つの設定だけで大丈夫ですが、eslintでimport/no-unresolvedを設定しているとエイリアスが解決できずエラーになります。
@@ -20,10 +20,9 @@ yarn add -D eslint-import-resolver-webpack 次にeslintrcのsettingsに以下の
 
     
 
-    <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="TypeScirptのプロジェクトにエイリアスを設定して絶対パスでimportするメモ"/>
+    <meta name="twitter:card" content="summary"/><meta name="twitter:title" content="TypeScirptのプロジェクトにエイリアスを設定して絶対パスでimportするメモ"/>
 <meta name="twitter:description" content="TypeScriptのプロジェクトを作る度に設定すると思うのでメモ。
-前提  Webpackでプロジェクトを管理している Linterはeslintを使用している  tsconfig.jsonの設定 tsconfig.jsonのcompilerOptionsを設定してsrc以下のディレクトリに対してエイリアスを貼ります。
+前提 Webpackでプロジェクトを管理している Linterはeslintを使用している tsconfig.jsonの設定 tsconfig.jsonのcompilerOptionsを設定してsrc以下のディレクトリに対してエイリアスを貼ります。
 エイリアスになる文字は何でも良いですが、私はnpm経由でimportするmoduleと混同しないように @/ を使用しています。
 { &#34;compilerOptions&#34;: { ~~~ &#34;baseUrl&#34;: &#34;./&#34;, &#34;paths&#34;: { &#34;@/*&#34;: [&#34;src/*&#34;] }, ~~~ } } Webpackのresolveの設定 Webpackのmoduleの解決にtsconfigで設定したエイリアスが使われるように設定します。
 import { Configuration } from &#39;webpack&#39;; const config: Configuration = { ~~~ resolve: { extensions: [&#39;.ts&#39;, &#39;.tsx&#39;, &#39;.js&#39;, &#39;.json&#39;], alias: { &#39;@&#39;: path.resolve(__dirname, &#39;src&#39;) } }, ~~~ }; export default config; eslintの設定 Webpackでプロジェクトをビルドするだけなら上記2つの設定だけで大丈夫ですが、eslintでimport/no-unresolvedを設定しているとエイリアスが解決できずエラーになります。
@@ -34,7 +33,7 @@ yarn add -D eslint-import-resolver-webpack 次にeslintrcのsettingsに以下の
 
     <meta property="og:title" content="TypeScirptのプロジェクトにエイリアスを設定して絶対パスでimportするメモ" />
 <meta property="og:description" content="TypeScriptのプロジェクトを作る度に設定すると思うのでメモ。
-前提  Webpackでプロジェクトを管理している Linterはeslintを使用している  tsconfig.jsonの設定 tsconfig.jsonのcompilerOptionsを設定してsrc以下のディレクトリに対してエイリアスを貼ります。
+前提 Webpackでプロジェクトを管理している Linterはeslintを使用している tsconfig.jsonの設定 tsconfig.jsonのcompilerOptionsを設定してsrc以下のディレクトリに対してエイリアスを貼ります。
 エイリアスになる文字は何でも良いですが、私はnpm経由でimportするmoduleと混同しないように @/ を使用しています。
 { &#34;compilerOptions&#34;: { ~~~ &#34;baseUrl&#34;: &#34;./&#34;, &#34;paths&#34;: { &#34;@/*&#34;: [&#34;src/*&#34;] }, ~~~ } } Webpackのresolveの設定 Webpackのmoduleの解決にtsconfigで設定したエイリアスが使われるように設定します。
 import { Configuration } from &#39;webpack&#39;; const config: Configuration = { ~~~ resolve: { extensions: [&#39;.ts&#39;, &#39;.tsx&#39;, &#39;.js&#39;, &#39;.json&#39;], alias: { &#39;@&#39;: path.resolve(__dirname, &#39;src&#39;) } }, ~~~ }; export default config; eslintの設定 Webpackでプロジェクトをビルドするだけなら上記2つの設定だけで大丈夫ですが、eslintでimport/no-unresolvedを設定しているとエイリアスが解決できずエラーになります。
@@ -43,9 +42,10 @@ import { Configuration } from &#39;webpack&#39;; const config: Configuration = {
 yarn add -D eslint-import-resolver-webpack 次にeslintrcのsettingsに以下のようにWebpackの設定を使用するように設定を加えます。
 { ~~~ &#34;settings&#34;: { &#34;import/resolver&#34;: &#34;webpack&#34; } ~~~ } これでeslintでもエイリアスを認識して、エラーも出なくなります。" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://nametake.github.io/posts/2019/10/07/typescript-absolute-imports/" />
+<meta property="og:url" content="https://nametake.github.io/posts/2019/10/07/typescript-absolute-imports/" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2019-10-07T00:15:35+09:00" />
 <meta property="article:modified_time" content="2019-10-07T00:15:35+09:00" />
+
 
 
     
@@ -92,7 +92,7 @@ yarn add -D eslint-import-resolver-webpack 次にeslintrcのsettingsに以下の
     <link rel="icon" type="image/png" href="https://nametake.github.io/images/favicon-32x32.png" sizes="32x32">
     <link rel="icon" type="image/png" href="https://nametake.github.io/images/favicon-16x16.png" sizes="16x16">
 
-    <meta name="generator" content="Hugo 0.80.0" />
+    <meta name="generator" content="Hugo 0.121.1">
   </head>
 
   
@@ -178,56 +178,56 @@ yarn add -D eslint-import-resolver-webpack 次にeslintrcのsettingsに以下の
 <h1 id="tsconfigjsonの設定">tsconfig.jsonの設定</h1>
 <p>tsconfig.jsonのcompilerOptionsを設定してsrc以下のディレクトリに対してエイリアスを貼ります。</p>
 <p>エイリアスになる文字は何でも良いですが、私はnpm経由でimportするmoduleと混同しないように <code>@/</code> を使用しています。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
-  <span style="color:#f92672">&#34;compilerOptions&#34;</span>: {
-    <span style="color:#960050;background-color:#1e0010">~~~</span>
-    <span style="color:#f92672">&#34;baseUrl&#34;</span>: <span style="color:#e6db74">&#34;./&#34;</span>,
-    <span style="color:#f92672">&#34;paths&#34;</span>: {
-      <span style="color:#f92672">&#34;@/*&#34;</span>: [<span style="color:#e6db74">&#34;src/*&#34;</span>]
-    },
-    <span style="color:#960050;background-color:#1e0010">~~~</span>
-  }
-}
-</code></pre></div><h1 id="webpackのresolveの設定">Webpackのresolveの設定</h1>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;compilerOptions&#34;</span>: {
+</span></span><span style="display:flex;"><span>    <span style="color:#960050;background-color:#1e0010">~~~</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;baseUrl&#34;</span>: <span style="color:#e6db74">&#34;./&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;paths&#34;</span>: {
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;@/*&#34;</span>: [<span style="color:#e6db74">&#34;src/*&#34;</span>]
+</span></span><span style="display:flex;"><span>    },
+</span></span><span style="display:flex;"><span>    <span style="color:#960050;background-color:#1e0010">~~~</span>
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h1 id="webpackのresolveの設定">Webpackのresolveの設定</h1>
 <p>Webpackのmoduleの解決にtsconfigで設定したエイリアスが使われるように設定します。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ts" data-lang="ts"><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">Configuration</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;webpack&#39;</span>;
-
-<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">config</span>: <span style="color:#66d9ef">Configuration</span> <span style="color:#f92672">=</span> {
-  <span style="color:#f92672">~~~</span>
-  <span style="color:#a6e22e">resolve</span><span style="color:#f92672">:</span> {
-    <span style="color:#a6e22e">extensions</span><span style="color:#f92672">:</span> [<span style="color:#e6db74">&#39;.ts&#39;</span>, <span style="color:#e6db74">&#39;.tsx&#39;</span>, <span style="color:#e6db74">&#39;.js&#39;</span>, <span style="color:#e6db74">&#39;.json&#39;</span>],
-    <span style="color:#a6e22e">alias</span><span style="color:#f92672">:</span> {
-      <span style="color:#e6db74">&#39;@&#39;</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">path</span>.<span style="color:#a6e22e">resolve</span>(<span style="color:#a6e22e">__dirname</span>, <span style="color:#e6db74">&#39;src&#39;</span>)
-    }
-  },
-  <span style="color:#f92672">~~~</span>
-};
-
-<span style="color:#66d9ef">export</span> <span style="color:#66d9ef">default</span> <span style="color:#a6e22e">config</span>;
-</code></pre></div><h1 id="eslintの設定">eslintの設定</h1>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ts" data-lang="ts"><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">Configuration</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;webpack&#39;</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">config</span>: <span style="color:#66d9ef">Configuration</span> <span style="color:#f92672">=</span> {
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">~~~</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">resolve</span><span style="color:#f92672">:</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">extensions</span><span style="color:#f92672">:</span> [<span style="color:#e6db74">&#39;.ts&#39;</span>, <span style="color:#e6db74">&#39;.tsx&#39;</span>, <span style="color:#e6db74">&#39;.js&#39;</span>, <span style="color:#e6db74">&#39;.json&#39;</span>],
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">alias</span><span style="color:#f92672">:</span> {
+</span></span><span style="display:flex;"><span>      <span style="color:#e6db74">&#39;@&#39;</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">path</span>.<span style="color:#a6e22e">resolve</span>(<span style="color:#a6e22e">__dirname</span>, <span style="color:#e6db74">&#39;src&#39;</span>)
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>  },
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">~~~</span>
+</span></span><span style="display:flex;"><span>};
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">default</span> <span style="color:#a6e22e">config</span>;
+</span></span></code></pre></div><h1 id="eslintの設定">eslintの設定</h1>
 <p>Webpackでプロジェクトをビルドするだけなら上記2つの設定だけで大丈夫ですが、eslintで<code>import/no-unresolved</code>を設定しているとエイリアスが解決できずエラーになります。</p>
 <p>そこで<a href="https://www.npmjs.com/package/eslint-import-resolver-webpack">eslint-import-resolver-webpack</a>を導入して、eslintのimportの解決にWebpackの設定を使用するようにeslintrcに設定を加えます。</p>
 <p>まずは以下のコマンドで<a href="https://www.npmjs.com/package/eslint-import-resolver-webpack">eslint-import-resolver-webpack</a>を追加します。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">yarn add -D eslint-import-resolver-webpack
-</code></pre></div><p>次にeslintrcの<code>settings</code>に以下のようにWebpackの設定を使用するように設定を加えます。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
-  <span style="color:#960050;background-color:#1e0010">~~~</span>
-  <span style="color:#f92672">&#34;settings&#34;</span>: {
-    <span style="color:#f92672">&#34;import/resolver&#34;</span>: <span style="color:#e6db74">&#34;webpack&#34;</span>
-  }
-  <span style="color:#960050;background-color:#1e0010">~~~</span>
-}
-</code></pre></div><p>これでeslintでもエイリアスを認識して、エラーも出なくなります。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>yarn add -D eslint-import-resolver-webpack
+</span></span></code></pre></div><p>次にeslintrcの<code>settings</code>に以下のようにWebpackの設定を使用するように設定を加えます。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>  <span style="color:#960050;background-color:#1e0010">~~~</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;settings&#34;</span>: {
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;import/resolver&#34;</span>: <span style="color:#e6db74">&#34;webpack&#34;</span>
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  <span style="color:#960050;background-color:#1e0010">~~~</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>これでeslintでもエイリアスを認識して、エラーも出なくなります。</p>
 <h1 id="おまけ">おまけ</h1>
 <p>せっかくエイリアスを設定したので、親を指定した相対パスでのimportがあるとエラーになるように以下のruleをeslintrcに設定します(子を指定した相対パスはmodule内では使用したいので禁止しません)。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">{
-  &#34;rules&#34;: {
-    ~~~
-    &#34;import/no-relative-parent-imports&#34;: &#34;error&#34;,
-    ~~~
-  }
-}
-</code></pre></div><p>これで親を指定した相対パスでのimportがあった場合eslintをかけたときにエラーで怒られるようになりました。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>  &#34;rules&#34;: {
+</span></span><span style="display:flex;"><span>    ~~~
+</span></span><span style="display:flex;"><span>    &#34;import/no-relative-parent-imports&#34;: &#34;error&#34;,
+</span></span><span style="display:flex;"><span>    ~~~
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>これで親を指定した相対パスでのimportがあった場合eslintをかけたときにエラーで怒られるようになりました。</p>
 
       </div>
 
@@ -237,8 +237,8 @@ yarn add -D eslint-import-resolver-webpack 次にeslintrcのsettingsに以下の
 
 
         <div id="disqus_thread"></div>
-<script type="application/javascript">
-    var disqus_config = function () {
+<script>
+    window.disqus_config = function () {
     
     
     
@@ -275,7 +275,7 @@ yarn add -D eslint-import-resolver-webpack 次にeslintrcのsettingsに以下の
       
         ©
         
-        2021
+        2023
          nametake 
       
       
@@ -291,7 +291,7 @@ yarn add -D eslint-import-resolver-webpack 次にeslintrcのsettingsに以下の
     
 
     
-<script type="application/javascript">
+<script>
 var doNotTrack = false;
 if (!doNotTrack) {
 	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -303,7 +303,6 @@ if (!doNotTrack) {
 	ga('send', 'pageview');
 }
 </script>
-
 
     
 

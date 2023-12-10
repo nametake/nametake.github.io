@@ -9,28 +9,28 @@
     <meta name="author" content="nametake">
     <meta name="description" content="nametake/protoc-gen-gohttpというprotocのプラグインを作ったのでその話です。
 Protocol Buffersとは Protocol Buffersはインターフェース定義言語の1つでGoogleによって開発されているものです(ざっくりいうと、JSONやXMLの仲間)。以下のように、構造を表すmessageとそのmessageを使ったRPCのインターフェースのserviceというものを定義できます。
-syntax = &#34;proto3&#34;;package helloworld;option go_package = &#34;main&#34;;message HelloRequest { string name = 1;}message HelloReply { string message = 1;}service Greeter { rpc SayHello(HelloRequest) returns (HelloReply) {}}上記の定義をprotocコマンドを使ってコンパイルすることで、対応した言語ならそのままコードを書き出せます。例えばGoなら以下のような構造体が書き出されます(長くなるのでコードは削っています)。以下の構造体はProtocol Bufferが用意しているライブラリを利用すればバイナリに変換できます。
-type HelloRequest struct { Name string `protobuf:&#34;bytes,1,opt,name=name&#34; json:&#34;name,omitempty&#34;` XXX_NoUnkeyedLiteral struct{} `json:&#34;-&#34;` XXX_unrecognized []byte `json:&#34;-&#34;` XXX_sizecache int32 `json:&#34;-&#34;` } type HelloReply struct { Message string `protobuf:&#34;bytes,1,opt,name=message&#34; json:&#34;message,omitempty&#34;` XXX_NoUnkeyedLiteral struct{} `json:&#34;-&#34;` XXX_unrecognized []byte `json:&#34;-&#34;` XXX_sizecache int32 `json:&#34;-&#34;` } また、protocコマンドはプラグイン機構も持っているため、例えばgRPCのためのコードを書き出したかったらprotoc --go_out=plugins=grpc:.のようにすることで以下のようにgRPC用のコードも同時に書き出してくれます(以下のコードも削ってます)。">
+syntax = &#34;proto3&#34;; package helloworld; option go_package = &#34;main&#34;; message HelloRequest { string name = 1; } message HelloReply { string message = 1; } service Greeter { rpc SayHello(HelloRequest) returns (HelloReply) {} } 上記の定義をprotocコマンドを使ってコンパイルすることで、対応した言語ならそのままコードを書き出せます。例えばGoなら以下のような構造体が書き出されます(長くなるのでコードは削っています)。以下の構造体はProtocol Bufferが用意しているライブラリを利用すればバイナリに変換できます。
+type HelloRequest struct { Name string `protobuf:&#34;bytes,1,opt,name=name&#34; json:&#34;name,omitempty&#34;` XXX_NoUnkeyedLiteral struct{} `json:&#34;-&#34;` XXX_unrecognized []byte `json:&#34;-&#34;` XXX_sizecache int32 `json:&#34;-&#34;` } type HelloReply struct { Message string `protobuf:&#34;bytes,1,opt,name=message&#34; json:&#34;message,omitempty&#34;` XXX_NoUnkeyedLiteral struct{} `json:&#34;-&#34;` XXX_unrecognized []byte `json:&#34;-&#34;` XXX_sizecache int32 `json:&#34;-&#34;` } また、protocコマンドはプラグイン機構も持っているため、例えばgRPCのためのコードを書き出したかったらprotoc --go_out=plugins=grpc:.">
     <meta name="keywords" content="blog,developer,personal">
 
     
 
-    <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Protocol Buffersのserviceをnet/httpに対応させるprotoc-gen-gohttpを作った"/>
+    <meta name="twitter:card" content="summary"/><meta name="twitter:title" content="Protocol Buffersのserviceをnet/httpに対応させるprotoc-gen-gohttpを作った"/>
 <meta name="twitter:description" content="nametake/protoc-gen-gohttpというprotocのプラグインを作ったのでその話です。
 Protocol Buffersとは Protocol Buffersはインターフェース定義言語の1つでGoogleによって開発されているものです(ざっくりいうと、JSONやXMLの仲間)。以下のように、構造を表すmessageとそのmessageを使ったRPCのインターフェースのserviceというものを定義できます。
-syntax = &#34;proto3&#34;;package helloworld;option go_package = &#34;main&#34;;message HelloRequest { string name = 1;}message HelloReply { string message = 1;}service Greeter { rpc SayHello(HelloRequest) returns (HelloReply) {}}上記の定義をprotocコマンドを使ってコンパイルすることで、対応した言語ならそのままコードを書き出せます。例えばGoなら以下のような構造体が書き出されます(長くなるのでコードは削っています)。以下の構造体はProtocol Bufferが用意しているライブラリを利用すればバイナリに変換できます。
-type HelloRequest struct { Name string `protobuf:&#34;bytes,1,opt,name=name&#34; json:&#34;name,omitempty&#34;` XXX_NoUnkeyedLiteral struct{} `json:&#34;-&#34;` XXX_unrecognized []byte `json:&#34;-&#34;` XXX_sizecache int32 `json:&#34;-&#34;` } type HelloReply struct { Message string `protobuf:&#34;bytes,1,opt,name=message&#34; json:&#34;message,omitempty&#34;` XXX_NoUnkeyedLiteral struct{} `json:&#34;-&#34;` XXX_unrecognized []byte `json:&#34;-&#34;` XXX_sizecache int32 `json:&#34;-&#34;` } また、protocコマンドはプラグイン機構も持っているため、例えばgRPCのためのコードを書き出したかったらprotoc --go_out=plugins=grpc:.のようにすることで以下のようにgRPC用のコードも同時に書き出してくれます(以下のコードも削ってます)。"/>
+syntax = &#34;proto3&#34;; package helloworld; option go_package = &#34;main&#34;; message HelloRequest { string name = 1; } message HelloReply { string message = 1; } service Greeter { rpc SayHello(HelloRequest) returns (HelloReply) {} } 上記の定義をprotocコマンドを使ってコンパイルすることで、対応した言語ならそのままコードを書き出せます。例えばGoなら以下のような構造体が書き出されます(長くなるのでコードは削っています)。以下の構造体はProtocol Bufferが用意しているライブラリを利用すればバイナリに変換できます。
+type HelloRequest struct { Name string `protobuf:&#34;bytes,1,opt,name=name&#34; json:&#34;name,omitempty&#34;` XXX_NoUnkeyedLiteral struct{} `json:&#34;-&#34;` XXX_unrecognized []byte `json:&#34;-&#34;` XXX_sizecache int32 `json:&#34;-&#34;` } type HelloReply struct { Message string `protobuf:&#34;bytes,1,opt,name=message&#34; json:&#34;message,omitempty&#34;` XXX_NoUnkeyedLiteral struct{} `json:&#34;-&#34;` XXX_unrecognized []byte `json:&#34;-&#34;` XXX_sizecache int32 `json:&#34;-&#34;` } また、protocコマンドはプラグイン機構も持っているため、例えばgRPCのためのコードを書き出したかったらprotoc --go_out=plugins=grpc:."/>
 
     <meta property="og:title" content="Protocol Buffersのserviceをnet/httpに対応させるprotoc-gen-gohttpを作った" />
 <meta property="og:description" content="nametake/protoc-gen-gohttpというprotocのプラグインを作ったのでその話です。
 Protocol Buffersとは Protocol Buffersはインターフェース定義言語の1つでGoogleによって開発されているものです(ざっくりいうと、JSONやXMLの仲間)。以下のように、構造を表すmessageとそのmessageを使ったRPCのインターフェースのserviceというものを定義できます。
-syntax = &#34;proto3&#34;;package helloworld;option go_package = &#34;main&#34;;message HelloRequest { string name = 1;}message HelloReply { string message = 1;}service Greeter { rpc SayHello(HelloRequest) returns (HelloReply) {}}上記の定義をprotocコマンドを使ってコンパイルすることで、対応した言語ならそのままコードを書き出せます。例えばGoなら以下のような構造体が書き出されます(長くなるのでコードは削っています)。以下の構造体はProtocol Bufferが用意しているライブラリを利用すればバイナリに変換できます。
-type HelloRequest struct { Name string `protobuf:&#34;bytes,1,opt,name=name&#34; json:&#34;name,omitempty&#34;` XXX_NoUnkeyedLiteral struct{} `json:&#34;-&#34;` XXX_unrecognized []byte `json:&#34;-&#34;` XXX_sizecache int32 `json:&#34;-&#34;` } type HelloReply struct { Message string `protobuf:&#34;bytes,1,opt,name=message&#34; json:&#34;message,omitempty&#34;` XXX_NoUnkeyedLiteral struct{} `json:&#34;-&#34;` XXX_unrecognized []byte `json:&#34;-&#34;` XXX_sizecache int32 `json:&#34;-&#34;` } また、protocコマンドはプラグイン機構も持っているため、例えばgRPCのためのコードを書き出したかったらprotoc --go_out=plugins=grpc:.のようにすることで以下のようにgRPC用のコードも同時に書き出してくれます(以下のコードも削ってます)。" />
+syntax = &#34;proto3&#34;; package helloworld; option go_package = &#34;main&#34;; message HelloRequest { string name = 1; } message HelloReply { string message = 1; } service Greeter { rpc SayHello(HelloRequest) returns (HelloReply) {} } 上記の定義をprotocコマンドを使ってコンパイルすることで、対応した言語ならそのままコードを書き出せます。例えばGoなら以下のような構造体が書き出されます(長くなるのでコードは削っています)。以下の構造体はProtocol Bufferが用意しているライブラリを利用すればバイナリに変換できます。
+type HelloRequest struct { Name string `protobuf:&#34;bytes,1,opt,name=name&#34; json:&#34;name,omitempty&#34;` XXX_NoUnkeyedLiteral struct{} `json:&#34;-&#34;` XXX_unrecognized []byte `json:&#34;-&#34;` XXX_sizecache int32 `json:&#34;-&#34;` } type HelloReply struct { Message string `protobuf:&#34;bytes,1,opt,name=message&#34; json:&#34;message,omitempty&#34;` XXX_NoUnkeyedLiteral struct{} `json:&#34;-&#34;` XXX_unrecognized []byte `json:&#34;-&#34;` XXX_sizecache int32 `json:&#34;-&#34;` } また、protocコマンドはプラグイン機構も持っているため、例えばgRPCのためのコードを書き出したかったらprotoc --go_out=plugins=grpc:." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://nametake.github.io/posts/2018/11/21/protoc-gen-gohttp/" />
+<meta property="og:url" content="https://nametake.github.io/posts/2018/11/21/protoc-gen-gohttp/" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2018-11-21T16:32:07+09:00" />
 <meta property="article:modified_time" content="2018-11-21T16:32:07+09:00" />
+
 
 
     
@@ -77,7 +77,7 @@ type HelloRequest struct { Name string `protobuf:&#34;bytes,1,opt,name=name&#34;
     <link rel="icon" type="image/png" href="https://nametake.github.io/images/favicon-32x32.png" sizes="32x32">
     <link rel="icon" type="image/png" href="https://nametake.github.io/images/favicon-16x16.png" sizes="16x16">
 
-    <meta name="generator" content="Hugo 0.80.0" />
+    <meta name="generator" content="Hugo 0.121.1">
   </head>
 
   
@@ -159,60 +159,60 @@ type HelloRequest struct { Name string `protobuf:&#34;bytes,1,opt,name=name&#34;
         <p><a href="https://github.com/nametake/protoc-gen-gohttp">nametake/protoc-gen-gohttp</a>という<code>protoc</code>のプラグインを作ったのでその話です。</p>
 <h1 id="protocol-buffersとは">Protocol Buffersとは</h1>
 <p>Protocol Buffersはインターフェース定義言語の1つでGoogleによって開発されているものです(ざっくりいうと、JSONやXMLの仲間)。以下のように、構造を表す<code>message</code>とその<code>message</code>を使ったRPCのインターフェースの<code>service</code>というものを定義できます。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-proto" data-lang="proto">syntax <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;proto3&#34;</span>;<span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#f92672">package</span> helloworld;<span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">option</span> go_package <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;main&#34;</span>;<span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">message</span> <span style="color:#a6e22e">HelloRequest</span> {<span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span>  <span style="color:#66d9ef">string</span> name <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;<span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span>}<span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">message</span> <span style="color:#a6e22e">HelloReply</span> {<span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span>  <span style="color:#66d9ef">string</span> <span style="color:#66d9ef">message</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;<span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span>}<span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">service</span> Greeter {<span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span>  <span style="color:#66d9ef">rpc</span> SayHello(HelloRequest) <span style="color:#66d9ef">returns</span> (HelloReply) {}<span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span>}<span style="color:#960050;background-color:#1e0010">
-</span></code></pre></div><p>上記の定義を<code>protoc</code>コマンドを使ってコンパイルすることで、対応した言語ならそのままコードを書き出せます。例えばGoなら以下のような構造体が書き出されます(長くなるのでコードは削っています)。以下の構造体はProtocol Bufferが用意しているライブラリを利用すればバイナリに変換できます。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">HelloRequest</span> <span style="color:#66d9ef">struct</span> {
-	<span style="color:#a6e22e">Name</span>                 <span style="color:#66d9ef">string</span>   <span style="color:#e6db74">`protobuf:&#34;bytes,1,opt,name=name&#34; json:&#34;name,omitempty&#34;`</span>
-	<span style="color:#a6e22e">XXX_NoUnkeyedLiteral</span> <span style="color:#66d9ef">struct</span>{} <span style="color:#e6db74">`json:&#34;-&#34;`</span>
-	<span style="color:#a6e22e">XXX_unrecognized</span>     []<span style="color:#66d9ef">byte</span>   <span style="color:#e6db74">`json:&#34;-&#34;`</span>
-	<span style="color:#a6e22e">XXX_sizecache</span>        <span style="color:#66d9ef">int32</span>    <span style="color:#e6db74">`json:&#34;-&#34;`</span>
-}
-
-<span style="color:#66d9ef">type</span> <span style="color:#a6e22e">HelloReply</span> <span style="color:#66d9ef">struct</span> {
-	<span style="color:#a6e22e">Message</span>              <span style="color:#66d9ef">string</span>   <span style="color:#e6db74">`protobuf:&#34;bytes,1,opt,name=message&#34; json:&#34;message,omitempty&#34;`</span>
-	<span style="color:#a6e22e">XXX_NoUnkeyedLiteral</span> <span style="color:#66d9ef">struct</span>{} <span style="color:#e6db74">`json:&#34;-&#34;`</span>
-	<span style="color:#a6e22e">XXX_unrecognized</span>     []<span style="color:#66d9ef">byte</span>   <span style="color:#e6db74">`json:&#34;-&#34;`</span>
-	<span style="color:#a6e22e">XXX_sizecache</span>        <span style="color:#66d9ef">int32</span>    <span style="color:#e6db74">`json:&#34;-&#34;`</span>
-}
-</code></pre></div><p>また、<code>protoc</code>コマンドはプラグイン機構も持っているため、例えばgRPCのためのコードを書き出したかったら<code>protoc --go_out=plugins=grpc:.</code>のようにすることで以下のようにgRPC用のコードも同時に書き出してくれます(以下のコードも削ってます)。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">NewGreeterClient</span>(<span style="color:#a6e22e">cc</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">grpc</span>.<span style="color:#a6e22e">ClientConn</span>) <span style="color:#a6e22e">GreeterClient</span> {
-	<span style="color:#66d9ef">return</span> <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">greeterClient</span>{<span style="color:#a6e22e">cc</span>}
-}
-
-<span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">c</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">greeterClient</span>) <span style="color:#a6e22e">SayHello</span>(<span style="color:#a6e22e">ctx</span> <span style="color:#a6e22e">context</span>.<span style="color:#a6e22e">Context</span>, <span style="color:#a6e22e">in</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">HelloRequest</span>, <span style="color:#a6e22e">opts</span> <span style="color:#f92672">...</span><span style="color:#a6e22e">grpc</span>.<span style="color:#a6e22e">CallOption</span>) (<span style="color:#f92672">*</span><span style="color:#a6e22e">HelloReply</span>, <span style="color:#66d9ef">error</span>) {
-	<span style="color:#a6e22e">out</span> <span style="color:#f92672">:=</span> new(<span style="color:#a6e22e">HelloReply</span>)
-	<span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">c</span>.<span style="color:#a6e22e">cc</span>.<span style="color:#a6e22e">Invoke</span>(<span style="color:#a6e22e">ctx</span>, <span style="color:#e6db74">&#34;/helloworld.Greeter/SayHello&#34;</span>, <span style="color:#a6e22e">in</span>, <span style="color:#a6e22e">out</span>, <span style="color:#a6e22e">opts</span><span style="color:#f92672">...</span>)
-	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
-		<span style="color:#66d9ef">return</span> <span style="color:#66d9ef">nil</span>, <span style="color:#a6e22e">err</span>
-	}
-	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">out</span>, <span style="color:#66d9ef">nil</span>
-}
-
-<span style="color:#75715e">// GreeterServer is the server API for Greeter service.
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">GreeterServer</span> <span style="color:#66d9ef">interface</span> {
-	<span style="color:#a6e22e">SayHello</span>(<span style="color:#a6e22e">context</span>.<span style="color:#a6e22e">Context</span>, <span style="color:#f92672">*</span><span style="color:#a6e22e">HelloRequest</span>) (<span style="color:#f92672">*</span><span style="color:#a6e22e">HelloReply</span>, <span style="color:#66d9ef">error</span>)
-}
-
-<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">RegisterGreeterServer</span>(<span style="color:#a6e22e">s</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">grpc</span>.<span style="color:#a6e22e">Server</span>, <span style="color:#a6e22e">srv</span> <span style="color:#a6e22e">GreeterServer</span>) {
-	<span style="color:#a6e22e">s</span>.<span style="color:#a6e22e">RegisterService</span>(<span style="color:#f92672">&amp;</span><span style="color:#a6e22e">_Greeter_serviceDesc</span>, <span style="color:#a6e22e">srv</span>)
-}
-</code></pre></div><h1 id="本題">本題</h1>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-proto" data-lang="proto"><span style="display:flex;"><span>syntax <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;proto3&#34;</span>;<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#f92672">package</span> helloworld;<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">option</span> go_package <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;main&#34;</span>;<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">message</span> <span style="color:#a6e22e">HelloRequest</span> {<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>  <span style="color:#66d9ef">string</span> name <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>}<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">message</span> <span style="color:#a6e22e">HelloReply</span> {<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>  <span style="color:#66d9ef">string</span> <span style="color:#66d9ef">message</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>}<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">service</span> Greeter {<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>  <span style="color:#66d9ef">rpc</span> SayHello(HelloRequest) <span style="color:#66d9ef">returns</span> (HelloReply) {}<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>}<span style="color:#960050;background-color:#1e0010">
+</span></span></span></code></pre></div><p>上記の定義を<code>protoc</code>コマンドを使ってコンパイルすることで、対応した言語ならそのままコードを書き出せます。例えばGoなら以下のような構造体が書き出されます(長くなるのでコードは削っています)。以下の構造体はProtocol Bufferが用意しているライブラリを利用すればバイナリに変換できます。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">HelloRequest</span> <span style="color:#66d9ef">struct</span> {
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">Name</span>                 <span style="color:#66d9ef">string</span>   <span style="color:#e6db74">`protobuf:&#34;bytes,1,opt,name=name&#34; json:&#34;name,omitempty&#34;`</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">XXX_NoUnkeyedLiteral</span> <span style="color:#66d9ef">struct</span>{} <span style="color:#e6db74">`json:&#34;-&#34;`</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">XXX_unrecognized</span>     []<span style="color:#66d9ef">byte</span>   <span style="color:#e6db74">`json:&#34;-&#34;`</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">XXX_sizecache</span>        <span style="color:#66d9ef">int32</span>    <span style="color:#e6db74">`json:&#34;-&#34;`</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">HelloReply</span> <span style="color:#66d9ef">struct</span> {
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">Message</span>              <span style="color:#66d9ef">string</span>   <span style="color:#e6db74">`protobuf:&#34;bytes,1,opt,name=message&#34; json:&#34;message,omitempty&#34;`</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">XXX_NoUnkeyedLiteral</span> <span style="color:#66d9ef">struct</span>{} <span style="color:#e6db74">`json:&#34;-&#34;`</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">XXX_unrecognized</span>     []<span style="color:#66d9ef">byte</span>   <span style="color:#e6db74">`json:&#34;-&#34;`</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">XXX_sizecache</span>        <span style="color:#66d9ef">int32</span>    <span style="color:#e6db74">`json:&#34;-&#34;`</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>また、<code>protoc</code>コマンドはプラグイン機構も持っているため、例えばgRPCのためのコードを書き出したかったら<code>protoc --go_out=plugins=grpc:.</code>のようにすることで以下のようにgRPC用のコードも同時に書き出してくれます(以下のコードも削ってます)。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">NewGreeterClient</span>(<span style="color:#a6e22e">cc</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">grpc</span>.<span style="color:#a6e22e">ClientConn</span>) <span style="color:#a6e22e">GreeterClient</span> {
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span> <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">greeterClient</span>{<span style="color:#a6e22e">cc</span>}
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">c</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">greeterClient</span>) <span style="color:#a6e22e">SayHello</span>(<span style="color:#a6e22e">ctx</span> <span style="color:#a6e22e">context</span>.<span style="color:#a6e22e">Context</span>, <span style="color:#a6e22e">in</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">HelloRequest</span>, <span style="color:#a6e22e">opts</span> <span style="color:#f92672">...</span><span style="color:#a6e22e">grpc</span>.<span style="color:#a6e22e">CallOption</span>) (<span style="color:#f92672">*</span><span style="color:#a6e22e">HelloReply</span>, <span style="color:#66d9ef">error</span>) {
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">out</span> <span style="color:#f92672">:=</span> new(<span style="color:#a6e22e">HelloReply</span>)
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">c</span>.<span style="color:#a6e22e">cc</span>.<span style="color:#a6e22e">Invoke</span>(<span style="color:#a6e22e">ctx</span>, <span style="color:#e6db74">&#34;/helloworld.Greeter/SayHello&#34;</span>, <span style="color:#a6e22e">in</span>, <span style="color:#a6e22e">out</span>, <span style="color:#a6e22e">opts</span><span style="color:#f92672">...</span>)
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">return</span> <span style="color:#66d9ef">nil</span>, <span style="color:#a6e22e">err</span>
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">out</span>, <span style="color:#66d9ef">nil</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// GreeterServer is the server API for Greeter service.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">GreeterServer</span> <span style="color:#66d9ef">interface</span> {
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">SayHello</span>(<span style="color:#a6e22e">context</span>.<span style="color:#a6e22e">Context</span>, <span style="color:#f92672">*</span><span style="color:#a6e22e">HelloRequest</span>) (<span style="color:#f92672">*</span><span style="color:#a6e22e">HelloReply</span>, <span style="color:#66d9ef">error</span>)
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">RegisterGreeterServer</span>(<span style="color:#a6e22e">s</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">grpc</span>.<span style="color:#a6e22e">Server</span>, <span style="color:#a6e22e">srv</span> <span style="color:#a6e22e">GreeterServer</span>) {
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">s</span>.<span style="color:#a6e22e">RegisterService</span>(<span style="color:#f92672">&amp;</span><span style="color:#a6e22e">_Greeter_serviceDesc</span>, <span style="color:#a6e22e">srv</span>)
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h1 id="本題">本題</h1>
 <p>Protocol Buffers自体はただのIDLでしかないので、書き出されるコードはただのデータ構造を表す構造体に過ぎません。よくgRPCと一緒に語られるため、gRPCと一緒に使わないといけないと勘違いされがちなのですが、gRPCを使わずとも書き出した構造体だけを利用可能です。</p>
 <p>書き出された構造体をバイナリに変換してHTTPのPOSTのBodyに乗せることで、通信プロトコルはHTTPのままでProtocol Buffersの恩恵を受けることもできます(構造体なのでJSONに変換して取り扱ったりもできます)。</p>
 <p>クライアントとサーバ間で同じ定義を利用できて、かつその定義もシンプルなため、gRPCを使わないでProtocol Buffersだけを利用するだけでもかなり便利です。</p>
@@ -220,40 +220,40 @@ type HelloRequest struct { Name string `protobuf:&#34;bytes,1,opt,name=name&#34;
 <p>「せっかく構造体までは利用できるんだから、どうせならgRPCのプラグインで書き出されるinterfaceも使いたい！」という気持ちと「protocにプラグイン機能が用意されてるならそれを利用して<code>http.Handler</code>に対応できるコードを書き出せば良いのでは？」という発想から作ったプラグインが<a href="https://github.com/nametake/protoc-gen-gohttp">protoc-gen-gohttp</a>です。</p>
 <h2 id="使い方">使い方</h2>
 <p>このプラグインはgRPCのプラグインと一緒に使うことを想定しています。Protocol Buffersの定義に<code>service</code>を書いてこのプラグインを使うと、以下のようなコードが生成されます。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">GreeterHTTPConverter</span> <span style="color:#66d9ef">struct</span> {
-	<span style="color:#a6e22e">srv</span> <span style="color:#a6e22e">GreeterServer</span>
-}
-
-<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">NewGreeterHTTPConverter</span>(<span style="color:#a6e22e">srv</span> <span style="color:#a6e22e">GreeterServer</span>) <span style="color:#f92672">*</span><span style="color:#a6e22e">GreeterHTTPConverter</span> {
-	<span style="color:#66d9ef">return</span> <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">GreeterHTTPConverter</span>{
-		<span style="color:#a6e22e">srv</span>: <span style="color:#a6e22e">srv</span>,
-	}
-}
-
-<span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">h</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">GreeterHTTPConverter</span>) <span style="color:#a6e22e">SayHello</span>(<span style="color:#a6e22e">cb</span> <span style="color:#66d9ef">func</span>(<span style="color:#a6e22e">ctx</span> <span style="color:#a6e22e">context</span>.<span style="color:#a6e22e">Context</span>, <span style="color:#a6e22e">w</span> <span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">ResponseWriter</span>, <span style="color:#a6e22e">r</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">Request</span>, <span style="color:#a6e22e">arg</span>, <span style="color:#a6e22e">ret</span> <span style="color:#a6e22e">proto</span>.<span style="color:#a6e22e">Message</span>, <span style="color:#a6e22e">err</span> <span style="color:#66d9ef">error</span>)) <span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">HandlerFunc</span> {
-	<span style="color:#75715e">// ~~ 省略 ~~
-</span><span style="color:#75715e"></span>	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">HandlerFunc</span>(<span style="color:#66d9ef">func</span>(<span style="color:#a6e22e">w</span> <span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">ResponseWriter</span>, <span style="color:#a6e22e">r</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">Request</span>) {
-	<span style="color:#75715e">// ~~ Content-Typeに応じてRequestを読み込む処理 ~~
-</span><span style="color:#75715e"></span> 		<span style="color:#a6e22e">ret</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">h</span>.<span style="color:#a6e22e">srv</span>.<span style="color:#a6e22e">SayHello</span>(<span style="color:#a6e22e">ctx</span>, <span style="color:#a6e22e">arg</span>)
-		<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
-			<span style="color:#a6e22e">cb</span>(<span style="color:#a6e22e">ctx</span>, <span style="color:#a6e22e">w</span>, <span style="color:#a6e22e">r</span>, <span style="color:#a6e22e">arg</span>, <span style="color:#66d9ef">nil</span>, <span style="color:#a6e22e">err</span>)
-			<span style="color:#66d9ef">return</span>
-		}
-	<span style="color:#75715e">// ~~ Responseを返す処理 ~~
-</span><span style="color:#75715e"></span>  }
-}
-</code></pre></div><p><code>GreeterHTTPConverter</code>という構造体がgRPCのプラグインを使ったときに生成される<code>GreeterServer</code> interfaceを内部に持ちます。<code>GreeterHTTPConverter</code>はCallbackを受け取って<code>http.HandlerFunc</code>を返す<code>SayHello</code>メソッドを実装しています。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">GreeterHTTPConverter</span> <span style="color:#66d9ef">struct</span> {
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">srv</span> <span style="color:#a6e22e">GreeterServer</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">NewGreeterHTTPConverter</span>(<span style="color:#a6e22e">srv</span> <span style="color:#a6e22e">GreeterServer</span>) <span style="color:#f92672">*</span><span style="color:#a6e22e">GreeterHTTPConverter</span> {
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span> <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">GreeterHTTPConverter</span>{
+</span></span><span style="display:flex;"><span>		<span style="color:#a6e22e">srv</span>: <span style="color:#a6e22e">srv</span>,
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">h</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">GreeterHTTPConverter</span>) <span style="color:#a6e22e">SayHello</span>(<span style="color:#a6e22e">cb</span> <span style="color:#66d9ef">func</span>(<span style="color:#a6e22e">ctx</span> <span style="color:#a6e22e">context</span>.<span style="color:#a6e22e">Context</span>, <span style="color:#a6e22e">w</span> <span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">ResponseWriter</span>, <span style="color:#a6e22e">r</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">Request</span>, <span style="color:#a6e22e">arg</span>, <span style="color:#a6e22e">ret</span> <span style="color:#a6e22e">proto</span>.<span style="color:#a6e22e">Message</span>, <span style="color:#a6e22e">err</span> <span style="color:#66d9ef">error</span>)) <span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">HandlerFunc</span> {
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e">// ~~ 省略 ~~
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">HandlerFunc</span>(<span style="color:#66d9ef">func</span>(<span style="color:#a6e22e">w</span> <span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">ResponseWriter</span>, <span style="color:#a6e22e">r</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">Request</span>) {
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e">// ~~ Content-Typeに応じてRequestを読み込む処理 ~~
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span> 		<span style="color:#a6e22e">ret</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">h</span>.<span style="color:#a6e22e">srv</span>.<span style="color:#a6e22e">SayHello</span>(<span style="color:#a6e22e">ctx</span>, <span style="color:#a6e22e">arg</span>)
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+</span></span><span style="display:flex;"><span>			<span style="color:#a6e22e">cb</span>(<span style="color:#a6e22e">ctx</span>, <span style="color:#a6e22e">w</span>, <span style="color:#a6e22e">r</span>, <span style="color:#a6e22e">arg</span>, <span style="color:#66d9ef">nil</span>, <span style="color:#a6e22e">err</span>)
+</span></span><span style="display:flex;"><span>			<span style="color:#66d9ef">return</span>
+</span></span><span style="display:flex;"><span>		}
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e">// ~~ Responseを返す処理 ~~
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p><code>GreeterHTTPConverter</code>という構造体がgRPCのプラグインを使ったときに生成される<code>GreeterServer</code> interfaceを内部に持ちます。<code>GreeterHTTPConverter</code>はCallbackを受け取って<code>http.HandlerFunc</code>を返す<code>SayHello</code>メソッドを実装しています。</p>
 <p>返される<code>http.HandlerFunc</code>内部では、Bodyの情報をContent-Typeに合わせてJSONかバイナリかを判断して読み取り、<code>GreeterServer</code>interfaceの<code>SayHello</code>メソッドを呼び出すようになっています。</p>
 <p>上記の<code>GreeterHTTPConverter</code>を使うことで、<code>GreeterServer</code> interfaceを実装している構造体を型を守りつつ以下のように<code>net/http</code>のinterfaceに乗せることができます。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#75715e">// GreeterServerを実装している構造体
-</span><span style="color:#75715e"></span><span style="color:#a6e22e">srv</span> <span style="color:#f92672">:=</span> <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">EchoGreeterServer</span>{}
-
-<span style="color:#75715e">// GreeterHTTPConverterのインスタンス作成
-</span><span style="color:#75715e"></span><span style="color:#a6e22e">conv</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">NewGreeterHTTPConverter</span>(<span style="color:#a6e22e">srv</span>)
-
-<span style="color:#75715e">// Callbackを渡してhttp.HandlerFuncに登録
-</span><span style="color:#75715e"></span><span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">Handle</span>(<span style="color:#e6db74">&#34;/sayhello&#34;</span>, <span style="color:#a6e22e">conv</span>.<span style="color:#a6e22e">SayHello</span>(<span style="color:#a6e22e">logCallback</span>))
-</code></pre></div><p><code>SayHello</code>メソッドに渡すCallbackは<code>http.HandlerFunc</code>を抜けるときに必ず呼び出されるため、Callbackの引数をハンドリングすることで呼び出し時の挟み込む処理やエラーハンドリングをできます。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#75715e">// GreeterServerを実装している構造体
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#a6e22e">srv</span> <span style="color:#f92672">:=</span> <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">EchoGreeterServer</span>{}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// GreeterHTTPConverterのインスタンス作成
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#a6e22e">conv</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">NewGreeterHTTPConverter</span>(<span style="color:#a6e22e">srv</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Callbackを渡してhttp.HandlerFuncに登録
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">Handle</span>(<span style="color:#e6db74">&#34;/sayhello&#34;</span>, <span style="color:#a6e22e">conv</span>.<span style="color:#a6e22e">SayHello</span>(<span style="color:#a6e22e">logCallback</span>))
+</span></span></code></pre></div><p><code>SayHello</code>メソッドに渡すCallbackは<code>http.HandlerFunc</code>を抜けるときに必ず呼び出されるため、Callbackの引数をハンドリングすることで呼び出し時の挟み込む処理やエラーハンドリングをできます。</p>
 <p>細かい使い方や動かし方は<a href="https://github.com/nametake/protoc-gen-gohttp#readme">README</a>を見てください。</p>
 <h2 id="コンセプト">コンセプト</h2>
 <p>作成にあたって以下のことに気をつけています。</p>
@@ -291,8 +291,8 @@ type HelloRequest struct { Name string `protobuf:&#34;bytes,1,opt,name=name&#34;
 
 
         <div id="disqus_thread"></div>
-<script type="application/javascript">
-    var disqus_config = function () {
+<script>
+    window.disqus_config = function () {
     
     
     
@@ -329,7 +329,7 @@ type HelloRequest struct { Name string `protobuf:&#34;bytes,1,opt,name=name&#34;
       
         ©
         
-        2021
+        2023
          nametake 
       
       
@@ -345,7 +345,7 @@ type HelloRequest struct { Name string `protobuf:&#34;bytes,1,opt,name=name&#34;
     
 
     
-<script type="application/javascript">
+<script>
 var doNotTrack = false;
 if (!doNotTrack) {
 	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -357,7 +357,6 @@ if (!doNotTrack) {
 	ga('send', 'pageview');
 }
 </script>
-
 
     
 

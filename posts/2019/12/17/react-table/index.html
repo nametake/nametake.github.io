@@ -25,8 +25,7 @@ import * as React from &#39;react&#39;; import { render } from &#39;react-dom&#3
 
     
 
-    <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Hooks対応したreact-tableをTypeScriptで使う"/>
+    <meta name="twitter:card" content="summary"/><meta name="twitter:title" content="Hooks対応したreact-tableをTypeScriptで使う"/>
 <meta name="twitter:description" content="この記事はReact Advent Calendar 2019の記事です。
 みなさまテーブルComponentは作成していますか?
 サービスにもよるとは思いますが、業務系のサービスではほぼ確実に登場するUIです。
@@ -58,9 +57,10 @@ yarn add react-table@7.0.0-beta.23 大きく使い勝手が変わるようなこ
 シンプルなテーブル まずは最もシンプルにテーブルを表示する例です。
 import * as React from &#39;react&#39;; import { render } from &#39;react-dom&#39;; import { useTable, Column } from &#39;react-table&#39;; import &#39;./styles.css&#39;; const columns: Column&lt;Data&gt;[] = [ { Header: &#39;名前&#39;, accessor: &#39;name&#39; }, { Header: &#39;年齢&#39;, accessor: &#39;age&#39; } ]; interface Data { name: string; age: number; } const data: Data[] = [ { name: &#39;John&#39;, age: 23 }, { name: &#39;Jane&#39;, age: 26 } ]; function App() { const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } = useTable&lt;Data&gt;({ columns, data }); return ( &lt;table {." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://nametake.github.io/posts/2019/12/17/react-table/" />
+<meta property="og:url" content="https://nametake.github.io/posts/2019/12/17/react-table/" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2019-12-17T00:00:00+00:00" />
 <meta property="article:modified_time" content="2019-12-17T00:00:00+00:00" />
+
 
 
     
@@ -107,7 +107,7 @@ import * as React from &#39;react&#39;; import { render } from &#39;react-dom&#3
     <link rel="icon" type="image/png" href="https://nametake.github.io/images/favicon-32x32.png" sizes="32x32">
     <link rel="icon" type="image/png" href="https://nametake.github.io/images/favicon-16x16.png" sizes="16x16">
 
-    <meta name="generator" content="Hugo 0.80.0" />
+    <meta name="generator" content="Hugo 0.121.1">
   </head>
 
   
@@ -195,225 +195,225 @@ import * as React from &#39;react&#39;; import { render } from &#39;react-dom&#3
 <p><a href="https://github.com/DefinitelyTyped/DefinitelyTyped/pull/40816">https://github.com/DefinitelyTyped/DefinitelyTyped/pull/40816</a></p>
 <p>また、議論の末、現段階最新バージョンのrc.9ではreact-table側で型定義を管理しないことになっています。</p>
 <p>そのため、この記事の紹介ではTypeScriptを使って紹介をする都合上、以下のコマンドで入るバージョンを使用して紹介をします。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">yarn add react-table@7.0.0-beta.23
-</code></pre></div><p>大きく使い勝手が変わるようなことはないと思いますが、react-tableは開発が活発なため、この記事の内容が陳腐化している可能性があります。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-console" data-lang="console"><span style="display:flex;"><span>yarn add react-table@7.0.0-beta.23
+</span></span></code></pre></div><p>大きく使い勝手が変わるようなことはないと思いますが、react-tableは開発が活発なため、この記事の内容が陳腐化している可能性があります。</p>
 <p>本番で使う際は必ず公式のドキュメントを参照してください。</p>
 <h1 id="シンプルなテーブル">シンプルなテーブル</h1>
 <p>まずは最もシンプルにテーブルを表示する例です。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-tsx" data-lang="tsx"><span style="color:#66d9ef">import</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">as</span> <span style="color:#a6e22e">React</span> <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;react&#39;</span>;
-<span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">render</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;react-dom&#39;</span>;
-
-<span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">useTable</span>, <span style="color:#a6e22e">Column</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;react-table&#39;</span>;
-
-<span style="color:#66d9ef">import</span> <span style="color:#e6db74">&#39;./styles.css&#39;</span>;
-
-<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">columns</span>: <span style="color:#66d9ef">Column</span>&lt;<span style="color:#f92672">Data</span>&gt;[] <span style="color:#f92672">=</span> [
-  {
-    <span style="color:#a6e22e">Header</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;名前&#39;</span>,
-    <span style="color:#a6e22e">accessor</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;name&#39;</span>
-  },
-  {
-    <span style="color:#a6e22e">Header</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;年齢&#39;</span>,
-    <span style="color:#a6e22e">accessor</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;age&#39;</span>
-  }
-];
-
-<span style="color:#66d9ef">interface</span> <span style="color:#a6e22e">Data</span> {
-  <span style="color:#a6e22e">name</span>: <span style="color:#66d9ef">string</span>;
-  <span style="color:#a6e22e">age</span>: <span style="color:#66d9ef">number</span>;
-}
-
-<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">data</span>: <span style="color:#66d9ef">Data</span>[] <span style="color:#f92672">=</span> [
-  {
-    <span style="color:#a6e22e">name</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;John&#39;</span>,
-    <span style="color:#a6e22e">age</span>: <span style="color:#66d9ef">23</span>
-  },
-  {
-    <span style="color:#a6e22e">name</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;Jane&#39;</span>,
-    <span style="color:#a6e22e">age</span>: <span style="color:#66d9ef">26</span>
-  }
-];
-
-<span style="color:#66d9ef">function</span> <span style="color:#a6e22e">App() {</span>
-  <span style="color:#66d9ef">const</span> {
-    <span style="color:#a6e22e">getTableProps</span>,
-    <span style="color:#a6e22e">getTableBodyProps</span>,
-    <span style="color:#a6e22e">headerGroups</span>,
-    <span style="color:#a6e22e">rows</span>,
-    <span style="color:#a6e22e">prepareRow</span>
-  } <span style="color:#f92672">=</span> <span style="color:#a6e22e">useTable</span>&lt;<span style="color:#f92672">Data</span>&gt;({ <span style="color:#a6e22e">columns</span>, <span style="color:#a6e22e">data</span> });
-
-  <span style="color:#66d9ef">return</span> (
-    &lt;<span style="color:#f92672">table</span> {<span style="color:#a6e22e">...getTableProps</span><span style="color:#960050;background-color:#1e0010">()</span>}&gt;
-      &lt;<span style="color:#f92672">thead</span>&gt;
-        {<span style="color:#a6e22e">headerGroups</span>.<span style="color:#a6e22e">map</span>(<span style="color:#a6e22e">headerGroup</span> <span style="color:#f92672">=&gt;</span> (
-          &lt;<span style="color:#f92672">tr</span> {<span style="color:#a6e22e">...headerGroup.getHeaderGroupProps</span><span style="color:#960050;background-color:#1e0010">()</span>}&gt;
-            {<span style="color:#a6e22e">headerGroup</span>.<span style="color:#a6e22e">headers</span>.<span style="color:#a6e22e">map</span>(<span style="color:#a6e22e">column</span> <span style="color:#f92672">=&gt;</span> (
-              &lt;<span style="color:#f92672">th</span> {<span style="color:#a6e22e">...column.getHeaderProps</span><span style="color:#960050;background-color:#1e0010">()</span>}&gt;{<span style="color:#a6e22e">column</span>.<span style="color:#a6e22e">render</span>(<span style="color:#e6db74">&#39;Header&#39;</span>)}&lt;/<span style="color:#f92672">th</span>&gt;
-            ))}
-          &lt;/<span style="color:#f92672">tr</span>&gt;
-        ))}
-      &lt;/<span style="color:#f92672">thead</span>&gt;
-      &lt;<span style="color:#f92672">tbody</span> {<span style="color:#a6e22e">...getTableBodyProps</span><span style="color:#960050;background-color:#1e0010">()</span>}&gt;
-        {<span style="color:#a6e22e">rows</span>.<span style="color:#a6e22e">map</span>((<span style="color:#a6e22e">row</span>, <span style="color:#a6e22e">i</span>) <span style="color:#f92672">=&gt;</span> {
-          <span style="color:#a6e22e">prepareRow</span>(<span style="color:#a6e22e">row</span>);
-          <span style="color:#66d9ef">return</span> (
-            &lt;<span style="color:#f92672">tr</span> {<span style="color:#a6e22e">...row.getRowProps</span><span style="color:#960050;background-color:#1e0010">()</span>}&gt;
-              {<span style="color:#a6e22e">row</span>.<span style="color:#a6e22e">cells</span>.<span style="color:#a6e22e">map</span>(<span style="color:#a6e22e">cell</span> <span style="color:#f92672">=&gt;</span> {
-                <span style="color:#66d9ef">return</span> &lt;<span style="color:#f92672">td</span> {<span style="color:#a6e22e">...cell.getCellProps</span><span style="color:#960050;background-color:#1e0010">()</span>}&gt;{<span style="color:#a6e22e">cell</span>.<span style="color:#a6e22e">render</span>(<span style="color:#e6db74">&#39;Cell&#39;</span>)}&lt;/<span style="color:#f92672">td</span>&gt;;
-              })}
-            &lt;/<span style="color:#f92672">tr</span>&gt;
-          );
-        })}
-      &lt;/<span style="color:#f92672">tbody</span>&gt;
-    &lt;/<span style="color:#f92672">table</span>&gt;
-  );
-}
-
-<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">rootElement</span> <span style="color:#f92672">=</span> document.<span style="color:#a6e22e">getElementById</span>(<span style="color:#e6db74">&#39;root&#39;</span>);
-<span style="color:#a6e22e">render</span>(&lt;<span style="color:#f92672">App</span> /&gt;, <span style="color:#a6e22e">rootElement</span>);
-</code></pre></div><p>キモとなるのは以下の部分です。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-tsx" data-lang="tsx">  <span style="color:#66d9ef">const</span> {
-    <span style="color:#a6e22e">getTableProps</span>,
-    <span style="color:#a6e22e">getTableBodyProps</span>,
-    <span style="color:#a6e22e">headerGroups</span>,
-    <span style="color:#a6e22e">rows</span>,
-    <span style="color:#a6e22e">prepareRow</span>
-  } <span style="color:#f92672">=</span> <span style="color:#a6e22e">useTable</span>&lt;<span style="color:#f92672">Data</span>&gt;({ <span style="color:#a6e22e">columns</span>, <span style="color:#a6e22e">data</span> });
-</code></pre></div><p><code>useTable</code> はColumnとそれに対応した情報 <code>data</code> を受け取って <code>TableInstance</code> を返します。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-tsx" data-lang="tsx"><span style="display:flex;"><span><span style="color:#66d9ef">import</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">as</span> <span style="color:#a6e22e">React</span> <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;react&#39;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">render</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;react-dom&#39;</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">useTable</span>, <span style="color:#a6e22e">Column</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;react-table&#39;</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> <span style="color:#e6db74">&#39;./styles.css&#39;</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">columns</span>: <span style="color:#66d9ef">Column</span>&lt;<span style="color:#f92672">Data</span>&gt;[] <span style="color:#f92672">=</span> [
+</span></span><span style="display:flex;"><span>  {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">Header</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;名前&#39;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">accessor</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;name&#39;</span>
+</span></span><span style="display:flex;"><span>  },
+</span></span><span style="display:flex;"><span>  {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">Header</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;年齢&#39;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">accessor</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;age&#39;</span>
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>];
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">interface</span> <span style="color:#a6e22e">Data</span> {
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">name</span>: <span style="color:#66d9ef">string</span>;
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">age</span>: <span style="color:#66d9ef">number</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">data</span>: <span style="color:#66d9ef">Data</span>[] <span style="color:#f92672">=</span> [
+</span></span><span style="display:flex;"><span>  {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">name</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;John&#39;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">age</span>: <span style="color:#66d9ef">23</span>
+</span></span><span style="display:flex;"><span>  },
+</span></span><span style="display:flex;"><span>  {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">name</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;Jane&#39;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">age</span>: <span style="color:#66d9ef">26</span>
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>];
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">App() {</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">getTableProps</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">getTableBodyProps</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">headerGroups</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">rows</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">prepareRow</span>
+</span></span><span style="display:flex;"><span>  } <span style="color:#f92672">=</span> <span style="color:#a6e22e">useTable</span>&lt;<span style="color:#f92672">Data</span>&gt;({ <span style="color:#a6e22e">columns</span>, <span style="color:#a6e22e">data</span> });
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> (
+</span></span><span style="display:flex;"><span>    &lt;<span style="color:#f92672">table</span> {<span style="color:#a6e22e">...getTableProps</span><span style="color:#960050;background-color:#1e0010">()</span>}&gt;
+</span></span><span style="display:flex;"><span>      &lt;<span style="color:#f92672">thead</span>&gt;
+</span></span><span style="display:flex;"><span>        {<span style="color:#a6e22e">headerGroups</span>.<span style="color:#a6e22e">map</span>(<span style="color:#a6e22e">headerGroup</span> <span style="color:#f92672">=&gt;</span> (
+</span></span><span style="display:flex;"><span>          &lt;<span style="color:#f92672">tr</span> {<span style="color:#a6e22e">...headerGroup.getHeaderGroupProps</span><span style="color:#960050;background-color:#1e0010">()</span>}&gt;
+</span></span><span style="display:flex;"><span>            {<span style="color:#a6e22e">headerGroup</span>.<span style="color:#a6e22e">headers</span>.<span style="color:#a6e22e">map</span>(<span style="color:#a6e22e">column</span> <span style="color:#f92672">=&gt;</span> (
+</span></span><span style="display:flex;"><span>              &lt;<span style="color:#f92672">th</span> {<span style="color:#a6e22e">...column.getHeaderProps</span><span style="color:#960050;background-color:#1e0010">()</span>}&gt;{<span style="color:#a6e22e">column</span>.<span style="color:#a6e22e">render</span>(<span style="color:#e6db74">&#39;Header&#39;</span>)}&lt;/<span style="color:#f92672">th</span>&gt;
+</span></span><span style="display:flex;"><span>            ))}
+</span></span><span style="display:flex;"><span>          &lt;/<span style="color:#f92672">tr</span>&gt;
+</span></span><span style="display:flex;"><span>        ))}
+</span></span><span style="display:flex;"><span>      &lt;/<span style="color:#f92672">thead</span>&gt;
+</span></span><span style="display:flex;"><span>      &lt;<span style="color:#f92672">tbody</span> {<span style="color:#a6e22e">...getTableBodyProps</span><span style="color:#960050;background-color:#1e0010">()</span>}&gt;
+</span></span><span style="display:flex;"><span>        {<span style="color:#a6e22e">rows</span>.<span style="color:#a6e22e">map</span>((<span style="color:#a6e22e">row</span>, <span style="color:#a6e22e">i</span>) <span style="color:#f92672">=&gt;</span> {
+</span></span><span style="display:flex;"><span>          <span style="color:#a6e22e">prepareRow</span>(<span style="color:#a6e22e">row</span>);
+</span></span><span style="display:flex;"><span>          <span style="color:#66d9ef">return</span> (
+</span></span><span style="display:flex;"><span>            &lt;<span style="color:#f92672">tr</span> {<span style="color:#a6e22e">...row.getRowProps</span><span style="color:#960050;background-color:#1e0010">()</span>}&gt;
+</span></span><span style="display:flex;"><span>              {<span style="color:#a6e22e">row</span>.<span style="color:#a6e22e">cells</span>.<span style="color:#a6e22e">map</span>(<span style="color:#a6e22e">cell</span> <span style="color:#f92672">=&gt;</span> {
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">return</span> &lt;<span style="color:#f92672">td</span> {<span style="color:#a6e22e">...cell.getCellProps</span><span style="color:#960050;background-color:#1e0010">()</span>}&gt;{<span style="color:#a6e22e">cell</span>.<span style="color:#a6e22e">render</span>(<span style="color:#e6db74">&#39;Cell&#39;</span>)}&lt;/<span style="color:#f92672">td</span>&gt;;
+</span></span><span style="display:flex;"><span>              })}
+</span></span><span style="display:flex;"><span>            &lt;/<span style="color:#f92672">tr</span>&gt;
+</span></span><span style="display:flex;"><span>          );
+</span></span><span style="display:flex;"><span>        })}
+</span></span><span style="display:flex;"><span>      &lt;/<span style="color:#f92672">tbody</span>&gt;
+</span></span><span style="display:flex;"><span>    &lt;/<span style="color:#f92672">table</span>&gt;
+</span></span><span style="display:flex;"><span>  );
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">rootElement</span> <span style="color:#f92672">=</span> document.<span style="color:#a6e22e">getElementById</span>(<span style="color:#e6db74">&#39;root&#39;</span>);
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">render</span>(&lt;<span style="color:#f92672">App</span> /&gt;, <span style="color:#a6e22e">rootElement</span>);
+</span></span></code></pre></div><p>キモとなるのは以下の部分です。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-tsx" data-lang="tsx"><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">getTableProps</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">getTableBodyProps</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">headerGroups</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">rows</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">prepareRow</span>
+</span></span><span style="display:flex;"><span>  } <span style="color:#f92672">=</span> <span style="color:#a6e22e">useTable</span>&lt;<span style="color:#f92672">Data</span>&gt;({ <span style="color:#a6e22e">columns</span>, <span style="color:#a6e22e">data</span> });
+</span></span></code></pre></div><p><code>useTable</code> はColumnとそれに対応した情報 <code>data</code> を受け取って <code>TableInstance</code> を返します。</p>
 <p><code>TableInstance</code> はTableを描画するのに必要な情報をすべて持っており、Tableの内部で変更があったときに更新されるようになっています。</p>
 <p>描画に使っているTableタグは、完全にreact-tableからは独立しており、 <code>TableInstance</code> と組み合わせて使うことで完全に描画とロジックを独立させることが可能になっています。</p>
 <h1 id="sortの機能を追加する">Sortの機能を追加する</h1>
 <p>上記例では特に複雑な機能がないため、テーブルを作る上でありがちなSortの機能を追加してみましょう。</p>
 <p>まず、TypeScriptでreact-tableの機能を使うためには以下の型定義ファイル設置する必要があります。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ts" data-lang="ts"><span style="color:#66d9ef">import</span> {
-  <span style="color:#a6e22e">UseSortByColumnOptions</span>,
-  <span style="color:#a6e22e">UseSortByColumnProps</span>,
-  <span style="color:#a6e22e">UseSortByInstanceProps</span>,
-  <span style="color:#a6e22e">UseSortByOptions</span>,
-  <span style="color:#a6e22e">UseSortByState</span>
-} <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;react-table&#39;</span>;
-
-<span style="color:#66d9ef">declare</span> <span style="color:#a6e22e">module</span> <span style="color:#e6db74">&#39;react-table&#39;</span> {
-  <span style="color:#66d9ef">export</span> <span style="color:#66d9ef">interface</span> <span style="color:#a6e22e">TableOptions</span>&lt;<span style="color:#f92672">D</span> <span style="color:#a6e22e">extends</span> <span style="color:#a6e22e">object</span>&gt; <span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">UseSortByOptions</span>&lt;<span style="color:#f92672">D</span>&gt; {}
-
-  <span style="color:#66d9ef">export</span> <span style="color:#66d9ef">interface</span> <span style="color:#a6e22e">TableInstance</span>&lt;<span style="color:#f92672">D</span> <span style="color:#a6e22e">extends</span> <span style="color:#a6e22e">object </span><span style="color:#f92672">=</span> {}&gt;
-    <span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">UseSortByInstanceProps</span>&lt;<span style="color:#f92672">D</span>&gt; {}
-
-  <span style="color:#66d9ef">export</span> <span style="color:#66d9ef">interface</span> <span style="color:#a6e22e">TableState</span>&lt;<span style="color:#f92672">D</span> <span style="color:#a6e22e">extends</span> <span style="color:#a6e22e">object </span><span style="color:#f92672">=</span> {}&gt;
-    <span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">UseSortByState</span>&lt;<span style="color:#f92672">D</span>&gt; {}
-
-  <span style="color:#66d9ef">export</span> <span style="color:#66d9ef">interface</span> <span style="color:#a6e22e">Column</span>&lt;<span style="color:#f92672">D</span> <span style="color:#a6e22e">extends</span> <span style="color:#a6e22e">object </span><span style="color:#f92672">=</span> {}&gt;
-    <span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">UseSortByColumnOptions</span>&lt;<span style="color:#f92672">D</span>&gt; {}
-
-  <span style="color:#66d9ef">export</span> <span style="color:#66d9ef">interface</span> <span style="color:#a6e22e">ColumnInstance</span>&lt;<span style="color:#f92672">D</span> <span style="color:#a6e22e">extends</span> <span style="color:#a6e22e">object </span><span style="color:#f92672">=</span> {}&gt;
-    <span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">UseSortByColumnProps</span>&lt;<span style="color:#f92672">D</span>&gt; {}
-}
-</code></pre></div><p>これはreact-tableがもともとJSベースで作られており、使いたい機能をプラグインとして使えるようにするという設計だったため、ライブラリ側で型定義を提供することが難しいため必要になっています(<a href="https://github.com/tannerlinsley/react-table/blob/v7.0.0-beta.24/TYPESCRIPT.md">参考</a>)。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ts" data-lang="ts"><span style="display:flex;"><span><span style="color:#66d9ef">import</span> {
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">UseSortByColumnOptions</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">UseSortByColumnProps</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">UseSortByInstanceProps</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">UseSortByOptions</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">UseSortByState</span>
+</span></span><span style="display:flex;"><span>} <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;react-table&#39;</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">declare</span> <span style="color:#a6e22e">module</span> <span style="color:#e6db74">&#39;react-table&#39;</span> {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">export</span> <span style="color:#66d9ef">interface</span> <span style="color:#a6e22e">TableOptions</span>&lt;<span style="color:#f92672">D</span> <span style="color:#a6e22e">extends</span> <span style="color:#a6e22e">object</span>&gt; <span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">UseSortByOptions</span>&lt;<span style="color:#f92672">D</span>&gt; {}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">export</span> <span style="color:#66d9ef">interface</span> <span style="color:#a6e22e">TableInstance</span>&lt;<span style="color:#f92672">D</span> <span style="color:#a6e22e">extends</span> <span style="color:#a6e22e">object </span><span style="color:#f92672">=</span> {}&gt;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">UseSortByInstanceProps</span>&lt;<span style="color:#f92672">D</span>&gt; {}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">export</span> <span style="color:#66d9ef">interface</span> <span style="color:#a6e22e">TableState</span>&lt;<span style="color:#f92672">D</span> <span style="color:#a6e22e">extends</span> <span style="color:#a6e22e">object </span><span style="color:#f92672">=</span> {}&gt;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">UseSortByState</span>&lt;<span style="color:#f92672">D</span>&gt; {}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">export</span> <span style="color:#66d9ef">interface</span> <span style="color:#a6e22e">Column</span>&lt;<span style="color:#f92672">D</span> <span style="color:#a6e22e">extends</span> <span style="color:#a6e22e">object </span><span style="color:#f92672">=</span> {}&gt;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">UseSortByColumnOptions</span>&lt;<span style="color:#f92672">D</span>&gt; {}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">export</span> <span style="color:#66d9ef">interface</span> <span style="color:#a6e22e">ColumnInstance</span>&lt;<span style="color:#f92672">D</span> <span style="color:#a6e22e">extends</span> <span style="color:#a6e22e">object </span><span style="color:#f92672">=</span> {}&gt;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">UseSortByColumnProps</span>&lt;<span style="color:#f92672">D</span>&gt; {}
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>これはreact-tableがもともとJSベースで作られており、使いたい機能をプラグインとして使えるようにするという設計だったため、ライブラリ側で型定義を提供することが難しいため必要になっています(<a href="https://github.com/tannerlinsley/react-table/blob/v7.0.0-beta.24/TYPESCRIPT.md">参考</a>)。</p>
 <p>この定義自体はコミュニティの型定義が進んだら変わるかもしれないので、公式を参照するようにしてください。</p>
 <p>さて、上記定義ができたら次はSortの実装をします。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-tsx" data-lang="tsx"><span style="color:#66d9ef">import</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">as</span> <span style="color:#a6e22e">React</span> <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;react&#39;</span>;
-<span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">render</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;react-dom&#39;</span>;
-
-<span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">useTable</span>, <span style="color:#a6e22e">Column</span>, <span style="color:#a6e22e">useSortBy</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;react-table&#39;</span>;
-
-<span style="color:#66d9ef">import</span> <span style="color:#e6db74">&#39;./styles.css&#39;</span>;
-
-<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">columns</span>: <span style="color:#66d9ef">Column</span>&lt;<span style="color:#f92672">Data</span>&gt;[] <span style="color:#f92672">=</span> [
-  {
-    <span style="color:#a6e22e">Header</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;名前&#39;</span>,
-    <span style="color:#a6e22e">accessor</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;name&#39;</span>
-  },
-  {
-    <span style="color:#a6e22e">Header</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;年齢&#39;</span>,
-    <span style="color:#a6e22e">accessor</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;age&#39;</span>
-  }
-];
-
-<span style="color:#66d9ef">interface</span> <span style="color:#a6e22e">Data</span> {
-  <span style="color:#a6e22e">name</span>: <span style="color:#66d9ef">string</span>;
-  <span style="color:#a6e22e">age</span>: <span style="color:#66d9ef">number</span>;
-}
-
-<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">data</span>: <span style="color:#66d9ef">Data</span>[] <span style="color:#f92672">=</span> [
-  {
-    <span style="color:#a6e22e">name</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;John&#39;</span>,
-    <span style="color:#a6e22e">age</span>: <span style="color:#66d9ef">23</span>
-  },
-  {
-    <span style="color:#a6e22e">name</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;Jane&#39;</span>,
-    <span style="color:#a6e22e">age</span>: <span style="color:#66d9ef">26</span>
-  }
-];
-
-<span style="color:#66d9ef">function</span> <span style="color:#a6e22e">App() {</span>
-  <span style="color:#66d9ef">const</span> {
-    <span style="color:#a6e22e">getTableProps</span>,
-    <span style="color:#a6e22e">getTableBodyProps</span>,
-    <span style="color:#a6e22e">headerGroups</span>,
-    <span style="color:#a6e22e">rows</span>,
-    <span style="color:#a6e22e">prepareRow</span>
-  } <span style="color:#f92672">=</span> <span style="color:#a6e22e">useTable</span>&lt;<span style="color:#f92672">Data</span>&gt;({ <span style="color:#a6e22e">columns</span>, <span style="color:#a6e22e">data</span> }, <span style="color:#a6e22e">useSortBy</span>);
-
-  <span style="color:#66d9ef">return</span> (
-    &lt;<span style="color:#f92672">table</span> {<span style="color:#a6e22e">...getTableProps</span><span style="color:#960050;background-color:#1e0010">()</span>}&gt;
-      &lt;<span style="color:#f92672">thead</span>&gt;
-        {<span style="color:#a6e22e">headerGroups</span>.<span style="color:#a6e22e">map</span>(<span style="color:#a6e22e">headerGroup</span> <span style="color:#f92672">=&gt;</span> (
-          &lt;<span style="color:#f92672">tr</span> {<span style="color:#a6e22e">...headerGroup.getHeaderGroupProps</span><span style="color:#960050;background-color:#1e0010">()</span>}&gt;
-            {<span style="color:#a6e22e">headerGroup</span>.<span style="color:#a6e22e">headers</span>.<span style="color:#a6e22e">map</span>(<span style="color:#a6e22e">column</span> <span style="color:#f92672">=&gt;</span> (
-              &lt;<span style="color:#f92672">th</span> {<span style="color:#a6e22e">...column.getHeaderProps</span><span style="color:#960050;background-color:#1e0010">(</span><span style="color:#a6e22e">column.getSortByToggleProps</span><span style="color:#960050;background-color:#1e0010">())</span>}&gt;
-                {<span style="color:#a6e22e">column</span>.<span style="color:#a6e22e">render</span>(<span style="color:#e6db74">&#39;Header&#39;</span>)}
-                &lt;<span style="color:#f92672">span</span>&gt;
-                  {<span style="color:#e6db74">&#39; &#39;</span>}
-                  {<span style="color:#a6e22e">column</span>.<span style="color:#a6e22e">isSorted</span>
-                    <span style="color:#f92672">?</span> <span style="color:#a6e22e">column</span>.<span style="color:#a6e22e">isSortedDesc</span>
-                      <span style="color:#f92672">?</span> <span style="color:#e6db74">&#39; 🔽&#39;</span>
-                      <span style="color:#f92672">:</span> <span style="color:#e6db74">&#39; 🔼&#39;</span>
-                    <span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;&#39;</span>}{<span style="color:#e6db74">&#39; &#39;</span>}
-                &lt;/<span style="color:#f92672">span</span>&gt;
-              &lt;/<span style="color:#f92672">th</span>&gt;
-            ))}
-          &lt;/<span style="color:#f92672">tr</span>&gt;
-        ))}
-      &lt;/<span style="color:#f92672">thead</span>&gt;
-      &lt;<span style="color:#f92672">tbody</span> {<span style="color:#a6e22e">...getTableBodyProps</span><span style="color:#960050;background-color:#1e0010">()</span>}&gt;
-        {<span style="color:#a6e22e">rows</span>.<span style="color:#a6e22e">map</span>((<span style="color:#a6e22e">row</span>, <span style="color:#a6e22e">i</span>) <span style="color:#f92672">=&gt;</span> {
-          <span style="color:#a6e22e">prepareRow</span>(<span style="color:#a6e22e">row</span>);
-          <span style="color:#66d9ef">return</span> (
-            &lt;<span style="color:#f92672">tr</span> {<span style="color:#a6e22e">...row.getRowProps</span><span style="color:#960050;background-color:#1e0010">()</span>}&gt;
-              {<span style="color:#a6e22e">row</span>.<span style="color:#a6e22e">cells</span>.<span style="color:#a6e22e">map</span>(<span style="color:#a6e22e">cell</span> <span style="color:#f92672">=&gt;</span> {
-                <span style="color:#66d9ef">return</span> &lt;<span style="color:#f92672">td</span> {<span style="color:#a6e22e">...cell.getCellProps</span><span style="color:#960050;background-color:#1e0010">()</span>}&gt;{<span style="color:#a6e22e">cell</span>.<span style="color:#a6e22e">render</span>(<span style="color:#e6db74">&#39;Cell&#39;</span>)}&lt;/<span style="color:#f92672">td</span>&gt;;
-              })}
-            &lt;/<span style="color:#f92672">tr</span>&gt;
-          );
-        })}
-      &lt;/<span style="color:#f92672">tbody</span>&gt;
-    &lt;/<span style="color:#f92672">table</span>&gt;
-  );
-}
-
-<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">rootElement</span> <span style="color:#f92672">=</span> document.<span style="color:#a6e22e">getElementById</span>(<span style="color:#e6db74">&#39;root&#39;</span>);
-<span style="color:#a6e22e">render</span>(&lt;<span style="color:#f92672">App</span> /&gt;, <span style="color:#a6e22e">rootElement</span>);
-</code></pre></div><p>差分は以下の2箇所です。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-tsx" data-lang="tsx">  <span style="color:#66d9ef">const</span> {
-    <span style="color:#a6e22e">getTableProps</span>,
-    <span style="color:#a6e22e">getTableBodyProps</span>,
-    <span style="color:#a6e22e">headerGroups</span>,
-    <span style="color:#a6e22e">rows</span>,
-    <span style="color:#a6e22e">prepareRow</span>
-  } <span style="color:#f92672">=</span> <span style="color:#a6e22e">useTable</span>&lt;<span style="color:#f92672">Data</span>&gt;({ <span style="color:#a6e22e">columns</span>, <span style="color:#a6e22e">data</span> }, <span style="color:#a6e22e">useSortBy</span>);
-</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-tsx" data-lang="tsx">              &lt;<span style="color:#f92672">th</span> {<span style="color:#a6e22e">...column.getHeaderProps</span><span style="color:#960050;background-color:#1e0010">(</span><span style="color:#a6e22e">column.getSortByToggleProps</span><span style="color:#960050;background-color:#1e0010">())</span>}&gt;
-                {<span style="color:#a6e22e">column</span>.<span style="color:#a6e22e">render</span>(<span style="color:#e6db74">&#39;Header&#39;</span>)}
-                &lt;<span style="color:#f92672">span</span>&gt;
-                  {<span style="color:#e6db74">&#39; &#39;</span>}
-                  {<span style="color:#a6e22e">column</span>.<span style="color:#a6e22e">isSorted</span>
-                    <span style="color:#f92672">?</span> <span style="color:#a6e22e">column</span>.<span style="color:#a6e22e">isSortedDesc</span>
-                      <span style="color:#f92672">?</span> <span style="color:#e6db74">&#39; 🔽&#39;</span>
-                      <span style="color:#f92672">:</span> <span style="color:#e6db74">&#39; 🔼&#39;</span>
-                    <span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;&#39;</span>}{<span style="color:#e6db74">&#39; &#39;</span>}
-                &lt;/<span style="color:#f92672">span</span>&gt;
-              &lt;/<span style="color:#f92672">th</span>&gt;
-</code></pre></div><p><code>useTable</code> に <code>useSortBy</code> を渡し、 <code>column</code> に新たに含まれた <code>getSortByToggleProps</code> を使って列をソート可能な状態にして、 <code>isSorted</code> と <code>isSortedDesc</code> を利用して現在のソートの状態を描画するようにしています。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-tsx" data-lang="tsx"><span style="display:flex;"><span><span style="color:#66d9ef">import</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">as</span> <span style="color:#a6e22e">React</span> <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;react&#39;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">render</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;react-dom&#39;</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">useTable</span>, <span style="color:#a6e22e">Column</span>, <span style="color:#a6e22e">useSortBy</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;react-table&#39;</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> <span style="color:#e6db74">&#39;./styles.css&#39;</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">columns</span>: <span style="color:#66d9ef">Column</span>&lt;<span style="color:#f92672">Data</span>&gt;[] <span style="color:#f92672">=</span> [
+</span></span><span style="display:flex;"><span>  {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">Header</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;名前&#39;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">accessor</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;name&#39;</span>
+</span></span><span style="display:flex;"><span>  },
+</span></span><span style="display:flex;"><span>  {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">Header</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;年齢&#39;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">accessor</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;age&#39;</span>
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>];
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">interface</span> <span style="color:#a6e22e">Data</span> {
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">name</span>: <span style="color:#66d9ef">string</span>;
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">age</span>: <span style="color:#66d9ef">number</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">data</span>: <span style="color:#66d9ef">Data</span>[] <span style="color:#f92672">=</span> [
+</span></span><span style="display:flex;"><span>  {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">name</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;John&#39;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">age</span>: <span style="color:#66d9ef">23</span>
+</span></span><span style="display:flex;"><span>  },
+</span></span><span style="display:flex;"><span>  {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">name</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;Jane&#39;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">age</span>: <span style="color:#66d9ef">26</span>
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>];
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">App() {</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">getTableProps</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">getTableBodyProps</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">headerGroups</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">rows</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">prepareRow</span>
+</span></span><span style="display:flex;"><span>  } <span style="color:#f92672">=</span> <span style="color:#a6e22e">useTable</span>&lt;<span style="color:#f92672">Data</span>&gt;({ <span style="color:#a6e22e">columns</span>, <span style="color:#a6e22e">data</span> }, <span style="color:#a6e22e">useSortBy</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> (
+</span></span><span style="display:flex;"><span>    &lt;<span style="color:#f92672">table</span> {<span style="color:#a6e22e">...getTableProps</span><span style="color:#960050;background-color:#1e0010">()</span>}&gt;
+</span></span><span style="display:flex;"><span>      &lt;<span style="color:#f92672">thead</span>&gt;
+</span></span><span style="display:flex;"><span>        {<span style="color:#a6e22e">headerGroups</span>.<span style="color:#a6e22e">map</span>(<span style="color:#a6e22e">headerGroup</span> <span style="color:#f92672">=&gt;</span> (
+</span></span><span style="display:flex;"><span>          &lt;<span style="color:#f92672">tr</span> {<span style="color:#a6e22e">...headerGroup.getHeaderGroupProps</span><span style="color:#960050;background-color:#1e0010">()</span>}&gt;
+</span></span><span style="display:flex;"><span>            {<span style="color:#a6e22e">headerGroup</span>.<span style="color:#a6e22e">headers</span>.<span style="color:#a6e22e">map</span>(<span style="color:#a6e22e">column</span> <span style="color:#f92672">=&gt;</span> (
+</span></span><span style="display:flex;"><span>              &lt;<span style="color:#f92672">th</span> {<span style="color:#a6e22e">...column.getHeaderProps</span><span style="color:#960050;background-color:#1e0010">(</span><span style="color:#a6e22e">column.getSortByToggleProps</span><span style="color:#960050;background-color:#1e0010">())</span>}&gt;
+</span></span><span style="display:flex;"><span>                {<span style="color:#a6e22e">column</span>.<span style="color:#a6e22e">render</span>(<span style="color:#e6db74">&#39;Header&#39;</span>)}
+</span></span><span style="display:flex;"><span>                &lt;<span style="color:#f92672">span</span>&gt;
+</span></span><span style="display:flex;"><span>                  {<span style="color:#e6db74">&#39; &#39;</span>}
+</span></span><span style="display:flex;"><span>                  {<span style="color:#a6e22e">column</span>.<span style="color:#a6e22e">isSorted</span>
+</span></span><span style="display:flex;"><span>                    <span style="color:#f92672">?</span> <span style="color:#a6e22e">column</span>.<span style="color:#a6e22e">isSortedDesc</span>
+</span></span><span style="display:flex;"><span>                      <span style="color:#f92672">?</span> <span style="color:#e6db74">&#39; 🔽&#39;</span>
+</span></span><span style="display:flex;"><span>                      <span style="color:#f92672">:</span> <span style="color:#e6db74">&#39; 🔼&#39;</span>
+</span></span><span style="display:flex;"><span>                    <span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;&#39;</span>}{<span style="color:#e6db74">&#39; &#39;</span>}
+</span></span><span style="display:flex;"><span>                &lt;/<span style="color:#f92672">span</span>&gt;
+</span></span><span style="display:flex;"><span>              &lt;/<span style="color:#f92672">th</span>&gt;
+</span></span><span style="display:flex;"><span>            ))}
+</span></span><span style="display:flex;"><span>          &lt;/<span style="color:#f92672">tr</span>&gt;
+</span></span><span style="display:flex;"><span>        ))}
+</span></span><span style="display:flex;"><span>      &lt;/<span style="color:#f92672">thead</span>&gt;
+</span></span><span style="display:flex;"><span>      &lt;<span style="color:#f92672">tbody</span> {<span style="color:#a6e22e">...getTableBodyProps</span><span style="color:#960050;background-color:#1e0010">()</span>}&gt;
+</span></span><span style="display:flex;"><span>        {<span style="color:#a6e22e">rows</span>.<span style="color:#a6e22e">map</span>((<span style="color:#a6e22e">row</span>, <span style="color:#a6e22e">i</span>) <span style="color:#f92672">=&gt;</span> {
+</span></span><span style="display:flex;"><span>          <span style="color:#a6e22e">prepareRow</span>(<span style="color:#a6e22e">row</span>);
+</span></span><span style="display:flex;"><span>          <span style="color:#66d9ef">return</span> (
+</span></span><span style="display:flex;"><span>            &lt;<span style="color:#f92672">tr</span> {<span style="color:#a6e22e">...row.getRowProps</span><span style="color:#960050;background-color:#1e0010">()</span>}&gt;
+</span></span><span style="display:flex;"><span>              {<span style="color:#a6e22e">row</span>.<span style="color:#a6e22e">cells</span>.<span style="color:#a6e22e">map</span>(<span style="color:#a6e22e">cell</span> <span style="color:#f92672">=&gt;</span> {
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">return</span> &lt;<span style="color:#f92672">td</span> {<span style="color:#a6e22e">...cell.getCellProps</span><span style="color:#960050;background-color:#1e0010">()</span>}&gt;{<span style="color:#a6e22e">cell</span>.<span style="color:#a6e22e">render</span>(<span style="color:#e6db74">&#39;Cell&#39;</span>)}&lt;/<span style="color:#f92672">td</span>&gt;;
+</span></span><span style="display:flex;"><span>              })}
+</span></span><span style="display:flex;"><span>            &lt;/<span style="color:#f92672">tr</span>&gt;
+</span></span><span style="display:flex;"><span>          );
+</span></span><span style="display:flex;"><span>        })}
+</span></span><span style="display:flex;"><span>      &lt;/<span style="color:#f92672">tbody</span>&gt;
+</span></span><span style="display:flex;"><span>    &lt;/<span style="color:#f92672">table</span>&gt;
+</span></span><span style="display:flex;"><span>  );
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">rootElement</span> <span style="color:#f92672">=</span> document.<span style="color:#a6e22e">getElementById</span>(<span style="color:#e6db74">&#39;root&#39;</span>);
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">render</span>(&lt;<span style="color:#f92672">App</span> /&gt;, <span style="color:#a6e22e">rootElement</span>);
+</span></span></code></pre></div><p>差分は以下の2箇所です。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-tsx" data-lang="tsx"><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">getTableProps</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">getTableBodyProps</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">headerGroups</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">rows</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">prepareRow</span>
+</span></span><span style="display:flex;"><span>  } <span style="color:#f92672">=</span> <span style="color:#a6e22e">useTable</span>&lt;<span style="color:#f92672">Data</span>&gt;({ <span style="color:#a6e22e">columns</span>, <span style="color:#a6e22e">data</span> }, <span style="color:#a6e22e">useSortBy</span>);
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-tsx" data-lang="tsx"><span style="display:flex;"><span>              &lt;<span style="color:#f92672">th</span> {<span style="color:#a6e22e">...column.getHeaderProps</span><span style="color:#960050;background-color:#1e0010">(</span><span style="color:#a6e22e">column.getSortByToggleProps</span><span style="color:#960050;background-color:#1e0010">())</span>}&gt;
+</span></span><span style="display:flex;"><span>                {<span style="color:#a6e22e">column</span>.<span style="color:#a6e22e">render</span>(<span style="color:#e6db74">&#39;Header&#39;</span>)}
+</span></span><span style="display:flex;"><span>                &lt;<span style="color:#f92672">span</span>&gt;
+</span></span><span style="display:flex;"><span>                  {<span style="color:#e6db74">&#39; &#39;</span>}
+</span></span><span style="display:flex;"><span>                  {<span style="color:#a6e22e">column</span>.<span style="color:#a6e22e">isSorted</span>
+</span></span><span style="display:flex;"><span>                    <span style="color:#f92672">?</span> <span style="color:#a6e22e">column</span>.<span style="color:#a6e22e">isSortedDesc</span>
+</span></span><span style="display:flex;"><span>                      <span style="color:#f92672">?</span> <span style="color:#e6db74">&#39; 🔽&#39;</span>
+</span></span><span style="display:flex;"><span>                      <span style="color:#f92672">:</span> <span style="color:#e6db74">&#39; 🔼&#39;</span>
+</span></span><span style="display:flex;"><span>                    <span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;&#39;</span>}{<span style="color:#e6db74">&#39; &#39;</span>}
+</span></span><span style="display:flex;"><span>                &lt;/<span style="color:#f92672">span</span>&gt;
+</span></span><span style="display:flex;"><span>              &lt;/<span style="color:#f92672">th</span>&gt;
+</span></span></code></pre></div><p><code>useTable</code> に <code>useSortBy</code> を渡し、 <code>column</code> に新たに含まれた <code>getSortByToggleProps</code> を使って列をソート可能な状態にして、 <code>isSorted</code> と <code>isSortedDesc</code> を利用して現在のソートの状態を描画するようにしています。</p>
 <p>このパターンでも、基本的にはSortしたかどうかの状態はすべてreact-table側が握り、使う側は <code>useTable</code> の戻り値を利用して描画するだけでいい状態を維持することができます。</p>
 <p>フィルターや行選択といった機能も提供されているため、必要に応じて型定義ファイルを更新しつつプラグインを追加することで、自分のプロダクトで必要なテーブルの機能だけを使えるようになります。</p>
 <p>一応、今回作成したコードはいかに設置しておきます。</p>
@@ -436,8 +436,8 @@ import * as React from &#39;react&#39;; import { render } from &#39;react-dom&#3
 
 
         <div id="disqus_thread"></div>
-<script type="application/javascript">
-    var disqus_config = function () {
+<script>
+    window.disqus_config = function () {
     
     
     
@@ -474,7 +474,7 @@ import * as React from &#39;react&#39;; import { render } from &#39;react-dom&#3
       
         ©
         
-        2021
+        2023
          nametake 
       
       
@@ -490,7 +490,7 @@ import * as React from &#39;react&#39;; import { render } from &#39;react-dom&#3
     
 
     
-<script type="application/javascript">
+<script>
 var doNotTrack = false;
 if (!doNotTrack) {
 	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -502,7 +502,6 @@ if (!doNotTrack) {
 	ga('send', 'pageview');
 }
 </script>
-
 
     
 

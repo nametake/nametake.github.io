@@ -6,127 +6,56 @@
     <description>Recent content in Vim on nametake.info</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 08 Mar 2020 00:00:00 +0900</lastBuildDate><atom:link href="https://nametake.github.io/tags/vim/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 08 Mar 2020 00:00:00 +0900</lastBuildDate>
+    <atom:link href="https://nametake.github.io/tags/vim/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>golangci-lint-langserverを作った話</title>
       <link>https://nametake.github.io/posts/2020/03/08/golangci-lint-langserver/</link>
       <pubDate>Sun, 08 Mar 2020 00:00:00 +0900</pubDate>
-      
       <guid>https://nametake.github.io/posts/2020/03/08/golangci-lint-langserver/</guid>
-      <description>最近VimのLinterのプラグインをaleからすべてlanguage serverに移行しました。
-殆どのCLIツールはdiagnostic-languageserver経由で使うことでいい感じに動いてくれています。
-ただ、golangci-lintだけはGoのスコープとの相性の関係ではうまく動作させることができませんでした。
-そこで、golangci-lint専用のlanguage server、golangci-lint-langserverを作成してみました。
-LSPクライアントに読み込ませるとファイルを開いたときと保存したときに以下のようにgolangci-lintの結果を返してくれます。
- 自分が使うために作ったためWindows対応や細かいエラーハンドリング等はしていませんが、個人的には割とちゃんと動いたので満足しています。
-もし機能追加等あったらPRお待ちしています。
-制作動機 一応制作動機も書いておこうと思います。
-今回aleの移行先として検討したdiagnostic-languageserverやefm-langserverなのですが、基本的には開いているファイルにlintをかけてその結果を返す仕組みになっています。
-しかし、Goはパッケージ単位(ディレクトリ単位)のスコープになっているためgolangci-lintはうまく動かない場合がありました。
-例えばunusedやdeadcodeのような使っていない変数や関数をチェックするようなものは、そのパッケージ内の別ファイルで使っていたとしてもそれがチェックされず、lintに引っかかってしまいます。
-また、別ファイルで定義されている関数や変数を使おうとした場合はそもそもビルド失敗扱いになりチェックすることすらできませんでした。
-かといって、ファイルが開かれるたびにパッケージ全体に対してgolangci-lintをかけると今度は関係ないファイルの結果も含まれてしまいます。
-この問題を解決するには、language server側で以下の流れのようにlinterが返した結果をLSPクライアントが送ってきた情報でフィルタをする必要がありました。
- LSPクライアントのNotificationを受け取る golangci-lintを実行する 結果の中から1の情報を使って対象ファイルの結果だけをフィルタする LSPクライアントに結果を伝える  最初はdiagnostic-languageserverやefm-langserverにコントリビュートしようとも考えました。
-ただ、そこそこ大きな機能を追加しないと実現できそうになく、かつgolangci-lintのためだけにその機能を追加するのもシンプルではないと思ったため、完全に独立したlanguage serverとして実装してしまうことにしました。
-efm-langserverの実装を参考にして書いたため、かなり重複したコードにはなっています。ただ、そのおかげで実装を大きくせずに書けたのでシンプルな状態は保つことができました。
-個人的にこのlanguage serverは一時的な実装のつもりなので、goplsやdiagnostic-languageserver、efm-langserverが対応したらすぐにdeprecatedな状態にしようと思っています。
-それまではgolangci-lint-langserverはある程度メンテするつもりなので、PRお待ちしています。</description>
+      <description>最近VimのLinterのプラグインをaleからすべてlanguage serverに移行しました。&#xA;殆どのCLIツールはdiagnostic-languageserver経由で使うことでいい感じに動いてくれています。&#xA;ただ、golangci-lintだけはGoのスコープとの相性の関係ではうまく動作させることができませんでした。&#xA;そこで、golangci-lint専用のlanguage server、golangci-lint-langserverを作成してみました。&#xA;LSPクライアントに読み込ませるとファイルを開いたときと保存したときに以下のようにgolangci-lintの結果を返してくれます。&#xA;自分が使うために作ったためWindows対応や細かいエラーハンドリング等はしていませんが、個人的には割とちゃんと動いたので満足しています。&#xA;もし機能追加等あったらPRお待ちしています。&#xA;制作動機 一応制作動機も書いておこうと思います。&#xA;今回aleの移行先として検討したdiagnostic-languageserverやefm-langserverなのですが、基本的には開いているファイルにlintをかけてその結果を返す仕組みになっています。&#xA;しかし、Goはパッケージ単位(ディレクトリ単位)のスコープになっているためgolangci-lintはうまく動かない場合がありました。&#xA;例えばunusedやdeadcodeのような使っていない変数や関数をチェックするようなものは、そのパッケージ内の別ファイルで使っていたとしてもそれがチェックされず、lintに引っかかってしまいます。&#xA;また、別ファイルで定義されている関数や変数を使おうとした場合はそもそもビルド失敗扱いになりチェックすることすらできませんでした。&#xA;かといって、ファイルが開かれるたびにパッケージ全体に対してgolangci-lintをかけると今度は関係ないファイルの結果も含まれてしまいます。&#xA;この問題を解決するには、language server側で以下の流れのようにlinterが返した結果をLSPクライアントが送ってきた情報でフィルタをする必要がありました。&#xA;LSPクライアントのNotificationを受け取る golangci-lintを実行する 結果の中から1の情報を使って対象ファイルの結果だけをフィルタする LSPクライアントに結果を伝える 最初はdiagnostic-languageserverやefm-langserverにコントリビュートしようとも考えました。&#xA;ただ、そこそこ大きな機能を追加しないと実現できそうになく、かつgolangci-lintのためだけにその機能を追加するのもシンプルではないと思ったため、完全に独立したlanguage serverとして実装してしまうことにしました。&#xA;efm-langserverの実装を参考にして書いたため、かなり重複したコードにはなっています。ただ、そのおかげで実装を大きくせずに書けたのでシンプルな状態は保つことができました。&#xA;個人的にこのlanguage serverは一時的な実装のつもりなので、goplsやdiagnostic-languageserver、efm-langserverが対応したらすぐにdeprecatedな状態にしようと思っています。&#xA;それまではgolangci-lint-langserverはある程度メンテするつもりなので、PRお待ちしています。</description>
     </item>
-    
     <item>
       <title>aleとneoformatからdiagnostic-languageserverに移行した</title>
       <link>https://nametake.github.io/posts/2020/02/26/migration-diagnostic-languageserver/</link>
       <pubDate>Wed, 26 Feb 2020 00:00:00 +0900</pubDate>
-      
       <guid>https://nametake.github.io/posts/2020/02/26/migration-diagnostic-languageserver/</guid>
-      <description>Vimのプラグインとしてaleとneoformatをずっと利用して来たのですが、LinterやFormatterも全てLanguage Serverに移行しようと思い、 diagnostic-languageserver に移行しました。
-aleやneoformatで使っていたLinterやFormatterも全て移行させたのでその設定のJSONもおいておきます。
-1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84 85 86 87 88 89 90 91 92 93 94 95 96 97 98 99 100 101 102 103 104 105 106 107 108 109 110 111 112 113 114 115 116 117 118 119 120 121 122 123 124 125 126 127 128 129 130 131 132 133 134 135 136 137 138 139 140 141 142 143 144 145 146 147 148 149 150 151 152 153 154 155 156 157 158 159 160 161 162 163 164 165 166 167 168 169 170 171 172 173 174 175 176 177 178 179 180 181 182 183 184 185 186 187 188 189 190 191 192 193 194 195 196 197 198 199 200 201 202 203 204 205 206 207 208 209 210 211 212 213 214 215 216 217 218 219 220 221 222 223 224 225 226 227 228 229 230 231 232 233 234 235 236 237 238 239 240 241 242 243 244 245 246 247 248 249 250 251 252 253 254 255  { &amp;#34;languageserver&amp;#34;: { &amp;#34;dls&amp;#34;: { &amp;#34;args&amp;#34;: [ &amp;#34;--stdio&amp;#34; ], &amp;#34;command&amp;#34;: &amp;#34;diagnostic-languageserver&amp;#34;, &amp;#34;filetypes&amp;#34;: [ &amp;#34;dockerfile&amp;#34;, &amp;#34;go&amp;#34;, &amp;#34;json&amp;#34;, &amp;#34;markdown&amp;#34;, &amp;#34;sh&amp;#34;, &amp;#34;yaml&amp;#34;, &amp;#34;vim&amp;#34; ], &amp;#34;initializationOptions&amp;#34;: { &amp;#34;filetypes&amp;#34;: { &amp;#34;dockerfile&amp;#34;: [ &amp;#34;dockerfile-hadolint&amp;#34; ], &amp;#34;go&amp;#34;: [], &amp;#34;markdown&amp;#34;: [ &amp;#34;markdown-remark-lint&amp;#34;, &amp;#34;markdown-textlint&amp;#34; ], &amp;#34;sh&amp;#34;: [ &amp;#34;sh-shellcheck&amp;#34; ], &amp;#34;vim&amp;#34;: [ &amp;#34;vim-vint&amp;#34; ], &amp;#34;yaml&amp;#34;: [ &amp;#34;yaml-yamllint&amp;#34; ] }, &amp;#34;formatFiletypes&amp;#34;: { &amp;#34;go&amp;#34;: [ &amp;#34;go-gofmtrlx&amp;#34;, &amp;#34;go-goimports&amp;#34; ], &amp;#34;json&amp;#34;: [ &amp;#34;json-fixjson&amp;#34;, &amp;#34;json-jq&amp;#34; ], &amp;#34;markdown&amp;#34;: [ &amp;#34;markdown-remark&amp;#34; ], &amp;#34;sh&amp;#34;: [ &amp;#34;sh-shfmt&amp;#34; ] }, &amp;#34;formatters&amp;#34;: { &amp;#34;go-gofmtrlx&amp;#34;: { &amp;#34;command&amp;#34;: &amp;#34;gofmtrlx&amp;#34; }, &amp;#34;go-goimports&amp;#34;: { &amp;#34;command&amp;#34;: &amp;#34;goimports&amp;#34; }, &amp;#34;json-fixjson&amp;#34;: { &amp;#34;command&amp;#34;: &amp;#34;fixjson&amp;#34;, &amp;#34;isStderr&amp;#34;: false, &amp;#34;isStdout&amp;#34;: true }, &amp;#34;json-jq&amp;#34;: { &amp;#34;args&amp;#34;: [ &amp;#34;.</description>
+      <description>Vimのプラグインとしてaleとneoformatをずっと利用して来たのですが、LinterやFormatterも全てLanguage Serverに移行しようと思い、 diagnostic-languageserver に移行しました。&#xA;aleやneoformatで使っていたLinterやFormatterも全て移行させたのでその設定のJSONもおいておきます。&#xA;1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84 85 86 87 88 89 90 91 92 93 94 95 96 97 98 99 100 101 102 103 104 105 106 107 108 109 110 111 112 113 114 115 116 117 118 119 120 121 122 123 124 125 126 127 128 129 130 131 132 133 134 135 136 137 138 139 140 141 142 143 144 145 146 147 148 149 150 151 152 153 154 155 156 157 158 159 160 161 162 163 164 165 166 167 168 169 170 171 172 173 174 175 176 177 178 179 180 181 182 183 184 185 186 187 188 189 190 191 192 193 194 195 196 197 198 199 200 201 202 203 204 205 206 207 208 209 210 211 212 213 214 215 216 217 218 219 220 221 222 223 224 225 226 227 228 229 230 231 232 233 234 235 236 237 238 239 240 241 242 243 244 245 246 247 248 249 250 251 252 253 254 255 { &amp;#34;languageserver&amp;#34;: { &amp;#34;dls&amp;#34;: { &amp;#34;args&amp;#34;: [ &amp;#34;--stdio&amp;#34; ], &amp;#34;command&amp;#34;: &amp;#34;diagnostic-languageserver&amp;#34;, &amp;#34;filetypes&amp;#34;: [ &amp;#34;dockerfile&amp;#34;, &amp;#34;go&amp;#34;, &amp;#34;json&amp;#34;, &amp;#34;markdown&amp;#34;, &amp;#34;sh&amp;#34;, &amp;#34;yaml&amp;#34;, &amp;#34;vim&amp;#34; ], &amp;#34;initializationOptions&amp;#34;: { &amp;#34;filetypes&amp;#34;: { &amp;#34;dockerfile&amp;#34;: [ &amp;#34;dockerfile-hadolint&amp;#34; ], &amp;#34;go&amp;#34;: [], &amp;#34;markdown&amp;#34;: [ &amp;#34;markdown-remark-lint&amp;#34;, &amp;#34;markdown-textlint&amp;#34; ], &amp;#34;sh&amp;#34;: [ &amp;#34;sh-shellcheck&amp;#34; ], &amp;#34;vim&amp;#34;: [ &amp;#34;vim-vint&amp;#34; ], &amp;#34;yaml&amp;#34;: [ &amp;#34;yaml-yamllint&amp;#34; ] }, &amp;#34;formatFiletypes&amp;#34;: { &amp;#34;go&amp;#34;: [ &amp;#34;go-gofmtrlx&amp;#34;, &amp;#34;go-goimports&amp;#34; ], &amp;#34;json&amp;#34;: [ &amp;#34;json-fixjson&amp;#34;, &amp;#34;json-jq&amp;#34; ], &amp;#34;markdown&amp;#34;: [ &amp;#34;markdown-remark&amp;#34; ], &amp;#34;sh&amp;#34;: [ &amp;#34;sh-shfmt&amp;#34; ] }, &amp;#34;formatters&amp;#34;: { &amp;#34;go-gofmtrlx&amp;#34;: { &amp;#34;command&amp;#34;: &amp;#34;gofmtrlx&amp;#34; }, &amp;#34;go-goimports&amp;#34;: { &amp;#34;command&amp;#34;: &amp;#34;goimports&amp;#34; }, &amp;#34;json-fixjson&amp;#34;: { &amp;#34;command&amp;#34;: &amp;#34;fixjson&amp;#34;, &amp;#34;isStderr&amp;#34;: false, &amp;#34;isStdout&amp;#34;: true }, &amp;#34;json-jq&amp;#34;: { &amp;#34;args&amp;#34;: [ &amp;#34;.</description>
     </item>
-    
     <item>
       <title>Goの戻り値をいい感じに補完してくれるvim-snippetsを作った</title>
       <link>https://nametake.github.io/posts/2019/07/29/vim-goiferr-snippets/</link>
       <pubDate>Mon, 29 Jul 2019 22:57:06 +0900</pubDate>
-      
       <guid>https://nametake.github.io/posts/2019/07/29/vim-goiferr-snippets/</guid>
-      <description>最近Vimの設定を整理してcoc.nvimに乗り換えるにあたり、snippetのプラグインもneosnippetからcoc-neosnippetに乗り換え、snippet集もvim-snippetsに変更しました。
-概ね問題はなかったのですが、Goを書くときにiferrで戻り値をいい感じに補完してくれる機能がなくなったのは若干不便でした(参考)。
-一応coc.nvimにneosnippetの機能を取り込む機能はついているようでしたがうまく動かなかったことと、もうちょっと高級な機能が欲しいと前々から思っていたのもあり、せっかくなのでsnippetを提供するプラグインを作りました。
-それで作ったのが、vim-goiferr-snippetsです。以下のgifのように動作します。
-iferrのsnippetに関して以下の機能を提供しています。
- 戻り値の型を構造体でも補完してくれる 構造体がポインタかどうかを判別してくれる pkg/errorsのWrap関数でerrorをWrapする補完の提供 名前付き戻り値のときはreturnしか出力しない インラインのエラーハンドリング用snippetも提供 上記機能を持ったVimScirptの関数として提供している  pkg/errors以外のerrorライブラリ等でカスタマイズできる    また、作っている最中に「iferr用の正規表現はそのままreturnのsnippetとしても使えるのでは？」と思ったので、そのままreturnを補完するsnippetとしても提供しました。戻り値をいい感じに展開して、それぞれにジャンプ用のマーカーを付けているので、サクサク戻り値を設定できます。
-自分用に作ったのでオレオレ設定な部分もありますが、生暖かい見ていただければ幸いです。
-最後に、プラグイン内の正規表現部分は@pockeさんの「Vim で Go 言語を書いている時、Neosnippet でいい感じに if する」という記事を参考にさせていただきました！ありがとうございました！</description>
+      <description>最近Vimの設定を整理してcoc.nvimに乗り換えるにあたり、snippetのプラグインもneosnippetからcoc-neosnippetに乗り換え、snippet集もvim-snippetsに変更しました。&#xA;概ね問題はなかったのですが、Goを書くときにiferrで戻り値をいい感じに補完してくれる機能がなくなったのは若干不便でした(参考)。&#xA;一応coc.nvimにneosnippetの機能を取り込む機能はついているようでしたがうまく動かなかったことと、もうちょっと高級な機能が欲しいと前々から思っていたのもあり、せっかくなのでsnippetを提供するプラグインを作りました。&#xA;それで作ったのが、vim-goiferr-snippetsです。以下のgifのように動作します。&#xA;iferrのsnippetに関して以下の機能を提供しています。&#xA;戻り値の型を構造体でも補完してくれる 構造体がポインタかどうかを判別してくれる pkg/errorsのWrap関数でerrorをWrapする補完の提供 名前付き戻り値のときはreturnしか出力しない インラインのエラーハンドリング用snippetも提供 上記機能を持ったVimScirptの関数として提供している pkg/errors以外のerrorライブラリ等でカスタマイズできる また、作っている最中に「iferr用の正規表現はそのままreturnのsnippetとしても使えるのでは？」と思ったので、そのままreturnを補完するsnippetとしても提供しました。戻り値をいい感じに展開して、それぞれにジャンプ用のマーカーを付けているので、サクサク戻り値を設定できます。&#xA;自分用に作ったのでオレオレ設定な部分もありますが、生暖かい見ていただければ幸いです。&#xA;最後に、プラグイン内の正規表現部分は@pockeさんの「Vim で Go 言語を書いている時、Neosnippet でいい感じに if する」という記事を参考にさせていただきました！ありがとうございました！</description>
     </item>
-    
     <item>
       <title>Vimのプラグインを整理した(あとcoc.nvimの紹介)</title>
       <link>https://nametake.github.io/posts/2019/07/25/change-vim-plugins/</link>
       <pubDate>Thu, 25 Jul 2019 00:51:43 +0900</pubDate>
-      
       <guid>https://nametake.github.io/posts/2019/07/25/change-vim-plugins/</guid>
-      <description>ちまちまとdotfilesを育ててきたんですが、Goの補完が動かなくなっていたり中途半端にLSP対応しようとした痕跡だけ残っていたりしたので、断捨離も兼ねてガッツリプラグインを整理しました。
-プラグインの構成はdotfiles/vim/rc/plug.rc.vimに全部寄せています。
-あんまり凝った構成にしてもメンテナンスが大変なので、以下の基準でプラグインを選びました。
- githubのStar数が多くてAPIが安定してそう 少ない設定でも動く  整理しているときに、coc.nvimという良さげな補完プラグインを見つけたので軽く紹介してみます。
-coc.nvim coc.nvimはREADMEに書いてあるとおり、VSCodeライクな補完をVim上で実現するために作られているらしい。
-高速と謳っているだけあり、重たいファイルを開いて補完を実行しても重くなりませでした。また、デフォルトでLSPに対応している上に、非常に丁寧なドキュメントも用意されているため、導入のハードルはとにかく低かったです。aleと共存するための設定があったのも個人的には嬉しい。
-一部設定はJSONで管理することになりますが、それさえ問題なければ強くおすすめできます。
-導入に際して、coc-snippetsをCocInstallではなく、プラグインマネージャ(vim-plug)経由でインストールしようとしたときにちょっとだけ引っかかったのでそれだけメモ。
-coc.nvimと連携するエクステンションをプラグインマネージャ経由でインストールするときには、以下のようにインストール後にyarnコマンドを実行するようにする必要があります。
-Plug &amp;#39;neoclide/coc-snippets&amp;#39;, {&amp;#39;do&amp;#39;: &amp;#39;yarn install --frozen-lockfile&amp;#39;}(ちなみにちゃんとドキュメントに書いてあるので、全部読んでおけば引っかかるようなこともないです)</description>
+      <description>ちまちまとdotfilesを育ててきたんですが、Goの補完が動かなくなっていたり中途半端にLSP対応しようとした痕跡だけ残っていたりしたので、断捨離も兼ねてガッツリプラグインを整理しました。&#xA;プラグインの構成はdotfiles/vim/rc/plug.rc.vimに全部寄せています。&#xA;あんまり凝った構成にしてもメンテナンスが大変なので、以下の基準でプラグインを選びました。&#xA;githubのStar数が多くてAPIが安定してそう 少ない設定でも動く 整理しているときに、coc.nvimという良さげな補完プラグインを見つけたので軽く紹介してみます。&#xA;coc.nvim coc.nvimはREADMEに書いてあるとおり、VSCodeライクな補完をVim上で実現するために作られているらしい。&#xA;高速と謳っているだけあり、重たいファイルを開いて補完を実行しても重くなりませでした。また、デフォルトでLSPに対応している上に、非常に丁寧なドキュメントも用意されているため、導入のハードルはとにかく低かったです。aleと共存するための設定があったのも個人的には嬉しい。&#xA;一部設定はJSONで管理することになりますが、それさえ問題なければ強くおすすめできます。&#xA;導入に際して、coc-snippetsをCocInstallではなく、プラグインマネージャ(vim-plug)経由でインストールしようとしたときにちょっとだけ引っかかったのでそれだけメモ。&#xA;coc.nvimと連携するエクステンションをプラグインマネージャ経由でインストールするときには、以下のようにインストール後にyarnコマンドを実行するようにする必要があります。&#xA;Plug &amp;#39;neoclide/coc-snippets&amp;#39;, {&amp;#39;do&amp;#39;: &amp;#39;yarn install --frozen-lockfile&amp;#39;} (ちなみにちゃんとドキュメントに書いてあるので、全部読んでおけば引っかかるようなこともないです)</description>
     </item>
-    
     <item>
       <title>IntelliJのPopupの候補を展開するKeymap</title>
       <link>https://nametake.github.io/posts/2019/01/20/intellij-popup-expand/</link>
       <pubDate>Sun, 20 Jan 2019 21:05:06 +0900</pubDate>
-      
       <guid>https://nametake.github.io/posts/2019/01/20/intellij-popup-expand/</guid>
-      <description>自分は普段Vimでの補完候補を&amp;lt;C-k&amp;gt;で展開しているがIntelliJでの補完候補も同じコマンドで展開したかったのでメモ。
-結論だけいうと、Editor Actions -&amp;gt; Choose Lookup ItemにKeymapを設定すればできました。
-本当は.ideavimrcだけに設定したかったんですが、ここまで調べるのに少し時間がかかったので後で調べます。</description>
+      <description>自分は普段Vimでの補完候補を&amp;lt;C-k&amp;gt;で展開しているがIntelliJでの補完候補も同じコマンドで展開したかったのでメモ。&#xA;結論だけいうと、Editor Actions -&amp;gt; Choose Lookup ItemにKeymapを設定すればできました。&#xA;本当は.ideavimrcだけに設定したかったんですが、ここまで調べるのに少し時間がかかったので後で調べます。</description>
     </item>
-    
     <item>
       <title>VimConf2018感想</title>
       <link>https://nametake.github.io/posts/2018/11/24/vimconf2018/</link>
       <pubDate>Sat, 24 Nov 2018 10:15:34 +0900</pubDate>
-      
       <guid>https://nametake.github.io/posts/2018/11/24/vimconf2018/</guid>
-      <description>11月24日にあったVimConf2018に行ったので参加ブログを書きます。
-Keynote - What is the next feature?(o) スライド
-mattnさんの発表。
-Keynote - Vim: From hjkl to a platform for plugins 楽しみにしていたBram氏の発表。
-Vimの歴史とこれからのVimの話をされていた。
-非常に勝手ながらにプラグインにはそこまで興味がないかと思っていたが、発表で言及されていた「これからのVim」はプラグインに関することが多く、少し驚いた。
-発表の内容からも、終始開発者として「使う人」のことを強く意識しながらVimのこれからを考えていることが伝わった。
-個人的にはVSCodeのPopup Windowが羨ましいのでPopUp Windowがほしいです。
-Migrating plugins to standard features  この発表の聽いたので帰ってからVimのプラグインを10個削りました。
-Modes  デバッグのお話。
-この話を聽いてDelveのプラグインを思い出したのでちょっとあとで試そうと思う。
-A day in the life of (ordinary) Vimmer  1日1回プラグインのアップデートは私もやります。
-Modern editor-independent development environment for PHP Modern editor-independent development environment for PHP #vimconf / 黒點 さん - ニコナレ 宗教戦争好きですすみません。
-Veonimは少し気になったので後で試す。
-Effective Modern Vim scripting スライド</description>
+      <description>11月24日にあったVimConf2018に行ったので参加ブログを書きます。&#xA;Keynote - What is the next feature?(o) スライド&#xA;mattnさんの発表。&#xA;Keynote - Vim: From hjkl to a platform for plugins 楽しみにしていたBram氏の発表。&#xA;Vimの歴史とこれからのVimの話をされていた。&#xA;非常に勝手ながらにプラグインにはそこまで興味がないかと思っていたが、発表で言及されていた「これからのVim」はプラグインに関することが多く、少し驚いた。&#xA;発表の内容からも、終始開発者として「使う人」のことを強く意識しながらVimのこれからを考えていることが伝わった。&#xA;個人的にはVSCodeのPopup Windowが羨ましいのでPopUp Windowがほしいです。&#xA;Migrating plugins to standard features この発表の聽いたので帰ってからVimのプラグインを10個削りました。&#xA;Modes デバッグのお話。&#xA;この話を聽いてDelveのプラグインを思い出したのでちょっとあとで試そうと思う。&#xA;A day in the life of (ordinary) Vimmer 1日1回プラグインのアップデートは私もやります。&#xA;Modern editor-independent development environment for PHP Modern editor-independent development environment for PHP #vimconf / 黒點 さん - ニコナレ 宗教戦争好きですすみません。&#xA;Veonimは少し気になったので後で試す。&#xA;Effective Modern Vim scripting スライド</description>
     </item>
-    
     <item>
       <title>neoformatでshfmtを使うときにインデントをタブ文字にしたい時の設定</title>
       <link>https://nametake.github.io/posts/2018/10/10/vim-shfmt-neoformat-indent/</link>
       <pubDate>Wed, 10 Oct 2018 11:44:32 +0900</pubDate>
-      
       <guid>https://nametake.github.io/posts/2018/10/10/vim-shfmt-neoformat-indent/</guid>
-      <description>neoformatで使うshfmtはデフォルトだとインデントがスペースなんですが、チームのコーディング規約に合わせてタブ文字にしたかったときにちょっと引っかかったのでメモ。
-まずは、shfmt のヘルプとneoformatのshfmtの定義を見てみます。
--i uint indent: 0 for tabs (default), &amp;gt;0 for number of spaces function! neoformat#formatters#sh#shfmt() abort return { \ &amp;#39;exe&amp;#39;: &amp;#39;shfmt&amp;#39;, \ &amp;#39;args&amp;#39;: [&amp;#39;-i &amp;#39; . shiftwidth()], \ &amp;#39;stdin&amp;#39;: 1, \ }endfunctionshfmtのヘルプから、インデントをタブにしたければ-i引数で0を渡せば良さそうで、neoformatの定義ではインデントの値にshiftwidthの値をしているようだったので、プロジェクトでのVimの設定を以下のように設定してみました(プロジェクト固有の設定ができるようにしている)。
-autocmd Filetype sh setlocal sw=0 sts=0 noexpandtabしかし、どうしてもインデントがスペースになってしまうためちゃんとshiftwidth()の挙動を調べてみると、shiftwidthが0に設定されているとtabstopの値を使うようになっているらしい。
-https://vim-jp.org/vimmagazine/2012/08/31/vimmagazine.html
-tabstopは0を設定できないため、結局以下のようにneoformatのshfmt設定をプロジェクト固有の設定で上書きして対処しました。
-let g:neoformat_sh_shfmt = { \ &amp;#39;exe&amp;#39;: &amp;#39;shfmt&amp;#39;, \ &amp;#39;args&amp;#39;: [&amp;#39;-i&amp;#39;, 0], \ &amp;#39;stdin&amp;#39;: 1, \ }</description>
+      <description>neoformatで使うshfmtはデフォルトだとインデントがスペースなんですが、チームのコーディング規約に合わせてタブ文字にしたかったときにちょっと引っかかったのでメモ。&#xA;まずは、shfmt のヘルプとneoformatのshfmtの定義を見てみます。&#xA;-i uint indent: 0 for tabs (default), &amp;gt;0 for number of spaces function! neoformat#formatters#sh#shfmt() abort return { \ &amp;#39;exe&amp;#39;: &amp;#39;shfmt&amp;#39;, \ &amp;#39;args&amp;#39;: [&amp;#39;-i &amp;#39; . shiftwidth()], \ &amp;#39;stdin&amp;#39;: 1, \ } endfunction shfmtのヘルプから、インデントをタブにしたければ-i引数で0を渡せば良さそうで、neoformatの定義ではインデントの値にshiftwidthの値をしているようだったので、プロジェクトでのVimの設定を以下のように設定してみました(プロジェクト固有の設定ができるようにしている)。&#xA;autocmd Filetype sh setlocal sw=0 sts=0 noexpandtab しかし、どうしてもインデントがスペースになってしまうためちゃんとshiftwidth()の挙動を調べてみると、shiftwidthが0に設定されているとtabstopの値を使うようになっているらしい。&#xA;https://vim-jp.org/vimmagazine/2012/08/31/vimmagazine.html&#xA;tabstopは0を設定できないため、結局以下のようにneoformatのshfmt設定をプロジェクト固有の設定で上書きして対処しました。&#xA;let g:neoformat_sh_shfmt = { \ &amp;#39;exe&amp;#39;: &amp;#39;shfmt&amp;#39;, \ &amp;#39;args&amp;#39;: [&amp;#39;-i&amp;#39;, 0], \ &amp;#39;stdin&amp;#39;: 1, \ } </description>
     </item>
-    
   </channel>
 </rss>

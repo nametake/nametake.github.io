@@ -12,16 +12,16 @@
 
     
 
-    <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="DDDにおける外部サービスの抽象化"/>
+    <meta name="twitter:card" content="summary"/><meta name="twitter:title" content="DDDにおける外部サービスの抽象化"/>
 <meta name="twitter:description" content="ビジネス要件で外部サービスとの連携が決まっている場合、勝手に抽象化せずにドメイン層にそれを定義していくことで正しくDDDが実践できるのではないかという話"/>
 
     <meta property="og:title" content="DDDにおける外部サービスの抽象化" />
 <meta property="og:description" content="ビジネス要件で外部サービスとの連携が決まっている場合、勝手に抽象化せずにドメイン層にそれを定義していくことで正しくDDDが実践できるのではないかという話" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://nametake.github.io/posts/2020/07/25/abstract-external-service/" />
+<meta property="og:url" content="https://nametake.github.io/posts/2020/07/25/abstract-external-service/" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2020-07-25T00:00:00+09:00" />
 <meta property="article:modified_time" content="2020-07-25T00:00:00+09:00" />
+
 
 
     
@@ -68,7 +68,7 @@
     <link rel="icon" type="image/png" href="https://nametake.github.io/images/favicon-32x32.png" sizes="32x32">
     <link rel="icon" type="image/png" href="https://nametake.github.io/images/favicon-16x16.png" sizes="16x16">
 
-    <meta name="generator" content="Hugo 0.80.0" />
+    <meta name="generator" content="Hugo 0.121.1">
   </head>
 
   
@@ -155,42 +155,42 @@
 <p>自社の販売所における仮想通貨の価格を決定する仕組みを作っていました。</p>
 <p>複数の外部取引所のAPIから価格情報を取り出してそれらの値を使って自社の販売価格を計算をします。</p>
 <p>販売所の価格の構造体は以下のようにドメイン層に定義していました。</p>
-<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">Tick</span> <span style="color:#66d9ef">struct</span> {
-	<span style="color:#a6e22e">Amount</span> <span style="color:#66d9ef">int</span>
-	<span style="color:#a6e22e">Market</span> <span style="color:#a6e22e">Currency</span>
-	<span style="color:#a6e22e">Base</span>   <span style="color:#a6e22e">Currency</span>
-}
-</code></pre></td></tr></table>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">Tick</span> <span style="color:#66d9ef">struct</span> {
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">Amount</span> <span style="color:#66d9ef">int</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">Market</span> <span style="color:#a6e22e">Currency</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">Base</span>   <span style="color:#a6e22e">Currency</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>また、それらの<code>Tick</code> を取り出すために各取引所のサービスごとに以下のようにinterfaceを定義していました。</p>
-<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
+<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">FooService</span> <span style="color:#66d9ef">interface</span> {
-	<span style="color:#a6e22e">GetTick</span>() (<span style="color:#f92672">*</span><span style="color:#a6e22e">Tick</span>, <span style="color:#66d9ef">error</span>)
-}
-
-<span style="color:#66d9ef">type</span> <span style="color:#a6e22e">BarService</span> <span style="color:#66d9ef">interface</span> {
-	<span style="color:#a6e22e">GetTick</span>() (<span style="color:#f92672">*</span><span style="color:#a6e22e">Tick</span>, <span style="color:#66d9ef">error</span>)
-}
-</code></pre></td></tr></table>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">FooService</span> <span style="color:#66d9ef">interface</span> {
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">GetTick</span>() (<span style="color:#f92672">*</span><span style="color:#a6e22e">Tick</span>, <span style="color:#66d9ef">error</span>)
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">BarService</span> <span style="color:#66d9ef">interface</span> {
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">GetTick</span>() (<span style="color:#f92672">*</span><span style="color:#a6e22e">Tick</span>, <span style="color:#66d9ef">error</span>)
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>FooやBarは取引所の名前だと思ってください。</p>
 <p>これらもドメイン層に定義しています。</p>
@@ -202,112 +202,112 @@
 <p>しかし、 <code>GetTick</code> からいきなり <code>Tick</code> 取り出そうとしているため、「外部サービスの値を使って <code>Tick</code> を計算する」というロジックがインフラストラクチャ層に流出するという問題が発生してしまいました。</p>
 <p>具体的な例をあげます。</p>
 <p>取引所Fooは以下のようなResponseを返すAPIを提供していました。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
-  <span style="color:#f92672">&#34;currentTick&#34;</span>: <span style="color:#e6db74">&#34;1000000&#34;</span>,
-  <span style="color:#f92672">&#34;market&#34;</span>: <span style="color:#e6db74">&#34;btc-jpy&#34;</span>
-}
-</code></pre></div><p>上記の構造を <code>Tick</code> に割り当てるのは難しくありません。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;currentTick&#34;</span>: <span style="color:#e6db74">&#34;1000000&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;market&#34;</span>: <span style="color:#e6db74">&#34;btc-jpy&#34;</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>上記の構造を <code>Tick</code> に割り当てるのは難しくありません。</p>
 <p><code>currentTick</code> をそのまま <code>Amount</code> に使い、 <code>market</code> の文字列を定義を分解して <code>Market</code> と <code>Base</code> に割り当てれば良さそうです。</p>
 <p>しかし取引所Barは以下のような取引の板情報だけしか返さないAPIの設計になっていました。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
-  <span style="color:#f92672">&#34;asks&#34;</span>: [
-    {
-      <span style="color:#f92672">&#34;rate&#34;</span>: <span style="color:#ae81ff">120000</span>,
-      <span style="color:#f92672">&#34;amount&#34;</span>: <span style="color:#ae81ff">0.1</span>
-    },
-    {
-      <span style="color:#f92672">&#34;rate&#34;</span>: <span style="color:#ae81ff">110000</span>,
-      <span style="color:#f92672">&#34;amount&#34;</span>: <span style="color:#ae81ff">0.22</span>
-    }
-  ],
-  <span style="color:#f92672">&#34;bids&#34;</span>: [
-    {
-      <span style="color:#f92672">&#34;rate&#34;</span>: <span style="color:#ae81ff">99000</span>,
-      <span style="color:#f92672">&#34;amount&#34;</span>: <span style="color:#ae81ff">0.6</span>
-    },
-    {
-      <span style="color:#f92672">&#34;rate&#34;</span>: <span style="color:#ae81ff">100000</span>,
-      <span style="color:#f92672">&#34;amount&#34;</span>: <span style="color:#ae81ff">0.18</span>
-    }
-  ]
-}
-</code></pre></div><p>ここから価格を決定するには <code>asks</code> と <code>bids</code> の情報を利用して決定する必要があります。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;asks&#34;</span>: [
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;rate&#34;</span>: <span style="color:#ae81ff">120000</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;amount&#34;</span>: <span style="color:#ae81ff">0.1</span>
+</span></span><span style="display:flex;"><span>    },
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;rate&#34;</span>: <span style="color:#ae81ff">110000</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;amount&#34;</span>: <span style="color:#ae81ff">0.22</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>  ],
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;bids&#34;</span>: [
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;rate&#34;</span>: <span style="color:#ae81ff">99000</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;amount&#34;</span>: <span style="color:#ae81ff">0.6</span>
+</span></span><span style="display:flex;"><span>    },
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;rate&#34;</span>: <span style="color:#ae81ff">100000</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;amount&#34;</span>: <span style="color:#ae81ff">0.18</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>  ]
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>ここから価格を決定するには <code>asks</code> と <code>bids</code> の情報を利用して決定する必要があります。</p>
 <p>しかし、上記の <code>BarService</code> interfaceに合わせて実装するとその価格を決定するロジックをどこに書くかが問題になります。</p>
 <p>板情報から加重平均で価格決定をしたりする場合は完全にドメインロジックですが、interfaceに合わせようとするとそれをインフラストラクチャ層に書かなくてはいけなくなり、ドメイン知識が流出してしまいます。</p>
 <p>結果、ドメイン層のテストではビジネスロジックが正しいのかを担保するのかが難しくなり、インフラストラクチャ層でもドメインのロジックを気にしながらテストを書くことになってしまいました。</p>
 <h2 id="どうすればよかったか">どうすればよかったか</h2>
 <p>以下のようにFoo取引所とBar取引所が提供している構造をそのままドメイン層に定義し、それらを取得できるinterfaceを定義します。</p>
-<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">25
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">26
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">27
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">28
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">29
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">30
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">31
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">32
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">33
+<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">25
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">26
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">27
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">28
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">29
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">30
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">31
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">32
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">33
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">FooService</span> <span style="color:#66d9ef">interface</span> {
-	<span style="color:#a6e22e">GetFooTick</span>() (<span style="color:#f92672">*</span><span style="color:#a6e22e">FooTick</span>, <span style="color:#66d9ef">error</span>)
-}
-
-<span style="color:#66d9ef">type</span> <span style="color:#a6e22e">FooTick</span> <span style="color:#66d9ef">struct</span> {
-	<span style="color:#a6e22e">CurrentTick</span> <span style="color:#66d9ef">string</span>
-	<span style="color:#a6e22e">Market</span>      <span style="color:#66d9ef">string</span>
-}
-
-<span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">t</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">FooTick</span>) <span style="color:#a6e22e">GetTick</span>() (<span style="color:#f92672">*</span><span style="color:#a6e22e">Tick</span>, <span style="color:#66d9ef">error</span>) {
-	<span style="color:#75715e">// Tick計算ロジック
-</span><span style="color:#75715e"></span>}
-
-<span style="color:#66d9ef">type</span> <span style="color:#a6e22e">BarService</span> <span style="color:#66d9ef">interface</span> {
-	<span style="color:#a6e22e">GetBarTick</span>() (<span style="color:#f92672">*</span><span style="color:#a6e22e">BarTick</span>, <span style="color:#66d9ef">error</span>)
-}
-
-<span style="color:#66d9ef">type</span> <span style="color:#a6e22e">BarTick</span> <span style="color:#66d9ef">struct</span> {
-	<span style="color:#a6e22e">Asks</span> []<span style="color:#a6e22e">Order</span>
-	<span style="color:#a6e22e">Bid</span>  []<span style="color:#a6e22e">Order</span>
-}
-<span style="color:#66d9ef">type</span> <span style="color:#a6e22e">Order</span> <span style="color:#66d9ef">struct</span> {
-	<span style="color:#a6e22e">Rate</span>   <span style="color:#66d9ef">float64</span>
-	<span style="color:#a6e22e">Amount</span> <span style="color:#66d9ef">float64</span>
-}
-
-<span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">t</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">BarTick</span>) <span style="color:#a6e22e">GetTick</span>() (<span style="color:#f92672">*</span><span style="color:#a6e22e">Tick</span>, <span style="color:#66d9ef">error</span>) {
-	<span style="color:#75715e">// Tick計算ロジック
-</span><span style="color:#75715e"></span>}
-
-<span style="color:#66d9ef">type</span> <span style="color:#a6e22e">GetTicker</span> <span style="color:#66d9ef">interface</span> {
-	<span style="color:#a6e22e">GetTick</span>() (<span style="color:#f92672">*</span><span style="color:#a6e22e">Tick</span>, <span style="color:#66d9ef">error</span>)
-}
-</code></pre></td></tr></table>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">FooService</span> <span style="color:#66d9ef">interface</span> {
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">GetFooTick</span>() (<span style="color:#f92672">*</span><span style="color:#a6e22e">FooTick</span>, <span style="color:#66d9ef">error</span>)
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">FooTick</span> <span style="color:#66d9ef">struct</span> {
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">CurrentTick</span> <span style="color:#66d9ef">string</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">Market</span>      <span style="color:#66d9ef">string</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">t</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">FooTick</span>) <span style="color:#a6e22e">GetTick</span>() (<span style="color:#f92672">*</span><span style="color:#a6e22e">Tick</span>, <span style="color:#66d9ef">error</span>) {
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e">// Tick計算ロジック
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">BarService</span> <span style="color:#66d9ef">interface</span> {
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">GetBarTick</span>() (<span style="color:#f92672">*</span><span style="color:#a6e22e">BarTick</span>, <span style="color:#66d9ef">error</span>)
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">BarTick</span> <span style="color:#66d9ef">struct</span> {
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">Asks</span> []<span style="color:#a6e22e">Order</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">Bid</span>  []<span style="color:#a6e22e">Order</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">Order</span> <span style="color:#66d9ef">struct</span> {
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">Rate</span>   <span style="color:#66d9ef">float64</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">Amount</span> <span style="color:#66d9ef">float64</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">t</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">BarTick</span>) <span style="color:#a6e22e">GetTick</span>() (<span style="color:#f92672">*</span><span style="color:#a6e22e">Tick</span>, <span style="color:#66d9ef">error</span>) {
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e">// Tick計算ロジック
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">GetTicker</span> <span style="color:#66d9ef">interface</span> {
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">GetTick</span>() (<span style="color:#f92672">*</span><span style="color:#a6e22e">Tick</span>, <span style="color:#66d9ef">error</span>)
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>また、FooTickやBarTickがGetTickを実装することで、その計算ロジックをドメイン層に寄せてオンメモリのテストを書くことが可能にしています。</p>
 <h2 id="失敗から得たこと">失敗から得たこと</h2>
@@ -316,17 +316,17 @@
 <p>ですが、エンジニアは抽象と具象の間を行き来する必要もあるため、意外とハマりがちな落とし穴かなとも思います(普段DBの抽象化をしているので余計に)。</p>
 <!-- textlint-enable ja-technical-writing/ja-no-weak-phrase -->
 <p>例えば、ビジネス上「クラウドストレージにファイルを保存する」ということを表現する必要があれば以下のようなinterfaceを定義する人は多いでしょう。</p>
-<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">CloudStorageService</span> <span style="color:#66d9ef">interface</span> {
-    <span style="color:#a6e22e">Save</span>(<span style="color:#f92672">*</span><span style="color:#a6e22e">os</span>.<span style="color:#a6e22e">File</span>) <span style="color:#66d9ef">error</span>
-}
-</code></pre></td></tr></table>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">CloudStorageService</span> <span style="color:#66d9ef">interface</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">Save</span>(<span style="color:#f92672">*</span><span style="color:#a6e22e">os</span>.<span style="color:#a6e22e">File</span>) <span style="color:#66d9ef">error</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>上記のように定義しておけば、S3でもGCSでもクラウドストレージは技術者の自由にできます。</p>
 <!-- textlint-disable ja-technical-writing/ja-no-weak-phrase -->
@@ -348,8 +348,8 @@
 
 
         <div id="disqus_thread"></div>
-<script type="application/javascript">
-    var disqus_config = function () {
+<script>
+    window.disqus_config = function () {
     
     
     
@@ -386,7 +386,7 @@
       
         ©
         
-        2021
+        2023
          nametake 
       
       
@@ -402,7 +402,7 @@
     
 
     
-<script type="application/javascript">
+<script>
 var doNotTrack = false;
 if (!doNotTrack) {
 	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -414,7 +414,6 @@ if (!doNotTrack) {
 	ga('send', 'pageview');
 }
 </script>
-
 
     
 

@@ -20,8 +20,7 @@ package fmt import &#34;errors&#34; func Errorf(format string, a ...interface{})
 
     
 
-    <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Go1.13のerrorsにWrapの機能が入ったので勉強がてらまとめる"/>
+    <meta name="twitter:card" content="summary"/><meta name="twitter:title" content="Go1.13のerrorsにWrapの機能が入ったので勉強がてらまとめる"/>
 <meta name="twitter:description" content="Go1.13からerrorsに色々機能が入りました(The Go Blog)。
 最近は新しいGoのことをインプットできていなかったので、リハビリがてらsonatardさんのまとめた記事も読みつつ、中の実装を眺めてまとめてみます。
 Unwrap interface 追加された機能は errors.As や errors.Is のようにいくつかありますが、一番のキモとなる追加機能は errors.Unwrap です。
@@ -43,9 +42,10 @@ func Unwrap(err error) error { u, ok := err.(interface { Unwrap() error }) if !o
 それでは、Wrapする側の errors.Errorf の中を見にいってみます。
 package fmt import &#34;errors&#34; func Errorf(format string, a ...interface{}) error { p := newPrinter() p.wrapErrs = true p.doPrintf(format, a) s := string(p.buf) var err error if p." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://nametake.github.io/posts/2019/10/30/unwrap-interface/" />
+<meta property="og:url" content="https://nametake.github.io/posts/2019/10/30/unwrap-interface/" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2019-10-30T00:52:57+09:00" />
 <meta property="article:modified_time" content="2019-10-30T00:52:57+09:00" />
+
 
 
     
@@ -92,7 +92,7 @@ package fmt import &#34;errors&#34; func Errorf(format string, a ...interface{})
     <link rel="icon" type="image/png" href="https://nametake.github.io/images/favicon-32x32.png" sizes="32x32">
     <link rel="icon" type="image/png" href="https://nametake.github.io/images/favicon-16x16.png" sizes="16x16">
 
-    <meta name="generator" content="Hugo 0.80.0" />
+    <meta name="generator" content="Hugo 0.121.1">
   </head>
 
   
@@ -175,50 +175,50 @@ package fmt import &#34;errors&#34; func Errorf(format string, a ...interface{})
 <p>追加された機能は <code>errors.As</code> や <code>errors.Is</code> のようにいくつかありますが、一番のキモとなる追加機能は <code>errors.Unwrap</code> です。</p>
 <p>似たような機能はデファクトスタンダードとして使われているpkg/errorsの <code>errors.Cause</code> としてありましたが、公式で導入されたことは非常に大きいと思います。</p>
 <p>とりあえず公式ライブラリの中を見にいきましょう。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">Unwrap</span>(<span style="color:#a6e22e">err</span> <span style="color:#66d9ef">error</span>) <span style="color:#66d9ef">error</span> {
-	<span style="color:#a6e22e">u</span>, <span style="color:#a6e22e">ok</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">err</span>.(<span style="color:#66d9ef">interface</span> {
-		<span style="color:#a6e22e">Unwrap</span>() <span style="color:#66d9ef">error</span>
-	})
-	<span style="color:#66d9ef">if</span> !<span style="color:#a6e22e">ok</span> {
-		<span style="color:#66d9ef">return</span> <span style="color:#66d9ef">nil</span>
-	}
-	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">u</span>.<span style="color:#a6e22e">Unwrap</span>()
-}
-</code></pre></div><p>これだけです。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">Unwrap</span>(<span style="color:#a6e22e">err</span> <span style="color:#66d9ef">error</span>) <span style="color:#66d9ef">error</span> {
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">u</span>, <span style="color:#a6e22e">ok</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">err</span>.(<span style="color:#66d9ef">interface</span> {
+</span></span><span style="display:flex;"><span>		<span style="color:#a6e22e">Unwrap</span>() <span style="color:#66d9ef">error</span>
+</span></span><span style="display:flex;"><span>	})
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">if</span> !<span style="color:#a6e22e">ok</span> {
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">return</span> <span style="color:#66d9ef">nil</span>
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">u</span>.<span style="color:#a6e22e">Unwrap</span>()
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>これだけです。</p>
 <p>やっていることを言葉にしても、「渡されたerrorがUnwrap interfaceを実装していればUnwrapの返り値を返して、そうでなければnilを返す」だけです。</p>
 <p>それでは、Wrapする側の <code>errors.Errorf</code> の中を見にいってみます。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#a6e22e">fmt</span>
-
-<span style="color:#f92672">import</span> <span style="color:#e6db74">&#34;errors&#34;</span>
-
-<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">Errorf</span>(<span style="color:#a6e22e">format</span> <span style="color:#66d9ef">string</span>, <span style="color:#a6e22e">a</span> <span style="color:#f92672">...</span><span style="color:#66d9ef">interface</span>{}) <span style="color:#66d9ef">error</span> {
-	<span style="color:#a6e22e">p</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">newPrinter</span>()
-	<span style="color:#a6e22e">p</span>.<span style="color:#a6e22e">wrapErrs</span> = <span style="color:#66d9ef">true</span>
-	<span style="color:#a6e22e">p</span>.<span style="color:#a6e22e">doPrintf</span>(<span style="color:#a6e22e">format</span>, <span style="color:#a6e22e">a</span>)
-	<span style="color:#a6e22e">s</span> <span style="color:#f92672">:=</span> string(<span style="color:#a6e22e">p</span>.<span style="color:#a6e22e">buf</span>)
-	<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">err</span> <span style="color:#66d9ef">error</span>
-	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">p</span>.<span style="color:#a6e22e">wrappedErr</span> <span style="color:#f92672">==</span> <span style="color:#66d9ef">nil</span> {
-		<span style="color:#a6e22e">err</span> = <span style="color:#a6e22e">errors</span>.<span style="color:#a6e22e">New</span>(<span style="color:#a6e22e">s</span>)
-	} <span style="color:#66d9ef">else</span> {
-		<span style="color:#a6e22e">err</span> = <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">wrapError</span>{<span style="color:#a6e22e">s</span>, <span style="color:#a6e22e">p</span>.<span style="color:#a6e22e">wrappedErr</span>}
-	}
-	<span style="color:#a6e22e">p</span>.<span style="color:#a6e22e">free</span>()
-	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">err</span>
-}
-
-<span style="color:#66d9ef">type</span> <span style="color:#a6e22e">wrapError</span> <span style="color:#66d9ef">struct</span> {
-	<span style="color:#a6e22e">msg</span> <span style="color:#66d9ef">string</span>
-	<span style="color:#a6e22e">err</span> <span style="color:#66d9ef">error</span>
-}
-
-<span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">e</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">wrapError</span>) <span style="color:#a6e22e">Error</span>() <span style="color:#66d9ef">string</span> {
-	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">e</span>.<span style="color:#a6e22e">msg</span>
-}
-
-<span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">e</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">wrapError</span>) <span style="color:#a6e22e">Unwrap</span>() <span style="color:#66d9ef">error</span> {
-	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">e</span>.<span style="color:#a6e22e">err</span>
-}
-</code></pre></div><p>長くなるのでコメントは削っています。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#f92672">package</span> <span style="color:#a6e22e">fmt</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> <span style="color:#e6db74">&#34;errors&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">Errorf</span>(<span style="color:#a6e22e">format</span> <span style="color:#66d9ef">string</span>, <span style="color:#a6e22e">a</span> <span style="color:#f92672">...</span><span style="color:#66d9ef">interface</span>{}) <span style="color:#66d9ef">error</span> {
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">p</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">newPrinter</span>()
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">p</span>.<span style="color:#a6e22e">wrapErrs</span> = <span style="color:#66d9ef">true</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">p</span>.<span style="color:#a6e22e">doPrintf</span>(<span style="color:#a6e22e">format</span>, <span style="color:#a6e22e">a</span>)
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">s</span> <span style="color:#f92672">:=</span> string(<span style="color:#a6e22e">p</span>.<span style="color:#a6e22e">buf</span>)
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">err</span> <span style="color:#66d9ef">error</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">p</span>.<span style="color:#a6e22e">wrappedErr</span> <span style="color:#f92672">==</span> <span style="color:#66d9ef">nil</span> {
+</span></span><span style="display:flex;"><span>		<span style="color:#a6e22e">err</span> = <span style="color:#a6e22e">errors</span>.<span style="color:#a6e22e">New</span>(<span style="color:#a6e22e">s</span>)
+</span></span><span style="display:flex;"><span>	} <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>		<span style="color:#a6e22e">err</span> = <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">wrapError</span>{<span style="color:#a6e22e">s</span>, <span style="color:#a6e22e">p</span>.<span style="color:#a6e22e">wrappedErr</span>}
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">p</span>.<span style="color:#a6e22e">free</span>()
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">err</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">wrapError</span> <span style="color:#66d9ef">struct</span> {
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">msg</span> <span style="color:#66d9ef">string</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">err</span> <span style="color:#66d9ef">error</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">e</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">wrapError</span>) <span style="color:#a6e22e">Error</span>() <span style="color:#66d9ef">string</span> {
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">e</span>.<span style="color:#a6e22e">msg</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">e</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">wrapError</span>) <span style="color:#a6e22e">Unwrap</span>() <span style="color:#66d9ef">error</span> {
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">e</span>.<span style="color:#a6e22e">err</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>長くなるのでコメントは削っています。</p>
 <p><code>fmt.Errorf</code> が呼び出されてからの4行は渡されたformatと引数をもとに <code>pp</code> 構造体を生成している部分です。深堀りはしませんが、Unwrapの説明でも若干関わるので、<code>pp</code> 構造体はformatと変数のスライスをパースして色々やっているということだけ覚えておいてください。</p>
 <p>Unwrapに関係があるのは5行目以降からです。 4行目までで生成した <code>pp</code> 構造体の <code>wrappedErr</code> を確認して、nilだった場合 <code>errors.New</code> を、nilじゃない場合は同じ階層に定義してある <code>wrapError</code> 構造体を使ってエラーを作成しています。</p>
 <p>本筋からは少しずれますが、このような実装のため <code>fmt.Errorf</code> を呼び出すと必ずエラーが作成されます。そのため、nilの可能性があるエラーをnilチェックせずに渡すと思わぬバグの原因になるので、<code>fmt.Errorf</code> を呼び出すときには必ずnilチェックをするようにしましょう。</p>
@@ -228,213 +228,213 @@ package fmt import &#34;errors&#34; func Errorf(format string, a ...interface{})
 <h1 id="unwrap-interface実用例">Unwrap interface実用例</h1>
 <h2 id="原因を取り出す">原因を取り出す</h2>
 <p><code>pkg/errors</code>の<code>Cause</code>と全く同じ挙動をする実装です。<code>pkg/errors</code>ではCause interfaceが使われていましたが、それをUnwrap interfaceに置き換えただけです。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
-
-<span style="color:#f92672">import</span> (
-	<span style="color:#e6db74">&#34;errors&#34;</span>
-	<span style="color:#e6db74">&#34;fmt&#34;</span>
-)
-
-<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
-	<span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">errors</span>.<span style="color:#a6e22e">New</span>(<span style="color:#e6db74">&#34;cause&#34;</span>)
-	<span style="color:#a6e22e">err</span> = <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Errorf</span>(<span style="color:#e6db74">&#34;first: %w&#34;</span>, <span style="color:#a6e22e">err</span>)
-	<span style="color:#a6e22e">err</span> = <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Errorf</span>(<span style="color:#e6db74">&#34;second: %w&#34;</span>, <span style="color:#a6e22e">err</span>)
-	<span style="color:#a6e22e">err</span> = <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Errorf</span>(<span style="color:#e6db74">&#34;third: %w&#34;</span>, <span style="color:#a6e22e">err</span>)
-	<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">Cause</span>(<span style="color:#a6e22e">err</span>))
-
-	<span style="color:#75715e">// Output:
-</span><span style="color:#75715e"></span>	<span style="color:#75715e">// cause
-</span><span style="color:#75715e"></span>}
-
-<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">Cause</span>(<span style="color:#a6e22e">err</span> <span style="color:#66d9ef">error</span>) <span style="color:#66d9ef">error</span> {
-	<span style="color:#66d9ef">for</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
-		<span style="color:#a6e22e">u</span>, <span style="color:#a6e22e">ok</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">err</span>.(<span style="color:#66d9ef">interface</span> {
-			<span style="color:#a6e22e">Unwrap</span>() <span style="color:#66d9ef">error</span>
-		})
-		<span style="color:#66d9ef">if</span> !<span style="color:#a6e22e">ok</span> {
-			<span style="color:#66d9ef">break</span>
-		}
-		<span style="color:#a6e22e">err</span> = <span style="color:#a6e22e">u</span>.<span style="color:#a6e22e">Unwrap</span>()
-	}
-	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">err</span>
-}
-</code></pre></div><p>ただ、同一性を調べるためだったら <code>errors.Is</code> があるので、あまり上の例は出番がないかもしれません。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> (
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#34;errors&#34;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#34;fmt&#34;</span>
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">errors</span>.<span style="color:#a6e22e">New</span>(<span style="color:#e6db74">&#34;cause&#34;</span>)
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">err</span> = <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Errorf</span>(<span style="color:#e6db74">&#34;first: %w&#34;</span>, <span style="color:#a6e22e">err</span>)
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">err</span> = <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Errorf</span>(<span style="color:#e6db74">&#34;second: %w&#34;</span>, <span style="color:#a6e22e">err</span>)
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">err</span> = <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Errorf</span>(<span style="color:#e6db74">&#34;third: %w&#34;</span>, <span style="color:#a6e22e">err</span>)
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">Cause</span>(<span style="color:#a6e22e">err</span>))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e">// Output:
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#75715e">// cause
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">Cause</span>(<span style="color:#a6e22e">err</span> <span style="color:#66d9ef">error</span>) <span style="color:#66d9ef">error</span> {
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">for</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+</span></span><span style="display:flex;"><span>		<span style="color:#a6e22e">u</span>, <span style="color:#a6e22e">ok</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">err</span>.(<span style="color:#66d9ef">interface</span> {
+</span></span><span style="display:flex;"><span>			<span style="color:#a6e22e">Unwrap</span>() <span style="color:#66d9ef">error</span>
+</span></span><span style="display:flex;"><span>		})
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">if</span> !<span style="color:#a6e22e">ok</span> {
+</span></span><span style="display:flex;"><span>			<span style="color:#66d9ef">break</span>
+</span></span><span style="display:flex;"><span>		}
+</span></span><span style="display:flex;"><span>		<span style="color:#a6e22e">err</span> = <span style="color:#a6e22e">u</span>.<span style="color:#a6e22e">Unwrap</span>()
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">err</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>ただ、同一性を調べるためだったら <code>errors.Is</code> があるので、あまり上の例は出番がないかもしれません。</p>
 <h2 id="wrapの途中に独自のエラー型が入っていないか調べる">Wrapの途中に独自のエラー型が入っていないか調べる</h2>
 <p><code>fmt.Errorf</code> でWrapされたエラーは <code>errors.As</code> でWrapされてきた中に指定した方があった場合それを取り出すことができます。</p>
 <p>以下の例だと途中でエラーにMarkをして、GetMarkerでそのMarkerを取り出しています。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
-
-<span style="color:#f92672">import</span> (
-	<span style="color:#e6db74">&#34;errors&#34;</span>
-	<span style="color:#e6db74">&#34;fmt&#34;</span>
-)
-
-<span style="color:#66d9ef">type</span> <span style="color:#a6e22e">markErr</span> <span style="color:#66d9ef">struct</span> {
-	<span style="color:#a6e22e">err</span>    <span style="color:#66d9ef">error</span>
-	<span style="color:#a6e22e">marker</span> <span style="color:#66d9ef">string</span>
-}
-
-<span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">e</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">markErr</span>) <span style="color:#a6e22e">Error</span>() <span style="color:#66d9ef">string</span> {
-	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Sprintf</span>(<span style="color:#e6db74">&#34;%s: %v&#34;</span>, <span style="color:#a6e22e">e</span>.<span style="color:#a6e22e">marker</span>, <span style="color:#a6e22e">e</span>.<span style="color:#a6e22e">err</span>)
-}
-
-<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">AddMark</span>(<span style="color:#a6e22e">err</span> <span style="color:#66d9ef">error</span>, <span style="color:#a6e22e">marker</span> <span style="color:#66d9ef">string</span>) <span style="color:#66d9ef">error</span> {
-	<span style="color:#66d9ef">return</span> <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">markErr</span>{<span style="color:#a6e22e">err</span>, <span style="color:#a6e22e">marker</span>}
-}
-
-<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">GetMarker</span>(<span style="color:#a6e22e">err</span> <span style="color:#66d9ef">error</span>) <span style="color:#66d9ef">string</span> {
-	<span style="color:#a6e22e">m</span> <span style="color:#f92672">:=</span> <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">markErr</span>{}
-	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">ok</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">errors</span>.<span style="color:#a6e22e">As</span>(<span style="color:#a6e22e">err</span>, <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">m</span>); !<span style="color:#a6e22e">ok</span> {
-		<span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;&#34;</span>
-	}
-	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">m</span>.<span style="color:#a6e22e">marker</span>
-}
-
-<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
-	<span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">errors</span>.<span style="color:#a6e22e">New</span>(<span style="color:#e6db74">&#34;cause&#34;</span>)
-	<span style="color:#a6e22e">err</span> = <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Errorf</span>(<span style="color:#e6db74">&#34;first: %w&#34;</span>, <span style="color:#a6e22e">err</span>)
-	<span style="color:#a6e22e">err</span> = <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Errorf</span>(<span style="color:#e6db74">&#34;second: %w&#34;</span>, <span style="color:#a6e22e">AddMark</span>(<span style="color:#a6e22e">err</span>, <span style="color:#e6db74">&#34;marker&#34;</span>))
-	<span style="color:#a6e22e">err</span> = <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Errorf</span>(<span style="color:#e6db74">&#34;third: %w&#34;</span>, <span style="color:#a6e22e">err</span>)
-	<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">GetMarker</span>(<span style="color:#a6e22e">err</span>))
-
-	<span style="color:#75715e">// Output:
-</span><span style="color:#75715e"></span>	<span style="color:#75715e">// marker
-</span><span style="color:#75715e"></span>}
-</code></pre></div><p>ですが、Asの実装はUnwrap interfaceの実装が有ることが前提のため、不用意に独自エラーをWrapに挟むと深い階層でWrapしたエラーを取り出せなくなってしまいます。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> (
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#34;errors&#34;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#34;fmt&#34;</span>
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">markErr</span> <span style="color:#66d9ef">struct</span> {
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">err</span>    <span style="color:#66d9ef">error</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">marker</span> <span style="color:#66d9ef">string</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">e</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">markErr</span>) <span style="color:#a6e22e">Error</span>() <span style="color:#66d9ef">string</span> {
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Sprintf</span>(<span style="color:#e6db74">&#34;%s: %v&#34;</span>, <span style="color:#a6e22e">e</span>.<span style="color:#a6e22e">marker</span>, <span style="color:#a6e22e">e</span>.<span style="color:#a6e22e">err</span>)
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">AddMark</span>(<span style="color:#a6e22e">err</span> <span style="color:#66d9ef">error</span>, <span style="color:#a6e22e">marker</span> <span style="color:#66d9ef">string</span>) <span style="color:#66d9ef">error</span> {
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span> <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">markErr</span>{<span style="color:#a6e22e">err</span>, <span style="color:#a6e22e">marker</span>}
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">GetMarker</span>(<span style="color:#a6e22e">err</span> <span style="color:#66d9ef">error</span>) <span style="color:#66d9ef">string</span> {
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">m</span> <span style="color:#f92672">:=</span> <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">markErr</span>{}
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">ok</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">errors</span>.<span style="color:#a6e22e">As</span>(<span style="color:#a6e22e">err</span>, <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">m</span>); !<span style="color:#a6e22e">ok</span> {
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">m</span>.<span style="color:#a6e22e">marker</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">errors</span>.<span style="color:#a6e22e">New</span>(<span style="color:#e6db74">&#34;cause&#34;</span>)
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">err</span> = <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Errorf</span>(<span style="color:#e6db74">&#34;first: %w&#34;</span>, <span style="color:#a6e22e">err</span>)
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">err</span> = <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Errorf</span>(<span style="color:#e6db74">&#34;second: %w&#34;</span>, <span style="color:#a6e22e">AddMark</span>(<span style="color:#a6e22e">err</span>, <span style="color:#e6db74">&#34;marker&#34;</span>))
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">err</span> = <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Errorf</span>(<span style="color:#e6db74">&#34;third: %w&#34;</span>, <span style="color:#a6e22e">err</span>)
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">GetMarker</span>(<span style="color:#a6e22e">err</span>))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e">// Output:
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#75715e">// marker
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}
+</span></span></code></pre></div><p>ですが、Asの実装はUnwrap interfaceの実装が有ることが前提のため、不用意に独自エラーをWrapに挟むと深い階層でWrapしたエラーを取り出せなくなってしまいます。</p>
 <p>以下の例だと、GetMarkerで途中でエラーをMarkしたMarkerを取り出したいのですが、Markした後にcodeErrでWrapしているためMarkerを取り出せていません。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
-
-<span style="color:#f92672">import</span> (
-	<span style="color:#e6db74">&#34;errors&#34;</span>
-	<span style="color:#e6db74">&#34;fmt&#34;</span>
-)
-
-<span style="color:#66d9ef">type</span> <span style="color:#a6e22e">markErr</span> <span style="color:#66d9ef">struct</span> {
-	<span style="color:#a6e22e">err</span>    <span style="color:#66d9ef">error</span>
-	<span style="color:#a6e22e">marker</span> <span style="color:#66d9ef">string</span>
-}
-
-<span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">e</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">markErr</span>) <span style="color:#a6e22e">Error</span>() <span style="color:#66d9ef">string</span> {
-	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Sprintf</span>(<span style="color:#e6db74">&#34;%s: %v&#34;</span>, <span style="color:#a6e22e">e</span>.<span style="color:#a6e22e">marker</span>, <span style="color:#a6e22e">e</span>.<span style="color:#a6e22e">err</span>)
-}
-
-<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">AddMark</span>(<span style="color:#a6e22e">err</span> <span style="color:#66d9ef">error</span>, <span style="color:#a6e22e">marker</span> <span style="color:#66d9ef">string</span>) <span style="color:#66d9ef">error</span> {
-	<span style="color:#66d9ef">return</span> <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">markErr</span>{<span style="color:#a6e22e">err</span>, <span style="color:#a6e22e">marker</span>}
-}
-
-<span style="color:#66d9ef">type</span> <span style="color:#a6e22e">codeErr</span> <span style="color:#66d9ef">struct</span> {
-	<span style="color:#a6e22e">err</span>  <span style="color:#66d9ef">error</span>
-	<span style="color:#a6e22e">code</span> <span style="color:#66d9ef">int</span>
-}
-
-<span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">e</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">codeErr</span>) <span style="color:#a6e22e">Error</span>() <span style="color:#66d9ef">string</span> {
-	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Sprintf</span>(<span style="color:#e6db74">&#34;%d: %v&#34;</span>, <span style="color:#a6e22e">e</span>.<span style="color:#a6e22e">code</span>, <span style="color:#a6e22e">e</span>.<span style="color:#a6e22e">err</span>)
-}
-
-<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">AddCode</span>(<span style="color:#a6e22e">err</span> <span style="color:#66d9ef">error</span>, <span style="color:#a6e22e">code</span> <span style="color:#66d9ef">int</span>) <span style="color:#66d9ef">error</span> {
-	<span style="color:#66d9ef">return</span> <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">codeErr</span>{<span style="color:#a6e22e">err</span>, <span style="color:#a6e22e">code</span>}
-}
-
-<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">GetMarker</span>(<span style="color:#a6e22e">err</span> <span style="color:#66d9ef">error</span>) <span style="color:#66d9ef">string</span> {
-	<span style="color:#a6e22e">m</span> <span style="color:#f92672">:=</span> <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">markErr</span>{}
-	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">ok</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">errors</span>.<span style="color:#a6e22e">As</span>(<span style="color:#a6e22e">err</span>, <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">m</span>); !<span style="color:#a6e22e">ok</span> {
-		<span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;&#34;</span>
-	}
-	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">m</span>.<span style="color:#a6e22e">marker</span>
-}
-
-<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">GetCode</span>(<span style="color:#a6e22e">err</span> <span style="color:#66d9ef">error</span>) <span style="color:#66d9ef">int</span> {
-	<span style="color:#a6e22e">c</span> <span style="color:#f92672">:=</span> <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">codeErr</span>{}
-	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">ok</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">errors</span>.<span style="color:#a6e22e">As</span>(<span style="color:#a6e22e">err</span>, <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">c</span>); !<span style="color:#a6e22e">ok</span> {
-		<span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>
-	}
-	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">c</span>.<span style="color:#a6e22e">code</span>
-}
-
-<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
-	<span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">errors</span>.<span style="color:#a6e22e">New</span>(<span style="color:#e6db74">&#34;cause&#34;</span>)
-	<span style="color:#a6e22e">err</span> = <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Errorf</span>(<span style="color:#e6db74">&#34;first: %w&#34;</span>, <span style="color:#a6e22e">err</span>)
-	<span style="color:#a6e22e">err</span> = <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Errorf</span>(<span style="color:#e6db74">&#34;second: %w&#34;</span>, <span style="color:#a6e22e">AddMark</span>(<span style="color:#a6e22e">err</span>, <span style="color:#e6db74">&#34;marker&#34;</span>))
-	<span style="color:#a6e22e">err</span> = <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Errorf</span>(<span style="color:#e6db74">&#34;third: %w&#34;</span>, <span style="color:#a6e22e">AddCode</span>(<span style="color:#a6e22e">err</span>, <span style="color:#ae81ff">3</span>))
-	<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">GetMarker</span>(<span style="color:#a6e22e">err</span>))
-	<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">GetCode</span>(<span style="color:#a6e22e">err</span>))
-
-	<span style="color:#75715e">// Output:
-</span><span style="color:#75715e"></span>	<span style="color:#75715e">//
-</span><span style="color:#75715e"></span>	<span style="color:#75715e">// 3
-</span><span style="color:#75715e"></span>}
-</code></pre></div><p><code>errors.As</code>の実装はUnwrap interfaceを満たしていることが前提のため、独自のエラー型を定義するときには同時にUnwrap interfaceを満たすように実装すると、期待する動作をしてくれるようになります。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> (
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#34;errors&#34;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#34;fmt&#34;</span>
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">markErr</span> <span style="color:#66d9ef">struct</span> {
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">err</span>    <span style="color:#66d9ef">error</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">marker</span> <span style="color:#66d9ef">string</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">e</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">markErr</span>) <span style="color:#a6e22e">Error</span>() <span style="color:#66d9ef">string</span> {
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Sprintf</span>(<span style="color:#e6db74">&#34;%s: %v&#34;</span>, <span style="color:#a6e22e">e</span>.<span style="color:#a6e22e">marker</span>, <span style="color:#a6e22e">e</span>.<span style="color:#a6e22e">err</span>)
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">AddMark</span>(<span style="color:#a6e22e">err</span> <span style="color:#66d9ef">error</span>, <span style="color:#a6e22e">marker</span> <span style="color:#66d9ef">string</span>) <span style="color:#66d9ef">error</span> {
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span> <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">markErr</span>{<span style="color:#a6e22e">err</span>, <span style="color:#a6e22e">marker</span>}
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">codeErr</span> <span style="color:#66d9ef">struct</span> {
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">err</span>  <span style="color:#66d9ef">error</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">code</span> <span style="color:#66d9ef">int</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">e</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">codeErr</span>) <span style="color:#a6e22e">Error</span>() <span style="color:#66d9ef">string</span> {
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Sprintf</span>(<span style="color:#e6db74">&#34;%d: %v&#34;</span>, <span style="color:#a6e22e">e</span>.<span style="color:#a6e22e">code</span>, <span style="color:#a6e22e">e</span>.<span style="color:#a6e22e">err</span>)
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">AddCode</span>(<span style="color:#a6e22e">err</span> <span style="color:#66d9ef">error</span>, <span style="color:#a6e22e">code</span> <span style="color:#66d9ef">int</span>) <span style="color:#66d9ef">error</span> {
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span> <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">codeErr</span>{<span style="color:#a6e22e">err</span>, <span style="color:#a6e22e">code</span>}
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">GetMarker</span>(<span style="color:#a6e22e">err</span> <span style="color:#66d9ef">error</span>) <span style="color:#66d9ef">string</span> {
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">m</span> <span style="color:#f92672">:=</span> <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">markErr</span>{}
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">ok</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">errors</span>.<span style="color:#a6e22e">As</span>(<span style="color:#a6e22e">err</span>, <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">m</span>); !<span style="color:#a6e22e">ok</span> {
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">m</span>.<span style="color:#a6e22e">marker</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">GetCode</span>(<span style="color:#a6e22e">err</span> <span style="color:#66d9ef">error</span>) <span style="color:#66d9ef">int</span> {
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">c</span> <span style="color:#f92672">:=</span> <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">codeErr</span>{}
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">ok</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">errors</span>.<span style="color:#a6e22e">As</span>(<span style="color:#a6e22e">err</span>, <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">c</span>); !<span style="color:#a6e22e">ok</span> {
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">c</span>.<span style="color:#a6e22e">code</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">errors</span>.<span style="color:#a6e22e">New</span>(<span style="color:#e6db74">&#34;cause&#34;</span>)
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">err</span> = <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Errorf</span>(<span style="color:#e6db74">&#34;first: %w&#34;</span>, <span style="color:#a6e22e">err</span>)
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">err</span> = <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Errorf</span>(<span style="color:#e6db74">&#34;second: %w&#34;</span>, <span style="color:#a6e22e">AddMark</span>(<span style="color:#a6e22e">err</span>, <span style="color:#e6db74">&#34;marker&#34;</span>))
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">err</span> = <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Errorf</span>(<span style="color:#e6db74">&#34;third: %w&#34;</span>, <span style="color:#a6e22e">AddCode</span>(<span style="color:#a6e22e">err</span>, <span style="color:#ae81ff">3</span>))
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">GetMarker</span>(<span style="color:#a6e22e">err</span>))
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">GetCode</span>(<span style="color:#a6e22e">err</span>))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e">// Output:
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#75715e">//
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#75715e">// 3
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}
+</span></span></code></pre></div><p><code>errors.As</code>の実装はUnwrap interfaceを満たしていることが前提のため、独自のエラー型を定義するときには同時にUnwrap interfaceを満たすように実装すると、期待する動作をしてくれるようになります。</p>
 <p>御存知の通りGoはDuck TypingなのでUnwrap interfaceを満たすには型が <code>Unwrap()</code> を実装するだけで大丈夫です。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
-
-<span style="color:#f92672">import</span> (
-	<span style="color:#e6db74">&#34;errors&#34;</span>
-	<span style="color:#e6db74">&#34;fmt&#34;</span>
-)
-
-<span style="color:#66d9ef">type</span> <span style="color:#a6e22e">markErr</span> <span style="color:#66d9ef">struct</span> {
-	<span style="color:#a6e22e">err</span>    <span style="color:#66d9ef">error</span>
-	<span style="color:#a6e22e">marker</span> <span style="color:#66d9ef">string</span>
-}
-
-<span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">e</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">markErr</span>) <span style="color:#a6e22e">Error</span>() <span style="color:#66d9ef">string</span> {
-	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Sprintf</span>(<span style="color:#e6db74">&#34;%s: %v&#34;</span>, <span style="color:#a6e22e">e</span>.<span style="color:#a6e22e">marker</span>, <span style="color:#a6e22e">e</span>.<span style="color:#a6e22e">err</span>)
-}
-
-<span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">e</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">markErr</span>) <span style="color:#a6e22e">Unwrap</span>() <span style="color:#66d9ef">error</span> {
-	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">e</span>.<span style="color:#a6e22e">err</span>
-}
-
-<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">AddMark</span>(<span style="color:#a6e22e">err</span> <span style="color:#66d9ef">error</span>, <span style="color:#a6e22e">marker</span> <span style="color:#66d9ef">string</span>) <span style="color:#66d9ef">error</span> {
-	<span style="color:#66d9ef">return</span> <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">markErr</span>{<span style="color:#a6e22e">err</span>, <span style="color:#a6e22e">marker</span>}
-}
-
-<span style="color:#66d9ef">type</span> <span style="color:#a6e22e">codeErr</span> <span style="color:#66d9ef">struct</span> {
-	<span style="color:#a6e22e">err</span>  <span style="color:#66d9ef">error</span>
-	<span style="color:#a6e22e">code</span> <span style="color:#66d9ef">int</span>
-}
-
-<span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">e</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">codeErr</span>) <span style="color:#a6e22e">Error</span>() <span style="color:#66d9ef">string</span> {
-	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Sprintf</span>(<span style="color:#e6db74">&#34;%d: %v&#34;</span>, <span style="color:#a6e22e">e</span>.<span style="color:#a6e22e">code</span>, <span style="color:#a6e22e">e</span>.<span style="color:#a6e22e">err</span>)
-}
-
-<span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">e</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">codeErr</span>) <span style="color:#a6e22e">Unwrap</span>() <span style="color:#66d9ef">error</span> {
-	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">e</span>.<span style="color:#a6e22e">err</span>
-}
-
-<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">AddCode</span>(<span style="color:#a6e22e">err</span> <span style="color:#66d9ef">error</span>, <span style="color:#a6e22e">code</span> <span style="color:#66d9ef">int</span>) <span style="color:#66d9ef">error</span> {
-	<span style="color:#66d9ef">return</span> <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">codeErr</span>{<span style="color:#a6e22e">err</span>, <span style="color:#a6e22e">code</span>}
-}
-
-<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">GetMarker</span>(<span style="color:#a6e22e">err</span> <span style="color:#66d9ef">error</span>) <span style="color:#66d9ef">string</span> {
-	<span style="color:#a6e22e">m</span> <span style="color:#f92672">:=</span> <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">markErr</span>{}
-	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">ok</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">errors</span>.<span style="color:#a6e22e">As</span>(<span style="color:#a6e22e">err</span>, <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">m</span>); !<span style="color:#a6e22e">ok</span> {
-		<span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;&#34;</span>
-	}
-	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">m</span>.<span style="color:#a6e22e">marker</span>
-}
-
-<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">GetCode</span>(<span style="color:#a6e22e">err</span> <span style="color:#66d9ef">error</span>) <span style="color:#66d9ef">int</span> {
-	<span style="color:#a6e22e">c</span> <span style="color:#f92672">:=</span> <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">codeErr</span>{}
-	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">ok</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">errors</span>.<span style="color:#a6e22e">As</span>(<span style="color:#a6e22e">err</span>, <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">c</span>); !<span style="color:#a6e22e">ok</span> {
-		<span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>
-	}
-	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">c</span>.<span style="color:#a6e22e">code</span>
-}
-
-<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
-	<span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">errors</span>.<span style="color:#a6e22e">New</span>(<span style="color:#e6db74">&#34;cause&#34;</span>)
-	<span style="color:#a6e22e">err</span> = <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Errorf</span>(<span style="color:#e6db74">&#34;first: %w&#34;</span>, <span style="color:#a6e22e">err</span>)
-	<span style="color:#a6e22e">err</span> = <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Errorf</span>(<span style="color:#e6db74">&#34;second: %w&#34;</span>, <span style="color:#a6e22e">AddMark</span>(<span style="color:#a6e22e">err</span>, <span style="color:#e6db74">&#34;marker&#34;</span>))
-	<span style="color:#a6e22e">err</span> = <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Errorf</span>(<span style="color:#e6db74">&#34;third: %w&#34;</span>, <span style="color:#a6e22e">AddCode</span>(<span style="color:#a6e22e">err</span>, <span style="color:#ae81ff">3</span>))
-	<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">GetMarker</span>(<span style="color:#a6e22e">err</span>))
-	<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">GetCode</span>(<span style="color:#a6e22e">err</span>))
-
-	<span style="color:#75715e">// Output:
-</span><span style="color:#75715e"></span>	<span style="color:#75715e">// marker
-</span><span style="color:#75715e"></span>	<span style="color:#75715e">// 3
-</span><span style="color:#75715e"></span>}
-</code></pre></div><p>新しくerrorsパッケージに入った機能はUnwrapという非常に薄いinterfaceで提供されていながら、とても応用の効く機能です。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> (
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#34;errors&#34;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#34;fmt&#34;</span>
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">markErr</span> <span style="color:#66d9ef">struct</span> {
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">err</span>    <span style="color:#66d9ef">error</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">marker</span> <span style="color:#66d9ef">string</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">e</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">markErr</span>) <span style="color:#a6e22e">Error</span>() <span style="color:#66d9ef">string</span> {
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Sprintf</span>(<span style="color:#e6db74">&#34;%s: %v&#34;</span>, <span style="color:#a6e22e">e</span>.<span style="color:#a6e22e">marker</span>, <span style="color:#a6e22e">e</span>.<span style="color:#a6e22e">err</span>)
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">e</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">markErr</span>) <span style="color:#a6e22e">Unwrap</span>() <span style="color:#66d9ef">error</span> {
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">e</span>.<span style="color:#a6e22e">err</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">AddMark</span>(<span style="color:#a6e22e">err</span> <span style="color:#66d9ef">error</span>, <span style="color:#a6e22e">marker</span> <span style="color:#66d9ef">string</span>) <span style="color:#66d9ef">error</span> {
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span> <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">markErr</span>{<span style="color:#a6e22e">err</span>, <span style="color:#a6e22e">marker</span>}
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">codeErr</span> <span style="color:#66d9ef">struct</span> {
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">err</span>  <span style="color:#66d9ef">error</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">code</span> <span style="color:#66d9ef">int</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">e</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">codeErr</span>) <span style="color:#a6e22e">Error</span>() <span style="color:#66d9ef">string</span> {
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Sprintf</span>(<span style="color:#e6db74">&#34;%d: %v&#34;</span>, <span style="color:#a6e22e">e</span>.<span style="color:#a6e22e">code</span>, <span style="color:#a6e22e">e</span>.<span style="color:#a6e22e">err</span>)
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">e</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">codeErr</span>) <span style="color:#a6e22e">Unwrap</span>() <span style="color:#66d9ef">error</span> {
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">e</span>.<span style="color:#a6e22e">err</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">AddCode</span>(<span style="color:#a6e22e">err</span> <span style="color:#66d9ef">error</span>, <span style="color:#a6e22e">code</span> <span style="color:#66d9ef">int</span>) <span style="color:#66d9ef">error</span> {
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span> <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">codeErr</span>{<span style="color:#a6e22e">err</span>, <span style="color:#a6e22e">code</span>}
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">GetMarker</span>(<span style="color:#a6e22e">err</span> <span style="color:#66d9ef">error</span>) <span style="color:#66d9ef">string</span> {
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">m</span> <span style="color:#f92672">:=</span> <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">markErr</span>{}
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">ok</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">errors</span>.<span style="color:#a6e22e">As</span>(<span style="color:#a6e22e">err</span>, <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">m</span>); !<span style="color:#a6e22e">ok</span> {
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">m</span>.<span style="color:#a6e22e">marker</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">GetCode</span>(<span style="color:#a6e22e">err</span> <span style="color:#66d9ef">error</span>) <span style="color:#66d9ef">int</span> {
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">c</span> <span style="color:#f92672">:=</span> <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">codeErr</span>{}
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">ok</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">errors</span>.<span style="color:#a6e22e">As</span>(<span style="color:#a6e22e">err</span>, <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">c</span>); !<span style="color:#a6e22e">ok</span> {
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">c</span>.<span style="color:#a6e22e">code</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">errors</span>.<span style="color:#a6e22e">New</span>(<span style="color:#e6db74">&#34;cause&#34;</span>)
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">err</span> = <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Errorf</span>(<span style="color:#e6db74">&#34;first: %w&#34;</span>, <span style="color:#a6e22e">err</span>)
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">err</span> = <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Errorf</span>(<span style="color:#e6db74">&#34;second: %w&#34;</span>, <span style="color:#a6e22e">AddMark</span>(<span style="color:#a6e22e">err</span>, <span style="color:#e6db74">&#34;marker&#34;</span>))
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">err</span> = <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Errorf</span>(<span style="color:#e6db74">&#34;third: %w&#34;</span>, <span style="color:#a6e22e">AddCode</span>(<span style="color:#a6e22e">err</span>, <span style="color:#ae81ff">3</span>))
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">GetMarker</span>(<span style="color:#a6e22e">err</span>))
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">GetCode</span>(<span style="color:#a6e22e">err</span>))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e">// Output:
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#75715e">// marker
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#75715e">// 3
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}
+</span></span></code></pre></div><p>新しくerrorsパッケージに入った機能はUnwrapという非常に薄いinterfaceで提供されていながら、とても応用の効く機能です。</p>
 <p>正しく機能を理解して上手に使いこなしていきましょう。</p>
 
       </div>
@@ -445,8 +445,8 @@ package fmt import &#34;errors&#34; func Errorf(format string, a ...interface{})
 
 
         <div id="disqus_thread"></div>
-<script type="application/javascript">
-    var disqus_config = function () {
+<script>
+    window.disqus_config = function () {
     
     
     
@@ -483,7 +483,7 @@ package fmt import &#34;errors&#34; func Errorf(format string, a ...interface{})
       
         ©
         
-        2021
+        2023
          nametake 
       
       
@@ -499,7 +499,7 @@ package fmt import &#34;errors&#34; func Errorf(format string, a ...interface{})
     
 
     
-<script type="application/javascript">
+<script>
 var doNotTrack = false;
 if (!doNotTrack) {
 	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -511,7 +511,6 @@ if (!doNotTrack) {
 	ga('send', 'pageview');
 }
 </script>
-
 
     
 

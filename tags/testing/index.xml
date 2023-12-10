@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>testing on nametake.info</title>
+    <link>https://nametake.github.io/tags/testing/</link>
+    <description>Recent content in testing on nametake.info</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 28 Jun 2020 00:00:00 +0900</lastBuildDate>
+    <atom:link href="https://nametake.github.io/tags/testing/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>組み合わせテストでの直交表とPICTの利用</title>
+      <link>https://nametake.github.io/posts/2020/06/28/combination-test-pict-and-orthogonal-array/</link>
+      <pubDate>Sun, 28 Jun 2020 00:00:00 +0900</pubDate>
+      <guid>https://nametake.github.io/posts/2020/06/28/combination-test-pict-and-orthogonal-array/</guid>
+      <description>結合テストの組み合わせについてある程度知見が溜まったのでメモ的に。&#xA;結合テストの組み合わせ問題 システムのリリース前には開発した機能や既存の機能を組み合わせてバグが発生していないかテストをする必要があります。&#xA;ですが、開発した機能が増えていけば組み合わせの数は指数関数的に増えていき、それらを全てテストするのは非現実的です。&#xA;となると、何かしらの方法でテストする組み合わせを絞る必要があります。&#xA;絞るにあたって「システムのバグは2つパラメータの組み合わせで発生する確率が高い」というデータから、2つの異なるパラメータ(因子)の組み合わせが必ず全て登場する最小の表を作る、という手法があります。&#xA;この記事ではその手法のうち、直交表とPICTというツールの使い方をメモして残しておこうと思います。&#xA;直交表 直交表は、因子の組み合わせが効率的になるよう作られた表です。&#xA;基本的には誰かがすでに定義しているものにテストしたいシステムの因子を割り当てるという使い方になります。&#xA;例を挙げてみます。&#xA;とあるWebシステムを作っていて、下記のような環境に対応しているかテストを行う必要があります。&#xA;因子 水準1 水準2 OS Windows macOS ブラウザ Chrome Firefox 端末 ラップトップ モバイル 3因子2通りのため、全ての組み合わせは8パターンになります。&#xA;8パターンであれば全てテストするのもそこまで大変でもないですが、試しに直交表に適用してみます。&#xA;以下のページのように、すでにある直交表からテストしたい項目の形に近いものを選びます。&#xA;タグチ計画のカタログ&#xA;今回は2^3通りのため、L4(2^3)の表が使えそうです。&#xA;上記のテスト項目をL4(2^3)の表に当てはめてみます。&#xA;テスト番号 OS ブラウザ 端末 1 Windows Chrome ラップトップ 2 Windows Firefox モバイル 3 macOS Chrome モバイル 4 macOS Firefox ラップトップ 全パターン行うと8パターンだったものが4パターンで済むようになりました。&#xA;2因子ごとの組み合わせも全て登場するため、バグ発見率も極端に下がりません。&#xA;上記の例のサイズならそこまで恩恵を感じないかもしれませんが、因子と水準が増えたときには大きく組み合わせの数を減らすことができます。&#xA;今回は例のためピッタリの表が見つかるように因子数と水準を調整しましたが、ピッタリの表がない場合は少し大きめのサイズの表に適用し、合いた箇所を有効な水準で埋めることで問題ないようです。&#xA;PICT PICT はMicrosoftが作成公開しているAll Pair法(ペアワイズ方)で組み合わせを作成するツールです。&#xA;直交表では静的な表に因子と水準を当てはめていましたが、PICTでは動的に表を生成します。&#xA;PICTでも例を挙げてみます。&#xA;直交表のときと同じ因子と水準を使うと仮定して、以下のようなテキストファイルを用意します。&#xA;OS: Windows, macOS ブラウザ: Chrome, Firefox 端末: ラップトップ, モバイル 因子: 水準1, 水準2 という構造を一行ずつ定義します。</description>
+    </item>
+  </channel>
+</rss>

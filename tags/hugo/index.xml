@@ -6,20 +6,14 @@
     <description>Recent content in hugo on nametake.info</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 15 Sep 2018 12:20:26 +0900</lastBuildDate><atom:link href="https://nametake.github.io/tags/hugo/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 15 Sep 2018 12:20:26 +0900</lastBuildDate>
+    <atom:link href="https://nametake.github.io/tags/hugo/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>hugo&#43;github pagesにブログを移転したメモ</title>
       <link>https://nametake.github.io/posts/2018/09/15/hugo-github-pages/</link>
       <pubDate>Sat, 15 Sep 2018 12:20:26 +0900</pubDate>
-      
       <guid>https://nametake.github.io/posts/2018/09/15/hugo-github-pages/</guid>
-      <description>大して書いていなかったブログをgithub pages+hugoの組み合わせに移行したのでそのメモ。
-とは言うものの、ほとんどHugoの入門用ページの内容をそのままやっただけなのでその辺は割愛。
-最終的なディレクトリ構成は以下。
-blog ├── Makefile ├── archetypes │ ├── default.md │ └── posts.md ├── bin │ ├── deploy.sh │ └── new_post.sh ├── config.toml ├── content │ ├── about │ │ └── index.md │ └── posts │ └── 2018-09-15-hugo-github-pages │ └── index.md ├── public(submodule) ├── static │ ├── css │ │ └── index.css │ └── images │ └── avatar.jpg └── themes └── coder(submodule) config.toml 自分はパーマリンクを日付+自分で設定した英単語にしたかったので、以下のようにconfig.tomlに追記。
-slugは各postのfrontmatter(postの先頭にあるヘッダ部分)に設定すると反映されます。
-posts = &amp;quot;/posts/:year/:month/:day/:slug&amp;quot;のpostsの部分はcontentディレクトリにあるpostsディレクトリと同じ名前にする必要があるので注意。</description>
+      <description>大して書いていなかったブログをgithub pages+hugoの組み合わせに移行したのでそのメモ。&#xA;とは言うものの、ほとんどHugoの入門用ページの内容をそのままやっただけなのでその辺は割愛。&#xA;最終的なディレクトリ構成は以下。&#xA;blog ├── Makefile ├── archetypes │ ├── default.md │ └── posts.md ├── bin │ ├── deploy.sh │ └── new_post.sh ├── config.toml ├── content │ ├── about │ │ └── index.md │ └── posts │ └── 2018-09-15-hugo-github-pages │ └── index.md ├── public(submodule) ├── static │ ├── css │ │ └── index.css │ └── images │ └── avatar.jpg └── themes └── coder(submodule) config.toml 自分はパーマリンクを日付+自分で設定した英単語にしたかったので、以下のようにconfig.tomlに追記。&#xA;slugは各postのfrontmatter(postの先頭にあるヘッダ部分)に設定すると反映されます。&#xA;posts = &amp;quot;/posts/:year/:month/:day/:slug&amp;quot;のpostsの部分はcontentディレクトリにあるpostsディレクトリと同じ名前にする必要があるので注意。</description>
     </item>
-    
   </channel>
 </rss>

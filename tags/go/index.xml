@@ -6,200 +6,98 @@
     <description>Recent content in Go on nametake.info</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 24 May 2020 00:00:00 +0900</lastBuildDate><atom:link href="https://nametake.github.io/tags/go/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 24 May 2020 00:00:00 +0900</lastBuildDate>
+    <atom:link href="https://nametake.github.io/tags/go/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Protocol Buffersのgo_packageの;の仕様</title>
       <link>https://nametake.github.io/posts/2020/05/24/protobuf-go-package-semicolon/</link>
       <pubDate>Sun, 24 May 2020 00:00:00 +0900</pubDate>
-      
       <guid>https://nametake.github.io/posts/2020/05/24/protobuf-go-package-semicolon/</guid>
-      <description>先日protoc-gen-gohttpの依存パッケージをしようと思って色々触っていたら以下のようなWARNINGが出てきました。
-2020/05/24 11:36:51 WARNING: Deprecated use of &amp;#39;go_package&amp;#39; option without a full import path in &amp;#34;greeter.proto&amp;#34;, please specify: option go_package = &amp;#34;.;main&amp;#34;; A future release of protoc-gen-go will require the import path be specified. See https://developers.google.com/protocol-buffers/docs/reference/go-generated#package for more information. 以下のファイルのように go_package のオプションにGoのimport pathを記述しなかったことが問題のようです。
-1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17  syntax = &amp;#34;proto3&amp;#34;;package helloworld;option go_package = &amp;#34;main&amp;#34;;service Greeter { rpc SayHello(HelloRequest) returns (HelloReply);}message HelloRequest { string name = 1;}message HelloReply { string message = 1;}  一応WARNINGには「go_package = &amp;quot;.</description>
+      <description>先日protoc-gen-gohttpの依存パッケージをしようと思って色々触っていたら以下のようなWARNINGが出てきました。&#xA;2020/05/24 11:36:51 WARNING: Deprecated use of &amp;#39;go_package&amp;#39; option without a full import path in &amp;#34;greeter.proto&amp;#34;, please specify: option go_package = &amp;#34;.;main&amp;#34;; A future release of protoc-gen-go will require the import path be specified. See https://developers.google.com/protocol-buffers/docs/reference/go-generated#package for more information. 以下のファイルのように go_package のオプションにGoのimport pathを記述しなかったことが問題のようです。&#xA;1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 syntax = &amp;#34;proto3&amp;#34;; package helloworld; option go_package = &amp;#34;main&amp;#34;; service Greeter { rpc SayHello(HelloRequest) returns (HelloReply); } message HelloRequest { string name = 1; } message HelloReply { string message = 1; } 一応WARNINGには「go_package = &amp;quot;.</description>
     </item>
-    
     <item>
       <title>golangci-lint-langserverを作った話</title>
       <link>https://nametake.github.io/posts/2020/03/08/golangci-lint-langserver/</link>
       <pubDate>Sun, 08 Mar 2020 00:00:00 +0900</pubDate>
-      
       <guid>https://nametake.github.io/posts/2020/03/08/golangci-lint-langserver/</guid>
-      <description>最近VimのLinterのプラグインをaleからすべてlanguage serverに移行しました。
-殆どのCLIツールはdiagnostic-languageserver経由で使うことでいい感じに動いてくれています。
-ただ、golangci-lintだけはGoのスコープとの相性の関係ではうまく動作させることができませんでした。
-そこで、golangci-lint専用のlanguage server、golangci-lint-langserverを作成してみました。
-LSPクライアントに読み込ませるとファイルを開いたときと保存したときに以下のようにgolangci-lintの結果を返してくれます。
- 自分が使うために作ったためWindows対応や細かいエラーハンドリング等はしていませんが、個人的には割とちゃんと動いたので満足しています。
-もし機能追加等あったらPRお待ちしています。
-制作動機 一応制作動機も書いておこうと思います。
-今回aleの移行先として検討したdiagnostic-languageserverやefm-langserverなのですが、基本的には開いているファイルにlintをかけてその結果を返す仕組みになっています。
-しかし、Goはパッケージ単位(ディレクトリ単位)のスコープになっているためgolangci-lintはうまく動かない場合がありました。
-例えばunusedやdeadcodeのような使っていない変数や関数をチェックするようなものは、そのパッケージ内の別ファイルで使っていたとしてもそれがチェックされず、lintに引っかかってしまいます。
-また、別ファイルで定義されている関数や変数を使おうとした場合はそもそもビルド失敗扱いになりチェックすることすらできませんでした。
-かといって、ファイルが開かれるたびにパッケージ全体に対してgolangci-lintをかけると今度は関係ないファイルの結果も含まれてしまいます。
-この問題を解決するには、language server側で以下の流れのようにlinterが返した結果をLSPクライアントが送ってきた情報でフィルタをする必要がありました。
- LSPクライアントのNotificationを受け取る golangci-lintを実行する 結果の中から1の情報を使って対象ファイルの結果だけをフィルタする LSPクライアントに結果を伝える  最初はdiagnostic-languageserverやefm-langserverにコントリビュートしようとも考えました。
-ただ、そこそこ大きな機能を追加しないと実現できそうになく、かつgolangci-lintのためだけにその機能を追加するのもシンプルではないと思ったため、完全に独立したlanguage serverとして実装してしまうことにしました。
-efm-langserverの実装を参考にして書いたため、かなり重複したコードにはなっています。ただ、そのおかげで実装を大きくせずに書けたのでシンプルな状態は保つことができました。
-個人的にこのlanguage serverは一時的な実装のつもりなので、goplsやdiagnostic-languageserver、efm-langserverが対応したらすぐにdeprecatedな状態にしようと思っています。
-それまではgolangci-lint-langserverはある程度メンテするつもりなので、PRお待ちしています。</description>
+      <description>最近VimのLinterのプラグインをaleからすべてlanguage serverに移行しました。&#xA;殆どのCLIツールはdiagnostic-languageserver経由で使うことでいい感じに動いてくれています。&#xA;ただ、golangci-lintだけはGoのスコープとの相性の関係ではうまく動作させることができませんでした。&#xA;そこで、golangci-lint専用のlanguage server、golangci-lint-langserverを作成してみました。&#xA;LSPクライアントに読み込ませるとファイルを開いたときと保存したときに以下のようにgolangci-lintの結果を返してくれます。&#xA;自分が使うために作ったためWindows対応や細かいエラーハンドリング等はしていませんが、個人的には割とちゃんと動いたので満足しています。&#xA;もし機能追加等あったらPRお待ちしています。&#xA;制作動機 一応制作動機も書いておこうと思います。&#xA;今回aleの移行先として検討したdiagnostic-languageserverやefm-langserverなのですが、基本的には開いているファイルにlintをかけてその結果を返す仕組みになっています。&#xA;しかし、Goはパッケージ単位(ディレクトリ単位)のスコープになっているためgolangci-lintはうまく動かない場合がありました。&#xA;例えばunusedやdeadcodeのような使っていない変数や関数をチェックするようなものは、そのパッケージ内の別ファイルで使っていたとしてもそれがチェックされず、lintに引っかかってしまいます。&#xA;また、別ファイルで定義されている関数や変数を使おうとした場合はそもそもビルド失敗扱いになりチェックすることすらできませんでした。&#xA;かといって、ファイルが開かれるたびにパッケージ全体に対してgolangci-lintをかけると今度は関係ないファイルの結果も含まれてしまいます。&#xA;この問題を解決するには、language server側で以下の流れのようにlinterが返した結果をLSPクライアントが送ってきた情報でフィルタをする必要がありました。&#xA;LSPクライアントのNotificationを受け取る golangci-lintを実行する 結果の中から1の情報を使って対象ファイルの結果だけをフィルタする LSPクライアントに結果を伝える 最初はdiagnostic-languageserverやefm-langserverにコントリビュートしようとも考えました。&#xA;ただ、そこそこ大きな機能を追加しないと実現できそうになく、かつgolangci-lintのためだけにその機能を追加するのもシンプルではないと思ったため、完全に独立したlanguage serverとして実装してしまうことにしました。&#xA;efm-langserverの実装を参考にして書いたため、かなり重複したコードにはなっています。ただ、そのおかげで実装を大きくせずに書けたのでシンプルな状態は保つことができました。&#xA;個人的にこのlanguage serverは一時的な実装のつもりなので、goplsやdiagnostic-languageserver、efm-langserverが対応したらすぐにdeprecatedな状態にしようと思っています。&#xA;それまではgolangci-lint-langserverはある程度メンテするつもりなので、PRお待ちしています。</description>
     </item>
-    
     <item>
       <title>Go言語でジェネリクスない理由の考察</title>
       <link>https://nametake.github.io/posts/2019/12/31/go-no-generics/</link>
       <pubDate>Tue, 31 Dec 2019 00:00:00 +0900</pubDate>
-      
       <guid>https://nametake.github.io/posts/2019/12/31/go-no-generics/</guid>
-      <description>Go言語にはジェネリクスがありません。
-他言語から入ってきた方はかなりこの部分に戸惑うことが多いようです。
-そこで、そういった方々になぜジェネリクスがないのかを説明するにあたって、自分の中でいい感じに言語化できたのでログとして残しておこうと思います。
-なぜジェネリクスがないか ジェネリクスがない理由を説明するには以下の2つが必要だと思っています。
- 言語としてのスタンスの話 ジェネリクスが効果を発揮する場面  それぞれ細かく説明していこうと思います。
-言語としてのスタンスの話 何かが新しく作られるときには何かしら課題を解決しようとして生まれてきます。
-Goが解決しようとした課題についてはGoの作者の生みの親の一人でもあるRob Pike氏が2012年の公演で話されています。
-リンク先の講演の記事の中に、以下の点が既存の開発の辛い部分で、Goはそれらに対処しているという部分があります。
- slow builds (遅いビルド) uncontrolled dependencies (制御されていない依存関係) each programmer using a different subset of the language(言語の異なるサブセットを使用する各プログラマ) poor program understanding (code hard to read, poorly documented, and so on) (不十分なプログラムの理解(読みにくいコード、不十分な文書化など)) duplication of effort (努力の重複) cost of updates (更新のコスト) version skew (バージョンスキュー) difficulty of writing automatic tools (自動ツールの作成の難しさ) cross-language builds (言語間ビルド)  上記に挙げられている対処している課題を見ると、Go言語は「プログラム言語としての正しさ」という点ではなく「(言語仕様も含む)開発のしやすさ」に強くフォーカスを当てられている言語だとわかります。
-そのため、新しい機能を言語に追加にあたり「プログラミング言語としての正しさ」が強くあったとしても、それを代替する手段がありかつ全体として「開発のしやすさ」が損なわれる場合は導入されない傾向があります。
-ジェネリクスが効果を発揮する場面 ジェネリクスは便利な機能です。型を値のように取り扱い、抽象化された処理を型安全に取り扱うことができます。
-ですが、便利に使うためには1つ条件があります。</description>
+      <description>Go言語にはジェネリクスがありません。&#xA;他言語から入ってきた方はかなりこの部分に戸惑うことが多いようです。&#xA;そこで、そういった方々になぜジェネリクスがないのかを説明するにあたって、自分の中でいい感じに言語化できたのでログとして残しておこうと思います。&#xA;なぜジェネリクスがないか ジェネリクスがない理由を説明するには以下の2つが必要だと思っています。&#xA;言語としてのスタンスの話 ジェネリクスが効果を発揮する場面 それぞれ細かく説明していこうと思います。&#xA;言語としてのスタンスの話 何かが新しく作られるときには何かしら課題を解決しようとして生まれてきます。&#xA;Goが解決しようとした課題についてはGoの作者の生みの親の一人でもあるRob Pike氏が2012年の公演で話されています。&#xA;リンク先の講演の記事の中に、以下の点が既存の開発の辛い部分で、Goはそれらに対処しているという部分があります。&#xA;slow builds (遅いビルド) uncontrolled dependencies (制御されていない依存関係) each programmer using a different subset of the language(言語の異なるサブセットを使用する各プログラマ) poor program understanding (code hard to read, poorly documented, and so on) (不十分なプログラムの理解(読みにくいコード、不十分な文書化など)) duplication of effort (努力の重複) cost of updates (更新のコスト) version skew (バージョンスキュー) difficulty of writing automatic tools (自動ツールの作成の難しさ) cross-language builds (言語間ビルド) 上記に挙げられている対処している課題を見ると、Go言語は「プログラム言語としての正しさ」という点ではなく「(言語仕様も含む)開発のしやすさ」に強くフォーカスを当てられている言語だとわかります。&#xA;そのため、新しい機能を言語に追加にあたり「プログラミング言語としての正しさ」が強くあったとしても、それを代替する手段がありかつ全体として「開発のしやすさ」が損なわれる場合は導入されない傾向があります。&#xA;ジェネリクスが効果を発揮する場面 ジェネリクスは便利な機能です。型を値のように取り扱い、抽象化された処理を型安全に取り扱うことができます。&#xA;ですが、便利に使うためには1つ条件があります。&#xA;それは、「高度に抽象化された振る舞い」が定義できる場合です。&#xA;それでは「高度に抽象化された振る舞い」とは何でしょうか。&#xA;例えばGUI開発におけるViewの振る舞いがあります。&#xA;AndroidのListViewは「アイテムが一覧で並んでいる」という振る舞いを抽象化したViewクラスです。ListView は内部で表示するものをAdapter経由で受け取りますが、Adapterには型パラメータを与えることができるため、一覧の中に表示する項目を型安全に取り扱うことができます。</description>
     </item>
-    
     <item>
       <title>Goの関数内で呼び出される関数をインターセプトする方法</title>
       <link>https://nametake.github.io/posts/2019/12/09/go-func-intercept/</link>
       <pubDate>Mon, 09 Dec 2019 00:05:29 +0900</pubDate>
-      
       <guid>https://nametake.github.io/posts/2019/12/09/go-func-intercept/</guid>
-      <description>この記事はGo2 Advent Calendar 2019の記事です。
-自分はprotoc-gen-gohttpというプラグインを作っているのですが、先日grpc.UnaryServerInterceptorに対応しました。
-その際、どうやればいいかを調査していたら、ChainUnaryServerという関数を見つけ、中身を読んでみると、「特定のinterfaceを受け取って内部でそのinterfaceで実行する」機能を持った関数に対して「内部でinterfaceを実行するときに複数の関数でインターセプトする」方法の知見を得られたので記事にしようと思います。
-コード例 まずはインターセプトしたいコードの例を書きます。
-type WrapStruct struct { pingServer pb.PingAPIServer } func (w *WrapStruct) Call() { ctx := context.Background() arg := &amp;amp;pb.PingRequest{ Msg: &amp;#34;PING&amp;#34;, } ret, err := w.pingServer.Ping(ctx, arg) fmt.Println(ret, err) } 上記例は以下のProtocol Buffersの定義をgRPCオプション付きでコンパイルすると生成されるコードを使用しています。
-syntax = &amp;#34;proto3&amp;#34;;package protobuf1;option go_package = &amp;#34;pb&amp;#34;;service PingAPI { rpc Ping(PingRequest) returns (PingResponse);}message PingRequest { string msg = 1;}message PingResponse { string msg = 1;}なんの変哲もない、ただ自身を実装している構造体がもつ PingAPIServer interfaceの Ping メソッドに PING の文字列を渡して実行し、その結果を出力しているだけのコードです。</description>
+      <description>この記事はGo2 Advent Calendar 2019の記事です。&#xA;自分はprotoc-gen-gohttpというプラグインを作っているのですが、先日grpc.UnaryServerInterceptorに対応しました。&#xA;その際、どうやればいいかを調査していたら、ChainUnaryServerという関数を見つけ、中身を読んでみると、「特定のinterfaceを受け取って内部でそのinterfaceで実行する」機能を持った関数に対して「内部でinterfaceを実行するときに複数の関数でインターセプトする」方法の知見を得られたので記事にしようと思います。&#xA;コード例 まずはインターセプトしたいコードの例を書きます。&#xA;type WrapStruct struct { pingServer pb.PingAPIServer } func (w *WrapStruct) Call() { ctx := context.Background() arg := &amp;amp;pb.PingRequest{ Msg: &amp;#34;PING&amp;#34;, } ret, err := w.pingServer.Ping(ctx, arg) fmt.Println(ret, err) } 上記例は以下のProtocol Buffersの定義をgRPCオプション付きでコンパイルすると生成されるコードを使用しています。&#xA;syntax = &amp;#34;proto3&amp;#34;; package protobuf1; option go_package = &amp;#34;pb&amp;#34;; service PingAPI { rpc Ping(PingRequest) returns (PingResponse); } message PingRequest { string msg = 1; } message PingResponse { string msg = 1; } なんの変哲もない、ただ自身を実装している構造体がもつ PingAPIServer interfaceの Ping メソッドに PING の文字列を渡して実行し、その結果を出力しているだけのコードです。</description>
     </item>
-    
     <item>
       <title>Go1.13のerrorsにWrapの機能が入ったので勉強がてらまとめる</title>
       <link>https://nametake.github.io/posts/2019/10/30/unwrap-interface/</link>
       <pubDate>Wed, 30 Oct 2019 00:52:57 +0900</pubDate>
-      
       <guid>https://nametake.github.io/posts/2019/10/30/unwrap-interface/</guid>
-      <description>Go1.13からerrorsに色々機能が入りました(The Go Blog)。
-最近は新しいGoのことをインプットできていなかったので、リハビリがてらsonatardさんのまとめた記事も読みつつ、中の実装を眺めてまとめてみます。
-Unwrap interface 追加された機能は errors.As や errors.Is のようにいくつかありますが、一番のキモとなる追加機能は errors.Unwrap です。
-似たような機能はデファクトスタンダードとして使われているpkg/errorsの errors.Cause としてありましたが、公式で導入されたことは非常に大きいと思います。
-とりあえず公式ライブラリの中を見にいきましょう。
-func Unwrap(err error) error { u, ok := err.(interface { Unwrap() error }) if !ok { return nil } return u.Unwrap() } これだけです。
-やっていることを言葉にしても、「渡されたerrorがUnwrap interfaceを実装していればUnwrapの返り値を返して、そうでなければnilを返す」だけです。
-それでは、Wrapする側の errors.Errorf の中を見にいってみます。
-package fmt import &amp;#34;errors&amp;#34; func Errorf(format string, a ...interface{}) error { p := newPrinter() p.wrapErrs = true p.doPrintf(format, a) s := string(p.buf) var err error if p.</description>
+      <description>Go1.13からerrorsに色々機能が入りました(The Go Blog)。&#xA;最近は新しいGoのことをインプットできていなかったので、リハビリがてらsonatardさんのまとめた記事も読みつつ、中の実装を眺めてまとめてみます。&#xA;Unwrap interface 追加された機能は errors.As や errors.Is のようにいくつかありますが、一番のキモとなる追加機能は errors.Unwrap です。&#xA;似たような機能はデファクトスタンダードとして使われているpkg/errorsの errors.Cause としてありましたが、公式で導入されたことは非常に大きいと思います。&#xA;とりあえず公式ライブラリの中を見にいきましょう。&#xA;func Unwrap(err error) error { u, ok := err.(interface { Unwrap() error }) if !ok { return nil } return u.Unwrap() } これだけです。&#xA;やっていることを言葉にしても、「渡されたerrorがUnwrap interfaceを実装していればUnwrapの返り値を返して、そうでなければnilを返す」だけです。&#xA;それでは、Wrapする側の errors.Errorf の中を見にいってみます。&#xA;package fmt import &amp;#34;errors&amp;#34; func Errorf(format string, a ...interface{}) error { p := newPrinter() p.wrapErrs = true p.doPrintf(format, a) s := string(p.buf) var err error if p.</description>
     </item>
-    
     <item>
       <title>Goのrelfectで構造体の変数にインスタンスを詰める方法</title>
       <link>https://nametake.github.io/posts/2019/09/10/go-reflect-create-instance/</link>
       <pubDate>Tue, 10 Sep 2019 13:39:29 +0900</pubDate>
-      
       <guid>https://nametake.github.io/posts/2019/09/10/go-reflect-create-instance/</guid>
-      <description>構造体の変数にreflectでインスタンスを詰める方法メモ。
-package main import ( &amp;#34;fmt&amp;#34; &amp;#34;reflect&amp;#34; ) func main() { var foo *Foo fmt.Println(foo) // nil  fmt.Println(&amp;#34;------------&amp;#34;) // nilにアクセスしようとするのでエラー 	// foo.msg = &amp;#34;Hello&amp;#34;  // fooの型を取得 	typ := reflect.TypeOf(foo).Elem() // fooの型の実体を生成 	dst := reflect.New(typ).Interface() // foo変数への参照を取得 	src := reflect.ValueOf(&amp;amp;foo).Elem() fmt.Println(typ) // main.Foo 	fmt.Println(src) // nil 	fmt.Println(dst) // &amp;amp;{}  fmt.Println(&amp;#34;------------&amp;#34;) // foo変数の参照に実体化したfooの型のを設定 	src.Set(reflect.ValueOf(dst)) fmt.Println(typ) // main.Foo 	fmt.Println(src) // &amp;amp;{} 	fmt.</description>
+      <description>構造体の変数にreflectでインスタンスを詰める方法メモ。&#xA;package main import ( &amp;#34;fmt&amp;#34; &amp;#34;reflect&amp;#34; ) func main() { var foo *Foo fmt.Println(foo) // nil fmt.Println(&amp;#34;------------&amp;#34;) // nilにアクセスしようとするのでエラー // foo.msg = &amp;#34;Hello&amp;#34; // fooの型を取得 typ := reflect.TypeOf(foo).Elem() // fooの型の実体を生成 dst := reflect.New(typ).Interface() // foo変数への参照を取得 src := reflect.ValueOf(&amp;amp;foo).Elem() fmt.Println(typ) // main.Foo fmt.Println(src) // nil fmt.Println(dst) // &amp;amp;{} fmt.Println(&amp;#34;------------&amp;#34;) // foo変数の参照に実体化したfooの型のを設定 src.Set(reflect.ValueOf(dst)) fmt.Println(typ) // main.Foo fmt.Println(src) // &amp;amp;{} fmt.Println(dst) // &amp;amp;{} fmt.Println(&amp;#34;------------&amp;#34;) // 生成した変数はすべて同じ構造体を参照している foo.msg = &amp;#34;Hello&amp;#34; fmt.Println(src) // &amp;amp;{Hello} fmt.</description>
     </item>
-    
     <item>
       <title>protoc-gen-gohttpをHttpRule Optionに対応させた</title>
       <link>https://nametake.github.io/posts/2019/08/30/protoc-gen-gohttp-httprule/</link>
       <pubDate>Fri, 30 Aug 2019 01:52:26 +0900</pubDate>
-      
       <guid>https://nametake.github.io/posts/2019/08/30/protoc-gen-gohttp-httprule/</guid>
-      <description>以前、Protocol Buffersのserviceの定義を利用してGoのnet/httpで利用できるようにするためのprotoc-gen-gohttpというprotocのプラグインを作成しました。
-ですが、protoc-gen-gohttpではURLのパス部分の定義はProtocol Buffersの定義には記述できないため、クライアント側がProtocol Buffersを見ただけでパスを読み取ることができませんでした。また、生成されたコードはHTTPのBodyしか参照しないため、情報を取得するだけのときもHTTPのメソッドをPOSTにする必要もありました。
-そこで、Googleが提供しているRPCの定義をHTTPのREST APIにマッピングするためのHttpRuleオプションを利用して、protoc-gen-gohttpがHttpRuleのマッピングどおりに動作するコードを生成するように改良しました。
-使い方 protoc-gen-gohttpをインストールしたら、以下のようにHttpRuleを使用したProtoの定義を用意します(annotations.protoのダウンロードの仕方はこの辺を参考にしてください)。この記事ではexample.protoに書いているとします。
-syntax = &amp;#34;proto3&amp;#34;;package main;option go_package = &amp;#34;main&amp;#34;;import &amp;#34;google/api/annotations.proto&amp;#34;;service Messaging { rpc GetMessage(GetMessageRequest) returns (GetMessageResponse) { option (google.api.http).get = &amp;#34;/v1/messages/{message_id}&amp;#34;; } rpc UpdateMessage(UpdateMessageRequest) returns (UpdateMessageResponse) { option (google.api.http) = { put: &amp;#34;/v1/messages/{message_id}/{sub.subfield}&amp;#34; body: &amp;#34;*&amp;#34; }; }}message GetMessageRequest { string message_id = 1; string message = 2; repeated string tags = 3;}message GetMessageResponse { string message_id = 1; string message = 2; repeated string tags = 4;}message SubMessage { string subfield = 1;}message UpdateMessageRequest { string message_id = 1; SubMessage sub = 2; string message = 3;}message UpdateMessageResponse { string message_id = 1; SubMessage sub = 2; string message = 3;}用意できたら、以下のコマンドでGoのコードを生成します。</description>
+      <description>以前、Protocol Buffersのserviceの定義を利用してGoのnet/httpで利用できるようにするためのprotoc-gen-gohttpというprotocのプラグインを作成しました。&#xA;ですが、protoc-gen-gohttpではURLのパス部分の定義はProtocol Buffersの定義には記述できないため、クライアント側がProtocol Buffersを見ただけでパスを読み取ることができませんでした。また、生成されたコードはHTTPのBodyしか参照しないため、情報を取得するだけのときもHTTPのメソッドをPOSTにする必要もありました。&#xA;そこで、Googleが提供しているRPCの定義をHTTPのREST APIにマッピングするためのHttpRuleオプションを利用して、protoc-gen-gohttpがHttpRuleのマッピングどおりに動作するコードを生成するように改良しました。&#xA;使い方 protoc-gen-gohttpをインストールしたら、以下のようにHttpRuleを使用したProtoの定義を用意します(annotations.protoのダウンロードの仕方はこの辺を参考にしてください)。この記事ではexample.protoに書いているとします。&#xA;syntax = &amp;#34;proto3&amp;#34;; package main; option go_package = &amp;#34;main&amp;#34;; import &amp;#34;google/api/annotations.proto&amp;#34;; service Messaging { rpc GetMessage(GetMessageRequest) returns (GetMessageResponse) { option (google.api.http).get = &amp;#34;/v1/messages/{message_id}&amp;#34;; } rpc UpdateMessage(UpdateMessageRequest) returns (UpdateMessageResponse) { option (google.api.http) = { put: &amp;#34;/v1/messages/{message_id}/{sub.subfield}&amp;#34; body: &amp;#34;*&amp;#34; }; } } message GetMessageRequest { string message_id = 1; string message = 2; repeated string tags = 3; } message GetMessageResponse { string message_id = 1; string message = 2; repeated string tags = 4; } message SubMessage { string subfield = 1; } message UpdateMessageRequest { string message_id = 1; SubMessage sub = 2; string message = 3; } message UpdateMessageResponse { string message_id = 1; SubMessage sub = 2; string message = 3; } 用意できたら、以下のコマンドでGoのコードを生成します。</description>
     </item>
-    
     <item>
       <title>Goの戻り値をいい感じに補完してくれるvim-snippetsを作った</title>
       <link>https://nametake.github.io/posts/2019/07/29/vim-goiferr-snippets/</link>
       <pubDate>Mon, 29 Jul 2019 22:57:06 +0900</pubDate>
-      
       <guid>https://nametake.github.io/posts/2019/07/29/vim-goiferr-snippets/</guid>
-      <description>最近Vimの設定を整理してcoc.nvimに乗り換えるにあたり、snippetのプラグインもneosnippetからcoc-neosnippetに乗り換え、snippet集もvim-snippetsに変更しました。
-概ね問題はなかったのですが、Goを書くときにiferrで戻り値をいい感じに補完してくれる機能がなくなったのは若干不便でした(参考)。
-一応coc.nvimにneosnippetの機能を取り込む機能はついているようでしたがうまく動かなかったことと、もうちょっと高級な機能が欲しいと前々から思っていたのもあり、せっかくなのでsnippetを提供するプラグインを作りました。
-それで作ったのが、vim-goiferr-snippetsです。以下のgifのように動作します。
-iferrのsnippetに関して以下の機能を提供しています。
- 戻り値の型を構造体でも補完してくれる 構造体がポインタかどうかを判別してくれる pkg/errorsのWrap関数でerrorをWrapする補完の提供 名前付き戻り値のときはreturnしか出力しない インラインのエラーハンドリング用snippetも提供 上記機能を持ったVimScirptの関数として提供している  pkg/errors以外のerrorライブラリ等でカスタマイズできる    また、作っている最中に「iferr用の正規表現はそのままreturnのsnippetとしても使えるのでは？」と思ったので、そのままreturnを補完するsnippetとしても提供しました。戻り値をいい感じに展開して、それぞれにジャンプ用のマーカーを付けているので、サクサク戻り値を設定できます。
-自分用に作ったのでオレオレ設定な部分もありますが、生暖かい見ていただければ幸いです。
-最後に、プラグイン内の正規表現部分は@pockeさんの「Vim で Go 言語を書いている時、Neosnippet でいい感じに if する」という記事を参考にさせていただきました！ありがとうございました！</description>
+      <description>最近Vimの設定を整理してcoc.nvimに乗り換えるにあたり、snippetのプラグインもneosnippetからcoc-neosnippetに乗り換え、snippet集もvim-snippetsに変更しました。&#xA;概ね問題はなかったのですが、Goを書くときにiferrで戻り値をいい感じに補完してくれる機能がなくなったのは若干不便でした(参考)。&#xA;一応coc.nvimにneosnippetの機能を取り込む機能はついているようでしたがうまく動かなかったことと、もうちょっと高級な機能が欲しいと前々から思っていたのもあり、せっかくなのでsnippetを提供するプラグインを作りました。&#xA;それで作ったのが、vim-goiferr-snippetsです。以下のgifのように動作します。&#xA;iferrのsnippetに関して以下の機能を提供しています。&#xA;戻り値の型を構造体でも補完してくれる 構造体がポインタかどうかを判別してくれる pkg/errorsのWrap関数でerrorをWrapする補完の提供 名前付き戻り値のときはreturnしか出力しない インラインのエラーハンドリング用snippetも提供 上記機能を持ったVimScirptの関数として提供している pkg/errors以外のerrorライブラリ等でカスタマイズできる また、作っている最中に「iferr用の正規表現はそのままreturnのsnippetとしても使えるのでは？」と思ったので、そのままreturnを補完するsnippetとしても提供しました。戻り値をいい感じに展開して、それぞれにジャンプ用のマーカーを付けているので、サクサク戻り値を設定できます。&#xA;自分用に作ったのでオレオレ設定な部分もありますが、生暖かい見ていただければ幸いです。&#xA;最後に、プラグイン内の正規表現部分は@pockeさんの「Vim で Go 言語を書いている時、Neosnippet でいい感じに if する」という記事を参考にさせていただきました！ありがとうございました！</description>
     </item>
-    
     <item>
       <title>labelerrとsuberrを作った話をLTしてきた</title>
       <link>https://nametake.github.io/posts/2018/12/19/created-labelerr-and-suberr/</link>
       <pubDate>Wed, 19 Dec 2018 11:37:17 +0900</pubDate>
-      
       <guid>https://nametake.github.io/posts/2018/12/19/created-labelerr-and-suberr/</guid>
-      <description>golang.tokyo #20のLT大会で、labelerrとsuberrを作った話をしてきました。
- 「Goのerrorは1種類というのは綺麗だとは思うけど、実運用上errorに重み付けをしたいよね」ってところからこのライブラリの出発点です。
-スライド内にもありますが、Primitiveな型しか取り扱わないように気をつけている上に、ライブラリ自体も難しいことはしてないので、なんとなく使ってみるか、ぐらいの感覚で使ってもらうと嬉しいです。</description>
+      <description>golang.tokyo #20のLT大会で、labelerrとsuberrを作った話をしてきました。&#xA;「Goのerrorは1種類というのは綺麗だとは思うけど、実運用上errorに重み付けをしたいよね」ってところからこのライブラリの出発点です。&#xA;スライド内にもありますが、Primitiveな型しか取り扱わないように気をつけている上に、ライブラリ自体も難しいことはしてないので、なんとなく使ってみるか、ぐらいの感覚で使ってもらうと嬉しいです。</description>
     </item>
-    
     <item>
       <title>Goでのprotocプラグインのテストの書き方</title>
       <link>https://nametake.github.io/posts/2018/12/14/protoc-plugin-test/</link>
       <pubDate>Fri, 14 Dec 2018 00:00:00 +0900</pubDate>
-      
       <guid>https://nametake.github.io/posts/2018/12/14/protoc-plugin-test/</guid>
-      <description>最近周りでProtocol Buffersの話題をよく聞くようになりました。
-ということはそろそろ人類はprotocのプラグインを書きたくなる時代がやってくると思います。
-そのときに世の中に生み出されるプラグインの品質が少しでも高くなればと思い、以前protoc-gen-gohttpというプラグイン作ったときにテストも書いたので、その知見を書こうと思います。
-プラグイン自体は@yuguiさんの「protocプラグインの書き方」がとても参考になったのでそちらを参照すると良いかもしれません。
-TL;DR  細かいやり方はprotoc-gen-goのgolden_test.goに書いてある  自分のプラグインのテストもそれを参考にして書いた   プラグインの動作テストはテスト内でprotocコマンドを実行して行う 実行結果の確認はGolden testingで行う Goのコードでprotoファイルをplugin.CodeGeneratorRequestに変換することは(恐らく)できない  経緯(読み飛ばして大丈夫です) protocのプラグインは標準入力に入ってきたデータをproto.CodeGeneratorRequest型にUnmarshalしてprotoファイルの情報を取得します。
-そのため、最初にテストを書こうとしたときにはGoだけでprotoファイルをproto.CodeGeneratorRequestに変換する仕組みがあるのかと思っていたのですが、この記事公開時点ではその仕組みは提供されていないようでした(知ってたらコメント等で教えていただけると助かります)。
-「それじゃあ有名なプラグインはどうやってるんだ?」と思いprotoc-gen-goのコードを見てみると、Goのコードの中で直接protocコマンドを実行していて、少し面白いテストをしていたので解説しようと思います。
-golden_test.goの解説 ファイル名から想像できる通り、いわゆるGolden testingと呼ばれるものです。テストの中からprotocコマンドを直接実行して、その結果の出力ファイルとtestdataディレクトリに入っている期待するファイルとを比較をしてテストしています。
-300行ぐらいなので全部読んでもそんなに時間はかからないと思いますが、簡単に解説をしてみようと思います。
-コマンド実行部分 以下のコードが直接コマンドを実行する部分です。testing.T構造体とprotocに与える引数を受け取って実際にコマンドを実行します。
-func protoc(t *testing.T, args []string) { cmd := exec.Command(&amp;#34;protoc&amp;#34;, &amp;#34;--plugin=protoc-gen-go=&amp;#34;+os.Args[0]) cmd.Args = append(cmd.Args, args...) // We set the RUN_AS_PROTOC_GEN_GO environment variable to indicate that 	// the subprocess should act as a proto compiler rather than a test. 	cmd.Env = append(os.Environ(), &amp;#34;RUN_AS_PROTOC_GEN_GO=1&amp;#34;) out, err := cmd.</description>
+      <description>最近周りでProtocol Buffersの話題をよく聞くようになりました。&#xA;ということはそろそろ人類はprotocのプラグインを書きたくなる時代がやってくると思います。&#xA;そのときに世の中に生み出されるプラグインの品質が少しでも高くなればと思い、以前protoc-gen-gohttpというプラグイン作ったときにテストも書いたので、その知見を書こうと思います。&#xA;プラグイン自体は@yuguiさんの「protocプラグインの書き方」がとても参考になったのでそちらを参照すると良いかもしれません。&#xA;TL;DR 細かいやり方はprotoc-gen-goのgolden_test.goに書いてある 自分のプラグインのテストもそれを参考にして書いた プラグインの動作テストはテスト内でprotocコマンドを実行して行う 実行結果の確認はGolden testingで行う Goのコードでprotoファイルをplugin.CodeGeneratorRequestに変換することは(恐らく)できない 経緯(読み飛ばして大丈夫です) protocのプラグインは標準入力に入ってきたデータをproto.CodeGeneratorRequest型にUnmarshalしてprotoファイルの情報を取得します。&#xA;そのため、最初にテストを書こうとしたときにはGoだけでprotoファイルをproto.CodeGeneratorRequestに変換する仕組みがあるのかと思っていたのですが、この記事公開時点ではその仕組みは提供されていないようでした(知ってたらコメント等で教えていただけると助かります)。&#xA;「それじゃあ有名なプラグインはどうやってるんだ?」と思いprotoc-gen-goのコードを見てみると、Goのコードの中で直接protocコマンドを実行していて、少し面白いテストをしていたので解説しようと思います。&#xA;golden_test.goの解説 ファイル名から想像できる通り、いわゆるGolden testingと呼ばれるものです。テストの中からprotocコマンドを直接実行して、その結果の出力ファイルとtestdataディレクトリに入っている期待するファイルとを比較をしてテストしています。&#xA;300行ぐらいなので全部読んでもそんなに時間はかからないと思いますが、簡単に解説をしてみようと思います。&#xA;コマンド実行部分 以下のコードが直接コマンドを実行する部分です。testing.T構造体とprotocに与える引数を受け取って実際にコマンドを実行します。&#xA;func protoc(t *testing.T, args []string) { cmd := exec.Command(&amp;#34;protoc&amp;#34;, &amp;#34;--plugin=protoc-gen-go=&amp;#34;+os.Args[0]) cmd.Args = append(cmd.Args, args...) // We set the RUN_AS_PROTOC_GEN_GO environment variable to indicate that // the subprocess should act as a proto compiler rather than a test. cmd.Env = append(os.Environ(), &amp;#34;RUN_AS_PROTOC_GEN_GO=1&amp;#34;) out, err := cmd.CombinedOutput() if len(out) &amp;gt; 0 || err !</description>
     </item>
-    
     <item>
       <title>Protocol Buffersのserviceをnet/httpに対応させるprotoc-gen-gohttpを作った</title>
       <link>https://nametake.github.io/posts/2018/11/21/protoc-gen-gohttp/</link>
       <pubDate>Wed, 21 Nov 2018 16:32:07 +0900</pubDate>
-      
       <guid>https://nametake.github.io/posts/2018/11/21/protoc-gen-gohttp/</guid>
-      <description>nametake/protoc-gen-gohttpというprotocのプラグインを作ったのでその話です。
-Protocol Buffersとは Protocol Buffersはインターフェース定義言語の1つでGoogleによって開発されているものです(ざっくりいうと、JSONやXMLの仲間)。以下のように、構造を表すmessageとそのmessageを使ったRPCのインターフェースのserviceというものを定義できます。
-syntax = &amp;#34;proto3&amp;#34;;package helloworld;option go_package = &amp;#34;main&amp;#34;;message HelloRequest { string name = 1;}message HelloReply { string message = 1;}service Greeter { rpc SayHello(HelloRequest) returns (HelloReply) {}}上記の定義をprotocコマンドを使ってコンパイルすることで、対応した言語ならそのままコードを書き出せます。例えばGoなら以下のような構造体が書き出されます(長くなるのでコードは削っています)。以下の構造体はProtocol Bufferが用意しているライブラリを利用すればバイナリに変換できます。
-type HelloRequest struct { Name string `protobuf:&amp;#34;bytes,1,opt,name=name&amp;#34; json:&amp;#34;name,omitempty&amp;#34;` XXX_NoUnkeyedLiteral struct{} `json:&amp;#34;-&amp;#34;` XXX_unrecognized []byte `json:&amp;#34;-&amp;#34;` XXX_sizecache int32 `json:&amp;#34;-&amp;#34;` } type HelloReply struct { Message string `protobuf:&amp;#34;bytes,1,opt,name=message&amp;#34; json:&amp;#34;message,omitempty&amp;#34;` XXX_NoUnkeyedLiteral struct{} `json:&amp;#34;-&amp;#34;` XXX_unrecognized []byte `json:&amp;#34;-&amp;#34;` XXX_sizecache int32 `json:&amp;#34;-&amp;#34;` } また、protocコマンドはプラグイン機構も持っているため、例えばgRPCのためのコードを書き出したかったらprotoc --go_out=plugins=grpc:.のようにすることで以下のようにgRPC用のコードも同時に書き出してくれます(以下のコードも削ってます)。</description>
+      <description>nametake/protoc-gen-gohttpというprotocのプラグインを作ったのでその話です。&#xA;Protocol Buffersとは Protocol Buffersはインターフェース定義言語の1つでGoogleによって開発されているものです(ざっくりいうと、JSONやXMLの仲間)。以下のように、構造を表すmessageとそのmessageを使ったRPCのインターフェースのserviceというものを定義できます。&#xA;syntax = &amp;#34;proto3&amp;#34;; package helloworld; option go_package = &amp;#34;main&amp;#34;; message HelloRequest { string name = 1; } message HelloReply { string message = 1; } service Greeter { rpc SayHello(HelloRequest) returns (HelloReply) {} } 上記の定義をprotocコマンドを使ってコンパイルすることで、対応した言語ならそのままコードを書き出せます。例えばGoなら以下のような構造体が書き出されます(長くなるのでコードは削っています)。以下の構造体はProtocol Bufferが用意しているライブラリを利用すればバイナリに変換できます。&#xA;type HelloRequest struct { Name string `protobuf:&amp;#34;bytes,1,opt,name=name&amp;#34; json:&amp;#34;name,omitempty&amp;#34;` XXX_NoUnkeyedLiteral struct{} `json:&amp;#34;-&amp;#34;` XXX_unrecognized []byte `json:&amp;#34;-&amp;#34;` XXX_sizecache int32 `json:&amp;#34;-&amp;#34;` } type HelloReply struct { Message string `protobuf:&amp;#34;bytes,1,opt,name=message&amp;#34; json:&amp;#34;message,omitempty&amp;#34;` XXX_NoUnkeyedLiteral struct{} `json:&amp;#34;-&amp;#34;` XXX_unrecognized []byte `json:&amp;#34;-&amp;#34;` XXX_sizecache int32 `json:&amp;#34;-&amp;#34;` } また、protocコマンドはプラグイン機構も持っているため、例えばgRPCのためのコードを書き出したかったらprotoc --go_out=plugins=grpc:.</description>
     </item>
-    
     <item>
       <title>GCPの認証済みのhttp.Clientの取得方法</title>
       <link>https://nametake.github.io/posts/2018/11/09/auth-gcp-client/</link>
       <pubDate>Fri, 09 Nov 2018 11:15:24 +0900</pubDate>
-      
       <guid>https://nametake.github.io/posts/2018/11/09/auth-gcp-client/</guid>
-      <description>GCPの認証済みのhttp.Clientが欲しいときにちょっとだけ調べたのでメモ。
-結論だけ言うと、golang.org/x/oauth2/googleのDefaultClientを使えばいいみたいです。
-今回はDataflowのAPIを叩きたかったので以下のようにすればできました。
-client, err := google.DefaultClient(ctx, dataflow.CloudPlatformScope) if err != nil { return fmt.Errorf(&amp;#34;failed create client: %v&amp;#34;, err) } </description>
+      <description>GCPの認証済みのhttp.Clientが欲しいときにちょっとだけ調べたのでメモ。&#xA;結論だけ言うと、golang.org/x/oauth2/googleのDefaultClientを使えばいいみたいです。&#xA;今回はDataflowのAPIを叩きたかったので以下のようにすればできました。&#xA;client, err := google.DefaultClient(ctx, dataflow.CloudPlatformScope) if err != nil { return fmt.Errorf(&amp;#34;failed create client: %v&amp;#34;, err) } </description>
     </item>
-    
     <item>
       <title>depでprivateリポジトリがupdateできなかったときの解決策</title>
       <link>https://nametake.github.io/posts/2018/09/20/dep-private-repo/</link>
       <pubDate>Thu, 20 Sep 2018 18:47:46 +0900</pubDate>
-      
       <guid>https://nametake.github.io/posts/2018/09/20/dep-private-repo/</guid>
-      <description>Goをアップデートした後、dep updateをしたら以下のようなエラーが発生しました。
-grouped write of manifest, lock and vendor: error while writing out vendor tree: failed to write dep tree: failed to export github.com/nametake/private-repo: unable to update repository: remote: Repository not found. fatal: repository &amp;#39;https://github.com/nametake/private-repo/&amp;#39; not found : command failed: [git fetch --tags --prune origin]: exit status 128 make: *** [dep] Error 1 原因はprivateリポジトリをhttps経由でcloneしようとしたことだったみたいです。
-以下のconfig設定をして、githubではhttpsで始まるURLをgitのURLを使うように書き換える設定を追加したら治りました。
-[url &amp;#34;git@github.com:&amp;#34;] insteadOf = https://github.com/ https://git-scm.com/docs/git-config#git-config-urlltbasegtinsteadOf</description>
+      <description>Goをアップデートした後、dep updateをしたら以下のようなエラーが発生しました。&#xA;grouped write of manifest, lock and vendor: error while writing out vendor tree: failed to write dep tree: failed to export github.com/nametake/private-repo: unable to update repository: remote: Repository not found. fatal: repository &amp;#39;https://github.com/nametake/private-repo/&amp;#39; not found : command failed: [git fetch --tags --prune origin]: exit status 128 make: *** [dep] Error 1 原因はprivateリポジトリをhttps経由でcloneしようとしたことだったみたいです。&#xA;以下のconfig設定をして、githubではhttpsで始まるURLをgitのURLを使うように書き換える設定を追加したら治りました。&#xA;[url &amp;#34;git@github.com:&amp;#34;] insteadOf = https://github.com/ https://git-scm.com/docs/git-config#git-config-urlltbasegtinsteadOf</description>
     </item>
-    
   </channel>
 </rss>

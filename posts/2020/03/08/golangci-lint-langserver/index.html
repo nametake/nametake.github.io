@@ -12,7 +12,7 @@
 ただ、golangci-lintだけはGoのスコープとの相性の関係ではうまく動作させることができませんでした。
 そこで、golangci-lint専用のlanguage server、golangci-lint-langserverを作成してみました。
 LSPクライアントに読み込ませるとファイルを開いたときと保存したときに以下のようにgolangci-lintの結果を返してくれます。
- 自分が使うために作ったためWindows対応や細かいエラーハンドリング等はしていませんが、個人的には割とちゃんと動いたので満足しています。
+自分が使うために作ったためWindows対応や細かいエラーハンドリング等はしていませんが、個人的には割とちゃんと動いたので満足しています。
 もし機能追加等あったらPRお待ちしています。
 制作動機 一応制作動機も書いておこうと思います。
 今回aleの移行先として検討したdiagnostic-languageserverやefm-langserverなのですが、基本的には開いているファイルにlintをかけてその結果を返す仕組みになっています。
@@ -21,7 +21,7 @@ LSPクライアントに読み込ませるとファイルを開いたときと�
 また、別ファイルで定義されている関数や変数を使おうとした場合はそもそもビルド失敗扱いになりチェックすることすらできませんでした。
 かといって、ファイルが開かれるたびにパッケージ全体に対してgolangci-lintをかけると今度は関係ないファイルの結果も含まれてしまいます。
 この問題を解決するには、language server側で以下の流れのようにlinterが返した結果をLSPクライアントが送ってきた情報でフィルタをする必要がありました。
- LSPクライアントのNotificationを受け取る golangci-lintを実行する 結果の中から1の情報を使って対象ファイルの結果だけをフィルタする LSPクライアントに結果を伝える  最初はdiagnostic-languageserverやefm-langserverにコントリビュートしようとも考えました。
+LSPクライアントのNotificationを受け取る golangci-lintを実行する 結果の中から1の情報を使って対象ファイルの結果だけをフィルタする LSPクライアントに結果を伝える 最初はdiagnostic-languageserverやefm-langserverにコントリビュートしようとも考えました。
 ただ、そこそこ大きな機能を追加しないと実現できそうになく、かつgolangci-lintのためだけにその機能を追加するのもシンプルではないと思ったため、完全に独立したlanguage serverとして実装してしまうことにしました。
 efm-langserverの実装を参考にして書いたため、かなり重複したコードにはなっています。ただ、そのおかげで実装を大きくせずに書けたのでシンプルな状態は保つことができました。
 個人的にこのlanguage serverは一時的な実装のつもりなので、goplsやdiagnostic-languageserver、efm-langserverが対応したらすぐにdeprecatedな状態にしようと思っています。
@@ -30,14 +30,13 @@ efm-langserverの実装を参考にして書いたため、かなり重複した
 
     
 
-    <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="golangci-lint-langserverを作った話"/>
+    <meta name="twitter:card" content="summary"/><meta name="twitter:title" content="golangci-lint-langserverを作った話"/>
 <meta name="twitter:description" content="最近VimのLinterのプラグインをaleからすべてlanguage serverに移行しました。
 殆どのCLIツールはdiagnostic-languageserver経由で使うことでいい感じに動いてくれています。
 ただ、golangci-lintだけはGoのスコープとの相性の関係ではうまく動作させることができませんでした。
 そこで、golangci-lint専用のlanguage server、golangci-lint-langserverを作成してみました。
 LSPクライアントに読み込ませるとファイルを開いたときと保存したときに以下のようにgolangci-lintの結果を返してくれます。
- 自分が使うために作ったためWindows対応や細かいエラーハンドリング等はしていませんが、個人的には割とちゃんと動いたので満足しています。
+自分が使うために作ったためWindows対応や細かいエラーハンドリング等はしていませんが、個人的には割とちゃんと動いたので満足しています。
 もし機能追加等あったらPRお待ちしています。
 制作動機 一応制作動機も書いておこうと思います。
 今回aleの移行先として検討したdiagnostic-languageserverやefm-langserverなのですが、基本的には開いているファイルにlintをかけてその結果を返す仕組みになっています。
@@ -46,7 +45,7 @@ LSPクライアントに読み込ませるとファイルを開いたときと�
 また、別ファイルで定義されている関数や変数を使おうとした場合はそもそもビルド失敗扱いになりチェックすることすらできませんでした。
 かといって、ファイルが開かれるたびにパッケージ全体に対してgolangci-lintをかけると今度は関係ないファイルの結果も含まれてしまいます。
 この問題を解決するには、language server側で以下の流れのようにlinterが返した結果をLSPクライアントが送ってきた情報でフィルタをする必要がありました。
- LSPクライアントのNotificationを受け取る golangci-lintを実行する 結果の中から1の情報を使って対象ファイルの結果だけをフィルタする LSPクライアントに結果を伝える  最初はdiagnostic-languageserverやefm-langserverにコントリビュートしようとも考えました。
+LSPクライアントのNotificationを受け取る golangci-lintを実行する 結果の中から1の情報を使って対象ファイルの結果だけをフィルタする LSPクライアントに結果を伝える 最初はdiagnostic-languageserverやefm-langserverにコントリビュートしようとも考えました。
 ただ、そこそこ大きな機能を追加しないと実現できそうになく、かつgolangci-lintのためだけにその機能を追加するのもシンプルではないと思ったため、完全に独立したlanguage serverとして実装してしまうことにしました。
 efm-langserverの実装を参考にして書いたため、かなり重複したコードにはなっています。ただ、そのおかげで実装を大きくせずに書けたのでシンプルな状態は保つことができました。
 個人的にこのlanguage serverは一時的な実装のつもりなので、goplsやdiagnostic-languageserver、efm-langserverが対応したらすぐにdeprecatedな状態にしようと思っています。
@@ -58,7 +57,7 @@ efm-langserverの実装を参考にして書いたため、かなり重複した
 ただ、golangci-lintだけはGoのスコープとの相性の関係ではうまく動作させることができませんでした。
 そこで、golangci-lint専用のlanguage server、golangci-lint-langserverを作成してみました。
 LSPクライアントに読み込ませるとファイルを開いたときと保存したときに以下のようにgolangci-lintの結果を返してくれます。
- 自分が使うために作ったためWindows対応や細かいエラーハンドリング等はしていませんが、個人的には割とちゃんと動いたので満足しています。
+自分が使うために作ったためWindows対応や細かいエラーハンドリング等はしていませんが、個人的には割とちゃんと動いたので満足しています。
 もし機能追加等あったらPRお待ちしています。
 制作動機 一応制作動機も書いておこうと思います。
 今回aleの移行先として検討したdiagnostic-languageserverやefm-langserverなのですが、基本的には開いているファイルにlintをかけてその結果を返す仕組みになっています。
@@ -67,15 +66,16 @@ LSPクライアントに読み込ませるとファイルを開いたときと�
 また、別ファイルで定義されている関数や変数を使おうとした場合はそもそもビルド失敗扱いになりチェックすることすらできませんでした。
 かといって、ファイルが開かれるたびにパッケージ全体に対してgolangci-lintをかけると今度は関係ないファイルの結果も含まれてしまいます。
 この問題を解決するには、language server側で以下の流れのようにlinterが返した結果をLSPクライアントが送ってきた情報でフィルタをする必要がありました。
- LSPクライアントのNotificationを受け取る golangci-lintを実行する 結果の中から1の情報を使って対象ファイルの結果だけをフィルタする LSPクライアントに結果を伝える  最初はdiagnostic-languageserverやefm-langserverにコントリビュートしようとも考えました。
+LSPクライアントのNotificationを受け取る golangci-lintを実行する 結果の中から1の情報を使って対象ファイルの結果だけをフィルタする LSPクライアントに結果を伝える 最初はdiagnostic-languageserverやefm-langserverにコントリビュートしようとも考えました。
 ただ、そこそこ大きな機能を追加しないと実現できそうになく、かつgolangci-lintのためだけにその機能を追加するのもシンプルではないと思ったため、完全に独立したlanguage serverとして実装してしまうことにしました。
 efm-langserverの実装を参考にして書いたため、かなり重複したコードにはなっています。ただ、そのおかげで実装を大きくせずに書けたのでシンプルな状態は保つことができました。
 個人的にこのlanguage serverは一時的な実装のつもりなので、goplsやdiagnostic-languageserver、efm-langserverが対応したらすぐにdeprecatedな状態にしようと思っています。
 それまではgolangci-lint-langserverはある程度メンテするつもりなので、PRお待ちしています。" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://nametake.github.io/posts/2020/03/08/golangci-lint-langserver/" />
+<meta property="og:url" content="https://nametake.github.io/posts/2020/03/08/golangci-lint-langserver/" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2020-03-08T00:00:00+09:00" />
 <meta property="article:modified_time" content="2020-03-08T00:00:00+09:00" />
+
 
 
     
@@ -122,7 +122,7 @@ efm-langserverの実装を参考にして書いたため、かなり重複した
     <link rel="icon" type="image/png" href="https://nametake.github.io/images/favicon-32x32.png" sizes="32x32">
     <link rel="icon" type="image/png" href="https://nametake.github.io/images/favicon-16x16.png" sizes="16x16">
 
-    <meta name="generator" content="Hugo 0.80.0" />
+    <meta name="generator" content="Hugo 0.121.1">
   </head>
 
   
@@ -237,8 +237,8 @@ efm-langserverの実装を参考にして書いたため、かなり重複した
 
 
         <div id="disqus_thread"></div>
-<script type="application/javascript">
-    var disqus_config = function () {
+<script>
+    window.disqus_config = function () {
     
     
     
@@ -275,7 +275,7 @@ efm-langserverの実装を参考にして書いたため、かなり重複した
       
         ©
         
-        2021
+        2023
          nametake 
       
       
@@ -291,7 +291,7 @@ efm-langserverの実装を参考にして書いたため、かなり重複した
     
 
     
-<script type="application/javascript">
+<script>
 var doNotTrack = false;
 if (!doNotTrack) {
 	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -303,7 +303,6 @@ if (!doNotTrack) {
 	ga('send', 'pageview');
 }
 </script>
-
 
     
 
