@@ -1,37 +1,26 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja">
 
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="Content-Language" content="en">
+<head>
+  <title>
+  hugo&#43;github pagesにブログを移転したメモ · nametake.info
+</title>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
 
-    <meta name="author" content="nametake">
-    <meta name="description" content="大して書いていなかったブログをgithub pages&#43;hugoの組み合わせに移行したのでそのメモ。
-とは言うものの、ほとんどHugoの入門用ページの内容をそのままやっただけなのでその辺は割愛。
-最終的なディレクトリ構成は以下。
-blog ├── Makefile ├── archetypes │ ├── default.md │ └── posts.md ├── bin │ ├── deploy.sh │ └── new_post.sh ├── config.toml ├── content │ ├── about │ │ └── index.md │ └── posts │ └── 2018-09-15-hugo-github-pages │ └── index.md ├── public(submodule) ├── static │ ├── css │ │ └── index.css │ └── images │ └── avatar.jpg └── themes └── coder(submodule) config.toml 自分はパーマリンクを日付&#43;自分で設定した英単語にしたかったので、以下のようにconfig.tomlに追記。
-slugは各postのfrontmatter(postの先頭にあるヘッダ部分)に設定すると反映されます。
-posts = &quot;/posts/:year/:month/:day/:slug&quot;のpostsの部分はcontentディレクトリにあるpostsディレクトリと同じ名前にする必要があるので注意。">
-    <meta name="keywords" content="blog,developer,personal">
 
-    
 
-    <meta name="twitter:card" content="summary"/><meta name="twitter:title" content="hugo&#43;github pagesにブログを移転したメモ"/>
-<meta name="twitter:description" content="大して書いていなかったブログをgithub pages&#43;hugoの組み合わせに移行したのでそのメモ。
-とは言うものの、ほとんどHugoの入門用ページの内容をそのままやっただけなのでその辺は割愛。
-最終的なディレクトリ構成は以下。
-blog ├── Makefile ├── archetypes │ ├── default.md │ └── posts.md ├── bin │ ├── deploy.sh │ └── new_post.sh ├── config.toml ├── content │ ├── about │ │ └── index.md │ └── posts │ └── 2018-09-15-hugo-github-pages │ └── index.md ├── public(submodule) ├── static │ ├── css │ │ └── index.css │ └── images │ └── avatar.jpg └── themes └── coder(submodule) config.toml 自分はパーマリンクを日付&#43;自分で設定した英単語にしたかったので、以下のようにconfig.tomlに追記。
-slugは各postのfrontmatter(postの先頭にあるヘッダ部分)に設定すると反映されます。
-posts = &quot;/posts/:year/:month/:day/:slug&quot;のpostsの部分はcontentディレクトリにあるpostsディレクトリと同じ名前にする必要があるので注意。"/>
 
-    <meta property="og:title" content="hugo&#43;github pagesにブログを移転したメモ" />
-<meta property="og:description" content="大して書いていなかったブログをgithub pages&#43;hugoの組み合わせに移行したのでそのメモ。
-とは言うものの、ほとんどHugoの入門用ページの内容をそのままやっただけなのでその辺は割愛。
-最終的なディレクトリ構成は以下。
-blog ├── Makefile ├── archetypes │ ├── default.md │ └── posts.md ├── bin │ ├── deploy.sh │ └── new_post.sh ├── config.toml ├── content │ ├── about │ │ └── index.md │ └── posts │ └── 2018-09-15-hugo-github-pages │ └── index.md ├── public(submodule) ├── static │ ├── css │ │ └── index.css │ └── images │ └── avatar.jpg └── themes └── coder(submodule) config.toml 自分はパーマリンクを日付&#43;自分で設定した英単語にしたかったので、以下のようにconfig.tomlに追記。
-slugは各postのfrontmatter(postの先頭にあるヘッダ部分)に設定すると反映されます。
-posts = &quot;/posts/:year/:month/:day/:slug&quot;のpostsの部分はcontentディレクトリにあるpostsディレクトリと同じ名前にする必要があるので注意。" />
+<meta name="author" content="nametake">
+<meta name="description" content="大して書いていなかったブログをgithub pages&#43;hugoの組み合わせに移行したのでそのメモ。 とは言うものの、ほとんどHugoの入門用ペ">
+<meta name="keywords" content="blog,developer,personal">
+
+<meta name="twitter:card" content="summary"/><meta name="twitter:title" content="hugo&#43;github pagesにブログを移転したメモ"/>
+<meta name="twitter:description" content="大して書いていなかったブログをgithub pages&#43;hugoの組み合わせに移行したのでそのメモ。 とは言うものの、ほとんどHugoの入門用ペ"/>
+
+<meta property="og:title" content="hugo&#43;github pagesにブログを移転したメモ" />
+<meta property="og:description" content="大して書いていなかったブログをgithub pages&#43;hugoの組み合わせに移行したのでそのメモ。 とは言うものの、ほとんどHugoの入門用ペ" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://nametake.github.io/posts/2018/09/15/hugo-github-pages/" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2018-09-15T12:20:26+09:00" />
@@ -39,129 +28,159 @@ posts = &quot;/posts/:year/:month/:day/:slug&quot;のpostsの部分はcontentデ
 
 
 
-    
-      <base href="https://nametake.github.io/posts/2018/09/15/hugo-github-pages/">
-    
-    <title>
-  hugo&#43;github pagesにブログを移転したメモ · nametake.info
-</title>
 
-    
-      <link rel="canonical" href="https://nametake.github.io/posts/2018/09/15/hugo-github-pages/">
-    
 
-    <link href="https://fonts.googleapis.com/css?family=Lato:400,700%7CMerriweather:300,700%7CSource+Code+Pro:400,700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/all.css" integrity="sha384-Bfad6CLCknfcloXFOyFnlgtENryhrpZCe29RTifKEixXQZ38WheV+i/6YWSzkz3V" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" integrity="sha256-l85OmPOjvil/SOvVt3HnSSjzF1TUMyT9eV0c2BzEGzU=" crossorigin="anonymous" />
+<link rel="canonical" href="https://nametake.github.io/posts/2018/09/15/hugo-github-pages/">
 
-    
-      
-      
-      <link rel="stylesheet" href="https://nametake.github.io/css/coder.min.3219ef62ae52679b7a9c19043171c3cd9f523628c2a65f3ef247ee18836bc90b.css" integrity="sha256-MhnvYq5SZ5t6nBkEMXHDzZ9SNijCpl8&#43;8kfuGINryQs=" crossorigin="anonymous" media="screen" />
-    
 
-    
+<link rel="preload" href="https://nametake.github.io/fonts/forkawesome-webfont.woff2?v=1.2.0" as="font" type="font/woff2" crossorigin>
 
-    
-      
-        
-        
-        <link rel="stylesheet" href="https://nametake.github.io/css/coder-dark.min.e78e80fc3a585a4d1c8fc7f58623b6ff852411e38431a9cd1792877ecaa160f6.css" integrity="sha256-546A/DpYWk0cj8f1hiO2/4UkEeOEManNF5KHfsqhYPY=" crossorigin="anonymous" media="screen" />
-      
-    
 
-    
-      <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto&#43;Sans&#43;JP&amp;display=swap" />
-    
-      <link rel="stylesheet" href="https://nametake.github.io/css/index.css" />
-    
-      <link rel="stylesheet" href="https://nametake.github.io/css/syntax.css" />
-    
+  
+  
+  <link rel="stylesheet" href="https://nametake.github.io/css/coder.min.e1bdf152d93b060b06ba5d496486ed9c201a8b95d335e035beb5faebe3b61cad.css" integrity="sha256-4b3xUtk7BgsGul1JZIbtnCAai5XTNeA1vrX66&#43;O2HK0=" crossorigin="anonymous" media="screen" />
 
+
+
+
+
+
+  
     
+    
+    <link rel="stylesheet" href="https://nametake.github.io/css/coder-dark.min.a00e6364bacbc8266ad1cc81230774a1397198f8cfb7bcba29b7d6fcb54ce57f.css" integrity="sha256-oA5jZLrLyCZq0cyBIwd0oTlxmPjPt7y6KbfW/LVM5X8=" crossorigin="anonymous" media="screen" />
+  
 
-    <link rel="icon" type="image/png" href="https://nametake.github.io/images/favicon-32x32.png" sizes="32x32">
-    <link rel="icon" type="image/png" href="https://nametake.github.io/images/favicon-16x16.png" sizes="16x16">
 
-    <meta name="generator" content="Hugo 0.121.1">
-  </head>
+
+ 
+  
+    
+    <link rel="stylesheet" href="https://nametake.github.io/css/noto&#43;sans&#43;jp.min.ed4b9470a6e014d7c178379b142a1dc1850e399398dc9ce15b1e3bba8368c55f.css" integrity="sha256-7UuUcKbgFNfBeDebFCodwYUOOZOY3JzhWx47uoNoxV8=" crossorigin="anonymous" media="screen" />
+  
+
+
 
   
   
     
+    <link rel="stylesheet" href="https://nametake.github.io/scss/custom.min.38767641d483228e61ddae5e0b6e364839f6a0780c348bd284892bd8ae1aef22.css" integrity="sha256-OHZ2QdSDIo5h3a5eC242SDn2oHgMNIvShIkr2K4a7yI=" crossorigin="anonymous" media="screen" />
   
-  <body class="colorscheme-auto"
-        onload=""
-  >
-    <main class="wrapper">
-      <nav class="navigation">
+
+
+
+<link rel="icon" type="image/svg+xml" href="https://nametake.github.io/images/favicon.svg" sizes="any">
+<link rel="icon" type="image/png" href="https://nametake.github.io/images/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="https://nametake.github.io/images/favicon-16x16.png" sizes="16x16">
+
+<link rel="apple-touch-icon" href="https://nametake.github.io/images/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="180x180" href="https://nametake.github.io/images/apple-touch-icon.png">
+
+<link rel="manifest" href="https://nametake.github.io/site.webmanifest">
+<link rel="mask-icon" href="https://nametake.github.io/images/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+
+
+
+
+
+
+</head>
+
+
+
+
+
+
+<body class="preload-transitions colorscheme-auto">
+  
+<div class="float-container">
+    <a id="dark-mode-toggle" class="colorscheme-toggle">
+        <i class="fa fa-adjust fa-fw" aria-hidden="true"></i>
+    </a>
+</div>
+
+
+  <main class="wrapper">
+    <nav class="navigation">
   <section class="container">
     <a class="navigation-title" href="https://nametake.github.io/">
       nametake.info
     </a>
     
-    <input type="checkbox" id="menu-toggle" />
-    <label class="menu-button float-right" for="menu-toggle"><i class="fas fa-bars"></i></label>
-    <ul class="navigation-list">
-      
+      <input type="checkbox" id="menu-toggle" />
+      <label class="menu-button float-right" for="menu-toggle">
+        <i class="fa fa-bars fa-fw" aria-hidden="true"></i>
+      </label>
+      <ul class="navigation-list">
         
-          <li class="navigation-item">
-            <a class="navigation-link" href="https://nametake.github.io/about/">About</a>
-          </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link" href="https://nametake.github.io/about/">About</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link" href="https://nametake.github.io/posts/">Blog</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link" href="https://nametake.github.io/project/">Project</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link" href="https://nametake.github.io/tags/">Tags</a>
+            </li>
+          
         
-          <li class="navigation-item">
-            <a class="navigation-link" href="https://nametake.github.io/posts/">Blog</a>
-          </li>
         
-          <li class="navigation-item">
-            <a class="navigation-link" href="https://nametake.github.io/project/">Project</a>
-          </li>
-        
-          <li class="navigation-item">
-            <a class="navigation-link" href="https://nametake.github.io/tags/">Tags</a>
-          </li>
-        
-      
-      
-    </ul>
+      </ul>
     
   </section>
 </nav>
 
 
-      <div class="content">
-        
+    <div class="content">
+      
   <section class="container post">
     <article>
       <header>
         <div class="post-title">
-          <h1 class="title">hugo&#43;github pagesにブログを移転したメモ</h1>
+          <h1 class="title">
+            <a class="title-link" href="https://nametake.github.io/posts/2018/09/15/hugo-github-pages/">
+              hugo&#43;github pagesにブログを移転したメモ
+            </a>
+          </h1>
         </div>
         <div class="post-meta">
           <div class="date">
             <span class="posted-on">
-              <i class="fas fa-calendar"></i>
-              <time datetime='2018-09-15T12:20:26&#43;09:00'>
-                September 15, 2018
+              <i class="fa fa-calendar" aria-hidden="true"></i>
+              <time datetime="2018-09-15T12:20:26&#43;09:00">
+                2018/09/15
               </time>
             </span>
             <span class="reading-time">
-              <i class="fas fa-clock"></i>
+              <i class="fa fa-clock-o" aria-hidden="true"></i>
               2-minute read
             </span>
           </div>
           
+          
           <div class="tags">
-  <i class="fas fa-tag"></i>
-    <a href="https://nametake.github.io/tags/hugo/">hugo</a></div>
+  <i class="fa fa-tag" aria-hidden="true"></i>
+    <span class="tag">
+      <a href="https://nametake.github.io/tags/hugo/">hugo</a>
+    </span></div>
 
         </div>
       </header>
 
-      <div>
+      <div class="post-content">
         
         <p>大して書いていなかったブログをgithub pages+hugoの組み合わせに移行したのでそのメモ。</p>
-<p>とは言うものの、ほとんど<a href="https://gohugo.io/categories/getting-started">Hugoの入門用ページ</a>の内容をそのままやっただけなのでその辺は割愛。</p>
+<p>とは言うものの、ほとんど<a href="https://gohugo.io/categories/getting-started"  class="external-link" target="_blank" rel="noopener">Hugoの入門用ページ</a>の内容をそのままやっただけなのでその辺は割愛。</p>
 <p>最終的なディレクトリ構成は以下。</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>blog
 </span></span><span style="display:flex;"><span> ├── Makefile
@@ -186,13 +205,25 @@ posts = &quot;/posts/:year/:month/:day/:slug&quot;のpostsの部分はcontentデ
 </span></span><span style="display:flex;"><span> │       └── avatar.jpg
 </span></span><span style="display:flex;"><span> └── themes
 </span></span><span style="display:flex;"><span>     └── coder(submodule)
-</span></span></code></pre></div><h2 id="configtoml">config.toml</h2>
+</span></span></code></pre></div><h2 id="configtoml">
+  config.toml
+  <a class="heading-link" href="#configtoml">
+    <i class="fa fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <p>自分はパーマリンクを<code>日付+自分で設定した英単語</code>にしたかったので、以下のようにconfig.tomlに追記。</p>
 <p>slugは各postのfrontmatter(postの先頭にあるヘッダ部分)に設定すると反映されます。</p>
 <p><code>posts = &quot;/posts/:year/:month/:day/:slug&quot;</code>の<code>posts</code>の部分はcontentディレクトリにある<code>posts</code>ディレクトリと同じ名前にする必要があるので注意。</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-toml" data-lang="toml"><span style="display:flex;"><span>[<span style="color:#a6e22e">permalinks</span>]
 </span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">posts</span> = <span style="color:#e6db74">&#34;/posts/:year/:month/:day/:slug&#34;</span>
-</span></span></code></pre></div><h2 id="makefile">Makefile</h2>
+</span></span></code></pre></div><h2 id="makefile">
+  Makefile
+  <a class="heading-link" href="#makefile">
+    <i class="fa fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <p>makeコマンドだけでいろいろな作業を完結させたかったので、以下のようにMakefileを作成。</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-make" data-lang="make"><span style="display:flex;"><span><span style="color:#75715e"># new post title
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>title<span style="color:#f92672">=</span>
@@ -222,8 +253,14 @@ posts = &quot;/posts/:year/:month/:day/:slug&quot;のpostsの部分はcontentデ
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#a6e22e">deploy</span><span style="color:#f92672">:</span> build
 </span></span><span style="display:flex;"><span>	@./bin/deploy.sh
-</span></span></code></pre></div><h2 id="deploysh">deploy.sh</h2>
-<p><a href="https://gohugo.io/hosting-and-deployment/hosting-on-github/#put-it-into-a-script">公式のデプロイ方法</a>に書いてあることに、少し自分に必要な要件を足して以下のようなスクリプトを用意しました。</p>
+</span></span></code></pre></div><h2 id="deploysh">
+  deploy.sh
+  <a class="heading-link" href="#deploysh">
+    <i class="fa fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p><a href="https://gohugo.io/hosting-and-deployment/hosting-on-github/#put-it-into-a-script"  class="external-link" target="_blank" rel="noopener">公式のデプロイ方法</a>に書いてあることに、少し自分に必要な要件を足して以下のようなスクリプトを用意しました。</p>
 <p>追加したことは以下。</p>
 <ul>
 <li>hugoコマンドの失敗に検知できるようにmakeファイルに役割を分割</li>
@@ -255,7 +292,13 @@ posts = &quot;/posts/:year/:month/:day/:slug&quot;のpostsの部分はcontentデ
 </span></span><span style="display:flex;"><span>git add public
 </span></span><span style="display:flex;"><span>git commit -m <span style="color:#e6db74">&#34;</span>$msg<span style="color:#e6db74">&#34;</span>
 </span></span><span style="display:flex;"><span>git push
-</span></span></code></pre></div><h2 id="new_postsh">new_post.sh</h2>
+</span></span></code></pre></div><h2 id="new_postsh">
+  new_post.sh
+  <a class="heading-link" href="#new_postsh">
+    <i class="fa fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <p>postのディレクトリに新しく記事を追加するとき、ディレクトリには<code>content/posts/2018-09-15-my-fist-post/index.md</code>のように日付を設定したかったので、postを作成するためのscriptを用意。</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e">#!/bin/bash
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>TITLE<span style="color:#f92672">=</span><span style="color:#e6db74">${</span>1<span style="color:#e6db74">}</span>
@@ -278,7 +321,7 @@ posts = &quot;/posts/:year/:month/:day/:slug&quot;のpostsの部分はcontentデ
 
         <div id="disqus_thread"></div>
 <script>
-    window.disqus_config = function () {
+  window.disqus_config = function () {
     
     
     
@@ -293,9 +336,15 @@ posts = &quot;/posts/:year/:month/:day/:slug&quot;のpostsの部分はcontentデ
         s.setAttribute('data-timestamp', +new Date());
         (d.head || d.body).appendChild(s);
     })();
+    
+    document.addEventListener('themeChanged', function (e) { 
+        if (document.readyState == 'complete') {
+          DISQUS.reset({ reload: true, config: disqus_config });
+        }
+    });
 </script>
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+        
+        
         
         
       </footer>
@@ -304,33 +353,36 @@ posts = &quot;/posts/:year/:month/:day/:slug&quot;のpostsの部分はcontentデ
     
   </section>
 
-      </div>
+    </div>
 
-      
-  <footer class="footer">
-    <section class="container">
-      
-        <p>nametake.github.io</p>
-      
-      
-        ©
-        
-        2023
-         nametake 
-      
-      
-         · 
-        Powered by <a href="https://gohugo.io/">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/">Coder</a>.
-      
-      
-    </section>
-  </footer>
-
-    </main>
-
+    <footer class="footer">
+  <section class="container">
+    ©
     
-
+    2023
+     nametake 
+    ·
     
+    Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/" target="_blank" rel="noopener">Coder</a>.
+    
+  </section>
+</footer>
+
+  </main>
+
+  
+
+  
+  
+  <script src="https://nametake.github.io/js/coder.min.6ae284be93d2d19dad1f02b0039508d9aab3180a12a06dcc71b0b0ef7825a317.js" integrity="sha256-auKEvpPS0Z2tHwKwA5UI2aqzGAoSoG3McbCw73gloxc="></script>
+  
+
+  
+
+  
+
+
+  
 <script>
 var doNotTrack = false;
 if (!doNotTrack) {
@@ -344,8 +396,33 @@ if (!doNotTrack) {
 }
 </script>
 
-    
+  
 
-  </body>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</body>
 
 </html>

@@ -5,7 +5,7 @@
     <link>https://nametake.github.io/posts/</link>
     <description>Recent content in Posts on nametake.info</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
+    <language>ja</language>
     <lastBuildDate>Sun, 14 Feb 2021 00:00:00 +0900</lastBuildDate>
     <atom:link href="https://nametake.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
     <item>
@@ -13,259 +13,259 @@
       <link>https://nametake.github.io/posts/2021/02/14/grid-with-display-contents/</link>
       <pubDate>Sun, 14 Feb 2021 00:00:00 +0900</pubDate>
       <guid>https://nametake.github.io/posts/2021/02/14/grid-with-display-contents/</guid>
-      <description>両端のborderがないテーブルをgridでスタイリングしようとすると、 :not(:first-of-type) をただ使うだけではうまくいきません。&#xA;gridにまかせて以下のようにすると、 :not(:first-of-type) は最初のcellにしかかかってくれません。&#xA;また、HTMLのマークアップとしても行が表現されておらずあまりきれいな状態とはいえません。&#xA;1 2 3 4 5 6 7 8 9 10 11 &amp;lt;div class=&amp;#34;table&amp;#34;&amp;gt; &amp;lt;div class=&amp;#34;cell&amp;#34;&amp;gt;One&amp;lt;/div&amp;gt; &amp;lt;div class=&amp;#34;cell&amp;#34;&amp;gt;Two&amp;lt;/div&amp;gt; &amp;lt;div class=&amp;#34;cell&amp;#34;&amp;gt;Three&amp;lt;/div&amp;gt; &amp;lt;div class=&amp;#34;cell&amp;#34;&amp;gt;Four&amp;lt;/div&amp;gt; &amp;lt;div class=&amp;#34;cell&amp;#34;&amp;gt;Five&amp;lt;/div&amp;gt; &amp;lt;div class=&amp;#34;cell&amp;#34;&amp;gt;Six&amp;lt;/div&amp;gt; &amp;lt;div class=&amp;#34;cell&amp;#34;&amp;gt;Seven&amp;lt;/div&amp;gt; &amp;lt;div class=&amp;#34;cell&amp;#34;&amp;gt;Eight&amp;lt;/div&amp;gt; &amp;lt;div class=&amp;#34;cell&amp;#34;&amp;gt;Nine&amp;lt;/div&amp;gt; &amp;lt;/div&amp;gt; 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 .table { display: grid; grid-template-columns: repeat(3, auto); margin: 32px; border-top: solid 1px black; } .cell { padding: 4px; text-align: center; border-bottom: solid 1px black; } .</description>
+      <description>両端のborderがないテーブルをgridでスタイリングしようとすると、 :not(:first-of-type) をただ使うだけではうまくいきません。 gridにまかせて以下のように</description>
     </item>
     <item>
       <title>react-resizableにemotionでスタイルを当てる</title>
       <link>https://nametake.github.io/posts/2020/10/25/react-resizable-emotion/</link>
       <pubDate>Sun, 25 Oct 2020 00:00:00 +0900</pubDate>
       <guid>https://nametake.github.io/posts/2020/10/25/react-resizable-emotion/</guid>
-      <description>react-resizable に emotion でスタイルを当てた時のメモ。&#xA;1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 import { ResizableBox } from &amp;#39;react-resizable&amp;#39;; const StyledResizableBox = styled(ResizableBox)` position: relative; display: inline-flex; flex-direction: column; align-items: right; justify-content: center; padding-left: 20px; overflow: hidden; border: 1px solid black; .react-resizable-handle { position: absolute; right: 0; width: 4px; height: 90%; border-left: 1px solid black; :hover { cursor: col-resize; } } `; 上記の例だと以下のように右端にサイズ変更用のバーが出るようなスタイルになります。</description>
+      <description>react-resizable に emotion でスタイルを当てた時のメモ。 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 import { ResizableBox } from &amp;#39;react-resizable&amp;#39;; const StyledResizableBox = styled(ResizableBox)` position: relative; display: inline-flex; flex-direction: column; align-items: right; justify-content: center; padding-left: 20px; overflow: hidden; border: 1px solid black; .react-resizable-handle</description>
     </item>
     <item>
       <title>Reactでアクセシビリティを維持したRadioボタンをデザインする</title>
       <link>https://nametake.github.io/posts/2020/09/26/react-a11y-radio/</link>
       <pubDate>Sat, 26 Sep 2020 00:00:00 +0900</pubDate>
       <guid>https://nametake.github.io/posts/2020/09/26/react-a11y-radio/</guid>
-      <description>ReactでRadioボタンにデザインを当てようとすると、 display: none を使う方法を紹介している記事が多いのですが、その方法ではアクセシビリティが消えてしまいます。&#xA;そこで、以下のページのCheckboxを参考にしてRadioボタンをアクセシビリティを維持したままReactで実装したのでメモ的にコードを残しておこうと思います。&#xA;https://medium.com/@colebemis/building-a-checkbox-component-with-react-and-styled-components-8d3aa1d826dd&#xA;1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84 85 86 87 88 89 90 91 92 93 94 95 96 97 98 99 100 101 102 103 104 105 106 107 108 109 110 111 112 113 114 115 116 117 118 119 120 121 122 123 124 125 126 127 128 129 130 131 132 133 134 135 136 137 138 139 140 141 142 143 144 145 146 147 148 149 150 151 152 153 154 155 156 157 158 159 160 161 162 163 164 165 166 167 168 169 170 171 172 173 174 175 176 177 178 179 180 181 182 183 184 185 186 187 import { css } from &amp;#39;@emotion/core&amp;#39;; import styled from &amp;#39;@emotion/styled&amp;#39;; import React from &amp;#39;react&amp;#39;; import * as colors from &amp;#39;@/app/components/styles/colors&amp;#39;; export enum RadioSize { Small, Large, } type RadioProps = { label?</description>
+      <description>ReactでRadioボタンにデザインを当てようとすると、 display: none を使う方法を紹介している記事が多いのですが、その方法ではアクセシビリティが消え</description>
     </item>
     <item>
       <title>SVGが特定のサイズ以下でずれる現象の原因と解決策</title>
       <link>https://nametake.github.io/posts/2020/08/10/css-svg-inline-descender/</link>
       <pubDate>Mon, 10 Aug 2020 00:00:00 +0900</pubDate>
       <guid>https://nametake.github.io/posts/2020/08/10/css-svg-inline-descender/</guid>
-      <description>下記ブログを参考にしてアクセシビリティを維持したままCheckboxやRadioボタンを作ろうとしたのですが、特定のサイズ以下でずれる問題に遭遇しました。&#xA;Building a Checkbox Component with React and styled-components&#xA;以下がそのずれているときの画像です。16pxにしたとき親要素に対して少し下側にずれています。&#xA;しかし、20pxにしたときには以下のように親要素とぴったり揃います。&#xA;サイズによって変わるので割と謎だったのですが、調べてみるとtextの descender が原因だったようです。&#xA;inline要素は g や y といったベースラインより下に突き抜ける文字用のために下側のスペースを確保してしまうようで、それが原因でSVGが下側にずれていました。&#xA;原因がわかったので、上記の問題は line-height: 0; をSVGをラップしている要素に当て、 descender が確保されないようにすることで解決しました。</description>
+      <description>下記ブログを参考にしてアクセシビリティを維持したままCheckboxやRadioボタンを作ろうとしたのですが、特定のサイズ以下でずれる問題に</description>
     </item>
     <item>
       <title>TypeScript &#43; electron-webpackでemotionを動かしたときのメモ</title>
       <link>https://nametake.github.io/posts/2020/08/04/typescript-electron-webpack-emotion/</link>
       <pubDate>Tue, 04 Aug 2020 00:00:00 +0900</pubDate>
       <guid>https://nametake.github.io/posts/2020/08/04/typescript-electron-webpack-emotion/</guid>
-      <description>electron-webpack で emotion を動かそうとして試行錯誤したのでその結果のメモ。&#xA;ライブラリとバージョン TypeScript(3.9.5) electron-webpack(2.8.2) emotion(10.0.27) ts-loader(7.0.5) babel-loader(8.1.0) babel-plugin-emotion(10.0.33) 起きた問題 styled-componentsのselectorに別のComponentsを指定しようとしたときに、 babel-plugin-emotion が必要というエラーが発生しました。&#xA;1 2 3 4 5 6 7 8 9 10 const StyledCheckbox = styled.div&amp;lt;StyledCheckboxProps&amp;gt;` display: inline-block; background: ${(props) =&amp;gt; (props.checked ? &amp;#39;salmon&amp;#39; : &amp;#39;papayawhip&amp;#39;)}; border-radius: 3px; transition: all 150ms; ${/* sc-selector */ HiddenCheckbox}:focus + &amp;amp; { box-shadow: 0 0 0 3px pink; } ` Component selectors can only be used in conjunction with babel-plugin-emotion electron-webpackのドキュメントに、 babel-plugin-* は自動で設定されると書いてあったため指示通りに babel-plugin-emotion をインストールしたのですが、それだけでは上手く動きませんでした。</description>
+      <description>electron-webpack で emotion を動かそうとして試行錯誤したのでその結果のメモ。 ライブラリとバージョン Link to heading TypeScript(3.9.5) electron-webpack(2.8.2) emotion(10.0.27) ts-loader(7.0.5) babel-loader(8.1.0) babel-plugin-emotion(10.0.33) 起きた問題 Link to heading styled-componen</description>
     </item>
     <item>
       <title>DDDにおける外部サービスの抽象化</title>
       <link>https://nametake.github.io/posts/2020/07/25/abstract-external-service/</link>
       <pubDate>Sat, 25 Jul 2020 00:00:00 +0900</pubDate>
       <guid>https://nametake.github.io/posts/2020/07/25/abstract-external-service/</guid>
-      <description>外部サービスの抽象化 最近のシステムはその複雑さの上昇に伴い、様々な外部サービスと連携する機会が多くあります。&#xA;その際、ドメインとして外部サービスをどう取り扱うといいのか、という個人的なプラクティスを過去の失敗例も含めて記事にしようと思います。&#xA;過去の失敗 昔私が関わっていた仮想通貨の販売所の価格判定ロジックを例にあげます。&#xA;自社の販売所における仮想通貨の価格を決定する仕組みを作っていました。&#xA;複数の外部取引所のAPIから価格情報を取り出してそれらの値を使って自社の販売価格を計算をします。&#xA;販売所の価格の構造体は以下のようにドメイン層に定義していました。&#xA;1 2 3 4 5 type Tick struct { Amount int Market Currency Base Currency } また、それらのTick を取り出すために各取引所のサービスごとに以下のようにinterfaceを定義していました。&#xA;1 2 3 4 5 6 7 type FooService interface { GetTick() (*Tick, error) } type BarService interface { GetTick() (*Tick, error) } FooやBarは取引所の名前だと思ってください。&#xA;これらもドメイン層に定義しています。&#xA;また、上記interfaceを満たす実装はインフラストラクチャ層等で定義してDIするようにしています。&#xA;さて、勘の良い方はもうお気づきかもしれませんが上記interfaceの定義が失敗です。&#xA;一見、 Tick を取り出せるinterfaceをサービス分定義したことで問題なく動くように見えます。&#xA;しかし、 GetTick からいきなり Tick 取り出そうとしているため、「外部サービスの値を使って Tick を計算する」というロジックがインフラストラクチャ層に流出するという問題が発生してしまいました。&#xA;具体的な例をあげます。&#xA;取引所Fooは以下のようなResponseを返すAPIを提供していました。&#xA;{ &amp;#34;currentTick&amp;#34;: &amp;#34;1000000&amp;#34;, &amp;#34;market&amp;#34;: &amp;#34;btc-jpy&amp;#34; } 上記の構造を Tick に割り当てるのは難しくありません。</description>
+      <description>外部サービスの抽象化 Link to heading 最近のシステムはその複雑さの上昇に伴い、様々な外部サービスと連携する機会が多くあります。 その際、ドメインとして外部</description>
     </item>
     <item>
       <title>Conditional Typesを使った話</title>
       <link>https://nametake.github.io/posts/2020/07/13/conditional-types/</link>
       <pubDate>Mon, 13 Jul 2020 00:00:00 +0900</pubDate>
       <guid>https://nametake.github.io/posts/2020/07/13/conditional-types/</guid>
-      <description>機能としては知っていたものの使う機会がなかった Conditional Types を使ったのでメモ。&#xA;ElectronのMainプロセスでAPIを叩く際、API毎にchannelを用意するのは手間だと思い以下のようなIPC通信用の型を用意しました。&#xA;同時にEnumも定義してMainプロセスとRendererプロセスで共有し、ReduxのActionとReducerと同じ要領で型安全にするのが目的です。&#xA;1 2 3 4 5 6 7 8 9 10 11 12 13 export type Action&amp;lt;T, P = undefined&amp;gt; = { type: T; payload: P; } export enum ApiType { GET_ACCOUNT = &amp;#39;GET_ACCOUNT&amp;#39;, GET_TASKS = &amp;#39;GET_TASKS&amp;#39;, } export type ApiAction = | Action&amp;lt;ApiType.GET_ACCOUNT&amp;gt; | Action&amp;lt;ApiType.GET_TASKS, GetTasksRequest&amp;gt;; しかし、上記の Action の定義では payload がないAPIを叩くときにも以下のように undefined を与えなければいけません。&#xA;1 invokeApi({type: ApiType.GET_ACCOUNT, payload: undefined}); そこで、以下のように Action の payload をConditional Typesで定義することにより、 P に型が与えられてないときは何もしないようにすることで呼び出し時にundefinedを与えなくてもいいようにしました。</description>
+      <description>機能としては知っていたものの使う機会がなかった Conditional Types を使ったのでメモ。 ElectronのMainプロセスでAPIを叩く際、API毎にchann</description>
     </item>
     <item>
       <title>組み合わせテストでの直交表とPICTの利用</title>
       <link>https://nametake.github.io/posts/2020/06/28/combination-test-pict-and-orthogonal-array/</link>
       <pubDate>Sun, 28 Jun 2020 00:00:00 +0900</pubDate>
       <guid>https://nametake.github.io/posts/2020/06/28/combination-test-pict-and-orthogonal-array/</guid>
-      <description>結合テストの組み合わせについてある程度知見が溜まったのでメモ的に。&#xA;結合テストの組み合わせ問題 システムのリリース前には開発した機能や既存の機能を組み合わせてバグが発生していないかテストをする必要があります。&#xA;ですが、開発した機能が増えていけば組み合わせの数は指数関数的に増えていき、それらを全てテストするのは非現実的です。&#xA;となると、何かしらの方法でテストする組み合わせを絞る必要があります。&#xA;絞るにあたって「システムのバグは2つパラメータの組み合わせで発生する確率が高い」というデータから、2つの異なるパラメータ(因子)の組み合わせが必ず全て登場する最小の表を作る、という手法があります。&#xA;この記事ではその手法のうち、直交表とPICTというツールの使い方をメモして残しておこうと思います。&#xA;直交表 直交表は、因子の組み合わせが効率的になるよう作られた表です。&#xA;基本的には誰かがすでに定義しているものにテストしたいシステムの因子を割り当てるという使い方になります。&#xA;例を挙げてみます。&#xA;とあるWebシステムを作っていて、下記のような環境に対応しているかテストを行う必要があります。&#xA;因子 水準1 水準2 OS Windows macOS ブラウザ Chrome Firefox 端末 ラップトップ モバイル 3因子2通りのため、全ての組み合わせは8パターンになります。&#xA;8パターンであれば全てテストするのもそこまで大変でもないですが、試しに直交表に適用してみます。&#xA;以下のページのように、すでにある直交表からテストしたい項目の形に近いものを選びます。&#xA;タグチ計画のカタログ&#xA;今回は2^3通りのため、L4(2^3)の表が使えそうです。&#xA;上記のテスト項目をL4(2^3)の表に当てはめてみます。&#xA;テスト番号 OS ブラウザ 端末 1 Windows Chrome ラップトップ 2 Windows Firefox モバイル 3 macOS Chrome モバイル 4 macOS Firefox ラップトップ 全パターン行うと8パターンだったものが4パターンで済むようになりました。&#xA;2因子ごとの組み合わせも全て登場するため、バグ発見率も極端に下がりません。&#xA;上記の例のサイズならそこまで恩恵を感じないかもしれませんが、因子と水準が増えたときには大きく組み合わせの数を減らすことができます。&#xA;今回は例のためピッタリの表が見つかるように因子数と水準を調整しましたが、ピッタリの表がない場合は少し大きめのサイズの表に適用し、合いた箇所を有効な水準で埋めることで問題ないようです。&#xA;PICT PICT はMicrosoftが作成公開しているAll Pair法(ペアワイズ方)で組み合わせを作成するツールです。&#xA;直交表では静的な表に因子と水準を当てはめていましたが、PICTでは動的に表を生成します。&#xA;PICTでも例を挙げてみます。&#xA;直交表のときと同じ因子と水準を使うと仮定して、以下のようなテキストファイルを用意します。&#xA;OS: Windows, macOS ブラウザ: Chrome, Firefox 端末: ラップトップ, モバイル 因子: 水準1, 水準2 という構造を一行ずつ定義します。</description>
+      <description>結合テストの組み合わせについてある程度知見が溜まったのでメモ的に。 結合テストの組み合わせ問題 Link to heading システムのリリース前には開発した機能や既存</description>
     </item>
     <item>
       <title>Protocol Buffersのgo_packageの;の仕様</title>
       <link>https://nametake.github.io/posts/2020/05/24/protobuf-go-package-semicolon/</link>
       <pubDate>Sun, 24 May 2020 00:00:00 +0900</pubDate>
       <guid>https://nametake.github.io/posts/2020/05/24/protobuf-go-package-semicolon/</guid>
-      <description>先日protoc-gen-gohttpの依存パッケージをしようと思って色々触っていたら以下のようなWARNINGが出てきました。&#xA;2020/05/24 11:36:51 WARNING: Deprecated use of &amp;#39;go_package&amp;#39; option without a full import path in &amp;#34;greeter.proto&amp;#34;, please specify: option go_package = &amp;#34;.;main&amp;#34;; A future release of protoc-gen-go will require the import path be specified. See https://developers.google.com/protocol-buffers/docs/reference/go-generated#package for more information. 以下のファイルのように go_package のオプションにGoのimport pathを記述しなかったことが問題のようです。&#xA;1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 syntax = &amp;#34;proto3&amp;#34;; package helloworld; option go_package = &amp;#34;main&amp;#34;; service Greeter { rpc SayHello(HelloRequest) returns (HelloReply); } message HelloRequest { string name = 1; } message HelloReply { string message = 1; } 一応WARNINGには「go_package = &amp;quot;.</description>
+      <description>先日protoc-gen-gohttpの依存パッケージをしようと思って色々触っていたら以下のようなWARNINGが出てきました。 2020/05/24 11:36:51 WARNING: Deprecated use of</description>
     </item>
     <item>
       <title>集約におけるトランザクションのドメイン的関心と技術的関心</title>
       <link>https://nametake.github.io/posts/2020/04/30/ddd-aggregate/</link>
       <pubDate>Thu, 30 Apr 2020 00:00:00 +0900</pubDate>
       <guid>https://nametake.github.io/posts/2020/04/30/ddd-aggregate/</guid>
-      <description>集約のトランザクション DDDの集約について学ぶと、必ず「集約はトランザクション境界である」という説明がされています。&#xA;整合性の境界の論理的な意味は、「その内部にあるあらゆるものは、どんな操作をするにかかわらず、特定の不変条件のルールに従う」ということだ。この境界の外部にある、あらゆるものの整合性は、集約とは無関係になる。つまり、集約はトランザクション整合性の境界と同義である&#xA;ヴァーン・ヴァーノン. 実践ドメイン駆動設計 (Japanese Edition) (Kindle の位置No.8139-8141). Kindle 版.&#xA;この「トランザクション」という言葉は技術者的には技術的領域(DB等)のトランザクションと同一視したくなります。&#xA;DDDの概念としてはその認識でも厳密には間違いではありません。&#xA;ただ、個人的にはそこへ至る前に「ドメイン的関心のトランザクション」という考えを1つ挟む必要があるのではないか、と考えています。&#xA;ドメイン的関心のトランザクション この記事で言及している「ドメイン的関心のトランザクション」とは「ドメインエキスパートが業務の処理をするにあたっての区切り」を指します。&#xA;この「ドメイン的関心のトランザクション」を意識しないと適切なトランザクションの切れなくなってしまいます。&#xA;たとえば、1つの契約書から複数の請求書を作成する、といった請求書作成の処理の区切りを例に取ってみます。&#xA;1つの契約書には複数の契約項目があり、それ毎に請求書が作成されるとします。&#xA;その作成の中で、契約書の契約項目にミスが有った場合、技術的関心のトランザクションだけに目が行っていると「契約項目が不正な状態だったため請求書作成の処理全体をロールバック」ということをしがちです。&#xA;このような処理を実現するにはデータの構造とトランザクションだけを表現すればいいのでドメイン貧血症になりがちです。&#xA;ですが、実際に業務をしているドメインエキスパートは「不正な契約項目だけ差し戻して、正しい契約項目からは請求書を作成する」といったことをしている可能性があります。&#xA;その場合、「不正な契約項目」というものを表現する必要があり、契約項目が不正だからということで一概ロールバックをすることはできません。&#xA;もちろん、上記の「不正な契約項目」というものを表現したとしても、契約書や請求書といったオブジェクトとの整合性は保つ必要があるため、最終的には技術的なトランザクションを意識する必要があります。&#xA;しかし、DDDで開発をすすめる上ではその手前に必ず「ドメイン的関心のトランザクション」があり、それを意識して集約を考えることでドメインを深堀りすることに繋がり、結果的に正しい集約を作ることができるのではないかと思います。</description>
+      <description>集約のトランザクション Link to heading DDDの集約について学ぶと、必ず「集約はトランザクション境界である」という説明がされています。 整合性の境界の論理</description>
     </item>
     <item>
       <title>golangci-lint-langserverを作った話</title>
       <link>https://nametake.github.io/posts/2020/03/08/golangci-lint-langserver/</link>
       <pubDate>Sun, 08 Mar 2020 00:00:00 +0900</pubDate>
       <guid>https://nametake.github.io/posts/2020/03/08/golangci-lint-langserver/</guid>
-      <description>最近VimのLinterのプラグインをaleからすべてlanguage serverに移行しました。&#xA;殆どのCLIツールはdiagnostic-languageserver経由で使うことでいい感じに動いてくれています。&#xA;ただ、golangci-lintだけはGoのスコープとの相性の関係ではうまく動作させることができませんでした。&#xA;そこで、golangci-lint専用のlanguage server、golangci-lint-langserverを作成してみました。&#xA;LSPクライアントに読み込ませるとファイルを開いたときと保存したときに以下のようにgolangci-lintの結果を返してくれます。&#xA;自分が使うために作ったためWindows対応や細かいエラーハンドリング等はしていませんが、個人的には割とちゃんと動いたので満足しています。&#xA;もし機能追加等あったらPRお待ちしています。&#xA;制作動機 一応制作動機も書いておこうと思います。&#xA;今回aleの移行先として検討したdiagnostic-languageserverやefm-langserverなのですが、基本的には開いているファイルにlintをかけてその結果を返す仕組みになっています。&#xA;しかし、Goはパッケージ単位(ディレクトリ単位)のスコープになっているためgolangci-lintはうまく動かない場合がありました。&#xA;例えばunusedやdeadcodeのような使っていない変数や関数をチェックするようなものは、そのパッケージ内の別ファイルで使っていたとしてもそれがチェックされず、lintに引っかかってしまいます。&#xA;また、別ファイルで定義されている関数や変数を使おうとした場合はそもそもビルド失敗扱いになりチェックすることすらできませんでした。&#xA;かといって、ファイルが開かれるたびにパッケージ全体に対してgolangci-lintをかけると今度は関係ないファイルの結果も含まれてしまいます。&#xA;この問題を解決するには、language server側で以下の流れのようにlinterが返した結果をLSPクライアントが送ってきた情報でフィルタをする必要がありました。&#xA;LSPクライアントのNotificationを受け取る golangci-lintを実行する 結果の中から1の情報を使って対象ファイルの結果だけをフィルタする LSPクライアントに結果を伝える 最初はdiagnostic-languageserverやefm-langserverにコントリビュートしようとも考えました。&#xA;ただ、そこそこ大きな機能を追加しないと実現できそうになく、かつgolangci-lintのためだけにその機能を追加するのもシンプルではないと思ったため、完全に独立したlanguage serverとして実装してしまうことにしました。&#xA;efm-langserverの実装を参考にして書いたため、かなり重複したコードにはなっています。ただ、そのおかげで実装を大きくせずに書けたのでシンプルな状態は保つことができました。&#xA;個人的にこのlanguage serverは一時的な実装のつもりなので、goplsやdiagnostic-languageserver、efm-langserverが対応したらすぐにdeprecatedな状態にしようと思っています。&#xA;それまではgolangci-lint-langserverはある程度メンテするつもりなので、PRお待ちしています。</description>
+      <description>最近VimのLinterのプラグインをaleからすべてlanguage serverに移行しました。 殆どのCLIツールはdiagnostic-</description>
     </item>
     <item>
       <title>aleとneoformatからdiagnostic-languageserverに移行した</title>
       <link>https://nametake.github.io/posts/2020/02/26/migration-diagnostic-languageserver/</link>
       <pubDate>Wed, 26 Feb 2020 00:00:00 +0900</pubDate>
       <guid>https://nametake.github.io/posts/2020/02/26/migration-diagnostic-languageserver/</guid>
-      <description>Vimのプラグインとしてaleとneoformatをずっと利用して来たのですが、LinterやFormatterも全てLanguage Serverに移行しようと思い、 diagnostic-languageserver に移行しました。&#xA;aleやneoformatで使っていたLinterやFormatterも全て移行させたのでその設定のJSONもおいておきます。&#xA;1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84 85 86 87 88 89 90 91 92 93 94 95 96 97 98 99 100 101 102 103 104 105 106 107 108 109 110 111 112 113 114 115 116 117 118 119 120 121 122 123 124 125 126 127 128 129 130 131 132 133 134 135 136 137 138 139 140 141 142 143 144 145 146 147 148 149 150 151 152 153 154 155 156 157 158 159 160 161 162 163 164 165 166 167 168 169 170 171 172 173 174 175 176 177 178 179 180 181 182 183 184 185 186 187 188 189 190 191 192 193 194 195 196 197 198 199 200 201 202 203 204 205 206 207 208 209 210 211 212 213 214 215 216 217 218 219 220 221 222 223 224 225 226 227 228 229 230 231 232 233 234 235 236 237 238 239 240 241 242 243 244 245 246 247 248 249 250 251 252 253 254 255 { &amp;#34;languageserver&amp;#34;: { &amp;#34;dls&amp;#34;: { &amp;#34;args&amp;#34;: [ &amp;#34;--stdio&amp;#34; ], &amp;#34;command&amp;#34;: &amp;#34;diagnostic-languageserver&amp;#34;, &amp;#34;filetypes&amp;#34;: [ &amp;#34;dockerfile&amp;#34;, &amp;#34;go&amp;#34;, &amp;#34;json&amp;#34;, &amp;#34;markdown&amp;#34;, &amp;#34;sh&amp;#34;, &amp;#34;yaml&amp;#34;, &amp;#34;vim&amp;#34; ], &amp;#34;initializationOptions&amp;#34;: { &amp;#34;filetypes&amp;#34;: { &amp;#34;dockerfile&amp;#34;: [ &amp;#34;dockerfile-hadolint&amp;#34; ], &amp;#34;go&amp;#34;: [], &amp;#34;markdown&amp;#34;: [ &amp;#34;markdown-remark-lint&amp;#34;, &amp;#34;markdown-textlint&amp;#34; ], &amp;#34;sh&amp;#34;: [ &amp;#34;sh-shellcheck&amp;#34; ], &amp;#34;vim&amp;#34;: [ &amp;#34;vim-vint&amp;#34; ], &amp;#34;yaml&amp;#34;: [ &amp;#34;yaml-yamllint&amp;#34; ] }, &amp;#34;formatFiletypes&amp;#34;: { &amp;#34;go&amp;#34;: [ &amp;#34;go-gofmtrlx&amp;#34;, &amp;#34;go-goimports&amp;#34; ], &amp;#34;json&amp;#34;: [ &amp;#34;json-fixjson&amp;#34;, &amp;#34;json-jq&amp;#34; ], &amp;#34;markdown&amp;#34;: [ &amp;#34;markdown-remark&amp;#34; ], &amp;#34;sh&amp;#34;: [ &amp;#34;sh-shfmt&amp;#34; ] }, &amp;#34;formatters&amp;#34;: { &amp;#34;go-gofmtrlx&amp;#34;: { &amp;#34;command&amp;#34;: &amp;#34;gofmtrlx&amp;#34; }, &amp;#34;go-goimports&amp;#34;: { &amp;#34;command&amp;#34;: &amp;#34;goimports&amp;#34; }, &amp;#34;json-fixjson&amp;#34;: { &amp;#34;command&amp;#34;: &amp;#34;fixjson&amp;#34;, &amp;#34;isStderr&amp;#34;: false, &amp;#34;isStdout&amp;#34;: true }, &amp;#34;json-jq&amp;#34;: { &amp;#34;args&amp;#34;: [ &amp;#34;.</description>
+      <description>Vimのプラグインとしてaleとneoformatをずっと利用して来たのですが、LinterやFormatterも全てLanguage Ser</description>
     </item>
     <item>
       <title>TypeScriptでFormのComponentを配列で管理する</title>
       <link>https://nametake.github.io/posts/2020/01/31/ts-array-form-onchange/</link>
       <pubDate>Fri, 31 Jan 2020 00:00:00 +0900</pubDate>
       <guid>https://nametake.github.io/posts/2020/01/31/ts-array-form-onchange/</guid>
-      <description>TypeScriptでFormのComponentを配列で管理する toB向けのサービスや管理画面のように情報量の多いのプロダクトを作っていると、FormをまとめたComponentを作りたくなるケースがあります。&#xA;単体で使っているときにはそこまで問題ないのですが、それを複数リスト上に管理して増減させたいときにonChangeをどうやって設計するのかを色々考えたのでまとめておきます。&#xA;サンプルForm 以下のようなFormを題材にします。&#xA;1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 interface HumanFormValue { firstName: string; lastName: string; } interface HumanFormProps { defaultValue: HumanFormValue; onChange: (value: HumanFormValue) =&amp;gt; void; } const HumanForm: React.</description>
+      <description>TypeScriptでFormのComponentを配列で管理する Link to heading toB向けのサービスや管理画面のように情報量の多いのプロダクトを作っ</description>
     </item>
     <item>
       <title>Go言語でジェネリクスない理由の考察</title>
       <link>https://nametake.github.io/posts/2019/12/31/go-no-generics/</link>
       <pubDate>Tue, 31 Dec 2019 00:00:00 +0900</pubDate>
       <guid>https://nametake.github.io/posts/2019/12/31/go-no-generics/</guid>
-      <description>Go言語にはジェネリクスがありません。&#xA;他言語から入ってきた方はかなりこの部分に戸惑うことが多いようです。&#xA;そこで、そういった方々になぜジェネリクスがないのかを説明するにあたって、自分の中でいい感じに言語化できたのでログとして残しておこうと思います。&#xA;なぜジェネリクスがないか ジェネリクスがない理由を説明するには以下の2つが必要だと思っています。&#xA;言語としてのスタンスの話 ジェネリクスが効果を発揮する場面 それぞれ細かく説明していこうと思います。&#xA;言語としてのスタンスの話 何かが新しく作られるときには何かしら課題を解決しようとして生まれてきます。&#xA;Goが解決しようとした課題についてはGoの作者の生みの親の一人でもあるRob Pike氏が2012年の公演で話されています。&#xA;リンク先の講演の記事の中に、以下の点が既存の開発の辛い部分で、Goはそれらに対処しているという部分があります。&#xA;slow builds (遅いビルド) uncontrolled dependencies (制御されていない依存関係) each programmer using a different subset of the language(言語の異なるサブセットを使用する各プログラマ) poor program understanding (code hard to read, poorly documented, and so on) (不十分なプログラムの理解(読みにくいコード、不十分な文書化など)) duplication of effort (努力の重複) cost of updates (更新のコスト) version skew (バージョンスキュー) difficulty of writing automatic tools (自動ツールの作成の難しさ) cross-language builds (言語間ビルド) 上記に挙げられている対処している課題を見ると、Go言語は「プログラム言語としての正しさ」という点ではなく「(言語仕様も含む)開発のしやすさ」に強くフォーカスを当てられている言語だとわかります。&#xA;そのため、新しい機能を言語に追加にあたり「プログラミング言語としての正しさ」が強くあったとしても、それを代替する手段がありかつ全体として「開発のしやすさ」が損なわれる場合は導入されない傾向があります。&#xA;ジェネリクスが効果を発揮する場面 ジェネリクスは便利な機能です。型を値のように取り扱い、抽象化された処理を型安全に取り扱うことができます。&#xA;ですが、便利に使うためには1つ条件があります。&#xA;それは、「高度に抽象化された振る舞い」が定義できる場合です。&#xA;それでは「高度に抽象化された振る舞い」とは何でしょうか。&#xA;例えばGUI開発におけるViewの振る舞いがあります。&#xA;AndroidのListViewは「アイテムが一覧で並んでいる」という振る舞いを抽象化したViewクラスです。ListView は内部で表示するものをAdapter経由で受け取りますが、Adapterには型パラメータを与えることができるため、一覧の中に表示する項目を型安全に取り扱うことができます。</description>
+      <description>Go言語にはジェネリクスがありません。 他言語から入ってきた方はかなりこの部分に戸惑うことが多いようです。 そこで、そういった方々になぜジェネリ</description>
     </item>
     <item>
       <title>Hooks対応したreact-tableをTypeScriptで使う</title>
       <link>https://nametake.github.io/posts/2019/12/17/react-table/</link>
       <pubDate>Tue, 17 Dec 2019 00:00:00 +0000</pubDate>
       <guid>https://nametake.github.io/posts/2019/12/17/react-table/</guid>
-      <description>この記事はReact Advent Calendar 2019の記事です。&#xA;みなさまテーブルComponentは作成していますか?&#xA;サービスにもよるとは思いますが、業務系のサービスではほぼ確実に登場するUIです。&#xA;しかも、よく登場する上にたくさんの機能を求められるUIでもあります。パッと思いつく限りでも、ソート、フィルター、検索、ページネーション等多岐にわたります。&#xA;これらの機能はUIと分離して1から作るは大変です。あり物のUIライブラリのテーブルComponentにオリジナルのスタイルを当てるという手もありますが、それだとUIライブラリの仕様に引っ張られたり、UIとロジックの分離がうまくできなかったりすることがあります。&#xA;そこで、今回は「テーブルで必要になる機能」だけをHooksとし、UIとロジックを完全に分離できるるreact-table v7を紹介しようと思います。&#xA;注意点 この記事執筆時点ではreact-table自体はRCになっていますが、react-tableの型定義はまだマージされていません。&#xA;https://github.com/DefinitelyTyped/DefinitelyTyped/pull/40816&#xA;また、議論の末、現段階最新バージョンのrc.9ではreact-table側で型定義を管理しないことになっています。&#xA;そのため、この記事の紹介ではTypeScriptを使って紹介をする都合上、以下のコマンドで入るバージョンを使用して紹介をします。&#xA;yarn add react-table@7.0.0-beta.23 大きく使い勝手が変わるようなことはないと思いますが、react-tableは開発が活発なため、この記事の内容が陳腐化している可能性があります。&#xA;本番で使う際は必ず公式のドキュメントを参照してください。&#xA;シンプルなテーブル まずは最もシンプルにテーブルを表示する例です。&#xA;import * as React from &amp;#39;react&amp;#39;; import { render } from &amp;#39;react-dom&amp;#39;; import { useTable, Column } from &amp;#39;react-table&amp;#39;; import &amp;#39;./styles.css&amp;#39;; const columns: Column&amp;lt;Data&amp;gt;[] = [ { Header: &amp;#39;名前&amp;#39;, accessor: &amp;#39;name&amp;#39; }, { Header: &amp;#39;年齢&amp;#39;, accessor: &amp;#39;age&amp;#39; } ]; interface Data { name: string; age: number; } const data: Data[] = [ { name: &amp;#39;John&amp;#39;, age: 23 }, { name: &amp;#39;Jane&amp;#39;, age: 26 } ]; function App() { const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } = useTable&amp;lt;Data&amp;gt;({ columns, data }); return ( &amp;lt;table {.</description>
+      <description>この記事はReact Advent Calendar 2019の記事です。 みなさまテーブルComponentは作成していますか? サービスにもよるとは思いますが、業務系のサ</description>
     </item>
     <item>
       <title>Goの関数内で呼び出される関数をインターセプトする方法</title>
       <link>https://nametake.github.io/posts/2019/12/09/go-func-intercept/</link>
       <pubDate>Mon, 09 Dec 2019 00:05:29 +0900</pubDate>
       <guid>https://nametake.github.io/posts/2019/12/09/go-func-intercept/</guid>
-      <description>この記事はGo2 Advent Calendar 2019の記事です。&#xA;自分はprotoc-gen-gohttpというプラグインを作っているのですが、先日grpc.UnaryServerInterceptorに対応しました。&#xA;その際、どうやればいいかを調査していたら、ChainUnaryServerという関数を見つけ、中身を読んでみると、「特定のinterfaceを受け取って内部でそのinterfaceで実行する」機能を持った関数に対して「内部でinterfaceを実行するときに複数の関数でインターセプトする」方法の知見を得られたので記事にしようと思います。&#xA;コード例 まずはインターセプトしたいコードの例を書きます。&#xA;type WrapStruct struct { pingServer pb.PingAPIServer } func (w *WrapStruct) Call() { ctx := context.Background() arg := &amp;amp;pb.PingRequest{ Msg: &amp;#34;PING&amp;#34;, } ret, err := w.pingServer.Ping(ctx, arg) fmt.Println(ret, err) } 上記例は以下のProtocol Buffersの定義をgRPCオプション付きでコンパイルすると生成されるコードを使用しています。&#xA;syntax = &amp;#34;proto3&amp;#34;; package protobuf1; option go_package = &amp;#34;pb&amp;#34;; service PingAPI { rpc Ping(PingRequest) returns (PingResponse); } message PingRequest { string msg = 1; } message PingResponse { string msg = 1; } なんの変哲もない、ただ自身を実装している構造体がもつ PingAPIServer interfaceの Ping メソッドに PING の文字列を渡して実行し、その結果を出力しているだけのコードです。</description>
+      <description>この記事はGo2 Advent Calendar 2019の記事です。 自分はprotoc-gen-gohttpというプラグインを作っているのですが、先日grpc.Unar</description>
     </item>
     <item>
       <title>Go1.13のerrorsにWrapの機能が入ったので勉強がてらまとめる</title>
       <link>https://nametake.github.io/posts/2019/10/30/unwrap-interface/</link>
       <pubDate>Wed, 30 Oct 2019 00:52:57 +0900</pubDate>
       <guid>https://nametake.github.io/posts/2019/10/30/unwrap-interface/</guid>
-      <description>Go1.13からerrorsに色々機能が入りました(The Go Blog)。&#xA;最近は新しいGoのことをインプットできていなかったので、リハビリがてらsonatardさんのまとめた記事も読みつつ、中の実装を眺めてまとめてみます。&#xA;Unwrap interface 追加された機能は errors.As や errors.Is のようにいくつかありますが、一番のキモとなる追加機能は errors.Unwrap です。&#xA;似たような機能はデファクトスタンダードとして使われているpkg/errorsの errors.Cause としてありましたが、公式で導入されたことは非常に大きいと思います。&#xA;とりあえず公式ライブラリの中を見にいきましょう。&#xA;func Unwrap(err error) error { u, ok := err.(interface { Unwrap() error }) if !ok { return nil } return u.Unwrap() } これだけです。&#xA;やっていることを言葉にしても、「渡されたerrorがUnwrap interfaceを実装していればUnwrapの返り値を返して、そうでなければnilを返す」だけです。&#xA;それでは、Wrapする側の errors.Errorf の中を見にいってみます。&#xA;package fmt import &amp;#34;errors&amp;#34; func Errorf(format string, a ...interface{}) error { p := newPrinter() p.wrapErrs = true p.doPrintf(format, a) s := string(p.buf) var err error if p.</description>
+      <description>Go1.13からerrorsに色々機能が入りました(The Go Blog)。 最近は新しいGoのことをインプットできていなかったので、リハビリがて</description>
     </item>
     <item>
       <title>TypeScirptのプロジェクトにエイリアスを設定して絶対パスでimportするメモ</title>
       <link>https://nametake.github.io/posts/2019/10/07/typescript-absolute-imports/</link>
       <pubDate>Mon, 07 Oct 2019 00:15:35 +0900</pubDate>
       <guid>https://nametake.github.io/posts/2019/10/07/typescript-absolute-imports/</guid>
-      <description>TypeScriptのプロジェクトを作る度に設定すると思うのでメモ。&#xA;前提 Webpackでプロジェクトを管理している Linterはeslintを使用している tsconfig.jsonの設定 tsconfig.jsonのcompilerOptionsを設定してsrc以下のディレクトリに対してエイリアスを貼ります。&#xA;エイリアスになる文字は何でも良いですが、私はnpm経由でimportするmoduleと混同しないように @/ を使用しています。&#xA;{ &amp;#34;compilerOptions&amp;#34;: { ~~~ &amp;#34;baseUrl&amp;#34;: &amp;#34;./&amp;#34;, &amp;#34;paths&amp;#34;: { &amp;#34;@/*&amp;#34;: [&amp;#34;src/*&amp;#34;] }, ~~~ } } Webpackのresolveの設定 Webpackのmoduleの解決にtsconfigで設定したエイリアスが使われるように設定します。&#xA;import { Configuration } from &amp;#39;webpack&amp;#39;; const config: Configuration = { ~~~ resolve: { extensions: [&amp;#39;.ts&amp;#39;, &amp;#39;.tsx&amp;#39;, &amp;#39;.js&amp;#39;, &amp;#39;.json&amp;#39;], alias: { &amp;#39;@&amp;#39;: path.resolve(__dirname, &amp;#39;src&amp;#39;) } }, ~~~ }; export default config; eslintの設定 Webpackでプロジェクトをビルドするだけなら上記2つの設定だけで大丈夫ですが、eslintでimport/no-unresolvedを設定しているとエイリアスが解決できずエラーになります。&#xA;そこでeslint-import-resolver-webpackを導入して、eslintのimportの解決にWebpackの設定を使用するようにeslintrcに設定を加えます。&#xA;まずは以下のコマンドでeslint-import-resolver-webpackを追加します。&#xA;yarn add -D eslint-import-resolver-webpack 次にeslintrcのsettingsに以下のようにWebpackの設定を使用するように設定を加えます。&#xA;{ ~~~ &amp;#34;settings&amp;#34;: { &amp;#34;import/resolver&amp;#34;: &amp;#34;webpack&amp;#34; } ~~~ } これでeslintでもエイリアスを認識して、エラーも出なくなります。</description>
+      <description>TypeScriptのプロジェクトを作る度に設定すると思うのでメモ。 前提 Link to heading Webpackでプロジェクトを管理している Linterはesl</description>
     </item>
     <item>
       <title>Goのrelfectで構造体の変数にインスタンスを詰める方法</title>
       <link>https://nametake.github.io/posts/2019/09/10/go-reflect-create-instance/</link>
       <pubDate>Tue, 10 Sep 2019 13:39:29 +0900</pubDate>
       <guid>https://nametake.github.io/posts/2019/09/10/go-reflect-create-instance/</guid>
-      <description>構造体の変数にreflectでインスタンスを詰める方法メモ。&#xA;package main import ( &amp;#34;fmt&amp;#34; &amp;#34;reflect&amp;#34; ) func main() { var foo *Foo fmt.Println(foo) // nil fmt.Println(&amp;#34;------------&amp;#34;) // nilにアクセスしようとするのでエラー // foo.msg = &amp;#34;Hello&amp;#34; // fooの型を取得 typ := reflect.TypeOf(foo).Elem() // fooの型の実体を生成 dst := reflect.New(typ).Interface() // foo変数への参照を取得 src := reflect.ValueOf(&amp;amp;foo).Elem() fmt.Println(typ) // main.Foo fmt.Println(src) // nil fmt.Println(dst) // &amp;amp;{} fmt.Println(&amp;#34;------------&amp;#34;) // foo変数の参照に実体化したfooの型のを設定 src.Set(reflect.ValueOf(dst)) fmt.Println(typ) // main.Foo fmt.Println(src) // &amp;amp;{} fmt.Println(dst) // &amp;amp;{} fmt.Println(&amp;#34;------------&amp;#34;) // 生成した変数はすべて同じ構造体を参照している foo.msg = &amp;#34;Hello&amp;#34; fmt.Println(src) // &amp;amp;{Hello} fmt.</description>
+      <description>構造体の変数にreflectでインスタンスを詰める方法メモ。 package main import ( &amp;#34;fmt&amp;#34; &amp;#34;reflect&amp;#34; ) func main() { var foo *Foo fmt.Println(foo) // nil fmt.Println(&amp;#34;------------&amp;#34;) // nilにアクセスしようとするのでエラー // foo.msg =</description>
     </item>
     <item>
       <title>protoc-gen-gohttpをHttpRule Optionに対応させた</title>
       <link>https://nametake.github.io/posts/2019/08/30/protoc-gen-gohttp-httprule/</link>
       <pubDate>Fri, 30 Aug 2019 01:52:26 +0900</pubDate>
       <guid>https://nametake.github.io/posts/2019/08/30/protoc-gen-gohttp-httprule/</guid>
-      <description>以前、Protocol Buffersのserviceの定義を利用してGoのnet/httpで利用できるようにするためのprotoc-gen-gohttpというprotocのプラグインを作成しました。&#xA;ですが、protoc-gen-gohttpではURLのパス部分の定義はProtocol Buffersの定義には記述できないため、クライアント側がProtocol Buffersを見ただけでパスを読み取ることができませんでした。また、生成されたコードはHTTPのBodyしか参照しないため、情報を取得するだけのときもHTTPのメソッドをPOSTにする必要もありました。&#xA;そこで、Googleが提供しているRPCの定義をHTTPのREST APIにマッピングするためのHttpRuleオプションを利用して、protoc-gen-gohttpがHttpRuleのマッピングどおりに動作するコードを生成するように改良しました。&#xA;使い方 protoc-gen-gohttpをインストールしたら、以下のようにHttpRuleを使用したProtoの定義を用意します(annotations.protoのダウンロードの仕方はこの辺を参考にしてください)。この記事ではexample.protoに書いているとします。&#xA;syntax = &amp;#34;proto3&amp;#34;; package main; option go_package = &amp;#34;main&amp;#34;; import &amp;#34;google/api/annotations.proto&amp;#34;; service Messaging { rpc GetMessage(GetMessageRequest) returns (GetMessageResponse) { option (google.api.http).get = &amp;#34;/v1/messages/{message_id}&amp;#34;; } rpc UpdateMessage(UpdateMessageRequest) returns (UpdateMessageResponse) { option (google.api.http) = { put: &amp;#34;/v1/messages/{message_id}/{sub.subfield}&amp;#34; body: &amp;#34;*&amp;#34; }; } } message GetMessageRequest { string message_id = 1; string message = 2; repeated string tags = 3; } message GetMessageResponse { string message_id = 1; string message = 2; repeated string tags = 4; } message SubMessage { string subfield = 1; } message UpdateMessageRequest { string message_id = 1; SubMessage sub = 2; string message = 3; } message UpdateMessageResponse { string message_id = 1; SubMessage sub = 2; string message = 3; } 用意できたら、以下のコマンドでGoのコードを生成します。</description>
+      <description>以前、Protocol Buffersのserviceの定義を利用してGoのnet/httpで利用できるようにするためのprotoc-gen-</description>
     </item>
     <item>
       <title>Protocol Buffersを使ったAPIでのNullの設計</title>
       <link>https://nametake.github.io/posts/2019/08/17/protobuf-null-api/</link>
       <pubDate>Sat, 17 Aug 2019 10:44:03 +0900</pubDate>
       <guid>https://nametake.github.io/posts/2019/08/17/protobuf-null-api/</guid>
-      <description>Protocol BuffersのNullの取り扱いの問題 Protocol Buffersのproto3の仕様ではmessageの中の値をOptionalで表現する記法がありません。値を詰めずに送ると入れ子の値がデフォルト値になってしまいます。&#xA;しかし、アプリケーションの設計によってはOptionalな値を表現する必要が出てきます。&#xA;そういった時、プリミティブな型ならgoogle/protobuf/wappers.protoを使う方法があります。&#xA;以下のように使うことでmsgはOptionalな値として取り扱えます。&#xA;syntax = &amp;#34;proto3&amp;#34;; package example; import &amp;#34;google/protobuf/wrappers.proto&amp;#34;; message Example { google.protobuf.StringValue msg = 1; } wappers.protoを読むと、google.protobuf.StringValueは内部にstringを持つmessageとして定義してあり、入れ子構造になったmessageはデフォルト値がnullになるという仕様を利用して擬似的にOptionalを表現する仕組みであるということがわかります。&#xA;しかし、プリミティブな型ではないmessageを定義して、それを入れ子構造にするようなmessageを定義すると、入れ子になったmessageのデフォルト値はnullであるという特性から、それがOptionalなのかRequiredなのかが分かりづらくなるという問題があります。&#xA;例えば、以下のようにDecimal 型が定義されたとき、それを入れ子構造にするようなOrder型があるとします。&#xA;syntax = &amp;#34;proto3&amp;#34;; package example; message Decimal { int64 value = 1; int64 exp = 2; } // アプリケーションに注文をするメッセージ message Order { // 支払う金額(Required) Decimal amount = 1; // 通貨単位(Required)。 int64 currency_unit = 2; // 使用するポイント(Optional) Decimal point = 3; } Order型では金銭を表現しているため数値を正確に表現できるDecimal型を使って金額とポイントを定義しています。しかし、アプリケーションの都合でamountはRequiredにpointはOptionalにしたいとき、どちらもデフォルト値がnullになってしまうため、そのままだと両方を同時に表現できません。また、0ポイントなのかnullなのかで挙動に明確な違いがある場合は0を送るという手段も成立しません。&#xA;Orderぐらいの定義量であればコメントやドキュメントで対応することもできます。しかし、生成されるコードがOptionalであるということは変わらないため、せっかく型付でコード生成をしてくれるProtocol Buffersのメリットが半減してしまいます。また、人類にドキュメントを書く読む管理するという行為は難しすぎるため、プロダクトの成長に従ってドキュメントは陳腐化していってしまいます。</description>
+      <description>Protocol BuffersのNullの取り扱いの問題 Link to heading Protocol Buffersのproto3の仕様ではmessageの中の値をOptionalで表現する記</description>
     </item>
     <item>
       <title>Goの戻り値をいい感じに補完してくれるvim-snippetsを作った</title>
       <link>https://nametake.github.io/posts/2019/07/29/vim-goiferr-snippets/</link>
       <pubDate>Mon, 29 Jul 2019 22:57:06 +0900</pubDate>
       <guid>https://nametake.github.io/posts/2019/07/29/vim-goiferr-snippets/</guid>
-      <description>最近Vimの設定を整理してcoc.nvimに乗り換えるにあたり、snippetのプラグインもneosnippetからcoc-neosnippetに乗り換え、snippet集もvim-snippetsに変更しました。&#xA;概ね問題はなかったのですが、Goを書くときにiferrで戻り値をいい感じに補完してくれる機能がなくなったのは若干不便でした(参考)。&#xA;一応coc.nvimにneosnippetの機能を取り込む機能はついているようでしたがうまく動かなかったことと、もうちょっと高級な機能が欲しいと前々から思っていたのもあり、せっかくなのでsnippetを提供するプラグインを作りました。&#xA;それで作ったのが、vim-goiferr-snippetsです。以下のgifのように動作します。&#xA;iferrのsnippetに関して以下の機能を提供しています。&#xA;戻り値の型を構造体でも補完してくれる 構造体がポインタかどうかを判別してくれる pkg/errorsのWrap関数でerrorをWrapする補完の提供 名前付き戻り値のときはreturnしか出力しない インラインのエラーハンドリング用snippetも提供 上記機能を持ったVimScirptの関数として提供している pkg/errors以外のerrorライブラリ等でカスタマイズできる また、作っている最中に「iferr用の正規表現はそのままreturnのsnippetとしても使えるのでは？」と思ったので、そのままreturnを補完するsnippetとしても提供しました。戻り値をいい感じに展開して、それぞれにジャンプ用のマーカーを付けているので、サクサク戻り値を設定できます。&#xA;自分用に作ったのでオレオレ設定な部分もありますが、生暖かい見ていただければ幸いです。&#xA;最後に、プラグイン内の正規表現部分は@pockeさんの「Vim で Go 言語を書いている時、Neosnippet でいい感じに if する」という記事を参考にさせていただきました！ありがとうございました！</description>
+      <description>最近Vimの設定を整理してcoc.nvimに乗り換えるにあたり、snippetのプラグインもneosnippetからcoc-neosnipp</description>
     </item>
     <item>
       <title>Vimのプラグインを整理した(あとcoc.nvimの紹介)</title>
       <link>https://nametake.github.io/posts/2019/07/25/change-vim-plugins/</link>
       <pubDate>Thu, 25 Jul 2019 00:51:43 +0900</pubDate>
       <guid>https://nametake.github.io/posts/2019/07/25/change-vim-plugins/</guid>
-      <description>ちまちまとdotfilesを育ててきたんですが、Goの補完が動かなくなっていたり中途半端にLSP対応しようとした痕跡だけ残っていたりしたので、断捨離も兼ねてガッツリプラグインを整理しました。&#xA;プラグインの構成はdotfiles/vim/rc/plug.rc.vimに全部寄せています。&#xA;あんまり凝った構成にしてもメンテナンスが大変なので、以下の基準でプラグインを選びました。&#xA;githubのStar数が多くてAPIが安定してそう 少ない設定でも動く 整理しているときに、coc.nvimという良さげな補完プラグインを見つけたので軽く紹介してみます。&#xA;coc.nvim coc.nvimはREADMEに書いてあるとおり、VSCodeライクな補完をVim上で実現するために作られているらしい。&#xA;高速と謳っているだけあり、重たいファイルを開いて補完を実行しても重くなりませでした。また、デフォルトでLSPに対応している上に、非常に丁寧なドキュメントも用意されているため、導入のハードルはとにかく低かったです。aleと共存するための設定があったのも個人的には嬉しい。&#xA;一部設定はJSONで管理することになりますが、それさえ問題なければ強くおすすめできます。&#xA;導入に際して、coc-snippetsをCocInstallではなく、プラグインマネージャ(vim-plug)経由でインストールしようとしたときにちょっとだけ引っかかったのでそれだけメモ。&#xA;coc.nvimと連携するエクステンションをプラグインマネージャ経由でインストールするときには、以下のようにインストール後にyarnコマンドを実行するようにする必要があります。&#xA;Plug &amp;#39;neoclide/coc-snippets&amp;#39;, {&amp;#39;do&amp;#39;: &amp;#39;yarn install --frozen-lockfile&amp;#39;} (ちなみにちゃんとドキュメントに書いてあるので、全部読んでおけば引っかかるようなこともないです)</description>
+      <description>ちまちまとdotfilesを育ててきたんですが、Goの補完が動かなくなっていたり中途半端にLSP対応しようとした痕跡だけ残っていたりしたので</description>
     </item>
     <item>
       <title>zshのPATHの順番をfish shellに引き継ぐ</title>
       <link>https://nametake.github.io/posts/2019/07/22/pass-zsh-path-to-fish/</link>
       <pubDate>Mon, 22 Jul 2019 01:34:18 +0900</pubDate>
       <guid>https://nametake.github.io/posts/2019/07/22/pass-zsh-path-to-fish/</guid>
-      <description>自分はメインのターミナル環境をfishにしています。&#xA;特に設定を細かくしなくてもサクサク動いてくれるので非常に助かっているんですが、POSIX準拠ではないためデフォルトシェルにするのは避けて、以下のような形で利用しています。&#xA;デフォルトシェルはzsh tmuxを自動起動 tmuxのデフォルトシェルとしてfish そのため、環境変数の設定は全てzshenvでしているんですが、fishを起動したときにzshenvで設定した環境変数の順番を維持してくれないという問題がありました。&#xA;普通にfishを起動するだけだと発生する問題のようだったので、以下のようにtmuxでfishを起動する際にzshのパスをそのままの順番でfishのパスに設定する変更することで対応しました。&#xA;set -g default-command /usr/local/bin/fish --init-command=&amp;#34;set PATH &amp;#39;string split : $PATH&amp;#39;)&amp;#34; 上記のやり方は直接的な解決方法ではないが、PATHの順序に関するissueは挙がっているので、そのうち直るかもしれません。(深く追う時間が確保できない……)&#xA;https://github.com/fish-shell/fish-shell/issues/5456</description>
+      <description>自分はメインのターミナル環境をfishにしています。 特に設定を細かくしなくてもサクサク動いてくれるので非常に助かっているんですが、POSIX</description>
     </item>
     <item>
       <title>FormikとYupを使った動的フォームのバリデーション</title>
       <link>https://nametake.github.io/posts/2019/06/05/formik-yup-dynamic-validation/</link>
       <pubDate>Wed, 05 Jun 2019 23:50:36 +0900</pubDate>
       <guid>https://nametake.github.io/posts/2019/06/05/formik-yup-dynamic-validation/</guid>
-      <description>Formikで動的なFormを作った時に、表示されるFormに応じてYupのバリデーションを切り替える方法でちょっと手間取ったのでメモ。&#xA;結論から言うとYup.lazy()を使って遅延評価されるValidationSchemaを使えば解決した。Yup.lazy()に渡ってくるFormの値を元にValidationwSchemaを表示されるFormに対応したValidationSchemaを返せば狙った挙動が実現できました。&#xA;サンプルコードは以下。</description>
+      <description>Formikで動的なFormを作った時に、表示されるFormに応じてYupのバリデーションを切り替える方法でちょっと手間取ったのでメモ。 結論</description>
     </item>
     <item>
       <title>インライン要素の高さを合わせるCSS定義</title>
       <link>https://nametake.github.io/posts/2019/05/29/inline-center/</link>
       <pubDate>Wed, 29 May 2019 15:47:35 +0900</pubDate>
       <guid>https://nametake.github.io/posts/2019/05/29/inline-center/</guid>
-      <description>ラジオボタンとラベルの高さを合わせるCSS定義を何回も調べている気がするのでメモ。&#xA;たぶん下の書き方が一番モダンだと思います。&#xA;display: inline-flex; align-items: center; </description>
+      <description>ラジオボタンとラベルの高さを合わせるCSS定義を何回も調べている気がするのでメモ。 たぶん下の書き方が一番モダンだと思います。 display: inline-flex; align-items: center;</description>
     </item>
     <item>
       <title>Type SafeなReducerの書き方</title>
       <link>https://nametake.github.io/posts/2019/05/18/type-safe-reducer/</link>
       <pubDate>Sat, 18 May 2019 10:38:55 +0900</pubDate>
       <guid>https://nametake.github.io/posts/2019/05/18/type-safe-reducer/</guid>
-      <description>以前書いた記事で書いたReducerでは、受け取ったActionの型を判別するために、switchで分岐した後に対応したActionの型でキャストをする必要がありました。&#xA;const todoReducer: Reducer&amp;lt;ITodoState&amp;gt; = ( state: ITodoState = initTodoState, action: TodoAction ): ITodoState =&amp;gt; { switch (action.type) { case TodoActionType.ADD_TODO: const addTodoAction: IAddTodoAction = action; // &amp;lt;-- ここでキャストしている return { ...state, todos: state.todos.concat([addTodoAction.payload.todo]) }; default: return state; } }; この方法だと、action.typeとそれに対応する型を実装者が気にしなければならず、型安全とは言い切れませんでした。&#xA;このあたりの話を某Slackで相談したら、以下のような Flux standard actionのtypeやpayloadをジェネリクスで指定するようにして、typeにenumを使うというやり方を教えてもらいました。&#xA;import { Reducer } from &amp;#39;redux&amp;#39;; // Flux standard action interface Action&amp;lt;TType, TPayload = null, TMeta = undefined&amp;gt; { type: TType; payload: TPayload; meta?: TMeta; } enum ActionType { ADD, DELETE } type AddAction = Action&amp;lt;ActionType.</description>
+      <description>以前書いた記事で書いたReducerでは、受け取ったActionの型を判別するために、switchで分岐した後に対応したActionの型でキ</description>
     </item>
     <item>
       <title>IntelliJのPopupの候補を展開するKeymap</title>
       <link>https://nametake.github.io/posts/2019/01/20/intellij-popup-expand/</link>
       <pubDate>Sun, 20 Jan 2019 21:05:06 +0900</pubDate>
       <guid>https://nametake.github.io/posts/2019/01/20/intellij-popup-expand/</guid>
-      <description>自分は普段Vimでの補完候補を&amp;lt;C-k&amp;gt;で展開しているがIntelliJでの補完候補も同じコマンドで展開したかったのでメモ。&#xA;結論だけいうと、Editor Actions -&amp;gt; Choose Lookup ItemにKeymapを設定すればできました。&#xA;本当は.ideavimrcだけに設定したかったんですが、ここまで調べるのに少し時間がかかったので後で調べます。</description>
+      <description>自分は普段Vimでの補完候補を&amp;lt;C-k&amp;gt;で展開しているがIntelliJでの補完候補も同じコマンドで展開したかったのでメモ。 結論</description>
     </item>
     <item>
       <title>labelerrとsuberrを作った話をLTしてきた</title>
       <link>https://nametake.github.io/posts/2018/12/19/created-labelerr-and-suberr/</link>
       <pubDate>Wed, 19 Dec 2018 11:37:17 +0900</pubDate>
       <guid>https://nametake.github.io/posts/2018/12/19/created-labelerr-and-suberr/</guid>
-      <description>golang.tokyo #20のLT大会で、labelerrとsuberrを作った話をしてきました。&#xA;「Goのerrorは1種類というのは綺麗だとは思うけど、実運用上errorに重み付けをしたいよね」ってところからこのライブラリの出発点です。&#xA;スライド内にもありますが、Primitiveな型しか取り扱わないように気をつけている上に、ライブラリ自体も難しいことはしてないので、なんとなく使ってみるか、ぐらいの感覚で使ってもらうと嬉しいです。</description>
+      <description>golang.tokyo #20のLT大会で、labelerrとsuberrを作った話をしてきました。 「Goのerrorは1種類というのは綺麗だとは思うけど、実運用</description>
     </item>
     <item>
       <title>Goでのprotocプラグインのテストの書き方</title>
       <link>https://nametake.github.io/posts/2018/12/14/protoc-plugin-test/</link>
       <pubDate>Fri, 14 Dec 2018 00:00:00 +0900</pubDate>
       <guid>https://nametake.github.io/posts/2018/12/14/protoc-plugin-test/</guid>
-      <description>最近周りでProtocol Buffersの話題をよく聞くようになりました。&#xA;ということはそろそろ人類はprotocのプラグインを書きたくなる時代がやってくると思います。&#xA;そのときに世の中に生み出されるプラグインの品質が少しでも高くなればと思い、以前protoc-gen-gohttpというプラグイン作ったときにテストも書いたので、その知見を書こうと思います。&#xA;プラグイン自体は@yuguiさんの「protocプラグインの書き方」がとても参考になったのでそちらを参照すると良いかもしれません。&#xA;TL;DR 細かいやり方はprotoc-gen-goのgolden_test.goに書いてある 自分のプラグインのテストもそれを参考にして書いた プラグインの動作テストはテスト内でprotocコマンドを実行して行う 実行結果の確認はGolden testingで行う Goのコードでprotoファイルをplugin.CodeGeneratorRequestに変換することは(恐らく)できない 経緯(読み飛ばして大丈夫です) protocのプラグインは標準入力に入ってきたデータをproto.CodeGeneratorRequest型にUnmarshalしてprotoファイルの情報を取得します。&#xA;そのため、最初にテストを書こうとしたときにはGoだけでprotoファイルをproto.CodeGeneratorRequestに変換する仕組みがあるのかと思っていたのですが、この記事公開時点ではその仕組みは提供されていないようでした(知ってたらコメント等で教えていただけると助かります)。&#xA;「それじゃあ有名なプラグインはどうやってるんだ?」と思いprotoc-gen-goのコードを見てみると、Goのコードの中で直接protocコマンドを実行していて、少し面白いテストをしていたので解説しようと思います。&#xA;golden_test.goの解説 ファイル名から想像できる通り、いわゆるGolden testingと呼ばれるものです。テストの中からprotocコマンドを直接実行して、その結果の出力ファイルとtestdataディレクトリに入っている期待するファイルとを比較をしてテストしています。&#xA;300行ぐらいなので全部読んでもそんなに時間はかからないと思いますが、簡単に解説をしてみようと思います。&#xA;コマンド実行部分 以下のコードが直接コマンドを実行する部分です。testing.T構造体とprotocに与える引数を受け取って実際にコマンドを実行します。&#xA;func protoc(t *testing.T, args []string) { cmd := exec.Command(&amp;#34;protoc&amp;#34;, &amp;#34;--plugin=protoc-gen-go=&amp;#34;+os.Args[0]) cmd.Args = append(cmd.Args, args...) // We set the RUN_AS_PROTOC_GEN_GO environment variable to indicate that // the subprocess should act as a proto compiler rather than a test. cmd.Env = append(os.Environ(), &amp;#34;RUN_AS_PROTOC_GEN_GO=1&amp;#34;) out, err := cmd.CombinedOutput() if len(out) &amp;gt; 0 || err !</description>
+      <description>最近周りでProtocol Buffersの話題をよく聞くようになりました。 ということはそろそろ人類はprotocのプラグインを書きたくなる時</description>
     </item>
     <item>
       <title>TypeScript&#43;React&#43;Reduxチュートリアル</title>
       <link>https://nametake.github.io/posts/2018/12/05/typescript-react-redux-tutorial/</link>
       <pubDate>Wed, 05 Dec 2018 11:08:00 +0900</pubDate>
       <guid>https://nametake.github.io/posts/2018/12/05/typescript-react-redux-tutorial/</guid>
-      <description>普段は Go でサーバサイドのコードを書いているのですが、TypeScript+React+Redux を勉強する機会がありました。&#xA;その際、巷に溢れているチュートリアルやサンプルコードで型で縛っているものが少なすぎて、理解にかなり苦労したので自分なりに Todo アプリケーションを作るチュートリアルを書いておきます。&#xA;このチュートリアルは以下のことを意識して書かれています。&#xA;引数や返り値は型で縛る データフローの理解を重視する 外部ライブラリは以下の 3 つしか import しない react redux react-redux 標準の設計になるべく則る また、この記事では以下のことについては深く言及はしません&#xA;nodeのツールのエコシステム TypeScript の記法 JSX の記法 React+Redux の概念 プロジェクトの準備 まずはプロジェクトを準備します。&#xA;node と yarn は入っている前提で進めます。&#xA;Facebook が公式で用意しているアプリケーション作成ツールを使用してプロジェクトテンプレートを作ります。&#xA;npx create-react-app todo-app --scripts-version=react-scripts-ts 次にプロジェクトのディレクトリに移動して以下のツールをインストールします。&#xA;cd todo-app yarn add redux react-redux yarn add -D @types/redux @types/react-redux @types がついているパッケージは、/以下のパッケージの型情報が記述されているパッケージです。開発時しか使用しないので-Dオプションを付けてインストールします。&#xA;以下のコマンドでローカルサーバが立ち上がり、ブラウザに画面が表示されれば問題ありません。&#xA;yarn start チュートリアルのコードは作成されたプロジェクト内部の src ディレクトリに記述していきます。&#xA;Component の実装 何はともあれ何かが表示されてないとモチベーションが上がらないのでブラウザに見た目を表示させます。&#xA;以下のコードを TodoComponent.tsx として src 以下に記述します。JSX 記法が含まれるファイルは tsx 拡張子にします。</description>
+      <description>普段は Go でサーバサイドのコードを書いているのですが、TypeScript+React+Redux を勉強する機会がありました。 その際、巷に溢れ</description>
     </item>
     <item>
       <title>VimConf2018感想</title>
       <link>https://nametake.github.io/posts/2018/11/24/vimconf2018/</link>
       <pubDate>Sat, 24 Nov 2018 10:15:34 +0900</pubDate>
       <guid>https://nametake.github.io/posts/2018/11/24/vimconf2018/</guid>
-      <description>11月24日にあったVimConf2018に行ったので参加ブログを書きます。&#xA;Keynote - What is the next feature?(o) スライド&#xA;mattnさんの発表。&#xA;Keynote - Vim: From hjkl to a platform for plugins 楽しみにしていたBram氏の発表。&#xA;Vimの歴史とこれからのVimの話をされていた。&#xA;非常に勝手ながらにプラグインにはそこまで興味がないかと思っていたが、発表で言及されていた「これからのVim」はプラグインに関することが多く、少し驚いた。&#xA;発表の内容からも、終始開発者として「使う人」のことを強く意識しながらVimのこれからを考えていることが伝わった。&#xA;個人的にはVSCodeのPopup Windowが羨ましいのでPopUp Windowがほしいです。&#xA;Migrating plugins to standard features この発表の聽いたので帰ってからVimのプラグインを10個削りました。&#xA;Modes デバッグのお話。&#xA;この話を聽いてDelveのプラグインを思い出したのでちょっとあとで試そうと思う。&#xA;A day in the life of (ordinary) Vimmer 1日1回プラグインのアップデートは私もやります。&#xA;Modern editor-independent development environment for PHP Modern editor-independent development environment for PHP #vimconf / 黒點 さん - ニコナレ 宗教戦争好きですすみません。&#xA;Veonimは少し気になったので後で試す。&#xA;Effective Modern Vim scripting スライド</description>
+      <description>11月24日にあったVimConf2018に行ったので参加ブログを書きます。 Keynote - What is the next feature?(o) Link to heading スライド mattnさんの発表。 Keynote - Vim: From hjkl to a</description>
     </item>
     <item>
       <title>Protocol Buffersのserviceをnet/httpに対応させるprotoc-gen-gohttpを作った</title>
       <link>https://nametake.github.io/posts/2018/11/21/protoc-gen-gohttp/</link>
       <pubDate>Wed, 21 Nov 2018 16:32:07 +0900</pubDate>
       <guid>https://nametake.github.io/posts/2018/11/21/protoc-gen-gohttp/</guid>
-      <description>nametake/protoc-gen-gohttpというprotocのプラグインを作ったのでその話です。&#xA;Protocol Buffersとは Protocol Buffersはインターフェース定義言語の1つでGoogleによって開発されているものです(ざっくりいうと、JSONやXMLの仲間)。以下のように、構造を表すmessageとそのmessageを使ったRPCのインターフェースのserviceというものを定義できます。&#xA;syntax = &amp;#34;proto3&amp;#34;; package helloworld; option go_package = &amp;#34;main&amp;#34;; message HelloRequest { string name = 1; } message HelloReply { string message = 1; } service Greeter { rpc SayHello(HelloRequest) returns (HelloReply) {} } 上記の定義をprotocコマンドを使ってコンパイルすることで、対応した言語ならそのままコードを書き出せます。例えばGoなら以下のような構造体が書き出されます(長くなるのでコードは削っています)。以下の構造体はProtocol Bufferが用意しているライブラリを利用すればバイナリに変換できます。&#xA;type HelloRequest struct { Name string `protobuf:&amp;#34;bytes,1,opt,name=name&amp;#34; json:&amp;#34;name,omitempty&amp;#34;` XXX_NoUnkeyedLiteral struct{} `json:&amp;#34;-&amp;#34;` XXX_unrecognized []byte `json:&amp;#34;-&amp;#34;` XXX_sizecache int32 `json:&amp;#34;-&amp;#34;` } type HelloReply struct { Message string `protobuf:&amp;#34;bytes,1,opt,name=message&amp;#34; json:&amp;#34;message,omitempty&amp;#34;` XXX_NoUnkeyedLiteral struct{} `json:&amp;#34;-&amp;#34;` XXX_unrecognized []byte `json:&amp;#34;-&amp;#34;` XXX_sizecache int32 `json:&amp;#34;-&amp;#34;` } また、protocコマンドはプラグイン機構も持っているため、例えばgRPCのためのコードを書き出したかったらprotoc --go_out=plugins=grpc:.</description>
+      <description>nametake/protoc-gen-gohttpというprotocのプラグインを作ったのでその話です。 Protocol Buffersとは Link to heading Protocol Buf</description>
     </item>
     <item>
       <title>GCPの認証済みのhttp.Clientの取得方法</title>
       <link>https://nametake.github.io/posts/2018/11/09/auth-gcp-client/</link>
       <pubDate>Fri, 09 Nov 2018 11:15:24 +0900</pubDate>
       <guid>https://nametake.github.io/posts/2018/11/09/auth-gcp-client/</guid>
-      <description>GCPの認証済みのhttp.Clientが欲しいときにちょっとだけ調べたのでメモ。&#xA;結論だけ言うと、golang.org/x/oauth2/googleのDefaultClientを使えばいいみたいです。&#xA;今回はDataflowのAPIを叩きたかったので以下のようにすればできました。&#xA;client, err := google.DefaultClient(ctx, dataflow.CloudPlatformScope) if err != nil { return fmt.Errorf(&amp;#34;failed create client: %v&amp;#34;, err) } </description>
+      <description>GCPの認証済みのhttp.Clientが欲しいときにちょっとだけ調べたのでメモ。 結論だけ言うと、golang.org/x/oauth2/g</description>
     </item>
     <item>
       <title>neoformatでshfmtを使うときにインデントをタブ文字にしたい時の設定</title>
       <link>https://nametake.github.io/posts/2018/10/10/vim-shfmt-neoformat-indent/</link>
       <pubDate>Wed, 10 Oct 2018 11:44:32 +0900</pubDate>
       <guid>https://nametake.github.io/posts/2018/10/10/vim-shfmt-neoformat-indent/</guid>
-      <description>neoformatで使うshfmtはデフォルトだとインデントがスペースなんですが、チームのコーディング規約に合わせてタブ文字にしたかったときにちょっと引っかかったのでメモ。&#xA;まずは、shfmt のヘルプとneoformatのshfmtの定義を見てみます。&#xA;-i uint indent: 0 for tabs (default), &amp;gt;0 for number of spaces function! neoformat#formatters#sh#shfmt() abort return { \ &amp;#39;exe&amp;#39;: &amp;#39;shfmt&amp;#39;, \ &amp;#39;args&amp;#39;: [&amp;#39;-i &amp;#39; . shiftwidth()], \ &amp;#39;stdin&amp;#39;: 1, \ } endfunction shfmtのヘルプから、インデントをタブにしたければ-i引数で0を渡せば良さそうで、neoformatの定義ではインデントの値にshiftwidthの値をしているようだったので、プロジェクトでのVimの設定を以下のように設定してみました(プロジェクト固有の設定ができるようにしている)。&#xA;autocmd Filetype sh setlocal sw=0 sts=0 noexpandtab しかし、どうしてもインデントがスペースになってしまうためちゃんとshiftwidth()の挙動を調べてみると、shiftwidthが0に設定されているとtabstopの値を使うようになっているらしい。&#xA;https://vim-jp.org/vimmagazine/2012/08/31/vimmagazine.html&#xA;tabstopは0を設定できないため、結局以下のようにneoformatのshfmt設定をプロジェクト固有の設定で上書きして対処しました。&#xA;let g:neoformat_sh_shfmt = { \ &amp;#39;exe&amp;#39;: &amp;#39;shfmt&amp;#39;, \ &amp;#39;args&amp;#39;: [&amp;#39;-i&amp;#39;, 0], \ &amp;#39;stdin&amp;#39;: 1, \ } </description>
+      <description>neoformatで使うshfmtはデフォルトだとインデントがスペースなんですが、チームのコーディング規約に合わせてタブ文字にしたかったとき</description>
     </item>
     <item>
       <title>depでprivateリポジトリがupdateできなかったときの解決策</title>
       <link>https://nametake.github.io/posts/2018/09/20/dep-private-repo/</link>
       <pubDate>Thu, 20 Sep 2018 18:47:46 +0900</pubDate>
       <guid>https://nametake.github.io/posts/2018/09/20/dep-private-repo/</guid>
-      <description>Goをアップデートした後、dep updateをしたら以下のようなエラーが発生しました。&#xA;grouped write of manifest, lock and vendor: error while writing out vendor tree: failed to write dep tree: failed to export github.com/nametake/private-repo: unable to update repository: remote: Repository not found. fatal: repository &amp;#39;https://github.com/nametake/private-repo/&amp;#39; not found : command failed: [git fetch --tags --prune origin]: exit status 128 make: *** [dep] Error 1 原因はprivateリポジトリをhttps経由でcloneしようとしたことだったみたいです。&#xA;以下のconfig設定をして、githubではhttpsで始まるURLをgitのURLを使うように書き換える設定を追加したら治りました。&#xA;[url &amp;#34;git@github.com:&amp;#34;] insteadOf = https://github.com/ https://git-scm.com/docs/git-config#git-config-urlltbasegtinsteadOf</description>
+      <description>Goをアップデートした後、dep updateをしたら以下のようなエラーが発生しました。 grouped write of manifest, lock and vendor: error while writing out vendor tree: failed to write dep tree: failed to export github.com/nametake/private-repo: unable to update repository: remote:</description>
     </item>
     <item>
       <title>hugo&#43;github pagesにブログを移転したメモ</title>
       <link>https://nametake.github.io/posts/2018/09/15/hugo-github-pages/</link>
       <pubDate>Sat, 15 Sep 2018 12:20:26 +0900</pubDate>
       <guid>https://nametake.github.io/posts/2018/09/15/hugo-github-pages/</guid>
-      <description>大して書いていなかったブログをgithub pages+hugoの組み合わせに移行したのでそのメモ。&#xA;とは言うものの、ほとんどHugoの入門用ページの内容をそのままやっただけなのでその辺は割愛。&#xA;最終的なディレクトリ構成は以下。&#xA;blog ├── Makefile ├── archetypes │ ├── default.md │ └── posts.md ├── bin │ ├── deploy.sh │ └── new_post.sh ├── config.toml ├── content │ ├── about │ │ └── index.md │ └── posts │ └── 2018-09-15-hugo-github-pages │ └── index.md ├── public(submodule) ├── static │ ├── css │ │ └── index.css │ └── images │ └── avatar.jpg └── themes └── coder(submodule) config.toml 自分はパーマリンクを日付+自分で設定した英単語にしたかったので、以下のようにconfig.tomlに追記。&#xA;slugは各postのfrontmatter(postの先頭にあるヘッダ部分)に設定すると反映されます。&#xA;posts = &amp;quot;/posts/:year/:month/:day/:slug&amp;quot;のpostsの部分はcontentディレクトリにあるpostsディレクトリと同じ名前にする必要があるので注意。</description>
+      <description>大して書いていなかったブログをgithub pages+hugoの組み合わせに移行したのでそのメモ。 とは言うものの、ほとんどHugoの入門用ペ</description>
     </item>
   </channel>
 </rss>

@@ -1,21 +1,25 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja">
 
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="Content-Language" content="en">
+<head>
+  <title>
+  組み合わせテストでの直交表とPICTの利用 · nametake.info
+</title>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
 
-    <meta name="author" content="nametake">
-    <meta name="description" content="組み合わせテストで数が指数関数的に増えてしまう問題を直交表とPICTを使って解決するメモ">
-    <meta name="keywords" content="blog,developer,personal">
 
-    
 
-    <meta name="twitter:card" content="summary"/><meta name="twitter:title" content="組み合わせテストでの直交表とPICTの利用"/>
+
+<meta name="author" content="nametake">
+<meta name="description" content="組み合わせテストで数が指数関数的に増えてしまう問題を直交表とPICTを使って解決するメモ">
+<meta name="keywords" content="blog,developer,personal">
+
+<meta name="twitter:card" content="summary"/><meta name="twitter:title" content="組み合わせテストでの直交表とPICTの利用"/>
 <meta name="twitter:description" content="組み合わせテストで数が指数関数的に増えてしまう問題を直交表とPICTを使って解決するメモ"/>
 
-    <meta property="og:title" content="組み合わせテストでの直交表とPICTの利用" />
+<meta property="og:title" content="組み合わせテストでの直交表とPICTの利用" />
 <meta property="og:description" content="組み合わせテストで数が指数関数的に増えてしまう問題を直交表とPICTを使って解決するメモ" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://nametake.github.io/posts/2020/06/28/combination-test-pict-and-orthogonal-array/" /><meta property="article:section" content="posts" />
@@ -24,135 +28,177 @@
 
 
 
-    
-      <base href="https://nametake.github.io/posts/2020/06/28/combination-test-pict-and-orthogonal-array/">
-    
-    <title>
-  組み合わせテストでの直交表とPICTの利用 · nametake.info
-</title>
 
-    
-      <link rel="canonical" href="https://nametake.github.io/posts/2020/06/28/combination-test-pict-and-orthogonal-array/">
-    
 
-    <link href="https://fonts.googleapis.com/css?family=Lato:400,700%7CMerriweather:300,700%7CSource+Code+Pro:400,700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/all.css" integrity="sha384-Bfad6CLCknfcloXFOyFnlgtENryhrpZCe29RTifKEixXQZ38WheV+i/6YWSzkz3V" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" integrity="sha256-l85OmPOjvil/SOvVt3HnSSjzF1TUMyT9eV0c2BzEGzU=" crossorigin="anonymous" />
+<link rel="canonical" href="https://nametake.github.io/posts/2020/06/28/combination-test-pict-and-orthogonal-array/">
 
-    
-      
-      
-      <link rel="stylesheet" href="https://nametake.github.io/css/coder.min.3219ef62ae52679b7a9c19043171c3cd9f523628c2a65f3ef247ee18836bc90b.css" integrity="sha256-MhnvYq5SZ5t6nBkEMXHDzZ9SNijCpl8&#43;8kfuGINryQs=" crossorigin="anonymous" media="screen" />
-    
 
-    
+<link rel="preload" href="https://nametake.github.io/fonts/forkawesome-webfont.woff2?v=1.2.0" as="font" type="font/woff2" crossorigin>
 
-    
-      
-        
-        
-        <link rel="stylesheet" href="https://nametake.github.io/css/coder-dark.min.e78e80fc3a585a4d1c8fc7f58623b6ff852411e38431a9cd1792877ecaa160f6.css" integrity="sha256-546A/DpYWk0cj8f1hiO2/4UkEeOEManNF5KHfsqhYPY=" crossorigin="anonymous" media="screen" />
-      
-    
 
-    
-      <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto&#43;Sans&#43;JP&amp;display=swap" />
-    
-      <link rel="stylesheet" href="https://nametake.github.io/css/index.css" />
-    
-      <link rel="stylesheet" href="https://nametake.github.io/css/syntax.css" />
-    
+  
+  
+  <link rel="stylesheet" href="https://nametake.github.io/css/coder.min.e1bdf152d93b060b06ba5d496486ed9c201a8b95d335e035beb5faebe3b61cad.css" integrity="sha256-4b3xUtk7BgsGul1JZIbtnCAai5XTNeA1vrX66&#43;O2HK0=" crossorigin="anonymous" media="screen" />
 
+
+
+
+
+
+  
     
+    
+    <link rel="stylesheet" href="https://nametake.github.io/css/coder-dark.min.a00e6364bacbc8266ad1cc81230774a1397198f8cfb7bcba29b7d6fcb54ce57f.css" integrity="sha256-oA5jZLrLyCZq0cyBIwd0oTlxmPjPt7y6KbfW/LVM5X8=" crossorigin="anonymous" media="screen" />
+  
 
-    <link rel="icon" type="image/png" href="https://nametake.github.io/images/favicon-32x32.png" sizes="32x32">
-    <link rel="icon" type="image/png" href="https://nametake.github.io/images/favicon-16x16.png" sizes="16x16">
 
-    <meta name="generator" content="Hugo 0.121.1">
-  </head>
+
+ 
+  
+    
+    <link rel="stylesheet" href="https://nametake.github.io/css/noto&#43;sans&#43;jp.min.ed4b9470a6e014d7c178379b142a1dc1850e399398dc9ce15b1e3bba8368c55f.css" integrity="sha256-7UuUcKbgFNfBeDebFCodwYUOOZOY3JzhWx47uoNoxV8=" crossorigin="anonymous" media="screen" />
+  
+
+
 
   
   
     
+    <link rel="stylesheet" href="https://nametake.github.io/scss/custom.min.38767641d483228e61ddae5e0b6e364839f6a0780c348bd284892bd8ae1aef22.css" integrity="sha256-OHZ2QdSDIo5h3a5eC242SDn2oHgMNIvShIkr2K4a7yI=" crossorigin="anonymous" media="screen" />
   
-  <body class="colorscheme-auto"
-        onload=""
-  >
-    <main class="wrapper">
-      <nav class="navigation">
+
+
+
+<link rel="icon" type="image/svg+xml" href="https://nametake.github.io/images/favicon.svg" sizes="any">
+<link rel="icon" type="image/png" href="https://nametake.github.io/images/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="https://nametake.github.io/images/favicon-16x16.png" sizes="16x16">
+
+<link rel="apple-touch-icon" href="https://nametake.github.io/images/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="180x180" href="https://nametake.github.io/images/apple-touch-icon.png">
+
+<link rel="manifest" href="https://nametake.github.io/site.webmanifest">
+<link rel="mask-icon" href="https://nametake.github.io/images/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+
+
+
+
+
+
+</head>
+
+
+
+
+
+
+<body class="preload-transitions colorscheme-auto">
+  
+<div class="float-container">
+    <a id="dark-mode-toggle" class="colorscheme-toggle">
+        <i class="fa fa-adjust fa-fw" aria-hidden="true"></i>
+    </a>
+</div>
+
+
+  <main class="wrapper">
+    <nav class="navigation">
   <section class="container">
     <a class="navigation-title" href="https://nametake.github.io/">
       nametake.info
     </a>
     
-    <input type="checkbox" id="menu-toggle" />
-    <label class="menu-button float-right" for="menu-toggle"><i class="fas fa-bars"></i></label>
-    <ul class="navigation-list">
-      
+      <input type="checkbox" id="menu-toggle" />
+      <label class="menu-button float-right" for="menu-toggle">
+        <i class="fa fa-bars fa-fw" aria-hidden="true"></i>
+      </label>
+      <ul class="navigation-list">
         
-          <li class="navigation-item">
-            <a class="navigation-link" href="https://nametake.github.io/about/">About</a>
-          </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link" href="https://nametake.github.io/about/">About</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link" href="https://nametake.github.io/posts/">Blog</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link" href="https://nametake.github.io/project/">Project</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link" href="https://nametake.github.io/tags/">Tags</a>
+            </li>
+          
         
-          <li class="navigation-item">
-            <a class="navigation-link" href="https://nametake.github.io/posts/">Blog</a>
-          </li>
         
-          <li class="navigation-item">
-            <a class="navigation-link" href="https://nametake.github.io/project/">Project</a>
-          </li>
-        
-          <li class="navigation-item">
-            <a class="navigation-link" href="https://nametake.github.io/tags/">Tags</a>
-          </li>
-        
-      
-      
-    </ul>
+      </ul>
     
   </section>
 </nav>
 
 
-      <div class="content">
-        
+    <div class="content">
+      
   <section class="container post">
     <article>
       <header>
         <div class="post-title">
-          <h1 class="title">組み合わせテストでの直交表とPICTの利用</h1>
+          <h1 class="title">
+            <a class="title-link" href="https://nametake.github.io/posts/2020/06/28/combination-test-pict-and-orthogonal-array/">
+              組み合わせテストでの直交表とPICTの利用
+            </a>
+          </h1>
         </div>
         <div class="post-meta">
           <div class="date">
             <span class="posted-on">
-              <i class="fas fa-calendar"></i>
-              <time datetime='2020-06-28T00:00:00&#43;09:00'>
-                June 28, 2020
+              <i class="fa fa-calendar" aria-hidden="true"></i>
+              <time datetime="2020-06-28T00:00:00&#43;09:00">
+                2020/06/28
               </time>
             </span>
             <span class="reading-time">
-              <i class="fas fa-clock"></i>
-              1-minute read
+              <i class="fa fa-clock-o" aria-hidden="true"></i>
+              4-minute read
             </span>
           </div>
           
+          
           <div class="tags">
-  <i class="fas fa-tag"></i>
-    <a href="https://nametake.github.io/tags/testing/">testing</a></div>
+  <i class="fa fa-tag" aria-hidden="true"></i>
+    <span class="tag">
+      <a href="https://nametake.github.io/tags/testing/">testing</a>
+    </span></div>
 
         </div>
       </header>
 
-      <div>
+      <div class="post-content">
         
         <p>結合テストの組み合わせについてある程度知見が溜まったのでメモ的に。</p>
-<h2 id="結合テストの組み合わせ問題">結合テストの組み合わせ問題</h2>
+<h2 id="結合テストの組み合わせ問題">
+  結合テストの組み合わせ問題
+  <a class="heading-link" href="#%e7%b5%90%e5%90%88%e3%83%86%e3%82%b9%e3%83%88%e3%81%ae%e7%b5%84%e3%81%bf%e5%90%88%e3%82%8f%e3%81%9b%e5%95%8f%e9%a1%8c">
+    <i class="fa fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <p>システムのリリース前には開発した機能や既存の機能を組み合わせてバグが発生していないかテストをする必要があります。</p>
 <p>ですが、開発した機能が増えていけば組み合わせの数は指数関数的に増えていき、それらを全てテストするのは非現実的です。</p>
 <p>となると、何かしらの方法でテストする組み合わせを絞る必要があります。</p>
 <p>絞るにあたって「システムのバグは2つパラメータの組み合わせで発生する確率が高い」というデータから、2つの異なるパラメータ(因子)の組み合わせが必ず全て登場する最小の表を作る、という手法があります。</p>
 <p>この記事ではその手法のうち、直交表とPICTというツールの使い方をメモして残しておこうと思います。</p>
-<h2 id="直交表">直交表</h2>
+<h2 id="直交表">
+  直交表
+  <a class="heading-link" href="#%e7%9b%b4%e4%ba%a4%e8%a1%a8">
+    <i class="fa fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <p>直交表は、因子の組み合わせが効率的になるよう作られた表です。</p>
 <p>基本的には誰かがすでに定義しているものにテストしたいシステムの因子を割り当てるという使い方になります。</p>
 <p>例を挙げてみます。</p>
@@ -186,7 +232,7 @@
 <p>3因子2通りのため、全ての組み合わせは8パターンになります。</p>
 <p>8パターンであれば全てテストするのもそこまで大変でもないですが、試しに直交表に適用してみます。</p>
 <p>以下のページのように、すでにある直交表からテストしたい項目の形に近いものを選びます。</p>
-<p><a href="https://support.minitab.com/ja-jp/minitab/18/help-and-how-to/modeling-statistics/doe/supporting-topics/taguchi-designs/catalogue-of-taguchi-designs/">タグチ計画のカタログ</a></p>
+<p><a href="https://support.minitab.com/ja-jp/minitab/18/help-and-how-to/modeling-statistics/doe/supporting-topics/taguchi-designs/catalogue-of-taguchi-designs/"  class="external-link" target="_blank" rel="noopener">タグチ計画のカタログ</a></p>
 <p>今回は2^3通りのため、L4(2^3)の表が使えそうです。</p>
 <p>上記のテスト項目をL4(2^3)の表に当てはめてみます。</p>
 <table>
@@ -229,8 +275,14 @@
 <p>2因子ごとの組み合わせも全て登場するため、バグ発見率も極端に下がりません。</p>
 <p>上記の例のサイズならそこまで恩恵を感じないかもしれませんが、因子と水準が増えたときには大きく組み合わせの数を減らすことができます。</p>
 <p>今回は例のためピッタリの表が見つかるように因子数と水準を調整しましたが、ピッタリの表がない場合は少し大きめのサイズの表に適用し、合いた箇所を有効な水準で埋めることで問題ないようです。</p>
-<h2 id="pict">PICT</h2>
-<p><a href="https://github.com/microsoft/pict">PICT</a> はMicrosoftが作成公開しているAll Pair法(ペアワイズ方)で組み合わせを作成するツールです。</p>
+<h2 id="pict">
+  PICT
+  <a class="heading-link" href="#pict">
+    <i class="fa fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p><a href="https://github.com/microsoft/pict"  class="external-link" target="_blank" rel="noopener">PICT</a> はMicrosoftが作成公開しているAll Pair法(ペアワイズ方)で組み合わせを作成するツールです。</p>
 <p>直交表では静的な表に因子と水準を当てはめていましたが、PICTでは動的に表を生成します。</p>
 <p>PICTでも例を挙げてみます。</p>
 <p>直交表のときと同じ因子と水準を使うと仮定して、以下のようなテキストファイルを用意します。</p>
@@ -262,7 +314,7 @@
 
         <div id="disqus_thread"></div>
 <script>
-    window.disqus_config = function () {
+  window.disqus_config = function () {
     
     
     
@@ -277,9 +329,15 @@
         s.setAttribute('data-timestamp', +new Date());
         (d.head || d.body).appendChild(s);
     })();
+    
+    document.addEventListener('themeChanged', function (e) { 
+        if (document.readyState == 'complete') {
+          DISQUS.reset({ reload: true, config: disqus_config });
+        }
+    });
 </script>
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+        
+        
         
         
       </footer>
@@ -288,33 +346,36 @@
     
   </section>
 
-      </div>
+    </div>
 
-      
-  <footer class="footer">
-    <section class="container">
-      
-        <p>nametake.github.io</p>
-      
-      
-        ©
-        
-        2023
-         nametake 
-      
-      
-         · 
-        Powered by <a href="https://gohugo.io/">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/">Coder</a>.
-      
-      
-    </section>
-  </footer>
-
-    </main>
-
+    <footer class="footer">
+  <section class="container">
+    ©
     
-
+    2023
+     nametake 
+    ·
     
+    Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/" target="_blank" rel="noopener">Coder</a>.
+    
+  </section>
+</footer>
+
+  </main>
+
+  
+
+  
+  
+  <script src="https://nametake.github.io/js/coder.min.6ae284be93d2d19dad1f02b0039508d9aab3180a12a06dcc71b0b0ef7825a317.js" integrity="sha256-auKEvpPS0Z2tHwKwA5UI2aqzGAoSoG3McbCw73gloxc="></script>
+  
+
+  
+
+  
+
+
+  
 <script>
 var doNotTrack = false;
 if (!doNotTrack) {
@@ -328,8 +389,33 @@ if (!doNotTrack) {
 }
 </script>
 
-    
+  
 
-  </body>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</body>
 
 </html>

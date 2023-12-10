@@ -1,34 +1,26 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja">
 
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="Content-Language" content="en">
+<head>
+  <title>
+  protoc-gen-gohttpをHttpRule Optionに対応させた · nametake.info
+</title>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
 
-    <meta name="author" content="nametake">
-    <meta name="description" content="以前、Protocol Buffersのserviceの定義を利用してGoのnet/httpで利用できるようにするためのprotoc-gen-gohttpというprotocのプラグインを作成しました。
-ですが、protoc-gen-gohttpではURLのパス部分の定義はProtocol Buffersの定義には記述できないため、クライアント側がProtocol Buffersを見ただけでパスを読み取ることができませんでした。また、生成されたコードはHTTPのBodyしか参照しないため、情報を取得するだけのときもHTTPのメソッドをPOSTにする必要もありました。
-そこで、Googleが提供しているRPCの定義をHTTPのREST APIにマッピングするためのHttpRuleオプションを利用して、protoc-gen-gohttpがHttpRuleのマッピングどおりに動作するコードを生成するように改良しました。
-使い方 protoc-gen-gohttpをインストールしたら、以下のようにHttpRuleを使用したProtoの定義を用意します(annotations.protoのダウンロードの仕方はこの辺を参考にしてください)。この記事ではexample.protoに書いているとします。
-syntax = &#34;proto3&#34;; package main; option go_package = &#34;main&#34;; import &#34;google/api/annotations.proto&#34;; service Messaging { rpc GetMessage(GetMessageRequest) returns (GetMessageResponse) { option (google.api.http).get = &#34;/v1/messages/{message_id}&#34;; } rpc UpdateMessage(UpdateMessageRequest) returns (UpdateMessageResponse) { option (google.api.http) = { put: &#34;/v1/messages/{message_id}/{sub.subfield}&#34; body: &#34;*&#34; }; } } message GetMessageRequest { string message_id = 1; string message = 2; repeated string tags = 3; } message GetMessageResponse { string message_id = 1; string message = 2; repeated string tags = 4; } message SubMessage { string subfield = 1; } message UpdateMessageRequest { string message_id = 1; SubMessage sub = 2; string message = 3; } message UpdateMessageResponse { string message_id = 1; SubMessage sub = 2; string message = 3; } 用意できたら、以下のコマンドでGoのコードを生成します。">
-    <meta name="keywords" content="blog,developer,personal">
 
-    
 
-    <meta name="twitter:card" content="summary"/><meta name="twitter:title" content="protoc-gen-gohttpをHttpRule Optionに対応させた"/>
-<meta name="twitter:description" content="以前、Protocol Buffersのserviceの定義を利用してGoのnet/httpで利用できるようにするためのprotoc-gen-gohttpというprotocのプラグインを作成しました。
-ですが、protoc-gen-gohttpではURLのパス部分の定義はProtocol Buffersの定義には記述できないため、クライアント側がProtocol Buffersを見ただけでパスを読み取ることができませんでした。また、生成されたコードはHTTPのBodyしか参照しないため、情報を取得するだけのときもHTTPのメソッドをPOSTにする必要もありました。
-そこで、Googleが提供しているRPCの定義をHTTPのREST APIにマッピングするためのHttpRuleオプションを利用して、protoc-gen-gohttpがHttpRuleのマッピングどおりに動作するコードを生成するように改良しました。
-使い方 protoc-gen-gohttpをインストールしたら、以下のようにHttpRuleを使用したProtoの定義を用意します(annotations.protoのダウンロードの仕方はこの辺を参考にしてください)。この記事ではexample.protoに書いているとします。
-syntax = &#34;proto3&#34;; package main; option go_package = &#34;main&#34;; import &#34;google/api/annotations.proto&#34;; service Messaging { rpc GetMessage(GetMessageRequest) returns (GetMessageResponse) { option (google.api.http).get = &#34;/v1/messages/{message_id}&#34;; } rpc UpdateMessage(UpdateMessageRequest) returns (UpdateMessageResponse) { option (google.api.http) = { put: &#34;/v1/messages/{message_id}/{sub.subfield}&#34; body: &#34;*&#34; }; } } message GetMessageRequest { string message_id = 1; string message = 2; repeated string tags = 3; } message GetMessageResponse { string message_id = 1; string message = 2; repeated string tags = 4; } message SubMessage { string subfield = 1; } message UpdateMessageRequest { string message_id = 1; SubMessage sub = 2; string message = 3; } message UpdateMessageResponse { string message_id = 1; SubMessage sub = 2; string message = 3; } 用意できたら、以下のコマンドでGoのコードを生成します。"/>
 
-    <meta property="og:title" content="protoc-gen-gohttpをHttpRule Optionに対応させた" />
-<meta property="og:description" content="以前、Protocol Buffersのserviceの定義を利用してGoのnet/httpで利用できるようにするためのprotoc-gen-gohttpというprotocのプラグインを作成しました。
-ですが、protoc-gen-gohttpではURLのパス部分の定義はProtocol Buffersの定義には記述できないため、クライアント側がProtocol Buffersを見ただけでパスを読み取ることができませんでした。また、生成されたコードはHTTPのBodyしか参照しないため、情報を取得するだけのときもHTTPのメソッドをPOSTにする必要もありました。
-そこで、Googleが提供しているRPCの定義をHTTPのREST APIにマッピングするためのHttpRuleオプションを利用して、protoc-gen-gohttpがHttpRuleのマッピングどおりに動作するコードを生成するように改良しました。
-使い方 protoc-gen-gohttpをインストールしたら、以下のようにHttpRuleを使用したProtoの定義を用意します(annotations.protoのダウンロードの仕方はこの辺を参考にしてください)。この記事ではexample.protoに書いているとします。
-syntax = &#34;proto3&#34;; package main; option go_package = &#34;main&#34;; import &#34;google/api/annotations.proto&#34;; service Messaging { rpc GetMessage(GetMessageRequest) returns (GetMessageResponse) { option (google.api.http).get = &#34;/v1/messages/{message_id}&#34;; } rpc UpdateMessage(UpdateMessageRequest) returns (UpdateMessageResponse) { option (google.api.http) = { put: &#34;/v1/messages/{message_id}/{sub.subfield}&#34; body: &#34;*&#34; }; } } message GetMessageRequest { string message_id = 1; string message = 2; repeated string tags = 3; } message GetMessageResponse { string message_id = 1; string message = 2; repeated string tags = 4; } message SubMessage { string subfield = 1; } message UpdateMessageRequest { string message_id = 1; SubMessage sub = 2; string message = 3; } message UpdateMessageResponse { string message_id = 1; SubMessage sub = 2; string message = 3; } 用意できたら、以下のコマンドでGoのコードを生成します。" />
+<meta name="author" content="nametake">
+<meta name="description" content="以前、Protocol Buffersのserviceの定義を利用してGoのnet/httpで利用できるようにするためのprotoc-gen-">
+<meta name="keywords" content="blog,developer,personal">
+
+<meta name="twitter:card" content="summary"/><meta name="twitter:title" content="protoc-gen-gohttpをHttpRule Optionに対応させた"/>
+<meta name="twitter:description" content="以前、Protocol Buffersのserviceの定義を利用してGoのnet/httpで利用できるようにするためのprotoc-gen-"/>
+
+<meta property="og:title" content="protoc-gen-gohttpをHttpRule Optionに対応させた" />
+<meta property="og:description" content="以前、Protocol Buffersのserviceの定義を利用してGoのnet/httpで利用できるようにするためのprotoc-gen-" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://nametake.github.io/posts/2019/08/30/protoc-gen-gohttp-httprule/" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2019-08-30T01:52:26+09:00" />
@@ -36,134 +28,172 @@ syntax = &#34;proto3&#34;; package main; option go_package = &#34;main&#34;; imp
 
 
 
-    
-      <base href="https://nametake.github.io/posts/2019/08/30/protoc-gen-gohttp-httprule/">
-    
-    <title>
-  protoc-gen-gohttpをHttpRule Optionに対応させた · nametake.info
-</title>
 
-    
-      <link rel="canonical" href="https://nametake.github.io/posts/2019/08/30/protoc-gen-gohttp-httprule/">
-    
 
-    <link href="https://fonts.googleapis.com/css?family=Lato:400,700%7CMerriweather:300,700%7CSource+Code+Pro:400,700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/all.css" integrity="sha384-Bfad6CLCknfcloXFOyFnlgtENryhrpZCe29RTifKEixXQZ38WheV+i/6YWSzkz3V" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" integrity="sha256-l85OmPOjvil/SOvVt3HnSSjzF1TUMyT9eV0c2BzEGzU=" crossorigin="anonymous" />
+<link rel="canonical" href="https://nametake.github.io/posts/2019/08/30/protoc-gen-gohttp-httprule/">
 
-    
-      
-      
-      <link rel="stylesheet" href="https://nametake.github.io/css/coder.min.3219ef62ae52679b7a9c19043171c3cd9f523628c2a65f3ef247ee18836bc90b.css" integrity="sha256-MhnvYq5SZ5t6nBkEMXHDzZ9SNijCpl8&#43;8kfuGINryQs=" crossorigin="anonymous" media="screen" />
-    
 
-    
+<link rel="preload" href="https://nametake.github.io/fonts/forkawesome-webfont.woff2?v=1.2.0" as="font" type="font/woff2" crossorigin>
 
-    
-      
-        
-        
-        <link rel="stylesheet" href="https://nametake.github.io/css/coder-dark.min.e78e80fc3a585a4d1c8fc7f58623b6ff852411e38431a9cd1792877ecaa160f6.css" integrity="sha256-546A/DpYWk0cj8f1hiO2/4UkEeOEManNF5KHfsqhYPY=" crossorigin="anonymous" media="screen" />
-      
-    
 
-    
-      <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto&#43;Sans&#43;JP&amp;display=swap" />
-    
-      <link rel="stylesheet" href="https://nametake.github.io/css/index.css" />
-    
-      <link rel="stylesheet" href="https://nametake.github.io/css/syntax.css" />
-    
+  
+  
+  <link rel="stylesheet" href="https://nametake.github.io/css/coder.min.e1bdf152d93b060b06ba5d496486ed9c201a8b95d335e035beb5faebe3b61cad.css" integrity="sha256-4b3xUtk7BgsGul1JZIbtnCAai5XTNeA1vrX66&#43;O2HK0=" crossorigin="anonymous" media="screen" />
 
+
+
+
+
+
+  
     
+    
+    <link rel="stylesheet" href="https://nametake.github.io/css/coder-dark.min.a00e6364bacbc8266ad1cc81230774a1397198f8cfb7bcba29b7d6fcb54ce57f.css" integrity="sha256-oA5jZLrLyCZq0cyBIwd0oTlxmPjPt7y6KbfW/LVM5X8=" crossorigin="anonymous" media="screen" />
+  
 
-    <link rel="icon" type="image/png" href="https://nametake.github.io/images/favicon-32x32.png" sizes="32x32">
-    <link rel="icon" type="image/png" href="https://nametake.github.io/images/favicon-16x16.png" sizes="16x16">
 
-    <meta name="generator" content="Hugo 0.121.1">
-  </head>
+
+ 
+  
+    
+    <link rel="stylesheet" href="https://nametake.github.io/css/noto&#43;sans&#43;jp.min.ed4b9470a6e014d7c178379b142a1dc1850e399398dc9ce15b1e3bba8368c55f.css" integrity="sha256-7UuUcKbgFNfBeDebFCodwYUOOZOY3JzhWx47uoNoxV8=" crossorigin="anonymous" media="screen" />
+  
+
+
 
   
   
     
+    <link rel="stylesheet" href="https://nametake.github.io/scss/custom.min.38767641d483228e61ddae5e0b6e364839f6a0780c348bd284892bd8ae1aef22.css" integrity="sha256-OHZ2QdSDIo5h3a5eC242SDn2oHgMNIvShIkr2K4a7yI=" crossorigin="anonymous" media="screen" />
   
-  <body class="colorscheme-auto"
-        onload=""
-  >
-    <main class="wrapper">
-      <nav class="navigation">
+
+
+
+<link rel="icon" type="image/svg+xml" href="https://nametake.github.io/images/favicon.svg" sizes="any">
+<link rel="icon" type="image/png" href="https://nametake.github.io/images/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="https://nametake.github.io/images/favicon-16x16.png" sizes="16x16">
+
+<link rel="apple-touch-icon" href="https://nametake.github.io/images/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="180x180" href="https://nametake.github.io/images/apple-touch-icon.png">
+
+<link rel="manifest" href="https://nametake.github.io/site.webmanifest">
+<link rel="mask-icon" href="https://nametake.github.io/images/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+
+
+
+
+
+
+</head>
+
+
+
+
+
+
+<body class="preload-transitions colorscheme-auto">
+  
+<div class="float-container">
+    <a id="dark-mode-toggle" class="colorscheme-toggle">
+        <i class="fa fa-adjust fa-fw" aria-hidden="true"></i>
+    </a>
+</div>
+
+
+  <main class="wrapper">
+    <nav class="navigation">
   <section class="container">
     <a class="navigation-title" href="https://nametake.github.io/">
       nametake.info
     </a>
     
-    <input type="checkbox" id="menu-toggle" />
-    <label class="menu-button float-right" for="menu-toggle"><i class="fas fa-bars"></i></label>
-    <ul class="navigation-list">
-      
+      <input type="checkbox" id="menu-toggle" />
+      <label class="menu-button float-right" for="menu-toggle">
+        <i class="fa fa-bars fa-fw" aria-hidden="true"></i>
+      </label>
+      <ul class="navigation-list">
         
-          <li class="navigation-item">
-            <a class="navigation-link" href="https://nametake.github.io/about/">About</a>
-          </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link" href="https://nametake.github.io/about/">About</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link" href="https://nametake.github.io/posts/">Blog</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link" href="https://nametake.github.io/project/">Project</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link" href="https://nametake.github.io/tags/">Tags</a>
+            </li>
+          
         
-          <li class="navigation-item">
-            <a class="navigation-link" href="https://nametake.github.io/posts/">Blog</a>
-          </li>
         
-          <li class="navigation-item">
-            <a class="navigation-link" href="https://nametake.github.io/project/">Project</a>
-          </li>
-        
-          <li class="navigation-item">
-            <a class="navigation-link" href="https://nametake.github.io/tags/">Tags</a>
-          </li>
-        
-      
-      
-    </ul>
+      </ul>
     
   </section>
 </nav>
 
 
-      <div class="content">
-        
+    <div class="content">
+      
   <section class="container post">
     <article>
       <header>
         <div class="post-title">
-          <h1 class="title">protoc-gen-gohttpをHttpRule Optionに対応させた</h1>
+          <h1 class="title">
+            <a class="title-link" href="https://nametake.github.io/posts/2019/08/30/protoc-gen-gohttp-httprule/">
+              protoc-gen-gohttpをHttpRule Optionに対応させた
+            </a>
+          </h1>
         </div>
         <div class="post-meta">
           <div class="date">
             <span class="posted-on">
-              <i class="fas fa-calendar"></i>
-              <time datetime='2019-08-30T01:52:26&#43;09:00'>
-                August 30, 2019
+              <i class="fa fa-calendar" aria-hidden="true"></i>
+              <time datetime="2019-08-30T01:52:26&#43;09:00">
+                2019/08/30
               </time>
             </span>
             <span class="reading-time">
-              <i class="fas fa-clock"></i>
-              2-minute read
+              <i class="fa fa-clock-o" aria-hidden="true"></i>
+              4-minute read
             </span>
           </div>
           
+          
           <div class="tags">
-  <i class="fas fa-tag"></i>
-    <a href="https://nametake.github.io/tags/protocol-buffers/">Protocol Buffers</a>
+  <i class="fa fa-tag" aria-hidden="true"></i>
+    <span class="tag">
+      <a href="https://nametake.github.io/tags/protocol-buffers/">Protocol Buffers</a>
+    </span>
       <span class="separator">•</span>
-    <a href="https://nametake.github.io/tags/go/">Go</a></div>
+    <span class="tag">
+      <a href="https://nametake.github.io/tags/go/">Go</a>
+    </span></div>
 
         </div>
       </header>
 
-      <div>
+      <div class="post-content">
         
-        <p>以前、Protocol Buffersのserviceの定義を利用してGoの<code>net/http</code>で利用できるようにするための<a href="https://github.com/nametake/protoc-gen-gohttp">protoc-gen-gohttp</a>というprotocのプラグインを<a href="https://nametake.github.io/posts/2018/11/21/protoc-gen-gohttp/">作成しました</a>。</p>
+        <p>以前、Protocol Buffersのserviceの定義を利用してGoの<code>net/http</code>で利用できるようにするための<a href="https://github.com/nametake/protoc-gen-gohttp"  class="external-link" target="_blank" rel="noopener">protoc-gen-gohttp</a>というprotocのプラグインを<a href="https://nametake.github.io/posts/2018/11/21/protoc-gen-gohttp/" >作成しました</a>。</p>
 <p>ですが、protoc-gen-gohttpではURLのパス部分の定義はProtocol Buffersの定義には記述できないため、クライアント側がProtocol Buffersを見ただけでパスを読み取ることができませんでした。また、生成されたコードはHTTPのBodyしか参照しないため、情報を取得するだけのときもHTTPのメソッドをPOSTにする必要もありました。</p>
-<p>そこで、Googleが提供しているRPCの定義をHTTPのREST APIにマッピングするための<a href="https://cloud.google.com/endpoints/docs/grpc-service-config/reference/rpc/google.api#httprule">HttpRule</a>オプションを利用して、protoc-gen-gohttpがHttpRuleのマッピングどおりに動作するコードを生成するように改良しました。</p>
-<h1 id="使い方">使い方</h1>
-<p><a href="https://github.com/nametake/protoc-gen-gohttp">protoc-gen-gohttp</a>をインストールしたら、以下のようにHttpRuleを使用したProtoの定義を用意します(annotations.protoのダウンロードの仕方は<a href="https://cloud.google.com/solutions/exposing-grpc-services-using-cloud-endpoints-pt1#configure_rest_transcoding">この辺</a>を参考にしてください)。この記事では<code>example.proto</code>に書いているとします。</p>
+<p>そこで、Googleが提供しているRPCの定義をHTTPのREST APIにマッピングするための<a href="https://cloud.google.com/endpoints/docs/grpc-service-config/reference/rpc/google.api#httprule"  class="external-link" target="_blank" rel="noopener">HttpRule</a>オプションを利用して、protoc-gen-gohttpがHttpRuleのマッピングどおりに動作するコードを生成するように改良しました。</p>
+<h1 id="使い方">
+  使い方
+  <a class="heading-link" href="#%e4%bd%bf%e3%81%84%e6%96%b9">
+    <i class="fa fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h1>
+<p><a href="https://github.com/nametake/protoc-gen-gohttp"  class="external-link" target="_blank" rel="noopener">protoc-gen-gohttp</a>をインストールしたら、以下のようにHttpRuleを使用したProtoの定義を用意します(annotations.protoのダウンロードの仕方は<a href="https://cloud.google.com/solutions/exposing-grpc-services-using-cloud-endpoints-pt1#configure_rest_transcoding"  class="external-link" target="_blank" rel="noopener">この辺</a>を参考にしてください)。この記事では<code>example.proto</code>に書いているとします。</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-proto" data-lang="proto"><span style="display:flex;"><span>syntax <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;proto3&#34;</span>;<span style="color:#960050;background-color:#1e0010">
 </span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
 </span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#f92672">package</span> main;<span style="color:#960050;background-color:#1e0010">
@@ -257,14 +287,26 @@ syntax = &#34;proto3&#34;; package main; option go_package = &#34;main&#34;; imp
 </span></span></code></pre></div><p>実装したサーバを起動したら、以下のようにAPIを叩くことで動作を確認できます。</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>curl -X GET -H &#39;Content-Type: application/json&#39; &#39;localhost:8080/v1/messages/abc1234?message=hello&amp;tags=a&amp;tags=b&#39;
 </span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>curl -X PUT -H &#39;Content-Type: application/json&#39; &#39;localhost:8080/v1/messages/abc1234/submsg&#39; -d &#39;{&#34;messageId&#34;:&#34;abc1234&#34;,&#34;sub&#34;:{&#34;subfield&#34;:&#34;submsg&#34;},&#34;message&#34;:&#34;Hello World!&#34;}&#39;
-</span></span></code></pre></div><h1 id="簡単な解説">簡単な解説</h1>
+</span></span></code></pre></div><h1 id="簡単な解説">
+  簡単な解説
+  <a class="heading-link" href="#%e7%b0%a1%e5%8d%98%e3%81%aa%e8%a7%a3%e8%aa%ac">
+    <i class="fa fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h1>
 <p>今まではprotoc-gen-gohttpは<code>GetMessage</code>メソッドや<code>GetMessageWithName</code>メソッドのような2つのパターンしか生成しませんでしたが、今回の修正で、HttpRuleオプションをRPCに記述していたら<code>GetMessageHTTPRule</code>というメソッドも生成するようになりました。</p>
 <p><code>HTTPRule</code>という接尾語がついたメソッドは、Protocol Buffersに定義されているHttpRuleのオプションのうち、メソッド名(string)、パス名(string)及びhttp.HandlerFuncを返すようになっています。</p>
 <p><code>GetMessageHTTPRule</code>の場合、返り値は<code>&quot;GET&quot;</code>、<code>&quot;/v1/messages/{message_id}&quot;</code>及び<code>http.HandlerFunc</code>を返します。また、GetMessageは<code>GET</code>メソッドをOptionで指定されているため、<code>http.HandlerFunc</code>はQuery Stringを解析して<code>GetMessageRequest</code>に情報を詰めるようになっています。</p>
 <p>パスパラメータにも対応しているため、<code>{message_id}</code>のように<code>{}</code>で囲った部分はmessageの定義へマッピングされるようになっています。</p>
-<h1 id="今後やりたいこと">今後やりたいこと</h1>
+<h1 id="今後やりたいこと">
+  今後やりたいこと
+  <a class="heading-link" href="#%e4%bb%8a%e5%be%8c%e3%82%84%e3%82%8a%e3%81%9f%e3%81%84%e3%81%93%e3%81%a8">
+    <i class="fa fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h1>
 <p>Query String対応でコードがだいぶ荒れたので、まずはリファクタリングをしたいです……</p>
-<p>また、HttpRuleオプションのうち<a href="https://cloud.google.com/endpoints/docs/grpc-service-config/reference/rpc/google.api#google.api.HttpRule.FIELDS.repeated.google.api.HttpRule.google.api.HttpRule.additional_bindings">additional_bindings</a>への対応ができてなかったり、Bodyに<code>*</code>以外を指定してもマッピングをしてくれなかったりと<a href="https://cloud.google.com/endpoints/docs/grpc-service-config/reference/rpc/google.api#httprule">HttpRule</a>に定義されている仕様からだいぶ漏れているものがあるので、それの対応もしていきたいなぁと思っています。</p>
+<p>また、HttpRuleオプションのうち<a href="https://cloud.google.com/endpoints/docs/grpc-service-config/reference/rpc/google.api#google.api.HttpRule.FIELDS.repeated.google.api.HttpRule.google.api.HttpRule.additional_bindings"  class="external-link" target="_blank" rel="noopener">additional_bindings</a>への対応ができてなかったり、Bodyに<code>*</code>以外を指定してもマッピングをしてくれなかったりと<a href="https://cloud.google.com/endpoints/docs/grpc-service-config/reference/rpc/google.api#httprule"  class="external-link" target="_blank" rel="noopener">HttpRule</a>に定義されている仕様からだいぶ漏れているものがあるので、それの対応もしていきたいなぁと思っています。</p>
 
       </div>
 
@@ -275,7 +317,7 @@ syntax = &#34;proto3&#34;; package main; option go_package = &#34;main&#34;; imp
 
         <div id="disqus_thread"></div>
 <script>
-    window.disqus_config = function () {
+  window.disqus_config = function () {
     
     
     
@@ -290,9 +332,15 @@ syntax = &#34;proto3&#34;; package main; option go_package = &#34;main&#34;; imp
         s.setAttribute('data-timestamp', +new Date());
         (d.head || d.body).appendChild(s);
     })();
+    
+    document.addEventListener('themeChanged', function (e) { 
+        if (document.readyState == 'complete') {
+          DISQUS.reset({ reload: true, config: disqus_config });
+        }
+    });
 </script>
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+        
+        
         
         
       </footer>
@@ -301,33 +349,36 @@ syntax = &#34;proto3&#34;; package main; option go_package = &#34;main&#34;; imp
     
   </section>
 
-      </div>
+    </div>
 
-      
-  <footer class="footer">
-    <section class="container">
-      
-        <p>nametake.github.io</p>
-      
-      
-        ©
-        
-        2023
-         nametake 
-      
-      
-         · 
-        Powered by <a href="https://gohugo.io/">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/">Coder</a>.
-      
-      
-    </section>
-  </footer>
-
-    </main>
-
+    <footer class="footer">
+  <section class="container">
+    ©
     
-
+    2023
+     nametake 
+    ·
     
+    Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/" target="_blank" rel="noopener">Coder</a>.
+    
+  </section>
+</footer>
+
+  </main>
+
+  
+
+  
+  
+  <script src="https://nametake.github.io/js/coder.min.6ae284be93d2d19dad1f02b0039508d9aab3180a12a06dcc71b0b0ef7825a317.js" integrity="sha256-auKEvpPS0Z2tHwKwA5UI2aqzGAoSoG3McbCw73gloxc="></script>
+  
+
+  
+
+  
+
+
+  
 <script>
 var doNotTrack = false;
 if (!doNotTrack) {
@@ -341,8 +392,33 @@ if (!doNotTrack) {
 }
 </script>
 
-    
+  
 
-  </body>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</body>
 
 </html>

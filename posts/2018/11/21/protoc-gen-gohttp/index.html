@@ -1,31 +1,26 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja">
 
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="Content-Language" content="en">
+<head>
+  <title>
+  Protocol Buffersのserviceをnet/httpに対応させるprotoc-gen-gohttpを作った · nametake.info
+</title>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
 
-    <meta name="author" content="nametake">
-    <meta name="description" content="nametake/protoc-gen-gohttpというprotocのプラグインを作ったのでその話です。
-Protocol Buffersとは Protocol Buffersはインターフェース定義言語の1つでGoogleによって開発されているものです(ざっくりいうと、JSONやXMLの仲間)。以下のように、構造を表すmessageとそのmessageを使ったRPCのインターフェースのserviceというものを定義できます。
-syntax = &#34;proto3&#34;; package helloworld; option go_package = &#34;main&#34;; message HelloRequest { string name = 1; } message HelloReply { string message = 1; } service Greeter { rpc SayHello(HelloRequest) returns (HelloReply) {} } 上記の定義をprotocコマンドを使ってコンパイルすることで、対応した言語ならそのままコードを書き出せます。例えばGoなら以下のような構造体が書き出されます(長くなるのでコードは削っています)。以下の構造体はProtocol Bufferが用意しているライブラリを利用すればバイナリに変換できます。
-type HelloRequest struct { Name string `protobuf:&#34;bytes,1,opt,name=name&#34; json:&#34;name,omitempty&#34;` XXX_NoUnkeyedLiteral struct{} `json:&#34;-&#34;` XXX_unrecognized []byte `json:&#34;-&#34;` XXX_sizecache int32 `json:&#34;-&#34;` } type HelloReply struct { Message string `protobuf:&#34;bytes,1,opt,name=message&#34; json:&#34;message,omitempty&#34;` XXX_NoUnkeyedLiteral struct{} `json:&#34;-&#34;` XXX_unrecognized []byte `json:&#34;-&#34;` XXX_sizecache int32 `json:&#34;-&#34;` } また、protocコマンドはプラグイン機構も持っているため、例えばgRPCのためのコードを書き出したかったらprotoc --go_out=plugins=grpc:.">
-    <meta name="keywords" content="blog,developer,personal">
 
-    
 
-    <meta name="twitter:card" content="summary"/><meta name="twitter:title" content="Protocol Buffersのserviceをnet/httpに対応させるprotoc-gen-gohttpを作った"/>
-<meta name="twitter:description" content="nametake/protoc-gen-gohttpというprotocのプラグインを作ったのでその話です。
-Protocol Buffersとは Protocol Buffersはインターフェース定義言語の1つでGoogleによって開発されているものです(ざっくりいうと、JSONやXMLの仲間)。以下のように、構造を表すmessageとそのmessageを使ったRPCのインターフェースのserviceというものを定義できます。
-syntax = &#34;proto3&#34;; package helloworld; option go_package = &#34;main&#34;; message HelloRequest { string name = 1; } message HelloReply { string message = 1; } service Greeter { rpc SayHello(HelloRequest) returns (HelloReply) {} } 上記の定義をprotocコマンドを使ってコンパイルすることで、対応した言語ならそのままコードを書き出せます。例えばGoなら以下のような構造体が書き出されます(長くなるのでコードは削っています)。以下の構造体はProtocol Bufferが用意しているライブラリを利用すればバイナリに変換できます。
-type HelloRequest struct { Name string `protobuf:&#34;bytes,1,opt,name=name&#34; json:&#34;name,omitempty&#34;` XXX_NoUnkeyedLiteral struct{} `json:&#34;-&#34;` XXX_unrecognized []byte `json:&#34;-&#34;` XXX_sizecache int32 `json:&#34;-&#34;` } type HelloReply struct { Message string `protobuf:&#34;bytes,1,opt,name=message&#34; json:&#34;message,omitempty&#34;` XXX_NoUnkeyedLiteral struct{} `json:&#34;-&#34;` XXX_unrecognized []byte `json:&#34;-&#34;` XXX_sizecache int32 `json:&#34;-&#34;` } また、protocコマンドはプラグイン機構も持っているため、例えばgRPCのためのコードを書き出したかったらprotoc --go_out=plugins=grpc:."/>
 
-    <meta property="og:title" content="Protocol Buffersのserviceをnet/httpに対応させるprotoc-gen-gohttpを作った" />
-<meta property="og:description" content="nametake/protoc-gen-gohttpというprotocのプラグインを作ったのでその話です。
-Protocol Buffersとは Protocol Buffersはインターフェース定義言語の1つでGoogleによって開発されているものです(ざっくりいうと、JSONやXMLの仲間)。以下のように、構造を表すmessageとそのmessageを使ったRPCのインターフェースのserviceというものを定義できます。
-syntax = &#34;proto3&#34;; package helloworld; option go_package = &#34;main&#34;; message HelloRequest { string name = 1; } message HelloReply { string message = 1; } service Greeter { rpc SayHello(HelloRequest) returns (HelloReply) {} } 上記の定義をprotocコマンドを使ってコンパイルすることで、対応した言語ならそのままコードを書き出せます。例えばGoなら以下のような構造体が書き出されます(長くなるのでコードは削っています)。以下の構造体はProtocol Bufferが用意しているライブラリを利用すればバイナリに変換できます。
-type HelloRequest struct { Name string `protobuf:&#34;bytes,1,opt,name=name&#34; json:&#34;name,omitempty&#34;` XXX_NoUnkeyedLiteral struct{} `json:&#34;-&#34;` XXX_unrecognized []byte `json:&#34;-&#34;` XXX_sizecache int32 `json:&#34;-&#34;` } type HelloReply struct { Message string `protobuf:&#34;bytes,1,opt,name=message&#34; json:&#34;message,omitempty&#34;` XXX_NoUnkeyedLiteral struct{} `json:&#34;-&#34;` XXX_unrecognized []byte `json:&#34;-&#34;` XXX_sizecache int32 `json:&#34;-&#34;` } また、protocコマンドはプラグイン機構も持っているため、例えばgRPCのためのコードを書き出したかったらprotoc --go_out=plugins=grpc:." />
+<meta name="author" content="nametake">
+<meta name="description" content="nametake/protoc-gen-gohttpというprotocのプラグインを作ったのでその話です。 Protocol Buffersとは Link to heading Protocol Buf">
+<meta name="keywords" content="blog,developer,personal">
+
+<meta name="twitter:card" content="summary"/><meta name="twitter:title" content="Protocol Buffersのserviceをnet/httpに対応させるprotoc-gen-gohttpを作った"/>
+<meta name="twitter:description" content="nametake/protoc-gen-gohttpというprotocのプラグインを作ったのでその話です。 Protocol Buffersとは Link to heading Protocol Buf"/>
+
+<meta property="og:title" content="Protocol Buffersのserviceをnet/httpに対応させるprotoc-gen-gohttpを作った" />
+<meta property="og:description" content="nametake/protoc-gen-gohttpというprotocのプラグインを作ったのでその話です。 Protocol Buffersとは Link to heading Protocol Buf" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://nametake.github.io/posts/2018/11/21/protoc-gen-gohttp/" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2018-11-21T16:32:07+09:00" />
@@ -33,131 +28,169 @@ type HelloRequest struct { Name string `protobuf:&#34;bytes,1,opt,name=name&#34;
 
 
 
-    
-      <base href="https://nametake.github.io/posts/2018/11/21/protoc-gen-gohttp/">
-    
-    <title>
-  Protocol Buffersのserviceをnet/httpに対応させるprotoc-gen-gohttpを作った · nametake.info
-</title>
 
-    
-      <link rel="canonical" href="https://nametake.github.io/posts/2018/11/21/protoc-gen-gohttp/">
-    
 
-    <link href="https://fonts.googleapis.com/css?family=Lato:400,700%7CMerriweather:300,700%7CSource+Code+Pro:400,700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/all.css" integrity="sha384-Bfad6CLCknfcloXFOyFnlgtENryhrpZCe29RTifKEixXQZ38WheV+i/6YWSzkz3V" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" integrity="sha256-l85OmPOjvil/SOvVt3HnSSjzF1TUMyT9eV0c2BzEGzU=" crossorigin="anonymous" />
+<link rel="canonical" href="https://nametake.github.io/posts/2018/11/21/protoc-gen-gohttp/">
 
-    
-      
-      
-      <link rel="stylesheet" href="https://nametake.github.io/css/coder.min.3219ef62ae52679b7a9c19043171c3cd9f523628c2a65f3ef247ee18836bc90b.css" integrity="sha256-MhnvYq5SZ5t6nBkEMXHDzZ9SNijCpl8&#43;8kfuGINryQs=" crossorigin="anonymous" media="screen" />
-    
 
-    
+<link rel="preload" href="https://nametake.github.io/fonts/forkawesome-webfont.woff2?v=1.2.0" as="font" type="font/woff2" crossorigin>
 
-    
-      
-        
-        
-        <link rel="stylesheet" href="https://nametake.github.io/css/coder-dark.min.e78e80fc3a585a4d1c8fc7f58623b6ff852411e38431a9cd1792877ecaa160f6.css" integrity="sha256-546A/DpYWk0cj8f1hiO2/4UkEeOEManNF5KHfsqhYPY=" crossorigin="anonymous" media="screen" />
-      
-    
 
-    
-      <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto&#43;Sans&#43;JP&amp;display=swap" />
-    
-      <link rel="stylesheet" href="https://nametake.github.io/css/index.css" />
-    
-      <link rel="stylesheet" href="https://nametake.github.io/css/syntax.css" />
-    
+  
+  
+  <link rel="stylesheet" href="https://nametake.github.io/css/coder.min.e1bdf152d93b060b06ba5d496486ed9c201a8b95d335e035beb5faebe3b61cad.css" integrity="sha256-4b3xUtk7BgsGul1JZIbtnCAai5XTNeA1vrX66&#43;O2HK0=" crossorigin="anonymous" media="screen" />
 
+
+
+
+
+
+  
     
+    
+    <link rel="stylesheet" href="https://nametake.github.io/css/coder-dark.min.a00e6364bacbc8266ad1cc81230774a1397198f8cfb7bcba29b7d6fcb54ce57f.css" integrity="sha256-oA5jZLrLyCZq0cyBIwd0oTlxmPjPt7y6KbfW/LVM5X8=" crossorigin="anonymous" media="screen" />
+  
 
-    <link rel="icon" type="image/png" href="https://nametake.github.io/images/favicon-32x32.png" sizes="32x32">
-    <link rel="icon" type="image/png" href="https://nametake.github.io/images/favicon-16x16.png" sizes="16x16">
 
-    <meta name="generator" content="Hugo 0.121.1">
-  </head>
+
+ 
+  
+    
+    <link rel="stylesheet" href="https://nametake.github.io/css/noto&#43;sans&#43;jp.min.ed4b9470a6e014d7c178379b142a1dc1850e399398dc9ce15b1e3bba8368c55f.css" integrity="sha256-7UuUcKbgFNfBeDebFCodwYUOOZOY3JzhWx47uoNoxV8=" crossorigin="anonymous" media="screen" />
+  
+
+
 
   
   
     
+    <link rel="stylesheet" href="https://nametake.github.io/scss/custom.min.38767641d483228e61ddae5e0b6e364839f6a0780c348bd284892bd8ae1aef22.css" integrity="sha256-OHZ2QdSDIo5h3a5eC242SDn2oHgMNIvShIkr2K4a7yI=" crossorigin="anonymous" media="screen" />
   
-  <body class="colorscheme-auto"
-        onload=""
-  >
-    <main class="wrapper">
-      <nav class="navigation">
+
+
+
+<link rel="icon" type="image/svg+xml" href="https://nametake.github.io/images/favicon.svg" sizes="any">
+<link rel="icon" type="image/png" href="https://nametake.github.io/images/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="https://nametake.github.io/images/favicon-16x16.png" sizes="16x16">
+
+<link rel="apple-touch-icon" href="https://nametake.github.io/images/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="180x180" href="https://nametake.github.io/images/apple-touch-icon.png">
+
+<link rel="manifest" href="https://nametake.github.io/site.webmanifest">
+<link rel="mask-icon" href="https://nametake.github.io/images/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+
+
+
+
+
+
+</head>
+
+
+
+
+
+
+<body class="preload-transitions colorscheme-auto">
+  
+<div class="float-container">
+    <a id="dark-mode-toggle" class="colorscheme-toggle">
+        <i class="fa fa-adjust fa-fw" aria-hidden="true"></i>
+    </a>
+</div>
+
+
+  <main class="wrapper">
+    <nav class="navigation">
   <section class="container">
     <a class="navigation-title" href="https://nametake.github.io/">
       nametake.info
     </a>
     
-    <input type="checkbox" id="menu-toggle" />
-    <label class="menu-button float-right" for="menu-toggle"><i class="fas fa-bars"></i></label>
-    <ul class="navigation-list">
-      
+      <input type="checkbox" id="menu-toggle" />
+      <label class="menu-button float-right" for="menu-toggle">
+        <i class="fa fa-bars fa-fw" aria-hidden="true"></i>
+      </label>
+      <ul class="navigation-list">
         
-          <li class="navigation-item">
-            <a class="navigation-link" href="https://nametake.github.io/about/">About</a>
-          </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link" href="https://nametake.github.io/about/">About</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link" href="https://nametake.github.io/posts/">Blog</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link" href="https://nametake.github.io/project/">Project</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link" href="https://nametake.github.io/tags/">Tags</a>
+            </li>
+          
         
-          <li class="navigation-item">
-            <a class="navigation-link" href="https://nametake.github.io/posts/">Blog</a>
-          </li>
         
-          <li class="navigation-item">
-            <a class="navigation-link" href="https://nametake.github.io/project/">Project</a>
-          </li>
-        
-          <li class="navigation-item">
-            <a class="navigation-link" href="https://nametake.github.io/tags/">Tags</a>
-          </li>
-        
-      
-      
-    </ul>
+      </ul>
     
   </section>
 </nav>
 
 
-      <div class="content">
-        
+    <div class="content">
+      
   <section class="container post">
     <article>
       <header>
         <div class="post-title">
-          <h1 class="title">Protocol Buffersのserviceをnet/httpに対応させるprotoc-gen-gohttpを作った</h1>
+          <h1 class="title">
+            <a class="title-link" href="https://nametake.github.io/posts/2018/11/21/protoc-gen-gohttp/">
+              Protocol Buffersのserviceをnet/httpに対応させるprotoc-gen-gohttpを作った
+            </a>
+          </h1>
         </div>
         <div class="post-meta">
           <div class="date">
             <span class="posted-on">
-              <i class="fas fa-calendar"></i>
-              <time datetime='2018-11-21T16:32:07&#43;09:00'>
-                November 21, 2018
+              <i class="fa fa-calendar" aria-hidden="true"></i>
+              <time datetime="2018-11-21T16:32:07&#43;09:00">
+                2018/11/21
               </time>
             </span>
             <span class="reading-time">
-              <i class="fas fa-clock"></i>
-              2-minute read
+              <i class="fa fa-clock-o" aria-hidden="true"></i>
+              6-minute read
             </span>
           </div>
           
+          
           <div class="tags">
-  <i class="fas fa-tag"></i>
-    <a href="https://nametake.github.io/tags/go/">Go</a>
+  <i class="fa fa-tag" aria-hidden="true"></i>
+    <span class="tag">
+      <a href="https://nametake.github.io/tags/go/">Go</a>
+    </span>
       <span class="separator">•</span>
-    <a href="https://nametake.github.io/tags/protocol-buffers/">Protocol Buffers</a></div>
+    <span class="tag">
+      <a href="https://nametake.github.io/tags/protocol-buffers/">Protocol Buffers</a>
+    </span></div>
 
         </div>
       </header>
 
-      <div>
+      <div class="post-content">
         
-        <p><a href="https://github.com/nametake/protoc-gen-gohttp">nametake/protoc-gen-gohttp</a>という<code>protoc</code>のプラグインを作ったのでその話です。</p>
-<h1 id="protocol-buffersとは">Protocol Buffersとは</h1>
+        <p><a href="https://github.com/nametake/protoc-gen-gohttp"  class="external-link" target="_blank" rel="noopener">nametake/protoc-gen-gohttp</a>という<code>protoc</code>のプラグインを作ったのでその話です。</p>
+<h1 id="protocol-buffersとは">
+  Protocol Buffersとは
+  <a class="heading-link" href="#protocol-buffers%e3%81%a8%e3%81%af">
+    <i class="fa fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h1>
 <p>Protocol Buffersはインターフェース定義言語の1つでGoogleによって開発されているものです(ざっくりいうと、JSONやXMLの仲間)。以下のように、構造を表す<code>message</code>とその<code>message</code>を使ったRPCのインターフェースの<code>service</code>というものを定義できます。</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-proto" data-lang="proto"><span style="display:flex;"><span>syntax <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;proto3&#34;</span>;<span style="color:#960050;background-color:#1e0010">
 </span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
@@ -212,13 +245,25 @@ type HelloRequest struct { Name string `protobuf:&#34;bytes,1,opt,name=name&#34;
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">RegisterGreeterServer</span>(<span style="color:#a6e22e">s</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">grpc</span>.<span style="color:#a6e22e">Server</span>, <span style="color:#a6e22e">srv</span> <span style="color:#a6e22e">GreeterServer</span>) {
 </span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">s</span>.<span style="color:#a6e22e">RegisterService</span>(<span style="color:#f92672">&amp;</span><span style="color:#a6e22e">_Greeter_serviceDesc</span>, <span style="color:#a6e22e">srv</span>)
 </span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><h1 id="本題">本題</h1>
+</span></span></code></pre></div><h1 id="本題">
+  本題
+  <a class="heading-link" href="#%e6%9c%ac%e9%a1%8c">
+    <i class="fa fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h1>
 <p>Protocol Buffers自体はただのIDLでしかないので、書き出されるコードはただのデータ構造を表す構造体に過ぎません。よくgRPCと一緒に語られるため、gRPCと一緒に使わないといけないと勘違いされがちなのですが、gRPCを使わずとも書き出した構造体だけを利用可能です。</p>
 <p>書き出された構造体をバイナリに変換してHTTPのPOSTのBodyに乗せることで、通信プロトコルはHTTPのままでProtocol Buffersの恩恵を受けることもできます(構造体なのでJSONに変換して取り扱ったりもできます)。</p>
 <p>クライアントとサーバ間で同じ定義を利用できて、かつその定義もシンプルなため、gRPCを使わないでProtocol Buffersだけを利用するだけでもかなり便利です。</p>
 <p>ただ、Go言語のコードを書き出した際に出力されるのは<code>message</code>に対応した構造体のみで、<code>service</code>の定義はgRPC等のプラグインを使わないと無視されてしまうため、HTTPの上で取り扱うには意味のない定義でした。</p>
-<p>「せっかく構造体までは利用できるんだから、どうせならgRPCのプラグインで書き出されるinterfaceも使いたい！」という気持ちと「protocにプラグイン機能が用意されてるならそれを利用して<code>http.Handler</code>に対応できるコードを書き出せば良いのでは？」という発想から作ったプラグインが<a href="https://github.com/nametake/protoc-gen-gohttp">protoc-gen-gohttp</a>です。</p>
-<h2 id="使い方">使い方</h2>
+<p>「せっかく構造体までは利用できるんだから、どうせならgRPCのプラグインで書き出されるinterfaceも使いたい！」という気持ちと「protocにプラグイン機能が用意されてるならそれを利用して<code>http.Handler</code>に対応できるコードを書き出せば良いのでは？」という発想から作ったプラグインが<a href="https://github.com/nametake/protoc-gen-gohttp"  class="external-link" target="_blank" rel="noopener">protoc-gen-gohttp</a>です。</p>
+<h2 id="使い方">
+  使い方
+  <a class="heading-link" href="#%e4%bd%bf%e3%81%84%e6%96%b9">
+    <i class="fa fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <p>このプラグインはgRPCのプラグインと一緒に使うことを想定しています。Protocol Buffersの定義に<code>service</code>を書いてこのプラグインを使うと、以下のようなコードが生成されます。</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">GreeterHTTPConverter</span> <span style="color:#66d9ef">struct</span> {
 </span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">srv</span> <span style="color:#a6e22e">GreeterServer</span>
@@ -254,8 +299,14 @@ type HelloRequest struct { Name string `protobuf:&#34;bytes,1,opt,name=name&#34;
 </span></span><span style="display:flex;"><span><span style="color:#75715e">// Callbackを渡してhttp.HandlerFuncに登録
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">Handle</span>(<span style="color:#e6db74">&#34;/sayhello&#34;</span>, <span style="color:#a6e22e">conv</span>.<span style="color:#a6e22e">SayHello</span>(<span style="color:#a6e22e">logCallback</span>))
 </span></span></code></pre></div><p><code>SayHello</code>メソッドに渡すCallbackは<code>http.HandlerFunc</code>を抜けるときに必ず呼び出されるため、Callbackの引数をハンドリングすることで呼び出し時の挟み込む処理やエラーハンドリングをできます。</p>
-<p>細かい使い方や動かし方は<a href="https://github.com/nametake/protoc-gen-gohttp#readme">README</a>を見てください。</p>
-<h2 id="コンセプト">コンセプト</h2>
+<p>細かい使い方や動かし方は<a href="https://github.com/nametake/protoc-gen-gohttp#readme"  class="external-link" target="_blank" rel="noopener">README</a>を見てください。</p>
+<h2 id="コンセプト">
+  コンセプト
+  <a class="heading-link" href="#%e3%82%b3%e3%83%b3%e3%82%bb%e3%83%97%e3%83%88">
+    <i class="fa fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <p>作成にあたって以下のことに気をつけています。</p>
 <ul>
 <li>生成される物が標準パッケージとProtobuf関係のパッケージしかimportしない</li>
@@ -265,9 +316,21 @@ type HelloRequest struct { Name string `protobuf:&#34;bytes,1,opt,name=name&#34;
 <li>無駄にMarshal/Unmarshalをしない</li>
 <li>できる限り型で守る(Contextに情報を詰めたりしない)</li>
 </ul>
-<h1 id="比較">比較</h1>
+<h1 id="比較">
+  比較
+  <a class="heading-link" href="#%e6%af%94%e8%bc%83">
+    <i class="fa fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h1>
 <p>このプラグインは実際にプロジェクトで使おうと思って作ったのですが、作る前に似たようなものがないか調べたのでそれとの比較も書いてみます。</p>
-<h2 id="twirphttpsgithubcomtwitchtvtwirp"><a href="https://github.com/twitchtv/twirp">twirp</a></h2>
+<h2 id="twirphttpsgithubcomtwitchtvtwirp">
+  <a href="https://github.com/twitchtv/twirp"  class="external-link" target="_blank" rel="noopener">twirp</a>
+  <a class="heading-link" href="#twirphttpsgithubcomtwitchtvtwirp">
+    <i class="fa fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <p>同じようにProtocol Buffersの定義からhttp.Handler対応するコードを生成するフレームワークです。Content−TypeをみてJSONかバイナリかを判断することもしています。ただ、以下の点が気になったので自分たちのプロジェクトでは採用を見送りました。</p>
 <ul>
 <li><strong>生成されるものがtwirpをimportしている</strong></li>
@@ -275,9 +338,21 @@ type HelloRequest struct { Name string `protobuf:&#34;bytes,1,opt,name=name&#34;
 <li>RPCの呼び出しに対するHookがContextに情報を詰めるようになっていて型で守るのが難しい</li>
 <li>フレームワークなのでピンポイントで使いづらい</li>
 </ul>
-<h2 id="russellluoprotoc-go-pluginshttpsgithubcomrussellluoprotoc-go-plugins"><a href="https://github.com/RussellLuo/protoc-go-plugins">RussellLuo/protoc-go-plugins</a></h2>
+<h2 id="russellluoprotoc-go-pluginshttpsgithubcomrussellluoprotoc-go-plugins">
+  <a href="https://github.com/RussellLuo/protoc-go-plugins"  class="external-link" target="_blank" rel="noopener">RussellLuo/protoc-go-plugins</a>
+  <a class="heading-link" href="#russellluoprotoc-go-pluginshttpsgithubcomrussellluoprotoc-go-plugins">
+    <i class="fa fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <p>Protocol Buffersの定義からhttp.Handler対応の物を生成するプラグインです。JSONには対応していたのですが、バイナリのMarshal/Unmarshalには対応しておらず、エラーハンドリングにも余地がありませんでした。</p>
-<h2 id="moulprotoc-gen-gotemplatehttpsgithubcommoulprotoc-gen-gotemplate"><a href="https://github.com/moul/protoc-gen-gotemplate">moul/protoc-gen-gotemplate</a></h2>
+<h2 id="moulprotoc-gen-gotemplatehttpsgithubcommoulprotoc-gen-gotemplate">
+  <a href="https://github.com/moul/protoc-gen-gotemplate"  class="external-link" target="_blank" rel="noopener">moul/protoc-gen-gotemplate</a>
+  <a class="heading-link" href="#moulprotoc-gen-gotemplatehttpsgithubcommoulprotoc-gen-gotemplate">
+    <i class="fa fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <!-- textlint-disable ja-technical-writing/ja-no-weak-phrase -->
 <p>他の物とは毛色が違うのですがProtocol Buffersの定義からGoのテンプレート機能を使ってコードを生成するためのプラグインです。時間と労力をかけないなら、テンプレートを用意してこれを使うのが一番早かったと思います。</p>
 <!-- textlint-enable ja-technical-writing/ja-no-weak-phrase -->
@@ -292,7 +367,7 @@ type HelloRequest struct { Name string `protobuf:&#34;bytes,1,opt,name=name&#34;
 
         <div id="disqus_thread"></div>
 <script>
-    window.disqus_config = function () {
+  window.disqus_config = function () {
     
     
     
@@ -307,9 +382,15 @@ type HelloRequest struct { Name string `protobuf:&#34;bytes,1,opt,name=name&#34;
         s.setAttribute('data-timestamp', +new Date());
         (d.head || d.body).appendChild(s);
     })();
+    
+    document.addEventListener('themeChanged', function (e) { 
+        if (document.readyState == 'complete') {
+          DISQUS.reset({ reload: true, config: disqus_config });
+        }
+    });
 </script>
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+        
+        
         
         
       </footer>
@@ -318,33 +399,36 @@ type HelloRequest struct { Name string `protobuf:&#34;bytes,1,opt,name=name&#34;
     
   </section>
 
-      </div>
+    </div>
 
-      
-  <footer class="footer">
-    <section class="container">
-      
-        <p>nametake.github.io</p>
-      
-      
-        ©
-        
-        2023
-         nametake 
-      
-      
-         · 
-        Powered by <a href="https://gohugo.io/">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/">Coder</a>.
-      
-      
-    </section>
-  </footer>
-
-    </main>
-
+    <footer class="footer">
+  <section class="container">
+    ©
     
-
+    2023
+     nametake 
+    ·
     
+    Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/" target="_blank" rel="noopener">Coder</a>.
+    
+  </section>
+</footer>
+
+  </main>
+
+  
+
+  
+  
+  <script src="https://nametake.github.io/js/coder.min.6ae284be93d2d19dad1f02b0039508d9aab3180a12a06dcc71b0b0ef7825a317.js" integrity="sha256-auKEvpPS0Z2tHwKwA5UI2aqzGAoSoG3McbCw73gloxc="></script>
+  
+
+  
+
+  
+
+
+  
 <script>
 var doNotTrack = false;
 if (!doNotTrack) {
@@ -358,8 +442,33 @@ if (!doNotTrack) {
 }
 </script>
 
-    
+  
 
-  </body>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</body>
 
 </html>

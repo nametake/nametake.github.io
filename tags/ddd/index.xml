@@ -5,7 +5,7 @@
     <link>https://nametake.github.io/tags/ddd/</link>
     <description>Recent content in DDD on nametake.info</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
+    <language>ja</language>
     <lastBuildDate>Sat, 25 Jul 2020 00:00:00 +0900</lastBuildDate>
     <atom:link href="https://nametake.github.io/tags/ddd/index.xml" rel="self" type="application/rss+xml" />
     <item>
@@ -13,14 +13,14 @@
       <link>https://nametake.github.io/posts/2020/07/25/abstract-external-service/</link>
       <pubDate>Sat, 25 Jul 2020 00:00:00 +0900</pubDate>
       <guid>https://nametake.github.io/posts/2020/07/25/abstract-external-service/</guid>
-      <description>外部サービスの抽象化 最近のシステムはその複雑さの上昇に伴い、様々な外部サービスと連携する機会が多くあります。&#xA;その際、ドメインとして外部サービスをどう取り扱うといいのか、という個人的なプラクティスを過去の失敗例も含めて記事にしようと思います。&#xA;過去の失敗 昔私が関わっていた仮想通貨の販売所の価格判定ロジックを例にあげます。&#xA;自社の販売所における仮想通貨の価格を決定する仕組みを作っていました。&#xA;複数の外部取引所のAPIから価格情報を取り出してそれらの値を使って自社の販売価格を計算をします。&#xA;販売所の価格の構造体は以下のようにドメイン層に定義していました。&#xA;1 2 3 4 5 type Tick struct { Amount int Market Currency Base Currency } また、それらのTick を取り出すために各取引所のサービスごとに以下のようにinterfaceを定義していました。&#xA;1 2 3 4 5 6 7 type FooService interface { GetTick() (*Tick, error) } type BarService interface { GetTick() (*Tick, error) } FooやBarは取引所の名前だと思ってください。&#xA;これらもドメイン層に定義しています。&#xA;また、上記interfaceを満たす実装はインフラストラクチャ層等で定義してDIするようにしています。&#xA;さて、勘の良い方はもうお気づきかもしれませんが上記interfaceの定義が失敗です。&#xA;一見、 Tick を取り出せるinterfaceをサービス分定義したことで問題なく動くように見えます。&#xA;しかし、 GetTick からいきなり Tick 取り出そうとしているため、「外部サービスの値を使って Tick を計算する」というロジックがインフラストラクチャ層に流出するという問題が発生してしまいました。&#xA;具体的な例をあげます。&#xA;取引所Fooは以下のようなResponseを返すAPIを提供していました。&#xA;{ &amp;#34;currentTick&amp;#34;: &amp;#34;1000000&amp;#34;, &amp;#34;market&amp;#34;: &amp;#34;btc-jpy&amp;#34; } 上記の構造を Tick に割り当てるのは難しくありません。</description>
+      <description>外部サービスの抽象化 Link to heading 最近のシステムはその複雑さの上昇に伴い、様々な外部サービスと連携する機会が多くあります。 その際、ドメインとして外部</description>
     </item>
     <item>
       <title>集約におけるトランザクションのドメイン的関心と技術的関心</title>
       <link>https://nametake.github.io/posts/2020/04/30/ddd-aggregate/</link>
       <pubDate>Thu, 30 Apr 2020 00:00:00 +0900</pubDate>
       <guid>https://nametake.github.io/posts/2020/04/30/ddd-aggregate/</guid>
-      <description>集約のトランザクション DDDの集約について学ぶと、必ず「集約はトランザクション境界である」という説明がされています。&#xA;整合性の境界の論理的な意味は、「その内部にあるあらゆるものは、どんな操作をするにかかわらず、特定の不変条件のルールに従う」ということだ。この境界の外部にある、あらゆるものの整合性は、集約とは無関係になる。つまり、集約はトランザクション整合性の境界と同義である&#xA;ヴァーン・ヴァーノン. 実践ドメイン駆動設計 (Japanese Edition) (Kindle の位置No.8139-8141). Kindle 版.&#xA;この「トランザクション」という言葉は技術者的には技術的領域(DB等)のトランザクションと同一視したくなります。&#xA;DDDの概念としてはその認識でも厳密には間違いではありません。&#xA;ただ、個人的にはそこへ至る前に「ドメイン的関心のトランザクション」という考えを1つ挟む必要があるのではないか、と考えています。&#xA;ドメイン的関心のトランザクション この記事で言及している「ドメイン的関心のトランザクション」とは「ドメインエキスパートが業務の処理をするにあたっての区切り」を指します。&#xA;この「ドメイン的関心のトランザクション」を意識しないと適切なトランザクションの切れなくなってしまいます。&#xA;たとえば、1つの契約書から複数の請求書を作成する、といった請求書作成の処理の区切りを例に取ってみます。&#xA;1つの契約書には複数の契約項目があり、それ毎に請求書が作成されるとします。&#xA;その作成の中で、契約書の契約項目にミスが有った場合、技術的関心のトランザクションだけに目が行っていると「契約項目が不正な状態だったため請求書作成の処理全体をロールバック」ということをしがちです。&#xA;このような処理を実現するにはデータの構造とトランザクションだけを表現すればいいのでドメイン貧血症になりがちです。&#xA;ですが、実際に業務をしているドメインエキスパートは「不正な契約項目だけ差し戻して、正しい契約項目からは請求書を作成する」といったことをしている可能性があります。&#xA;その場合、「不正な契約項目」というものを表現する必要があり、契約項目が不正だからということで一概ロールバックをすることはできません。&#xA;もちろん、上記の「不正な契約項目」というものを表現したとしても、契約書や請求書といったオブジェクトとの整合性は保つ必要があるため、最終的には技術的なトランザクションを意識する必要があります。&#xA;しかし、DDDで開発をすすめる上ではその手前に必ず「ドメイン的関心のトランザクション」があり、それを意識して集約を考えることでドメインを深堀りすることに繋がり、結果的に正しい集約を作ることができるのではないかと思います。</description>
+      <description>集約のトランザクション Link to heading DDDの集約について学ぶと、必ず「集約はトランザクション境界である」という説明がされています。 整合性の境界の論理</description>
     </item>
   </channel>
 </rss>

@@ -5,7 +5,7 @@
     <link>https://nametake.github.io/tags/protocol-buffers/</link>
     <description>Recent content in Protocol Buffers on nametake.info</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
+    <language>ja</language>
     <lastBuildDate>Sun, 24 May 2020 00:00:00 +0900</lastBuildDate>
     <atom:link href="https://nametake.github.io/tags/protocol-buffers/index.xml" rel="self" type="application/rss+xml" />
     <item>
@@ -13,35 +13,35 @@
       <link>https://nametake.github.io/posts/2020/05/24/protobuf-go-package-semicolon/</link>
       <pubDate>Sun, 24 May 2020 00:00:00 +0900</pubDate>
       <guid>https://nametake.github.io/posts/2020/05/24/protobuf-go-package-semicolon/</guid>
-      <description>先日protoc-gen-gohttpの依存パッケージをしようと思って色々触っていたら以下のようなWARNINGが出てきました。&#xA;2020/05/24 11:36:51 WARNING: Deprecated use of &amp;#39;go_package&amp;#39; option without a full import path in &amp;#34;greeter.proto&amp;#34;, please specify: option go_package = &amp;#34;.;main&amp;#34;; A future release of protoc-gen-go will require the import path be specified. See https://developers.google.com/protocol-buffers/docs/reference/go-generated#package for more information. 以下のファイルのように go_package のオプションにGoのimport pathを記述しなかったことが問題のようです。&#xA;1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 syntax = &amp;#34;proto3&amp;#34;; package helloworld; option go_package = &amp;#34;main&amp;#34;; service Greeter { rpc SayHello(HelloRequest) returns (HelloReply); } message HelloRequest { string name = 1; } message HelloReply { string message = 1; } 一応WARNINGには「go_package = &amp;quot;.</description>
+      <description>先日protoc-gen-gohttpの依存パッケージをしようと思って色々触っていたら以下のようなWARNINGが出てきました。 2020/05/24 11:36:51 WARNING: Deprecated use of</description>
     </item>
     <item>
       <title>protoc-gen-gohttpをHttpRule Optionに対応させた</title>
       <link>https://nametake.github.io/posts/2019/08/30/protoc-gen-gohttp-httprule/</link>
       <pubDate>Fri, 30 Aug 2019 01:52:26 +0900</pubDate>
       <guid>https://nametake.github.io/posts/2019/08/30/protoc-gen-gohttp-httprule/</guid>
-      <description>以前、Protocol Buffersのserviceの定義を利用してGoのnet/httpで利用できるようにするためのprotoc-gen-gohttpというprotocのプラグインを作成しました。&#xA;ですが、protoc-gen-gohttpではURLのパス部分の定義はProtocol Buffersの定義には記述できないため、クライアント側がProtocol Buffersを見ただけでパスを読み取ることができませんでした。また、生成されたコードはHTTPのBodyしか参照しないため、情報を取得するだけのときもHTTPのメソッドをPOSTにする必要もありました。&#xA;そこで、Googleが提供しているRPCの定義をHTTPのREST APIにマッピングするためのHttpRuleオプションを利用して、protoc-gen-gohttpがHttpRuleのマッピングどおりに動作するコードを生成するように改良しました。&#xA;使い方 protoc-gen-gohttpをインストールしたら、以下のようにHttpRuleを使用したProtoの定義を用意します(annotations.protoのダウンロードの仕方はこの辺を参考にしてください)。この記事ではexample.protoに書いているとします。&#xA;syntax = &amp;#34;proto3&amp;#34;; package main; option go_package = &amp;#34;main&amp;#34;; import &amp;#34;google/api/annotations.proto&amp;#34;; service Messaging { rpc GetMessage(GetMessageRequest) returns (GetMessageResponse) { option (google.api.http).get = &amp;#34;/v1/messages/{message_id}&amp;#34;; } rpc UpdateMessage(UpdateMessageRequest) returns (UpdateMessageResponse) { option (google.api.http) = { put: &amp;#34;/v1/messages/{message_id}/{sub.subfield}&amp;#34; body: &amp;#34;*&amp;#34; }; } } message GetMessageRequest { string message_id = 1; string message = 2; repeated string tags = 3; } message GetMessageResponse { string message_id = 1; string message = 2; repeated string tags = 4; } message SubMessage { string subfield = 1; } message UpdateMessageRequest { string message_id = 1; SubMessage sub = 2; string message = 3; } message UpdateMessageResponse { string message_id = 1; SubMessage sub = 2; string message = 3; } 用意できたら、以下のコマンドでGoのコードを生成します。</description>
+      <description>以前、Protocol Buffersのserviceの定義を利用してGoのnet/httpで利用できるようにするためのprotoc-gen-</description>
     </item>
     <item>
       <title>Protocol Buffersを使ったAPIでのNullの設計</title>
       <link>https://nametake.github.io/posts/2019/08/17/protobuf-null-api/</link>
       <pubDate>Sat, 17 Aug 2019 10:44:03 +0900</pubDate>
       <guid>https://nametake.github.io/posts/2019/08/17/protobuf-null-api/</guid>
-      <description>Protocol BuffersのNullの取り扱いの問題 Protocol Buffersのproto3の仕様ではmessageの中の値をOptionalで表現する記法がありません。値を詰めずに送ると入れ子の値がデフォルト値になってしまいます。&#xA;しかし、アプリケーションの設計によってはOptionalな値を表現する必要が出てきます。&#xA;そういった時、プリミティブな型ならgoogle/protobuf/wappers.protoを使う方法があります。&#xA;以下のように使うことでmsgはOptionalな値として取り扱えます。&#xA;syntax = &amp;#34;proto3&amp;#34;; package example; import &amp;#34;google/protobuf/wrappers.proto&amp;#34;; message Example { google.protobuf.StringValue msg = 1; } wappers.protoを読むと、google.protobuf.StringValueは内部にstringを持つmessageとして定義してあり、入れ子構造になったmessageはデフォルト値がnullになるという仕様を利用して擬似的にOptionalを表現する仕組みであるということがわかります。&#xA;しかし、プリミティブな型ではないmessageを定義して、それを入れ子構造にするようなmessageを定義すると、入れ子になったmessageのデフォルト値はnullであるという特性から、それがOptionalなのかRequiredなのかが分かりづらくなるという問題があります。&#xA;例えば、以下のようにDecimal 型が定義されたとき、それを入れ子構造にするようなOrder型があるとします。&#xA;syntax = &amp;#34;proto3&amp;#34;; package example; message Decimal { int64 value = 1; int64 exp = 2; } // アプリケーションに注文をするメッセージ message Order { // 支払う金額(Required) Decimal amount = 1; // 通貨単位(Required)。 int64 currency_unit = 2; // 使用するポイント(Optional) Decimal point = 3; } Order型では金銭を表現しているため数値を正確に表現できるDecimal型を使って金額とポイントを定義しています。しかし、アプリケーションの都合でamountはRequiredにpointはOptionalにしたいとき、どちらもデフォルト値がnullになってしまうため、そのままだと両方を同時に表現できません。また、0ポイントなのかnullなのかで挙動に明確な違いがある場合は0を送るという手段も成立しません。&#xA;Orderぐらいの定義量であればコメントやドキュメントで対応することもできます。しかし、生成されるコードがOptionalであるということは変わらないため、せっかく型付でコード生成をしてくれるProtocol Buffersのメリットが半減してしまいます。また、人類にドキュメントを書く読む管理するという行為は難しすぎるため、プロダクトの成長に従ってドキュメントは陳腐化していってしまいます。</description>
+      <description>Protocol BuffersのNullの取り扱いの問題 Link to heading Protocol Buffersのproto3の仕様ではmessageの中の値をOptionalで表現する記</description>
     </item>
     <item>
       <title>Goでのprotocプラグインのテストの書き方</title>
       <link>https://nametake.github.io/posts/2018/12/14/protoc-plugin-test/</link>
       <pubDate>Fri, 14 Dec 2018 00:00:00 +0900</pubDate>
       <guid>https://nametake.github.io/posts/2018/12/14/protoc-plugin-test/</guid>
-      <description>最近周りでProtocol Buffersの話題をよく聞くようになりました。&#xA;ということはそろそろ人類はprotocのプラグインを書きたくなる時代がやってくると思います。&#xA;そのときに世の中に生み出されるプラグインの品質が少しでも高くなればと思い、以前protoc-gen-gohttpというプラグイン作ったときにテストも書いたので、その知見を書こうと思います。&#xA;プラグイン自体は@yuguiさんの「protocプラグインの書き方」がとても参考になったのでそちらを参照すると良いかもしれません。&#xA;TL;DR 細かいやり方はprotoc-gen-goのgolden_test.goに書いてある 自分のプラグインのテストもそれを参考にして書いた プラグインの動作テストはテスト内でprotocコマンドを実行して行う 実行結果の確認はGolden testingで行う Goのコードでprotoファイルをplugin.CodeGeneratorRequestに変換することは(恐らく)できない 経緯(読み飛ばして大丈夫です) protocのプラグインは標準入力に入ってきたデータをproto.CodeGeneratorRequest型にUnmarshalしてprotoファイルの情報を取得します。&#xA;そのため、最初にテストを書こうとしたときにはGoだけでprotoファイルをproto.CodeGeneratorRequestに変換する仕組みがあるのかと思っていたのですが、この記事公開時点ではその仕組みは提供されていないようでした(知ってたらコメント等で教えていただけると助かります)。&#xA;「それじゃあ有名なプラグインはどうやってるんだ?」と思いprotoc-gen-goのコードを見てみると、Goのコードの中で直接protocコマンドを実行していて、少し面白いテストをしていたので解説しようと思います。&#xA;golden_test.goの解説 ファイル名から想像できる通り、いわゆるGolden testingと呼ばれるものです。テストの中からprotocコマンドを直接実行して、その結果の出力ファイルとtestdataディレクトリに入っている期待するファイルとを比較をしてテストしています。&#xA;300行ぐらいなので全部読んでもそんなに時間はかからないと思いますが、簡単に解説をしてみようと思います。&#xA;コマンド実行部分 以下のコードが直接コマンドを実行する部分です。testing.T構造体とprotocに与える引数を受け取って実際にコマンドを実行します。&#xA;func protoc(t *testing.T, args []string) { cmd := exec.Command(&amp;#34;protoc&amp;#34;, &amp;#34;--plugin=protoc-gen-go=&amp;#34;+os.Args[0]) cmd.Args = append(cmd.Args, args...) // We set the RUN_AS_PROTOC_GEN_GO environment variable to indicate that // the subprocess should act as a proto compiler rather than a test. cmd.Env = append(os.Environ(), &amp;#34;RUN_AS_PROTOC_GEN_GO=1&amp;#34;) out, err := cmd.CombinedOutput() if len(out) &amp;gt; 0 || err !</description>
+      <description>最近周りでProtocol Buffersの話題をよく聞くようになりました。 ということはそろそろ人類はprotocのプラグインを書きたくなる時</description>
     </item>
     <item>
       <title>Protocol Buffersのserviceをnet/httpに対応させるprotoc-gen-gohttpを作った</title>
       <link>https://nametake.github.io/posts/2018/11/21/protoc-gen-gohttp/</link>
       <pubDate>Wed, 21 Nov 2018 16:32:07 +0900</pubDate>
       <guid>https://nametake.github.io/posts/2018/11/21/protoc-gen-gohttp/</guid>
-      <description>nametake/protoc-gen-gohttpというprotocのプラグインを作ったのでその話です。&#xA;Protocol Buffersとは Protocol Buffersはインターフェース定義言語の1つでGoogleによって開発されているものです(ざっくりいうと、JSONやXMLの仲間)。以下のように、構造を表すmessageとそのmessageを使ったRPCのインターフェースのserviceというものを定義できます。&#xA;syntax = &amp;#34;proto3&amp;#34;; package helloworld; option go_package = &amp;#34;main&amp;#34;; message HelloRequest { string name = 1; } message HelloReply { string message = 1; } service Greeter { rpc SayHello(HelloRequest) returns (HelloReply) {} } 上記の定義をprotocコマンドを使ってコンパイルすることで、対応した言語ならそのままコードを書き出せます。例えばGoなら以下のような構造体が書き出されます(長くなるのでコードは削っています)。以下の構造体はProtocol Bufferが用意しているライブラリを利用すればバイナリに変換できます。&#xA;type HelloRequest struct { Name string `protobuf:&amp;#34;bytes,1,opt,name=name&amp;#34; json:&amp;#34;name,omitempty&amp;#34;` XXX_NoUnkeyedLiteral struct{} `json:&amp;#34;-&amp;#34;` XXX_unrecognized []byte `json:&amp;#34;-&amp;#34;` XXX_sizecache int32 `json:&amp;#34;-&amp;#34;` } type HelloReply struct { Message string `protobuf:&amp;#34;bytes,1,opt,name=message&amp;#34; json:&amp;#34;message,omitempty&amp;#34;` XXX_NoUnkeyedLiteral struct{} `json:&amp;#34;-&amp;#34;` XXX_unrecognized []byte `json:&amp;#34;-&amp;#34;` XXX_sizecache int32 `json:&amp;#34;-&amp;#34;` } また、protocコマンドはプラグイン機構も持っているため、例えばgRPCのためのコードを書き出したかったらprotoc --go_out=plugins=grpc:.</description>
+      <description>nametake/protoc-gen-gohttpというprotocのプラグインを作ったのでその話です。 Protocol Buffersとは Link to heading Protocol Buf</description>
     </item>
   </channel>
 </rss>

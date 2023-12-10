@@ -1,61 +1,26 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja">
 
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="Content-Language" content="en">
+<head>
+  <title>
+  Hooks対応したreact-tableをTypeScriptで使う · nametake.info
+</title>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
 
-    <meta name="author" content="nametake">
-    <meta name="description" content="この記事はReact Advent Calendar 2019の記事です。
-みなさまテーブルComponentは作成していますか?
-サービスにもよるとは思いますが、業務系のサービスではほぼ確実に登場するUIです。
-しかも、よく登場する上にたくさんの機能を求められるUIでもあります。パッと思いつく限りでも、ソート、フィルター、検索、ページネーション等多岐にわたります。
-これらの機能はUIと分離して1から作るは大変です。あり物のUIライブラリのテーブルComponentにオリジナルのスタイルを当てるという手もありますが、それだとUIライブラリの仕様に引っ張られたり、UIとロジックの分離がうまくできなかったりすることがあります。
-そこで、今回は「テーブルで必要になる機能」だけをHooksとし、UIとロジックを完全に分離できるるreact-table v7を紹介しようと思います。
-注意点 この記事執筆時点ではreact-table自体はRCになっていますが、react-tableの型定義はまだマージされていません。
-https://github.com/DefinitelyTyped/DefinitelyTyped/pull/40816
-また、議論の末、現段階最新バージョンのrc.9ではreact-table側で型定義を管理しないことになっています。
-そのため、この記事の紹介ではTypeScriptを使って紹介をする都合上、以下のコマンドで入るバージョンを使用して紹介をします。
-yarn add react-table@7.0.0-beta.23 大きく使い勝手が変わるようなことはないと思いますが、react-tableは開発が活発なため、この記事の内容が陳腐化している可能性があります。
-本番で使う際は必ず公式のドキュメントを参照してください。
-シンプルなテーブル まずは最もシンプルにテーブルを表示する例です。
-import * as React from &#39;react&#39;; import { render } from &#39;react-dom&#39;; import { useTable, Column } from &#39;react-table&#39;; import &#39;./styles.css&#39;; const columns: Column&lt;Data&gt;[] = [ { Header: &#39;名前&#39;, accessor: &#39;name&#39; }, { Header: &#39;年齢&#39;, accessor: &#39;age&#39; } ]; interface Data { name: string; age: number; } const data: Data[] = [ { name: &#39;John&#39;, age: 23 }, { name: &#39;Jane&#39;, age: 26 } ]; function App() { const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } = useTable&lt;Data&gt;({ columns, data }); return ( &lt;table {.">
-    <meta name="keywords" content="blog,developer,personal">
 
-    
 
-    <meta name="twitter:card" content="summary"/><meta name="twitter:title" content="Hooks対応したreact-tableをTypeScriptで使う"/>
-<meta name="twitter:description" content="この記事はReact Advent Calendar 2019の記事です。
-みなさまテーブルComponentは作成していますか?
-サービスにもよるとは思いますが、業務系のサービスではほぼ確実に登場するUIです。
-しかも、よく登場する上にたくさんの機能を求められるUIでもあります。パッと思いつく限りでも、ソート、フィルター、検索、ページネーション等多岐にわたります。
-これらの機能はUIと分離して1から作るは大変です。あり物のUIライブラリのテーブルComponentにオリジナルのスタイルを当てるという手もありますが、それだとUIライブラリの仕様に引っ張られたり、UIとロジックの分離がうまくできなかったりすることがあります。
-そこで、今回は「テーブルで必要になる機能」だけをHooksとし、UIとロジックを完全に分離できるるreact-table v7を紹介しようと思います。
-注意点 この記事執筆時点ではreact-table自体はRCになっていますが、react-tableの型定義はまだマージされていません。
-https://github.com/DefinitelyTyped/DefinitelyTyped/pull/40816
-また、議論の末、現段階最新バージョンのrc.9ではreact-table側で型定義を管理しないことになっています。
-そのため、この記事の紹介ではTypeScriptを使って紹介をする都合上、以下のコマンドで入るバージョンを使用して紹介をします。
-yarn add react-table@7.0.0-beta.23 大きく使い勝手が変わるようなことはないと思いますが、react-tableは開発が活発なため、この記事の内容が陳腐化している可能性があります。
-本番で使う際は必ず公式のドキュメントを参照してください。
-シンプルなテーブル まずは最もシンプルにテーブルを表示する例です。
-import * as React from &#39;react&#39;; import { render } from &#39;react-dom&#39;; import { useTable, Column } from &#39;react-table&#39;; import &#39;./styles.css&#39;; const columns: Column&lt;Data&gt;[] = [ { Header: &#39;名前&#39;, accessor: &#39;name&#39; }, { Header: &#39;年齢&#39;, accessor: &#39;age&#39; } ]; interface Data { name: string; age: number; } const data: Data[] = [ { name: &#39;John&#39;, age: 23 }, { name: &#39;Jane&#39;, age: 26 } ]; function App() { const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } = useTable&lt;Data&gt;({ columns, data }); return ( &lt;table {."/>
 
-    <meta property="og:title" content="Hooks対応したreact-tableをTypeScriptで使う" />
-<meta property="og:description" content="この記事はReact Advent Calendar 2019の記事です。
-みなさまテーブルComponentは作成していますか?
-サービスにもよるとは思いますが、業務系のサービスではほぼ確実に登場するUIです。
-しかも、よく登場する上にたくさんの機能を求められるUIでもあります。パッと思いつく限りでも、ソート、フィルター、検索、ページネーション等多岐にわたります。
-これらの機能はUIと分離して1から作るは大変です。あり物のUIライブラリのテーブルComponentにオリジナルのスタイルを当てるという手もありますが、それだとUIライブラリの仕様に引っ張られたり、UIとロジックの分離がうまくできなかったりすることがあります。
-そこで、今回は「テーブルで必要になる機能」だけをHooksとし、UIとロジックを完全に分離できるるreact-table v7を紹介しようと思います。
-注意点 この記事執筆時点ではreact-table自体はRCになっていますが、react-tableの型定義はまだマージされていません。
-https://github.com/DefinitelyTyped/DefinitelyTyped/pull/40816
-また、議論の末、現段階最新バージョンのrc.9ではreact-table側で型定義を管理しないことになっています。
-そのため、この記事の紹介ではTypeScriptを使って紹介をする都合上、以下のコマンドで入るバージョンを使用して紹介をします。
-yarn add react-table@7.0.0-beta.23 大きく使い勝手が変わるようなことはないと思いますが、react-tableは開発が活発なため、この記事の内容が陳腐化している可能性があります。
-本番で使う際は必ず公式のドキュメントを参照してください。
-シンプルなテーブル まずは最もシンプルにテーブルを表示する例です。
-import * as React from &#39;react&#39;; import { render } from &#39;react-dom&#39;; import { useTable, Column } from &#39;react-table&#39;; import &#39;./styles.css&#39;; const columns: Column&lt;Data&gt;[] = [ { Header: &#39;名前&#39;, accessor: &#39;name&#39; }, { Header: &#39;年齢&#39;, accessor: &#39;age&#39; } ]; interface Data { name: string; age: number; } const data: Data[] = [ { name: &#39;John&#39;, age: 23 }, { name: &#39;Jane&#39;, age: 26 } ]; function App() { const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } = useTable&lt;Data&gt;({ columns, data }); return ( &lt;table {." />
+<meta name="author" content="nametake">
+<meta name="description" content="この記事はReact Advent Calendar 2019の記事です。 みなさまテーブルComponentは作成していますか? サービスにもよるとは思いますが、業務系のサ">
+<meta name="keywords" content="blog,developer,personal">
+
+<meta name="twitter:card" content="summary"/><meta name="twitter:title" content="Hooks対応したreact-tableをTypeScriptで使う"/>
+<meta name="twitter:description" content="この記事はReact Advent Calendar 2019の記事です。 みなさまテーブルComponentは作成していますか? サービスにもよるとは思いますが、業務系のサ"/>
+
+<meta property="og:title" content="Hooks対応したreact-tableをTypeScriptで使う" />
+<meta property="og:description" content="この記事はReact Advent Calendar 2019の記事です。 みなさまテーブルComponentは作成していますか? サービスにもよるとは思いますが、業務系のサ" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://nametake.github.io/posts/2019/12/17/react-table/" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2019-12-17T00:00:00+00:00" />
@@ -63,142 +28,184 @@ import * as React from &#39;react&#39;; import { render } from &#39;react-dom&#3
 
 
 
-    
-      <base href="https://nametake.github.io/posts/2019/12/17/react-table/">
-    
-    <title>
-  Hooks対応したreact-tableをTypeScriptで使う · nametake.info
-</title>
 
-    
-      <link rel="canonical" href="https://nametake.github.io/posts/2019/12/17/react-table/">
-    
 
-    <link href="https://fonts.googleapis.com/css?family=Lato:400,700%7CMerriweather:300,700%7CSource+Code+Pro:400,700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/all.css" integrity="sha384-Bfad6CLCknfcloXFOyFnlgtENryhrpZCe29RTifKEixXQZ38WheV+i/6YWSzkz3V" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" integrity="sha256-l85OmPOjvil/SOvVt3HnSSjzF1TUMyT9eV0c2BzEGzU=" crossorigin="anonymous" />
+<link rel="canonical" href="https://nametake.github.io/posts/2019/12/17/react-table/">
 
-    
-      
-      
-      <link rel="stylesheet" href="https://nametake.github.io/css/coder.min.3219ef62ae52679b7a9c19043171c3cd9f523628c2a65f3ef247ee18836bc90b.css" integrity="sha256-MhnvYq5SZ5t6nBkEMXHDzZ9SNijCpl8&#43;8kfuGINryQs=" crossorigin="anonymous" media="screen" />
-    
 
-    
+<link rel="preload" href="https://nametake.github.io/fonts/forkawesome-webfont.woff2?v=1.2.0" as="font" type="font/woff2" crossorigin>
 
-    
-      
-        
-        
-        <link rel="stylesheet" href="https://nametake.github.io/css/coder-dark.min.e78e80fc3a585a4d1c8fc7f58623b6ff852411e38431a9cd1792877ecaa160f6.css" integrity="sha256-546A/DpYWk0cj8f1hiO2/4UkEeOEManNF5KHfsqhYPY=" crossorigin="anonymous" media="screen" />
-      
-    
 
-    
-      <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto&#43;Sans&#43;JP&amp;display=swap" />
-    
-      <link rel="stylesheet" href="https://nametake.github.io/css/index.css" />
-    
-      <link rel="stylesheet" href="https://nametake.github.io/css/syntax.css" />
-    
+  
+  
+  <link rel="stylesheet" href="https://nametake.github.io/css/coder.min.e1bdf152d93b060b06ba5d496486ed9c201a8b95d335e035beb5faebe3b61cad.css" integrity="sha256-4b3xUtk7BgsGul1JZIbtnCAai5XTNeA1vrX66&#43;O2HK0=" crossorigin="anonymous" media="screen" />
 
+
+
+
+
+
+  
     
+    
+    <link rel="stylesheet" href="https://nametake.github.io/css/coder-dark.min.a00e6364bacbc8266ad1cc81230774a1397198f8cfb7bcba29b7d6fcb54ce57f.css" integrity="sha256-oA5jZLrLyCZq0cyBIwd0oTlxmPjPt7y6KbfW/LVM5X8=" crossorigin="anonymous" media="screen" />
+  
 
-    <link rel="icon" type="image/png" href="https://nametake.github.io/images/favicon-32x32.png" sizes="32x32">
-    <link rel="icon" type="image/png" href="https://nametake.github.io/images/favicon-16x16.png" sizes="16x16">
 
-    <meta name="generator" content="Hugo 0.121.1">
-  </head>
+
+ 
+  
+    
+    <link rel="stylesheet" href="https://nametake.github.io/css/noto&#43;sans&#43;jp.min.ed4b9470a6e014d7c178379b142a1dc1850e399398dc9ce15b1e3bba8368c55f.css" integrity="sha256-7UuUcKbgFNfBeDebFCodwYUOOZOY3JzhWx47uoNoxV8=" crossorigin="anonymous" media="screen" />
+  
+
+
 
   
   
     
+    <link rel="stylesheet" href="https://nametake.github.io/scss/custom.min.38767641d483228e61ddae5e0b6e364839f6a0780c348bd284892bd8ae1aef22.css" integrity="sha256-OHZ2QdSDIo5h3a5eC242SDn2oHgMNIvShIkr2K4a7yI=" crossorigin="anonymous" media="screen" />
   
-  <body class="colorscheme-auto"
-        onload=""
-  >
-    <main class="wrapper">
-      <nav class="navigation">
+
+
+
+<link rel="icon" type="image/svg+xml" href="https://nametake.github.io/images/favicon.svg" sizes="any">
+<link rel="icon" type="image/png" href="https://nametake.github.io/images/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="https://nametake.github.io/images/favicon-16x16.png" sizes="16x16">
+
+<link rel="apple-touch-icon" href="https://nametake.github.io/images/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="180x180" href="https://nametake.github.io/images/apple-touch-icon.png">
+
+<link rel="manifest" href="https://nametake.github.io/site.webmanifest">
+<link rel="mask-icon" href="https://nametake.github.io/images/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+
+
+
+
+
+
+</head>
+
+
+
+
+
+
+<body class="preload-transitions colorscheme-auto">
+  
+<div class="float-container">
+    <a id="dark-mode-toggle" class="colorscheme-toggle">
+        <i class="fa fa-adjust fa-fw" aria-hidden="true"></i>
+    </a>
+</div>
+
+
+  <main class="wrapper">
+    <nav class="navigation">
   <section class="container">
     <a class="navigation-title" href="https://nametake.github.io/">
       nametake.info
     </a>
     
-    <input type="checkbox" id="menu-toggle" />
-    <label class="menu-button float-right" for="menu-toggle"><i class="fas fa-bars"></i></label>
-    <ul class="navigation-list">
-      
+      <input type="checkbox" id="menu-toggle" />
+      <label class="menu-button float-right" for="menu-toggle">
+        <i class="fa fa-bars fa-fw" aria-hidden="true"></i>
+      </label>
+      <ul class="navigation-list">
         
-          <li class="navigation-item">
-            <a class="navigation-link" href="https://nametake.github.io/about/">About</a>
-          </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link" href="https://nametake.github.io/about/">About</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link" href="https://nametake.github.io/posts/">Blog</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link" href="https://nametake.github.io/project/">Project</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link" href="https://nametake.github.io/tags/">Tags</a>
+            </li>
+          
         
-          <li class="navigation-item">
-            <a class="navigation-link" href="https://nametake.github.io/posts/">Blog</a>
-          </li>
         
-          <li class="navigation-item">
-            <a class="navigation-link" href="https://nametake.github.io/project/">Project</a>
-          </li>
-        
-          <li class="navigation-item">
-            <a class="navigation-link" href="https://nametake.github.io/tags/">Tags</a>
-          </li>
-        
-      
-      
-    </ul>
+      </ul>
     
   </section>
 </nav>
 
 
-      <div class="content">
-        
+    <div class="content">
+      
   <section class="container post">
     <article>
       <header>
         <div class="post-title">
-          <h1 class="title">Hooks対応したreact-tableをTypeScriptで使う</h1>
+          <h1 class="title">
+            <a class="title-link" href="https://nametake.github.io/posts/2019/12/17/react-table/">
+              Hooks対応したreact-tableをTypeScriptで使う
+            </a>
+          </h1>
         </div>
         <div class="post-meta">
           <div class="date">
             <span class="posted-on">
-              <i class="fas fa-calendar"></i>
-              <time datetime='2019-12-17T00:00:00Z'>
-                December 17, 2019
+              <i class="fa fa-calendar" aria-hidden="true"></i>
+              <time datetime="2019-12-17T00:00:00Z">
+                2019/12/17
               </time>
             </span>
             <span class="reading-time">
-              <i class="fas fa-clock"></i>
-              3-minute read
+              <i class="fa fa-clock-o" aria-hidden="true"></i>
+              5-minute read
             </span>
           </div>
           
+          
           <div class="tags">
-  <i class="fas fa-tag"></i>
-    <a href="https://nametake.github.io/tags/react/">React</a></div>
+  <i class="fa fa-tag" aria-hidden="true"></i>
+    <span class="tag">
+      <a href="https://nametake.github.io/tags/react/">React</a>
+    </span></div>
 
         </div>
       </header>
 
-      <div>
+      <div class="post-content">
         
-        <p>この記事は<a href="https://qiita.com/advent-calendar/2019/react">React Advent Calendar 2019</a>の記事です。</p>
+        <p>この記事は<a href="https://qiita.com/advent-calendar/2019/react"  class="external-link" target="_blank" rel="noopener">React Advent Calendar 2019</a>の記事です。</p>
 <p>みなさまテーブルComponentは作成していますか?</p>
 <p>サービスにもよるとは思いますが、業務系のサービスではほぼ確実に登場するUIです。</p>
 <p>しかも、よく登場する上にたくさんの機能を求められるUIでもあります。パッと思いつく限りでも、ソート、フィルター、検索、ページネーション等多岐にわたります。</p>
 <p>これらの機能はUIと分離して1から作るは大変です。あり物のUIライブラリのテーブルComponentにオリジナルのスタイルを当てるという手もありますが、それだとUIライブラリの仕様に引っ張られたり、UIとロジックの分離がうまくできなかったりすることがあります。</p>
-<p>そこで、今回は「テーブルで必要になる機能」だけをHooksとし、UIとロジックを完全に分離できるる<a href="https://github.com/tannerlinsley/react-table">react-table v7</a>を紹介しようと思います。</p>
-<h1 id="注意点">注意点</h1>
+<p>そこで、今回は「テーブルで必要になる機能」だけをHooksとし、UIとロジックを完全に分離できるる<a href="https://github.com/tannerlinsley/react-table"  class="external-link" target="_blank" rel="noopener">react-table v7</a>を紹介しようと思います。</p>
+<h1 id="注意点">
+  注意点
+  <a class="heading-link" href="#%e6%b3%a8%e6%84%8f%e7%82%b9">
+    <i class="fa fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h1>
 <p>この記事執筆時点ではreact-table自体はRCになっていますが、react-tableの型定義はまだマージされていません。</p>
-<p><a href="https://github.com/DefinitelyTyped/DefinitelyTyped/pull/40816">https://github.com/DefinitelyTyped/DefinitelyTyped/pull/40816</a></p>
+<p><a href="https://github.com/DefinitelyTyped/DefinitelyTyped/pull/40816"  class="external-link" target="_blank" rel="noopener">https://github.com/DefinitelyTyped/DefinitelyTyped/pull/40816</a></p>
 <p>また、議論の末、現段階最新バージョンのrc.9ではreact-table側で型定義を管理しないことになっています。</p>
 <p>そのため、この記事の紹介ではTypeScriptを使って紹介をする都合上、以下のコマンドで入るバージョンを使用して紹介をします。</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-console" data-lang="console"><span style="display:flex;"><span>yarn add react-table@7.0.0-beta.23
 </span></span></code></pre></div><p>大きく使い勝手が変わるようなことはないと思いますが、react-tableは開発が活発なため、この記事の内容が陳腐化している可能性があります。</p>
 <p>本番で使う際は必ず公式のドキュメントを参照してください。</p>
-<h1 id="シンプルなテーブル">シンプルなテーブル</h1>
+<h1 id="シンプルなテーブル">
+  シンプルなテーブル
+  <a class="heading-link" href="#%e3%82%b7%e3%83%b3%e3%83%97%e3%83%ab%e3%81%aa%e3%83%86%e3%83%bc%e3%83%96%e3%83%ab">
+    <i class="fa fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h1>
 <p>まずは最もシンプルにテーブルを表示する例です。</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-tsx" data-lang="tsx"><span style="display:flex;"><span><span style="color:#66d9ef">import</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">as</span> <span style="color:#a6e22e">React</span> <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;react&#39;</span>;
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">render</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;react-dom&#39;</span>;
@@ -283,7 +290,13 @@ import * as React from &#39;react&#39;; import { render } from &#39;react-dom&#3
 </span></span></code></pre></div><p><code>useTable</code> はColumnとそれに対応した情報 <code>data</code> を受け取って <code>TableInstance</code> を返します。</p>
 <p><code>TableInstance</code> はTableを描画するのに必要な情報をすべて持っており、Tableの内部で変更があったときに更新されるようになっています。</p>
 <p>描画に使っているTableタグは、完全にreact-tableからは独立しており、 <code>TableInstance</code> と組み合わせて使うことで完全に描画とロジックを独立させることが可能になっています。</p>
-<h1 id="sortの機能を追加する">Sortの機能を追加する</h1>
+<h1 id="sortの機能を追加する">
+  Sortの機能を追加する
+  <a class="heading-link" href="#sort%e3%81%ae%e6%a9%9f%e8%83%bd%e3%82%92%e8%bf%bd%e5%8a%a0%e3%81%99%e3%82%8b">
+    <i class="fa fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h1>
 <p>上記例では特に複雑な機能がないため、テーブルを作る上でありがちなSortの機能を追加してみましょう。</p>
 <p>まず、TypeScriptでreact-tableの機能を使うためには以下の型定義ファイル設置する必要があります。</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ts" data-lang="ts"><span style="display:flex;"><span><span style="color:#66d9ef">import</span> {
@@ -309,7 +322,7 @@ import * as React from &#39;react&#39;; import { render } from &#39;react-dom&#3
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">export</span> <span style="color:#66d9ef">interface</span> <span style="color:#a6e22e">ColumnInstance</span>&lt;<span style="color:#f92672">D</span> <span style="color:#a6e22e">extends</span> <span style="color:#a6e22e">object </span><span style="color:#f92672">=</span> {}&gt;
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">UseSortByColumnProps</span>&lt;<span style="color:#f92672">D</span>&gt; {}
 </span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><p>これはreact-tableがもともとJSベースで作られており、使いたい機能をプラグインとして使えるようにするという設計だったため、ライブラリ側で型定義を提供することが難しいため必要になっています(<a href="https://github.com/tannerlinsley/react-table/blob/v7.0.0-beta.24/TYPESCRIPT.md">参考</a>)。</p>
+</span></span></code></pre></div><p>これはreact-tableがもともとJSベースで作られており、使いたい機能をプラグインとして使えるようにするという設計だったため、ライブラリ側で型定義を提供することが難しいため必要になっています(<a href="https://github.com/tannerlinsley/react-table/blob/v7.0.0-beta.24/TYPESCRIPT.md"  class="external-link" target="_blank" rel="noopener">参考</a>)。</p>
 <p>この定義自体はコミュニティの型定義が進んだら変わるかもしれないので、公式を参照するようにしてください。</p>
 <p>さて、上記定義ができたら次はSortの実装をします。</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-tsx" data-lang="tsx"><span style="display:flex;"><span><span style="color:#66d9ef">import</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">as</span> <span style="color:#a6e22e">React</span> <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;react&#39;</span>;
@@ -424,9 +437,15 @@ import * as React from &#39;react&#39;; import { render } from &#39;react-dom&#3
  allow="geolocation; microphone; camera; midi; vr; accelerometer; gyroscope; payment; ambient-light-sensor; encrypted-media; usb"
  sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"
 > </iframe>
-<h1 id="注意点その2">注意点その2</h1>
+<h1 id="注意点その2">
+  注意点その2
+  <a class="heading-link" href="#%e6%b3%a8%e6%84%8f%e7%82%b9%e3%81%9d%e3%81%ae2">
+    <i class="fa fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h1>
 <p>react-tableはHooksとして提供されているため、渡すときにメモ化されていないと正常に動作しない機能があります(自分も2回ほど引っかかった)。</p>
-<p><a href="https://github.com/tannerlinsley/react-table/tree/master/docs/api">公式のドキュメント</a>にメモ化が必要なものについてはその旨が書いてあるので、自分が使いたいプラグインの部分は熟読することをおすすめします。</p>
+<p><a href="https://github.com/tannerlinsley/react-table/tree/master/docs/api"  class="external-link" target="_blank" rel="noopener">公式のドキュメント</a>にメモ化が必要なものについてはその旨が書いてあるので、自分が使いたいプラグインの部分は熟読することをおすすめします。</p>
 
       </div>
 
@@ -437,7 +456,7 @@ import * as React from &#39;react&#39;; import { render } from &#39;react-dom&#3
 
         <div id="disqus_thread"></div>
 <script>
-    window.disqus_config = function () {
+  window.disqus_config = function () {
     
     
     
@@ -452,9 +471,15 @@ import * as React from &#39;react&#39;; import { render } from &#39;react-dom&#3
         s.setAttribute('data-timestamp', +new Date());
         (d.head || d.body).appendChild(s);
     })();
+    
+    document.addEventListener('themeChanged', function (e) { 
+        if (document.readyState == 'complete') {
+          DISQUS.reset({ reload: true, config: disqus_config });
+        }
+    });
 </script>
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+        
+        
         
         
       </footer>
@@ -463,33 +488,36 @@ import * as React from &#39;react&#39;; import { render } from &#39;react-dom&#3
     
   </section>
 
-      </div>
+    </div>
 
-      
-  <footer class="footer">
-    <section class="container">
-      
-        <p>nametake.github.io</p>
-      
-      
-        ©
-        
-        2023
-         nametake 
-      
-      
-         · 
-        Powered by <a href="https://gohugo.io/">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/">Coder</a>.
-      
-      
-    </section>
-  </footer>
-
-    </main>
-
+    <footer class="footer">
+  <section class="container">
+    ©
     
-
+    2023
+     nametake 
+    ·
     
+    Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/" target="_blank" rel="noopener">Coder</a>.
+    
+  </section>
+</footer>
+
+  </main>
+
+  
+
+  
+  
+  <script src="https://nametake.github.io/js/coder.min.6ae284be93d2d19dad1f02b0039508d9aab3180a12a06dcc71b0b0ef7825a317.js" integrity="sha256-auKEvpPS0Z2tHwKwA5UI2aqzGAoSoG3McbCw73gloxc="></script>
+  
+
+  
+
+  
+
+
+  
 <script>
 var doNotTrack = false;
 if (!doNotTrack) {
@@ -503,8 +531,33 @@ if (!doNotTrack) {
 }
 </script>
 
-    
+  
 
-  </body>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</body>
 
 </html>

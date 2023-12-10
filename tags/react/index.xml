@@ -5,7 +5,7 @@
     <link>https://nametake.github.io/tags/react/</link>
     <description>Recent content in React on nametake.info</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
+    <language>ja</language>
     <lastBuildDate>Sun, 25 Oct 2020 00:00:00 +0900</lastBuildDate>
     <atom:link href="https://nametake.github.io/tags/react/index.xml" rel="self" type="application/rss+xml" />
     <item>
@@ -13,49 +13,49 @@
       <link>https://nametake.github.io/posts/2020/10/25/react-resizable-emotion/</link>
       <pubDate>Sun, 25 Oct 2020 00:00:00 +0900</pubDate>
       <guid>https://nametake.github.io/posts/2020/10/25/react-resizable-emotion/</guid>
-      <description>react-resizable に emotion でスタイルを当てた時のメモ。&#xA;1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 import { ResizableBox } from &amp;#39;react-resizable&amp;#39;; const StyledResizableBox = styled(ResizableBox)` position: relative; display: inline-flex; flex-direction: column; align-items: right; justify-content: center; padding-left: 20px; overflow: hidden; border: 1px solid black; .react-resizable-handle { position: absolute; right: 0; width: 4px; height: 90%; border-left: 1px solid black; :hover { cursor: col-resize; } } `; 上記の例だと以下のように右端にサイズ変更用のバーが出るようなスタイルになります。</description>
+      <description>react-resizable に emotion でスタイルを当てた時のメモ。 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 import { ResizableBox } from &amp;#39;react-resizable&amp;#39;; const StyledResizableBox = styled(ResizableBox)` position: relative; display: inline-flex; flex-direction: column; align-items: right; justify-content: center; padding-left: 20px; overflow: hidden; border: 1px solid black; .react-resizable-handle</description>
     </item>
     <item>
       <title>Reactでアクセシビリティを維持したRadioボタンをデザインする</title>
       <link>https://nametake.github.io/posts/2020/09/26/react-a11y-radio/</link>
       <pubDate>Sat, 26 Sep 2020 00:00:00 +0900</pubDate>
       <guid>https://nametake.github.io/posts/2020/09/26/react-a11y-radio/</guid>
-      <description>ReactでRadioボタンにデザインを当てようとすると、 display: none を使う方法を紹介している記事が多いのですが、その方法ではアクセシビリティが消えてしまいます。&#xA;そこで、以下のページのCheckboxを参考にしてRadioボタンをアクセシビリティを維持したままReactで実装したのでメモ的にコードを残しておこうと思います。&#xA;https://medium.com/@colebemis/building-a-checkbox-component-with-react-and-styled-components-8d3aa1d826dd&#xA;1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84 85 86 87 88 89 90 91 92 93 94 95 96 97 98 99 100 101 102 103 104 105 106 107 108 109 110 111 112 113 114 115 116 117 118 119 120 121 122 123 124 125 126 127 128 129 130 131 132 133 134 135 136 137 138 139 140 141 142 143 144 145 146 147 148 149 150 151 152 153 154 155 156 157 158 159 160 161 162 163 164 165 166 167 168 169 170 171 172 173 174 175 176 177 178 179 180 181 182 183 184 185 186 187 import { css } from &amp;#39;@emotion/core&amp;#39;; import styled from &amp;#39;@emotion/styled&amp;#39;; import React from &amp;#39;react&amp;#39;; import * as colors from &amp;#39;@/app/components/styles/colors&amp;#39;; export enum RadioSize { Small, Large, } type RadioProps = { label?</description>
+      <description>ReactでRadioボタンにデザインを当てようとすると、 display: none を使う方法を紹介している記事が多いのですが、その方法ではアクセシビリティが消え</description>
     </item>
     <item>
       <title>TypeScript &#43; electron-webpackでemotionを動かしたときのメモ</title>
       <link>https://nametake.github.io/posts/2020/08/04/typescript-electron-webpack-emotion/</link>
       <pubDate>Tue, 04 Aug 2020 00:00:00 +0900</pubDate>
       <guid>https://nametake.github.io/posts/2020/08/04/typescript-electron-webpack-emotion/</guid>
-      <description>electron-webpack で emotion を動かそうとして試行錯誤したのでその結果のメモ。&#xA;ライブラリとバージョン TypeScript(3.9.5) electron-webpack(2.8.2) emotion(10.0.27) ts-loader(7.0.5) babel-loader(8.1.0) babel-plugin-emotion(10.0.33) 起きた問題 styled-componentsのselectorに別のComponentsを指定しようとしたときに、 babel-plugin-emotion が必要というエラーが発生しました。&#xA;1 2 3 4 5 6 7 8 9 10 const StyledCheckbox = styled.div&amp;lt;StyledCheckboxProps&amp;gt;` display: inline-block; background: ${(props) =&amp;gt; (props.checked ? &amp;#39;salmon&amp;#39; : &amp;#39;papayawhip&amp;#39;)}; border-radius: 3px; transition: all 150ms; ${/* sc-selector */ HiddenCheckbox}:focus + &amp;amp; { box-shadow: 0 0 0 3px pink; } ` Component selectors can only be used in conjunction with babel-plugin-emotion electron-webpackのドキュメントに、 babel-plugin-* は自動で設定されると書いてあったため指示通りに babel-plugin-emotion をインストールしたのですが、それだけでは上手く動きませんでした。</description>
+      <description>electron-webpack で emotion を動かそうとして試行錯誤したのでその結果のメモ。 ライブラリとバージョン Link to heading TypeScript(3.9.5) electron-webpack(2.8.2) emotion(10.0.27) ts-loader(7.0.5) babel-loader(8.1.0) babel-plugin-emotion(10.0.33) 起きた問題 Link to heading styled-componen</description>
     </item>
     <item>
       <title>TypeScriptでFormのComponentを配列で管理する</title>
       <link>https://nametake.github.io/posts/2020/01/31/ts-array-form-onchange/</link>
       <pubDate>Fri, 31 Jan 2020 00:00:00 +0900</pubDate>
       <guid>https://nametake.github.io/posts/2020/01/31/ts-array-form-onchange/</guid>
-      <description>TypeScriptでFormのComponentを配列で管理する toB向けのサービスや管理画面のように情報量の多いのプロダクトを作っていると、FormをまとめたComponentを作りたくなるケースがあります。&#xA;単体で使っているときにはそこまで問題ないのですが、それを複数リスト上に管理して増減させたいときにonChangeをどうやって設計するのかを色々考えたのでまとめておきます。&#xA;サンプルForm 以下のようなFormを題材にします。&#xA;1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 interface HumanFormValue { firstName: string; lastName: string; } interface HumanFormProps { defaultValue: HumanFormValue; onChange: (value: HumanFormValue) =&amp;gt; void; } const HumanForm: React.</description>
+      <description>TypeScriptでFormのComponentを配列で管理する Link to heading toB向けのサービスや管理画面のように情報量の多いのプロダクトを作っ</description>
     </item>
     <item>
       <title>Hooks対応したreact-tableをTypeScriptで使う</title>
       <link>https://nametake.github.io/posts/2019/12/17/react-table/</link>
       <pubDate>Tue, 17 Dec 2019 00:00:00 +0000</pubDate>
       <guid>https://nametake.github.io/posts/2019/12/17/react-table/</guid>
-      <description>この記事はReact Advent Calendar 2019の記事です。&#xA;みなさまテーブルComponentは作成していますか?&#xA;サービスにもよるとは思いますが、業務系のサービスではほぼ確実に登場するUIです。&#xA;しかも、よく登場する上にたくさんの機能を求められるUIでもあります。パッと思いつく限りでも、ソート、フィルター、検索、ページネーション等多岐にわたります。&#xA;これらの機能はUIと分離して1から作るは大変です。あり物のUIライブラリのテーブルComponentにオリジナルのスタイルを当てるという手もありますが、それだとUIライブラリの仕様に引っ張られたり、UIとロジックの分離がうまくできなかったりすることがあります。&#xA;そこで、今回は「テーブルで必要になる機能」だけをHooksとし、UIとロジックを完全に分離できるるreact-table v7を紹介しようと思います。&#xA;注意点 この記事執筆時点ではreact-table自体はRCになっていますが、react-tableの型定義はまだマージされていません。&#xA;https://github.com/DefinitelyTyped/DefinitelyTyped/pull/40816&#xA;また、議論の末、現段階最新バージョンのrc.9ではreact-table側で型定義を管理しないことになっています。&#xA;そのため、この記事の紹介ではTypeScriptを使って紹介をする都合上、以下のコマンドで入るバージョンを使用して紹介をします。&#xA;yarn add react-table@7.0.0-beta.23 大きく使い勝手が変わるようなことはないと思いますが、react-tableは開発が活発なため、この記事の内容が陳腐化している可能性があります。&#xA;本番で使う際は必ず公式のドキュメントを参照してください。&#xA;シンプルなテーブル まずは最もシンプルにテーブルを表示する例です。&#xA;import * as React from &amp;#39;react&amp;#39;; import { render } from &amp;#39;react-dom&amp;#39;; import { useTable, Column } from &amp;#39;react-table&amp;#39;; import &amp;#39;./styles.css&amp;#39;; const columns: Column&amp;lt;Data&amp;gt;[] = [ { Header: &amp;#39;名前&amp;#39;, accessor: &amp;#39;name&amp;#39; }, { Header: &amp;#39;年齢&amp;#39;, accessor: &amp;#39;age&amp;#39; } ]; interface Data { name: string; age: number; } const data: Data[] = [ { name: &amp;#39;John&amp;#39;, age: 23 }, { name: &amp;#39;Jane&amp;#39;, age: 26 } ]; function App() { const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } = useTable&amp;lt;Data&amp;gt;({ columns, data }); return ( &amp;lt;table {.</description>
+      <description>この記事はReact Advent Calendar 2019の記事です。 みなさまテーブルComponentは作成していますか? サービスにもよるとは思いますが、業務系のサ</description>
     </item>
     <item>
       <title>FormikとYupを使った動的フォームのバリデーション</title>
       <link>https://nametake.github.io/posts/2019/06/05/formik-yup-dynamic-validation/</link>
       <pubDate>Wed, 05 Jun 2019 23:50:36 +0900</pubDate>
       <guid>https://nametake.github.io/posts/2019/06/05/formik-yup-dynamic-validation/</guid>
-      <description>Formikで動的なFormを作った時に、表示されるFormに応じてYupのバリデーションを切り替える方法でちょっと手間取ったのでメモ。&#xA;結論から言うとYup.lazy()を使って遅延評価されるValidationSchemaを使えば解決した。Yup.lazy()に渡ってくるFormの値を元にValidationwSchemaを表示されるFormに対応したValidationSchemaを返せば狙った挙動が実現できました。&#xA;サンプルコードは以下。</description>
+      <description>Formikで動的なFormを作った時に、表示されるFormに応じてYupのバリデーションを切り替える方法でちょっと手間取ったのでメモ。 結論</description>
     </item>
     <item>
       <title>TypeScript&#43;React&#43;Reduxチュートリアル</title>
       <link>https://nametake.github.io/posts/2018/12/05/typescript-react-redux-tutorial/</link>
       <pubDate>Wed, 05 Dec 2018 11:08:00 +0900</pubDate>
       <guid>https://nametake.github.io/posts/2018/12/05/typescript-react-redux-tutorial/</guid>
-      <description>普段は Go でサーバサイドのコードを書いているのですが、TypeScript+React+Redux を勉強する機会がありました。&#xA;その際、巷に溢れているチュートリアルやサンプルコードで型で縛っているものが少なすぎて、理解にかなり苦労したので自分なりに Todo アプリケーションを作るチュートリアルを書いておきます。&#xA;このチュートリアルは以下のことを意識して書かれています。&#xA;引数や返り値は型で縛る データフローの理解を重視する 外部ライブラリは以下の 3 つしか import しない react redux react-redux 標準の設計になるべく則る また、この記事では以下のことについては深く言及はしません&#xA;nodeのツールのエコシステム TypeScript の記法 JSX の記法 React+Redux の概念 プロジェクトの準備 まずはプロジェクトを準備します。&#xA;node と yarn は入っている前提で進めます。&#xA;Facebook が公式で用意しているアプリケーション作成ツールを使用してプロジェクトテンプレートを作ります。&#xA;npx create-react-app todo-app --scripts-version=react-scripts-ts 次にプロジェクトのディレクトリに移動して以下のツールをインストールします。&#xA;cd todo-app yarn add redux react-redux yarn add -D @types/redux @types/react-redux @types がついているパッケージは、/以下のパッケージの型情報が記述されているパッケージです。開発時しか使用しないので-Dオプションを付けてインストールします。&#xA;以下のコマンドでローカルサーバが立ち上がり、ブラウザに画面が表示されれば問題ありません。&#xA;yarn start チュートリアルのコードは作成されたプロジェクト内部の src ディレクトリに記述していきます。&#xA;Component の実装 何はともあれ何かが表示されてないとモチベーションが上がらないのでブラウザに見た目を表示させます。&#xA;以下のコードを TodoComponent.tsx として src 以下に記述します。JSX 記法が含まれるファイルは tsx 拡張子にします。</description>
+      <description>普段は Go でサーバサイドのコードを書いているのですが、TypeScript+React+Redux を勉強する機会がありました。 その際、巷に溢れ</description>
     </item>
   </channel>
 </rss>

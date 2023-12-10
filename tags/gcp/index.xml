@@ -5,7 +5,7 @@
     <link>https://nametake.github.io/tags/gcp/</link>
     <description>Recent content in GCP on nametake.info</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
+    <language>ja</language>
     <lastBuildDate>Fri, 09 Nov 2018 11:15:24 +0900</lastBuildDate>
     <atom:link href="https://nametake.github.io/tags/gcp/index.xml" rel="self" type="application/rss+xml" />
     <item>
@@ -13,7 +13,7 @@
       <link>https://nametake.github.io/posts/2018/11/09/auth-gcp-client/</link>
       <pubDate>Fri, 09 Nov 2018 11:15:24 +0900</pubDate>
       <guid>https://nametake.github.io/posts/2018/11/09/auth-gcp-client/</guid>
-      <description>GCPの認証済みのhttp.Clientが欲しいときにちょっとだけ調べたのでメモ。&#xA;結論だけ言うと、golang.org/x/oauth2/googleのDefaultClientを使えばいいみたいです。&#xA;今回はDataflowのAPIを叩きたかったので以下のようにすればできました。&#xA;client, err := google.DefaultClient(ctx, dataflow.CloudPlatformScope) if err != nil { return fmt.Errorf(&amp;#34;failed create client: %v&amp;#34;, err) } </description>
+      <description>GCPの認証済みのhttp.Clientが欲しいときにちょっとだけ調べたのでメモ。 結論だけ言うと、golang.org/x/oauth2/g</description>
     </item>
   </channel>
 </rss>

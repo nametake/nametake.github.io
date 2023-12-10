@@ -5,7 +5,7 @@
     <link>https://nametake.github.io/tags/redux/</link>
     <description>Recent content in Redux on nametake.info</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
+    <language>ja</language>
     <lastBuildDate>Wed, 05 Dec 2018 11:08:00 +0900</lastBuildDate>
     <atom:link href="https://nametake.github.io/tags/redux/index.xml" rel="self" type="application/rss+xml" />
     <item>
@@ -13,7 +13,7 @@
       <link>https://nametake.github.io/posts/2018/12/05/typescript-react-redux-tutorial/</link>
       <pubDate>Wed, 05 Dec 2018 11:08:00 +0900</pubDate>
       <guid>https://nametake.github.io/posts/2018/12/05/typescript-react-redux-tutorial/</guid>
-      <description>普段は Go でサーバサイドのコードを書いているのですが、TypeScript+React+Redux を勉強する機会がありました。&#xA;その際、巷に溢れているチュートリアルやサンプルコードで型で縛っているものが少なすぎて、理解にかなり苦労したので自分なりに Todo アプリケーションを作るチュートリアルを書いておきます。&#xA;このチュートリアルは以下のことを意識して書かれています。&#xA;引数や返り値は型で縛る データフローの理解を重視する 外部ライブラリは以下の 3 つしか import しない react redux react-redux 標準の設計になるべく則る また、この記事では以下のことについては深く言及はしません&#xA;nodeのツールのエコシステム TypeScript の記法 JSX の記法 React+Redux の概念 プロジェクトの準備 まずはプロジェクトを準備します。&#xA;node と yarn は入っている前提で進めます。&#xA;Facebook が公式で用意しているアプリケーション作成ツールを使用してプロジェクトテンプレートを作ります。&#xA;npx create-react-app todo-app --scripts-version=react-scripts-ts 次にプロジェクトのディレクトリに移動して以下のツールをインストールします。&#xA;cd todo-app yarn add redux react-redux yarn add -D @types/redux @types/react-redux @types がついているパッケージは、/以下のパッケージの型情報が記述されているパッケージです。開発時しか使用しないので-Dオプションを付けてインストールします。&#xA;以下のコマンドでローカルサーバが立ち上がり、ブラウザに画面が表示されれば問題ありません。&#xA;yarn start チュートリアルのコードは作成されたプロジェクト内部の src ディレクトリに記述していきます。&#xA;Component の実装 何はともあれ何かが表示されてないとモチベーションが上がらないのでブラウザに見た目を表示させます。&#xA;以下のコードを TodoComponent.tsx として src 以下に記述します。JSX 記法が含まれるファイルは tsx 拡張子にします。</description>
+      <description>普段は Go でサーバサイドのコードを書いているのですが、TypeScript+React+Redux を勉強する機会がありました。 その際、巷に溢れ</description>
     </item>
   </channel>
 </rss>
