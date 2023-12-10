@@ -6,8 +6,15 @@
     <description>Recent content in Tags on nametake.info</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <lastBuildDate>Sun, 14 Feb 2021 00:00:00 +0900</lastBuildDate>
+    <lastBuildDate>Sun, 10 Dec 2023 00:00:00 +0900</lastBuildDate>
     <atom:link href="https://nametake.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>hugo</title>
+      <link>https://nametake.github.io/tags/hugo/</link>
+      <pubDate>Sun, 10 Dec 2023 00:00:00 +0900</pubDate>
+      <guid>https://nametake.github.io/tags/hugo/</guid>
+      <description></description>
+    </item>
     <item>
       <title>CSS</title>
       <link>https://nametake.github.io/tags/css/</link>
@@ -125,13 +132,6 @@
       <link>https://nametake.github.io/tags/git/</link>
       <pubDate>Thu, 20 Sep 2018 18:47:46 +0900</pubDate>
       <guid>https://nametake.github.io/tags/git/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>hugo</title>
-      <link>https://nametake.github.io/tags/hugo/</link>
-      <pubDate>Sat, 15 Sep 2018 12:20:26 +0900</pubDate>
-      <guid>https://nametake.github.io/tags/hugo/</guid>
       <description></description>
     </item>
   </channel>

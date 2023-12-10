@@ -6,8 +6,15 @@
     <description>Recent content in Posts on nametake.info</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <lastBuildDate>Sun, 14 Feb 2021 00:00:00 +0900</lastBuildDate>
+    <lastBuildDate>Sun, 10 Dec 2023 00:00:00 +0900</lastBuildDate>
     <atom:link href="https://nametake.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>hugo-coderテーマの拡張</title>
+      <link>https://nametake.github.io/posts/2023/12/10/hugo-coder-custom-font/</link>
+      <pubDate>Sun, 10 Dec 2023 00:00:00 +0900</pubDate>
+      <guid>https://nametake.github.io/posts/2023/12/10/hugo-coder-custom-font/</guid>
+      <description>長らく放置してしまってブログを書く場所に困ったのでこのブログの環境を整備し直した。 テーマのバージョンアップもしたが、その時に色々と気になって</description>
+    </item>
     <item>
       <title>display: gridでテーブルをスタイリングする時にdisplay: contentsを使う</title>
       <link>https://nametake.github.io/posts/2021/02/14/grid-with-display-contents/</link>
