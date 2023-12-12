@@ -6,8 +6,15 @@
     <description>Recent content in Posts on nametake.dev</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <lastBuildDate>Sun, 10 Dec 2023 00:00:00 +0900</lastBuildDate>
+    <lastBuildDate>Wed, 13 Dec 2023 00:00:00 +0900</lastBuildDate>
     <atom:link href="https://nametake.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>telescope.nvimのgit_filesやlive_grepでもtagstackを使いたい</title>
+      <link>https://nametake.github.io/posts/2023/12/13/telescope-nvim-git-files-tagstack/</link>
+      <pubDate>Wed, 13 Dec 2023 00:00:00 +0900</pubDate>
+      <guid>https://nametake.github.io/posts/2023/12/13/telescope-nvim-git-files-tagstack/</guid>
+      <description>telescope.nvimのgit_filesやlive_grepでのファイル移動でもTagstackに積みたかった。 結論からいうと以下の</description>
+    </item>
     <item>
       <title>hugo-coderテーマの拡張</title>
       <link>https://nametake.github.io/posts/2023/12/10/hugo-coder-custom-font/</link>
