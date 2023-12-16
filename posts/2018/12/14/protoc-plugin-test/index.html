@@ -254,7 +254,7 @@
 <li>protocの実行時引数に<code>os.Args[0]</code>を与えている</li>
 <li><code>RUN_AS_PROTOC_GEN_GO</code>という環境変数に1を設定している</li>
 </ul>
-<p>1つ目の<code>os.Args[0]</code>を与えている部分ですが、これはprotocの引数の仕様で、プラグインのバイナリファイルを指定して実行するための記述です。<code>os.Args</code>の0番目にはテスト実行時にビルドされたバイナリファイルのPATHが入っているため、<code>&quot;--plugin=protoc-gen-go=&quot;+os.Args[0]</code>とすることで、テストのバイナリをprotoc-gen-goプラグインとして実行することができます。</p>
+<p>1つ目の<code>os.Args[0]</code>を与えている部分ですが、これはprotocの引数の仕様で、プラグインのバイナリファイルを指定して実行するための記述です。<code>os.Args</code>の0番目にはテスト実行時にビルドされたバイナリファイルのPATHが入っているため、<code>&quot;--plugin=protoc-gen-go=&quot;+os.Args[0]</code>とすることで、テストのバイナリをprotoc-gen-goプラグインとして実行できます。</p>
 <p>2つ目の環境変数ですが、環境変数名通り、これがセットされたらそれ以降はテストバイナリ自体がprotoc-gen-goのバイナリのように動作するためにセットしています。詳細は次のinit関数の項目で解説します。</p>
 <h3 id="init関数">
   init関数

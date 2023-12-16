@@ -336,7 +336,7 @@
 </h4>
 <p>Redux はアプリケーションの全体で使う状態( Component の状態ではなく)を外出しすることで、アプリケーションの状態とUIを分離するためのフレームワークのことです。</p>
 <p>今回は Redux のチュートリアルのため、<code>todos</code> は外から渡される props に配置しましたが、この Component の状態( state )とすることで、React のみで完結させることができます。</p>
-<p>以下のように書き換えることで React のみで Todo リストを作成することができます。</p>
+<p>以下のように書き換えることで React のみで Todo リストを作成できます。</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-tsx" data-lang="tsx"><span style="display:flex;"><span><span style="color:#75715e">// TodoComponent.tsx
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">import</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">as</span> <span style="color:#a6e22e">React</span> <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;react&#39;</span>;
 </span></span><span style="display:flex;"><span>
@@ -436,7 +436,7 @@
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">interface</span> <span style="color:#a6e22e">IRootState</span> {
 </span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">todoState</span>: <span style="color:#66d9ef">ITodoState</span>;
 </span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><p>Store とは Redux における役割の一つで、<a href="https://redux.js.org/api/store"  class="external-link" target="_blank" rel="noopener">公式ドキュメント</a>にあるとおり、そのアプリケーションにおける全ての状態(State)を持ちます。この State は後述する Action-&gt;Reducer 経由でしか更新されません。</p>
+</span></span></code></pre></div><p>Store とは Redux における役割の1つで、<a href="https://redux.js.org/api/store"  class="external-link" target="_blank" rel="noopener">公式ドキュメント</a>にあるとおり、そのアプリケーションにおける全ての状態(State)を持ちます。この State は後述する Action-&gt;Reducer 経由でしか更新されません。</p>
 <p>ちなみに上記のコードにはまだ Store は定義されておらず、Store が持つ State しか定義されていません。また、少し冗長ですが、いくつか State が出てくることを想定して、<code>IRootState</code> を用意しています。これぐらいのアプリケーションなら <code>ITodoState</code> だけでも十分です。</p>
 <p>少し厄介なのですが、ここにおける &ldquo;State&rdquo; は先程出てきた &ldquo;Component の state&rdquo; とは<strong>全くの別物</strong>です。Redux における State はアプリケーション全体の状態を表し、React の state はその Component の状態を表しています。</p>
 <h3 id="action-の追加">

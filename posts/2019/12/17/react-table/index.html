@@ -427,7 +427,7 @@
 </span></span><span style="display:flex;"><span>                &lt;/<span style="color:#f92672">span</span>&gt;
 </span></span><span style="display:flex;"><span>              &lt;/<span style="color:#f92672">th</span>&gt;
 </span></span></code></pre></div><p><code>useTable</code> に <code>useSortBy</code> を渡し、 <code>column</code> に新たに含まれた <code>getSortByToggleProps</code> を使って列をソート可能な状態にして、 <code>isSorted</code> と <code>isSortedDesc</code> を利用して現在のソートの状態を描画するようにしています。</p>
-<p>このパターンでも、基本的にはSortしたかどうかの状態はすべてreact-table側が握り、使う側は <code>useTable</code> の戻り値を利用して描画するだけでいい状態を維持することができます。</p>
+<p>このパターンでも、基本的にはSortしたかどうかの状態はすべてreact-table側が握り、使う側は <code>useTable</code> の戻り値を利用して描画するだけでいい状態を維持できます。</p>
 <p>フィルターや行選択といった機能も提供されているため、必要に応じて型定義ファイルを更新しつつプラグインを追加することで、自分のプロダクトで必要なテーブルの機能だけを使えるようになります。</p>
 <p>一応、今回作成したコードはいかに設置しておきます。</p>
 <iframe
