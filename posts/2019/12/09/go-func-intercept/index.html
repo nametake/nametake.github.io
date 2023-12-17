@@ -13,14 +13,14 @@
 
 
 <meta name="author" content="nametake">
-<meta name="description" content="この記事はGo2 Advent Calendar 2019の記事です。 自分はprotoc-gen-gohttpというプラグインを作っているのですが、先日grpc.Unar">
+<meta name="description" content="この記事はGo2 Advent Calendar 2019の記事。 自分はprotoc-gen-gohttpというプラグインを作っているが、先日grpc.UnaryServ">
 <meta name="keywords" content="blog,developer,personal">
 
 <meta name="twitter:card" content="summary"/><meta name="twitter:title" content="Goの関数内で呼び出される関数をインターセプトする方法"/>
-<meta name="twitter:description" content="この記事はGo2 Advent Calendar 2019の記事です。 自分はprotoc-gen-gohttpというプラグインを作っているのですが、先日grpc.Unar"/>
+<meta name="twitter:description" content="この記事はGo2 Advent Calendar 2019の記事。 自分はprotoc-gen-gohttpというプラグインを作っているが、先日grpc.UnaryServ"/>
 
 <meta property="og:title" content="Goの関数内で呼び出される関数をインターセプトする方法" />
-<meta property="og:description" content="この記事はGo2 Advent Calendar 2019の記事です。 自分はprotoc-gen-gohttpというプラグインを作っているのですが、先日grpc.Unar" />
+<meta property="og:description" content="この記事はGo2 Advent Calendar 2019の記事。 自分はprotoc-gen-gohttpというプラグインを作っているが、先日grpc.UnaryServ" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://nametake.github.io/posts/2019/12/09/go-func-intercept/" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2019-12-09T00:05:29+09:00" />
@@ -179,17 +179,20 @@
 
       <div class="post-content">
         
-        <p>この記事は<a href="https://qiita.com/advent-calendar/2019/go2"  class="external-link" target="_blank" rel="noopener">Go2 Advent Calendar 2019</a>の記事です。</p>
-<p>自分は<a href="https://github.com/nametake/protoc-gen-gohttp"  class="external-link" target="_blank" rel="noopener">protoc-gen-gohttp</a>というプラグインを作っているのですが、先日<a href="https://godoc.org/google.golang.org/grpc#UnaryServerInterceptor"  class="external-link" target="_blank" rel="noopener">grpc.UnaryServerInterceptor</a>に対応しました。</p>
-<p>その際、どうやればいいかを調査していたら、<a href="https://godoc.org/github.com/grpc-ecosystem/go-grpc-middleware#ChainUnaryServer"  class="external-link" target="_blank" rel="noopener">ChainUnaryServer</a>という関数を見つけ、中身を読んでみると、「特定のinterfaceを受け取って内部でそのinterfaceで実行する」機能を持った関数に対して「内部でinterfaceを実行するときに複数の関数でインターセプトする」方法の知見を得られたので記事にしようと思います。</p>
-<h1 id="コード例">
+        <p>この記事は<a href="https://qiita.com/advent-calendar/2019/go2"  class="external-link" target="_blank" rel="noopener">Go2 Advent Calendar 2019</a>の記事。</p>
+<p>自分は<a href="https://github.com/nametake/protoc-gen-gohttp"  class="external-link" target="_blank" rel="noopener">protoc-gen-gohttp</a>というプラグインを作っているが、先日<a href="https://godoc.org/google.golang.org/grpc#UnaryServerInterceptor"  class="external-link" target="_blank" rel="noopener">grpc.UnaryServerInterceptor</a>に対応した。</p>
+<!-- textlint-disable ja-technical-writing/ja-no-weak-phrase -->
+<p>その際、どうやればいいかを調査していたら、<a href="https://godoc.org/github.com/grpc-ecosystem/go-grpc-middleware#ChainUnaryServer"  class="external-link" target="_blank" rel="noopener">ChainUnaryServer</a>という関数を見つけた。
+中身を読んでみると、特定のinterfaceを受け取ってそれを実行する機能を持った関数に対し、interfaceを実行するときに複数の関数でインターセプトする方法の知見を得られたのため記事にしようと思う。</p>
+<!-- textlint-enable -->
+<h2 id="コード例">
   コード例
   <a class="heading-link" href="#%e3%82%b3%e3%83%bc%e3%83%89%e4%be%8b">
     <i class="fa fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
-</h1>
-<p>まずはインターセプトしたいコードの例を書きます。</p>
+</h2>
+<p>まずはインターセプトしたいコードの例を書く。</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">WrapStruct</span> <span style="color:#66d9ef">struct</span> {
 </span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">pingServer</span> <span style="color:#a6e22e">pb</span>.<span style="color:#a6e22e">PingAPIServer</span>
 </span></span><span style="display:flex;"><span>}
@@ -204,7 +207,7 @@
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">ret</span>, <span style="color:#a6e22e">err</span>)
 </span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><p>上記例は以下のProtocol Buffersの定義をgRPCオプション付きでコンパイルすると生成されるコードを使用しています。</p>
+</span></span></code></pre></div><p>上記例は以下のProtocol Buffersの定義をgRPCオプション付きでコンパイルすると生成されるコードを使用している。</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-proto" data-lang="proto"><span style="display:flex;"><span>syntax <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;proto3&#34;</span>;<span style="color:#960050;background-color:#1e0010">
 </span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
 </span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#f92672">package</span> protobuf1;<span style="color:#960050;background-color:#1e0010">
@@ -222,8 +225,8 @@
 </span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">message</span> <span style="color:#a6e22e">PingResponse</span> {<span style="color:#960050;background-color:#1e0010">
 </span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>  <span style="color:#66d9ef">string</span> msg <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;<span style="color:#960050;background-color:#1e0010">
 </span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>}<span style="color:#960050;background-color:#1e0010">
-</span></span></span></code></pre></div><p>なんの変哲もない、ただ自身を実装している構造体がもつ <code>PingAPIServer</code> interfaceの <code>Ping</code> メソッドに <code>PING</code> の文字列を渡して実行し、その結果を出力しているだけのコードです。</p>
-<p>以下のように、 <code>PingAPIServer</code> interfaceを実装した構造体を渡すことで実行できます。</p>
+</span></span></span></code></pre></div><p>ただ自身を実装している構造体がもつ <code>PingAPIServer</code> interfaceの <code>Ping</code> メソッドに <code>PING</code> の文字列を渡して実行し、その結果を出力している。</p>
+<p>以下のように、 <code>PingAPIServer</code> interfaceを実装した構造体を渡すことで実行できる。</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
 </span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">pingServer</span> <span style="color:#f92672">:=</span> <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">PingAPIServer</span>{}
 </span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">wrapStruct</span> <span style="color:#f92672">:=</span> <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">WrapStruct</span>{
@@ -241,13 +244,13 @@
 </span></span><span style="display:flex;"><span>		<span style="color:#a6e22e">Msg</span>: <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Sprintf</span>(<span style="color:#e6db74">&#34;PONG: %s&#34;</span>, <span style="color:#a6e22e">arg</span>.<span style="color:#a6e22e">GetMsg</span>()),
 </span></span><span style="display:flex;"><span>	}, <span style="color:#66d9ef">nil</span>
 </span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><p>実行結果は以下のようになります。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>CALLED PING
+</span></span></code></pre></div><p>実行結果は以下のようになる。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-console" data-lang="console"><span style="display:flex;"><span>CALLED PING
 </span></span><span style="display:flex;"><span>msg:&#34;PONG: PING&#34;  &lt;nil&gt;
-</span></span></code></pre></div><p>さて、今回インターセプトしたい部分は最初のコードの以下の部分です。</p>
+</span></span></code></pre></div><p>さて、今回インターセプトしたい部分は最初のコードの以下の部分。</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span>	<span style="color:#a6e22e">ret</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">w</span>.<span style="color:#a6e22e">pingServer</span>.<span style="color:#a6e22e">Ping</span>(<span style="color:#a6e22e">ctx</span>, <span style="color:#a6e22e">arg</span>)
-</span></span></code></pre></div><p>このコードの前後に、 <code>WrapStruct.Call</code> に関数を渡すことで処理をインターセプトできるようにしたいと思います。</p>
-<p>いきなりですがインターセプトできるようにしたコードを以下に貼ります。</p>
+</span></span></code></pre></div><p>このコードの前後に、 <code>WrapStruct.Call</code> に関数を渡すことで処理をインターセプトできるようにしたい。</p>
+<p>いきなりですがインターセプトできるようにしたコードを以下に貼る。</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">RPC</span> <span style="color:#66d9ef">func</span>(<span style="color:#a6e22e">context</span>.<span style="color:#a6e22e">Context</span>, <span style="color:#f92672">*</span><span style="color:#a6e22e">pb</span>.<span style="color:#a6e22e">PingRequest</span>) (<span style="color:#f92672">*</span><span style="color:#a6e22e">pb</span>.<span style="color:#a6e22e">PingResponse</span>, <span style="color:#66d9ef">error</span>)
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">Interceptor</span> <span style="color:#66d9ef">func</span>(<span style="color:#a6e22e">context</span>.<span style="color:#a6e22e">Context</span>, <span style="color:#f92672">*</span><span style="color:#a6e22e">pb</span>.<span style="color:#a6e22e">PingRequest</span>, <span style="color:#a6e22e">RPC</span>) (<span style="color:#f92672">*</span><span style="color:#a6e22e">pb</span>.<span style="color:#a6e22e">PingResponse</span>, <span style="color:#66d9ef">error</span>)
 </span></span><span style="display:flex;"><span>
@@ -280,7 +283,7 @@
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">ret</span>, <span style="color:#a6e22e">err</span>)
 </span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><p>以下のようにして実行することで内部の <code>Ping</code> をインターセプトできます。</p>
+</span></span></code></pre></div><p>以下のようにして実行することで内部の <code>Ping</code> をインターセプトできる。</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
 </span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">pingServer</span> <span style="color:#f92672">:=</span> <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">PingAPIServer</span>{}
 </span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">wrapStruct</span> <span style="color:#f92672">:=</span> <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">WrapStruct</span>{
@@ -312,8 +315,8 @@
 </span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;AFTER2&#34;</span>)
 </span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">ret</span>, <span style="color:#a6e22e">err</span>
 </span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><p>上記コードの実行結果は以下です。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>CALLED PING
+</span></span></code></pre></div><p>上記コードの実行結果は以下。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-console" data-lang="console"><span style="display:flex;"><span>CALLED PING
 </span></span><span style="display:flex;"><span>msg:&#34;PONG: PING&#34;  &lt;nil&gt;
 </span></span><span style="display:flex;"><span>-------------------
 </span></span><span style="display:flex;"><span>BEFORE
@@ -327,27 +330,30 @@
 </span></span><span style="display:flex;"><span>AFTER2
 </span></span><span style="display:flex;"><span>AFTER
 </span></span><span style="display:flex;"><span>msg:&#34;PONG: PING&#34;  &lt;nil&gt;
-</span></span></code></pre></div><p>Pingメソッドが内部で出力している <code>CALLED PING</code> の前後に任意の文字列を出力できています。</p>
-<h1 id="解説">
+</span></span></code></pre></div><p>Pingメソッドが内部で出力している <code>CALLED PING</code> の前後に任意の文字列を出力できている。</p>
+<h2 id="解説">
   解説
   <a class="heading-link" href="#%e8%a7%a3%e8%aa%ac">
     <i class="fa fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
-</h1>
-<p>さて、コードを見ればわかりはするのですが、一応どういう変更を入れたのか簡単に解説をしようと思います。</p>
-<p>まずは下記のintrafaceです。</p>
+</h2>
+<!-- textlint-disable ja-technical-writing/ja-no-weak-phrase -->
+<p>コードを見ればわかりはするのですが、一応どういう変更を入れたのか簡単に解説をしようと思う。</p>
+<!-- textlint-enable -->
+<p>まずは下記のintraface。</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">RPC</span> <span style="color:#66d9ef">func</span>(<span style="color:#a6e22e">context</span>.<span style="color:#a6e22e">Context</span>, <span style="color:#f92672">*</span><span style="color:#a6e22e">pb</span>.<span style="color:#a6e22e">PingRequest</span>) (<span style="color:#f92672">*</span><span style="color:#a6e22e">pb</span>.<span style="color:#a6e22e">PingResponse</span>, <span style="color:#66d9ef">error</span>)
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">Interceptor</span> <span style="color:#66d9ef">func</span>(<span style="color:#a6e22e">context</span>.<span style="color:#a6e22e">Context</span>, <span style="color:#f92672">*</span><span style="color:#a6e22e">pb</span>.<span style="color:#a6e22e">PingRequest</span>, <span style="color:#a6e22e">RPC</span>) (<span style="color:#f92672">*</span><span style="color:#a6e22e">pb</span>.<span style="color:#a6e22e">PingResponse</span>, <span style="color:#66d9ef">error</span>)
-</span></span></code></pre></div><p><code>RPC</code> は内部でインターセプトされる側のメソッドを表現したものです。</p>
-<p>今回は例のため型をベタに書いていますが、汎用性が必要な場合は <code>interface{}</code> 型にしたり、引数や返り値にinterfaceを使うほうがよいでしょう。今回の例も <code>proto.Message</code> 型で抽象化できるのですが、わかりやすさのために構造体を直に書いています。</p>
-<p><code>Interceptor</code> は文字通りインターセプトをするための関数の定義です。</p>
-<p>引数に、「<code>RPC</code>の引数」と「<code>RPC</code>そのもの」を受け取り、「<code>RPC</code>の戻り値」を返す定義になっています。</p>
-<p>次に <code>Call</code> メソッドの引数です。</p>
+</span></span></code></pre></div><p><code>RPC</code> は内部でインターセプトされる側のメソッドを表現したもの。</p>
+<p>今回は例のため型をベタに書いているが、汎用性が必要な場合は <code>interface{}</code> 型にしたり、引数や返り値にinterfaceを使うほうがよい。
+今回の例も <code>proto.Message</code> 型で抽象化できるが、わかりやすさのために構造体を直に書いている。</p>
+<p><code>Interceptor</code> は文字通りインターセプトをするための関数の定義。</p>
+<p>引数に、「<code>RPC</code>の引数」と「<code>RPC</code>そのもの」を受け取り、「<code>RPC</code>の戻り値」を返す定義になっている。</p>
+<p>次に <code>Call</code> メソッドの引数の解説。</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">w</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">WrapStruct</span>) <span style="color:#a6e22e">Call</span>(<span style="color:#a6e22e">interceptors</span> <span style="color:#f92672">...</span><span style="color:#a6e22e">Interceptor</span>) {
-</span></span></code></pre></div><p>ここは単純に、可変長引数でInterceptorを受け取っています。</p>
-<p>必須なら可変長引数にしないほうがいいですが、ここでは渡さなくても動く例を示せるよう可変長引数にしています。</p>
-<p>さて、一番重要なところです。</p>
+</span></span></code></pre></div><p>ここは単純に、可変長引数でInterceptorを受け取っている。</p>
+<p>必須なら可変長引数にしないほうがいいが、ここでは渡さなくても動く例を示せるよう可変長引数にしている。</p>
+<p>さて、一番重要な部分。</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span>	<span style="color:#a6e22e">n</span> <span style="color:#f92672">:=</span> len(<span style="color:#a6e22e">interceptors</span>)
 </span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">chained</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">func</span>(<span style="color:#a6e22e">ctx</span> <span style="color:#a6e22e">context</span>.<span style="color:#a6e22e">Context</span>, <span style="color:#a6e22e">arg</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">pb</span>.<span style="color:#a6e22e">PingRequest</span>, <span style="color:#a6e22e">rpc</span> <span style="color:#a6e22e">RPC</span>) (<span style="color:#f92672">*</span><span style="color:#a6e22e">pb</span>.<span style="color:#a6e22e">PingResponse</span>, <span style="color:#66d9ef">error</span>) {
 </span></span><span style="display:flex;"><span>		<span style="color:#a6e22e">chainer</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">func</span>(<span style="color:#a6e22e">currentInter</span> <span style="color:#a6e22e">Interceptor</span>, <span style="color:#a6e22e">currentRPC</span> <span style="color:#a6e22e">RPC</span>) <span style="color:#a6e22e">RPC</span> {
@@ -364,25 +370,26 @@
 </span></span><span style="display:flex;"><span>	}
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">ret</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">chained</span>(<span style="color:#a6e22e">ctx</span>, <span style="color:#a6e22e">arg</span>, <span style="color:#a6e22e">w</span>.<span style="color:#a6e22e">pingServer</span>.<span style="color:#a6e22e">Ping</span>)
-</span></span></code></pre></div><p>1つずつ分解してみていきます。</p>
-<p><code>chained</code> 関数は <code>Interceptor</code> と同じ引数戻り値をしています。</p>
-<p>重要なのは <code>chained</code> 関数の内部です。</p>
-<p>内部で定義されている <code>chainer</code> は <code>Interceptor</code> と <code>RPC</code> を受け取り、 <code>RPC</code> を返す関数です。</p>
-<p>返している <code>RPC</code> は何をしているかというと、 <code>chainer</code> が受け取った <code>Interceptor</code> を内部で実行してその戻り値を返しています。</p>
-<p>つまり <code>chainer</code> は、「受け取った <code>RPC</code> を、同時に受け取った <code>Interceptor</code> で実行する <code>RPC</code> に変換する」機能を持った関数というわけです。</p>
-<p>それ以降は簡単です。</p>
-<p><code>chained</code> の引数で受け取った <code>RPC</code> を起点にして、forループで <code>chainer</code> を実行し、受け取った <code>Interceptor</code> を <code>RPC</code> に変換していきます。逆順に回している理由は、 最初に渡した <code>Interceptor</code> を最後に変換することで、渡した順に <code>Interceptor</code> を実行するためです。</p>
-<p>最後に、変換が終わった <code>RPC</code> を <code>chained</code> が受け取った <code>RPC</code> の引数を渡して実行することで、 <code>chained</code> の処理は終わりです。</p>
-<p>こうすることで、 例えば <code>Call</code> メソッドに1つの <code>Interceptor</code> が渡された場合、その渡された <code>Interceptor</code> には <code>Ping</code> メソッドが渡された状態で <code>RPC</code> に変換され、その <code>RPC</code> を実行することでインターセプトを可能にできるわけです。</p>
-<h1 id="まとめ">
+</span></span></code></pre></div><p>1つずつ分解してみる。</p>
+<p><code>chained</code> 関数は <code>Interceptor</code> と同じ引数戻り値をしている。</p>
+<p>重要なのは <code>chained</code> 関数の内部。</p>
+<p>内部で定義されている <code>chainer</code> は <code>Interceptor</code> と <code>RPC</code> を受け取り、 <code>RPC</code> を返す関数になっている。</p>
+<p>返している <code>RPC</code> は何をしているかというと、 <code>chainer</code> が受け取った <code>Interceptor</code> を内部で実行してその戻り値を返している。</p>
+<p>つまり <code>chainer</code> は、「受け取った <code>RPC</code> を、同時に受け取った <code>Interceptor</code> で実行する <code>RPC</code> へ変換する」機能を持った関数となる。</p>
+<p>それ以降は簡単。</p>
+<p><code>chained</code> の引数で受け取った <code>RPC</code> を起点にして、forループで <code>chainer</code> を実行し、受け取った <code>Interceptor</code> を <code>RPC</code> に変換していく。
+逆順に回している理由は、 最初に渡した <code>Interceptor</code> を最後に変換することで、渡した順に <code>Interceptor</code> を実行するため。</p>
+<p>最後に、変換が終わった <code>RPC</code> を <code>chained</code> が受け取った <code>RPC</code> の引数を渡して実行することで、 <code>chained</code> の処理は終わり。</p>
+<p>こうすることで、 <code>Call</code> メソッドに1つの <code>Interceptor</code> が渡された場合、その渡された <code>Interceptor</code> には <code>Ping</code> メソッドが渡された状態で <code>RPC</code> に変換して <code>RPC</code> を実行することでインターセプトを可能にできる。</p>
+<h2 id="まとめ">
   まとめ
   <a class="heading-link" href="#%e3%81%be%e3%81%a8%e3%82%81">
     <i class="fa fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
-</h1>
-<p>このテクニックを知っていると「特定のinterfaceを受け取って内部でそのinterfaceで実行する」機能を持ったものを内部でインターセプトして任意の処理を挟むことができるようになります。</p>
-<p>あまり業務のコードで使えるようなテクニックではないですが、上記のような構造を持つライブラリやコードジェネレータを作るときに知っておくと、使う側にある程度の自由度を与えることができるようになると思います。</p>
+</h2>
+<p>このテクニックを知っていると「特定のinterfaceを受け取ってそのinterfaceで実行する」機能を持ったものを内部でインターセプトして任意の処理を挟むことができるようになる。</p>
+<p>あまり業務のコードで使えるようなテクニックではないですが、上記のような構造を持つライブラリやコードジェネレータを作るときに知っておくと、使う側にある程度の自由度を与えることができるようになる。</p>
 <h2 id="おまけ">
   おまけ
   <a class="heading-link" href="#%e3%81%8a%e3%81%be%e3%81%91">
@@ -390,10 +397,10 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h2>
-<p>今回の例では出てこなかったテクニックとして、Interceptorに追加の情報を渡すということができます。</p>
-<p>上記の例では <code>Interceptor</code> は引数に、「<code>RPC</code> の引数」と「<code>RPC</code> そのもの」を受け取るようになっていますが、これは最低限の定義でしかないため、追加で別のものを受け取るように定義することで実現できます。</p>
-<p>実際に<a href="https://godoc.org/google.golang.org/grpc#UnaryServerInterceptor"  class="external-link" target="_blank" rel="noopener">grpc.UnaryServerInterceptor</a>は、ctxとreqとhandlerの他に、 <code>UnaryServerInfo</code> という構造体も渡されるように作られています。</p>
-<p>こうすることにより、インターセプトする側がされる側の情報を取得して処理を挟むことができるようになります。</p>
+<p>今回の例では出てこなかったテクニックとして、Interceptorに追加の情報を渡すということができる。</p>
+<p>上記の例では <code>Interceptor</code> は引数に、「<code>RPC</code> の引数」と「<code>RPC</code> そのもの」を受け取るようになっているが、これは最低限の定義でしかないため、追加で別のものを受け取るように定義することで実現できる。</p>
+<p>実際に<a href="https://godoc.org/google.golang.org/grpc#UnaryServerInterceptor"  class="external-link" target="_blank" rel="noopener">grpc.UnaryServerInterceptor</a>は、ctxとreqとhandlerの他に、 <code>UnaryServerInfo</code> という構造体も渡されるように作られている。</p>
+<p>こうすることにより、インターセプトする側がされる側の情報を取得して処理を挟むことができるようになる。</p>
 
       </div>
 

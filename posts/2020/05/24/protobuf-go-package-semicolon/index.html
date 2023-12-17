@@ -13,14 +13,14 @@
 
 
 <meta name="author" content="nametake">
-<meta name="description" content="先日protoc-gen-gohttpの依存パッケージをしようと思って色々触っていたら以下のようなWARNINGが出てきました。 2020/05/24 11:36:51 WARNING: Deprecated use of">
+<meta name="description" content="先日protoc-gen-gohttpの依存パッケージをしようと思って色々触っていたら以下のようなWARNINGが出てきた。 2020/05/24 11:36:51 WARNING: Deprecated use of &#39;go_package&#39; option">
 <meta name="keywords" content="blog,developer,personal">
 
 <meta name="twitter:card" content="summary"/><meta name="twitter:title" content="Protocol Buffersのgo_packageの;の仕様"/>
-<meta name="twitter:description" content="先日protoc-gen-gohttpの依存パッケージをしようと思って色々触っていたら以下のようなWARNINGが出てきました。 2020/05/24 11:36:51 WARNING: Deprecated use of"/>
+<meta name="twitter:description" content="先日protoc-gen-gohttpの依存パッケージをしようと思って色々触っていたら以下のようなWARNINGが出てきた。 2020/05/24 11:36:51 WARNING: Deprecated use of &#39;go_package&#39; option"/>
 
 <meta property="og:title" content="Protocol Buffersのgo_packageの;の仕様" />
-<meta property="og:description" content="先日protoc-gen-gohttpの依存パッケージをしようと思って色々触っていたら以下のようなWARNINGが出てきました。 2020/05/24 11:36:51 WARNING: Deprecated use of" />
+<meta property="og:description" content="先日protoc-gen-gohttpの依存パッケージをしようと思って色々触っていたら以下のようなWARNINGが出てきた。 2020/05/24 11:36:51 WARNING: Deprecated use of &#39;go_package&#39; option" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://nametake.github.io/posts/2020/05/24/protobuf-go-package-semicolon/" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2020-05-24T00:00:00+09:00" />
@@ -183,34 +183,13 @@
 
       <div class="post-content">
         
-        <p>先日<a href="https://github.com/nametake/protoc-gen-gohttp"  class="external-link" target="_blank" rel="noopener">protoc-gen-gohttp</a>の依存パッケージをしようと思って色々触っていたら以下のようなWARNINGが出てきました。</p>
+        <p>先日<a href="https://github.com/nametake/protoc-gen-gohttp"  class="external-link" target="_blank" rel="noopener">protoc-gen-gohttp</a>の依存パッケージをしようと思って色々触っていたら以下のようなWARNINGが出てきた。</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>2020/05/24 11:36:51 WARNING: Deprecated use of <span style="color:#e6db74">&#39;go_package&#39;</span> option without a full import path in <span style="color:#e6db74">&#34;greeter.proto&#34;</span>, please specify:
 </span></span><span style="display:flex;"><span>        option go_package <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;.;main&#34;</span>;
 </span></span><span style="display:flex;"><span>A future release of protoc-gen-go will require the import path be specified.
 </span></span><span style="display:flex;"><span>See https://developers.google.com/protocol-buffers/docs/reference/go-generated#package <span style="color:#66d9ef">for</span> more information.
-</span></span></code></pre></div><p>以下のファイルのように <code>go_package</code> のオプションにGoのimport pathを記述しなかったことが問題のようです。</p>
-<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
-<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
-</span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-proto" data-lang="proto"><span style="display:flex;"><span>syntax <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;proto3&#34;</span>;<span style="color:#960050;background-color:#1e0010">
+</span></span></code></pre></div><p>以下のファイルのように <code>go_package</code> のオプションにGoのimport pathを記述しなかったことが問題だった。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-proto" data-lang="proto"><span style="display:flex;"><span>syntax <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;proto3&#34;</span>;<span style="color:#960050;background-color:#1e0010">
 </span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
 </span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#f92672">package</span> helloworld;<span style="color:#960050;background-color:#1e0010">
 </span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
@@ -227,13 +206,13 @@
 </span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">message</span> <span style="color:#a6e22e">HelloReply</span> {<span style="color:#960050;background-color:#1e0010">
 </span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>  <span style="color:#66d9ef">string</span> <span style="color:#66d9ef">message</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;<span style="color:#960050;background-color:#1e0010">
 </span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>}<span style="color:#960050;background-color:#1e0010">
-</span></span></span></code></pre></td></tr></table>
-</div>
-</div><p>一応WARNINGには「<code>go_package = &quot;.;main&quot;;</code> みたいに指定してください」と書いてあり、そのとおりに指定すると問題なく生成はできました。</p>
-<p>しかし、その下にあるLinkには <code>;</code> に関する情報が記載されていません(執筆時点)。</p>
-<p>また、上記のように <code>;</code> で区切った文字列を <code>go_package</code> に指定すると<a href="https://github.com/nametake/protoc-gen-gohttp"  class="external-link" target="_blank" rel="noopener">protoc-gen-gohttp</a>でエラーを吐いてしまいました。</p>
-<p>実装を反映させる都合上、 <a href="https://github.com/golang/protobuf/tree/master/protoc-gen-go"  class="external-link" target="_blank" rel="noopener">protoc-gen-go</a>  で <code>;</code> がどのような扱いになっているのかを調べる必要があったため、せっかくなので調べた結果をまとめておこうと思います。</p>
-<p>この記事で挙動を確認した <a href="https://github.com/golang/protobuf/tree/master/protoc-gen-go"  class="external-link" target="_blank" rel="noopener">protoc-gen-go</a> のバージョンはv1.4.2、protocのバージョンはv3.12.0です。</p>
+</span></span></span></code></pre></div><p>一応WARNINGには「<code>go_package = &quot;.;main&quot;;</code> みたいに指定してください」と書いてあり、そのとおりに指定すると問題なく生成はできた。</p>
+<p>しかし、その下にあるLinkには <code>;</code> に関する情報が記載されていない(執筆時点)。</p>
+<p>また、上記のように <code>;</code> で区切った文字列を <code>go_package</code> に指定すると<a href="https://github.com/nametake/protoc-gen-gohttp"  class="external-link" target="_blank" rel="noopener">protoc-gen-gohttp</a>でエラーを吐いてしまった。</p>
+<!-- textlint-disable ja-technical-writing/ja-no-weak-phrase -->
+<p>実装を反映させる都合上、 <a href="https://github.com/golang/protobuf/tree/master/protoc-gen-go"  class="external-link" target="_blank" rel="noopener">protoc-gen-go</a>  で <code>;</code> がどのような扱いになっているのかを調べる必要があったため、せっかくなので調べた結果をまとめておこうと思う。</p>
+<!-- textlint-enable -->
+<p>この記事で挙動を確認した <a href="https://github.com/golang/protobuf/tree/master/protoc-gen-go"  class="external-link" target="_blank" rel="noopener">protoc-gen-go</a> のバージョンはv1.4.2、protocのバージョンはv3.12.0。</p>
 <h2 id="結論">
   結論
   <a class="heading-link" href="#%e7%b5%90%e8%ab%96">
@@ -253,11 +232,13 @@
 </ul>
 </li>
 </ul>
-<p>実装の該当箇所は<a href="https://github.com/golang/protobuf/blob/b5de78c91d0d09482d65f0a96927631cd343d7bb/protoc-gen-go/generator/generator.go#L275-L291"  class="external-link" target="_blank" rel="noopener">こちら</a>です。</p>
-<p><a href="https://github.com/golang/protobuf/issues/139"  class="external-link" target="_blank" rel="noopener">このIssue</a> がProposalで実装自体は2年ほど前にされていました。</p>
-<p>ただ、このWARNING自体も<a href="https://github.com/golang/protobuf/issues/992"  class="external-link" target="_blank" rel="noopener">このIssue</a>で議論されている通り、第三者に配布したときの挙動として適切かどうかはまだ議論されている段階のようです。</p>
-<p>とはいえ、実装と仕組み自体はわかったので<a href="https://github.com/nametake/protoc-gen-gohttp"  class="external-link" target="_blank" rel="noopener">protoc-gen-gohttp</a>のパッケージ名生成部分は <code>;</code> で区切られたパターンは対応しました。</p>
-<p>一応自分でも追いかけてはいきますが、Protocol Buffersはまだまだ開発が活発なため追いつけないことも多々あると思うので、もし<a href="https://github.com/nametake/protoc-gen-gohttp"  class="external-link" target="_blank" rel="noopener">protoc-gen-gohttp</a>で動かない挙動があった場合はIssueを立てていただけると助かります 🙇‍</p>
+<p>実装の該当箇所は<a href="https://github.com/golang/protobuf/blob/b5de78c91d0d09482d65f0a96927631cd343d7bb/protoc-gen-go/generator/generator.go#L275-L291"  class="external-link" target="_blank" rel="noopener">こちら</a>。</p>
+<p><a href="https://github.com/golang/protobuf/issues/139"  class="external-link" target="_blank" rel="noopener">このIssue</a> がProposalで実装自体は2年ほど前にされていた。</p>
+<p>ただ、このWARNING自体も<a href="https://github.com/golang/protobuf/issues/992"  class="external-link" target="_blank" rel="noopener">このIssue</a>で議論されている通り、第三者に配布したときの挙動として適切かどうかはまだ議論されている段階のようだった。</p>
+<p>とはいえ、実装と仕組み自体はわかったので<a href="https://github.com/nametake/protoc-gen-gohttp"  class="external-link" target="_blank" rel="noopener">protoc-gen-gohttp</a>のパッケージ名生成部分では <code>;</code> で区切られたパターンは対応した。</p>
+<!-- textlint-disable ja-technical-writing/ja-no-weak-phrase -->
+<p>一応自分でも追いかけてはいきますが、Protocol Buffersはまだまだ開発が活発なため追いつけないことも多々あると思うので、もし<a href="https://github.com/nametake/protoc-gen-gohttp"  class="external-link" target="_blank" rel="noopener">protoc-gen-gohttp</a>で動かない挙動があった場合はIssueを立てていただけると助かります。</p>
+<!-- textlint-enable -->
 
       </div>
 

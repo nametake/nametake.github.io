@@ -13,35 +13,35 @@
       <link>https://nametake.github.io/posts/2020/05/24/protobuf-go-package-semicolon/</link>
       <pubDate>Sun, 24 May 2020 00:00:00 +0900</pubDate>
       <guid>https://nametake.github.io/posts/2020/05/24/protobuf-go-package-semicolon/</guid>
-      <description>先日protoc-gen-gohttpの依存パッケージをしようと思って色々触っていたら以下のようなWARNINGが出てきました。 2020/05/24 11:36:51 WARNING: Deprecated use of</description>
+      <description>先日protoc-gen-gohttpの依存パッケージをしようと思って色々触っていたら以下のようなWARNINGが出てきた。 2020/05/24 11:36:51 WARNING: Deprecated use of &amp;#39;go_package&amp;#39; option</description>
     </item>
     <item>
       <title>golangci-lint-langserverを作った話</title>
       <link>https://nametake.github.io/posts/2020/03/08/golangci-lint-langserver/</link>
       <pubDate>Sun, 08 Mar 2020 00:00:00 +0900</pubDate>
       <guid>https://nametake.github.io/posts/2020/03/08/golangci-lint-langserver/</guid>
-      <description>最近VimのLinterのプラグインをaleからすべてlanguage serverに移行しました。 殆どのCLIツールはdiagnostic-</description>
+      <description>最近VimのLinterのプラグインをaleからすべてlanguage serverに移行した。 殆どのCLIツールはdiagnostic-la</description>
     </item>
     <item>
       <title>Go言語でジェネリクスない理由の考察</title>
       <link>https://nametake.github.io/posts/2019/12/31/go-no-generics/</link>
       <pubDate>Tue, 31 Dec 2019 00:00:00 +0900</pubDate>
       <guid>https://nametake.github.io/posts/2019/12/31/go-no-generics/</guid>
-      <description>Go言語にはジェネリクスがありません。 他言語から入ってきた方はかなりこの部分に戸惑うことが多いようです。 そこで、そういった方々になぜジェネリ</description>
+      <description>Go言語にはジェネリクスがない。 他言語から入ってきた方はかなりこの部分に戸惑うことが多い。 そこで、そういった方々になぜジェネリクスがないのか</description>
     </item>
     <item>
       <title>Goの関数内で呼び出される関数をインターセプトする方法</title>
       <link>https://nametake.github.io/posts/2019/12/09/go-func-intercept/</link>
       <pubDate>Mon, 09 Dec 2019 00:05:29 +0900</pubDate>
       <guid>https://nametake.github.io/posts/2019/12/09/go-func-intercept/</guid>
-      <description>この記事はGo2 Advent Calendar 2019の記事です。 自分はprotoc-gen-gohttpというプラグインを作っているのですが、先日grpc.Unar</description>
+      <description>この記事はGo2 Advent Calendar 2019の記事。 自分はprotoc-gen-gohttpというプラグインを作っているが、先日grpc.UnaryServ</description>
     </item>
     <item>
       <title>Go1.13のerrorsにWrapの機能が入ったので勉強がてらまとめる</title>
       <link>https://nametake.github.io/posts/2019/10/30/unwrap-interface/</link>
       <pubDate>Wed, 30 Oct 2019 00:52:57 +0900</pubDate>
       <guid>https://nametake.github.io/posts/2019/10/30/unwrap-interface/</guid>
-      <description>Go1.13からerrorsに色々機能が入りました(The Go Blog)。 最近は新しいGoのことをインプットできていなかったので、リハビリがて</description>
+      <description>Go1.13からerrorsに色々機能が入った(The Go Blog)。 最近は新しいGoのことをインプットできていなかったので、リハビリがてらs</description>
     </item>
     <item>
       <title>Goのrelfectで構造体の変数にインスタンスを詰める方法</title>
@@ -69,21 +69,21 @@
       <link>https://nametake.github.io/posts/2018/12/19/created-labelerr-and-suberr/</link>
       <pubDate>Wed, 19 Dec 2018 11:37:17 +0900</pubDate>
       <guid>https://nametake.github.io/posts/2018/12/19/created-labelerr-and-suberr/</guid>
-      <description>golang.tokyo #20のLT大会で、labelerrとsuberrを作った話をしてきました。 「Goのerrorは1種類というのは綺麗だとは思うけど、実運用</description>
+      <description>golang.tokyo #20のLT大会で、labelerrとsuberrを作った話をしてきた。 「Goのerrorは1種類というのは綺麗だとは思うけど、実運用上e</description>
     </item>
     <item>
       <title>Goでのprotocプラグインのテストの書き方</title>
       <link>https://nametake.github.io/posts/2018/12/14/protoc-plugin-test/</link>
       <pubDate>Fri, 14 Dec 2018 00:00:00 +0900</pubDate>
       <guid>https://nametake.github.io/posts/2018/12/14/protoc-plugin-test/</guid>
-      <description>最近周りでProtocol Buffersの話題をよく聞くようになりました。 ということはそろそろ人類はprotocのプラグインを書きたくなる時</description>
+      <description>最近周りでProtocol Buffersの話題をよく聞くようになった。 ということは、そろそろ人類はprotocのプラグインを書きたくなる時代</description>
     </item>
     <item>
       <title>Protocol Buffersのserviceをnet/httpに対応させるprotoc-gen-gohttpを作った</title>
       <link>https://nametake.github.io/posts/2018/11/21/protoc-gen-gohttp/</link>
       <pubDate>Wed, 21 Nov 2018 16:32:07 +0900</pubDate>
       <guid>https://nametake.github.io/posts/2018/11/21/protoc-gen-gohttp/</guid>
-      <description>nametake/protoc-gen-gohttpというprotocのプラグインを作ったのでその話です。 Protocol Buffersとは Link to heading Protocol Buf</description>
+      <description>nametake/protoc-gen-gohttpというprotocのプラグインを作ったのでその話。 Protocol Buffersとは Link to heading Protocol Buffe</description>
     </item>
     <item>
       <title>GCPの認証済みのhttp.Clientの取得方法</title>
@@ -97,7 +97,7 @@
       <link>https://nametake.github.io/posts/2018/09/20/dep-private-repo/</link>
       <pubDate>Thu, 20 Sep 2018 18:47:46 +0900</pubDate>
       <guid>https://nametake.github.io/posts/2018/09/20/dep-private-repo/</guid>
-      <description>Goをアップデートした後、dep updateをしたら以下のようなエラーが発生しました。 grouped write of manifest, lock and vendor: error while writing out vendor tree: failed to write dep tree: failed to export github.com/nametake/private-repo: unable to update repository: remote:</description>
+      <description>Goをアップデートした後、dep updateをしたら以下のようなエラーが発生した。 grouped write of manifest, lock and vendor: error while writing out vendor tree: failed to write dep tree: failed to export github.com/nametake/private-repo: unable to update repository: remote: Repository not</description>
     </item>
   </channel>
 </rss>

@@ -184,8 +184,8 @@
       <div class="post-content">
         
         <p>GCPの認証済みのhttp.Clientが欲しいときにちょっとだけ調べたのでメモ。</p>
-<p>結論だけ言うと、<a href="https://godoc.org/golang.org/x/oauth2/google#DefaultClient"  class="external-link" target="_blank" rel="noopener">golang.org/x/oauth2/googleのDefaultClient</a>を使えばいいみたいです。</p>
-<p>今回はDataflowのAPIを叩きたかったので以下のようにすればできました。</p>
+<p>結論だけ言うと、<a href="https://godoc.org/golang.org/x/oauth2/google#DefaultClient"  class="external-link" target="_blank" rel="noopener">golang.org/x/oauth2/googleのDefaultClient</a>を使えばよかった。</p>
+<p>今回はDataflowのAPIを叩きたかったので以下のようにすればできた。</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#a6e22e">client</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">google</span>.<span style="color:#a6e22e">DefaultClient</span>(<span style="color:#a6e22e">ctx</span>, <span style="color:#a6e22e">dataflow</span>.<span style="color:#a6e22e">CloudPlatformScope</span>)
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
 </span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Errorf</span>(<span style="color:#e6db74">&#34;failed create client: %v&#34;</span>, <span style="color:#a6e22e">err</span>)

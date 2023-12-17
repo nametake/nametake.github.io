@@ -13,14 +13,14 @@
 
 
 <meta name="author" content="nametake">
-<meta name="description" content="最近VimのLinterのプラグインをaleからすべてlanguage serverに移行しました。 殆どのCLIツールはdiagnostic-">
+<meta name="description" content="最近VimのLinterのプラグインをaleからすべてlanguage serverに移行した。 殆どのCLIツールはdiagnostic-la">
 <meta name="keywords" content="blog,developer,personal">
 
 <meta name="twitter:card" content="summary"/><meta name="twitter:title" content="golangci-lint-langserverを作った話"/>
-<meta name="twitter:description" content="最近VimのLinterのプラグインをaleからすべてlanguage serverに移行しました。 殆どのCLIツールはdiagnostic-"/>
+<meta name="twitter:description" content="最近VimのLinterのプラグインをaleからすべてlanguage serverに移行した。 殆どのCLIツールはdiagnostic-la"/>
 
 <meta property="og:title" content="golangci-lint-langserverを作った話" />
-<meta property="og:description" content="最近VimのLinterのプラグインをaleからすべてlanguage serverに移行しました。 殆どのCLIツールはdiagnostic-" />
+<meta property="og:description" content="最近VimのLinterのプラグインをaleからすべてlanguage serverに移行した。 殆どのCLIツールはdiagnostic-la" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://nametake.github.io/posts/2020/03/08/golangci-lint-langserver/" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2020-03-08T00:00:00+09:00" />
@@ -183,14 +183,13 @@
 
       <div class="post-content">
         
-        <p>最近VimのLinterのプラグインをaleからすべてlanguage serverに移行しました。</p>
-<p>殆どのCLIツールは<a href="https://github.com/iamcco/diagnostic-languageserver"  class="external-link" target="_blank" rel="noopener">diagnostic-languageserver</a>経由で使うことでいい感じに動いてくれています。</p>
-<p>ただ、<a href="https://github.com/golangci/golangci-lint"  class="external-link" target="_blank" rel="noopener">golangci-lint</a>だけはGoのスコープとの相性の関係ではうまく動作させることができませんでした。</p>
-<p>そこで、golangci-lint専用のlanguage server、<a href="https://github.com/nametake/golangci-lint-langserver"  class="external-link" target="_blank" rel="noopener">golangci-lint-langserver</a>を作成してみました。</p>
-<p>LSPクライアントに読み込ませるとファイルを開いたときと保存したときに以下のようにgolangci-lintの結果を返してくれます。</p>
+        <p>最近VimのLinterのプラグインをaleからすべてlanguage serverに移行した。</p>
+<p>殆どのCLIツールは<a href="https://github.com/iamcco/diagnostic-languageserver"  class="external-link" target="_blank" rel="noopener">diagnostic-languageserver</a>経由で使うことでいい感じに動いてくれている。</p>
+<p>ただ、<a href="https://github.com/golangci/golangci-lint"  class="external-link" target="_blank" rel="noopener">golangci-lint</a>だけはGoのスコープとの相性の関係ではうまく動作させることができなかった。</p>
+<p>そこで、golangci-lint専用のlanguage server、<a href="https://github.com/nametake/golangci-lint-langserver"  class="external-link" target="_blank" rel="noopener">golangci-lint-langserver</a>を作成してみた。</p>
+<p>LSPクライアントに読み込ませるとファイルを開いたときと保存したときに以下のようにgolangci-lintの結果を返してくれる。</p>
 <script id="asciicast-308369" src="https://asciinema.org/a/308369.js" async></script>
-<p>自分が使うために作ったためWindows対応や細かいエラーハンドリング等はしていませんが、個人的には割とちゃんと動いたので満足しています。</p>
-<p>もし機能追加等あったらPRお待ちしています。</p>
+<p>自分が使うために作ったためWindows対応や細かいエラーハンドリング等はしていないが、個人的には割とちゃんと動いたので満足している。</p>
 <h2 id="制作動機">
   制作動機
   <a class="heading-link" href="#%e5%88%b6%e4%bd%9c%e5%8b%95%e6%a9%9f">
@@ -198,23 +197,26 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h2>
-<p>一応制作動機も書いておこうと思います。</p>
-<p>今回aleの移行先として検討した<a href="https://github.com/iamcco/diagnostic-languageserver"  class="external-link" target="_blank" rel="noopener">diagnostic-languageserver</a>や<a href="https://github.com/mattn/efm-langserver"  class="external-link" target="_blank" rel="noopener">efm-langserver</a>なのですが、基本的には開いているファイルにlintをかけてその結果を返す仕組みになっています。</p>
-<p>しかし、Goはパッケージ単位(ディレクトリ単位)のスコープになっているためgolangci-lintはうまく動かない場合がありました。</p>
-<p>例えばunusedやdeadcodeのような使っていない変数や関数をチェックするようなものは、そのパッケージ内の別ファイルで使っていたとしてもそれがチェックされず、lintに引っかかってしまいます。</p>
-<p>また、別ファイルで定義されている関数や変数を使おうとした場合はそもそもビルド失敗扱いになりチェックすることすらできませんでした。</p>
-<p>かといって、ファイルが開かれるたびにパッケージ全体に対してgolangci-lintをかけると今度は関係ないファイルの結果も含まれてしまいます。</p>
-<p>この問題を解決するには、language server側で以下の流れのようにlinterが返した結果をLSPクライアントが送ってきた情報でフィルタをする必要がありました。</p>
+<!-- textlint-disable ja-technical-writing/ja-no-weak-phrase -->
+<p>一応制作動機も書いておこうと思う。</p>
+<!-- textlint-enable -->
+<p>今回aleの移行先として検討した<a href="https://github.com/iamcco/diagnostic-languageserver"  class="external-link" target="_blank" rel="noopener">diagnostic-languageserver</a>や<a href="https://github.com/mattn/efm-langserver"  class="external-link" target="_blank" rel="noopener">efm-langserver</a>だが、基本的には開いているファイルにlintをかけてその結果を返す仕組みになっている。</p>
+<p>しかし、Goはパッケージ単位(ディレクトリ単位)のスコープになっているためgolangci-lintはうまく動かない場合があった。</p>
+<p>例えばunusedやdeadcodeのような使っていない変数や関数をチェックするようなものは、そのパッケージ内の別ファイルで使っていたとしてもそれがチェックされず、lintに引っかかってしまう。</p>
+<p>また、別ファイルで定義されている関数や変数を使おうとした場合はそもそもビルド失敗扱いになりチェックすらできない。</p>
+<p>かといって、ファイルが開かれるたびにパッケージ全体に対してgolangci-lintをかけると今度は関係ないファイルの結果も含まれてしまう。</p>
+<p>この問題を解決するには、language server側で以下の流れのようにlinterが返した結果をLSPクライアントが送ってきた情報でフィルタをする必要があった。</p>
 <ol>
 <li>LSPクライアントのNotificationを受け取る</li>
 <li>golangci-lintを実行する</li>
 <li>結果の中から1の情報を使って対象ファイルの結果だけをフィルタする</li>
 <li>LSPクライアントに結果を伝える</li>
 </ol>
-<p>最初はdiagnostic-languageserverやefm-langserverにコントリビュートしようとも考えました。</p>
-<p>ただ、そこそこ大きな機能を追加しないと実現できそうになく、かつgolangci-lintのためだけにその機能を追加するのもシンプルではないと思ったため、完全に独立したlanguage serverとして実装してしまうことにしました。</p>
-<p>efm-langserverの実装を参考にして書いたため、かなり重複したコードにはなっています。ただ、そのおかげで実装を大きくせずに書けたのでシンプルな状態は保つことができました。</p>
-<p>個人的にこのlanguage serverは一時的な実装のつもりなので、goplsやdiagnostic-languageserver、efm-langserverが対応したらすぐにdeprecatedな状態にしようと思っています。</p>
+<p>最初はdiagnostic-languageserverやefm-langserverにコントリビュートしようとも考えた。</p>
+<p>しかし、そこそこ大きな機能を追加しないと実現できそうになく、かつgolangci-lintのためだけにその機能を追加するのもシンプルではないと思ったため、完全に独立したlanguage serverとして実装してしまうことにしてみた。</p>
+<p>efm-langserverの実装を参考にして書いたため、かなり重複したコードにはなってはいる。
+ただ、そのおかげで実装を大きくせずに書けたのでシンプルな状態は保つことができた。</p>
+<p>個人的にこのlanguage serverは一時的な実装のつもりなので、goplsやdiagnostic-languageserver、efm-langserverが対応したらすぐにdeprecatedな状態にしようと思っている。</p>
 <p>それまではgolangci-lint-langserverはある程度メンテするつもりなので、PRお待ちしています。</p>
 
       </div>

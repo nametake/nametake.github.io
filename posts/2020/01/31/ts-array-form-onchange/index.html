@@ -190,8 +190,8 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h1>
-<p>toB向けのサービスや管理画面のように情報量の多いのプロダクトを作っていると、FormをまとめたComponentを作りたくなるケースがあります。</p>
-<p>単体で使っているときにはそこまで問題ないのですが、それを複数リスト上に管理して増減させたいときにonChangeをどうやって設計するのかを色々考えたのでまとめておきます。</p>
+<p>toB向けのサービスや管理画面のように情報量の多いのプロダクトを作っていると、FormをまとめたComponentを作りたくなるケースがある。</p>
+<p>単体で使っているときにはそこまで問題ないが、それを複数リスト上に管理して増減させたいときにonChangeをどうやって設計するのかを色々考えたのでまとめておく。</p>
 <h2 id="サンプルform">
   サンプルForm
   <a class="heading-link" href="#%e3%82%b5%e3%83%b3%e3%83%97%e3%83%abform">
@@ -199,7 +199,7 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h2>
-<p>以下のようなFormを題材にします。</p>
+<p>以下のようなFormを題材にしてみる。</p>
 <div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
 <table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
 <pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
@@ -329,17 +329,17 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h2>
-<p>配列で扱うにあたり、以下の方法を検討しました。</p>
+<p>配列で扱うにあたり、以下の方法を検討した。</p>
 <ol>
 <li><code>HumanFormValue</code> にidとなるもの付与する</li>
 <li>onChangeのCurry化を行う</li>
-<li>valuesのlengthをみて関数の増減を行う</li>
+<li>valuesのlengthをみて関数の増減する</li>
 <li>使う側で <code>HumanFormValue</code> にidとなるもの付与する</li>
 </ol>
-<p>1は確実にできるのですが、リストで扱われるかはComponentの責務として違うと思ったので除外。</p>
-<p>最初は2でいけると思ったのですが、useEffectに引っかかってしまい無限ループが発生したのでこの方法では出来なかったです。</p>
-<p>3は出来たのですが、もう少し別の方法を考えてみた結果4が出てきました。</p>
-<p>4の方法が以下です。</p>
+<p>1は確実にできるが、リストで扱われるかはComponentの責務として違うと思ったので除外。</p>
+<p>最初は2でいけると考えたが、useEffectに引っかかってしまい無限ループが発生したのでこの方法では出来なかった。</p>
+<p>3は出来たが、もう少し別の方法を考えてみた結果4が出てきた。</p>
+<p>4の方法が以下。</p>
 <iframe
      src="https://codesandbox.io/embed/ts-array-form-b3bo0?fontsize=14&hidenavigation=1&theme=dark"
      style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;"
@@ -347,7 +347,9 @@
      allow="geolocation; microphone; camera; midi; vr; accelerometer; gyroscope; payment; ambient-light-sensor; encrypted-media; usb"
      sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"
    ></iframe>
-<p>以下の点に気をつけないといけないですが、個人的には一番しっくり来たので他にいい方法が見つかるまではこの方法で配列管理していきたいと思います。</p>
+<!-- textlint-disable ja-technical-writing/ja-no-weak-phrase -->
+<p>以下の点に気をつけないといけないが、個人的には一番しっくり来たので他にいい方法が見つかるまではこの方法で配列管理していきたいと思う。</p>
+<!-- textlint-enable -->
 <ul>
 <li>HumanFormのonChangeの型とHumanFormValueWithKeyの型が合わないのでlintを少し緩くする必要がある</li>
 <li>以下のように不用意なsetValuesをするとkeyが消える

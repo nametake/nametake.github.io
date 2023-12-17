@@ -182,7 +182,7 @@
         <p>大して書いていなかったブログをgithub pages+hugoの組み合わせに移行したのでそのメモ。</p>
 <p>とは言うものの、ほとんど<a href="https://gohugo.io/categories/getting-started"  class="external-link" target="_blank" rel="noopener">Hugoの入門用ページ</a>の内容をそのままやっただけなのでその辺は割愛。</p>
 <p>最終的なディレクトリ構成は以下。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>blog
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-console" data-lang="console"><span style="display:flex;"><span>blog
 </span></span><span style="display:flex;"><span> ├── Makefile
 </span></span><span style="display:flex;"><span> ├── archetypes
 </span></span><span style="display:flex;"><span> │   ├── default.md
@@ -213,7 +213,7 @@
   </a>
 </h2>
 <p>自分はパーマリンクを<code>日付+自分で設定した英単語</code>にしたかったので、以下のようにconfig.tomlに追記。</p>
-<p>slugは各postのfrontmatter(postの先頭にあるヘッダ部分)に設定すると反映されます。</p>
+<p>slugは各postのfrontmatter(postの先頭のヘッダ部分)に設定すると反映される。</p>
 <p><code>posts = &quot;/posts/:year/:month/:day/:slug&quot;</code>の<code>posts</code>の部分はcontentディレクトリにある<code>posts</code>ディレクトリと同じ名前にする必要があるので注意。</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-toml" data-lang="toml"><span style="display:flex;"><span>[<span style="color:#a6e22e">permalinks</span>]
 </span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">posts</span> = <span style="color:#e6db74">&#34;/posts/:year/:month/:day/:slug&#34;</span>
@@ -224,7 +224,7 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h2>
-<p>makeコマンドだけでいろいろな作業を完結させたかったので、以下のようにMakefileを作成。</p>
+<p>makeコマンドだけでいろいろな作業を完結させたかったので以下のようにMakefileを作成。</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-make" data-lang="make"><span style="display:flex;"><span><span style="color:#75715e"># new post title
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>title<span style="color:#f92672">=</span>
 </span></span><span style="display:flex;"><span>
@@ -260,7 +260,7 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h2>
-<p><a href="https://gohugo.io/hosting-and-deployment/hosting-on-github/#put-it-into-a-script"  class="external-link" target="_blank" rel="noopener">公式のデプロイ方法</a>に書いてあることに、少し自分に必要な要件を足して以下のようなスクリプトを用意しました。</p>
+<p><a href="https://gohugo.io/hosting-and-deployment/hosting-on-github/#put-it-into-a-script"  class="external-link" target="_blank" rel="noopener">公式のデプロイ方法</a>に書いてあることに、少し自分に必要な要件を足して以下のようなスクリプトを用意した。</p>
 <p>追加したことは以下。</p>
 <ul>
 <li>hugoコマンドの失敗に検知できるようにmakeファイルに役割を分割</li>

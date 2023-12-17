@@ -13,7 +13,7 @@
       <link>https://nametake.github.io/posts/2018/10/10/vim-shfmt-neoformat-indent/</link>
       <pubDate>Wed, 10 Oct 2018 11:44:32 +0900</pubDate>
       <guid>https://nametake.github.io/posts/2018/10/10/vim-shfmt-neoformat-indent/</guid>
-      <description>neoformatで使うshfmtはデフォルトだとインデントがスペースなんですが、チームのコーディング規約に合わせてタブ文字にしたかったとき</description>
+      <description>neoformatで使うshfmtはデフォルトだとインデントがスペースだが、チームのコーディング規約に合わせてタブ文字へ変更したかったときに</description>
     </item>
   </channel>
 </rss>

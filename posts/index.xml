@@ -27,28 +27,28 @@
       <link>https://nametake.github.io/posts/2021/02/14/grid-with-display-contents/</link>
       <pubDate>Sun, 14 Feb 2021 00:00:00 +0900</pubDate>
       <guid>https://nametake.github.io/posts/2021/02/14/grid-with-display-contents/</guid>
-      <description>両端のborderがないテーブルをgridでスタイリングしようとすると、 :not(:first-of-type) をただ使うだけではうまくいきません。 gridにまかせて以下のように</description>
+      <description>両端のborderがないテーブルをgridでスタイリングしようとすると、 :not(:first-of-type) をただ使うだけではうまくいかない。 gridにまかせて以下のようにす</description>
     </item>
     <item>
       <title>react-resizableにemotionでスタイルを当てる</title>
       <link>https://nametake.github.io/posts/2020/10/25/react-resizable-emotion/</link>
       <pubDate>Sun, 25 Oct 2020 00:00:00 +0900</pubDate>
       <guid>https://nametake.github.io/posts/2020/10/25/react-resizable-emotion/</guid>
-      <description>react-resizable に emotion でスタイルを当てた時のメモ。 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 import { ResizableBox } from &amp;#39;react-resizable&amp;#39;; const StyledResizableBox = styled(ResizableBox)` position: relative; display: inline-flex; flex-direction: column; align-items: right; justify-content: center; padding-left: 20px; overflow: hidden; border: 1px solid black; .react-resizable-handle</description>
+      <description>react-resizable に emotion でスタイルを当てた時のメモ。 import { ResizableBox } from &amp;#39;react-resizable&amp;#39;; const StyledResizableBox = styled(ResizableBox)` position: relative; display: inline-flex; flex-direction: column; align-items: right; justify-content: center; padding-left: 20px; overflow: hidden; border: 1px solid black; .react-resizable-handle { position: absolute; right: 0; width: 4px; height: 90%; border-left: 1px solid black; :hover { cursor: col-resize; } } `; 上記の例</description>
     </item>
     <item>
       <title>Reactでアクセシビリティを維持したRadioボタンをデザインする</title>
       <link>https://nametake.github.io/posts/2020/09/26/react-a11y-radio/</link>
       <pubDate>Sat, 26 Sep 2020 00:00:00 +0900</pubDate>
       <guid>https://nametake.github.io/posts/2020/09/26/react-a11y-radio/</guid>
-      <description>ReactでRadioボタンにデザインを当てようとすると、 display: none を使う方法を紹介している記事が多いのですが、その方法ではアクセシビリティが消え</description>
+      <description>ReactでRadioボタンにデザインを当てようとすると、 display: none を使う方法を紹介している記事が多いが、その方法ではアクセシビリティが消えてしま</description>
     </item>
     <item>
       <title>SVGが特定のサイズ以下でずれる現象の原因と解決策</title>
       <link>https://nametake.github.io/posts/2020/08/10/css-svg-inline-descender/</link>
       <pubDate>Mon, 10 Aug 2020 00:00:00 +0900</pubDate>
       <guid>https://nametake.github.io/posts/2020/08/10/css-svg-inline-descender/</guid>
-      <description>下記ブログを参考にしてアクセシビリティを維持したままCheckboxやRadioボタンを作ろうとしたのですが、特定のサイズ以下でずれる問題に</description>
+      <description>下記ブログを参考にしてアクセシビリティを維持したままCheckboxやRadioボタンを作ろうとしたが、特定のサイズ以下でずれる問題に遭遇し</description>
     </item>
     <item>
       <title>TypeScript &#43; electron-webpackでemotionを動かしたときのメモ</title>
@@ -62,7 +62,7 @@
       <link>https://nametake.github.io/posts/2020/07/25/abstract-external-service/</link>
       <pubDate>Sat, 25 Jul 2020 00:00:00 +0900</pubDate>
       <guid>https://nametake.github.io/posts/2020/07/25/abstract-external-service/</guid>
-      <description>外部サービスの抽象化 Link to heading 最近のシステムはその複雑さの上昇に伴い、様々な外部サービスと連携する機会が多くあります。 その際、ドメインとして外部</description>
+      <description>外部サービスの抽象化 Link to heading 最近のシステムはその複雑さの上昇に伴い、様々な外部サービスと連携する機会が多い。 その際、ドメインとして外部サービス</description>
     </item>
     <item>
       <title>Conditional Typesを使った話</title>
@@ -76,28 +76,28 @@
       <link>https://nametake.github.io/posts/2020/06/28/combination-test-pict-and-orthogonal-array/</link>
       <pubDate>Sun, 28 Jun 2020 00:00:00 +0900</pubDate>
       <guid>https://nametake.github.io/posts/2020/06/28/combination-test-pict-and-orthogonal-array/</guid>
-      <description>結合テストの組み合わせについてある程度知見が溜まったのでメモ的に。 結合テストの組み合わせ問題 Link to heading システムのリリース前には開発した機能や既存</description>
+      <description>テストの組み合わせについてある程度知見が溜まったのでメモ。 結合テストの組み合わせ問題 Link to heading システムのリリース前には開発した機能や既存の機能を</description>
     </item>
     <item>
       <title>Protocol Buffersのgo_packageの;の仕様</title>
       <link>https://nametake.github.io/posts/2020/05/24/protobuf-go-package-semicolon/</link>
       <pubDate>Sun, 24 May 2020 00:00:00 +0900</pubDate>
       <guid>https://nametake.github.io/posts/2020/05/24/protobuf-go-package-semicolon/</guid>
-      <description>先日protoc-gen-gohttpの依存パッケージをしようと思って色々触っていたら以下のようなWARNINGが出てきました。 2020/05/24 11:36:51 WARNING: Deprecated use of</description>
+      <description>先日protoc-gen-gohttpの依存パッケージをしようと思って色々触っていたら以下のようなWARNINGが出てきた。 2020/05/24 11:36:51 WARNING: Deprecated use of &amp;#39;go_package&amp;#39; option</description>
     </item>
     <item>
       <title>集約におけるトランザクションのドメイン的関心と技術的関心</title>
       <link>https://nametake.github.io/posts/2020/04/30/ddd-aggregate/</link>
       <pubDate>Thu, 30 Apr 2020 00:00:00 +0900</pubDate>
       <guid>https://nametake.github.io/posts/2020/04/30/ddd-aggregate/</guid>
-      <description>集約のトランザクション Link to heading DDDの集約について学ぶと、必ず「集約はトランザクション境界である」という説明がされています。 整合性の境界の論理</description>
+      <description>集約のトランザクション Link to heading DDDの集約について学ぶと、必ず「集約はトランザクション境界である」という説明がされている。 整合性の境界の論理的</description>
     </item>
     <item>
       <title>golangci-lint-langserverを作った話</title>
       <link>https://nametake.github.io/posts/2020/03/08/golangci-lint-langserver/</link>
       <pubDate>Sun, 08 Mar 2020 00:00:00 +0900</pubDate>
       <guid>https://nametake.github.io/posts/2020/03/08/golangci-lint-langserver/</guid>
-      <description>最近VimのLinterのプラグインをaleからすべてlanguage serverに移行しました。 殆どのCLIツールはdiagnostic-</description>
+      <description>最近VimのLinterのプラグインをaleからすべてlanguage serverに移行した。 殆どのCLIツールはdiagnostic-la</description>
     </item>
     <item>
       <title>aleとneoformatからdiagnostic-languageserverに移行した</title>
@@ -118,28 +118,28 @@
       <link>https://nametake.github.io/posts/2019/12/31/go-no-generics/</link>
       <pubDate>Tue, 31 Dec 2019 00:00:00 +0900</pubDate>
       <guid>https://nametake.github.io/posts/2019/12/31/go-no-generics/</guid>
-      <description>Go言語にはジェネリクスがありません。 他言語から入ってきた方はかなりこの部分に戸惑うことが多いようです。 そこで、そういった方々になぜジェネリ</description>
+      <description>Go言語にはジェネリクスがない。 他言語から入ってきた方はかなりこの部分に戸惑うことが多い。 そこで、そういった方々になぜジェネリクスがないのか</description>
     </item>
     <item>
       <title>Hooks対応したreact-tableをTypeScriptで使う</title>
       <link>https://nametake.github.io/posts/2019/12/17/react-table/</link>
       <pubDate>Tue, 17 Dec 2019 00:00:00 +0000</pubDate>
       <guid>https://nametake.github.io/posts/2019/12/17/react-table/</guid>
-      <description>この記事はReact Advent Calendar 2019の記事です。 みなさまテーブルComponentは作成していますか? サービスにもよるとは思いますが、業務系のサ</description>
+      <description>この記事はReact Advent Calendar 2019の記事。 サービスにもよるとは思うが、業務系のサービスではテーブルUIはほぼ確実に登場する。 しかも、よく登場す</description>
     </item>
     <item>
       <title>Goの関数内で呼び出される関数をインターセプトする方法</title>
       <link>https://nametake.github.io/posts/2019/12/09/go-func-intercept/</link>
       <pubDate>Mon, 09 Dec 2019 00:05:29 +0900</pubDate>
       <guid>https://nametake.github.io/posts/2019/12/09/go-func-intercept/</guid>
-      <description>この記事はGo2 Advent Calendar 2019の記事です。 自分はprotoc-gen-gohttpというプラグインを作っているのですが、先日grpc.Unar</description>
+      <description>この記事はGo2 Advent Calendar 2019の記事。 自分はprotoc-gen-gohttpというプラグインを作っているが、先日grpc.UnaryServ</description>
     </item>
     <item>
       <title>Go1.13のerrorsにWrapの機能が入ったので勉強がてらまとめる</title>
       <link>https://nametake.github.io/posts/2019/10/30/unwrap-interface/</link>
       <pubDate>Wed, 30 Oct 2019 00:52:57 +0900</pubDate>
       <guid>https://nametake.github.io/posts/2019/10/30/unwrap-interface/</guid>
-      <description>Go1.13からerrorsに色々機能が入りました(The Go Blog)。 最近は新しいGoのことをインプットできていなかったので、リハビリがて</description>
+      <description>Go1.13からerrorsに色々機能が入った(The Go Blog)。 最近は新しいGoのことをインプットできていなかったので、リハビリがてらs</description>
     </item>
     <item>
       <title>TypeScirptのプロジェクトにエイリアスを設定して絶対パスでimportするメモ</title>
@@ -181,14 +181,14 @@
       <link>https://nametake.github.io/posts/2019/07/25/change-vim-plugins/</link>
       <pubDate>Thu, 25 Jul 2019 00:51:43 +0900</pubDate>
       <guid>https://nametake.github.io/posts/2019/07/25/change-vim-plugins/</guid>
-      <description>ちまちまとdotfilesを育ててきたんですが、Goの補完が動かなくなっていたり中途半端にLSP対応しようとした痕跡だけ残っていたりしたので</description>
+      <description>ちまちまとdotfilesを育ててきたが、Goの補完が動かなくなっていたり中途半端にLSP対応しようとした痕跡だけ残っていたりしたので、断捨</description>
     </item>
     <item>
       <title>zshのPATHの順番をfish shellに引き継ぐ</title>
       <link>https://nametake.github.io/posts/2019/07/22/pass-zsh-path-to-fish/</link>
       <pubDate>Mon, 22 Jul 2019 01:34:18 +0900</pubDate>
       <guid>https://nametake.github.io/posts/2019/07/22/pass-zsh-path-to-fish/</guid>
-      <description>自分はメインのターミナル環境をfishにしています。 特に設定を細かくしなくてもサクサク動いてくれるので非常に助かっているんですが、POSIX</description>
+      <description>自分はメインのターミナル環境をfishにしている。 特に設定を細かくしなくてもサクサク動いてくれるので非常に助かっているが、POSIX準拠では</description>
     </item>
     <item>
       <title>FormikとYupを使った動的フォームのバリデーション</title>
@@ -202,7 +202,7 @@
       <link>https://nametake.github.io/posts/2019/05/29/inline-center/</link>
       <pubDate>Wed, 29 May 2019 15:47:35 +0900</pubDate>
       <guid>https://nametake.github.io/posts/2019/05/29/inline-center/</guid>
-      <description>ラジオボタンとラベルの高さを合わせるCSS定義を何回も調べている気がするのでメモ。 たぶん下の書き方が一番モダンだと思います。 display: inline-flex; align-items: center;</description>
+      <description>ラジオボタンとラベルの高さを合わせるCSS定義を何回も調べている気がするのでメモ。 たぶん下の書き方が一番モダンだと思われる。 display: inline-flex; align-items: center;</description>
     </item>
     <item>
       <title>Type SafeなReducerの書き方</title>
@@ -223,35 +223,35 @@
       <link>https://nametake.github.io/posts/2018/12/19/created-labelerr-and-suberr/</link>
       <pubDate>Wed, 19 Dec 2018 11:37:17 +0900</pubDate>
       <guid>https://nametake.github.io/posts/2018/12/19/created-labelerr-and-suberr/</guid>
-      <description>golang.tokyo #20のLT大会で、labelerrとsuberrを作った話をしてきました。 「Goのerrorは1種類というのは綺麗だとは思うけど、実運用</description>
+      <description>golang.tokyo #20のLT大会で、labelerrとsuberrを作った話をしてきた。 「Goのerrorは1種類というのは綺麗だとは思うけど、実運用上e</description>
     </item>
     <item>
       <title>Goでのprotocプラグインのテストの書き方</title>
       <link>https://nametake.github.io/posts/2018/12/14/protoc-plugin-test/</link>
       <pubDate>Fri, 14 Dec 2018 00:00:00 +0900</pubDate>
       <guid>https://nametake.github.io/posts/2018/12/14/protoc-plugin-test/</guid>
-      <description>最近周りでProtocol Buffersの話題をよく聞くようになりました。 ということはそろそろ人類はprotocのプラグインを書きたくなる時</description>
+      <description>最近周りでProtocol Buffersの話題をよく聞くようになった。 ということは、そろそろ人類はprotocのプラグインを書きたくなる時代</description>
     </item>
     <item>
       <title>TypeScript&#43;React&#43;Reduxチュートリアル</title>
       <link>https://nametake.github.io/posts/2018/12/05/typescript-react-redux-tutorial/</link>
       <pubDate>Wed, 05 Dec 2018 11:08:00 +0900</pubDate>
       <guid>https://nametake.github.io/posts/2018/12/05/typescript-react-redux-tutorial/</guid>
-      <description>普段は Go でサーバサイドのコードを書いているのですが、TypeScript+React+Redux を勉強する機会がありました。 その際、巷に溢れ</description>
+      <description>普段は Go でサーバサイドのコードを書いているが、TypeScript+React+Redux を勉強する機会があった。 その際、巷のチュートリアル</description>
     </item>
     <item>
       <title>VimConf2018感想</title>
       <link>https://nametake.github.io/posts/2018/11/24/vimconf2018/</link>
       <pubDate>Sat, 24 Nov 2018 10:15:34 +0900</pubDate>
       <guid>https://nametake.github.io/posts/2018/11/24/vimconf2018/</guid>
-      <description>11月24日にあったVimConf2018に行ったので参加ブログを書きます。 Keynote - What is the next feature?(o) Link to heading スライド mattnさんの発表。 Keynote - Vim: From hjkl to a</description>
+      <description>11月24日にあったVimConf2018へ行ったので参加ブログ。 Keynote - What is the next feature?(o) Link to heading スライド mattnさんの発表。 Keynote - Vim: From hjkl to a platform for plugins Link to</description>
     </item>
     <item>
       <title>Protocol Buffersのserviceをnet/httpに対応させるprotoc-gen-gohttpを作った</title>
       <link>https://nametake.github.io/posts/2018/11/21/protoc-gen-gohttp/</link>
       <pubDate>Wed, 21 Nov 2018 16:32:07 +0900</pubDate>
       <guid>https://nametake.github.io/posts/2018/11/21/protoc-gen-gohttp/</guid>
-      <description>nametake/protoc-gen-gohttpというprotocのプラグインを作ったのでその話です。 Protocol Buffersとは Link to heading Protocol Buf</description>
+      <description>nametake/protoc-gen-gohttpというprotocのプラグインを作ったのでその話。 Protocol Buffersとは Link to heading Protocol Buffe</description>
     </item>
     <item>
       <title>GCPの認証済みのhttp.Clientの取得方法</title>
@@ -265,14 +265,14 @@
       <link>https://nametake.github.io/posts/2018/10/10/vim-shfmt-neoformat-indent/</link>
       <pubDate>Wed, 10 Oct 2018 11:44:32 +0900</pubDate>
       <guid>https://nametake.github.io/posts/2018/10/10/vim-shfmt-neoformat-indent/</guid>
-      <description>neoformatで使うshfmtはデフォルトだとインデントがスペースなんですが、チームのコーディング規約に合わせてタブ文字にしたかったとき</description>
+      <description>neoformatで使うshfmtはデフォルトだとインデントがスペースだが、チームのコーディング規約に合わせてタブ文字へ変更したかったときに</description>
     </item>
     <item>
       <title>depでprivateリポジトリがupdateできなかったときの解決策</title>
       <link>https://nametake.github.io/posts/2018/09/20/dep-private-repo/</link>
       <pubDate>Thu, 20 Sep 2018 18:47:46 +0900</pubDate>
       <guid>https://nametake.github.io/posts/2018/09/20/dep-private-repo/</guid>
-      <description>Goをアップデートした後、dep updateをしたら以下のようなエラーが発生しました。 grouped write of manifest, lock and vendor: error while writing out vendor tree: failed to write dep tree: failed to export github.com/nametake/private-repo: unable to update repository: remote:</description>
+      <description>Goをアップデートした後、dep updateをしたら以下のようなエラーが発生した。 grouped write of manifest, lock and vendor: error while writing out vendor tree: failed to write dep tree: failed to export github.com/nametake/private-repo: unable to update repository: remote: Repository not</description>
     </item>
     <item>
       <title>hugo&#43;github pagesにブログを移転したメモ</title>

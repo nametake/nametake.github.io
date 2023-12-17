@@ -186,9 +186,9 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h1>
-<p>最近のシステムはその複雑さの上昇に伴い、様々な外部サービスと連携する機会が多くあります。</p>
+<p>最近のシステムはその複雑さの上昇に伴い、様々な外部サービスと連携する機会が多い。</p>
 <!-- textlint-disable ja-technical-writing/ja-no-weak-phrase -->
-<p>その際、ドメインとして外部サービスをどう取り扱うといいのか、という個人的なプラクティスを過去の失敗例も含めて記事にしようと思います。</p>
+<p>その際、ドメインとして外部サービスをどう取り扱うといいのか、という個人的なプラクティスを過去の失敗例も含めて記事にしようと思う。</p>
 <!-- textlint-enable ja-technical-writing/ja-no-weak-phrase -->
 <h2 id="過去の失敗">
   過去の失敗
@@ -197,64 +197,40 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h2>
-<p>昔私が関わっていた仮想通貨の販売所の価格判定ロジックを例にあげます。</p>
-<p>自社の販売所における仮想通貨の価格を決定する仕組みを作っていました。</p>
-<p>複数の外部取引所のAPIから価格情報を取り出してそれらの値を使って自社の販売価格を計算をします。</p>
-<p>販売所の価格の構造体は以下のようにドメイン層に定義していました。</p>
-<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
-<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
-</span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">Tick</span> <span style="color:#66d9ef">struct</span> {
+<p>昔私が関わっていた仮想通貨の販売所の価格判定ロジックを例に挙げてみる。</p>
+<p>自社の販売所における仮想通貨の価格を決定する仕組みを作っていた。</p>
+<p>複数の外部取引所のAPIから価格情報を取り出してそれらの値を使って自社の販売価格を計算をする必要がある。</p>
+<p>販売所の価格の構造体は以下のようにドメイン層に定義していた。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">Tick</span> <span style="color:#66d9ef">struct</span> {
 </span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">Amount</span> <span style="color:#66d9ef">int</span>
 </span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">Market</span> <span style="color:#a6e22e">Currency</span>
 </span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">Base</span>   <span style="color:#a6e22e">Currency</span>
 </span></span><span style="display:flex;"><span>}
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>また、それらの<code>Tick</code> を取り出すために各取引所のサービスごとに以下のようにinterfaceを定義していました。</p>
-<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
-<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
-</span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">FooService</span> <span style="color:#66d9ef">interface</span> {
+</span></span></code></pre></div><p>また、それらの<code>Tick</code> を取り出すために各取引所のサービスごとに以下のようにinterfaceを定義していた。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">FooService</span> <span style="color:#66d9ef">interface</span> {
 </span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">GetTick</span>() (<span style="color:#f92672">*</span><span style="color:#a6e22e">Tick</span>, <span style="color:#66d9ef">error</span>)
 </span></span><span style="display:flex;"><span>}
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">BarService</span> <span style="color:#66d9ef">interface</span> {
 </span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">GetTick</span>() (<span style="color:#f92672">*</span><span style="color:#a6e22e">Tick</span>, <span style="color:#66d9ef">error</span>)
 </span></span><span style="display:flex;"><span>}
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>FooやBarは取引所の名前だと思ってください。</p>
-<p>これらもドメイン層に定義しています。</p>
-<p>また、上記interfaceを満たす実装はインフラストラクチャ層等で定義してDIするようにしています。</p>
+</span></span></code></pre></div><p>FooやBarは取引所の名前だと想定してください。</p>
+<p>これらもドメイン層に定義している。</p>
+<p>また、上記interfaceを満たす実装はインフラストラクチャ層等で定義してDIするようにしている。</p>
 <!-- textlint-disable ja-technical-writing/ja-no-weak-phrase -->
-<p>さて、勘の良い方はもうお気づきかもしれませんが上記interfaceの定義が失敗です。</p>
+<p>さて、勘の良い方はもうお気づきかもしれませんが上記interfaceの定義が失敗になっている。</p>
 <!-- textlint-enable ja-technical-writing/ja-no-weak-phrase -->
-<p>一見、 <code>Tick</code> を取り出せるinterfaceをサービス分定義したことで問題なく動くように見えます。</p>
-<p>しかし、 <code>GetTick</code> からいきなり <code>Tick</code> 取り出そうとしているため、「外部サービスの値を使って <code>Tick</code> を計算する」というロジックがインフラストラクチャ層に流出するという問題が発生してしまいました。</p>
+<p>一見、 <code>Tick</code> を取り出せるinterfaceをサービス分定義したことで問題なく動くように見える。</p>
+<p>しかし、 <code>GetTick</code> からいきなり <code>Tick</code> 取り出そうとしているため、「外部サービスの値を使って <code>Tick</code> を計算する」というロジックがインフラストラクチャ層に流出するという問題が発生してしまった。</p>
 <p>具体的な例をあげます。</p>
-<p>取引所Fooは以下のようなResponseを返すAPIを提供していました。</p>
+<p>取引所Fooは以下のようなResponseを返すAPIを提供していた。</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>{
 </span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;currentTick&#34;</span>: <span style="color:#e6db74">&#34;1000000&#34;</span>,
 </span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;market&#34;</span>: <span style="color:#e6db74">&#34;btc-jpy&#34;</span>
 </span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><p>上記の構造を <code>Tick</code> に割り当てるのは難しくありません。</p>
-<p><code>currentTick</code> をそのまま <code>Amount</code> に使い、 <code>market</code> の文字列を定義を分解して <code>Market</code> と <code>Base</code> に割り当てれば良さそうです。</p>
-<p>しかし取引所Barは以下のような取引の板情報だけしか返さないAPIの設計になっていました。</p>
+</span></span></code></pre></div><p>上記の構造を <code>Tick</code> に割り当てるのは難しくない。</p>
+<p><code>currentTick</code> をそのまま <code>Amount</code> に使い、 <code>market</code> の文字列を定義を分解して <code>Market</code> と <code>Base</code> に割り当てれば良さそう。</p>
+<p>しかし取引所Barは以下のような取引の板情報だけしか返さないAPIの設計になっていた。</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>{
 </span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;asks&#34;</span>: [
 </span></span><span style="display:flex;"><span>    {
@@ -277,10 +253,10 @@
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>  ]
 </span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><p>ここから価格を決定するには <code>asks</code> と <code>bids</code> の情報を利用して決定する必要があります。</p>
-<p>しかし、上記の <code>BarService</code> interfaceに合わせて実装するとその価格を決定するロジックをどこに書くかが問題になります。</p>
-<p>板情報から加重平均で価格決定をしたりする場合は完全にドメインロジックですが、interfaceに合わせようとするとそれをインフラストラクチャ層に書かなくてはいけなくなり、ドメイン知識が流出してしまいます。</p>
-<p>結果、ドメイン層のテストではビジネスロジックが正しいのかを担保するのかが難しくなり、インフラストラクチャ層でもドメインのロジックを気にしながらテストを書くことになってしまいました。</p>
+</span></span></code></pre></div><p>ここから価格を決定するには <code>asks</code> と <code>bids</code> の情報を利用して決定する必要がある。</p>
+<p>しかし、上記の <code>BarService</code> interfaceに合わせて実装するとその価格を決定するロジックをどこに書くかが問題になる。</p>
+<p>板情報から加重平均で価格決定をしたりする場合は完全にドメインロジックだが、interfaceに合わせようとするとそれをインフラストラクチャ層に書かなくてはいけなくなり、ドメイン知識が流出してしまう。</p>
+<p>結果、ドメイン層のテストではビジネスロジックが正しいのかを担保するのかが難しくなり、インフラストラクチャ層でもドメインのロジックを気にしながらテストを書くことにしまった。</p>
 <h2 id="どうすればよかったか">
   どうすればよかったか
   <a class="heading-link" href="#%e3%81%a9%e3%81%86%e3%81%99%e3%82%8c%e3%81%b0%e3%82%88%e3%81%8b%e3%81%a3%e3%81%9f%e3%81%8b">
@@ -288,45 +264,8 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h2>
-<p>以下のようにFoo取引所とBar取引所が提供している構造をそのままドメイン層に定義し、それらを取得できるinterfaceを定義します。</p>
-<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
-<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">25
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">26
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">27
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">28
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">29
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">30
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">31
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">32
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">33
-</span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">FooService</span> <span style="color:#66d9ef">interface</span> {
+<p>以下のようにFoo取引所とBar取引所が提供している構造をそのままドメイン層に定義し、それらを取得できるinterfaceを定義する。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">FooService</span> <span style="color:#66d9ef">interface</span> {
 </span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">GetFooTick</span>() (<span style="color:#f92672">*</span><span style="color:#a6e22e">FooTick</span>, <span style="color:#66d9ef">error</span>)
 </span></span><span style="display:flex;"><span>}
 </span></span><span style="display:flex;"><span>
@@ -359,9 +298,7 @@
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">GetTicker</span> <span style="color:#66d9ef">interface</span> {
 </span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">GetTick</span>() (<span style="color:#f92672">*</span><span style="color:#a6e22e">Tick</span>, <span style="color:#66d9ef">error</span>)
 </span></span><span style="display:flex;"><span>}
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>また、FooTickやBarTickがGetTickを実装することで、その計算ロジックをドメイン層に寄せてオンメモリのテストを書くことが可能にしています。</p>
+</span></span></code></pre></div><p>また、FooTickやBarTickがGetTickを実装することで、その計算ロジックをドメイン層に寄せてオンメモリのテストを書くことが可能にしている。</p>
 <h2 id="失敗から得たこと">
   失敗から得たこと
   <a class="heading-link" href="#%e5%a4%b1%e6%95%97%e3%81%8b%e3%82%89%e5%be%97%e3%81%9f%e3%81%93%e3%81%a8">
@@ -369,34 +306,25 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h2>
-<p>結局の所「ビジネスの要件(ドメイン)をコードに落とし込む」というDDDの基本中の基本を抑えましょうということでした。</p>
+<p>結局の所「ビジネスの要件(ドメイン)をコードに落とし込む」というDDDの基本中の基本を抑えましょうということだった。</p>
 <!-- textlint-disable ja-technical-writing/ja-no-weak-phrase -->
-<p>ですが、エンジニアは抽象と具象の間を行き来する必要もあるため、意外とハマりがちな落とし穴かなとも思います(普段DBの抽象化をしているので余計に)。</p>
+<p>ですが、エンジニアは抽象と具象の間を行き来する必要もあるため、意外とハマりがちな落とし穴かなとも思う(普段DBの抽象化をしているので余計に)。</p>
 <!-- textlint-enable ja-technical-writing/ja-no-weak-phrase -->
-<p>例えば、ビジネス上「クラウドストレージにファイルを保存する」ということを表現する必要があれば以下のようなinterfaceを定義する人は多いでしょう。</p>
-<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
-<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
-</span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">CloudStorageService</span> <span style="color:#66d9ef">interface</span> {
+<p>例えば、ビジネス上「クラウドストレージにファイルを保存する」ということを表現する必要があれば以下のようなinterfaceを定義する人は多い。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">CloudStorageService</span> <span style="color:#66d9ef">interface</span> {
 </span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">Save</span>(<span style="color:#f92672">*</span><span style="color:#a6e22e">os</span>.<span style="color:#a6e22e">File</span>) <span style="color:#66d9ef">error</span>
 </span></span><span style="display:flex;"><span>}
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>上記のように定義しておけば、S3でもGCSでもクラウドストレージは技術者の自由にできます。</p>
+</span></span></code></pre></div><p>上記のように定義しておけば、S3でもGCSでもクラウドストレージは技術者の自由にできる。</p>
 <!-- textlint-disable ja-technical-writing/ja-no-weak-phrase -->
-<p>ですが、ビジネス上「S3に保存をする」ということが非常に重要な場合、上記の定義では十分ではなく <code>S3Service</code> のような定義をする必要があるかもしれません。</p>
+<p>しかし、ビジネス上「S3に保存をする」ということが非常に重要な場合、上記の定義では十分ではなく <code>S3Service</code> のような定義をする必要が出てくる。</p>
 <!-- textlint-enable ja-technical-writing/ja-no-weak-phrase -->
-<p>「S3に保存をする」だけなら問題なさそうですが、ビジネスの展開として「S3とGCSのどちらかを選べるようにする」となった時点で、上記のinterfaceではビジネス要件の表現がコード上で難しくなっていく可能性があります。</p>
-<p>自分の失敗に関しても全く同じで、ビジネスの要件として「取引所Fooと取引所Barから価格を決定する」というものだったにも関わらず、それらを表現していなかったのが大きな失敗でした。</p>
-<p>これは当時の私が「各取引所からTickを取り出す」という言葉から外と中を勝手に切り分けてinterfaceを定義し、ドメインの境界を勘違いしてしまったのが原因です。</p>
+<p>「S3に保存をする」だけなら問題ないが、ビジネスの展開として「S3とGCSのどちらかを選べるようにする」となった時点で、上記のinterfaceではビジネス要件の表現がコード上で難しくなっていく可能性がある。</p>
+<p>自分の失敗に関しても全く同じで、ビジネスの要件として「取引所Fooと取引所Barから価格を決定する」というものだったにも関わらず、それらを表現していなかったのが大きな失敗だった。</p>
+<p>これは当時の私が「各取引所からTickを取り出す」という言葉から外と中を勝手に切り分けてinterfaceを定義し、ドメインの境界を勘違いしてしまったのが原因。</p>
 <!-- textlint-disable ja-technical-writing/ja-no-weak-phrase -->
-<p>外部サービスとシステムの連携はビジネス要件として決まっていることが多いと思います。</p>
+<p>外部サービスとシステムの連携はビジネス要件として決まっていることが多いと思う。</p>
 <!-- textlint-enable ja-technical-writing/ja-no-weak-phrase -->
-<p>その場合それらの単語を勝手に抽象化せず、きちんとドメイン層に必要な情報を定義していくことでビジネスサイドとの認識差を減らすことができ、DDDとしての旨味を大きく得られるのではないかなと思っています。</p>
+<p>その場合それらの単語を勝手に抽象化せず、きちんとドメイン層に必要な情報を定義していくことでビジネスサイドとの認識差を減らすことができ、DDDとしての旨味を大きく得られるのではないかなと思った。</p>
 
       </div>
 

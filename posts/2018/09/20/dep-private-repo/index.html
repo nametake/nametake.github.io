@@ -13,14 +13,14 @@
 
 
 <meta name="author" content="nametake">
-<meta name="description" content="Goをアップデートした後、dep updateをしたら以下のようなエラーが発生しました。 grouped write of manifest, lock and vendor: error while writing out vendor tree: failed to write dep tree: failed to export github.com/nametake/private-repo: unable to update repository: remote:">
+<meta name="description" content="Goをアップデートした後、dep updateをしたら以下のようなエラーが発生した。 grouped write of manifest, lock and vendor: error while writing out vendor tree: failed to write dep tree: failed to export github.com/nametake/private-repo: unable to update repository: remote: Repository not">
 <meta name="keywords" content="blog,developer,personal">
 
 <meta name="twitter:card" content="summary"/><meta name="twitter:title" content="depでprivateリポジトリがupdateできなかったときの解決策"/>
-<meta name="twitter:description" content="Goをアップデートした後、dep updateをしたら以下のようなエラーが発生しました。 grouped write of manifest, lock and vendor: error while writing out vendor tree: failed to write dep tree: failed to export github.com/nametake/private-repo: unable to update repository: remote:"/>
+<meta name="twitter:description" content="Goをアップデートした後、dep updateをしたら以下のようなエラーが発生した。 grouped write of manifest, lock and vendor: error while writing out vendor tree: failed to write dep tree: failed to export github.com/nametake/private-repo: unable to update repository: remote: Repository not"/>
 
 <meta property="og:title" content="depでprivateリポジトリがupdateできなかったときの解決策" />
-<meta property="og:description" content="Goをアップデートした後、dep updateをしたら以下のようなエラーが発生しました。 grouped write of manifest, lock and vendor: error while writing out vendor tree: failed to write dep tree: failed to export github.com/nametake/private-repo: unable to update repository: remote:" />
+<meta property="og:description" content="Goをアップデートした後、dep updateをしたら以下のようなエラーが発生した。 grouped write of manifest, lock and vendor: error while writing out vendor tree: failed to write dep tree: failed to export github.com/nametake/private-repo: unable to update repository: remote: Repository not" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://nametake.github.io/posts/2018/09/20/dep-private-repo/" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2018-09-20T18:47:46+09:00" />
@@ -183,13 +183,13 @@
 
       <div class="post-content">
         
-        <p>Goをアップデートした後、<code>dep update</code>をしたら以下のようなエラーが発生しました。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-gdscript3" data-lang="gdscript3"><span style="display:flex;"><span>grouped write of manifest, lock <span style="color:#f92672">and</span> vendor: error <span style="color:#66d9ef">while</span> writing out vendor tree: failed to write dep tree: failed to <span style="color:#66d9ef">export</span> github<span style="color:#f92672">.</span>com<span style="color:#f92672">/</span>nametake<span style="color:#f92672">/</span>private<span style="color:#f92672">-</span>repo: unable to update repository: remote: Repository <span style="color:#f92672">not</span> found<span style="color:#f92672">.</span>
-</span></span><span style="display:flex;"><span>fatal: repository <span style="color:#e6db74">&#39;https://github.com/nametake/private-repo/&#39;</span> <span style="color:#f92672">not</span> found
-</span></span><span style="display:flex;"><span>: command failed: [git fetch <span style="color:#f92672">--</span>tags <span style="color:#f92672">--</span>prune origin]: exit status <span style="color:#ae81ff">128</span>
-</span></span><span style="display:flex;"><span>make: <span style="color:#f92672">***</span> [dep] Error <span style="color:#ae81ff">1</span>
-</span></span></code></pre></div><p>原因はprivateリポジトリをhttps経由でcloneしようとしたことだったみたいです。</p>
-<p>以下のconfig設定をして、githubではhttpsで始まるURLをgitのURLを使うように書き換える設定を追加したら治りました。</p>
+        <p>Goをアップデートした後、<code>dep update</code>をしたら以下のようなエラーが発生した。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-console" data-lang="console"><span style="display:flex;"><span>grouped write of manifest, lock and vendor: error while writing out vendor tree: failed to write dep tree: failed to export github.com/nametake/private-repo: unable to update repository: remote: Repository not found.
+</span></span><span style="display:flex;"><span>fatal: repository &#39;https://github.com/nametake/private-repo/&#39; not found
+</span></span><span style="display:flex;"><span>: command failed: [git fetch --tags --prune origin]: exit status 128
+</span></span><span style="display:flex;"><span>make: *** [dep] Error 1
+</span></span></code></pre></div><p>原因はprivateリポジトリをhttps経由でcloneしようとしたことだった。</p>
+<p>以下のconfig設定をして、githubではhttpsで始まるURLをgitのURLを使うように書き換える設定を追加したら直った。</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>[url &#34;git@github.com:&#34;]
 </span></span><span style="display:flex;"><span>  insteadOf = https://github.com/
 </span></span></code></pre></div><p><a href="https://git-scm.com/docs/git-config#git-config-urlltbasegtinsteadOf"  class="external-link" target="_blank" rel="noopener">https://git-scm.com/docs/git-config#git-config-urlltbasegtinsteadOf</a></p>

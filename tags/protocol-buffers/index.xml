@@ -13,7 +13,7 @@
       <link>https://nametake.github.io/posts/2020/05/24/protobuf-go-package-semicolon/</link>
       <pubDate>Sun, 24 May 2020 00:00:00 +0900</pubDate>
       <guid>https://nametake.github.io/posts/2020/05/24/protobuf-go-package-semicolon/</guid>
-      <description>先日protoc-gen-gohttpの依存パッケージをしようと思って色々触っていたら以下のようなWARNINGが出てきました。 2020/05/24 11:36:51 WARNING: Deprecated use of</description>
+      <description>先日protoc-gen-gohttpの依存パッケージをしようと思って色々触っていたら以下のようなWARNINGが出てきた。 2020/05/24 11:36:51 WARNING: Deprecated use of &amp;#39;go_package&amp;#39; option</description>
     </item>
     <item>
       <title>protoc-gen-gohttpをHttpRule Optionに対応させた</title>
@@ -34,14 +34,14 @@
       <link>https://nametake.github.io/posts/2018/12/14/protoc-plugin-test/</link>
       <pubDate>Fri, 14 Dec 2018 00:00:00 +0900</pubDate>
       <guid>https://nametake.github.io/posts/2018/12/14/protoc-plugin-test/</guid>
-      <description>最近周りでProtocol Buffersの話題をよく聞くようになりました。 ということはそろそろ人類はprotocのプラグインを書きたくなる時</description>
+      <description>最近周りでProtocol Buffersの話題をよく聞くようになった。 ということは、そろそろ人類はprotocのプラグインを書きたくなる時代</description>
     </item>
     <item>
       <title>Protocol Buffersのserviceをnet/httpに対応させるprotoc-gen-gohttpを作った</title>
       <link>https://nametake.github.io/posts/2018/11/21/protoc-gen-gohttp/</link>
       <pubDate>Wed, 21 Nov 2018 16:32:07 +0900</pubDate>
       <guid>https://nametake.github.io/posts/2018/11/21/protoc-gen-gohttp/</guid>
-      <description>nametake/protoc-gen-gohttpというprotocのプラグインを作ったのでその話です。 Protocol Buffersとは Link to heading Protocol Buf</description>
+      <description>nametake/protoc-gen-gohttpというprotocのプラグインを作ったのでその話。 Protocol Buffersとは Link to heading Protocol Buffe</description>
     </item>
   </channel>
 </rss>

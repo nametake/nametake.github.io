@@ -13,14 +13,14 @@
 
 
 <meta name="author" content="nametake">
-<meta name="description" content="この記事はReact Advent Calendar 2019の記事です。 みなさまテーブルComponentは作成していますか? サービスにもよるとは思いますが、業務系のサ">
+<meta name="description" content="この記事はReact Advent Calendar 2019の記事。 サービスにもよるとは思うが、業務系のサービスではテーブルUIはほぼ確実に登場する。 しかも、よく登場す">
 <meta name="keywords" content="blog,developer,personal">
 
 <meta name="twitter:card" content="summary"/><meta name="twitter:title" content="Hooks対応したreact-tableをTypeScriptで使う"/>
-<meta name="twitter:description" content="この記事はReact Advent Calendar 2019の記事です。 みなさまテーブルComponentは作成していますか? サービスにもよるとは思いますが、業務系のサ"/>
+<meta name="twitter:description" content="この記事はReact Advent Calendar 2019の記事。 サービスにもよるとは思うが、業務系のサービスではテーブルUIはほぼ確実に登場する。 しかも、よく登場す"/>
 
 <meta property="og:title" content="Hooks対応したreact-tableをTypeScriptで使う" />
-<meta property="og:description" content="この記事はReact Advent Calendar 2019の記事です。 みなさまテーブルComponentは作成していますか? サービスにもよるとは思いますが、業務系のサ" />
+<meta property="og:description" content="この記事はReact Advent Calendar 2019の記事。 サービスにもよるとは思うが、業務系のサービスではテーブルUIはほぼ確実に登場する。 しかも、よく登場す" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://nametake.github.io/posts/2019/12/17/react-table/" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2019-12-17T00:00:00+00:00" />
@@ -163,7 +163,7 @@
             </span>
             <span class="reading-time">
               <i class="fa fa-clock-o" aria-hidden="true"></i>
-              5-minute read
+              4-minute read
             </span>
           </div>
           
@@ -179,34 +179,38 @@
 
       <div class="post-content">
         
-        <p>この記事は<a href="https://qiita.com/advent-calendar/2019/react"  class="external-link" target="_blank" rel="noopener">React Advent Calendar 2019</a>の記事です。</p>
-<p>みなさまテーブルComponentは作成していますか?</p>
-<p>サービスにもよるとは思いますが、業務系のサービスではほぼ確実に登場するUIです。</p>
-<p>しかも、よく登場する上にたくさんの機能を求められるUIでもあります。パッと思いつく限りでも、ソート、フィルター、検索、ページネーション等多岐にわたります。</p>
-<p>これらの機能はUIと分離して1から作るは大変です。あり物のUIライブラリのテーブルComponentにオリジナルのスタイルを当てるという手もありますが、それだとUIライブラリの仕様に引っ張られたり、UIとロジックの分離がうまくできなかったりすることがあります。</p>
-<p>そこで、今回は「テーブルで必要になる機能」だけをHooksとし、UIとロジックを完全に分離できるる<a href="https://github.com/tannerlinsley/react-table"  class="external-link" target="_blank" rel="noopener">react-table v7</a>を紹介しようと思います。</p>
-<h1 id="注意点">
+        <p>この記事は<a href="https://qiita.com/advent-calendar/2019/react"  class="external-link" target="_blank" rel="noopener">React Advent Calendar 2019</a>の記事。</p>
+<!-- textlint-disable ja-technical-writing/ja-no-weak-phrase -->
+<p>サービスにもよるとは思うが、業務系のサービスではテーブルUIはほぼ確実に登場する。</p>
+<!-- textlint-enable -->
+<p>しかも、よく登場する上にたくさんの機能を求められるUIでもある。
+パッと思いつく限りでも、ソート、フィルター、検索、ページネーション等多岐にわたる。</p>
+<p>あり物のUIライブラリのテーブルComponentにオリジナルのスタイルを当てるという手もあるが、それだとUIライブラリの仕様に引っ張られたり、UIとロジックの分離がうまくできなかったりすることがある。</p>
+<p>そこで、今回は「テーブルで必要になる機能」だけをHooksとし、UIとロジックを完全に分離できる<a href="https://github.com/tannerlinsley/react-table"  class="external-link" target="_blank" rel="noopener">react-table v7</a>を紹介してみる。</p>
+<h2 id="注意点">
   注意点
   <a class="heading-link" href="#%e6%b3%a8%e6%84%8f%e7%82%b9">
     <i class="fa fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
-</h1>
-<p>この記事執筆時点ではreact-table自体はRCになっていますが、react-tableの型定義はまだマージされていません。</p>
+</h2>
+<p>この記事執筆時点ではreact-table自体はRCになっているが、react-tableの型定義はまだマージされていない。</p>
 <p><a href="https://github.com/DefinitelyTyped/DefinitelyTyped/pull/40816"  class="external-link" target="_blank" rel="noopener">https://github.com/DefinitelyTyped/DefinitelyTyped/pull/40816</a></p>
-<p>また、議論の末、現段階最新バージョンのrc.9ではreact-table側で型定義を管理しないことになっています。</p>
-<p>そのため、この記事の紹介ではTypeScriptを使って紹介をする都合上、以下のコマンドで入るバージョンを使用して紹介をします。</p>
+<p>また、議論の末、現段階最新バージョンのrc.9ではreact-table側で型定義を管理しないことになっている。</p>
+<p>そのため、この記事の紹介ではTypeScriptを使って紹介をする都合上、以下のコマンドで入るバージョンを使用して紹介する。</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-console" data-lang="console"><span style="display:flex;"><span>yarn add react-table@7.0.0-beta.23
-</span></span></code></pre></div><p>大きく使い勝手が変わるようなことはないと思いますが、react-tableは開発が活発なため、この記事の内容が陳腐化している可能性があります。</p>
-<p>本番で使う際は必ず公式のドキュメントを参照してください。</p>
-<h1 id="シンプルなテーブル">
+</span></span></code></pre></div><!-- textlint-disable ja-technical-writing/ja-no-weak-phrase -->
+<p>大きく使い勝手が変わるようなことはないと思うが、react-tableは開発が活発なため、この記事の内容が陳腐化している可能性がある。</p>
+<!-- textlint-enable -->
+<p>本番で使う際は必ず公式のドキュメントを参照するように。</p>
+<h2 id="シンプルなテーブル">
   シンプルなテーブル
   <a class="heading-link" href="#%e3%82%b7%e3%83%b3%e3%83%97%e3%83%ab%e3%81%aa%e3%83%86%e3%83%bc%e3%83%96%e3%83%ab">
     <i class="fa fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
-</h1>
-<p>まずは最もシンプルにテーブルを表示する例です。</p>
+</h2>
+<p>まずは最もシンプルにテーブルを表示する例。</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-tsx" data-lang="tsx"><span style="display:flex;"><span><span style="color:#66d9ef">import</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">as</span> <span style="color:#a6e22e">React</span> <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;react&#39;</span>;
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">render</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;react-dom&#39;</span>;
 </span></span><span style="display:flex;"><span>
@@ -279,7 +283,7 @@
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">rootElement</span> <span style="color:#f92672">=</span> document.<span style="color:#a6e22e">getElementById</span>(<span style="color:#e6db74">&#39;root&#39;</span>);
 </span></span><span style="display:flex;"><span><span style="color:#a6e22e">render</span>(&lt;<span style="color:#f92672">App</span> /&gt;, <span style="color:#a6e22e">rootElement</span>);
-</span></span></code></pre></div><p>キモとなるのは以下の部分です。</p>
+</span></span></code></pre></div><p>キモとなるのは以下の部分。</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-tsx" data-lang="tsx"><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> {
 </span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">getTableProps</span>,
 </span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">getTableBodyProps</span>,
@@ -287,18 +291,18 @@
 </span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">rows</span>,
 </span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">prepareRow</span>
 </span></span><span style="display:flex;"><span>  } <span style="color:#f92672">=</span> <span style="color:#a6e22e">useTable</span>&lt;<span style="color:#f92672">Data</span>&gt;({ <span style="color:#a6e22e">columns</span>, <span style="color:#a6e22e">data</span> });
-</span></span></code></pre></div><p><code>useTable</code> はColumnとそれに対応した情報 <code>data</code> を受け取って <code>TableInstance</code> を返します。</p>
-<p><code>TableInstance</code> はTableを描画するのに必要な情報をすべて持っており、Tableの内部で変更があったときに更新されるようになっています。</p>
-<p>描画に使っているTableタグは、完全にreact-tableからは独立しており、 <code>TableInstance</code> と組み合わせて使うことで完全に描画とロジックを独立させることが可能になっています。</p>
-<h1 id="sortの機能を追加する">
+</span></span></code></pre></div><p><code>useTable</code> はColumnとそれに対応した情報 <code>data</code> を受け取って <code>TableInstance</code> を返す。</p>
+<p><code>TableInstance</code> はTableを描画するのに必要な情報をすべて持っており、Tableの内部で変更があったときに更新される。</p>
+<p>描画に使っているTableタグは、完全にreact-tableからは独立していて、 <code>TableInstance</code> と組み合わせて使うことで完全に描画とロジックを独立させることが可能になっている。</p>
+<h2 id="sortの機能を追加する">
   Sortの機能を追加する
   <a class="heading-link" href="#sort%e3%81%ae%e6%a9%9f%e8%83%bd%e3%82%92%e8%bf%bd%e5%8a%a0%e3%81%99%e3%82%8b">
     <i class="fa fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
-</h1>
-<p>上記例では特に複雑な機能がないため、テーブルを作る上でありがちなSortの機能を追加してみましょう。</p>
-<p>まず、TypeScriptでreact-tableの機能を使うためには以下の型定義ファイル設置する必要があります。</p>
+</h2>
+<p>上記例では特に複雑な機能がないため、テーブルを作る上でありがちなSortの機能を追加してみる。</p>
+<p>まず、TypeScriptでreact-tableの機能を使うためには以下の型定義ファイル設置する必要がある。</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ts" data-lang="ts"><span style="display:flex;"><span><span style="color:#66d9ef">import</span> {
 </span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">UseSortByColumnOptions</span>,
 </span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">UseSortByColumnProps</span>,
@@ -322,9 +326,11 @@
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">export</span> <span style="color:#66d9ef">interface</span> <span style="color:#a6e22e">ColumnInstance</span>&lt;<span style="color:#f92672">D</span> <span style="color:#a6e22e">extends</span> <span style="color:#a6e22e">object </span><span style="color:#f92672">=</span> {}&gt;
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">UseSortByColumnProps</span>&lt;<span style="color:#f92672">D</span>&gt; {}
 </span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><p>これはreact-tableがもともとJSベースで作られており、使いたい機能をプラグインとして使えるようにするという設計だったため、ライブラリ側で型定義を提供することが難しいため必要になっています(<a href="https://github.com/tannerlinsley/react-table/blob/v7.0.0-beta.24/TYPESCRIPT.md"  class="external-link" target="_blank" rel="noopener">参考</a>)。</p>
-<p>この定義自体はコミュニティの型定義が進んだら変わるかもしれないので、公式を参照するようにしてください。</p>
-<p>さて、上記定義ができたら次はSortの実装をします。</p>
+</span></span></code></pre></div><p>これはreact-tableがもともとJSベースで作られており、使いたい機能をプラグインとして使えるようにするという設計だったため、ライブラリ側で型定義を提供することが難しいため必要になっている(<a href="https://github.com/tannerlinsley/react-table/blob/v7.0.0-beta.24/TYPESCRIPT.md"  class="external-link" target="_blank" rel="noopener">参考</a>)。</p>
+<!-- textlint-disable ja-technical-writing/ja-no-weak-phrase -->
+<p>この定義自体はコミュニティの型定義が進んだら変わるかもしれないので、公式を参照するように。</p>
+<!-- textlint-enable -->
+<p>上記定義ができたら次はSortの実装する。</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-tsx" data-lang="tsx"><span style="display:flex;"><span><span style="color:#66d9ef">import</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">as</span> <span style="color:#a6e22e">React</span> <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;react&#39;</span>;
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">render</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;react-dom&#39;</span>;
 </span></span><span style="display:flex;"><span>
@@ -407,7 +413,7 @@
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">rootElement</span> <span style="color:#f92672">=</span> document.<span style="color:#a6e22e">getElementById</span>(<span style="color:#e6db74">&#39;root&#39;</span>);
 </span></span><span style="display:flex;"><span><span style="color:#a6e22e">render</span>(&lt;<span style="color:#f92672">App</span> /&gt;, <span style="color:#a6e22e">rootElement</span>);
-</span></span></code></pre></div><p>差分は以下の2箇所です。</p>
+</span></span></code></pre></div><p>差分は以下の2箇所。</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-tsx" data-lang="tsx"><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> {
 </span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">getTableProps</span>,
 </span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">getTableBodyProps</span>,
@@ -426,10 +432,10 @@
 </span></span><span style="display:flex;"><span>                    <span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;&#39;</span>}{<span style="color:#e6db74">&#39; &#39;</span>}
 </span></span><span style="display:flex;"><span>                &lt;/<span style="color:#f92672">span</span>&gt;
 </span></span><span style="display:flex;"><span>              &lt;/<span style="color:#f92672">th</span>&gt;
-</span></span></code></pre></div><p><code>useTable</code> に <code>useSortBy</code> を渡し、 <code>column</code> に新たに含まれた <code>getSortByToggleProps</code> を使って列をソート可能な状態にして、 <code>isSorted</code> と <code>isSortedDesc</code> を利用して現在のソートの状態を描画するようにしています。</p>
-<p>このパターンでも、基本的にはSortしたかどうかの状態はすべてreact-table側が握り、使う側は <code>useTable</code> の戻り値を利用して描画するだけでいい状態を維持できます。</p>
-<p>フィルターや行選択といった機能も提供されているため、必要に応じて型定義ファイルを更新しつつプラグインを追加することで、自分のプロダクトで必要なテーブルの機能だけを使えるようになります。</p>
-<p>一応、今回作成したコードはいかに設置しておきます。</p>
+</span></span></code></pre></div><p><code>useTable</code> に <code>useSortBy</code> を渡し、 <code>column</code> に含まれた <code>getSortByToggleProps</code> を使って列をソート可能な状態にして、 <code>isSorted</code> と <code>isSortedDesc</code> を利用して現在のソートの状態を描画するようにしている。</p>
+<p>このパターンでも、基本的にはSortしたかどうかの状態はすべてreact-table側が握り、使う側は <code>useTable</code> の戻り値を利用して描画するだけでいい状態を維持できる。</p>
+<p>フィルターや行選択といった機能も提供されているため、必要に応じて型定義ファイルを更新しつつプラグインを追加することで、自分のプロダクトで必要なテーブルの機能だけを使えるようになる。</p>
+<p>一応、今回作成したコードは以下に設置しておく。</p>
 <iframe
  src="https://codesandbox.io/embed/github/nametake/react-table-ts-example/tree/master/?fontsize=14&hidenavigation=1&theme=dark"
  style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;"
@@ -437,15 +443,15 @@
  allow="geolocation; microphone; camera; midi; vr; accelerometer; gyroscope; payment; ambient-light-sensor; encrypted-media; usb"
  sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"
 > </iframe>
-<h1 id="注意点その2">
+<h2 id="注意点その2">
   注意点その2
   <a class="heading-link" href="#%e6%b3%a8%e6%84%8f%e7%82%b9%e3%81%9d%e3%81%ae2">
     <i class="fa fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
-</h1>
-<p>react-tableはHooksとして提供されているため、渡すときにメモ化されていないと正常に動作しない機能があります(自分も2回ほど引っかかった)。</p>
-<p><a href="https://github.com/tannerlinsley/react-table/tree/master/docs/api"  class="external-link" target="_blank" rel="noopener">公式のドキュメント</a>にメモ化が必要なものについてはその旨が書いてあるので、自分が使いたいプラグインの部分は熟読することをおすすめします。</p>
+</h2>
+<p>react-tableはHooksとして提供されているため、渡すときにメモ化されていないと正常に動作しない機能がある(自分も2回ほど引っかかった)。</p>
+<p><a href="https://github.com/tannerlinsley/react-table/tree/master/docs/api"  class="external-link" target="_blank" rel="noopener">公式のドキュメント</a>にメモ化が必要なものについてはその旨が書いてあるので、自分が使いたいプラグインの部分は熟読することをオススメする。</p>
 
       </div>
 

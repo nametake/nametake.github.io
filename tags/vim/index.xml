@@ -20,7 +20,7 @@
       <link>https://nametake.github.io/posts/2020/03/08/golangci-lint-langserver/</link>
       <pubDate>Sun, 08 Mar 2020 00:00:00 +0900</pubDate>
       <guid>https://nametake.github.io/posts/2020/03/08/golangci-lint-langserver/</guid>
-      <description>最近VimのLinterのプラグインをaleからすべてlanguage serverに移行しました。 殆どのCLIツールはdiagnostic-</description>
+      <description>最近VimのLinterのプラグインをaleからすべてlanguage serverに移行した。 殆どのCLIツールはdiagnostic-la</description>
     </item>
     <item>
       <title>aleとneoformatからdiagnostic-languageserverに移行した</title>
@@ -41,7 +41,7 @@
       <link>https://nametake.github.io/posts/2019/07/25/change-vim-plugins/</link>
       <pubDate>Thu, 25 Jul 2019 00:51:43 +0900</pubDate>
       <guid>https://nametake.github.io/posts/2019/07/25/change-vim-plugins/</guid>
-      <description>ちまちまとdotfilesを育ててきたんですが、Goの補完が動かなくなっていたり中途半端にLSP対応しようとした痕跡だけ残っていたりしたので</description>
+      <description>ちまちまとdotfilesを育ててきたが、Goの補完が動かなくなっていたり中途半端にLSP対応しようとした痕跡だけ残っていたりしたので、断捨</description>
     </item>
     <item>
       <title>IntelliJのPopupの候補を展開するKeymap</title>
@@ -55,14 +55,14 @@
       <link>https://nametake.github.io/posts/2018/11/24/vimconf2018/</link>
       <pubDate>Sat, 24 Nov 2018 10:15:34 +0900</pubDate>
       <guid>https://nametake.github.io/posts/2018/11/24/vimconf2018/</guid>
-      <description>11月24日にあったVimConf2018に行ったので参加ブログを書きます。 Keynote - What is the next feature?(o) Link to heading スライド mattnさんの発表。 Keynote - Vim: From hjkl to a</description>
+      <description>11月24日にあったVimConf2018へ行ったので参加ブログ。 Keynote - What is the next feature?(o) Link to heading スライド mattnさんの発表。 Keynote - Vim: From hjkl to a platform for plugins Link to</description>
     </item>
     <item>
       <title>neoformatでshfmtを使うときにインデントをタブ文字にしたい時の設定</title>
       <link>https://nametake.github.io/posts/2018/10/10/vim-shfmt-neoformat-indent/</link>
       <pubDate>Wed, 10 Oct 2018 11:44:32 +0900</pubDate>
       <guid>https://nametake.github.io/posts/2018/10/10/vim-shfmt-neoformat-indent/</guid>
-      <description>neoformatで使うshfmtはデフォルトだとインデントがスペースなんですが、チームのコーディング規約に合わせてタブ文字にしたかったとき</description>
+      <description>neoformatで使うshfmtはデフォルトだとインデントがスペースだが、チームのコーディング規約に合わせてタブ文字へ変更したかったときに</description>
     </item>
   </channel>
 </rss>

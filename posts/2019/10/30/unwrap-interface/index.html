@@ -13,14 +13,14 @@
 
 
 <meta name="author" content="nametake">
-<meta name="description" content="Go1.13からerrorsに色々機能が入りました(The Go Blog)。 最近は新しいGoのことをインプットできていなかったので、リハビリがて">
+<meta name="description" content="Go1.13からerrorsに色々機能が入った(The Go Blog)。 最近は新しいGoのことをインプットできていなかったので、リハビリがてらs">
 <meta name="keywords" content="blog,developer,personal">
 
 <meta name="twitter:card" content="summary"/><meta name="twitter:title" content="Go1.13のerrorsにWrapの機能が入ったので勉強がてらまとめる"/>
-<meta name="twitter:description" content="Go1.13からerrorsに色々機能が入りました(The Go Blog)。 最近は新しいGoのことをインプットできていなかったので、リハビリがて"/>
+<meta name="twitter:description" content="Go1.13からerrorsに色々機能が入った(The Go Blog)。 最近は新しいGoのことをインプットできていなかったので、リハビリがてらs"/>
 
 <meta property="og:title" content="Go1.13のerrorsにWrapの機能が入ったので勉強がてらまとめる" />
-<meta property="og:description" content="Go1.13からerrorsに色々機能が入りました(The Go Blog)。 最近は新しいGoのことをインプットできていなかったので、リハビリがて" />
+<meta property="og:description" content="Go1.13からerrorsに色々機能が入った(The Go Blog)。 最近は新しいGoのことをインプットできていなかったので、リハビリがてらs" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://nametake.github.io/posts/2019/10/30/unwrap-interface/" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2019-10-30T00:52:57+09:00" />
@@ -179,18 +179,18 @@
 
       <div class="post-content">
         
-        <p>Go1.13からerrorsに色々機能が入りました(<a href="https://blog.golang.org/go1.13-errors"  class="external-link" target="_blank" rel="noopener">The Go Blog</a>)。</p>
-<p>最近は新しいGoのことをインプットできていなかったので、リハビリがてら<a href="https://qiita.com/sonatard/items/9c9faf79ac03c20f4ae1"  class="external-link" target="_blank" rel="noopener">sonatardさんのまとめた記事</a>も読みつつ、中の実装を眺めてまとめてみます。</p>
-<h1 id="unwrap-interface">
+        <p>Go1.13からerrorsに色々機能が入った(<a href="https://blog.golang.org/go1.13-errors"  class="external-link" target="_blank" rel="noopener">The Go Blog</a>)。</p>
+<p>最近は新しいGoのことをインプットできていなかったので、リハビリがてら<a href="https://qiita.com/sonatard/items/9c9faf79ac03c20f4ae1"  class="external-link" target="_blank" rel="noopener">sonatardさんのまとめた記事</a>も読みつつ、中の実装を眺めてまとめてみる。</p>
+<h2 id="unwrap-interface">
   Unwrap interface
   <a class="heading-link" href="#unwrap-interface">
     <i class="fa fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
-</h1>
-<p>追加された機能は <code>errors.As</code> や <code>errors.Is</code> のようにいくつかありますが、一番のキモとなる追加機能は <code>errors.Unwrap</code> です。</p>
-<p>似たような機能はデファクトスタンダードとして使われているpkg/errorsの <code>errors.Cause</code> としてありましたが、公式で導入されたことは非常に大きいと思います。</p>
-<p>とりあえず公式ライブラリの中を見にいきましょう。</p>
+</h2>
+<p>追加された機能は <code>errors.As</code> や <code>errors.Is</code> のようにいくつかあるが、一番のキモとなる追加機能は <code>errors.Unwrap</code> になる。</p>
+<p>似たような機能はデファクトスタンダードとして使われているpkg/errorsの <code>errors.Cause</code> としてありましたが、公式で導入されたことは非常に大きい。</p>
+<p>とりあえず公式ライブラリの中を見に行ってみる。</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">Unwrap</span>(<span style="color:#a6e22e">err</span> <span style="color:#66d9ef">error</span>) <span style="color:#66d9ef">error</span> {
 </span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">u</span>, <span style="color:#a6e22e">ok</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">err</span>.(<span style="color:#66d9ef">interface</span> {
 </span></span><span style="display:flex;"><span>		<span style="color:#a6e22e">Unwrap</span>() <span style="color:#66d9ef">error</span>
@@ -200,9 +200,9 @@
 </span></span><span style="display:flex;"><span>	}
 </span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">u</span>.<span style="color:#a6e22e">Unwrap</span>()
 </span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><p>これだけです。</p>
-<p>やっていることを言葉にしても、「渡されたerrorがUnwrap interfaceを実装していればUnwrapの返り値を返して、そうでなければnilを返す」だけです。</p>
-<p>それでは、Wrapする側の <code>errors.Errorf</code> の中を見にいってみます。</p>
+</span></span></code></pre></div><p>これだけだった。</p>
+<p>やっていることを言葉にしても、「渡されたerrorがUnwrap interfaceを実装していればUnwrapの返り値を返して、そうでなければnilを返す」だけ。</p>
+<p>次はWrapする側の <code>errors.Errorf</code> の中を見にいってみる。</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#f92672">package</span> <span style="color:#a6e22e">fmt</span>
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> <span style="color:#e6db74">&#34;errors&#34;</span>
@@ -234,28 +234,34 @@
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">e</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">wrapError</span>) <span style="color:#a6e22e">Unwrap</span>() <span style="color:#66d9ef">error</span> {
 </span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">e</span>.<span style="color:#a6e22e">err</span>
 </span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><p>長くなるのでコメントは削っています。</p>
-<p><code>fmt.Errorf</code> が呼び出されてからの4行は渡されたformatと引数をもとに <code>pp</code> 構造体を生成している部分です。深堀りはしませんが、Unwrapの説明でも若干関わるので、<code>pp</code> 構造体はformatと変数のスライスをパースして色々やっているということだけ覚えておいてください。</p>
-<p>Unwrapに関係があるのは5行目以降からです。 4行目までで生成した <code>pp</code> 構造体の <code>wrappedErr</code> を確認して、nilだった場合 <code>errors.New</code> を、nilじゃない場合は同じ階層に定義してある <code>wrapError</code> 構造体を使ってエラーを作成しています。</p>
-<p>本筋からは少しずれますが、このような実装のため <code>fmt.Errorf</code> を呼び出すと必ずエラーが作成されます。そのため、nilの可能性があるエラーをnilチェックせずに渡すと思わぬバグの原因になるので、<code>fmt.Errorf</code> を呼び出すときには必ずnilチェックをするようにしましょう。</p>
-<p>さて、ここで重要になるのは <code>wrapError</code> 構造体です。</p>
-<p><code>wrapError</code> 構造体はerror interfaceとUnwrap interfaceを実装しています。<code>Unwrap()</code>の中では <code>wrapError</code> が持っている<code>err</code>を返していますが、この<code>err</code>は<code>pp</code>の<code>wrapedErr</code>を確認して詰められています。また、3行目の<code>doPrintf</code>の中を追いかけていくと、<code>wrapedErr</code> は<code>fmt.Errorf</code>の第2引数に渡されたエラーが入っている事がわかります。</p>
-<p>上記のことから、<code>fmt.Errorf</code>経由でWrapされたエラーが<code>errors.Unwrap</code>に渡されたときには、<code>fmt.Errorf</code>に渡されたエラーが返ることになり、文字通り<code>fmt.Errorf</code>でWrapされたエラーをUnwrapできる事がわかります。</p>
-<h1 id="unwrap-interface実用例">
+</span></span></code></pre></div><p>長くなるのでコメントは削っている。</p>
+<p><code>fmt.Errorf</code> が呼び出されてからの4行は渡されたformatと引数をもとに <code>pp</code> 構造体を生成している部分。
+深堀りはしないが、Unwrapの説明でも若干関わるので、<code>pp</code> 構造体はformatと変数のスライスをパースして色々やっているということだけは覚えておく。</p>
+<p>Unwrapに関係があるのは5行目以降から。
+4行目までで生成した <code>pp</code> 構造体の <code>wrappedErr</code> を確認して、nilだった場合 <code>errors.New</code> を、nilじゃない場合は同じ階層に定義してある <code>wrapError</code> 構造体を使ってエラーを作成しています。</p>
+<p>本筋からは少しずれるが、このような実装のため <code>fmt.Errorf</code> を呼び出すと必ずエラーが作成される。
+そのため、nilの可能性があるエラーをnilチェックせずに渡すと思わぬバグの原因になるので、<code>fmt.Errorf</code> を呼び出すときには必ずnilチェックをするようにすること。</p>
+<p>ここで重要になるのは <code>wrapError</code> 構造体。</p>
+<p><code>wrapError</code> 構造体はerror interfaceとUnwrap interfaceを実装しています。
+<code>Unwrap()</code>の中では <code>wrapError</code> が持っている<code>err</code>を返していますが、この<code>err</code>は<code>pp</code>の<code>wrapedErr</code>を確認して詰められている。
+また、3行目の<code>doPrintf</code>の中を追いかけていくと、<code>wrapedErr</code> は<code>fmt.Errorf</code>の第2引数に渡されたエラーが入っている事がわかる。</p>
+<p>上記のことから、<code>fmt.Errorf</code>経由でWrapされたエラーが<code>errors.Unwrap</code>に渡されたときには、<code>fmt.Errorf</code>に渡されたエラーが返ることになり、文字通り<code>fmt.Errorf</code>でWrapされたエラーをUnwrapできる事がわかる。</p>
+<h2 id="unwrap-interface実用例">
   Unwrap interface実用例
   <a class="heading-link" href="#unwrap-interface%e5%ae%9f%e7%94%a8%e4%be%8b">
     <i class="fa fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
-</h1>
-<h2 id="原因を取り出す">
+</h2>
+<h3 id="原因を取り出す">
   原因を取り出す
   <a class="heading-link" href="#%e5%8e%9f%e5%9b%a0%e3%82%92%e5%8f%96%e3%82%8a%e5%87%ba%e3%81%99">
     <i class="fa fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
-</h2>
-<p><code>pkg/errors</code>の<code>Cause</code>と全く同じ挙動をする実装です。<code>pkg/errors</code>ではCause interfaceが使われていましたが、それをUnwrap interfaceに置き換えただけです。</p>
+</h3>
+<p><code>pkg/errors</code>の<code>Cause</code>と全く同じ挙動をする実装になる。
+<code>pkg/errors</code>ではCause interfaceが使われていましたが、それをUnwrap interfaceに置き換えただけ。</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> (
@@ -286,16 +292,18 @@
 </span></span><span style="display:flex;"><span>	}
 </span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">err</span>
 </span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><p>ただ、同一性を調べるためだったら <code>errors.Is</code> があるので、あまり上の例は出番がないかもしれません。</p>
-<h2 id="wrapの途中に独自のエラー型が入っていないか調べる">
+</span></span></code></pre></div><!-- textlint-disable ja-technical-writing/ja-no-weak-phrase -->
+<p>ただ、同一性を調べるためだったら <code>errors.Is</code> があるので、あまり上の例は出番がないかもしれない。</p>
+<!-- textlint-enable -->
+<h3 id="wrapの途中に独自のエラー型が入っていないか調べる">
   Wrapの途中に独自のエラー型が入っていないか調べる
   <a class="heading-link" href="#wrap%e3%81%ae%e9%80%94%e4%b8%ad%e3%81%ab%e7%8b%ac%e8%87%aa%e3%81%ae%e3%82%a8%e3%83%a9%e3%83%bc%e5%9e%8b%e3%81%8c%e5%85%a5%e3%81%a3%e3%81%a6%e3%81%84%e3%81%aa%e3%81%84%e3%81%8b%e8%aa%bf%e3%81%b9%e3%82%8b">
     <i class="fa fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
-</h2>
-<p><code>fmt.Errorf</code> でWrapされたエラーは <code>errors.As</code> でWrapされてきた中に指定した方があった場合それを取り出すことができます。</p>
-<p>以下の例だと途中でエラーにMarkをして、GetMarkerでそのMarkerを取り出しています。</p>
+</h3>
+<p><code>fmt.Errorf</code> でWrapされたエラーは <code>errors.As</code> でWrapされてきた中に指定した方があった場合それを取り出すことができる。</p>
+<p>以下の例だと途中でエラーにMarkをして、GetMarkerでそのMarkerを取り出している。</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> (
@@ -334,8 +342,8 @@
 </span></span><span style="display:flex;"><span>	<span style="color:#75715e">// Output:
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#75715e">// marker
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}
-</span></span></code></pre></div><p>ですが、Asの実装はUnwrap interfaceの実装が有ることが前提のため、不用意に独自エラーをWrapに挟むと深い階層でWrapしたエラーを取り出せなくなってしまいます。</p>
-<p>以下の例だと、GetMarkerで途中でエラーをMarkしたMarkerを取り出したいのですが、Markした後にcodeErrでWrapしているためMarkerを取り出せていません。</p>
+</span></span></code></pre></div><p>しかし、Asの実装はUnwrap interfaceの実装が前提のため、不用意に独自エラーをWrapに挟むと深い階層でWrapしたエラーを取り出せなくなってしまう。</p>
+<p>以下の例だと、GetMarkerの途中でエラーをMarkしたMarkerを取り出したいが、Markした後にcodeErrでWrapしているためMarkerを取り出せていない。</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> (
@@ -468,8 +476,7 @@
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#75715e">// marker
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#75715e">// 3
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}
-</span></span></code></pre></div><p>新しくerrorsパッケージに入った機能はUnwrapという非常に薄いinterfaceで提供されていながら、とても応用の効く機能です。</p>
-<p>正しく機能を理解して上手に使いこなしていきましょう。</p>
+</span></span></code></pre></div><p>新しくerrorsパッケージに入った機能はUnwrapという非常に薄いinterfaceで提供されていながら、とても応用の効く機能だった。</p>
 
       </div>
 

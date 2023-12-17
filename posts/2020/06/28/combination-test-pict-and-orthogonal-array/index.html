@@ -179,7 +179,7 @@
 
       <div class="post-content">
         
-        <p>結合テストの組み合わせについてある程度知見が溜まったのでメモ的に。</p>
+        <p>テストの組み合わせについてある程度知見が溜まったのでメモ。</p>
 <h2 id="結合テストの組み合わせ問題">
   結合テストの組み合わせ問題
   <a class="heading-link" href="#%e7%b5%90%e5%90%88%e3%83%86%e3%82%b9%e3%83%88%e3%81%ae%e7%b5%84%e3%81%bf%e5%90%88%e3%82%8f%e3%81%9b%e5%95%8f%e9%a1%8c">
@@ -187,11 +187,13 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h2>
-<p>システムのリリース前には開発した機能や既存の機能を組み合わせてバグが発生していないかテストをする必要があります。</p>
-<p>ですが、開発した機能が増えていけば組み合わせの数は指数関数的に増えていき、それらを全てテストするのは非現実的です。</p>
-<p>となると、何かしらの方法でテストする組み合わせを絞る必要があります。</p>
-<p>絞るにあたって「システムのバグは2つパラメータの組み合わせで発生する確率が高い」というデータから、2つの異なるパラメータ(因子)の組み合わせが必ず全て登場する最小の表を作る、という手法があります。</p>
-<p>この記事ではその手法のうち、直交表とPICTというツールの使い方をメモして残しておこうと思います。</p>
+<p>システムのリリース前には開発した機能や既存の機能を組み合わせてバグが発生していないかテストをする必要がある。</p>
+<p>しかし、開発した機能が増えていけば組み合わせの数は指数関数的に増えていくため、それらを全てテストするのは非現実的になってしまう。</p>
+<p>となると、何かしらの方法でテストする組み合わせを絞る必要がある。</p>
+<p>絞るにあたって「システムのバグは2つパラメータの組み合わせで発生する確率が高い」というデータから、2つの異なるパラメータ(因子)の組み合わせが必ず全て登場する最小の表を作る、という手法がある。</p>
+<!-- textlint-disable ja-technical-writing/ja-no-weak-phrase -->
+<p>この記事ではその手法のうち、直交表とPICTというツールの使い方をメモして残しておこうと思う。</p>
+<!-- textlint-enable -->
 <h2 id="直交表">
   直交表
   <a class="heading-link" href="#%e7%9b%b4%e4%ba%a4%e8%a1%a8">
@@ -199,10 +201,10 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h2>
-<p>直交表は、因子の組み合わせが効率的になるよう作られた表です。</p>
-<p>基本的には誰かがすでに定義しているものにテストしたいシステムの因子を割り当てるという使い方になります。</p>
-<p>例を挙げてみます。</p>
-<p>とあるWebシステムを作っていて、下記のような環境に対応しているかテストを行う必要があります。</p>
+<p>直交表は、因子の組み合わせが効率的になるよう作られた表。</p>
+<p>基本的には誰かがすでに定義しているものにテストしたいシステムの因子を割り当てるという使い方になる。</p>
+<p>わかりやすいように例を挙げてみる。</p>
+<p>とあるWebシステムを作っていて、下記のような環境に対応しているかテストを行う必要がある。</p>
 <table>
 <thead>
 <tr>
@@ -229,12 +231,12 @@
 </tr>
 </tbody>
 </table>
-<p>3因子2通りのため、全ての組み合わせは8パターンになります。</p>
-<p>8パターンであれば全てテストするのもそこまで大変でもないですが、試しに直交表に適用してみます。</p>
-<p>以下のページのように、すでにある直交表からテストしたい項目の形に近いものを選びます。</p>
+<p>3因子2通りのため、全ての組み合わせは8パターンになる。</p>
+<p>8パターンであれば全てテストするのはそこまで大変でもないが、試しに直交表へ適用してみる。</p>
+<p>以下のページのように、すでにある直交表からテストしたい項目の形に近いものを選ぶ。</p>
 <p><a href="https://support.minitab.com/ja-jp/minitab/18/help-and-how-to/modeling-statistics/doe/supporting-topics/taguchi-designs/catalogue-of-taguchi-designs/"  class="external-link" target="_blank" rel="noopener">タグチ計画のカタログ</a></p>
-<p>今回は2^3通りのため、L4(2^3)の表が使えそうです。</p>
-<p>上記のテスト項目をL4(2^3)の表に当てはめてみます。</p>
+<p>今回は2^3通りのため、L4(2^3)の表が使えそう。</p>
+<p>上記のテスト項目をL4(2^3)の表に当てはめてみる。</p>
 <table>
 <thead>
 <tr>
@@ -271,10 +273,12 @@
 </tr>
 </tbody>
 </table>
-<p>全パターン行うと8パターンだったものが4パターンで済むようになりました。</p>
-<p>2因子ごとの組み合わせも全て登場するため、バグ発見率も極端に下がりません。</p>
-<p>上記の例のサイズならそこまで恩恵を感じないかもしれませんが、因子と水準が増えたときには大きく組み合わせの数を減らすことができます。</p>
-<p>今回は例のためピッタリの表が見つかるように因子数と水準を調整しましたが、ピッタリの表がない場合は少し大きめのサイズの表に適用し、合いた箇所を有効な水準で埋めることで問題ないようです。</p>
+<p>全パターン行うと8パターンだったものが4パターンで済むようになった。</p>
+<p>2因子ごとの組み合わせも全て登場するため、バグ発見率も極端に下がらない。</p>
+<!-- textlint-disable ja-technical-writing/ja-no-weak-phrase -->
+<p>上記の例のサイズならそこまで恩恵を感じないかもしれないが、因子と水準が増えたときには大きく組み合わせの数を減らすことができる。</p>
+<!-- textlint-enable -->
+<p>今回は例のためピッタリの表が見つかるように因子数と水準を調整したが、ピッタリの表がない場合は少し大きめのサイズの表に適用し、合いた箇所を有効な水準で埋めて問題ない。</p>
 <h2 id="pict">
   PICT
   <a class="heading-link" href="#pict">
@@ -282,28 +286,30 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h2>
-<p><a href="https://github.com/microsoft/pict"  class="external-link" target="_blank" rel="noopener">PICT</a> はMicrosoftが作成公開しているAll Pair法(ペアワイズ方)で組み合わせを作成するツールです。</p>
-<p>直交表では静的な表に因子と水準を当てはめていましたが、PICTでは動的に表を生成します。</p>
-<p>PICTでも例を挙げてみます。</p>
-<p>直交表のときと同じ因子と水準を使うと仮定して、以下のようなテキストファイルを用意します。</p>
+<p><a href="https://github.com/microsoft/pict"  class="external-link" target="_blank" rel="noopener">PICT</a> はMicrosoftが作成公開しているAll Pair法(ペアワイズ方)で組み合わせを作成するツール。</p>
+<p>直交表では静的な表に因子と水準を当てはめていましたが、PICTでは動的に表を生成する。</p>
+<p>PICTでも例を挙げてみる。</p>
+<p>直交表のときと同じ因子と水準を使うと仮定して、以下のようなテキストファイルを用意する。</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>OS: Windows, macOS
 </span></span><span style="display:flex;"><span>ブラウザ: Chrome, Firefox
 </span></span><span style="display:flex;"><span>端末: ラップトップ, モバイル
-</span></span></code></pre></div><p><code>因子: 水準1, 水準2</code> という構造を一行ずつ定義します。</p>
-<p>上記ファイルを <code>factor.txt</code> という名前で保存して、以下のコマンドを実行します。</p>
+</span></span></code></pre></div><p><code>因子: 水準1, 水準2</code> という構造を一行ずつ定義する。</p>
+<p>上記ファイルを <code>factor.txt</code> という名前で保存して、以下のコマンドを実行する。</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>pict factor.txt
-</span></span></code></pre></div><p>すると、以下のような出力を得られます。</p>
+</span></span></code></pre></div><p>すると、以下のような出力を得られる。</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>OS      ブラウザ   端末
 </span></span><span style="display:flex;"><span>macOS   Firefox  モバイル
 </span></span><span style="display:flex;"><span>macOS   Chrome   ラップトップ
 </span></span><span style="display:flex;"><span>Windows Chrome   モバイル
 </span></span><span style="display:flex;"><span>Windows Firefox  ラップトップ
-</span></span></code></pre></div><p>組み合わせの構造は違いますが、直交表と同じように2因子ごとの組み合わせが全て登場するテストケースが得られます。</p>
-<p>動的に作成するため、直交表では因子と水準の数から表を探す必要がありましたが、PICTではそれをする必要がありません。</p>
-<p>また、最も効率の良い形で表を作るため、因子と水準の数が増えたときの組み合わせの数は直交表より少なくなります。</p>
-<p>ただし、PICTで作った表は、組み合わせ数が減ることと直交表が他の因子の組み合わせもある程度考慮されて作成されていることから、3因子間の網羅率はあまり高くありません。</p>
-<p>PICTでは禁則処理や因子間の組み合わせ数も設定できるため、使い方に寄っては直交表と同じように3因子の網羅率を上げることもできますが、正確なものにするためにはちゃんと考えなければいけません。</p>
-<p>どちらを使っても組み合わせが爆発するようなテストで、実施項目を減らすことができるため、適材適所で使っていきたいと思います。</p>
+</span></span></code></pre></div><p>組み合わせの構造は違うが、直交表と同じように2因子ごとの組み合わせ全てが登場するテストケースを得られる。</p>
+<p>動的に作成するため、直交表では因子と水準の数から表を探す必要があるが、PICTではそれをする必要ない。</p>
+<p>また、最も効率の良い形で表を作るため、因子と水準の数が増えたときの組み合わせの数は直交表より少なくなる傾向がある。</p>
+<p>ただし、PICTで作った表は組み合わせ数が減ることと直交表が他の因子の組み合わせもある程度考慮されて作成されていることから、3因子間の網羅率はあまり高くない。</p>
+<p>PICTでは禁則処理や因子間の組み合わせ数も設定できるため、使い方に寄っては直交表と同じように3因子の網羅率を上げることもできるが、正確なものにするためにはちゃんと考えなければならない。</p>
+<!-- textlint-disable ja-technical-writing/ja-no-weak-phrase -->
+<p>どちらを使っても組み合わせが爆発するようなテストで、実施項目を減らすことができるため、適材適所で使っていきたいと思う。</p>
+<!-- textlint-enable -->
 
       </div>
 

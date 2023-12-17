@@ -179,15 +179,16 @@
 
       <div class="post-content">
         
-        <p>下記ブログを参考にしてアクセシビリティを維持したままCheckboxやRadioボタンを作ろうとしたのですが、特定のサイズ以下でずれる問題に遭遇しました。</p>
+        <p>下記ブログを参考にしてアクセシビリティを維持したままCheckboxやRadioボタンを作ろうとしたが、特定のサイズ以下でずれる問題に遭遇した。</p>
 <p><a href="https://medium.com/@colebemis/building-a-checkbox-component-with-react-and-styled-components-8d3aa1d826dd"  class="external-link" target="_blank" rel="noopener">Building a Checkbox Component with React and styled-components</a></p>
-<p>以下がそのずれているときの画像です。16pxにしたとき親要素に対して少し下側にずれています。</p>
+<p>以下がそのずれているときの画像。
+16pxにしたとき親要素に対して少し下側にずれている。</p>
 <p><img src="./16px.png" alt="16px"></p>
-<p>しかし、20pxにしたときには以下のように親要素とぴったり揃います。</p>
+<p>しかし、20pxにしたときには以下のように親要素とぴったり揃う。</p>
 <p><img src="./20px.png" alt="20px"></p>
-<p>サイズによって変わるので割と謎だったのですが、調べてみるとtextの <code>descender</code> が原因だったようです。</p>
-<p>inline要素は <code>g</code> や <code>y</code> といったベースラインより下に突き抜ける文字用のために下側のスペースを確保してしまうようで、それが原因でSVGが下側にずれていました。</p>
-<p>原因がわかったので、上記の問題は <code>line-height: 0;</code> をSVGをラップしている要素に当て、 <code>descender</code> が確保されないようにすることで解決しました。</p>
+<p>サイズによって変わるので割と謎だったが、調べてみるとtextの <code>descender</code> が原因だった。</p>
+<p>inline要素は <code>g</code> や <code>y</code> といったベースラインより下に突き抜ける文字用のために下側のスペースを確保してしまうようで、それが原因でSVGが下側にずれていた。</p>
+<p>原因がわかったので、上記の問題は <code>line-height: 0;</code> をSVGをラップしている要素に当て、 <code>descender</code> が確保されないようにすることで解決した。</p>
 
       </div>
 

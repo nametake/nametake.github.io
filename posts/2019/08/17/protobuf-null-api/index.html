@@ -179,17 +179,18 @@
 
       <div class="post-content">
         
-        <h1 id="protocol-buffersのnullの取り扱いの問題">
+        <h2 id="protocol-buffersのnullの取り扱いの問題">
   Protocol BuffersのNullの取り扱いの問題
   <a class="heading-link" href="#protocol-buffers%e3%81%aenull%e3%81%ae%e5%8f%96%e3%82%8a%e6%89%b1%e3%81%84%e3%81%ae%e5%95%8f%e9%a1%8c">
     <i class="fa fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
-</h1>
-<p>Protocol Buffersのproto3の仕様ではmessageの中の値をOptionalで表現する記法がありません。値を詰めずに送ると入れ子の値が<a href="https://developers.google.com/protocol-buffers/docs/proto3#default"  class="external-link" target="_blank" rel="noopener">デフォルト値</a>になってしまいます。</p>
-<p>しかし、アプリケーションの設計によってはOptionalな値を表現する必要が出てきます。</p>
-<p>そういった時、プリミティブな型なら<a href="https://github.com/protocolbuffers/protobuf/blob/master/src/google/protobuf/wrappers.proto"  class="external-link" target="_blank" rel="noopener"><code>google/protobuf/wappers.proto</code></a>を使う方法があります。</p>
-<p>以下のように使うことで<code>msg</code>はOptionalな値として取り扱えます。</p>
+</h2>
+<p>Protocol Buffersのproto3の仕様ではmessageの中の値をOptionalで表現する記法がない。
+値を詰めずに送ると入れ子の値が<a href="https://developers.google.com/protocol-buffers/docs/proto3#default"  class="external-link" target="_blank" rel="noopener">デフォルト値</a>になってしまう。</p>
+<p>しかし、アプリケーションの設計によってはOptionalな値を表現する必要が出てくる。</p>
+<p>そういった時、プリミティブな型なら<a href="https://github.com/protocolbuffers/protobuf/blob/master/src/google/protobuf/wrappers.proto"  class="external-link" target="_blank" rel="noopener"><code>google/protobuf/wappers.proto</code></a>を使う方法がある。</p>
+<p>以下のように使うことで<code>msg</code>はOptionalな値として取り扱えるようになる。</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-proto" data-lang="proto"><span style="display:flex;"><span>syntax <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;proto3&#34;</span>;<span style="color:#960050;background-color:#1e0010">
 </span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
 </span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#f92672">package</span> example;<span style="color:#960050;background-color:#1e0010">
@@ -199,9 +200,10 @@
 </span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">message</span> <span style="color:#a6e22e">Example</span> {<span style="color:#960050;background-color:#1e0010">
 </span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>  google.protobuf.StringValue msg <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;<span style="color:#960050;background-color:#1e0010">
 </span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>}<span style="color:#960050;background-color:#1e0010">
-</span></span></span></code></pre></div><p><code>wappers.proto</code>を読むと、<code>google.protobuf.StringValue</code>は内部にstringを持つmessageとして定義してあり、入れ子構造になったmessageはデフォルト値がnullになるという仕様を利用して擬似的にOptionalを表現する仕組みであるということがわかります。</p>
-<p>しかし、プリミティブな型ではないmessageを定義して、それを入れ子構造にするようなmessageを定義すると、入れ子になったmessageのデフォルト値はnullであるという特性から、それがOptionalなのかRequiredなのかが分かりづらくなるという問題があります。</p>
-<p>例えば、以下のように<code>Decimal</code> 型が定義されたとき、それを入れ子構造にするような<code>Order</code>型があるとします。</p>
+</span></span></span></code></pre></div><p><code>wappers.proto</code>を読むと、<code>google.protobuf.StringValue</code>は内部にstringを持つmessageとして定義している。
+入れ子構造になったmessageはデフォルト値がnullになるという仕様を利用して擬似的にOptionalを表現する仕組みであるということがわかる。</p>
+<p>しかし、プリミティブな型ではないmessageを定義して入れ子構造にするようなmessageを定義すると、入れ子になったmessageのデフォルト値はnullであるという特性からそれがOptionalなのかRequiredなのかが分かりづらくなるという問題がある。</p>
+<p>例えば、以下のように<code>Decimal</code> 型が定義されたとき、それを入れ子構造にするような<code>Order</code>型があるとする。</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-proto" data-lang="proto"><span style="display:flex;"><span>syntax <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;proto3&#34;</span>;<span style="color:#960050;background-color:#1e0010">
 </span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
 </span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#f92672">package</span> example;<span style="color:#960050;background-color:#1e0010">
@@ -220,8 +222,12 @@
 </span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>  <span style="color:#75715e">// 使用するポイント(Optional)
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  Decimal point <span style="color:#f92672">=</span> <span style="color:#ae81ff">3</span>;<span style="color:#960050;background-color:#1e0010">
 </span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>}<span style="color:#960050;background-color:#1e0010">
-</span></span></span></code></pre></div><p><code>Order</code>型では金銭を表現しているため数値を正確に表現できるDecimal型を使って金額とポイントを定義しています。しかし、アプリケーションの都合で<code>amount</code>はRequiredに<code>point</code>はOptionalにしたいとき、どちらもデフォルト値がnullになってしまうため、そのままだと両方を同時に表現できません。また、0ポイントなのかnullなのかで挙動に明確な違いがある場合は0を送るという手段も成立しません。</p>
-<p><code>Order</code>ぐらいの定義量であればコメントやドキュメントで対応することもできます。しかし、生成されるコードがOptionalであるということは変わらないため、せっかく型付でコード生成をしてくれるProtocol Buffersのメリットが半減してしまいます。また、人類にドキュメントを書く読む管理するという行為は難しすぎるため、プロダクトの成長に従ってドキュメントは陳腐化していってしまいます。</p>
+</span></span></span></code></pre></div><p><code>Order</code>型では金銭を表現しているため数値を正確に表現できるDecimal型を使って金額とポイントを定義している。
+しかし、アプリケーションの都合で<code>amount</code>はRequiredに<code>point</code>はOptionalにしたいとき、どちらもデフォルト値がnullになってしまうため、そのままだと両方を同時に表現できません。
+また、0ポイントなのかnullなのかで挙動に明確な違いがある場合は0を送るという手段も成立しない。</p>
+<p><code>Order</code>ぐらいの定義量であればコメントやドキュメントで対応ができる。
+しかし、生成されるコードがOptionalであるということは変わらないため、せっかく型付でコード生成をしてくれるProtocol Buffersのメリットが半減してしまう。
+また、人類にドキュメントを書く読む管理するという行為は難しすぎるため、プロダクトの成長に従ってドキュメントは陳腐化していってしまう。</p>
 <h1 id="解決策">
   解決策
   <a class="heading-link" href="#%e8%a7%a3%e6%b1%ba%e7%ad%96">
@@ -229,13 +235,16 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h1>
-<p><code>Decimal</code>をOptionalで表現するために以下のような<code>NullDecimal</code>型を定義してみます。</p>
+<p><code>Decimal</code>をOptionalで表現するために以下のような<code>NullDecimal</code>型を定義してみる。</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-proto" data-lang="proto"><span style="display:flex;"><span><span style="color:#66d9ef">message</span> <span style="color:#a6e22e">NullDecimal</span> {<span style="color:#960050;background-color:#1e0010">
 </span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>  <span style="color:#66d9ef">bool</span> has_value <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;<span style="color:#960050;background-color:#1e0010">
 </span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>  Decimal decimal <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>;<span style="color:#960050;background-color:#1e0010">
 </span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>}<span style="color:#960050;background-color:#1e0010">
-</span></span></span></code></pre></div><p>定義の通り、値を持っているかどうかを判別する<code>has_value</code>と実際の値になる<code>Decimal</code>型を持っている型です。Goを書く方はピンとくるかもしれませんが、<code>sql.Null~</code>型と同じ形です。</p>
-<p>上記の<code>NullDecimal</code>型を使用して<code>Order</code>型を再定義すると以下のようになります。</p>
+</span></span></span></code></pre></div><!-- textlint-disable ja-technical-writing/ja-no-weak-phrase -->
+<p>定義の通り、値を持っているかどうかを判別する<code>has_value</code>と実際の値になる<code>Decimal</code>型を持つ。
+Goを書く方はこの時点でもわかるかもだが、<code>sql.Null~</code>型と同じ形を表している。</p>
+<!-- textlint-enable -->
+<p>上記の<code>NullDecimal</code>型を使用して<code>Order</code>型を再定義すると以下のようになる。</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-proto" data-lang="proto"><span style="display:flex;"><span>syntax <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;proto3&#34;</span>;<span style="color:#960050;background-color:#1e0010">
 </span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
 </span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#f92672">package</span> example;<span style="color:#960050;background-color:#1e0010">
@@ -258,12 +267,11 @@
 </span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>  <span style="color:#75715e">// 使用するポイント。Optional
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  NullDecimal point <span style="color:#f92672">=</span> <span style="color:#ae81ff">3</span>;<span style="color:#960050;background-color:#1e0010">
 </span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>}<span style="color:#960050;background-color:#1e0010">
-</span></span></span></code></pre></div><p>Optionalにしたかった<code>point</code>を<code>NullDecimal</code>型にすることで、その属性を明示的にできました。</p>
-<p>その上で「<strong>Protocol Buffersのmessageの値は全て情報を詰める</strong>」という取り決めを作っておくことで、もしアプリケーション都合で<code>point</code>がRequiredな属性になっても、コードを生成すれば属性が変わっていることに気づくことができます。</p>
-<p>デメリットとしては記述量が少し増えることですが、明示的に書くことによって減るコストに比べればだいぶ安く済むと思います。</p>
-<p>値しか持たないため同質のものかどうかは微妙ですが、NullをそのままNullとして扱わず特別な型を用意するという発想は<a href="https://martinfowler.com/eaaCatalog/specialCase.html"  class="external-link" target="_blank" rel="noopener">Special Case Pattern</a>として昔から提唱されているものでもあります。</p>
-<p>Protocol Buffersはシンプルな設計ですが、プログラミング言語的な表現力も兼ね備えているため、こういったOOPにおける原理原則を適用することが可能です。</p>
-<p>様々な先人の知恵と教えを駆使して、明確でシンプルなAPI設計をしていきましょう。</p>
+</span></span></span></code></pre></div><p>Optionalにしたかった<code>point</code>を<code>NullDecimal</code>型にすることで、その属性を明示的にできた。</p>
+<p>その上で「<strong>Protocol Buffersのmessageの値は全て情報を詰める</strong>」という取り決めを作っておくことで、もしアプリケーション都合で<code>point</code>がRequiredな属性になっても、コードを生成すれば属性が変わっていることに気づくことができる。</p>
+<p>デメリットは記述量が少し増えることだが、明示的に書くことによって減るコストに比べればだいぶ安く済むと思われる。</p>
+<p>値しか持たないため同質のものかどうかは微妙だが、NullをそのままNullとして扱わず特別な型を用意するという発想は<a href="https://martinfowler.com/eaaCatalog/specialCase.html"  class="external-link" target="_blank" rel="noopener">Special Case Pattern</a>として昔から提唱されているものでもある。</p>
+<p>Protocol Buffersはシンプルな設計だが、プログラミング言語的な表現力も兼ね備えているため、こういったOOPにおける原理原則を適用することが可能。</p>
 
       </div>
 

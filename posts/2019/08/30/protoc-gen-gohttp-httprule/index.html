@@ -183,17 +183,19 @@
 
       <div class="post-content">
         
-        <p>以前、Protocol Buffersのserviceの定義を利用してGoの<code>net/http</code>で利用できるようにするための<a href="https://github.com/nametake/protoc-gen-gohttp"  class="external-link" target="_blank" rel="noopener">protoc-gen-gohttp</a>というprotocのプラグインを<a href="../../../../../posts/2018/11/21/protoc-gen-gohttp/" >作成しました</a>。</p>
-<p>ですが、protoc-gen-gohttpではURLのパス部分の定義はProtocol Buffersの定義には記述できないため、クライアント側がProtocol Buffersを見ただけでパスを読み取ることができませんでした。また、生成されたコードはHTTPのBodyしか参照しないため、情報を取得するだけのときもHTTPのメソッドをPOSTにする必要もありました。</p>
-<p>そこで、Googleが提供しているRPCの定義をHTTPのREST APIにマッピングするための<a href="https://cloud.google.com/endpoints/docs/grpc-service-config/reference/rpc/google.api#httprule"  class="external-link" target="_blank" rel="noopener">HttpRule</a>オプションを利用して、protoc-gen-gohttpがHttpRuleのマッピングどおりに動作するコードを生成するように改良しました。</p>
-<h1 id="使い方">
+        <p>以前、Protocol Buffersのserviceの定義を利用してGoの<code>net/http</code>で利用できるようにするための<a href="https://github.com/nametake/protoc-gen-gohttp"  class="external-link" target="_blank" rel="noopener">protoc-gen-gohttp</a>というprotocのプラグインを<a href="../../../../../posts/2018/11/21/protoc-gen-gohttp/" >作成した</a>。</p>
+<p>しかし、protoc-gen-gohttpではURLのパス部分の定義はProtocol Buffersの定義には記述できないため、クライアント側がProtocol Buffersを見ただけでパスを読み取ることができない。
+また、生成されたコードはHTTPのBodyしか参照しないため、情報を取得するだけのときもHTTPのメソッドをPOSTにする必要もあった。</p>
+<p>そこで、Googleが提供しているRPCの定義をHTTPのREST APIにマッピングするための<a href="https://cloud.google.com/endpoints/docs/grpc-service-config/reference/rpc/google.api#httprule"  class="external-link" target="_blank" rel="noopener">HttpRule</a>オプションを利用して、protoc-gen-gohttpがHttpRuleのマッピングどおりに動作するコードを生成するように改良してみた。</p>
+<h2 id="使い方">
   使い方
   <a class="heading-link" href="#%e4%bd%bf%e3%81%84%e6%96%b9">
     <i class="fa fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
-</h1>
-<p><a href="https://github.com/nametake/protoc-gen-gohttp"  class="external-link" target="_blank" rel="noopener">protoc-gen-gohttp</a>をインストールしたら、以下のようにHttpRuleを使用したProtoの定義を用意します(annotations.protoのダウンロードの仕方は<a href="https://cloud.google.com/solutions/exposing-grpc-services-using-cloud-endpoints-pt1#configure_rest_transcoding"  class="external-link" target="_blank" rel="noopener">この辺</a>を参考にしてください)。この記事では<code>example.proto</code>に書いているとします。</p>
+</h2>
+<p><a href="https://github.com/nametake/protoc-gen-gohttp"  class="external-link" target="_blank" rel="noopener">protoc-gen-gohttp</a>をインストールしたら、以下のようにHttpRuleを使用したProtoの定義を用意する(annotations.protoのダウンロードの仕方は<a href="https://cloud.google.com/solutions/exposing-grpc-services-using-cloud-endpoints-pt1#configure_rest_transcoding"  class="external-link" target="_blank" rel="noopener">この辺</a>を参考にしてください)。
+この記事では<code>example.proto</code>に書いているとする。</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-proto" data-lang="proto"><span style="display:flex;"><span>syntax <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;proto3&#34;</span>;<span style="color:#960050;background-color:#1e0010">
 </span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
 </span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#f92672">package</span> main;<span style="color:#960050;background-color:#1e0010">
@@ -241,9 +243,9 @@
 </span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>  SubMessage sub <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>;<span style="color:#960050;background-color:#1e0010">
 </span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>  <span style="color:#66d9ef">string</span> <span style="color:#66d9ef">message</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">3</span>;<span style="color:#960050;background-color:#1e0010">
 </span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>}<span style="color:#960050;background-color:#1e0010">
-</span></span></span></code></pre></div><p>用意できたら、以下のコマンドでGoのコードを生成します。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>protoc --go_out=plugins=grpc:. --gohttp_out=. *.proto
-</span></span></code></pre></div><p>生成されたコードを利用して、以下のように受け取ったものをただ返すだけのHTTPのWebサーバ実装します。</p>
+</span></span></span></code></pre></div><p>用意できたら、以下のコマンドでGoのコードを生成する。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-console" data-lang="console"><span style="display:flex;"><span>protoc --go_out=plugins=grpc:. --gohttp_out=. *.proto
+</span></span></code></pre></div><p>生成されたコードを利用して、以下のように受け取ったものをただ返すだけのHTTPのWebサーバを実装する。</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> (
@@ -284,29 +286,33 @@
 </span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">log</span>.<span style="color:#a6e22e">Fatal</span>(<span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">ListenAndServe</span>(<span style="color:#e6db74">&#34;:8080&#34;</span>, <span style="color:#a6e22e">r</span>))
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><p>実装したサーバを起動したら、以下のようにAPIを叩くことで動作を確認できます。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>curl -X GET -H &#39;Content-Type: application/json&#39; &#39;localhost:8080/v1/messages/abc1234?message=hello&amp;tags=a&amp;tags=b&#39;
-</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>curl -X PUT -H &#39;Content-Type: application/json&#39; &#39;localhost:8080/v1/messages/abc1234/submsg&#39; -d &#39;{&#34;messageId&#34;:&#34;abc1234&#34;,&#34;sub&#34;:{&#34;subfield&#34;:&#34;submsg&#34;},&#34;message&#34;:&#34;Hello World!&#34;}&#39;
-</span></span></code></pre></div><h1 id="簡単な解説">
+</span></span></code></pre></div><p>実装したサーバを起動したら、以下のようにAPIを叩くことで動作を確認できる。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-console" data-lang="console"><span style="display:flex;"><span>curl -X GET -H &#39;Content-Type: application/json&#39; &#39;localhost:8080/v1/messages/abc1234?message=hello&amp;tags=a&amp;tags=b&#39;
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-console" data-lang="console"><span style="display:flex;"><span>curl -X PUT -H &#39;Content-Type: application/json&#39; &#39;localhost:8080/v1/messages/abc1234/submsg&#39; -d &#39;{&#34;messageId&#34;:&#34;abc1234&#34;,&#34;sub&#34;:{&#34;subfield&#34;:&#34;submsg&#34;},&#34;message&#34;:&#34;Hello World!&#34;}&#39;
+</span></span></code></pre></div><h2 id="簡単な解説">
   簡単な解説
   <a class="heading-link" href="#%e7%b0%a1%e5%8d%98%e3%81%aa%e8%a7%a3%e8%aa%ac">
     <i class="fa fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
-</h1>
-<p>今まではprotoc-gen-gohttpは<code>GetMessage</code>メソッドや<code>GetMessageWithName</code>メソッドのような2つのパターンしか生成しませんでしたが、今回の修正で、HttpRuleオプションをRPCに記述していたら<code>GetMessageHTTPRule</code>というメソッドも生成するようになりました。</p>
-<p><code>HTTPRule</code>という接尾語がついたメソッドは、Protocol Buffersに定義されているHttpRuleのオプションのうち、メソッド名(string)、パス名(string)及びhttp.HandlerFuncを返すようになっています。</p>
-<p><code>GetMessageHTTPRule</code>の場合、返り値は<code>&quot;GET&quot;</code>、<code>&quot;/v1/messages/{message_id}&quot;</code>及び<code>http.HandlerFunc</code>を返します。また、GetMessageは<code>GET</code>メソッドをOptionで指定されているため、<code>http.HandlerFunc</code>はQuery Stringを解析して<code>GetMessageRequest</code>に情報を詰めるようになっています。</p>
-<p>パスパラメータにも対応しているため、<code>{message_id}</code>のように<code>{}</code>で囲った部分はmessageの定義へマッピングされるようになっています。</p>
-<h1 id="今後やりたいこと">
+</h2>
+<p>今まではprotoc-gen-gohttpは<code>GetMessage</code>メソッドや<code>GetMessageWithName</code>メソッドのような2つのパターンしか生成しなかった。
+今回の修正で、HttpRuleオプションをRPCに記述していたら<code>GetMessageHTTPRule</code>というメソッドも生成するようになった。</p>
+<p><code>HTTPRule</code>という接尾語がついたメソッドは、Protocol Buffersに定義されているHttpRuleのオプションのうち、メソッド名(string)、パス名(string)及びhttp.HandlerFuncを返すようになっている。</p>
+<p><code>GetMessageHTTPRule</code>の場合、返り値は<code>&quot;GET&quot;</code>、<code>&quot;/v1/messages/{message_id}&quot;</code>及び<code>http.HandlerFunc</code>を返す。
+また、GetMessageは<code>GET</code>メソッドをOptionで指定されているため、<code>http.HandlerFunc</code>はQuery Stringを解析して<code>GetMessageRequest</code>に情報を詰めるようになっている。</p>
+<p>パスパラメータにも対応しているため、<code>{message_id}</code>のように<code>{}</code>で囲った部分はmessageの定義へマッピングされるようになっている。</p>
+<h2 id="今後やりたいこと">
   今後やりたいこと
   <a class="heading-link" href="#%e4%bb%8a%e5%be%8c%e3%82%84%e3%82%8a%e3%81%9f%e3%81%84%e3%81%93%e3%81%a8">
     <i class="fa fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
-</h1>
-<p>Query String対応でコードがだいぶ荒れたので、まずはリファクタリングをしたいです……</p>
-<p>また、HttpRuleオプションのうち<a href="https://cloud.google.com/endpoints/docs/grpc-service-config/reference/rpc/google.api#google.api.HttpRule.FIELDS.repeated.google.api.HttpRule.google.api.HttpRule.additional_bindings"  class="external-link" target="_blank" rel="noopener">additional_bindings</a>への対応ができてなかったり、Bodyに<code>*</code>以外を指定してもマッピングをしてくれなかったりと<a href="https://cloud.google.com/endpoints/docs/grpc-service-config/reference/rpc/google.api#httprule"  class="external-link" target="_blank" rel="noopener">HttpRule</a>に定義されている仕様からだいぶ漏れているものがあるので、それの対応もしていきたいなぁと思っています。</p>
+</h2>
+<p>Query String対応でコードがだいぶ荒れたので、まずはリファクタリングをしたい。</p>
+<!-- textlint-disable ja-technical-writing/ja-no-weak-phrase -->
+<p>また、HttpRuleオプションのうち<a href="https://cloud.google.com/endpoints/docs/grpc-service-config/reference/rpc/google.api#google.api.HttpRule.FIELDS.repeated.google.api.HttpRule.google.api.HttpRule.additional_bindings"  class="external-link" target="_blank" rel="noopener">additional_bindings</a>への対応ができてなかったり、Bodyに<code>*</code>以外を指定してもマッピングをしてくれなかったりと<a href="https://cloud.google.com/endpoints/docs/grpc-service-config/reference/rpc/google.api#httprule"  class="external-link" target="_blank" rel="noopener">HttpRule</a>に定義されている仕様からだいぶ漏れているものがあるのでそれらの対応もしていきたいなぁと思う。</p>
+<!-- textlint-enable -->
 
       </div>
 
