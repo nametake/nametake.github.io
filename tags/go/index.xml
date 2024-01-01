@@ -6,8 +6,15 @@
     <description>Recent content in Go on nametake.dev</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <lastBuildDate>Sun, 24 May 2020 00:00:00 +0900</lastBuildDate>
+    <lastBuildDate>Mon, 01 Jan 2024 00:00:00 +0900</lastBuildDate>
     <atom:link href="https://nametake.github.io/tags/go/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Goの関数定義の引数をチェックするLinterを作った</title>
+      <link>https://nametake.github.io/posts/2024/01/01/mustargs/</link>
+      <pubDate>Mon, 01 Jan 2024 00:00:00 +0900</pubDate>
+      <guid>https://nametake.github.io/posts/2024/01/01/mustargs/</guid>
+      <description>チームでWebサービスを書いていると特定の条件の関数には特定の型の引数を渡すことがルールになっていくことがある。 例えば、マルチテナントなアプ</description>
+    </item>
     <item>
       <title>Protocol Buffersのgo_packageの;の仕様</title>
       <link>https://nametake.github.io/posts/2020/05/24/protobuf-go-package-semicolon/</link>

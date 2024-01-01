@@ -6,8 +6,15 @@
     <description>Recent content in Posts on nametake.dev</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <lastBuildDate>Wed, 13 Dec 2023 00:00:00 +0900</lastBuildDate>
+    <lastBuildDate>Mon, 01 Jan 2024 00:00:00 +0900</lastBuildDate>
     <atom:link href="https://nametake.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Goの関数定義の引数をチェックするLinterを作った</title>
+      <link>https://nametake.github.io/posts/2024/01/01/mustargs/</link>
+      <pubDate>Mon, 01 Jan 2024 00:00:00 +0900</pubDate>
+      <guid>https://nametake.github.io/posts/2024/01/01/mustargs/</guid>
+      <description>チームでWebサービスを書いていると特定の条件の関数には特定の型の引数を渡すことがルールになっていくことがある。 例えば、マルチテナントなアプ</description>
+    </item>
     <item>
       <title>telescope.nvimのgit_filesやlive_grepでもtagstackに積みたい</title>
       <link>https://nametake.github.io/posts/2023/12/13/telescope-nvim-git-files-tagstack/</link>
