@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <title>
+  go/packagesでformatterを作る · nametake.dev
+</title>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+
+
+
+
+<meta name="author" content="nametake">
+<meta name="description" content="特定の構造体の文字列を置き換えるFormatterを作ったときにgo/packagesを使って作ってみたので備忘録。 全体の流れ Link to heading pack">
+<meta name="keywords" content="blog,developer,personal">
+
+<meta name="twitter:card" content="summary"/><meta name="twitter:title" content="go/packagesでformatterを作る"/>
+<meta name="twitter:description" content="特定の構造体の文字列を置き換えるFormatterを作ったときにgo/packagesを使って作ってみたので備忘録。 全体の流れ Link to heading pack"/>
+
+<meta property="og:title" content="go/packagesでformatterを作る" />
+<meta property="og:description" content="特定の構造体の文字列を置き換えるFormatterを作ったときにgo/packagesを使って作ってみたので備忘録。 全体の流れ Link to heading pack" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://nametake.github.io/posts/2024/01/08/use-go-packages/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2024-01-08T00:00:00+09:00" />
+<meta property="article:modified_time" content="2024-01-08T00:00:00+09:00" />
+
+
+
+
+
+<link rel="canonical" href="https://nametake.github.io/posts/2024/01/08/use-go-packages/">
+
+
+<link rel="preload" href="../../../../../fonts/forkawesome-webfont.woff2?v=1.2.0" as="font" type="font/woff2" crossorigin>
+
+
+  
+  
+  <link rel="stylesheet" href="../../../../../css/coder.min.e1bdf152d93b060b06ba5d496486ed9c201a8b95d335e035beb5faebe3b61cad.css" integrity="sha256-4b3xUtk7BgsGul1JZIbtnCAai5XTNeA1vrX66&#43;O2HK0=" crossorigin="anonymous" media="screen" />
+
+
+
+
+
+
+  
+    
+    
+    <link rel="stylesheet" href="../../../../../css/coder-dark.min.a00e6364bacbc8266ad1cc81230774a1397198f8cfb7bcba29b7d6fcb54ce57f.css" integrity="sha256-oA5jZLrLyCZq0cyBIwd0oTlxmPjPt7y6KbfW/LVM5X8=" crossorigin="anonymous" media="screen" />
+  
+
+
+
+ 
+  
+    
+    <link rel="stylesheet" href="../../../../../css/noto&#43;sans&#43;jp.min.ed4b9470a6e014d7c178379b142a1dc1850e399398dc9ce15b1e3bba8368c55f.css" integrity="sha256-7UuUcKbgFNfBeDebFCodwYUOOZOY3JzhWx47uoNoxV8=" crossorigin="anonymous" media="screen" />
+  
+
+
+
+  
+  
+    
+    <link rel="stylesheet" href="../../../../../scss/custom.min.058882cb3caba673503d9e9323f469b039fbd5f4a6e1f421464d8311ae68be80.css" integrity="sha256-BYiCyzyrpnNQPZ6TI/RpsDn71fSm4fQhRk2DEa5ovoA=" crossorigin="anonymous" media="screen" />
+  
+
+
+
+<link rel="icon" type="image/svg+xml" href="../../../../../images/favicon.svg" sizes="any">
+<link rel="icon" type="image/png" href="../../../../../images/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../../../../images/favicon-16x16.png" sizes="16x16">
+
+<link rel="apple-touch-icon" href="../../../../../images/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="180x180" href="../../../../../images/apple-touch-icon.png">
+
+<link rel="manifest" href="../../../../../site.webmanifest">
+<link rel="mask-icon" href="../../../../../images/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+
+
+
+
+
+
+</head>
+
+
+
+
+
+
+<body class="preload-transitions colorscheme-auto">
+  
+<div class="float-container">
+    <a id="dark-mode-toggle" class="colorscheme-toggle">
+        <i class="fa fa-adjust fa-fw" aria-hidden="true"></i>
+    </a>
+</div>
+
+
+  <main class="wrapper">
+    <nav class="navigation">
+  <section class="container">
+    <a class="navigation-title" href="../../../../../">
+      nametake.dev
+    </a>
+    
+      <input type="checkbox" id="menu-toggle" />
+      <label class="menu-button float-right" for="menu-toggle">
+        <i class="fa fa-bars fa-fw" aria-hidden="true"></i>
+      </label>
+      <ul class="navigation-list">
+        
+          
+            <li class="navigation-item">
+              <a class="navigation-link" href="../../../../../about/">About</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link" href="../../../../../posts/">Blog</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link" href="../../../../../project/">Project</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link" href="../../../../../tags/">Tags</a>
+            </li>
+          
+        
+        
+      </ul>
+    
+  </section>
+</nav>
+
+
+    <div class="content">
+      
+  <section class="container post">
+    <article>
+      <header>
+        <div class="post-title">
+          <h1 class="title">
+            <a class="title-link" href="https://nametake.github.io/posts/2024/01/08/use-go-packages/">
+              go/packagesでformatterを作る
+            </a>
+          </h1>
+        </div>
+        <div class="post-meta">
+          <div class="date">
+            <span class="posted-on">
+              <i class="fa fa-calendar" aria-hidden="true"></i>
+              <time datetime="2024-01-08T00:00:00&#43;09:00">
+                2024/01/08
+              </time>
+            </span>
+            <span class="reading-time">
+              <i class="fa fa-clock-o" aria-hidden="true"></i>
+              3-minute read
+            </span>
+          </div>
+          
+          
+          <div class="tags">
+  <i class="fa fa-tag" aria-hidden="true"></i>
+    <span class="tag">
+      <a href="../../../../../tags/go/">Go</a>
+    </span></div>
+
+        </div>
+      </header>
+
+      <div class="post-content">
+        
+        <p>特定の構造体の文字列を置き換えるFormatterを作ったときに<a href="https://pkg.go.dev/golang.org/x/tools/go/packages"  class="external-link" target="_blank" rel="noopener">go/packages</a>を使って作ってみたので備忘録。</p>
+<h2 id="全体の流れ">
+  全体の流れ
+  <a class="heading-link" href="#%e5%85%a8%e4%bd%93%e3%81%ae%e6%b5%81%e3%82%8c">
+    <i class="fa fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<ol>
+<li><a href="https://pkg.go.dev/golang.org/x/tools/go/packages#Load"  class="external-link" target="_blank" rel="noopener">packages.Load</a>を使ってパッケージ情報を読み込む</li>
+<li>読み込んだ<a href="https://pkg.go.dev/golang.org/x/tools/go/packages#Package"  class="external-link" target="_blank" rel="noopener">packages.Package</a>からast.File(Syntax)と型情報(TypesInfo)を取り出す</li>
+<li>ファイルごとに置き換え処理</li>
+<li>保存</li>
+</ol>
+<h2 id="packagesloadでパッケージ情報の読み込み">
+  packages.Loadでパッケージ情報の読み込み
+  <a class="heading-link" href="#packagesload%e3%81%a7%e3%83%91%e3%83%83%e3%82%b1%e3%83%bc%e3%82%b8%e6%83%85%e5%a0%b1%e3%81%ae%e8%aa%ad%e3%81%bf%e8%be%bc%e3%81%bf">
+    <i class="fa fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p><a href="https://pkg.go.dev/golang.org/x/tools/go/packages#Load"  class="external-link" target="_blank" rel="noopener">packages.Load</a> は指定したパターンからパッケージの情報を読み込める。</p>
+<p>細かい仕様はドキュメントに任せるとして、ざっくりと説明をすると以下のようにGoでよくあるパッケージの指定方法の文字列を渡すといい感じにパッケージ情報を取得してくれる。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">cfg</span> <span style="color:#f92672">:=</span> <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">packages</span>.<span style="color:#a6e22e">Config</span>{
+</span></span><span style="display:flex;"><span>		<span style="color:#a6e22e">Mode</span>: <span style="color:#a6e22e">packages</span>.<span style="color:#a6e22e">NeedTypes</span> | <span style="color:#a6e22e">packages</span>.<span style="color:#a6e22e">NeedSyntax</span> | <span style="color:#a6e22e">packages</span>.<span style="color:#a6e22e">NeedTypesInfo</span> | <span style="color:#a6e22e">packages</span>.<span style="color:#a6e22e">NeedFiles</span>,
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">pkgs</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">packages</span>.<span style="color:#a6e22e">Load</span>(<span style="color:#a6e22e">cfg</span>, <span style="color:#e6db74">&#34;./...&#34;</span>)
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e">// ~~~
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}
+</span></span></code></pre></div><p>packages.Packageの中にはConfigで指定したModeに沿った情報が格納されているため、これらを利用することで対象の特定や置き換えしたいファイルのastが取得できる。</p>
+<p>余談だが、この方法で実装する前は <code>filepath.Walk</code> を利用していたが、比較にならないぐらいpackages.Loadのほうが早かった。</p>
+<h2 id="packagespackageからsyntaxとtypesinfoの取り出し">
+  packages.PackageからSyntaxとTypesInfoの取り出し
+  <a class="heading-link" href="#packagespackage%e3%81%8b%e3%82%89syntax%e3%81%a8typesinfo%e3%81%ae%e5%8f%96%e3%82%8a%e5%87%ba%e3%81%97">
+    <i class="fa fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>読み込んだpackages.PackageにはModeで指定した情報がいくつか含まれているが、特定の型を探して置き換えを行いたい場合は、SyntaxとTypesInfoが利用できる。</p>
+<p>Syntaxにはそのパッケージ内に含まれるファイルがast.File型で格納されており、TypesInfoはそのパッケージで使用されている型の情報が <a href="https://pkg.go.dev/go/types#Info"  class="external-link" target="_blank" rel="noopener"><code>go/types.Info</code></a> 型として格納されている。</p>
+<p>ast.File型は標準パッケージのものなので、そのままast.Inspectに渡してファイル構造を探索できる。</p>
+<p>go/types.Info型は内部にast.Exprやast.Node、ast.Identをキーにして型の情報をmapで保持している。
+そのため、ast.Inspectで探索中にそれらの型にキャストした上でmapのキーに渡すとそれに対応した情報を取得できる。</p>
+<p>例えば、 <code>cloud.google.com/go/spanner.Statement</code> を利用している場所を特定したい場合、以下のようにすることパッケージ名と型名の完全一致で利用箇所を特定できる。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">Format</span>(<span style="color:#a6e22e">pkg</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">packages</span>.<span style="color:#a6e22e">Package</span>, <span style="color:#a6e22e">file</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">ast</span>.<span style="color:#a6e22e">File</span>) {
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e">// ~~~
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#a6e22e">ast</span>.<span style="color:#a6e22e">Inspect</span>(<span style="color:#a6e22e">file</span>, <span style="color:#66d9ef">func</span>(<span style="color:#a6e22e">n</span> <span style="color:#a6e22e">ast</span>.<span style="color:#a6e22e">Node</span>) <span style="color:#66d9ef">bool</span> {
+</span></span><span style="display:flex;"><span>		<span style="color:#a6e22e">compositeLit</span>, <span style="color:#a6e22e">ok</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">n</span>.(<span style="color:#f92672">*</span><span style="color:#a6e22e">ast</span>.<span style="color:#a6e22e">CompositeLit</span>)
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">if</span> !<span style="color:#a6e22e">ok</span> {
+</span></span><span style="display:flex;"><span>			<span style="color:#66d9ef">return</span> <span style="color:#66d9ef">true</span>
+</span></span><span style="display:flex;"><span>		}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>		<span style="color:#a6e22e">selectorExpr</span>, <span style="color:#a6e22e">ok</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">compositeLit</span>.<span style="color:#a6e22e">Type</span>.(<span style="color:#f92672">*</span><span style="color:#a6e22e">ast</span>.<span style="color:#a6e22e">SelectorExpr</span>)
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">if</span> !<span style="color:#a6e22e">ok</span> {
+</span></span><span style="display:flex;"><span>			<span style="color:#66d9ef">return</span> <span style="color:#66d9ef">true</span>
+</span></span><span style="display:flex;"><span>		}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>		<span style="color:#a6e22e">use</span>, <span style="color:#a6e22e">ok</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">pkg</span>.<span style="color:#a6e22e">TypesInfo</span>.<span style="color:#a6e22e">Uses</span>[<span style="color:#a6e22e">selectorExpr</span>.<span style="color:#a6e22e">Sel</span>]
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">if</span> !<span style="color:#a6e22e">ok</span> {
+</span></span><span style="display:flex;"><span>			<span style="color:#66d9ef">return</span> <span style="color:#66d9ef">true</span>
+</span></span><span style="display:flex;"><span>		}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">use</span>.<span style="color:#a6e22e">Type</span>().<span style="color:#a6e22e">String</span>() <span style="color:#f92672">!=</span> <span style="color:#e6db74">&#34;cloud.google.com/go/spanner.Statement&#34;</span> {
+</span></span><span style="display:flex;"><span>			<span style="color:#66d9ef">return</span> <span style="color:#66d9ef">true</span>
+</span></span><span style="display:flex;"><span>		}
+</span></span><span style="display:flex;"><span>		<span style="color:#75715e">// ~~~
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	}
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>実行する側は以下のような感じ。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">run</span>() {
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">for</span> <span style="color:#a6e22e">_</span>, <span style="color:#a6e22e">pkg</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">range</span> <span style="color:#a6e22e">pkgs</span> {
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">for</span> <span style="color:#a6e22e">_</span>, <span style="color:#a6e22e">file</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">range</span> <span style="color:#a6e22e">pkg</span>.<span style="color:#a6e22e">Syntax</span> {
+</span></span><span style="display:flex;"><span>			<span style="color:#a6e22e">Format</span>(<span style="color:#a6e22e">pkg</span>, <span style="color:#a6e22e">file</span>)
+</span></span><span style="display:flex;"><span>		}
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>あとは普通の抽象構文木なので、よしなに値を操作すればfileの構造を変更できる。</p>
+<h2 id="保存">
+  保存
+  <a class="heading-link" href="#%e4%bf%9d%e5%ad%98">
+    <i class="fa fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>go/packages自体はあくまで解析の機能しか持っていないので、保存等はast.Fileの内容を文字列に変換して保存する必要がある。</p>
+<p>とはいえそんなに難しい話でもなく、気をつける点といえばFileSetはpackages.Packageに含まれているものを利用するぐらいで、それ以外は普通に抽象構文木をファイルに保存する処理をすれば良い。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">Save</span>(<span style="color:#a6e22e">pkg</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">packages</span>.<span style="color:#a6e22e">Package</span>, <span style="color:#a6e22e">file</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">ast</span>.<span style="color:#a6e22e">File</span>) {
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">path</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">pkg</span>.<span style="color:#a6e22e">Fset</span>.<span style="color:#a6e22e">Position</span>(<span style="color:#a6e22e">file</span>.<span style="color:#a6e22e">Pos</span>()).<span style="color:#a6e22e">Filename</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// ~~~
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">buf</span> <span style="color:#a6e22e">bytes</span>.<span style="color:#a6e22e">Buffer</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">printer</span>.<span style="color:#a6e22e">Fprint</span>(<span style="color:#f92672">&amp;</span><span style="color:#a6e22e">buf</span>, <span style="color:#a6e22e">pkg</span>.<span style="color:#a6e22e">Fset</span>, <span style="color:#a6e22e">file</span>); <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+</span></span><span style="display:flex;"><span>		panic(<span style="color:#a6e22e">err</span>)
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">result</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">format</span>.<span style="color:#a6e22e">Source</span>(<span style="color:#a6e22e">buf</span>.<span style="color:#a6e22e">Bytes</span>())
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+</span></span><span style="display:flex;"><span>		panic(<span style="color:#a6e22e">err</span>)
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">os</span>.<span style="color:#a6e22e">WriteFile</span>(<span style="color:#a6e22e">path</span>, <span style="color:#a6e22e">result</span>, <span style="color:#ae81ff">0644</span>); <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+</span></span><span style="display:flex;"><span>		panic(<span style="color:#a6e22e">err</span>)
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div>
+      </div>
+
+
+      <footer>
+        
+
+
+        <div id="disqus_thread"></div>
+<script>
+  window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "nametake-dev" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+    
+    document.addEventListener('themeChanged', function (e) { 
+        if (document.readyState == 'complete') {
+          DISQUS.reset({ reload: true, config: disqus_config });
+        }
+    });
+</script>
+        
+        
+        
+        
+      </footer>
+    </article>
+
+    
+  </section>
+
+    </div>
+
+    <footer class="footer">
+  <section class="container">
+    ©
+    
+    2024
+     nametake 
+    ·
+    
+    Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/" target="_blank" rel="noopener">Coder</a>.
+    
+  </section>
+</footer>
+
+  </main>
+
+  
+
+  
+  
+  <script src="../../../../../js/coder.min.6ae284be93d2d19dad1f02b0039508d9aab3180a12a06dcc71b0b0ef7825a317.js" integrity="sha256-auKEvpPS0Z2tHwKwA5UI2aqzGAoSoG3McbCw73gloxc="></script>
+  
+
+  
+
+  
+
+
+  
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-ML7TD1LERR"></script>
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-ML7TD1LERR', { 'anonymize_ip': false });
+}
+</script>
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</body>
+
+</html>

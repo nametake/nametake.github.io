@@ -6,8 +6,15 @@
     <description>Recent content on nametake.dev</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <lastBuildDate>Mon, 01 Jan 2024 00:00:00 +0900</lastBuildDate>
+    <lastBuildDate>Mon, 08 Jan 2024 00:00:00 +0900</lastBuildDate>
     <atom:link href="https://nametake.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>go/packagesでformatterを作る</title>
+      <link>https://nametake.github.io/posts/2024/01/08/use-go-packages/</link>
+      <pubDate>Mon, 08 Jan 2024 00:00:00 +0900</pubDate>
+      <guid>https://nametake.github.io/posts/2024/01/08/use-go-packages/</guid>
+      <description>特定の構造体の文字列を置き換えるFormatterを作ったときにgo/packagesを使って作ってみたので備忘録。 全体の流れ Link to heading pack</description>
+    </item>
     <item>
       <title>Goの関数定義の引数をチェックするLinterを作った</title>
       <link>https://nametake.github.io/posts/2024/01/01/mustargs/</link>
