@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <title>
+  ja-leaky-abstraction · nametake.dev
+</title>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+
+
+
+
+<meta name="author" content="nametake">
+<meta name="description" content="インターネットのエンジニアリングには、毎日頼りにしている魔法の鍵となる部分があります。それは、インターネットの基本的な構成要素の一つであるT">
+<meta name="keywords" content="blog,developer,personal">
+
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="ja-leaky-abstraction">
+  <meta name="twitter:description" content="インターネットのエンジニアリングには、毎日頼りにしている魔法の鍵となる部分があります。それは、インターネットの基本的な構成要素の一つであるT">
+
+<meta property="og:url" content="http://localhost:1313/posts/2020/10/23/ja-leaky-abstraction/">
+  <meta property="og:site_name" content="nametake.dev">
+  <meta property="og:title" content="ja-leaky-abstraction">
+  <meta property="og:description" content="インターネットのエンジニアリングには、毎日頼りにしている魔法の鍵となる部分があります。それは、インターネットの基本的な構成要素の一つであるT">
+  <meta property="og:locale" content="ja">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2020-10-23T00:00:00+09:00">
+    <meta property="article:modified_time" content="2020-10-23T00:00:00+09:00">
+
+
+
+
+<link rel="canonical" href="http://localhost:1313/posts/2020/10/23/ja-leaky-abstraction/">
+
+
+<link rel="preload" href="../../../../../fonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../../../../../fonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../../../../../fonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
+
+
+  
+  
+  <link rel="stylesheet" href="../../../../../css/coder.css" media="screen">
+
+
+
+
+
+
+  
+    
+    
+    <link rel="stylesheet" href="../../../../../css/coder-dark.css" media="screen">
+  
+
+
+
+ 
+  
+    
+    <link rel="stylesheet" href="../../../../../css/noto&#43;sans&#43;jp.css" media="screen">
+  
+
+
+
+  
+  
+    
+    
+    <link rel="stylesheet" href="../../../../../scss/custom.css" media="screen">
+  
+
+
+
+<link rel="icon" type="image/svg+xml" href="../../../../../images/favicon.svg" sizes="any">
+<link rel="icon" type="image/png" href="../../../../../images/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../../../../images/favicon-16x16.png" sizes="16x16">
+
+<link rel="apple-touch-icon" href="../../../../../images/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="180x180" href="../../../../../images/apple-touch-icon.png">
+
+<link rel="manifest" href="../../../../../site.webmanifest">
+<link rel="mask-icon" href="../../../../../images/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+
+
+
+
+
+
+</head>
+
+
+
+
+
+
+<body class="preload-transitions colorscheme-auto">
+  
+<div class="float-container">
+    <a id="dark-mode-toggle" class="colorscheme-toggle">
+        <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+    </a>
+</div>
+
+
+  <main class="wrapper">
+    <nav class="navigation">
+  <section class="container">
+    
+    <a class="navigation-title" href="http://localhost:1313/">
+      nametake.dev
+    </a>
+    
+    
+      <input type="checkbox" id="menu-toggle" />
+      <label class="menu-button float-right" for="menu-toggle">
+        <i class="fa-solid fa-bars fa-fw" aria-hidden="true"></i>
+      </label>
+      <ul class="navigation-list">
+        
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="../../../../../about/">About</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="../../../../../posts/">Blog</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="../../../../../project/">Project</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="../../../../../tags/">Tags</a>
+            </li>
+          
+        
+        
+      </ul>
+    
+  </section>
+</nav>
+
+
+    <div class="content">
+      
+  <section class="container post">
+    <article>
+      <header>
+        <div class="post-title">
+          <h1 class="title">
+            <a class="title-link" href="http://localhost:1313/posts/2020/10/23/ja-leaky-abstraction/">
+              ja-leaky-abstraction
+            </a>
+          </h1>
+        </div>
+        <div class="post-meta">
+          <div class="date">
+            <span class="posted-on">
+              <i class="fa-solid fa-calendar" aria-hidden="true"></i>
+              <time datetime="2020-10-23T00:00:00&#43;09:00">
+                2020/10/23
+              </time>
+            </span>
+            <span class="reading-time">
+              <i class="fa-solid fa-clock" aria-hidden="true"></i>
+              11-minute read
+            </span>
+          </div>
+          
+          
+          
+        </div>
+      </header>
+
+      <div class="post-content">
+        
+        <!-- textlint-disable -->
+<p>インターネットのエンジニアリングには、毎日頼りにしている魔法の鍵となる部分があります。それは、インターネットの基本的な構成要素の一つであるTCPプロトコルにあります。</p>
+<p>TCPは信頼性の高いデータを送信する方法です。これは、TCPを使用してネットワーク上でメッセージを送信した場合には、メッセージが到着し、文字化けしたり破損したりすることはないということを意味します。</p>
+<p>私たちは、ウェブページの取得や電子メールの送信など、多くのことにTCPを使用しています。TCPの信頼性があるからこそ、すべてのメールが完璧な状態で届くのです。たとえそれがおかしなスパムであったとしても。</p>
+<p>それに比べて、IPと呼ばれる信頼性の低いデータ送信方法があります。誰もデータが届くとは約束していないし、届く前にめちゃくちゃになってしまうかもしれない。IPを使ってたくさんのメッセージを送信しても、そのうちの半分しか届かなくても驚かないでください。</p>
+<p>ここに魔法の部分があります。TCPはIPの上に構築されています。言い換えれば、TCPは信頼性の低いツールだけを使って、どうにかして信頼性の高いデータを送信しなければならないということです。</p>
+<p>なぜこれが魔法なのかを説明するために、現実世界の道徳的に同等のシナリオを考えてみましょう。</p>
+<p>ブロードウェイからハリウッドに俳優を送る方法を考えてみましょう。車の中には事故を起こして役者が死んでしまうものもありました。途中で酔っぱらって頭を剃ったり、鼻にタトゥーを入れたりして、ハリウッドで働くにはあまりにも醜い役者になってしまうこともありましたし、俳優たちはみんな違うルートを通ったために、予定していた順番とは違う順番で到着することもしばしばありました。さて、ハリウッド・エクスプレスという新しいサービスを想像してみてください。これは、俳優をハリウッドに届け、(a)順番通りに(b)完璧な状態で(c)到着することを保証するものです。ハリウッドエクスプレスには、俳優を車に乗せて全国に送り届けるという頼りない方法以外に、俳優を届ける方法がないというのが不思議なところです。ハリウッド・エクスプレスは、各俳優が完璧な状態で到着しているかどうかを確認し、到着していない場合は、ホーム・オフィスに電話して、その俳優の一卵性双生児を送ってもらうように依頼します。俳優が間違った順番で到着した場合は、ハリウッド・エクスプレスが俳優を再編成します。エリア51に向かっていた大型UFOがネバダ州の高速道路に墜落して通行不能になった場合、そこに向かっていた俳優はすべてアリゾナ経由でルート変更され、ハリウッドエクスプレスはカリフォルニアの映画監督に何が起こったのかさえ伝えません。ハリウッドエクスプレスはカリフォルニアの映画監督にも何があったのか教えてくれません。彼らにとっては、俳優たちがいつもより少し遅れて到着しているように見えるだけで、UFOが墜落したことも聞かされません。</p>
+<p>これが、おおよそTCPの魔法です。これは、コンピュータ科学者が抽象化と呼ぶもので、裏で行われているもっと複雑なことを単純化したものです。結局のところ、多くのコンピュータプログラミングは抽象化を構築することで成り立っています。文字列ライブラリとは何ですか？コンピュータが数字を操作するのと同じように、文字列を簡単に操作できるように見せかける方法です。ファイルシステムとは何ですか？ハードドライブは、特定の場所にビットを保存することができる回転する磁気プラッタの集まりではなく、むしろ、1 つ以上のバイトの文字列からなる個々のファイルを含むフォルダの中にあるフォルダの階層システムである、というふりをするための方法です。</p>
+<p>TCP の話に戻ります。先ほど、簡単にするためにちょっとした嘘の話をしましたが、この嘘に気が狂いそうになって耳から湯気が出ている人もいるでしょう。私はTCPがメッセージの到着を保証していると言いましたが、実際にはそうではありません。実際にはそうではありません。もしペットのヘビがコンピュータにつながるネットワークケーブルを噛み切ってしまい、IPパケットが届かなくなってしまった場合、TCPは何もできず、メッセージは届かないのです。もしあなたが会社のシステム管理者に無礼を働いて、過負荷のハブに接続することで罰せられたとしたら、IPパケットの一部だけが通過し、TCPは動作しますが、すべてが本当に遅くなります。</p>
+<p>これを私はリーキー抽象化と呼んでいます。TCP は信頼性の低いネットワークを完全に抽象化して提供しようとしますが、時として、ネットワークが抽象化された部分から漏れてしまい、抽象化された部分では防ぎきれないものを感じてしまうことがあります。これは、私が「リーキー抽象化の法則」と呼んでいるものの一例です。</p>
+<p>すべての自明でない抽象化は、ある程度は漏れている。
+抽象化は失敗する。多少失敗することもあれば、大量に失敗することもある。漏れがある。物事がうまくいかない。抽象化をしていると、それはあちこちで起こります。いくつか例を挙げてみましょう。</p>
+<p>大きな二次元配列の反復処理のような単純なことでも、垂直方向ではなく水平方向に行うと、&ldquo;木目 &ldquo;に応じてパフォーマンスが根本的に異なることがあります - 一方の方向では、他方の方向よりも膨大な数のページフォルトが発生し、ページフォルトは遅くなります。アセンブリプログラマでさえ、大きなフラットなアドレス空間を持っているふりをすることが許されていますが、仮想メモリは実際には抽象化されたものにすぎず、ページフォルトが発生したときに漏れてしまい、特定のメモリフェッチには他のメモリフェッチよりもナノ秒以上の時間がかかることになります。
+SQL言語は、データベースへの問い合わせに必要な手続き的なステップを抽象化することを目的としています。しかし、場合によっては、特定のSQLクエリは他の論理的に等価なクエリよりも数千倍も遅くなることがあります。有名な例としては、&ldquo;where a=b and b=c and a=c&rdquo; を指定した方が、&ldquo;where a=b and b=c&rdquo; のみを指定した場合よりも、&ldquo;where a=b and b=c&rdquo; のみを指定した場合の方が、結果セットが同じであるにもかかわらず、劇的に高速になる SQL サーバーがあることが挙げられます。プロシージャは気にしなくていい、仕様だけは気にしなくていいということになっています。しかし、時には抽象化が漏れて恐ろしいパフォーマンスを引き起こすことがあります。
+NFSやSMBのようなネットワークライブラリでは、リモートマシン上のファイルを「あたかもローカルであるかのように」扱うことができますが、接続が非常に遅くなったり、ダウンしたりして、ファイルがローカルであるかのように動作しなくなることがあります。リモートファイルはローカルファイルと同じ」という抽象化が漏れてしまいます。Unixのシステム管理者向けの具体的な例を挙げてみましょう。ユーザのホームディレクトリを NFS マウントされたドライブに置き（一つの抽象化）、ユーザが .forward ファイルを作成してすべての電子メールを別の場所に転送した場合（別の抽象化）、新しい電子メールが到着している間に NFS サーバがダウンした場合、.forward ファイルが見つからないので、メッセージは転送されません。この抽象化の漏れで、実際にいくつかのメッセージが床に落とされてしまいました。
+C++の文字列クラスは、文字列が第一級のデータであるふりをさせてくれることになっています。文字列が難しいという事実を抽象化して、あたかも整数のように簡単なデータであるかのように振る舞わせようとしています。ほとんどすべての C++ 文字列クラスは + 演算子をオーバーロードしているので、s + &ldquo;bar&rdquo; と書いて連結することができます。しかし、あなたは知っていますか？どんなに頑張っても、&ldquo;foo&rdquo; + &ldquo;bar&rdquo; と入力できる C++ の文字列クラスは地球上に存在しません。抽象化のために、この言語があなたにプラグインさせてくれないというリークが出てきたのです。(面白いことに、C++ の進化の歴史は、文字列抽象化のリークを塞ごうとしてきた歴史と言えるでしょう。なぜネイティブの文字列クラスを言語自体に追加できなかったのか、今のところ私には理解できません)。
+雨が降っているときは、車にはワイパーやヘッドライト、屋根やヒーターがついていても、雨が降っているという事実を気にしないようにしてくれていても、雨が降っているときはスピードを上げて運転することはできません（天気を抽象化してしまう）。
+漏れのある抽象化の法則が問題になっている理由の一つは、抽象化が意図したほど私たちの生活を本当に単純化しないことを意味しています。私が誰かをC++プログラマーになるためのトレーニングをしているときに、char*やポインタの算術について教える必要がなければいいのですが。STL文字列に直行できればいいんだけどね。しかし、ある日、彼らは &ldquo;foo&rdquo; + &ldquo;bar&rdquo; というコードを書くようになり、本当に奇妙なことが起こるでしょう。あるいは、ある日、彼らは Windows API 関数を呼ぼうとするでしょう。その関数は、OUT LPTSTR 引数を持つと文書化されています。</p>
+<p>COM プログラミングについて誰かに教える際に、Visual Studio のウィザードやコード生成機能の使い方を教えることができればいいのですが、何か問題が起きた場合に、何が起きたのか、どうやってデバッグしてそこから回復するのか、ということを漠然と考えることができなくなってしまいます。IUnknown とか CLSID とか ProgIDS とか&hellip;&hellip;ああ、人間性を教えなければならない。</p>
+<p>ASP.NETプログラミングを教える際には、物をダブルクリックして、ユーザーがその物をクリックした時にサーバー上で実行されるコードを書けることを教えることができれば良いのですが、そうではありません。実際、ASP.NET はハイパーリンク (<a>) のクリックを処理する HTML コードとボタンのクリックを処理するコードの違いを抽象化しています。問題: ASP.NETの設計者は、HTMLではハイパーリンクからフォームを送信する方法がないことを隠す必要がありました。これは、数行の JavaScript を生成し、ハイパーリンクに onclick ハンドラをアタッチすることで実現しています。抽象度は漏れますが。エンドユーザーが JavaScript を無効にしている場合、ASP.NET アプリケーションは正しく動作せず、プログラマーが ASP.NET が何を抽象化しているのか理解していない場合、何が間違っているのか手掛かりがないだけです。</p>
+<p>漏れのある抽象化の法則は、誰かが、私たちをこれまで以上に効率的にしてくれると思われる、目まぐるしい新しいコード生成ツールを思いついたときにはいつでも、多くの人が「最初に手動で行う方法を学んでから、時間を節約するために目まぐるしいツールを使え」と言っているのを耳にすることを意味します。何かを抽象化したふりをするコード生成ツールは、他の抽象化ツールと同じようにリークしてしまいます。つまり、抽象化は作業する時間を節約してくれるが、学習する時間を節約してくれるわけではないのだ。</p>
+<p>つまり、逆説的に言えば、より優れた抽象化を備えたより高度なプログラミングツールを手に入れても、熟練したプログラマーになるのはますます難しくなっているということです。</p>
+<p>最初のマイクロソフトのインターンシップでは、Macintoshで動作する文字列ライブラリを書いていました。典型的な課題は、新しい文字列の末尾へのポインタを返す strcat のバージョンを書くことです。数行のCコード。私がしたことはすべて、K&amp;R - C言語プログラミング言語についての薄い本 - から右でした。</p>
+<p>今日、CityDeskで作業するためには、Visual Basic、COM、ATL、C++、InnoSetup、Internet Explorerの内部、正規表現、DOM、HTML、CSS、XMLを知っている必要があります。昔のK&amp;Rのものに比べれば、どれもハイレベルなツールですが、それでもK&amp;Rのものを知っていなければ、もうダメです。</p>
+<p>10年前には、新しいプログラミングパラダイムによって今頃はプログラミングが簡単になっているだろうと想像していたかもしれません。実際、私たちが長年かけて作り上げてきた抽象化によって、10年前や15年前には必要のなかったソフトウェア開発の複雑さを扱うことができるようになりました。そして、最新の OO フォームベースの言語のような素晴らしいツールによって、信じられないほど素早く多くの仕事をこなすことができますが、ある日突然、抽象化が漏れてしまった問題を解決しなければならなくなり、2週間もかかってしまうのです。そして、ほとんどVBのプログラミングをするためにプログラマーを雇う必要があるとき、VBの抽象化が漏れるたびに完全にタールにはまってしまうので、VBのプログラマーを雇うのはよくありません。</p>
+<p>漏れた抽象化の法則が足を引っ張っています。</p>
+
+      </div>
+
+
+      <footer>
+        
+
+
+        <div id="disqus_thread"></div>
+<script>
+  window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "nametake-dev" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+    
+    document.addEventListener('themeChanged', function (e) { 
+        if (document.readyState == 'complete') {
+          DISQUS.reset({ reload: true, config: disqus_config });
+        }
+    });
+</script>
+        
+        
+        
+        
+
+        
+        
+      </footer>
+    </article>
+
+    
+  </section>
+
+    </div>
+
+    <footer class="footer">
+  <section class="container">
+    ©
+    
+    2024
+     nametake 
+    ·
+    
+    Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/" target="_blank" rel="noopener">Coder</a>.
+    
+  </section>
+</footer>
+
+  </main>
+
+  
+
+  
+  
+  <script src="../../../../../js/coder.js"></script>
+  
+
+  
+
+  
+
+
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</body>
+
+</html>

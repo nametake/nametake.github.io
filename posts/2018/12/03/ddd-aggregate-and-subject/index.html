@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <title>
+  ddd-aggregate-and-subject · nametake.dev
+</title>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+
+
+
+
+<meta name="author" content="nametake">
+<meta name="description" content="https://qiita.com/tanaka9230/items/05850cda0d867f1b50e9 DDDでの集約 Link to heading トランザクション境界を示すもの 複数のコンテキストにまたがった時どうするか Link to heading https://kbigwheel.hateblo.jp/entry/2018/12/03/aggregate-and-consistency 巨大にする 結果整合性にする トランザクシ">
+<meta name="keywords" content="blog,developer,personal">
+
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="ddd-aggregate-and-subject">
+  <meta name="twitter:description" content="https://qiita.com/tanaka9230/items/05850cda0d867f1b50e9 DDDでの集約 Link to heading トランザクション境界を示すもの 複数のコンテキストにまたがった時どうするか Link to heading https://kbigwheel.hateblo.jp/entry/2018/12/03/aggregate-and-consistency 巨大にする 結果整合性にする トランザクシ">
+
+<meta property="og:url" content="http://localhost:1313/posts/2018/12/03/ddd-aggregate-and-subject/">
+  <meta property="og:site_name" content="nametake.dev">
+  <meta property="og:title" content="ddd-aggregate-and-subject">
+  <meta property="og:description" content="https://qiita.com/tanaka9230/items/05850cda0d867f1b50e9 DDDでの集約 Link to heading トランザクション境界を示すもの 複数のコンテキストにまたがった時どうするか Link to heading https://kbigwheel.hateblo.jp/entry/2018/12/03/aggregate-and-consistency 巨大にする 結果整合性にする トランザクシ">
+  <meta property="og:locale" content="ja">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2018-12-03T20:39:55+09:00">
+    <meta property="article:modified_time" content="2018-12-03T20:39:55+09:00">
+    <meta property="article:tag" content="DDD">
+
+
+
+
+<link rel="canonical" href="http://localhost:1313/posts/2018/12/03/ddd-aggregate-and-subject/">
+
+
+<link rel="preload" href="../../../../../fonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../../../../../fonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../../../../../fonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
+
+
+  
+  
+  <link rel="stylesheet" href="../../../../../css/coder.css" media="screen">
+
+
+
+
+
+
+  
+    
+    
+    <link rel="stylesheet" href="../../../../../css/coder-dark.css" media="screen">
+  
+
+
+
+ 
+  
+    
+    <link rel="stylesheet" href="../../../../../css/noto&#43;sans&#43;jp.css" media="screen">
+  
+
+
+
+  
+  
+    
+    
+    <link rel="stylesheet" href="../../../../../scss/custom.css" media="screen">
+  
+
+
+
+<link rel="icon" type="image/svg+xml" href="../../../../../images/favicon.svg" sizes="any">
+<link rel="icon" type="image/png" href="../../../../../images/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../../../../images/favicon-16x16.png" sizes="16x16">
+
+<link rel="apple-touch-icon" href="../../../../../images/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="180x180" href="../../../../../images/apple-touch-icon.png">
+
+<link rel="manifest" href="../../../../../site.webmanifest">
+<link rel="mask-icon" href="../../../../../images/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+
+
+
+
+
+
+</head>
+
+
+
+
+
+
+<body class="preload-transitions colorscheme-auto">
+  
+<div class="float-container">
+    <a id="dark-mode-toggle" class="colorscheme-toggle">
+        <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+    </a>
+</div>
+
+
+  <main class="wrapper">
+    <nav class="navigation">
+  <section class="container">
+    
+    <a class="navigation-title" href="http://localhost:1313/">
+      nametake.dev
+    </a>
+    
+    
+      <input type="checkbox" id="menu-toggle" />
+      <label class="menu-button float-right" for="menu-toggle">
+        <i class="fa-solid fa-bars fa-fw" aria-hidden="true"></i>
+      </label>
+      <ul class="navigation-list">
+        
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="../../../../../about/">About</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="../../../../../posts/">Blog</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="../../../../../project/">Project</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="../../../../../tags/">Tags</a>
+            </li>
+          
+        
+        
+      </ul>
+    
+  </section>
+</nav>
+
+
+    <div class="content">
+      
+  <section class="container post">
+    <article>
+      <header>
+        <div class="post-title">
+          <h1 class="title">
+            <a class="title-link" href="http://localhost:1313/posts/2018/12/03/ddd-aggregate-and-subject/">
+              ddd-aggregate-and-subject
+            </a>
+          </h1>
+        </div>
+        <div class="post-meta">
+          <div class="date">
+            <span class="posted-on">
+              <i class="fa-solid fa-calendar" aria-hidden="true"></i>
+              <time datetime="2018-12-03T20:39:55&#43;09:00">
+                2018/12/03
+              </time>
+            </span>
+            <span class="reading-time">
+              <i class="fa-solid fa-clock" aria-hidden="true"></i>
+              1-minute read
+            </span>
+          </div>
+          
+          
+          <div class="tags">
+  <i class="fa-solid fa-tag" aria-hidden="true"></i>
+    <span class="tag">
+      <a href="../../../../../tags/ddd/">DDD</a>
+    </span></div>
+
+        </div>
+      </header>
+
+      <div class="post-content">
+        
+        <p><a href="https://qiita.com/tanaka9230/items/05850cda0d867f1b50e9"  class="external-link" target="_blank" rel="noopener">https://qiita.com/tanaka9230/items/05850cda0d867f1b50e9</a></p>
+<h3 id="dddでの集約">
+  DDDでの集約
+  <a class="heading-link" href="#ddd%e3%81%a7%e3%81%ae%e9%9b%86%e7%b4%84">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>トランザクション境界を示すもの</li>
+</ul>
+<h3 id="複数のコンテキストにまたがった時どうするか">
+  複数のコンテキストにまたがった時どうするか
+  <a class="heading-link" href="#%e8%a4%87%e6%95%b0%e3%81%ae%e3%82%b3%e3%83%b3%e3%83%86%e3%82%ad%e3%82%b9%e3%83%88%e3%81%ab%e3%81%be%e3%81%9f%e3%81%8c%e3%81%a3%e3%81%9f%e6%99%82%e3%81%a9%e3%81%86%e3%81%99%e3%82%8b%e3%81%8b">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p><a href="https://kbigwheel.hateblo.jp/entry/2018/12/03/aggregate-and-consistency"  class="external-link" target="_blank" rel="noopener">https://kbigwheel.hateblo.jp/entry/2018/12/03/aggregate-and-consistency</a></p>
+<ul>
+<li>巨大にする</li>
+<li>結果整合性にする</li>
+<li>トランザクションを外出しする</li>
+<li>アーキテクチャを見直す</li>
+</ul>
+<h3 id="自分たちの課題">
+  自分たちの課題
+  <a class="heading-link" href="#%e8%87%aa%e5%88%86%e3%81%9f%e3%81%a1%e3%81%ae%e8%aa%b2%e9%a1%8c">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>巨大にする
+<ul>
+<li>そのコンテキストでは使わないDomainも引いてくる必要がある</li>
+</ul>
+</li>
+<li>結果整合性
+<ul>
+<li>許されない場合</li>
+<li>例えば金融</li>
+</ul>
+</li>
+</ul>
+<h3 id="かとじゅんさんアンサー">
+  かとじゅんさんアンサー
+  <a class="heading-link" href="#%e3%81%8b%e3%81%a8%e3%81%98%e3%82%85%e3%82%93%e3%81%95%e3%82%93%e3%82%a2%e3%83%b3%e3%82%b5%e3%83%bc">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p><a href="https://qiita.com/j5ik2o/items/ae8a4d3cdaa24afe7599"  class="external-link" target="_blank" rel="noopener">https://qiita.com/j5ik2o/items/ae8a4d3cdaa24afe7599</a></p>
+<ul>
+<li>結果整合性で頑張る</li>
+</ul>
+<h3 id="結果整合性で頑張れない場合">
+  結果整合性で頑張れない場合
+  <a class="heading-link" href="#%e7%b5%90%e6%9e%9c%e6%95%b4%e5%90%88%e6%80%a7%e3%81%a7%e9%a0%91%e5%bc%b5%e3%82%8c%e3%81%aa%e3%81%84%e5%a0%b4%e5%90%88">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p><a href="https://twitter.com/little_hand_s/status/1069371669230145537"  class="external-link" target="_blank" rel="noopener">https://twitter.com/little_hand_s/status/1069371669230145537</a></p>
+<h4 id="自分たちの場合">
+  自分たちの場合
+  <a class="heading-link" href="#%e8%87%aa%e5%88%86%e3%81%9f%e3%81%a1%e3%81%ae%e5%a0%b4%e5%90%88">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>トランザクションを外出しする
+<ul>
+<li>トランザクション境界はDomainに反映されない</li>
+</ul>
+</li>
+</ul>
+<h5 id="外出し時の課題解決">
+  外出し時の課題解決
+  <a class="heading-link" href="#%e5%a4%96%e5%87%ba%e3%81%97%e6%99%82%e3%81%ae%e8%aa%b2%e9%a1%8c%e8%a7%a3%e6%b1%ba">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h5>
+<ul>
+<li>トランザクション境界をサブジェクトとして表現する
+<ul>
+<li>RepositoryからDomainを取り出す</li>
+<li>サブジェクトのDomainとして組み立てる</li>
+</ul>
+</li>
+<li>サブジェクトの単位でトランザクションを張る</li>
+</ul>
+<h5 id="サブジェクトとは">
+  サブジェクトとは
+  <a class="heading-link" href="#%e3%82%b5%e3%83%96%e3%82%b8%e3%82%a7%e3%82%af%e3%83%88%e3%81%a8%e3%81%af">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h5>
+<p><a href="http://www.atmarkit.co.jp/fdotnet/softfactory/softfactory04/softfactory04_03.html"  class="external-link" target="_blank" rel="noopener">http://www.atmarkit.co.jp/fdotnet/softfactory/softfactory04/softfactory04_03.html</a></p>
+<h5 id="メリット">
+  メリット
+  <a class="heading-link" href="#%e3%83%a1%e3%83%aa%e3%83%83%e3%83%88">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h5>
+<ul>
+<li>Domainの巨大化は防げる</li>
+<li>強整合性を実現できる</li>
+</ul>
+<h5 id="デメリット">
+  デメリット
+  <a class="heading-link" href="#%e3%83%87%e3%83%a1%e3%83%aa%e3%83%83%e3%83%88">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h5>
+<ul>
+<li>集約ではトランザクションが守られていない</li>
+</ul>
+
+      </div>
+
+
+      <footer>
+        
+
+
+        <div id="disqus_thread"></div>
+<script>
+  window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "nametake-dev" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+    
+    document.addEventListener('themeChanged', function (e) { 
+        if (document.readyState == 'complete') {
+          DISQUS.reset({ reload: true, config: disqus_config });
+        }
+    });
+</script>
+        
+        
+        
+        
+
+        
+        
+      </footer>
+    </article>
+
+    
+  </section>
+
+    </div>
+
+    <footer class="footer">
+  <section class="container">
+    ©
+    
+    2024
+     nametake 
+    ·
+    
+    Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/" target="_blank" rel="noopener">Coder</a>.
+    
+  </section>
+</footer>
+
+  </main>
+
+  
+
+  
+  
+  <script src="../../../../../js/coder.js"></script>
+  
+
+  
+
+  
+
+
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</body>
+
+</html>

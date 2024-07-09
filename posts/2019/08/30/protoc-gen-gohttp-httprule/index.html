@@ -16,16 +16,22 @@
 <meta name="description" content="以前、Protocol Buffersのserviceの定義を利用してGoのnet/httpで利用できるようにするためのprotoc-gen-">
 <meta name="keywords" content="blog,developer,personal">
 
-<meta name="twitter:card" content="summary"/><meta name="twitter:title" content="protoc-gen-gohttpをHttpRule Optionに対応させた"/>
-<meta name="twitter:description" content="以前、Protocol Buffersのserviceの定義を利用してGoのnet/httpで利用できるようにするためのprotoc-gen-"/>
 
-<meta property="og:title" content="protoc-gen-gohttpをHttpRule Optionに対応させた" />
-<meta property="og:description" content="以前、Protocol Buffersのserviceの定義を利用してGoのnet/httpで利用できるようにするためのprotoc-gen-" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://nametake.github.io/posts/2019/08/30/protoc-gen-gohttp-httprule/" /><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2019-08-30T01:52:26+09:00" />
-<meta property="article:modified_time" content="2019-08-30T01:52:26+09:00" />
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="protoc-gen-gohttpをHttpRule Optionに対応させた">
+  <meta name="twitter:description" content="以前、Protocol Buffersのserviceの定義を利用してGoのnet/httpで利用できるようにするためのprotoc-gen-">
 
+<meta property="og:url" content="https://nametake.github.io/posts/2019/08/30/protoc-gen-gohttp-httprule/">
+  <meta property="og:site_name" content="nametake.dev">
+  <meta property="og:title" content="protoc-gen-gohttpをHttpRule Optionに対応させた">
+  <meta property="og:description" content="以前、Protocol Buffersのserviceの定義を利用してGoのnet/httpで利用できるようにするためのprotoc-gen-">
+  <meta property="og:locale" content="ja">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2019-08-30T01:52:26+09:00">
+    <meta property="article:modified_time" content="2019-08-30T01:52:26+09:00">
+    <meta property="article:tag" content="Protocol Buffers">
+    <meta property="article:tag" content="Go">
 
 
 
@@ -33,12 +39,14 @@
 <link rel="canonical" href="https://nametake.github.io/posts/2019/08/30/protoc-gen-gohttp-httprule/">
 
 
-<link rel="preload" href="../../../../../fonts/forkawesome-webfont.woff2?v=1.2.0" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../../../../../fonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../../../../../fonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../../../../../fonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
 
 
   
   
-  <link rel="stylesheet" href="../../../../../css/coder.min.e1bdf152d93b060b06ba5d496486ed9c201a8b95d335e035beb5faebe3b61cad.css" integrity="sha256-4b3xUtk7BgsGul1JZIbtnCAai5XTNeA1vrX66&#43;O2HK0=" crossorigin="anonymous" media="screen" />
+  <link rel="stylesheet" href="../../../../../css/coder.min.38c4552ac40f9ae3408bad40358f654ebd8804412fe74ed56f2d6c8a7af82dd3.css" integrity="sha256-OMRVKsQPmuNAi61ANY9lTr2IBEEv507Vby1sinr4LdM=" crossorigin="anonymous" media="screen" />
 
 
 
@@ -98,7 +106,7 @@
   
 <div class="float-container">
     <a id="dark-mode-toggle" class="colorscheme-toggle">
-        <i class="fa fa-adjust fa-fw" aria-hidden="true"></i>
+        <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
     </a>
 </div>
 
@@ -106,31 +114,33 @@
   <main class="wrapper">
     <nav class="navigation">
   <section class="container">
-    <a class="navigation-title" href="../../../../../">
+    
+    <a class="navigation-title" href="https://nametake.github.io/">
       nametake.dev
     </a>
     
+    
       <input type="checkbox" id="menu-toggle" />
       <label class="menu-button float-right" for="menu-toggle">
-        <i class="fa fa-bars fa-fw" aria-hidden="true"></i>
+        <i class="fa-solid fa-bars fa-fw" aria-hidden="true"></i>
       </label>
       <ul class="navigation-list">
         
           
             <li class="navigation-item">
-              <a class="navigation-link" href="../../../../../about/">About</a>
+              <a class="navigation-link " href="../../../../../about/">About</a>
             </li>
           
             <li class="navigation-item">
-              <a class="navigation-link" href="../../../../../posts/">Blog</a>
+              <a class="navigation-link " href="../../../../../posts/">Blog</a>
             </li>
           
             <li class="navigation-item">
-              <a class="navigation-link" href="../../../../../project/">Project</a>
+              <a class="navigation-link " href="../../../../../project/">Project</a>
             </li>
           
             <li class="navigation-item">
-              <a class="navigation-link" href="../../../../../tags/">Tags</a>
+              <a class="navigation-link " href="../../../../../tags/">Tags</a>
             </li>
           
         
@@ -156,20 +166,20 @@
         <div class="post-meta">
           <div class="date">
             <span class="posted-on">
-              <i class="fa fa-calendar" aria-hidden="true"></i>
+              <i class="fa-solid fa-calendar" aria-hidden="true"></i>
               <time datetime="2019-08-30T01:52:26&#43;09:00">
                 2019/08/30
               </time>
             </span>
             <span class="reading-time">
-              <i class="fa fa-clock-o" aria-hidden="true"></i>
+              <i class="fa-solid fa-clock" aria-hidden="true"></i>
               4-minute read
             </span>
           </div>
           
           
           <div class="tags">
-  <i class="fa fa-tag" aria-hidden="true"></i>
+  <i class="fa-solid fa-tag" aria-hidden="true"></i>
     <span class="tag">
       <a href="../../../../../tags/protocol-buffers/">Protocol Buffers</a>
     </span>
@@ -190,7 +200,7 @@
 <h2 id="使い方">
   使い方
   <a class="heading-link" href="#%e4%bd%bf%e3%81%84%e6%96%b9">
-    <i class="fa fa-link" aria-hidden="true" title="Link to heading"></i>
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h2>
@@ -292,7 +302,7 @@
 </span></span></code></pre></div><h2 id="簡単な解説">
   簡単な解説
   <a class="heading-link" href="#%e7%b0%a1%e5%8d%98%e3%81%aa%e8%a7%a3%e8%aa%ac">
-    <i class="fa fa-link" aria-hidden="true" title="Link to heading"></i>
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h2>
@@ -305,7 +315,7 @@
 <h2 id="今後やりたいこと">
   今後やりたいこと
   <a class="heading-link" href="#%e4%bb%8a%e5%be%8c%e3%82%84%e3%82%8a%e3%81%9f%e3%81%84%e3%81%93%e3%81%a8">
-    <i class="fa fa-link" aria-hidden="true" title="Link to heading"></i>
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h2>
@@ -349,6 +359,9 @@
         
         
         
+
+        
+        
       </footer>
     </article>
 
@@ -385,17 +398,28 @@
 
 
   
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-ML7TD1LERR"></script>
-<script>
-var doNotTrack = false;
-if (!doNotTrack) {
-	window.dataLayer = window.dataLayer || [];
-	function gtag(){dataLayer.push(arguments);}
-	gtag('js', new Date());
-	gtag('config', 'G-ML7TD1LERR', { 'anonymize_ip': false });
-}
-</script>
+  
+    
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-ML7TD1LERR"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-ML7TD1LERR');
+        }
+      </script>
+    
+  
 
+
+
+  
 
   
 

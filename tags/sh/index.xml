@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>sh on nametake.dev</title>
+    <title>Sh on nametake.dev</title>
     <link>https://nametake.github.io/tags/sh/</link>
-    <description>Recent content in sh on nametake.dev</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <description>Recent content in Sh on nametake.dev</description>
+    <generator>Hugo</generator>
     <language>ja</language>
     <lastBuildDate>Wed, 10 Oct 2018 11:44:32 +0900</lastBuildDate>
     <atom:link href="https://nametake.github.io/tags/sh/index.xml" rel="self" type="application/rss+xml" />

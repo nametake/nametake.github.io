@@ -1,0 +1,13 @@
+{
+	"version": 3,
+	"file": "custom.css",
+	"sourceRoot": "/Users/nametake/Workspace/github.com/nametake/blog",
+	"sources": [
+		"assets/scss/custom.scss"
+	],
+	"sourcesContent": [
+		"body {\n  font-family: 'Noto Sans JP', sans-serif;\n  font-size: 1.6em;\n}\n\ncode {\n  font-size: 1.4rem;\n}\n\npre {\n  font-size: 1.4rem;\n}\n\nh1,\nh2,\nh3,\nh4,\nh5,\nh6 {\n  font-family: 'Noto Sans JP', sans-serif;\n}\n\n.list {\n  ul {\n    li {\n      .title {\n        flex: 9;\n        font-family: 'Noto Sans JP', sans-serif;\n      }\n      .date {\n        flex: 1;\n      }\n    }\n  }\n}\n"
+	],
+	"names": [],
+	"mappings": "AAAA,AAAA,IAAI,CAAC;EACH,WAAW,EAAE,0BAA0B;EACvC,SAAS,EAAE,KAAK,GACjB;;AAED,AAAA,IAAI,CAAC;EACH,SAAS,EAAE,MAAM,GAClB;;AAED,AAAA,GAAG,CAAC;EACF,SAAS,EAAE,MAAM,GAClB;;AAED,AAAA,EAAE;AACF,EAAE;AACF,EAAE;AACF,EAAE;AACF,EAAE;AACF,EAAE,CAAC;EACD,WAAW,EAAE,0BAA0B,GACxC;;AAED,AAGM,KAHD,CACH,EAAE,CACA,EAAE,CACA,MAAM,CAAC;EACL,IAAI,EAAE,CAAC;EACP,WAAW,EAAE,0BAA0B,GACxC;;AANP,AAOM,KAPD,CACH,EAAE,CACA,EAAE,CAKA,KAAK,CAAC;EACJ,IAAI,EAAE,CAAC,GACR"
+}

@@ -16,16 +16,22 @@
 <meta name="description" content="nametake/protoc-gen-gohttpというprotocのプラグインを作ったのでその話。 Protocol Buffersとは Link to heading Protocol Buffe">
 <meta name="keywords" content="blog,developer,personal">
 
-<meta name="twitter:card" content="summary"/><meta name="twitter:title" content="Protocol Buffersのserviceをnet/httpに対応させるprotoc-gen-gohttpを作った"/>
-<meta name="twitter:description" content="nametake/protoc-gen-gohttpというprotocのプラグインを作ったのでその話。 Protocol Buffersとは Link to heading Protocol Buffe"/>
 
-<meta property="og:title" content="Protocol Buffersのserviceをnet/httpに対応させるprotoc-gen-gohttpを作った" />
-<meta property="og:description" content="nametake/protoc-gen-gohttpというprotocのプラグインを作ったのでその話。 Protocol Buffersとは Link to heading Protocol Buffe" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://nametake.github.io/posts/2018/11/21/protoc-gen-gohttp/" /><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2018-11-21T16:32:07+09:00" />
-<meta property="article:modified_time" content="2018-11-21T16:32:07+09:00" />
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Protocol Buffersのserviceをnet/httpに対応させるprotoc-gen-gohttpを作った">
+  <meta name="twitter:description" content="nametake/protoc-gen-gohttpというprotocのプラグインを作ったのでその話。 Protocol Buffersとは Link to heading Protocol Buffe">
 
+<meta property="og:url" content="https://nametake.github.io/posts/2018/11/21/protoc-gen-gohttp/">
+  <meta property="og:site_name" content="nametake.dev">
+  <meta property="og:title" content="Protocol Buffersのserviceをnet/httpに対応させるprotoc-gen-gohttpを作った">
+  <meta property="og:description" content="nametake/protoc-gen-gohttpというprotocのプラグインを作ったのでその話。 Protocol Buffersとは Link to heading Protocol Buffe">
+  <meta property="og:locale" content="ja">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2018-11-21T16:32:07+09:00">
+    <meta property="article:modified_time" content="2018-11-21T16:32:07+09:00">
+    <meta property="article:tag" content="Go">
+    <meta property="article:tag" content="Protocol Buffers">
 
 
 
@@ -33,12 +39,14 @@
 <link rel="canonical" href="https://nametake.github.io/posts/2018/11/21/protoc-gen-gohttp/">
 
 
-<link rel="preload" href="../../../../../fonts/forkawesome-webfont.woff2?v=1.2.0" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../../../../../fonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../../../../../fonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../../../../../fonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
 
 
   
   
-  <link rel="stylesheet" href="../../../../../css/coder.min.e1bdf152d93b060b06ba5d496486ed9c201a8b95d335e035beb5faebe3b61cad.css" integrity="sha256-4b3xUtk7BgsGul1JZIbtnCAai5XTNeA1vrX66&#43;O2HK0=" crossorigin="anonymous" media="screen" />
+  <link rel="stylesheet" href="../../../../../css/coder.min.38c4552ac40f9ae3408bad40358f654ebd8804412fe74ed56f2d6c8a7af82dd3.css" integrity="sha256-OMRVKsQPmuNAi61ANY9lTr2IBEEv507Vby1sinr4LdM=" crossorigin="anonymous" media="screen" />
 
 
 
@@ -98,7 +106,7 @@
   
 <div class="float-container">
     <a id="dark-mode-toggle" class="colorscheme-toggle">
-        <i class="fa fa-adjust fa-fw" aria-hidden="true"></i>
+        <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
     </a>
 </div>
 
@@ -106,31 +114,33 @@
   <main class="wrapper">
     <nav class="navigation">
   <section class="container">
-    <a class="navigation-title" href="../../../../../">
+    
+    <a class="navigation-title" href="https://nametake.github.io/">
       nametake.dev
     </a>
     
+    
       <input type="checkbox" id="menu-toggle" />
       <label class="menu-button float-right" for="menu-toggle">
-        <i class="fa fa-bars fa-fw" aria-hidden="true"></i>
+        <i class="fa-solid fa-bars fa-fw" aria-hidden="true"></i>
       </label>
       <ul class="navigation-list">
         
           
             <li class="navigation-item">
-              <a class="navigation-link" href="../../../../../about/">About</a>
+              <a class="navigation-link " href="../../../../../about/">About</a>
             </li>
           
             <li class="navigation-item">
-              <a class="navigation-link" href="../../../../../posts/">Blog</a>
+              <a class="navigation-link " href="../../../../../posts/">Blog</a>
             </li>
           
             <li class="navigation-item">
-              <a class="navigation-link" href="../../../../../project/">Project</a>
+              <a class="navigation-link " href="../../../../../project/">Project</a>
             </li>
           
             <li class="navigation-item">
-              <a class="navigation-link" href="../../../../../tags/">Tags</a>
+              <a class="navigation-link " href="../../../../../tags/">Tags</a>
             </li>
           
         
@@ -156,20 +166,20 @@
         <div class="post-meta">
           <div class="date">
             <span class="posted-on">
-              <i class="fa fa-calendar" aria-hidden="true"></i>
+              <i class="fa-solid fa-calendar" aria-hidden="true"></i>
               <time datetime="2018-11-21T16:32:07&#43;09:00">
                 2018/11/21
               </time>
             </span>
             <span class="reading-time">
-              <i class="fa fa-clock-o" aria-hidden="true"></i>
+              <i class="fa-solid fa-clock" aria-hidden="true"></i>
               6-minute read
             </span>
           </div>
           
           
           <div class="tags">
-  <i class="fa fa-tag" aria-hidden="true"></i>
+  <i class="fa-solid fa-tag" aria-hidden="true"></i>
     <span class="tag">
       <a href="../../../../../tags/go/">Go</a>
     </span>
@@ -187,7 +197,7 @@
 <h2 id="protocol-buffersとは">
   Protocol Buffersとは
   <a class="heading-link" href="#protocol-buffers%e3%81%a8%e3%81%af">
-    <i class="fa fa-link" aria-hidden="true" title="Link to heading"></i>
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h2>
@@ -248,7 +258,7 @@
 </span></span></code></pre></div><h2 id="本題">
   本題
   <a class="heading-link" href="#%e6%9c%ac%e9%a1%8c">
-    <i class="fa fa-link" aria-hidden="true" title="Link to heading"></i>
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h2>
@@ -260,7 +270,7 @@
 <h3 id="使い方">
   使い方
   <a class="heading-link" href="#%e4%bd%bf%e3%81%84%e6%96%b9">
-    <i class="fa fa-link" aria-hidden="true" title="Link to heading"></i>
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
@@ -303,7 +313,7 @@
 <h3 id="コンセプト">
   コンセプト
   <a class="heading-link" href="#%e3%82%b3%e3%83%b3%e3%82%bb%e3%83%97%e3%83%88">
-    <i class="fa fa-link" aria-hidden="true" title="Link to heading"></i>
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
@@ -319,7 +329,7 @@
 <h2 id="比較">
   比較
   <a class="heading-link" href="#%e6%af%94%e8%bc%83">
-    <i class="fa fa-link" aria-hidden="true" title="Link to heading"></i>
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h2>
@@ -327,7 +337,7 @@
 <h3 id="twirphttpsgithubcomtwitchtvtwirp">
   <a href="https://github.com/twitchtv/twirp"  class="external-link" target="_blank" rel="noopener">twirp</a>
   <a class="heading-link" href="#twirphttpsgithubcomtwitchtvtwirp">
-    <i class="fa fa-link" aria-hidden="true" title="Link to heading"></i>
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
@@ -341,7 +351,7 @@
 <h3 id="russellluoprotoc-go-pluginshttpsgithubcomrussellluoprotoc-go-plugins">
   <a href="https://github.com/RussellLuo/protoc-go-plugins"  class="external-link" target="_blank" rel="noopener">RussellLuo/protoc-go-plugins</a>
   <a class="heading-link" href="#russellluoprotoc-go-pluginshttpsgithubcomrussellluoprotoc-go-plugins">
-    <i class="fa fa-link" aria-hidden="true" title="Link to heading"></i>
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
@@ -349,7 +359,7 @@
 <h3 id="moulprotoc-gen-gotemplatehttpsgithubcommoulprotoc-gen-gotemplate">
   <a href="https://github.com/moul/protoc-gen-gotemplate"  class="external-link" target="_blank" rel="noopener">moul/protoc-gen-gotemplate</a>
   <a class="heading-link" href="#moulprotoc-gen-gotemplatehttpsgithubcommoulprotoc-gen-gotemplate">
-    <i class="fa fa-link" aria-hidden="true" title="Link to heading"></i>
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
@@ -393,6 +403,9 @@
         
         
         
+
+        
+        
       </footer>
     </article>
 
@@ -429,17 +442,28 @@
 
 
   
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-ML7TD1LERR"></script>
-<script>
-var doNotTrack = false;
-if (!doNotTrack) {
-	window.dataLayer = window.dataLayer || [];
-	function gtag(){dataLayer.push(arguments);}
-	gtag('js', new Date());
-	gtag('config', 'G-ML7TD1LERR', { 'anonymize_ip': false });
-}
-</script>
+  
+    
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-ML7TD1LERR"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-ML7TD1LERR');
+        }
+      </script>
+    
+  
 
+
+
+  
 
   
 

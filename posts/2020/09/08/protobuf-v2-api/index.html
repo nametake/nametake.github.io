@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <title>
+  Protocol BuffernsのV2 APIの使い方 · nametake.dev
+</title>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+
+
+
+
+<meta name="author" content="nametake">
+<meta name="description" content="エントリポイント ファイル生成 コードの書き込み GoImportPackage Optionの取り扱い プリントの特性 フォーマットについて foo 先日 protoc-gen-gohttp で使うProtocol Buff">
+<meta name="keywords" content="blog,developer,personal">
+
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Protocol BuffernsのV2 APIの使い方">
+  <meta name="twitter:description" content="エントリポイント ファイル生成 コードの書き込み GoImportPackage Optionの取り扱い プリントの特性 フォーマットについて foo 先日 protoc-gen-gohttp で使うProtocol Buff">
+
+<meta property="og:url" content="http://localhost:1313/posts/2020/09/08/protobuf-v2-api/">
+  <meta property="og:site_name" content="nametake.dev">
+  <meta property="og:title" content="Protocol BuffernsのV2 APIの使い方">
+  <meta property="og:description" content="エントリポイント ファイル生成 コードの書き込み GoImportPackage Optionの取り扱い プリントの特性 フォーマットについて foo 先日 protoc-gen-gohttp で使うProtocol Buff">
+  <meta property="og:locale" content="ja">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2020-09-08T00:00:00+09:00">
+    <meta property="article:modified_time" content="2020-09-08T00:00:00+09:00">
+    <meta property="article:tag" content="Protocol Buffers">
+
+
+
+
+<link rel="canonical" href="http://localhost:1313/posts/2020/09/08/protobuf-v2-api/">
+
+
+<link rel="preload" href="../../../../../fonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../../../../../fonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../../../../../fonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
+
+
+  
+  
+  <link rel="stylesheet" href="../../../../../css/coder.css" media="screen">
+
+
+
+
+
+
+  
+    
+    
+    <link rel="stylesheet" href="../../../../../css/coder-dark.css" media="screen">
+  
+
+
+
+ 
+  
+    
+    <link rel="stylesheet" href="../../../../../css/noto&#43;sans&#43;jp.css" media="screen">
+  
+
+
+
+  
+  
+    
+    
+    <link rel="stylesheet" href="../../../../../scss/custom.css" media="screen">
+  
+
+
+
+<link rel="icon" type="image/svg+xml" href="../../../../../images/favicon.svg" sizes="any">
+<link rel="icon" type="image/png" href="../../../../../images/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../../../../images/favicon-16x16.png" sizes="16x16">
+
+<link rel="apple-touch-icon" href="../../../../../images/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="180x180" href="../../../../../images/apple-touch-icon.png">
+
+<link rel="manifest" href="../../../../../site.webmanifest">
+<link rel="mask-icon" href="../../../../../images/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+
+
+
+
+
+
+</head>
+
+
+
+
+
+
+<body class="preload-transitions colorscheme-auto">
+  
+<div class="float-container">
+    <a id="dark-mode-toggle" class="colorscheme-toggle">
+        <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+    </a>
+</div>
+
+
+  <main class="wrapper">
+    <nav class="navigation">
+  <section class="container">
+    
+    <a class="navigation-title" href="http://localhost:1313/">
+      nametake.dev
+    </a>
+    
+    
+      <input type="checkbox" id="menu-toggle" />
+      <label class="menu-button float-right" for="menu-toggle">
+        <i class="fa-solid fa-bars fa-fw" aria-hidden="true"></i>
+      </label>
+      <ul class="navigation-list">
+        
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="../../../../../about/">About</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="../../../../../posts/">Blog</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="../../../../../project/">Project</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="../../../../../tags/">Tags</a>
+            </li>
+          
+        
+        
+      </ul>
+    
+  </section>
+</nav>
+
+
+    <div class="content">
+      
+  <section class="container post">
+    <article>
+      <header>
+        <div class="post-title">
+          <h1 class="title">
+            <a class="title-link" href="http://localhost:1313/posts/2020/09/08/protobuf-v2-api/">
+              Protocol BuffernsのV2 APIの使い方
+            </a>
+          </h1>
+        </div>
+        <div class="post-meta">
+          <div class="date">
+            <span class="posted-on">
+              <i class="fa-solid fa-calendar" aria-hidden="true"></i>
+              <time datetime="2020-09-08T00:00:00&#43;09:00">
+                2020/09/08
+              </time>
+            </span>
+            <span class="reading-time">
+              <i class="fa-solid fa-clock" aria-hidden="true"></i>
+              2-minute read
+            </span>
+          </div>
+          
+          
+          <div class="tags">
+  <i class="fa-solid fa-tag" aria-hidden="true"></i>
+    <span class="tag">
+      <a href="../../../../../tags/protocol-buffers/">Protocol Buffers</a>
+    </span></div>
+
+        </div>
+      </header>
+
+      <div class="post-content">
+        
+        <ul>
+<li>エントリポイント</li>
+<li>ファイル生成</li>
+<li>コードの書き込み</li>
+<li>GoImportPackage</li>
+<li>Optionの取り扱い</li>
+<li>プリントの特性</li>
+<li>フォーマットについて</li>
+<li>foo</li>
+</ul>
+<p>先日 <a href="https://github.com/nametake/protoc-gen-gohttp"  class="external-link" target="_blank" rel="noopener">protoc-gen-gohttp</a> で使うProtocol BuffersのAPIをV1からV2に移行しました。</p>
+<!-- textlint-disable ja-technical-writing/ja-no-weak-phrase -->
+<p>その際、V2 APIでプラグインを生成するにあたっていくつか知見が溜まったのでメモとして残そうと思います。</p>
+<!-- textlint-enable ja-technical-writing/ja-no-weak-phrase -->
+<h2 id="エントリポイント">
+  エントリポイント
+  <a class="heading-link" href="#%e3%82%a8%e3%83%b3%e3%83%88%e3%83%aa%e3%83%9d%e3%82%a4%e3%83%b3%e3%83%88">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>V1の頃は標準入力と標準出力を自分で制御する必要がありましたが、 <a href="https://godoc.org/google.golang.org/protobuf/compiler/protogen#Options"  class="external-link" target="_blank" rel="noopener">protogen.Option</a> を使うことでそのあたりをいい感じにやってくれるようになりました。</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#a6e22e">protogen</span>.<span style="color:#a6e22e">Options</span>{}.<span style="color:#a6e22e">Run</span>(<span style="color:#66d9ef">func</span>(<span style="color:#a6e22e">p</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">protogen</span>.<span style="color:#a6e22e">Plugin</span>) <span style="color:#66d9ef">error</span> {})
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><code>Run</code> に渡すCallbackの <a href="https://godoc.org/google.golang.org/protobuf/compiler/protogen#Plugin"  class="external-link" target="_blank" rel="noopener">protogen.Plugin</a> を使うことで内部的に標準入力と標準入力をいい感じにやってくれます。</p>
+<h2 id="ファイル生成">
+  ファイル生成
+  <a class="heading-link" href="#%e3%83%95%e3%82%a1%e3%82%a4%e3%83%ab%e7%94%9f%e6%88%90">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>protogen.Plugin が実装している <a href="https://godoc.org/google.golang.org/protobuf/compiler/protogen#Plugin.NewGeneratedFile"  class="external-link" target="_blank" rel="noopener">NewGeneratedFile</a> を使用するとファイル対応するファイルが生成されます。</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#66d9ef">for</span> <span style="color:#a6e22e">_</span>, <span style="color:#a6e22e">file</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">range</span> <span style="color:#a6e22e">p</span>.<span style="color:#a6e22e">Files</span> {
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">file</span>.<span style="color:#a6e22e">Generate</span> {
+</span></span><span style="display:flex;"><span>		<span style="color:#a6e22e">filename</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">file</span>.<span style="color:#a6e22e">GeneratedFilenamePrefix</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;.http.go&#34;</span>
+</span></span><span style="display:flex;"><span>		<span style="color:#a6e22e">g</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">p</span>.<span style="color:#a6e22e">NewGeneratedFile</span>(<span style="color:#a6e22e">filename</span>, <span style="color:#a6e22e">file</span>.<span style="color:#a6e22e">GoImportPath</span>)
+</span></span><span style="display:flex;"><span>		<span style="color:#75715e">// TODO
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	}
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>上記例では protogen.Plugin が持っている File のリストから情報を取り出すようにしているためProtoファイルごとにコードの生成が生成されます。</p>
+<h2 id="コードの出力">
+  コードの出力
+  <a class="heading-link" href="#%e3%82%b3%e3%83%bc%e3%83%89%e3%81%ae%e5%87%ba%e5%8a%9b">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>GeneratedFile に実装されている <a href="https://godoc.org/google.golang.org/protobuf/compiler/protogen#GeneratedFile.P"  class="external-link" target="_blank" rel="noopener">P</a> メソッドを使うと生成したファイルに文字を書き込むことができます。</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#a6e22e">g</span>.<span style="color:#a6e22e">P</span>(<span style="color:#e6db74">&#34;// Code generated by protoc-gen-gohttp. DO NOT EDIT.&#34;</span>)
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>ドキュメントに書いてあるとおり、 <code>fmt.Print</code> と同じルールで書き込まれるため以下のように変数を渡すことでその値を出力できます。</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#a6e22e">g</span>.<span style="color:#a6e22e">P</span>(<span style="color:#e6db74">&#34;// source: &#34;</span>, <span style="color:#a6e22e">file</span>.<span style="color:#a6e22e">Desc</span>.<span style="color:#a6e22e">Path</span>())
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="goimportpackage">
+  GoImportPackage
+  <a class="heading-link" href="#goimportpackage">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Goのコードを出力する場合、 <code>GoImportPackage</code> を使用するとimportパスを自動で出力してくれます。</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">hoge</span> = <span style="color:#a6e22e">GoImportPackage</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div>
+      </div>
+
+
+      <footer>
+        
+
+
+        <div id="disqus_thread"></div>
+<script>
+  window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "nametake-dev" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+    
+    document.addEventListener('themeChanged', function (e) { 
+        if (document.readyState == 'complete') {
+          DISQUS.reset({ reload: true, config: disqus_config });
+        }
+    });
+</script>
+        
+        
+        
+        
+
+        
+        
+      </footer>
+    </article>
+
+    
+  </section>
+
+    </div>
+
+    <footer class="footer">
+  <section class="container">
+    ©
+    
+    2024
+     nametake 
+    ·
+    
+    Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/" target="_blank" rel="noopener">Coder</a>.
+    
+  </section>
+</footer>
+
+  </main>
+
+  
+
+  
+  
+  <script src="../../../../../js/coder.js"></script>
+  
+
+  
+
+  
+
+
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</body>
+
+</html>

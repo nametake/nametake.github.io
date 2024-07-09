@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <title>
+  external-service-abstraction · nametake.dev
+</title>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+
+
+
+
+<meta name="author" content="nametake">
+<meta name="description" content="前提 Link to heading あくまで自分の意見の発露で、この記事の内容が100%正しいと思っているわけでも、今の構造が間違っているから直したいというわけではな">
+<meta name="keywords" content="blog,developer,personal">
+
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="external-service-abstraction">
+  <meta name="twitter:description" content="前提 Link to heading あくまで自分の意見の発露で、この記事の内容が100%正しいと思っているわけでも、今の構造が間違っているから直したいというわけではな">
+
+<meta property="og:url" content="http://localhost:1313/posts/2020/10/18/external-service-abstraction/">
+  <meta property="og:site_name" content="nametake.dev">
+  <meta property="og:title" content="external-service-abstraction">
+  <meta property="og:description" content="前提 Link to heading あくまで自分の意見の発露で、この記事の内容が100%正しいと思っているわけでも、今の構造が間違っているから直したいというわけではな">
+  <meta property="og:locale" content="ja">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2020-10-18T00:00:00+09:00">
+    <meta property="article:modified_time" content="2020-10-18T00:00:00+09:00">
+
+
+
+
+<link rel="canonical" href="http://localhost:1313/posts/2020/10/18/external-service-abstraction/">
+
+
+<link rel="preload" href="../../../../../fonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../../../../../fonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../../../../../fonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
+
+
+  
+  
+  <link rel="stylesheet" href="../../../../../css/coder.css" media="screen">
+
+
+
+
+
+
+  
+    
+    
+    <link rel="stylesheet" href="../../../../../css/coder-dark.css" media="screen">
+  
+
+
+
+ 
+  
+    
+    <link rel="stylesheet" href="../../../../../css/noto&#43;sans&#43;jp.css" media="screen">
+  
+
+
+
+  
+  
+    
+    
+    <link rel="stylesheet" href="../../../../../scss/custom.css" media="screen">
+  
+
+
+
+<link rel="icon" type="image/svg+xml" href="../../../../../images/favicon.svg" sizes="any">
+<link rel="icon" type="image/png" href="../../../../../images/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../../../../images/favicon-16x16.png" sizes="16x16">
+
+<link rel="apple-touch-icon" href="../../../../../images/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="180x180" href="../../../../../images/apple-touch-icon.png">
+
+<link rel="manifest" href="../../../../../site.webmanifest">
+<link rel="mask-icon" href="../../../../../images/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+
+
+
+
+
+
+</head>
+
+
+
+
+
+
+<body class="preload-transitions colorscheme-auto">
+  
+<div class="float-container">
+    <a id="dark-mode-toggle" class="colorscheme-toggle">
+        <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+    </a>
+</div>
+
+
+  <main class="wrapper">
+    <nav class="navigation">
+  <section class="container">
+    
+    <a class="navigation-title" href="http://localhost:1313/">
+      nametake.dev
+    </a>
+    
+    
+      <input type="checkbox" id="menu-toggle" />
+      <label class="menu-button float-right" for="menu-toggle">
+        <i class="fa-solid fa-bars fa-fw" aria-hidden="true"></i>
+      </label>
+      <ul class="navigation-list">
+        
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="../../../../../about/">About</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="../../../../../posts/">Blog</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="../../../../../project/">Project</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="../../../../../tags/">Tags</a>
+            </li>
+          
+        
+        
+      </ul>
+    
+  </section>
+</nav>
+
+
+    <div class="content">
+      
+  <section class="container post">
+    <article>
+      <header>
+        <div class="post-title">
+          <h1 class="title">
+            <a class="title-link" href="http://localhost:1313/posts/2020/10/18/external-service-abstraction/">
+              external-service-abstraction
+            </a>
+          </h1>
+        </div>
+        <div class="post-meta">
+          <div class="date">
+            <span class="posted-on">
+              <i class="fa-solid fa-calendar" aria-hidden="true"></i>
+              <time datetime="2020-10-18T00:00:00&#43;09:00">
+                2020/10/18
+              </time>
+            </span>
+            <span class="reading-time">
+              <i class="fa-solid fa-clock" aria-hidden="true"></i>
+              9-minute read
+            </span>
+          </div>
+          
+          
+          
+        </div>
+      </header>
+
+      <div class="post-content">
+        
+        <!-- textlint-disable -->
+<h2 id="前提">
+  前提
+  <a class="heading-link" href="#%e5%89%8d%e6%8f%90">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>あくまで自分の意見の発露で、この記事の内容が100%正しいと思っているわけでも、今の構造が間違っているから直したいというわけではないです。</p>
+<p>ただ、自分が「こういう考え方でドメインモデルを捉えることで、ドメイン層に業務的関心を寄せられて結果的に変更に強いソフトウェアにできるんじゃないかなぁ」と思っていることのまとめをしてみます。</p>
+<h2 id="言葉の整理">
+  言葉の整理
+  <a class="heading-link" href="#%e8%a8%80%e8%91%89%e3%81%ae%e6%95%b4%e7%90%86">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>DDDは本によって用語の使い方が違ったりして、認識がズレがちなので言葉の定義を先にしておきます。</p>
+<table>
+<thead>
+<tr>
+<th>言葉</th>
+<th>意味</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ドメイン</td>
+<td>その会社が解決する(しようとしている)問題領域。</td>
+</tr>
+<tr>
+<td>ドメインモデル</td>
+<td>ソフトウェア上で業務的振る舞いを保持するもの。</td>
+</tr>
+<tr>
+<td>コアドメイン</td>
+<td>自社のビジネスのコアとなるドメインモデル。Scalebaseの契約、請求、顧客やそれらに関係するロジックはこれ。</td>
+</tr>
+<tr>
+<td>サブドメイン</td>
+<td>コアドメインが業務を円滑に行うために支援するためのドメインモデル。コアドメインに依存することはあるが、コアドメインに依存されることはない。</td>
+</tr>
+<tr>
+<td>コンテキスト</td>
+<td>ドメインモデルの境界を示すもの。内側にコアドメインやサブドメインを持つ。</td>
+</tr>
+<tr>
+<td>業務的関心</td>
+<td>ドメインモデルと同義。</td>
+</tr>
+<tr>
+<td>技術的関心</td>
+<td>ソフトウェアを構築する上で必要な業務的関心以外のもの。エンジニアだけで判断して良い領域。</td>
+</tr>
+<tr>
+<td>ドメイン層</td>
+<td>コード上ドメインモデルが書かれている場所。技術的関心は別の層に書かれる。</td>
+</tr>
+<tr>
+<td>ドメインエキスパート</td>
+<td>そのドメインについて詳しい人。AlpだとBizサイドと呼ばれることもある。</td>
+</tr>
+</tbody>
+</table>
+<p>上記説明はエリック・エヴァンスの書籍ベースです(特にコンテキストの部分)。</p>
+<h2 id="自分の意見">
+  自分の意見
+  <a class="heading-link" href="#%e8%87%aa%e5%88%86%e3%81%ae%e6%84%8f%e8%a6%8b">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>最初に自分の意見を述べておくと 外部サービスについては以下の2点に該当する場合は、自社のドメインモデルとして取り扱うほうが良いんじゃないかなぁと考えています。</p>
+<ul>
+<li>ドメインエキスパートが主語や目的語としてサービス名を使う</li>
+<li>そのサービスの構造を自社の都合で変えられない</li>
+</ul>
+<p>理由は「要件が起点で取り扱う外部サービスはドメインである可能性が非常に高い(と思っている)」ためです。</p>
+<p>一方でコアドメインを汚さないように、外部サービスがどのコンテキストなのかや、コアドメインなのかサブドメインなのかは十分に議論する必要はあると思っています。</p>
+<p>また、業務的関心と技術的関心を分離せず全てドメインモデルに全て表現するべきであるという主張でもないです。</p>
+<h2 id="なぜ外部サービスはドメインになりうるか">
+  なぜ外部サービスはドメインになりうるか
+  <a class="heading-link" href="#%e3%81%aa%e3%81%9c%e5%a4%96%e9%83%a8%e3%82%b5%e3%83%bc%e3%83%93%e3%82%b9%e3%81%af%e3%83%89%e3%83%a1%e3%82%a4%e3%83%b3%e3%81%ab%e3%81%aa%e3%82%8a%e3%81%86%e3%82%8b%e3%81%8b">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>外部サービスの構造をドメインモデルとして定義すると、一見して境界が切れておらず自社ドメインが他社に引っ張られるように見えると思います。</p>
+<p>ですが、私はここで「外部サービスが変わったとき」に何が変化するのかを考慮して境界を切る必要があるのかなぁと考えています。</p>
+<p>DDDはビジネス知識をモデリングしてソフトウェアに反映させることで、ビジネスの核心を分析したりエンジニアとドメインエキスパートの認識ロスを少なくする設計手法です。</p>
+<p>つまり、DDDにおいてソフトウェアというのは「ビジネスで何が起きているのか」が中心にあり、それを表現する手法であるともいえます。</p>
+<p>ということは、外部サービスに変更があった時、「ビジネスで起きることが変わる」のであればそれは十分にドメインモデルとして扱える、もしくは扱ったほうがDDDの恩恵を受けられるのではないか、と考えています。</p>
+<p>(依存の話をするのであれば、外部サービスに依存するという発想ではなく、ビジネスに依存するという発想です)</p>
+<p>例えば、「つなぎ込んでいたとある請求書SaaSでネスト構造が表現できるようになった」ということが起きたとします。</p>
+<p>その時、ビジネス側では「 今まで総額しか載せていなかった積上式従量を正確な形で表現する」といった変化あるはずです。</p>
+<p>これらの変化をドメインモデルとして表現することでコアドメインの分析や変更箇所の認識ズレを避けるいったDDDのメリットを得られるかなぁと考えています。</p>
+<p>一方で、「ビジネスに影響のない変更」があったときにはドメインモデルが変更されるべきではないとも思います。</p>
+<p>例えば、認証方法や通信の方法が変わったところでビジネスに影響はありません。こういったことは技術的関心としてドメインモデルからは分離するべきです。</p>
+<p>また、外部サービスの影響で守るべきドメインモデルが変化する、ということも避ける必要があります。</p>
+<p>Scalebaseで言えば、せっかくモデリングしたサブスクリプション管理のドメインモデルが外部サービスの影響で崩れてしまうのは望ましくありません。</p>
+<p>そういったことを避けるため、ドメインの中にサブドメインやコンテキストを定義し、その間で依存関係を制御する必要があると思います。</p>
+<hr>
+<p>ここまでの話だと「ドメインモデルの抽象化を諦めてビジネスで取り扱われている構造をだけを取り扱うということ？」と勘違いされるかもなんですが、自分の意見はそういうわけでもありません。</p>
+<p>「実際に取り扱われている構造をドメインモデルとして定義して、その中からドメインモデルを抽象化して洗練していく」のほうが正しい方向に進めるのではないかなぁという意見です。</p>
+<p>ScalebaseでInvoiceというドメインモデルはそういう経緯で発生したと思っています。</p>
+<p>Invoiceというドメインモデルが抽象化されたおかげで、サブスクリプション管理のドメインモデルでは各請求書SaaSに関する情報を細かく取り扱わなくて良くなっています。</p>
+<p>一方、InvoiceコンテキストではそのInvoiceとして抽象化された情報が、各請求書SaaSにどのように出力するのかというのが責務になりうるかなぁと思ったりしています。</p>
+<p>例えば「この請求書SaaSではネスト構造が取れるので積上式従量はネストして表現する」や「この請求書SaaSではInvoiceの情報を一部を表現できないから���足欄で表現する」���いった知識です。</p>
+<p>そうなったとき、Invoiceコンテキストでは外部サービスの請求書の構造や、どういう手続で請求書が出力されるか、ということがドメインモデルとして表現されることで、ドメインエキスパートのメンタルモデルとコードの乖離が少なくなり、DDDの挙げるメリットを享受できるようになんじゃないかなぁと考えています。</p>
+<p>(ここからは全く背景や技術を共有していない支払い関係の話なので空中戦になるかもなのですが)Paymentコンテキストを切るときも同様に外部のPGWの名前はPaymentコンテキスト上にドメインモデルとして表現されていたほうが良いんじゃないかなぁと思っています。</p>
+<p>もちろん、サブスクリプション管理のコンテキストからは支払の状態がわかるPaymentというドメインモデルだけが見えていれば十分だと思います。</p>
+<p>一方で、Paymentコンテキストではその「Payment」というドメインモデルが各PGWでどういう支払いフローを経たらどういう状態になるのか、ということを知っている必要があるはずです(完全に想像ですが、PGWごとにPaymentのステータス変化のフロー図ができたりしそう)。</p>
+<p>そうなった場合、Paymentコンテキストのドメインモデルとして「GMOPGに関するコマンド/アクションとSaga」や「Stripeに関するコマンド/アクションとSaga」が表現されていると「業務上実際に発生したこと」ベースでPaymentという抽象化された情報を操作するということが表現され、それがドメインエキスパートの使う表現やイメージと一致させることができると思っています。</p>
+<p>(もちろん、支払いのフローに影響を及ぼさない認証や通信方法は技術的関心として切り出して、Saga上からはそれらを気にしないようにする必要があると思っています）。</p>
+<h2 id="dddにおける抽象化の話">
+  DDDにおける抽象化の話
+  <a class="heading-link" href="#ddd%e3%81%ab%e3%81%8a%e3%81%91%e3%82%8b%e6%8a%bd%e8%b1%a1%e5%8c%96%e3%81%ae%e8%a9%b1">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>エンジニアリングにとって抽象化をするという作業が非常に重要であるということは議論の余地がないと思います。</p>
+<p>抽象化によってモジュールを疎結合にしたり依存の方向を制御することができるため、一定のレベルを超えたエンジニアにとってこの作業は日常になっているはずです。</p>
+<p>DDDにおいても抽象化は大事な作業です。複数の事象から共通の振る舞いを抜き出してドメインモデルを洗練するのに役に立ちます。</p>
+<p>一方で、自分はDDDにおいては抽象化のもう一つの側面を気にしていきたいという考えがあります。</p>
+<p>抽象の意味を調べてみると以下のようになっています。</p>
+<blockquote>
+<p>事物や表象を、ある性質・共通性・本質に着目し、それを抽き出して把握すること。その際、他の不要な性質を排除する作用（＝捨象）をも伴うので、抽象と捨象とは同一作用の二側面を形づくる。</p>
+</blockquote>
+<p><a href="https://kotobank.jp/word/%E6%8A%BD%E8%B1%A1-97265#E5.A4.A7.E8.BE.9E.E6.9E.97.20.E7.AC.AC.E4.B8.89.E7.89.88"  class="external-link" target="_blank" rel="noopener">https://kotobank.jp/word/%E6%8A%BD%E8%B1%A1-97265#E5.A4.A7.E8.BE.9E.E6.9E.97.20.E7.AC.AC.E4.B8.89.E7.89.88</a></p>
+<p>前半部分は上記で説明したとおりの作業ですが、後半部分で抽象には「捨象」ということが伴うと説明されています。</p>
+<p>DDDを採用した上で抽象化を行う際、自分はこの「捨象」の対象になった事柄が、「ビジネスに関係ない」から捨象の対象になったのか「ドメインモデルの洗練のため」に捨象の対象になったのかということを意識する必要があるんじゃないかなぁと思っています。</p>
+<p>前者の場合は技術的関心としてドメインモデルの外に追い出す必要がありますが、後者の場合は抽象化前の構造が業務的関心として残る可能性があります。</p>
+<p>「ドメインモデルの洗練のため」に捨象が起きていた場合、その抽象化の対象になったものもドメインモデルとして残しておかないと、DDDの挙げるメリットを享受できなくなっていく可能性があると思っています。</p>
+<p>これは自分自身の失敗の話なのですが、昔外部サービスを抽象化した際、捨象の対象になった物を全て技術的関心として取り扱ってしまったがためにドメインエキスパートのメンタルモデルがドメイン層に反映されなくなったということがありました。</p>
+<p>また、よく言われる「システムに決済手段を追加するのが高コストになる」という現象も、ドメインモデルにするべき情報が捨象されて技術的関心として取り扱われてしまい、技術と密にその情報が絡むことが原因なんじゃないかなぁと想像したりしています(ここは本当に根拠のない想像です)。</p>
+<p>捨象の対象が業務的関心として残るのか技術的関心として捨てて良いのか、という境界に正解はないと思っています。</p>
+<p>ですが、自分としてはドメインエキスパートのメンタルモデルがちゃんと反映された形でドメインモデルを作ることで、DDDのメリットを最大限享受していきたいなぁと私は思っています。</p>
+
+      </div>
+
+
+      <footer>
+        
+
+
+        <div id="disqus_thread"></div>
+<script>
+  window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "nametake-dev" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+    
+    document.addEventListener('themeChanged', function (e) { 
+        if (document.readyState == 'complete') {
+          DISQUS.reset({ reload: true, config: disqus_config });
+        }
+    });
+</script>
+        
+        
+        
+        
+
+        
+        
+      </footer>
+    </article>
+
+    
+  </section>
+
+    </div>
+
+    <footer class="footer">
+  <section class="container">
+    ©
+    
+    2024
+     nametake 
+    ·
+    
+    Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/" target="_blank" rel="noopener">Coder</a>.
+    
+  </section>
+</footer>
+
+  </main>
+
+  
+
+  
+  
+  <script src="../../../../../js/coder.js"></script>
+  
+
+  
+
+  
+
+
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</body>
+
+</html>

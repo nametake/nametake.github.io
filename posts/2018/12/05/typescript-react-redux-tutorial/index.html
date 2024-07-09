@@ -16,16 +16,23 @@
 <meta name="description" content="普段は Go でサーバサイドのコードを書いているが、TypeScript&#43;React&#43;Redux を勉強する機会があった。 その際、巷のチュートリアル">
 <meta name="keywords" content="blog,developer,personal">
 
-<meta name="twitter:card" content="summary"/><meta name="twitter:title" content="TypeScript&#43;React&#43;Reduxチュートリアル"/>
-<meta name="twitter:description" content="普段は Go でサーバサイドのコードを書いているが、TypeScript&#43;React&#43;Redux を勉強する機会があった。 その際、巷のチュートリアル"/>
 
-<meta property="og:title" content="TypeScript&#43;React&#43;Reduxチュートリアル" />
-<meta property="og:description" content="普段は Go でサーバサイドのコードを書いているが、TypeScript&#43;React&#43;Redux を勉強する機会があった。 その際、巷のチュートリアル" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://nametake.github.io/posts/2018/12/05/typescript-react-redux-tutorial/" /><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2018-12-05T11:08:00+09:00" />
-<meta property="article:modified_time" content="2018-12-05T11:08:00+09:00" />
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="TypeScript&#43;React&#43;Reduxチュートリアル">
+  <meta name="twitter:description" content="普段は Go でサーバサイドのコードを書いているが、TypeScript&#43;React&#43;Redux を勉強する機会があった。 その際、巷のチュートリアル">
 
+<meta property="og:url" content="https://nametake.github.io/posts/2018/12/05/typescript-react-redux-tutorial/">
+  <meta property="og:site_name" content="nametake.dev">
+  <meta property="og:title" content="TypeScript&#43;React&#43;Reduxチュートリアル">
+  <meta property="og:description" content="普段は Go でサーバサイドのコードを書いているが、TypeScript&#43;React&#43;Redux を勉強する機会があった。 その際、巷のチュートリアル">
+  <meta property="og:locale" content="ja">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2018-12-05T11:08:00+09:00">
+    <meta property="article:modified_time" content="2018-12-05T11:08:00+09:00">
+    <meta property="article:tag" content="TypeScript">
+    <meta property="article:tag" content="React">
+    <meta property="article:tag" content="Redux">
 
 
 
@@ -33,12 +40,14 @@
 <link rel="canonical" href="https://nametake.github.io/posts/2018/12/05/typescript-react-redux-tutorial/">
 
 
-<link rel="preload" href="../../../../../fonts/forkawesome-webfont.woff2?v=1.2.0" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../../../../../fonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../../../../../fonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../../../../../fonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
 
 
   
   
-  <link rel="stylesheet" href="../../../../../css/coder.min.e1bdf152d93b060b06ba5d496486ed9c201a8b95d335e035beb5faebe3b61cad.css" integrity="sha256-4b3xUtk7BgsGul1JZIbtnCAai5XTNeA1vrX66&#43;O2HK0=" crossorigin="anonymous" media="screen" />
+  <link rel="stylesheet" href="../../../../../css/coder.min.38c4552ac40f9ae3408bad40358f654ebd8804412fe74ed56f2d6c8a7af82dd3.css" integrity="sha256-OMRVKsQPmuNAi61ANY9lTr2IBEEv507Vby1sinr4LdM=" crossorigin="anonymous" media="screen" />
 
 
 
@@ -98,7 +107,7 @@
   
 <div class="float-container">
     <a id="dark-mode-toggle" class="colorscheme-toggle">
-        <i class="fa fa-adjust fa-fw" aria-hidden="true"></i>
+        <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
     </a>
 </div>
 
@@ -106,31 +115,33 @@
   <main class="wrapper">
     <nav class="navigation">
   <section class="container">
-    <a class="navigation-title" href="../../../../../">
+    
+    <a class="navigation-title" href="https://nametake.github.io/">
       nametake.dev
     </a>
     
+    
       <input type="checkbox" id="menu-toggle" />
       <label class="menu-button float-right" for="menu-toggle">
-        <i class="fa fa-bars fa-fw" aria-hidden="true"></i>
+        <i class="fa-solid fa-bars fa-fw" aria-hidden="true"></i>
       </label>
       <ul class="navigation-list">
         
           
             <li class="navigation-item">
-              <a class="navigation-link" href="../../../../../about/">About</a>
+              <a class="navigation-link " href="../../../../../about/">About</a>
             </li>
           
             <li class="navigation-item">
-              <a class="navigation-link" href="../../../../../posts/">Blog</a>
+              <a class="navigation-link " href="../../../../../posts/">Blog</a>
             </li>
           
             <li class="navigation-item">
-              <a class="navigation-link" href="../../../../../project/">Project</a>
+              <a class="navigation-link " href="../../../../../project/">Project</a>
             </li>
           
             <li class="navigation-item">
-              <a class="navigation-link" href="../../../../../tags/">Tags</a>
+              <a class="navigation-link " href="../../../../../tags/">Tags</a>
             </li>
           
         
@@ -156,20 +167,20 @@
         <div class="post-meta">
           <div class="date">
             <span class="posted-on">
-              <i class="fa fa-calendar" aria-hidden="true"></i>
+              <i class="fa-solid fa-calendar" aria-hidden="true"></i>
               <time datetime="2018-12-05T11:08:00&#43;09:00">
                 2018/12/05
               </time>
             </span>
             <span class="reading-time">
-              <i class="fa fa-clock-o" aria-hidden="true"></i>
+              <i class="fa-solid fa-clock" aria-hidden="true"></i>
               12-minute read
             </span>
           </div>
           
           
           <div class="tags">
-  <i class="fa fa-tag" aria-hidden="true"></i>
+  <i class="fa-solid fa-tag" aria-hidden="true"></i>
     <span class="tag">
       <a href="../../../../../tags/typescript/">TypeScript</a>
     </span>
@@ -215,7 +226,7 @@
 <h3 id="プロジェクトの準備">
   プロジェクトの準備
   <a class="heading-link" href="#%e3%83%97%e3%83%ad%e3%82%b8%e3%82%a7%e3%82%af%e3%83%88%e3%81%ae%e6%ba%96%e5%82%99">
-    <i class="fa fa-link" aria-hidden="true" title="Link to heading"></i>
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
@@ -234,7 +245,7 @@
 <h3 id="component-の実装">
   Component の実装
   <a class="heading-link" href="#component-%e3%81%ae%e5%ae%9f%e8%a3%85">
-    <i class="fa fa-link" aria-hidden="true" title="Link to heading"></i>
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
@@ -330,7 +341,7 @@
 </span></span></code></pre></div><h4 id="react-のみでtodoアプリケーションを作る場合">
   React のみでTodoアプリケーションを作る場合
   <a class="heading-link" href="#react-%e3%81%ae%e3%81%bf%e3%81%a7todo%e3%82%a2%e3%83%97%e3%83%aa%e3%82%b1%e3%83%bc%e3%82%b7%e3%83%a7%e3%83%b3%e3%82%92%e4%bd%9c%e3%82%8b%e5%a0%b4%e5%90%88">
-    <i class="fa fa-link" aria-hidden="true" title="Link to heading"></i>
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h4>
@@ -422,7 +433,7 @@
 <h3 id="store-の-state-の定義">
   Store の State の定義
   <a class="heading-link" href="#store-%e3%81%ae-state-%e3%81%ae%e5%ae%9a%e7%be%a9">
-    <i class="fa fa-link" aria-hidden="true" title="Link to heading"></i>
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
@@ -444,7 +455,7 @@
 <h3 id="action-の追加">
   Action の追加
   <a class="heading-link" href="#action-%e3%81%ae%e8%bf%bd%e5%8a%a0">
-    <i class="fa fa-link" aria-hidden="true" title="Link to heading"></i>
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
@@ -497,7 +508,7 @@
 </span></span></code></pre></div><h3 id="reducer-の追加">
   Reducer の追加
   <a class="heading-link" href="#reducer-%e3%81%ae%e8%bf%bd%e5%8a%a0">
-    <i class="fa fa-link" aria-hidden="true" title="Link to heading"></i>
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
@@ -547,7 +558,7 @@
 <h3 id="reducer-を使って-store-の作成">
   Reducer を使って Store の作成
   <a class="heading-link" href="#reducer-%e3%82%92%e4%bd%bf%e3%81%a3%e3%81%a6-store-%e3%81%ae%e4%bd%9c%e6%88%90">
-    <i class="fa fa-link" aria-hidden="true" title="Link to heading"></i>
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
@@ -576,7 +587,7 @@
 <h3 id="container-を作成">
   Container を作成
   <a class="heading-link" href="#container-%e3%82%92%e4%bd%9c%e6%88%90">
-    <i class="fa fa-link" aria-hidden="true" title="Link to heading"></i>
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
@@ -712,7 +723,7 @@
 <h3 id="開発にあたって">
   開発にあたって
   <a class="heading-link" href="#%e9%96%8b%e7%99%ba%e3%81%ab%e3%81%82%e3%81%9f%e3%81%a3%e3%81%a6">
-    <i class="fa fa-link" aria-hidden="true" title="Link to heading"></i>
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
@@ -756,6 +767,9 @@
         
         
         
+
+        
+        
       </footer>
     </article>
 
@@ -792,17 +806,28 @@
 
 
   
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-ML7TD1LERR"></script>
-<script>
-var doNotTrack = false;
-if (!doNotTrack) {
-	window.dataLayer = window.dataLayer || [];
-	function gtag(){dataLayer.push(arguments);}
-	gtag('js', new Date());
-	gtag('config', 'G-ML7TD1LERR', { 'anonymize_ip': false });
-}
-</script>
+  
+    
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-ML7TD1LERR"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-ML7TD1LERR');
+        }
+      </script>
+    
+  
 
+
+
+  
 
   
 

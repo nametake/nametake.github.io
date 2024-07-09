@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <title>
+  SaaS的世界観におけるシステムの境界づけられたコンテキストの統合 · nametake.dev
+</title>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+
+
+
+
+<meta name="author" content="nametake">
+<meta name="description" content="境界づけられたコンテキストの統合 腐敗防止層が取り上げられがちだが、SaaS的世界観では他の選択肢も十分に取れるのではと思った SaaS的世界観">
+<meta name="keywords" content="blog,developer,personal">
+
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="SaaS的世界観におけるシステムの境界づけられたコンテキストの統合">
+  <meta name="twitter:description" content="境界づけられたコンテキストの統合 腐敗防止層が取り上げられがちだが、SaaS的世界観では他の選択肢も十分に取れるのではと思った SaaS的世界観">
+
+<meta property="og:url" content="http://localhost:1313/posts/2021/03/13/saas-bounded-contextintegration/">
+  <meta property="og:site_name" content="nametake.dev">
+  <meta property="og:title" content="SaaS的世界観におけるシステムの境界づけられたコンテキストの統合">
+  <meta property="og:description" content="境界づけられたコンテキストの統合 腐敗防止層が取り上げられがちだが、SaaS的世界観では他の選択肢も十分に取れるのではと思った SaaS的世界観">
+  <meta property="og:locale" content="ja">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2021-03-13T00:00:00+09:00">
+    <meta property="article:modified_time" content="2021-03-13T00:00:00+09:00">
+    <meta property="article:tag" content="DDD">
+
+
+
+
+<link rel="canonical" href="http://localhost:1313/posts/2021/03/13/saas-bounded-contextintegration/">
+
+
+<link rel="preload" href="../../../../../fonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../../../../../fonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../../../../../fonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
+
+
+  
+  
+  <link rel="stylesheet" href="../../../../../css/coder.css" media="screen">
+
+
+
+
+
+
+  
+    
+    
+    <link rel="stylesheet" href="../../../../../css/coder-dark.css" media="screen">
+  
+
+
+
+ 
+  
+    
+    <link rel="stylesheet" href="../../../../../css/noto&#43;sans&#43;jp.css" media="screen">
+  
+
+
+
+  
+  
+    
+    
+    <link rel="stylesheet" href="../../../../../scss/custom.css" media="screen">
+  
+
+
+
+<link rel="icon" type="image/svg+xml" href="../../../../../images/favicon.svg" sizes="any">
+<link rel="icon" type="image/png" href="../../../../../images/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../../../../images/favicon-16x16.png" sizes="16x16">
+
+<link rel="apple-touch-icon" href="../../../../../images/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="180x180" href="../../../../../images/apple-touch-icon.png">
+
+<link rel="manifest" href="../../../../../site.webmanifest">
+<link rel="mask-icon" href="../../../../../images/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+
+
+
+
+
+
+</head>
+
+
+
+
+
+
+<body class="preload-transitions colorscheme-auto">
+  
+<div class="float-container">
+    <a id="dark-mode-toggle" class="colorscheme-toggle">
+        <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+    </a>
+</div>
+
+
+  <main class="wrapper">
+    <nav class="navigation">
+  <section class="container">
+    
+    <a class="navigation-title" href="http://localhost:1313/">
+      nametake.dev
+    </a>
+    
+    
+      <input type="checkbox" id="menu-toggle" />
+      <label class="menu-button float-right" for="menu-toggle">
+        <i class="fa-solid fa-bars fa-fw" aria-hidden="true"></i>
+      </label>
+      <ul class="navigation-list">
+        
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="../../../../../about/">About</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="../../../../../posts/">Blog</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="../../../../../project/">Project</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="../../../../../tags/">Tags</a>
+            </li>
+          
+        
+        
+      </ul>
+    
+  </section>
+</nav>
+
+
+    <div class="content">
+      
+  <section class="container post">
+    <article>
+      <header>
+        <div class="post-title">
+          <h1 class="title">
+            <a class="title-link" href="http://localhost:1313/posts/2021/03/13/saas-bounded-contextintegration/">
+              SaaS的世界観におけるシステムの境界づけられたコンテキストの統合
+            </a>
+          </h1>
+        </div>
+        <div class="post-meta">
+          <div class="date">
+            <span class="posted-on">
+              <i class="fa-solid fa-calendar" aria-hidden="true"></i>
+              <time datetime="2021-03-13T00:00:00&#43;09:00">
+                2021/03/13
+              </time>
+            </span>
+            <span class="reading-time">
+              <i class="fa-solid fa-clock" aria-hidden="true"></i>
+              2-minute read
+            </span>
+          </div>
+          
+          
+          <div class="tags">
+  <i class="fa-solid fa-tag" aria-hidden="true"></i>
+    <span class="tag">
+      <a href="../../../../../tags/ddd/">DDD</a>
+    </span></div>
+
+        </div>
+      </header>
+
+      <div class="post-content">
+        
+        <ul>
+<li>境界づけられたコンテキストの統合</li>
+<li>腐敗防止層が取り上げられがちだが、SaaS的世界観では他の選択肢も十分に取れるのではと思った</li>
+<li>SaaS的世界観
+<ul>
+<li>コアではない業務領域を外部のソフトウェア(SaaS)に任せる</li>
+<li>それにより自身のコアに集中できる</li>
+</ul>
+</li>
+<li>外部サービスと自社のコアをつなぐときに腐敗防止層を利用する事が多い
+<ul>
+<li>外部サービスを抽象化して自社のコアと完全に切り離す</li>
+</ul>
+</li>
+<li>悪いとは思っていない</li>
+<li>SaaS的世界観以前は洗練されていないモデルのシステムとつなぐことも多かった(はず)
+<ul>
+<li>もともと統合を考えていなかった</li>
+<li>外部に公開するつもりがなかった</li>
+</ul>
+</li>
+<li>洗練されていないモデルとコアが混ざることを指して「腐敗」というのはわかる</li>
+<li>SaaS的世界観におけるシステムでは最初から統合はスコープに入っている
+<ul>
+<li>APIは公開が前提</li>
+<li>使うユーザーが選択することすらある</li>
+</ul>
+</li>
+<li>そのモデルは一定以上洗練されているはず
+<ul>
+<li>洗練されていないモデルのSaaSは一定淘汰されていそう</li>
+</ul>
+</li>
+<li>他のシステムとつながることがビジネスやユーザーにも期待されている</li>
+<li>そういった世界観の中では自社以外のSaaSのモデルがドメインとして取り扱われるのではないか</li>
+<li>エリック・エヴァンスのDDD本でも洗練されているなら使うことで自社ドメインが改善されるという話もある
+<ul>
+<li>コンテキストの結合の順応者の部分</li>
+</ul>
+</li>
+<li>自社のコアドメインとごっちゃにするという意味ではない
+<ul>
+<li>サブドメインとして切るとか</li>
+<li>特定の境界づけられたコンテキストの中では使うとか</li>
+</ul>
+</li>
+</ul>
+
+      </div>
+
+
+      <footer>
+        
+
+
+        <div id="disqus_thread"></div>
+<script>
+  window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "nametake-dev" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+    
+    document.addEventListener('themeChanged', function (e) { 
+        if (document.readyState == 'complete') {
+          DISQUS.reset({ reload: true, config: disqus_config });
+        }
+    });
+</script>
+        
+        
+        
+        
+
+        
+        
+      </footer>
+    </article>
+
+    
+  </section>
+
+    </div>
+
+    <footer class="footer">
+  <section class="container">
+    ©
+    
+    2024
+     nametake 
+    ·
+    
+    Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/" target="_blank" rel="noopener">Coder</a>.
+    
+  </section>
+</footer>
+
+  </main>
+
+  
+
+  
+  
+  <script src="../../../../../js/coder.js"></script>
+  
+
+  
+
+  
+
+
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</body>
+
+</html>

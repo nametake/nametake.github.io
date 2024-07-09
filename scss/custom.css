@@ -1,0 +1,26 @@
+body {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 1.6em; }
+
+code {
+  font-size: 1.4rem; }
+
+pre {
+  font-size: 1.4rem; }
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Noto Sans JP', sans-serif; }
+
+.list ul li .title {
+  flex: 9;
+  font-family: 'Noto Sans JP', sans-serif; }
+
+.list ul li .date {
+  flex: 1; }
+
+/*# sourceMappingURL=custom.css.map */
