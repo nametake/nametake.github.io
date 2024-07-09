@@ -205,13 +205,6 @@
       <description>最近Vimの設定を整理してcoc.nvimに乗り換えるにあたり、snippetのプラグインもneosnippetからcoc-neosnipp</description>
     </item>
     <item>
-      <title>Project</title>
-      <link>https://nametake.github.io/project/</link>
-      <pubDate>Mon, 29 Jul 2019 00:14:54 +0900</pubDate>
-      <guid>https://nametake.github.io/project/</guid>
-      <description>作ったもの Link to heading protoc-gen-gohttp Link to heading Protocol Buffersの定義から生成されるGoのgRPC用interfaceをnet/http用に変換するコードを生成する</description>
-    </item>
-    <item>
       <title>Vimのプラグインを整理した(あとcoc.nvimの紹介)</title>
       <link>https://nametake.github.io/posts/2019/07/25/change-vim-plugins/</link>
       <pubDate>Thu, 25 Jul 2019 00:51:43 +0900</pubDate>
