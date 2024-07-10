@@ -27,7 +27,7 @@
       <link>https://nametake.github.io/posts/2020/02/26/migration-diagnostic-languageserver/</link>
       <pubDate>Wed, 26 Feb 2020 00:00:00 +0900</pubDate>
       <guid>https://nametake.github.io/posts/2020/02/26/migration-diagnostic-languageserver/</guid>
-      <description>Vimのプラグインとしてaleとneoformatをずっと利用して来たのですが、LinterやFormatterも全てLanguage Ser</description>
+      <description>Vimのプラグインとしてaleとneoformatをずっと利用してきたが、LinterやFormatterも全てLanguage Server</description>
     </item>
     <item>
       <title>Goの戻り値をいい感じに補完してくれるvim-snippetsを作った</title>

@@ -190,7 +190,7 @@
       <div class="post-content">
         
         <p>最近Vimの設定を整理してcoc.nvimに乗り換えるにあたり、snippetのプラグインもneosnippetからcoc-neosnippetに乗り換え、snippet集もvim-snippetsに変更した。</p>
-<p>概ね問題はなかったのですが、Goを書くときに<code>iferr</code>で戻り値をいい感じに補完してくれる機能がなくなったのは若干不便だった(<a href="https://pocke.hatenablog.com/entry/2015/12/20/133445"  class="external-link" target="_blank" rel="noopener">参考</a>)。</p>
+<p>概ね問題はなかったが、Goを書くときに<code>iferr</code>で戻り値をいい感じに補完してくれる機能がなくなったのは若干不便だった(<a href="https://pocke.hatenablog.com/entry/2015/12/20/133445"  class="external-link" target="_blank" rel="noopener">参考</a>)。</p>
 <p>一応coc.nvimにneosnippetの機能を取り込む機能はついているようでしたがうまく動かなかったことと、もうちょっと高級な機能が欲しいと前々から思っていたのもあり、せっかくなのでsnippetを提供するプラグインを。</p>
 <p>それで作ったのが、<a href="https://github.com/nametake/vim-goiferr-snippets"  class="external-link" target="_blank" rel="noopener">vim-goiferr-snippets</a>になる。
 以下のgifのように動作する。</p>
@@ -202,7 +202,7 @@
 <li><code>pkg/errors</code>の<code>Wrap</code>関数でerrorをWrapする補完の提供</li>
 <li>名前付き戻り値のときは<code>return</code>しか出力しない</li>
 <li>インラインのエラーハンドリング用snippetも提供</li>
-<li>上記機能を持ったVimScirptの関数として提供している
+<li>上記機能を持ったVimScriptの関数として提供している
 <ul>
 <li><code>pkg/errors</code>以外のerrorライブラリ等でカスタマイズできる</li>
 </ul>
@@ -210,7 +210,7 @@
 </ul>
 <p>また、作っている最中に「<code>iferr</code>用の正規表現はそのまま<code>return</code>のsnippetとしても使えるのでは」と思ったので、そのまま<code>return</code>を補完するsnippetとしても提供してみた。
 戻り値をいい感じに展開して、それぞれにジャンプ用のマーカーを付けているので、サクサク戻り値を設定できる。</p>
-<p>自分用に作ったのでオレオレ設定な部分もありますが、生暖かい見ていただければ幸い。</p>
+<p>自分用に作ったのでオレオレ設定な部分もあるが、生暖かい見ていただければ幸い。</p>
 <p>最後に、プラグイン内の正規表現部分は<a href="https://github.com/pocke"  class="external-link" target="_blank" rel="noopener">@pocke</a>さんの「<a href="https://pocke.hatenablog.com/entry/2015/12/20/133445"  class="external-link" target="_blank" rel="noopener">Vim で Go 言語を書いている時、Neosnippet でいい感じに if する</a>」という記事を参考にさせていただきました。ありがとうございました。</p>
 
       </div>

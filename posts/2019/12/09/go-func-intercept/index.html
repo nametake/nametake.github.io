@@ -255,7 +255,7 @@
 </span></span></code></pre></div><p>さて、今回インターセプトしたい部分は最初のコードの以下の部分。</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span>	<span style="color:#a6e22e">ret</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">w</span>.<span style="color:#a6e22e">pingServer</span>.<span style="color:#a6e22e">Ping</span>(<span style="color:#a6e22e">ctx</span>, <span style="color:#a6e22e">arg</span>)
 </span></span></code></pre></div><p>このコードの前後に、 <code>WrapStruct.Call</code> に関数を渡すことで処理をインターセプトできるようにしたい。</p>
-<p>いきなりですがインターセプトできるようにしたコードを以下に貼る。</p>
+<p>インターセプトできるようにしたコードを以下に貼ってみる。</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">RPC</span> <span style="color:#66d9ef">func</span>(<span style="color:#a6e22e">context</span>.<span style="color:#a6e22e">Context</span>, <span style="color:#f92672">*</span><span style="color:#a6e22e">pb</span>.<span style="color:#a6e22e">PingRequest</span>) (<span style="color:#f92672">*</span><span style="color:#a6e22e">pb</span>.<span style="color:#a6e22e">PingResponse</span>, <span style="color:#66d9ef">error</span>)
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">Interceptor</span> <span style="color:#66d9ef">func</span>(<span style="color:#a6e22e">context</span>.<span style="color:#a6e22e">Context</span>, <span style="color:#f92672">*</span><span style="color:#a6e22e">pb</span>.<span style="color:#a6e22e">PingRequest</span>, <span style="color:#a6e22e">RPC</span>) (<span style="color:#f92672">*</span><span style="color:#a6e22e">pb</span>.<span style="color:#a6e22e">PingResponse</span>, <span style="color:#66d9ef">error</span>)
 </span></span><span style="display:flex;"><span>
@@ -344,7 +344,7 @@
   </a>
 </h2>
 <!-- textlint-disable ja-technical-writing/ja-no-weak-phrase -->
-<p>コードを見ればわかりはするのですが、一応どういう変更を入れたのか簡単に解説をしようと思う。</p>
+<p>コードを見ればわかるが、一応どういう変更を入れたのか簡単に解説をしようと思う。</p>
 <!-- textlint-enable -->
 <p>まずは下記のintraface。</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">RPC</span> <span style="color:#66d9ef">func</span>(<span style="color:#a6e22e">context</span>.<span style="color:#a6e22e">Context</span>, <span style="color:#f92672">*</span><span style="color:#a6e22e">pb</span>.<span style="color:#a6e22e">PingRequest</span>) (<span style="color:#f92672">*</span><span style="color:#a6e22e">pb</span>.<span style="color:#a6e22e">PingResponse</span>, <span style="color:#66d9ef">error</span>)
@@ -394,7 +394,7 @@
   </a>
 </h2>
 <p>このテクニックを知っていると「特定のinterfaceを受け取ってそのinterfaceで実行する」機能を持ったものを内部でインターセプトして任意の処理を挟むことができるようになる。</p>
-<p>あまり業務のコードで使えるようなテクニックではないですが、上記のような構造を持つライブラリやコードジェネレータを作るときに知っておくと、使う側にある程度の自由度を与えることができるようになる。</p>
+<p>あまり業務のコードで使えるようなテクニックではないが、上記のような構造を持つライブラリやコードジェネレータを作るときに知っておくと使う側にある程度の自由度を与えることができるようになる。</p>
 <h2 id="おまけ">
   おまけ
   <a class="heading-link" href="#%e3%81%8a%e3%81%be%e3%81%91">

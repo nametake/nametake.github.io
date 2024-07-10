@@ -65,7 +65,7 @@
       <description>Go1.13からerrorsに色々機能が入った(The Go Blog)。 最近は新しいGoのことをインプットできていなかったので、リハビリがてらs</description>
     </item>
     <item>
-      <title>Goのrelfectで構造体の変数にインスタンスを詰める方法</title>
+      <title>Goのreflectで構造体の変数にインスタンスを詰める方法</title>
       <link>https://nametake.github.io/posts/2019/09/10/go-reflect-create-instance/</link>
       <pubDate>Tue, 10 Sep 2019 13:39:29 +0900</pubDate>
       <guid>https://nametake.github.io/posts/2019/09/10/go-reflect-create-instance/</guid>

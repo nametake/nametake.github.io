@@ -132,7 +132,7 @@
       <link>https://nametake.github.io/posts/2020/02/26/migration-diagnostic-languageserver/</link>
       <pubDate>Wed, 26 Feb 2020 00:00:00 +0900</pubDate>
       <guid>https://nametake.github.io/posts/2020/02/26/migration-diagnostic-languageserver/</guid>
-      <description>Vimのプラグインとしてaleとneoformatをずっと利用して来たのですが、LinterやFormatterも全てLanguage Ser</description>
+      <description>Vimのプラグインとしてaleとneoformatをずっと利用してきたが、LinterやFormatterも全てLanguage Server</description>
     </item>
     <item>
       <title>TypeScriptでFormのComponentを配列で管理する</title>
@@ -177,7 +177,7 @@
       <description>TypeScriptのプロジェクトを作る度に設定すると思うのでメモ。 前提 Link to heading Webpackでプロジェクトを管理している Linterはesl</description>
     </item>
     <item>
-      <title>Goのrelfectで構造体の変数にインスタンスを詰める方法</title>
+      <title>Goのreflectで構造体の変数にインスタンスを詰める方法</title>
       <link>https://nametake.github.io/posts/2019/09/10/go-reflect-create-instance/</link>
       <pubDate>Tue, 10 Sep 2019 13:39:29 +0900</pubDate>
       <guid>https://nametake.github.io/posts/2019/09/10/go-reflect-create-instance/</guid>

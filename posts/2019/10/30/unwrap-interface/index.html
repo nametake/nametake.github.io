@@ -243,13 +243,13 @@
 <p><code>fmt.Errorf</code> が呼び出されてからの4行は渡されたformatと引数をもとに <code>pp</code> 構造体を生成している部分。
 深堀りはしないが、Unwrapの説明でも若干関わるので、<code>pp</code> 構造体はformatと変数のスライスをパースして色々やっているということだけは覚えておく。</p>
 <p>Unwrapに関係があるのは5行目以降から。
-4行目までで生成した <code>pp</code> 構造体の <code>wrappedErr</code> を確認して、nilだった場合 <code>errors.New</code> を、nilじゃない場合は同じ階層に定義してある <code>wrapError</code> 構造体を使ってエラーを作成しています。</p>
+4行目までで生成した <code>pp</code> 構造体の <code>wrappedErr</code> を確認して、nilだった場合 <code>errors.New</code> を、nilじゃない場合は同じ階層に定義してある <code>wrapError</code> 構造体を使ってエラーを作成している。</p>
 <p>本筋からは少しずれるが、このような実装のため <code>fmt.Errorf</code> を呼び出すと必ずエラーが作成される。
 そのため、nilの可能性があるエラーをnilチェックせずに渡すと思わぬバグの原因になるので、<code>fmt.Errorf</code> を呼び出すときには必ずnilチェックをするようにすること。</p>
 <p>ここで重要になるのは <code>wrapError</code> 構造体。</p>
-<p><code>wrapError</code> 構造体はerror interfaceとUnwrap interfaceを実装しています。
-<code>Unwrap()</code>の中では <code>wrapError</code> が持っている<code>err</code>を返していますが、この<code>err</code>は<code>pp</code>の<code>wrapedErr</code>を確認して詰められている。
-また、3行目の<code>doPrintf</code>の中を追いかけていくと、<code>wrapedErr</code> は<code>fmt.Errorf</code>の第2引数に渡されたエラーが入っている事がわかる。</p>
+<p><code>wrapError</code> 構造体はerror interfaceとUnwrap interfaceを実装している。
+<code>Unwrap()</code>の中では <code>wrapError</code> が持っている<code>err</code>を返しているが、この<code>err</code>は<code>pp</code>の<code>wrappedErr</code>を確認して詰められている。
+また、3行目の<code>doPrintf</code>の中を追いかけていくと、<code>wrappedErr</code> は<code>fmt.Errorf</code>の第2引数に渡されたエラーが入っている事がわかる。</p>
 <p>上記のことから、<code>fmt.Errorf</code>経由でWrapされたエラーが<code>errors.Unwrap</code>に渡されたときには、<code>fmt.Errorf</code>に渡されたエラーが返ることになり、文字通り<code>fmt.Errorf</code>でWrapされたエラーをUnwrapできる事がわかる。</p>
 <h2 id="unwrap-interface実用例">
   Unwrap interface実用例
@@ -410,8 +410,8 @@
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#75715e">//
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#75715e">// 3
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}
-</span></span></code></pre></div><p><code>errors.As</code>の実装はUnwrap interfaceを満たしていることが前提のため、独自のエラー型を定義するときには同時にUnwrap interfaceを満たすように実装すると、期待する動作をしてくれるようになります。</p>
-<p>御存知の通りGoはDuck TypingなのでUnwrap interfaceを満たすには型が <code>Unwrap()</code> を実装するだけで大丈夫です。</p>
+</span></span></code></pre></div><p><code>errors.As</code>の実装はUnwrap interfaceを満たしていることが前提のため、独自のエラー型を定義するときには同時にUnwrap interfaceを満たすように実装すると、期待する動作をしてくれるようになる。</p>
+<p>御存知の通りGoはDuck TypingなのでUnwrap interfaceを満たすには型が <code>Unwrap()</code> を実装するだけでよい。</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> (

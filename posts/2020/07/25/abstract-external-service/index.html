@@ -227,7 +227,7 @@
 <!-- textlint-enable ja-technical-writing/ja-no-weak-phrase -->
 <p>一見、 <code>Tick</code> を取り出せるinterfaceをサービス分定義したことで問題なく動くように見える。</p>
 <p>しかし、 <code>GetTick</code> からいきなり <code>Tick</code> 取り出そうとしているため、「外部サービスの値を使って <code>Tick</code> を計算する」というロジックがインフラストラクチャ層に流出するという問題が発生してしまった。</p>
-<p>具体的な例をあげます。</p>
+<p>具体的な例を挙げてみる。</p>
 <p>取引所Fooは以下のようなResponseを返すAPIを提供していた。</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>{
 </span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;currentTick&#34;</span>: <span style="color:#e6db74">&#34;1000000&#34;</span>,
