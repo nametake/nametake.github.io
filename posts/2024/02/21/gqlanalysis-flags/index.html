@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ja">
 
-<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+<head>
   <title>
   gqlgo/gqlanalysisを使ったコマンドで独自引数を指定する · nametake.dev
 </title>
@@ -13,18 +13,18 @@
 
 
 <meta name="author" content="nametake">
-<meta name="description" content="この記事で言及している gqlgo/gqlanalysis のバージョンはv0.3.5。 GraphQLの静的解析をしてCLIを作りやすくしてくれるgqlgo/gqlanalys">
+<meta name="description" content="GraphQLの静的解析をCLIで作りやすくしてくれるgqlgo/gqlanalysisというライブラリがある。 go/analysisを使っ">
 <meta name="keywords" content="blog,developer,personal">
 
 
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="gqlgo/gqlanalysisを使ったコマンドで独自引数を指定する">
-  <meta name="twitter:description" content="この記事で言及している gqlgo/gqlanalysis のバージョンはv0.3.5。 GraphQLの静的解析をしてCLIを作りやすくしてくれるgqlgo/gqlanalys">
+  <meta name="twitter:description" content="GraphQLの静的解析をCLIで作りやすくしてくれるgqlgo/gqlanalysisというライブラリがある。 go/analysisを使っ">
 
-<meta property="og:url" content="http://localhost:1313/posts/2024/02/21/gqlanalysis-flags/">
+<meta property="og:url" content="https://nametake.github.io/posts/2024/02/21/gqlanalysis-flags/">
   <meta property="og:site_name" content="nametake.dev">
   <meta property="og:title" content="gqlgo/gqlanalysisを使ったコマンドで独自引数を指定する">
-  <meta property="og:description" content="この記事で言及している gqlgo/gqlanalysis のバージョンはv0.3.5。 GraphQLの静的解析をしてCLIを作りやすくしてくれるgqlgo/gqlanalys">
+  <meta property="og:description" content="GraphQLの静的解析をCLIで作りやすくしてくれるgqlgo/gqlanalysisというライブラリがある。 go/analysisを使っ">
   <meta property="og:locale" content="ja">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
@@ -36,7 +36,7 @@
 
 
 
-<link rel="canonical" href="http://localhost:1313/posts/2024/02/21/gqlanalysis-flags/">
+<link rel="canonical" href="https://nametake.github.io/posts/2024/02/21/gqlanalysis-flags/">
 
 
 <link rel="preload" href="../../../../../fonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin>
@@ -46,7 +46,7 @@
 
   
   
-  <link rel="stylesheet" href="../../../../../css/coder.css" media="screen">
+  <link rel="stylesheet" href="../../../../../css/coder.min.38c4552ac40f9ae3408bad40358f654ebd8804412fe74ed56f2d6c8a7af82dd3.css" integrity="sha256-OMRVKsQPmuNAi61ANY9lTr2IBEEv507Vby1sinr4LdM=" crossorigin="anonymous" media="screen" />
 
 
 
@@ -56,7 +56,7 @@
   
     
     
-    <link rel="stylesheet" href="../../../../../css/coder-dark.css" media="screen">
+    <link rel="stylesheet" href="../../../../../css/coder-dark.min.a00e6364bacbc8266ad1cc81230774a1397198f8cfb7bcba29b7d6fcb54ce57f.css" integrity="sha256-oA5jZLrLyCZq0cyBIwd0oTlxmPjPt7y6KbfW/LVM5X8=" crossorigin="anonymous" media="screen" />
   
 
 
@@ -64,7 +64,7 @@
  
   
     
-    <link rel="stylesheet" href="../../../../../css/noto&#43;sans&#43;jp.css" media="screen">
+    <link rel="stylesheet" href="../../../../../css/noto&#43;sans&#43;jp.min.ed4b9470a6e014d7c178379b142a1dc1850e399398dc9ce15b1e3bba8368c55f.css" integrity="sha256-7UuUcKbgFNfBeDebFCodwYUOOZOY3JzhWx47uoNoxV8=" crossorigin="anonymous" media="screen" />
   
 
 
@@ -72,8 +72,7 @@
   
   
     
-    
-    <link rel="stylesheet" href="../../../../../scss/custom.css" media="screen">
+    <link rel="stylesheet" href="../../../../../scss/custom.min.058882cb3caba673503d9e9323f469b039fbd5f4a6e1f421464d8311ae68be80.css" integrity="sha256-BYiCyzyrpnNQPZ6TI/RpsDn71fSm4fQhRk2DEa5ovoA=" crossorigin="anonymous" media="screen" />
   
 
 
@@ -116,7 +115,7 @@
     <nav class="navigation">
   <section class="container">
     
-    <a class="navigation-title" href="http://localhost:1313/">
+    <a class="navigation-title" href="https://nametake.github.io/">
       nametake.dev
     </a>
     
@@ -155,7 +154,7 @@
       <header>
         <div class="post-title">
           <h1 class="title">
-            <a class="title-link" href="http://localhost:1313/posts/2024/02/21/gqlanalysis-flags/">
+            <a class="title-link" href="https://nametake.github.io/posts/2024/02/21/gqlanalysis-flags/">
               gqlgo/gqlanalysisを使ったコマンドで独自引数を指定する
             </a>
           </h1>
@@ -170,7 +169,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              1-minute read
+              2-minute read
             </span>
           </div>
           
@@ -190,22 +189,45 @@
 
       <div class="post-content">
         
-        <p>この記事で言及している gqlgo/gqlanalysis のバージョンは<a href="https://github.com/gqlgo/gqlanalysis/tree/v0.3.5"  class="external-link" target="_blank" rel="noopener">v0.3.5</a>。</p>
-<ul>
-<li>GraphQLの静的解析をしてCLIを作りやすくしてくれるgqlgo/gqlanalysisというライブラリがある</li>
-<li>go/analysisと同じ使い勝手で使えてテストも書きやすいが一点ハマった</li>
-<li>multichecker.Mainを使った場合に独自引数の指定に少し癖があった</li>
-<li>go/analysisだとAnalyzer.Flagsに設定すればできた</li>
-<li><a href="https://github.com/gqlgo/gqlanalysis/blob/v0.3.5/multichecker/checker.go#L16-L19"  class="external-link" target="_blank" rel="noopener">https://github.com/gqlgo/gqlanalysis/blob/v0.3.5/multichecker/checker.go#L16-L19</a> で引数がflagパッケージ直接に設定されている</li>
-<li>独自引数を指定子たい場合flagパッケージに直接追加する必要がある
-<ul>
-<li>これがないとコマンドの引数が不足したときに正しくUsageが表示されない</li>
-</ul>
-</li>
-<li>挙動としてちょっと不思議な部分でもあるのでいずれ治るかも</li>
-<li>余談として上記の設定が必ず入っているためqueryの指定がないとコマンドとしても正しく動いてくれない</li>
-<li>schemaが必須なのはわかるがQueryは必須にしなくてもいい気がするのでそこもいつか治るかも</li>
-</ul>
+        <p>GraphQLの静的解析をCLIで作りやすくしてくれるgqlgo/gqlanalysisというライブラリがある。</p>
+<p>go/analysisを使ったことがあればそれと殆ど同じ使い方ができるため非常に便利だが、CLIに引数を渡すときにハマったのでその備忘録。</p>
+<p>この記事で言及している gqlgo/gqlanalysis のバージョンは<a href="https://github.com/gqlgo/gqlanalysis/tree/v0.3.5"  class="external-link" target="_blank" rel="noopener">v0.3.5</a>。</p>
+<p>作成したCLIに引数を渡したい場合、go/analysisではAnalyzer.FlagsにGo標準のFlagと同じように設定をすることでunitchecker.Mainが勝手にflagをparseしてくれいていた。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#66d9ef">var</span> (
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">configPath</span> <span style="color:#66d9ef">string</span>
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">init</span>() {
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">Analyzer</span>.<span style="color:#a6e22e">Flags</span>.<span style="color:#a6e22e">StringVar</span>(<span style="color:#f92672">&amp;</span><span style="color:#a6e22e">configPath</span>, <span style="color:#e6db74">&#34;config&#34;</span>, <span style="color:#e6db74">&#34;&#34;</span>, <span style="color:#e6db74">&#34;config file path&#34;</span>)
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>しかし、gqlanalysisだと以下の部分のように引数がflagパッケージ直接に設定されている。</p>
+<p><a href="https://github.com/gqlgo/gqlanalysis/blob/v0.3.5/multichecker/checker.go#L16-L19"  class="external-link" target="_blank" rel="noopener">https://github.com/gqlgo/gqlanalysis/blob/v0.3.5/multichecker/checker.go#L16-L19</a></p>
+<p>そのため、 gqlanalysisで作成したCLIでは暗黙的に、 <code>-schema=&quot;schema/**/*.graphql&quot; -query=&quot;query/**/*.graphql&quot;</code> のような引数を受け取れるようになっている。</p>
+<p>また、AnalyzerのFlagsに設定をしたとしても、上記の設定が選考するため、Usage等でschemaとqueryをセットでCLIの引数として表示できない。</p>
+<p>もし独自引数を設定したい場合は以下のようにflagパッケージに直接渡してschemaとqueryと同じ扱いにする必要がある。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">var</span> (
+</span></span><span style="display:flex;"><span>		<span style="color:#a6e22e">flagTypes</span>      <span style="color:#66d9ef">string</span>
+</span></span><span style="display:flex;"><span>		<span style="color:#a6e22e">flagDirectives</span> <span style="color:#66d9ef">string</span>
+</span></span><span style="display:flex;"><span>	)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">flag</span>.<span style="color:#a6e22e">StringVar</span>(<span style="color:#f92672">&amp;</span><span style="color:#a6e22e">flagDirectives</span>, <span style="color:#e6db74">&#34;directives&#34;</span>, <span style="color:#e6db74">&#34;&#34;</span>, <span style="color:#e6db74">&#34;required: comma-separated list of directives&#34;</span>)
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">flag</span>.<span style="color:#a6e22e">StringVar</span>(<span style="color:#f92672">&amp;</span><span style="color:#a6e22e">flagTypes</span>, <span style="color:#e6db74">&#34;types&#34;</span>, <span style="color:#e6db74">&#34;&#34;</span>, <span style="color:#e6db74">&#34;comma-separated list of list types&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">flag</span>.<span style="color:#a6e22e">Parse</span>(); <span style="color:#a6e22e">flagDirectives</span> <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;&#34;</span> {
+</span></span><span style="display:flex;"><span>		<span style="color:#a6e22e">flag</span>.<span style="color:#a6e22e">Usage</span>()
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">return</span>
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">types</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">parseTypes</span>(<span style="color:#a6e22e">flagTypes</span>)
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">directives</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">parseDirectives</span>(<span style="color:#a6e22e">flagDirectives</span>)
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">multichecker</span>.<span style="color:#a6e22e">Main</span>(<span style="color:#a6e22e">arraydirective</span>.<span style="color:#a6e22e">NewAnalyzer</span>(<span style="color:#a6e22e">types</span>, <span style="color:#a6e22e">directives</span>))
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>また、上記のようにflagパッケージに直接指定したとしても、schemaだけではなくqueryもセットで渡さないと正しく解析をしてくれない。</p>
+<p>schemaが必要な理由はわかるが、queryが必要な理由はちょっと不思議。</p>
+<!-- textlint-disable ja-technical-writing/ja-no-weak-phrase -->
+<p>これらの挙動はちょっと不思議なため、どこかで誰かが(もしくは自分が)PRを出して直すかもしれない。</p>
+<!-- textlint-enable -->
 
       </div>
 
@@ -272,7 +294,7 @@
 
   
   
-  <script src="../../../../../js/coder.js"></script>
+  <script src="../../../../../js/coder.min.6ae284be93d2d19dad1f02b0039508d9aab3180a12a06dcc71b0b0ef7825a317.js" integrity="sha256-auKEvpPS0Z2tHwKwA5UI2aqzGAoSoG3McbCw73gloxc="></script>
   
 
   
@@ -281,6 +303,25 @@
 
 
   
+  
+    
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-ML7TD1LERR"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-ML7TD1LERR');
+        }
+      </script>
+    
+  
+
 
 
   

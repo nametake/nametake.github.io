@@ -2,18 +2,18 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>GraphQL on nametake.dev</title>
-    <link>http://localhost:1313/tags/graphql/</link>
+    <link>https://nametake.github.io/tags/graphql/</link>
     <description>Recent content in GraphQL on nametake.dev</description>
     <generator>Hugo</generator>
     <language>ja</language>
     <lastBuildDate>Wed, 21 Feb 2024 00:00:00 +0900</lastBuildDate>
-    <atom:link href="http://localhost:1313/tags/graphql/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://nametake.github.io/tags/graphql/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>gqlgo/gqlanalysisを使ったコマンドで独自引数を指定する</title>
-      <link>http://localhost:1313/posts/2024/02/21/gqlanalysis-flags/</link>
+      <link>https://nametake.github.io/posts/2024/02/21/gqlanalysis-flags/</link>
       <pubDate>Wed, 21 Feb 2024 00:00:00 +0900</pubDate>
-      <guid>http://localhost:1313/posts/2024/02/21/gqlanalysis-flags/</guid>
-      <description>この記事で言及している gqlgo/gqlanalysis のバージョンはv0.3.5です。 GraphQLの静的解析をしてCLIを作りやすくしてくれるgqlgo/gqlanal</description>
+      <guid>https://nametake.github.io/posts/2024/02/21/gqlanalysis-flags/</guid>
+      <description>GraphQLの静的解析をCLIで作りやすくしてくれるgqlgo/gqlanalysisというライブラリがある。 go/analysisを使っ</description>
     </item>
   </channel>
 </rss>

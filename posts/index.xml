@@ -6,8 +6,15 @@
     <description>Recent content in Posts on nametake.dev</description>
     <generator>Hugo</generator>
     <language>ja</language>
-    <lastBuildDate>Sat, 13 Jan 2024 00:00:00 +0900</lastBuildDate>
+    <lastBuildDate>Wed, 21 Feb 2024 00:00:00 +0900</lastBuildDate>
     <atom:link href="https://nametake.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>gqlgo/gqlanalysisを使ったコマンドで独自引数を指定する</title>
+      <link>https://nametake.github.io/posts/2024/02/21/gqlanalysis-flags/</link>
+      <pubDate>Wed, 21 Feb 2024 00:00:00 +0900</pubDate>
+      <guid>https://nametake.github.io/posts/2024/02/21/gqlanalysis-flags/</guid>
+      <description>GraphQLの静的解析をCLIで作りやすくしてくれるgqlgo/gqlanalysisというライブラリがある。 go/analysisを使っ</description>
+    </item>
     <item>
       <title>Goのコード内のZetaSQLをフォーマットするツールを作った</title>
       <link>https://nametake.github.io/posts/2024/01/13/go-zetasqlfmt/</link>
