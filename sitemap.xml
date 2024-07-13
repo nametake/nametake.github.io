@@ -3,21 +3,24 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://nametake.github.io/tags/go/</loc>
-    <lastmod>2024-02-21T00:00:00+09:00</lastmod>
+    <lastmod>2024-07-13T00:00:00+09:00</lastmod>
+  </url><url>
+    <loc>https://nametake.github.io/posts/2024/07/13/go-stacktrace-frame/</loc>
+    <lastmod>2024-07-13T00:00:00+09:00</lastmod>
+  </url><url>
+    <loc>https://nametake.github.io/</loc>
+    <lastmod>2024-07-13T00:00:00+09:00</lastmod>
+  </url><url>
+    <loc>https://nametake.github.io/posts/</loc>
+    <lastmod>2024-07-13T00:00:00+09:00</lastmod>
+  </url><url>
+    <loc>https://nametake.github.io/tags/</loc>
+    <lastmod>2024-07-13T00:00:00+09:00</lastmod>
   </url><url>
     <loc>https://nametake.github.io/posts/2024/02/21/gqlanalysis-flags/</loc>
     <lastmod>2024-02-21T00:00:00+09:00</lastmod>
   </url><url>
     <loc>https://nametake.github.io/tags/graphql/</loc>
-    <lastmod>2024-02-21T00:00:00+09:00</lastmod>
-  </url><url>
-    <loc>https://nametake.github.io/</loc>
-    <lastmod>2024-02-21T00:00:00+09:00</lastmod>
-  </url><url>
-    <loc>https://nametake.github.io/posts/</loc>
-    <lastmod>2024-02-21T00:00:00+09:00</lastmod>
-  </url><url>
-    <loc>https://nametake.github.io/tags/</loc>
     <lastmod>2024-02-21T00:00:00+09:00</lastmod>
   </url><url>
     <loc>https://nametake.github.io/posts/2024/01/13/go-zetasqlfmt/</loc>
