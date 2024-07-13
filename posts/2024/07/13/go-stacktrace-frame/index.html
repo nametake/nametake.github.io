@@ -191,7 +191,7 @@
  <!-- textlint-enable -->
 <p>3rdパーティ製のerrorパッケージを使うという手もあるが、Stacktraceを取るだけならそこまで難しいコードにならないため、自作も十分最初の選択肢に入るはず。</p>
 <p>ということで、以下に備忘録的にStacktraceを取得できるerrorパッケージのコードを書いておく。</p>
-<p>使用感としては、標準のerrorsパッケージと同じようにしつつ、 <code>Stacktrace</code> 関数にerrorを渡すことでStacktraceであるFrameの配列を取得できるようになっている。</p>
+<p>使用感は標準のerrorsパッケージと同じようにしつつ、 <code>Stacktrace</code> 関数にerrorを渡すことでStacktraceであるFrameの配列を取得できるようになっている。</p>
 <p>また、 <code>Format</code> 関数でpanicと同じようなフォーマットの文字列を取得できるようにしている。</p>
 <p>これにより、panicを解析してくれるようなクラウドサービスへ乗せたときに、エラーレポートも正しく解析してくれる。</p>
 <p>唯一気をつけなければならないこととして、パッケージレベル変数でErrorfを使ってしまうとその呼出時点でStacktraceが記録されてしまうため、発生元のStacktraceが正しく取れなくなってしまう。</p>
