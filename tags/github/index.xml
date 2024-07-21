@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>GitHub on nametake.dev</title>
+    <link>https://nametake.github.io/tags/github/</link>
+    <description>Recent content in GitHub on nametake.dev</description>
+    <generator>Hugo</generator>
+    <language>ja</language>
+    <lastBuildDate>Sun, 21 Jul 2024 00:00:00 +0900</lastBuildDate>
+    <atom:link href="https://nametake.github.io/tags/github/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>go-zetasqlfmt-actionを作った</title>
+      <link>https://nametake.github.io/posts/2024/07/21/go-zetasqlfmt-action/</link>
+      <pubDate>Sun, 21 Jul 2024 00:00:00 +0900</pubDate>
+      <guid>https://nametake.github.io/posts/2024/07/21/go-zetasqlfmt-action/</guid>
+      <description>以前、spanner.StatementのSQLの文字列をフォーマットするために、go-zetasqlfmtというCLIを作った。 便利に使え</description>
+    </item>
+  </channel>
+</rss>
