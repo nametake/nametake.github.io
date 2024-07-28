@@ -6,8 +6,15 @@
     <description>Recent content in Vim on nametake.dev</description>
     <generator>Hugo</generator>
     <language>ja</language>
-    <lastBuildDate>Wed, 13 Dec 2023 00:00:00 +0900</lastBuildDate>
+    <lastBuildDate>Sun, 28 Jul 2024 00:00:00 +0900</lastBuildDate>
     <atom:link href="https://nametake.github.io/tags/vim/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>NERDTreeでファイルを開いたときにタグスタックに積む</title>
+      <link>https://nametake.github.io/posts/2024/07/28/nerdtree-tag-stack/</link>
+      <pubDate>Sun, 28 Jul 2024 00:00:00 +0900</pubDate>
+      <guid>https://nametake.github.io/posts/2024/07/28/nerdtree-tag-stack/</guid>
+      <description>自分はVimでのバッファ移動によくタグスタックを使っている。 思考スタイル的にすぐ前に戻るという感覚がやりやすいのか、telescopeでファ</description>
+    </item>
     <item>
       <title>telescope.nvimのgit_filesやlive_grepでもtagstackに積みたい</title>
       <link>https://nametake.github.io/posts/2023/12/13/telescope-nvim-git-files-tagstack/</link>
