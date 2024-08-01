@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Git on nametake.dev</title>
-    <link>https://nametake.github.io/tags/git/</link>
+    <link>https://nametake.dev/tags/git/</link>
     <description>Recent content in Git on nametake.dev</description>
     <generator>Hugo</generator>
     <language>ja</language>
     <lastBuildDate>Thu, 20 Sep 2018 18:47:46 +0900</lastBuildDate>
-    <atom:link href="https://nametake.github.io/tags/git/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://nametake.dev/tags/git/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>depでprivateリポジトリがupdateできなかったときの解決策</title>
-      <link>https://nametake.github.io/posts/2018/09/20/dep-private-repo/</link>
+      <link>https://nametake.dev/posts/2018/09/20/dep-private-repo/</link>
       <pubDate>Thu, 20 Sep 2018 18:47:46 +0900</pubDate>
-      <guid>https://nametake.github.io/posts/2018/09/20/dep-private-repo/</guid>
+      <guid>https://nametake.dev/posts/2018/09/20/dep-private-repo/</guid>
       <description>Goをアップデートした後、dep updateをしたら以下のようなエラーが発生した。 grouped write of manifest, lock and vendor: error while writing out vendor tree: failed to write dep tree: failed to export github.com/nametake/private-repo: unable to update repository: remote: Repository not</description>
     </item>
   </channel>

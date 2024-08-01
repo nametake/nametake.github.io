@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Slide on nametake.dev</title>
-    <link>https://nametake.github.io/tags/slide/</link>
+    <link>https://nametake.dev/tags/slide/</link>
     <description>Recent content in Slide on nametake.dev</description>
     <generator>Hugo</generator>
     <language>ja</language>
     <lastBuildDate>Wed, 19 Dec 2018 11:37:17 +0900</lastBuildDate>
-    <atom:link href="https://nametake.github.io/tags/slide/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://nametake.dev/tags/slide/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>labelerrとsuberrを作った話をLTしてきた</title>
-      <link>https://nametake.github.io/posts/2018/12/19/created-labelerr-and-suberr/</link>
+      <link>https://nametake.dev/posts/2018/12/19/created-labelerr-and-suberr/</link>
       <pubDate>Wed, 19 Dec 2018 11:37:17 +0900</pubDate>
-      <guid>https://nametake.github.io/posts/2018/12/19/created-labelerr-and-suberr/</guid>
+      <guid>https://nametake.dev/posts/2018/12/19/created-labelerr-and-suberr/</guid>
       <description>golang.tokyo #20のLT大会で、labelerrとsuberrを作った話をしてきた。 「Goのerrorは1種類というのは綺麗だとは思うけど、実運用上e</description>
     </item>
   </channel>

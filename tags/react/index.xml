@@ -2,59 +2,59 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>React on nametake.dev</title>
-    <link>https://nametake.github.io/tags/react/</link>
+    <link>https://nametake.dev/tags/react/</link>
     <description>Recent content in React on nametake.dev</description>
     <generator>Hugo</generator>
     <language>ja</language>
     <lastBuildDate>Sun, 25 Oct 2020 00:00:00 +0900</lastBuildDate>
-    <atom:link href="https://nametake.github.io/tags/react/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://nametake.dev/tags/react/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>react-resizableにemotionでスタイルを当てる</title>
-      <link>https://nametake.github.io/posts/2020/10/25/react-resizable-emotion/</link>
+      <link>https://nametake.dev/posts/2020/10/25/react-resizable-emotion/</link>
       <pubDate>Sun, 25 Oct 2020 00:00:00 +0900</pubDate>
-      <guid>https://nametake.github.io/posts/2020/10/25/react-resizable-emotion/</guid>
+      <guid>https://nametake.dev/posts/2020/10/25/react-resizable-emotion/</guid>
       <description>react-resizable に emotion でスタイルを当てた時のメモ。 import { ResizableBox } from &amp;#39;react-resizable&amp;#39;; const StyledResizableBox = styled(ResizableBox)` position: relative; display: inline-flex; flex-direction: column; align-items: right; justify-content: center; padding-left: 20px; overflow: hidden; border: 1px solid black; .react-resizable-handle { position: absolute; right: 0; width: 4px; height: 90%; border-left: 1px solid black; :hover { cursor: col-resize; } } `; 上記の例</description>
     </item>
     <item>
       <title>Reactでアクセシビリティを維持したRadioボタンをデザインする</title>
-      <link>https://nametake.github.io/posts/2020/09/26/react-a11y-radio/</link>
+      <link>https://nametake.dev/posts/2020/09/26/react-a11y-radio/</link>
       <pubDate>Sat, 26 Sep 2020 00:00:00 +0900</pubDate>
-      <guid>https://nametake.github.io/posts/2020/09/26/react-a11y-radio/</guid>
+      <guid>https://nametake.dev/posts/2020/09/26/react-a11y-radio/</guid>
       <description>ReactでRadioボタンにデザインを当てようとすると、 display: none を使う方法を紹介している記事が多いが、その方法ではアクセシビリティが消えてしま</description>
     </item>
     <item>
       <title>TypeScript &#43; electron-webpackでemotionを動かしたときのメモ</title>
-      <link>https://nametake.github.io/posts/2020/08/04/typescript-electron-webpack-emotion/</link>
+      <link>https://nametake.dev/posts/2020/08/04/typescript-electron-webpack-emotion/</link>
       <pubDate>Tue, 04 Aug 2020 00:00:00 +0900</pubDate>
-      <guid>https://nametake.github.io/posts/2020/08/04/typescript-electron-webpack-emotion/</guid>
+      <guid>https://nametake.dev/posts/2020/08/04/typescript-electron-webpack-emotion/</guid>
       <description>electron-webpack で emotion を動かそうとして試行錯誤したのでその結果のメモ。 ライブラリとバージョン Link to heading TypeScript(3.9.5) electron-webpack(2.8.2) emotion(10.0.27) ts-loader(7.0.5) babel-loader(8.1.0) babel-plugin-emotion(10.0.33) 起きた問題 Link to heading styled-componen</description>
     </item>
     <item>
       <title>TypeScriptでFormのComponentを配列で管理する</title>
-      <link>https://nametake.github.io/posts/2020/01/31/ts-array-form-onchange/</link>
+      <link>https://nametake.dev/posts/2020/01/31/ts-array-form-onchange/</link>
       <pubDate>Fri, 31 Jan 2020 00:00:00 +0900</pubDate>
-      <guid>https://nametake.github.io/posts/2020/01/31/ts-array-form-onchange/</guid>
+      <guid>https://nametake.dev/posts/2020/01/31/ts-array-form-onchange/</guid>
       <description>TypeScriptでFormのComponentを配列で管理する Link to heading toB向けのサービスや管理画面のように情報量の多いのプロダクトを作っ</description>
     </item>
     <item>
       <title>Hooks対応したreact-tableをTypeScriptで使う</title>
-      <link>https://nametake.github.io/posts/2019/12/17/react-table/</link>
+      <link>https://nametake.dev/posts/2019/12/17/react-table/</link>
       <pubDate>Tue, 17 Dec 2019 00:00:00 +0000</pubDate>
-      <guid>https://nametake.github.io/posts/2019/12/17/react-table/</guid>
+      <guid>https://nametake.dev/posts/2019/12/17/react-table/</guid>
       <description>この記事はReact Advent Calendar 2019の記事。 サービスにもよるとは思うが、業務系のサービスではテーブルUIはほぼ確実に登場する。 しかも、よく登場す</description>
     </item>
     <item>
       <title>FormikとYupを使った動的フォームのバリデーション</title>
-      <link>https://nametake.github.io/posts/2019/06/05/formik-yup-dynamic-validation/</link>
+      <link>https://nametake.dev/posts/2019/06/05/formik-yup-dynamic-validation/</link>
       <pubDate>Wed, 05 Jun 2019 23:50:36 +0900</pubDate>
-      <guid>https://nametake.github.io/posts/2019/06/05/formik-yup-dynamic-validation/</guid>
+      <guid>https://nametake.dev/posts/2019/06/05/formik-yup-dynamic-validation/</guid>
       <description>Formikで動的なFormを作った時に、表示されるFormに応じてYupのバリデーションを切り替える方法でちょっと手間取ったのでメモ。 結論</description>
     </item>
     <item>
       <title>TypeScript&#43;React&#43;Reduxチュートリアル</title>
-      <link>https://nametake.github.io/posts/2018/12/05/typescript-react-redux-tutorial/</link>
+      <link>https://nametake.dev/posts/2018/12/05/typescript-react-redux-tutorial/</link>
       <pubDate>Wed, 05 Dec 2018 11:08:00 +0900</pubDate>
-      <guid>https://nametake.github.io/posts/2018/12/05/typescript-react-redux-tutorial/</guid>
+      <guid>https://nametake.dev/posts/2018/12/05/typescript-react-redux-tutorial/</guid>
       <description>普段は Go でサーバサイドのコードを書いているが、TypeScript+React+Redux を勉強する機会があった。 その際、巷のチュートリアル</description>
     </item>
   </channel>

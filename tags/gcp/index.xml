@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>GCP on nametake.dev</title>
-    <link>https://nametake.github.io/tags/gcp/</link>
+    <link>https://nametake.dev/tags/gcp/</link>
     <description>Recent content in GCP on nametake.dev</description>
     <generator>Hugo</generator>
     <language>ja</language>
     <lastBuildDate>Fri, 09 Nov 2018 11:15:24 +0900</lastBuildDate>
-    <atom:link href="https://nametake.github.io/tags/gcp/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://nametake.dev/tags/gcp/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>GCPの認証済みのhttp.Clientの取得方法</title>
-      <link>https://nametake.github.io/posts/2018/11/09/auth-gcp-client/</link>
+      <link>https://nametake.dev/posts/2018/11/09/auth-gcp-client/</link>
       <pubDate>Fri, 09 Nov 2018 11:15:24 +0900</pubDate>
-      <guid>https://nametake.github.io/posts/2018/11/09/auth-gcp-client/</guid>
+      <guid>https://nametake.dev/posts/2018/11/09/auth-gcp-client/</guid>
       <description>GCPの認証済みのhttp.Clientが欲しいときにちょっとだけ調べたのでメモ。 結論だけ言うと、golang.org/x/oauth2/g</description>
     </item>
   </channel>

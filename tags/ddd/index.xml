@@ -2,24 +2,24 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>DDD on nametake.dev</title>
-    <link>https://nametake.github.io/tags/ddd/</link>
+    <link>https://nametake.dev/tags/ddd/</link>
     <description>Recent content in DDD on nametake.dev</description>
     <generator>Hugo</generator>
     <language>ja</language>
     <lastBuildDate>Sat, 25 Jul 2020 00:00:00 +0900</lastBuildDate>
-    <atom:link href="https://nametake.github.io/tags/ddd/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://nametake.dev/tags/ddd/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>DDDにおける外部サービスの抽象化</title>
-      <link>https://nametake.github.io/posts/2020/07/25/abstract-external-service/</link>
+      <link>https://nametake.dev/posts/2020/07/25/abstract-external-service/</link>
       <pubDate>Sat, 25 Jul 2020 00:00:00 +0900</pubDate>
-      <guid>https://nametake.github.io/posts/2020/07/25/abstract-external-service/</guid>
+      <guid>https://nametake.dev/posts/2020/07/25/abstract-external-service/</guid>
       <description>外部サービスの抽象化 Link to heading 最近のシステムはその複雑さの上昇に伴い、様々な外部サービスと連携する機会が多い。 その際、ドメインとして外部サービス</description>
     </item>
     <item>
       <title>集約におけるトランザクションのドメイン的関心と技術的関心</title>
-      <link>https://nametake.github.io/posts/2020/04/30/ddd-aggregate/</link>
+      <link>https://nametake.dev/posts/2020/04/30/ddd-aggregate/</link>
       <pubDate>Thu, 30 Apr 2020 00:00:00 +0900</pubDate>
-      <guid>https://nametake.github.io/posts/2020/04/30/ddd-aggregate/</guid>
+      <guid>https://nametake.dev/posts/2020/04/30/ddd-aggregate/</guid>
       <description>集約のトランザクション Link to heading DDDの集約について学ぶと、必ず「集約はトランザクション境界である」という説明がされている。 整合性の境界の論理的</description>
     </item>
   </channel>

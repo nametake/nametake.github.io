@@ -2,31 +2,31 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>CSS on nametake.dev</title>
-    <link>https://nametake.github.io/tags/css/</link>
+    <link>https://nametake.dev/tags/css/</link>
     <description>Recent content in CSS on nametake.dev</description>
     <generator>Hugo</generator>
     <language>ja</language>
     <lastBuildDate>Sun, 14 Feb 2021 00:00:00 +0900</lastBuildDate>
-    <atom:link href="https://nametake.github.io/tags/css/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://nametake.dev/tags/css/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>display: gridでテーブルをスタイリングする時にdisplay: contentsを使う</title>
-      <link>https://nametake.github.io/posts/2021/02/14/grid-with-display-contents/</link>
+      <link>https://nametake.dev/posts/2021/02/14/grid-with-display-contents/</link>
       <pubDate>Sun, 14 Feb 2021 00:00:00 +0900</pubDate>
-      <guid>https://nametake.github.io/posts/2021/02/14/grid-with-display-contents/</guid>
+      <guid>https://nametake.dev/posts/2021/02/14/grid-with-display-contents/</guid>
       <description>両端のborderがないテーブルをgridでスタイリングしようとすると、 :not(:first-of-type) をただ使うだけではうまくいかない。 gridにまかせて以下のようにす</description>
     </item>
     <item>
       <title>SVGが特定のサイズ以下でずれる現象の原因と解決策</title>
-      <link>https://nametake.github.io/posts/2020/08/10/css-svg-inline-descender/</link>
+      <link>https://nametake.dev/posts/2020/08/10/css-svg-inline-descender/</link>
       <pubDate>Mon, 10 Aug 2020 00:00:00 +0900</pubDate>
-      <guid>https://nametake.github.io/posts/2020/08/10/css-svg-inline-descender/</guid>
+      <guid>https://nametake.dev/posts/2020/08/10/css-svg-inline-descender/</guid>
       <description>下記ブログを参考にしてアクセシビリティを維持したままCheckboxやRadioボタンを作ろうとしたが、特定のサイズ以下でずれる問題に遭遇し</description>
     </item>
     <item>
       <title>インライン要素の高さを合わせるCSS定義</title>
-      <link>https://nametake.github.io/posts/2019/05/29/inline-center/</link>
+      <link>https://nametake.dev/posts/2019/05/29/inline-center/</link>
       <pubDate>Wed, 29 May 2019 15:47:35 +0900</pubDate>
-      <guid>https://nametake.github.io/posts/2019/05/29/inline-center/</guid>
+      <guid>https://nametake.dev/posts/2019/05/29/inline-center/</guid>
       <description>ラジオボタンとラベルの高さを合わせるCSS定義を何回も調べている気がするのでメモ。 たぶん下の書き方が一番モダンだと思われる。 display: inline-flex; align-items: center;</description>
     </item>
   </channel>

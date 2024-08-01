@@ -2,217 +2,217 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://nametake.github.io/</loc>
+    <loc>https://nametake.dev/</loc>
     <lastmod>2024-07-28T00:00:00+09:00</lastmod>
   </url><url>
-    <loc>https://nametake.github.io/posts/2024/07/28/nerdtree-tag-stack/</loc>
+    <loc>https://nametake.dev/posts/2024/07/28/nerdtree-tag-stack/</loc>
     <lastmod>2024-07-28T00:00:00+09:00</lastmod>
   </url><url>
-    <loc>https://nametake.github.io/posts/</loc>
+    <loc>https://nametake.dev/posts/</loc>
     <lastmod>2024-07-28T00:00:00+09:00</lastmod>
   </url><url>
-    <loc>https://nametake.github.io/tags/</loc>
+    <loc>https://nametake.dev/tags/</loc>
     <lastmod>2024-07-28T00:00:00+09:00</lastmod>
   </url><url>
-    <loc>https://nametake.github.io/tags/vim/</loc>
+    <loc>https://nametake.dev/tags/vim/</loc>
     <lastmod>2024-07-28T00:00:00+09:00</lastmod>
   </url><url>
-    <loc>https://nametake.github.io/tags/github/</loc>
+    <loc>https://nametake.dev/tags/github/</loc>
     <lastmod>2024-07-21T00:00:00+09:00</lastmod>
   </url><url>
-    <loc>https://nametake.github.io/tags/go/</loc>
+    <loc>https://nametake.dev/tags/go/</loc>
     <lastmod>2024-07-21T00:00:00+09:00</lastmod>
   </url><url>
-    <loc>https://nametake.github.io/posts/2024/07/21/go-zetasqlfmt-action/</loc>
+    <loc>https://nametake.dev/posts/2024/07/21/go-zetasqlfmt-action/</loc>
     <lastmod>2024-07-21T00:00:00+09:00</lastmod>
   </url><url>
-    <loc>https://nametake.github.io/posts/2024/07/13/go-stacktrace-frame/</loc>
+    <loc>https://nametake.dev/posts/2024/07/13/go-stacktrace-frame/</loc>
     <lastmod>2024-07-13T00:00:00+09:00</lastmod>
   </url><url>
-    <loc>https://nametake.github.io/posts/2024/02/21/gqlanalysis-flags/</loc>
+    <loc>https://nametake.dev/posts/2024/02/21/gqlanalysis-flags/</loc>
     <lastmod>2024-02-21T00:00:00+09:00</lastmod>
   </url><url>
-    <loc>https://nametake.github.io/tags/graphql/</loc>
+    <loc>https://nametake.dev/tags/graphql/</loc>
     <lastmod>2024-02-21T00:00:00+09:00</lastmod>
   </url><url>
-    <loc>https://nametake.github.io/posts/2024/01/13/go-zetasqlfmt/</loc>
+    <loc>https://nametake.dev/posts/2024/01/13/go-zetasqlfmt/</loc>
     <lastmod>2024-01-13T00:00:00+09:00</lastmod>
   </url><url>
-    <loc>https://nametake.github.io/posts/2024/01/08/use-go-packages/</loc>
+    <loc>https://nametake.dev/posts/2024/01/08/use-go-packages/</loc>
     <lastmod>2024-01-08T00:00:00+09:00</lastmod>
   </url><url>
-    <loc>https://nametake.github.io/posts/2024/01/01/mustargs/</loc>
+    <loc>https://nametake.dev/posts/2024/01/01/mustargs/</loc>
     <lastmod>2024-01-01T00:00:00+09:00</lastmod>
   </url><url>
-    <loc>https://nametake.github.io/tags/neovim/</loc>
+    <loc>https://nametake.dev/tags/neovim/</loc>
     <lastmod>2023-12-13T00:00:00+09:00</lastmod>
   </url><url>
-    <loc>https://nametake.github.io/posts/2023/12/13/telescope-nvim-git-files-tagstack/</loc>
+    <loc>https://nametake.dev/posts/2023/12/13/telescope-nvim-git-files-tagstack/</loc>
     <lastmod>2023-12-13T00:00:00+09:00</lastmod>
   </url><url>
-    <loc>https://nametake.github.io/about/</loc>
+    <loc>https://nametake.dev/about/</loc>
     <lastmod>2023-12-10T00:00:00+09:00</lastmod>
   </url><url>
-    <loc>https://nametake.github.io/tags/hugo/</loc>
+    <loc>https://nametake.dev/tags/hugo/</loc>
     <lastmod>2023-12-10T00:00:00+09:00</lastmod>
   </url><url>
-    <loc>https://nametake.github.io/posts/2023/12/10/hugo-coder-custom-font/</loc>
+    <loc>https://nametake.dev/posts/2023/12/10/hugo-coder-custom-font/</loc>
     <lastmod>2023-12-10T00:00:00+09:00</lastmod>
   </url><url>
-    <loc>https://nametake.github.io/tags/css/</loc>
+    <loc>https://nametake.dev/tags/css/</loc>
     <lastmod>2021-02-14T00:00:00+09:00</lastmod>
   </url><url>
-    <loc>https://nametake.github.io/posts/2021/02/14/grid-with-display-contents/</loc>
+    <loc>https://nametake.dev/posts/2021/02/14/grid-with-display-contents/</loc>
     <lastmod>2021-02-14T00:00:00+09:00</lastmod>
   </url><url>
-    <loc>https://nametake.github.io/tags/react/</loc>
+    <loc>https://nametake.dev/tags/react/</loc>
     <lastmod>2020-10-25T00:00:00+09:00</lastmod>
   </url><url>
-    <loc>https://nametake.github.io/posts/2020/10/25/react-resizable-emotion/</loc>
+    <loc>https://nametake.dev/posts/2020/10/25/react-resizable-emotion/</loc>
     <lastmod>2020-10-25T00:00:00+09:00</lastmod>
   </url><url>
-    <loc>https://nametake.github.io/posts/2020/09/26/react-a11y-radio/</loc>
+    <loc>https://nametake.dev/posts/2020/09/26/react-a11y-radio/</loc>
     <lastmod>2020-09-26T00:00:00+09:00</lastmod>
   </url><url>
-    <loc>https://nametake.github.io/posts/2020/08/10/css-svg-inline-descender/</loc>
+    <loc>https://nametake.dev/posts/2020/08/10/css-svg-inline-descender/</loc>
     <lastmod>2020-08-10T00:00:00+09:00</lastmod>
   </url><url>
-    <loc>https://nametake.github.io/tags/electron/</loc>
+    <loc>https://nametake.dev/tags/electron/</loc>
     <lastmod>2020-08-04T00:00:00+09:00</lastmod>
   </url><url>
-    <loc>https://nametake.github.io/posts/2020/08/04/typescript-electron-webpack-emotion/</loc>
+    <loc>https://nametake.dev/posts/2020/08/04/typescript-electron-webpack-emotion/</loc>
     <lastmod>2020-08-04T00:00:00+09:00</lastmod>
   </url><url>
-    <loc>https://nametake.github.io/tags/ddd/</loc>
+    <loc>https://nametake.dev/tags/ddd/</loc>
     <lastmod>2020-07-25T00:00:00+09:00</lastmod>
   </url><url>
-    <loc>https://nametake.github.io/posts/2020/07/25/abstract-external-service/</loc>
+    <loc>https://nametake.dev/posts/2020/07/25/abstract-external-service/</loc>
     <lastmod>2020-07-25T00:00:00+09:00</lastmod>
   </url><url>
-    <loc>https://nametake.github.io/posts/2020/07/13/conditional-types/</loc>
+    <loc>https://nametake.dev/posts/2020/07/13/conditional-types/</loc>
     <lastmod>2020-07-13T00:00:00+09:00</lastmod>
   </url><url>
-    <loc>https://nametake.github.io/tags/typescript/</loc>
+    <loc>https://nametake.dev/tags/typescript/</loc>
     <lastmod>2020-07-13T00:00:00+09:00</lastmod>
   </url><url>
-    <loc>https://nametake.github.io/tags/testing/</loc>
+    <loc>https://nametake.dev/tags/testing/</loc>
     <lastmod>2020-06-28T00:00:00+09:00</lastmod>
   </url><url>
-    <loc>https://nametake.github.io/posts/2020/06/28/combination-test-pict-and-orthogonal-array/</loc>
+    <loc>https://nametake.dev/posts/2020/06/28/combination-test-pict-and-orthogonal-array/</loc>
     <lastmod>2020-06-28T00:00:00+09:00</lastmod>
   </url><url>
-    <loc>https://nametake.github.io/tags/protocol-buffers/</loc>
+    <loc>https://nametake.dev/tags/protocol-buffers/</loc>
     <lastmod>2020-05-24T00:00:00+09:00</lastmod>
   </url><url>
-    <loc>https://nametake.github.io/posts/2020/05/24/protobuf-go-package-semicolon/</loc>
+    <loc>https://nametake.dev/posts/2020/05/24/protobuf-go-package-semicolon/</loc>
     <lastmod>2020-05-24T00:00:00+09:00</lastmod>
   </url><url>
-    <loc>https://nametake.github.io/posts/2020/04/30/ddd-aggregate/</loc>
+    <loc>https://nametake.dev/posts/2020/04/30/ddd-aggregate/</loc>
     <lastmod>2020-04-30T00:00:00+09:00</lastmod>
   </url><url>
-    <loc>https://nametake.github.io/posts/2020/03/08/golangci-lint-langserver/</loc>
+    <loc>https://nametake.dev/posts/2020/03/08/golangci-lint-langserver/</loc>
     <lastmod>2020-03-08T00:00:00+09:00</lastmod>
   </url><url>
-    <loc>https://nametake.github.io/posts/2020/02/26/migration-diagnostic-languageserver/</loc>
+    <loc>https://nametake.dev/posts/2020/02/26/migration-diagnostic-languageserver/</loc>
     <lastmod>2020-02-26T00:00:00+09:00</lastmod>
   </url><url>
-    <loc>https://nametake.github.io/posts/2020/01/31/ts-array-form-onchange/</loc>
+    <loc>https://nametake.dev/posts/2020/01/31/ts-array-form-onchange/</loc>
     <lastmod>2020-01-31T00:00:00+09:00</lastmod>
   </url><url>
-    <loc>https://nametake.github.io/posts/2019/12/31/go-no-generics/</loc>
+    <loc>https://nametake.dev/posts/2019/12/31/go-no-generics/</loc>
     <lastmod>2019-12-31T00:00:00+09:00</lastmod>
   </url><url>
-    <loc>https://nametake.github.io/posts/2019/12/17/react-table/</loc>
+    <loc>https://nametake.dev/posts/2019/12/17/react-table/</loc>
     <lastmod>2019-12-17T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://nametake.github.io/posts/2019/12/09/go-func-intercept/</loc>
+    <loc>https://nametake.dev/posts/2019/12/09/go-func-intercept/</loc>
     <lastmod>2019-12-09T00:05:29+09:00</lastmod>
   </url><url>
-    <loc>https://nametake.github.io/posts/2019/10/30/unwrap-interface/</loc>
+    <loc>https://nametake.dev/posts/2019/10/30/unwrap-interface/</loc>
     <lastmod>2019-10-30T00:52:57+09:00</lastmod>
   </url><url>
-    <loc>https://nametake.github.io/posts/2019/10/07/typescript-absolute-imports/</loc>
+    <loc>https://nametake.dev/posts/2019/10/07/typescript-absolute-imports/</loc>
     <lastmod>2019-10-07T00:15:35+09:00</lastmod>
   </url><url>
-    <loc>https://nametake.github.io/posts/2019/09/10/go-reflect-create-instance/</loc>
+    <loc>https://nametake.dev/posts/2019/09/10/go-reflect-create-instance/</loc>
     <lastmod>2019-09-10T13:39:29+09:00</lastmod>
   </url><url>
-    <loc>https://nametake.github.io/posts/2019/08/30/protoc-gen-gohttp-httprule/</loc>
+    <loc>https://nametake.dev/posts/2019/08/30/protoc-gen-gohttp-httprule/</loc>
     <lastmod>2019-08-30T01:52:26+09:00</lastmod>
   </url><url>
-    <loc>https://nametake.github.io/posts/2019/08/17/protobuf-null-api/</loc>
+    <loc>https://nametake.dev/posts/2019/08/17/protobuf-null-api/</loc>
     <lastmod>2019-08-17T10:44:03+09:00</lastmod>
   </url><url>
-    <loc>https://nametake.github.io/posts/2019/07/29/vim-goiferr-snippets/</loc>
+    <loc>https://nametake.dev/posts/2019/07/29/vim-goiferr-snippets/</loc>
     <lastmod>2019-07-29T22:57:06+09:00</lastmod>
   </url><url>
-    <loc>https://nametake.github.io/posts/2019/07/25/change-vim-plugins/</loc>
+    <loc>https://nametake.dev/posts/2019/07/25/change-vim-plugins/</loc>
     <lastmod>2019-07-25T00:51:43+09:00</lastmod>
   </url><url>
-    <loc>https://nametake.github.io/tags/fish/</loc>
+    <loc>https://nametake.dev/tags/fish/</loc>
     <lastmod>2019-07-22T01:34:18+09:00</lastmod>
   </url><url>
-    <loc>https://nametake.github.io/tags/zsh/</loc>
+    <loc>https://nametake.dev/tags/zsh/</loc>
     <lastmod>2019-07-22T01:34:18+09:00</lastmod>
   </url><url>
-    <loc>https://nametake.github.io/posts/2019/07/22/pass-zsh-path-to-fish/</loc>
+    <loc>https://nametake.dev/posts/2019/07/22/pass-zsh-path-to-fish/</loc>
     <lastmod>2019-07-22T01:34:18+09:00</lastmod>
   </url><url>
-    <loc>https://nametake.github.io/posts/2019/06/05/formik-yup-dynamic-validation/</loc>
+    <loc>https://nametake.dev/posts/2019/06/05/formik-yup-dynamic-validation/</loc>
     <lastmod>2019-06-05T23:50:36+09:00</lastmod>
   </url><url>
-    <loc>https://nametake.github.io/posts/2019/05/29/inline-center/</loc>
+    <loc>https://nametake.dev/posts/2019/05/29/inline-center/</loc>
     <lastmod>2019-05-29T15:47:35+09:00</lastmod>
   </url><url>
-    <loc>https://nametake.github.io/posts/2019/05/18/type-safe-reducer/</loc>
+    <loc>https://nametake.dev/posts/2019/05/18/type-safe-reducer/</loc>
     <lastmod>2019-05-18T10:38:55+09:00</lastmod>
   </url><url>
-    <loc>https://nametake.github.io/tags/intellij/</loc>
+    <loc>https://nametake.dev/tags/intellij/</loc>
     <lastmod>2019-01-20T21:05:06+09:00</lastmod>
   </url><url>
-    <loc>https://nametake.github.io/posts/2019/01/20/intellij-popup-expand/</loc>
+    <loc>https://nametake.dev/posts/2019/01/20/intellij-popup-expand/</loc>
     <lastmod>2019-01-20T21:05:06+09:00</lastmod>
   </url><url>
-    <loc>https://nametake.github.io/posts/2018/12/19/created-labelerr-and-suberr/</loc>
+    <loc>https://nametake.dev/posts/2018/12/19/created-labelerr-and-suberr/</loc>
     <lastmod>2018-12-19T11:37:17+09:00</lastmod>
   </url><url>
-    <loc>https://nametake.github.io/tags/slide/</loc>
+    <loc>https://nametake.dev/tags/slide/</loc>
     <lastmod>2018-12-19T11:37:17+09:00</lastmod>
   </url><url>
-    <loc>https://nametake.github.io/posts/2018/12/14/protoc-plugin-test/</loc>
+    <loc>https://nametake.dev/posts/2018/12/14/protoc-plugin-test/</loc>
     <lastmod>2018-12-14T00:00:00+09:00</lastmod>
   </url><url>
-    <loc>https://nametake.github.io/tags/redux/</loc>
+    <loc>https://nametake.dev/tags/redux/</loc>
     <lastmod>2018-12-05T11:08:00+09:00</lastmod>
   </url><url>
-    <loc>https://nametake.github.io/posts/2018/12/05/typescript-react-redux-tutorial/</loc>
+    <loc>https://nametake.dev/posts/2018/12/05/typescript-react-redux-tutorial/</loc>
     <lastmod>2018-12-05T11:08:00+09:00</lastmod>
   </url><url>
-    <loc>https://nametake.github.io/posts/2018/11/24/vimconf2018/</loc>
+    <loc>https://nametake.dev/posts/2018/11/24/vimconf2018/</loc>
     <lastmod>2018-11-24T10:15:34+09:00</lastmod>
   </url><url>
-    <loc>https://nametake.github.io/posts/2018/11/21/protoc-gen-gohttp/</loc>
+    <loc>https://nametake.dev/posts/2018/11/21/protoc-gen-gohttp/</loc>
     <lastmod>2018-11-21T16:32:07+09:00</lastmod>
   </url><url>
-    <loc>https://nametake.github.io/tags/gcp/</loc>
+    <loc>https://nametake.dev/tags/gcp/</loc>
     <lastmod>2018-11-09T11:15:24+09:00</lastmod>
   </url><url>
-    <loc>https://nametake.github.io/posts/2018/11/09/auth-gcp-client/</loc>
+    <loc>https://nametake.dev/posts/2018/11/09/auth-gcp-client/</loc>
     <lastmod>2018-11-09T11:15:24+09:00</lastmod>
   </url><url>
-    <loc>https://nametake.github.io/posts/2018/10/10/vim-shfmt-neoformat-indent/</loc>
+    <loc>https://nametake.dev/posts/2018/10/10/vim-shfmt-neoformat-indent/</loc>
     <lastmod>2018-10-10T11:44:32+09:00</lastmod>
   </url><url>
-    <loc>https://nametake.github.io/tags/sh/</loc>
+    <loc>https://nametake.dev/tags/sh/</loc>
     <lastmod>2018-10-10T11:44:32+09:00</lastmod>
   </url><url>
-    <loc>https://nametake.github.io/posts/2018/09/20/dep-private-repo/</loc>
+    <loc>https://nametake.dev/posts/2018/09/20/dep-private-repo/</loc>
     <lastmod>2018-09-20T18:47:46+09:00</lastmod>
   </url><url>
-    <loc>https://nametake.github.io/tags/git/</loc>
+    <loc>https://nametake.dev/tags/git/</loc>
     <lastmod>2018-09-20T18:47:46+09:00</lastmod>
   </url><url>
-    <loc>https://nametake.github.io/posts/2018/09/15/hugo-github-pages/</loc>
+    <loc>https://nametake.dev/posts/2018/09/15/hugo-github-pages/</loc>
     <lastmod>2018-09-15T12:20:26+09:00</lastmod>
   </url>
 </urlset>

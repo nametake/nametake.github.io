@@ -2,24 +2,24 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Hugo on nametake.dev</title>
-    <link>https://nametake.github.io/tags/hugo/</link>
+    <link>https://nametake.dev/tags/hugo/</link>
     <description>Recent content in Hugo on nametake.dev</description>
     <generator>Hugo</generator>
     <language>ja</language>
     <lastBuildDate>Sun, 10 Dec 2023 00:00:00 +0900</lastBuildDate>
-    <atom:link href="https://nametake.github.io/tags/hugo/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://nametake.dev/tags/hugo/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>hugo-coderテーマの拡張</title>
-      <link>https://nametake.github.io/posts/2023/12/10/hugo-coder-custom-font/</link>
+      <link>https://nametake.dev/posts/2023/12/10/hugo-coder-custom-font/</link>
       <pubDate>Sun, 10 Dec 2023 00:00:00 +0900</pubDate>
-      <guid>https://nametake.github.io/posts/2023/12/10/hugo-coder-custom-font/</guid>
+      <guid>https://nametake.dev/posts/2023/12/10/hugo-coder-custom-font/</guid>
       <description>長らく放置してしまってブログを書く場所に困ったのでこのブログの環境を整備し直した。 テーマのバージョンアップもしたが、その時に色々と気になって</description>
     </item>
     <item>
       <title>hugo&#43;github pagesにブログを移転したメモ</title>
-      <link>https://nametake.github.io/posts/2018/09/15/hugo-github-pages/</link>
+      <link>https://nametake.dev/posts/2018/09/15/hugo-github-pages/</link>
       <pubDate>Sat, 15 Sep 2018 12:20:26 +0900</pubDate>
-      <guid>https://nametake.github.io/posts/2018/09/15/hugo-github-pages/</guid>
+      <guid>https://nametake.dev/posts/2018/09/15/hugo-github-pages/</guid>
       <description>大して書いていなかったブログをgithub pages+hugoの組み合わせに移行したのでそのメモ。 とは言うものの、ほとんどHugoの入門用ペ</description>
     </item>
   </channel>

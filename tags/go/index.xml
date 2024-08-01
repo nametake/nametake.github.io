@@ -2,143 +2,143 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Go on nametake.dev</title>
-    <link>https://nametake.github.io/tags/go/</link>
+    <link>https://nametake.dev/tags/go/</link>
     <description>Recent content in Go on nametake.dev</description>
     <generator>Hugo</generator>
     <language>ja</language>
     <lastBuildDate>Sun, 21 Jul 2024 00:00:00 +0900</lastBuildDate>
-    <atom:link href="https://nametake.github.io/tags/go/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://nametake.dev/tags/go/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>go-zetasqlfmt-actionを作った</title>
-      <link>https://nametake.github.io/posts/2024/07/21/go-zetasqlfmt-action/</link>
+      <link>https://nametake.dev/posts/2024/07/21/go-zetasqlfmt-action/</link>
       <pubDate>Sun, 21 Jul 2024 00:00:00 +0900</pubDate>
-      <guid>https://nametake.github.io/posts/2024/07/21/go-zetasqlfmt-action/</guid>
+      <guid>https://nametake.dev/posts/2024/07/21/go-zetasqlfmt-action/</guid>
       <description>以前、spanner.StatementのSQLの文字列をフォーマットするために、go-zetasqlfmtというCLIを作った。 便利に使え</description>
     </item>
     <item>
       <title>GoでStacktraceを取るためのコード</title>
-      <link>https://nametake.github.io/posts/2024/07/13/go-stacktrace-frame/</link>
+      <link>https://nametake.dev/posts/2024/07/13/go-stacktrace-frame/</link>
       <pubDate>Sat, 13 Jul 2024 00:00:00 +0900</pubDate>
-      <guid>https://nametake.github.io/posts/2024/07/13/go-stacktrace-frame/</guid>
+      <guid>https://nametake.dev/posts/2024/07/13/go-stacktrace-frame/</guid>
       <description>最近社内でGoのStacktraceを取る方法が話題に上がったので備忘録としてブログにしてみる。 Goでは標準機能としてスタックトレースを取る</description>
     </item>
     <item>
       <title>gqlgo/gqlanalysisを使ったコマンドで独自引数を指定する</title>
-      <link>https://nametake.github.io/posts/2024/02/21/gqlanalysis-flags/</link>
+      <link>https://nametake.dev/posts/2024/02/21/gqlanalysis-flags/</link>
       <pubDate>Wed, 21 Feb 2024 00:00:00 +0900</pubDate>
-      <guid>https://nametake.github.io/posts/2024/02/21/gqlanalysis-flags/</guid>
+      <guid>https://nametake.dev/posts/2024/02/21/gqlanalysis-flags/</guid>
       <description>GraphQLの静的解析をCLIで作りやすくしてくれるgqlgo/gqlanalysisというライブラリがある。 go/analysisを使っ</description>
     </item>
     <item>
       <title>Goのコード内のZetaSQLをフォーマットするツールを作った</title>
-      <link>https://nametake.github.io/posts/2024/01/13/go-zetasqlfmt/</link>
+      <link>https://nametake.dev/posts/2024/01/13/go-zetasqlfmt/</link>
       <pubDate>Sat, 13 Jan 2024 00:00:00 +0900</pubDate>
-      <guid>https://nametake.github.io/posts/2024/01/13/go-zetasqlfmt/</guid>
+      <guid>https://nametake.dev/posts/2024/01/13/go-zetasqlfmt/</guid>
       <description>GoからSpannerのQueryを実行しようとするとcloud.google.com/go/spannerのStatement構造体のSQ</description>
     </item>
     <item>
       <title>go/packagesでformatterを作る</title>
-      <link>https://nametake.github.io/posts/2024/01/08/use-go-packages/</link>
+      <link>https://nametake.dev/posts/2024/01/08/use-go-packages/</link>
       <pubDate>Mon, 08 Jan 2024 00:00:00 +0900</pubDate>
-      <guid>https://nametake.github.io/posts/2024/01/08/use-go-packages/</guid>
+      <guid>https://nametake.dev/posts/2024/01/08/use-go-packages/</guid>
       <description>特定の構造体の文字列を置き換えるFormatterを作ったときにgo/packagesを使って作ってみたので備忘録。 全体の流れ Link to heading pack</description>
     </item>
     <item>
       <title>Goの関数定義の引数をチェックするLinterを作った</title>
-      <link>https://nametake.github.io/posts/2024/01/01/mustargs/</link>
+      <link>https://nametake.dev/posts/2024/01/01/mustargs/</link>
       <pubDate>Mon, 01 Jan 2024 00:00:00 +0900</pubDate>
-      <guid>https://nametake.github.io/posts/2024/01/01/mustargs/</guid>
+      <guid>https://nametake.dev/posts/2024/01/01/mustargs/</guid>
       <description>チームでWebサービスを書いていると特定の条件の関数には特定の型の引数を渡すことがルールになっていくことがある。 例えば、マルチテナントなアプ</description>
     </item>
     <item>
       <title>Protocol Buffersのgo_packageの;の仕様</title>
-      <link>https://nametake.github.io/posts/2020/05/24/protobuf-go-package-semicolon/</link>
+      <link>https://nametake.dev/posts/2020/05/24/protobuf-go-package-semicolon/</link>
       <pubDate>Sun, 24 May 2020 00:00:00 +0900</pubDate>
-      <guid>https://nametake.github.io/posts/2020/05/24/protobuf-go-package-semicolon/</guid>
+      <guid>https://nametake.dev/posts/2020/05/24/protobuf-go-package-semicolon/</guid>
       <description>先日protoc-gen-gohttpの依存パッケージをしようと思って色々触っていたら以下のようなWARNINGが出てきた。 2020/05/24 11:36:51 WARNING: Deprecated use of &amp;#39;go_package&amp;#39; option</description>
     </item>
     <item>
       <title>golangci-lint-langserverを作った話</title>
-      <link>https://nametake.github.io/posts/2020/03/08/golangci-lint-langserver/</link>
+      <link>https://nametake.dev/posts/2020/03/08/golangci-lint-langserver/</link>
       <pubDate>Sun, 08 Mar 2020 00:00:00 +0900</pubDate>
-      <guid>https://nametake.github.io/posts/2020/03/08/golangci-lint-langserver/</guid>
+      <guid>https://nametake.dev/posts/2020/03/08/golangci-lint-langserver/</guid>
       <description>最近VimのLinterのプラグインをaleからすべてlanguage serverに移行した。 殆どのCLIツールはdiagnostic-la</description>
     </item>
     <item>
       <title>Go言語でジェネリクスない理由の考察</title>
-      <link>https://nametake.github.io/posts/2019/12/31/go-no-generics/</link>
+      <link>https://nametake.dev/posts/2019/12/31/go-no-generics/</link>
       <pubDate>Tue, 31 Dec 2019 00:00:00 +0900</pubDate>
-      <guid>https://nametake.github.io/posts/2019/12/31/go-no-generics/</guid>
+      <guid>https://nametake.dev/posts/2019/12/31/go-no-generics/</guid>
       <description>Go言語にはジェネリクスがない。 他言語から入ってきた方はかなりこの部分に戸惑うことが多い。 そこで、そういった方々になぜジェネリクスがないのか</description>
     </item>
     <item>
       <title>Goの関数内で呼び出される関数をインターセプトする方法</title>
-      <link>https://nametake.github.io/posts/2019/12/09/go-func-intercept/</link>
+      <link>https://nametake.dev/posts/2019/12/09/go-func-intercept/</link>
       <pubDate>Mon, 09 Dec 2019 00:05:29 +0900</pubDate>
-      <guid>https://nametake.github.io/posts/2019/12/09/go-func-intercept/</guid>
+      <guid>https://nametake.dev/posts/2019/12/09/go-func-intercept/</guid>
       <description>この記事はGo2 Advent Calendar 2019の記事。 自分はprotoc-gen-gohttpというプラグインを作っているが、先日grpc.UnaryServ</description>
     </item>
     <item>
       <title>Go1.13のerrorsにWrapの機能が入ったので勉強がてらまとめる</title>
-      <link>https://nametake.github.io/posts/2019/10/30/unwrap-interface/</link>
+      <link>https://nametake.dev/posts/2019/10/30/unwrap-interface/</link>
       <pubDate>Wed, 30 Oct 2019 00:52:57 +0900</pubDate>
-      <guid>https://nametake.github.io/posts/2019/10/30/unwrap-interface/</guid>
+      <guid>https://nametake.dev/posts/2019/10/30/unwrap-interface/</guid>
       <description>Go1.13からerrorsに色々機能が入った(The Go Blog)。 最近は新しいGoのことをインプットできていなかったので、リハビリがてらs</description>
     </item>
     <item>
       <title>Goのreflectで構造体の変数にインスタンスを詰める方法</title>
-      <link>https://nametake.github.io/posts/2019/09/10/go-reflect-create-instance/</link>
+      <link>https://nametake.dev/posts/2019/09/10/go-reflect-create-instance/</link>
       <pubDate>Tue, 10 Sep 2019 13:39:29 +0900</pubDate>
-      <guid>https://nametake.github.io/posts/2019/09/10/go-reflect-create-instance/</guid>
+      <guid>https://nametake.dev/posts/2019/09/10/go-reflect-create-instance/</guid>
       <description>構造体の変数にreflectでインスタンスを詰める方法メモ。 package main import ( &amp;#34;fmt&amp;#34; &amp;#34;reflect&amp;#34; ) func main() { var foo *Foo fmt.Println(foo) // nil fmt.Println(&amp;#34;------------&amp;#34;) // nilにアクセスしようとするのでエラー // foo.msg =</description>
     </item>
     <item>
       <title>protoc-gen-gohttpをHttpRule Optionに対応させた</title>
-      <link>https://nametake.github.io/posts/2019/08/30/protoc-gen-gohttp-httprule/</link>
+      <link>https://nametake.dev/posts/2019/08/30/protoc-gen-gohttp-httprule/</link>
       <pubDate>Fri, 30 Aug 2019 01:52:26 +0900</pubDate>
-      <guid>https://nametake.github.io/posts/2019/08/30/protoc-gen-gohttp-httprule/</guid>
+      <guid>https://nametake.dev/posts/2019/08/30/protoc-gen-gohttp-httprule/</guid>
       <description>以前、Protocol Buffersのserviceの定義を利用してGoのnet/httpで利用できるようにするためのprotoc-gen-</description>
     </item>
     <item>
       <title>Goの戻り値をいい感じに補完してくれるvim-snippetsを作った</title>
-      <link>https://nametake.github.io/posts/2019/07/29/vim-goiferr-snippets/</link>
+      <link>https://nametake.dev/posts/2019/07/29/vim-goiferr-snippets/</link>
       <pubDate>Mon, 29 Jul 2019 22:57:06 +0900</pubDate>
-      <guid>https://nametake.github.io/posts/2019/07/29/vim-goiferr-snippets/</guid>
+      <guid>https://nametake.dev/posts/2019/07/29/vim-goiferr-snippets/</guid>
       <description>最近Vimの設定を整理してcoc.nvimに乗り換えるにあたり、snippetのプラグインもneosnippetからcoc-neosnipp</description>
     </item>
     <item>
       <title>labelerrとsuberrを作った話をLTしてきた</title>
-      <link>https://nametake.github.io/posts/2018/12/19/created-labelerr-and-suberr/</link>
+      <link>https://nametake.dev/posts/2018/12/19/created-labelerr-and-suberr/</link>
       <pubDate>Wed, 19 Dec 2018 11:37:17 +0900</pubDate>
-      <guid>https://nametake.github.io/posts/2018/12/19/created-labelerr-and-suberr/</guid>
+      <guid>https://nametake.dev/posts/2018/12/19/created-labelerr-and-suberr/</guid>
       <description>golang.tokyo #20のLT大会で、labelerrとsuberrを作った話をしてきた。 「Goのerrorは1種類というのは綺麗だとは思うけど、実運用上e</description>
     </item>
     <item>
       <title>Goでのprotocプラグインのテストの書き方</title>
-      <link>https://nametake.github.io/posts/2018/12/14/protoc-plugin-test/</link>
+      <link>https://nametake.dev/posts/2018/12/14/protoc-plugin-test/</link>
       <pubDate>Fri, 14 Dec 2018 00:00:00 +0900</pubDate>
-      <guid>https://nametake.github.io/posts/2018/12/14/protoc-plugin-test/</guid>
+      <guid>https://nametake.dev/posts/2018/12/14/protoc-plugin-test/</guid>
       <description>最近周りでProtocol Buffersの話題をよく聞くようになった。 ということは、そろそろ人類はprotocのプラグインを書きたくなる時代</description>
     </item>
     <item>
       <title>Protocol Buffersのserviceをnet/httpに対応させるprotoc-gen-gohttpを作った</title>
-      <link>https://nametake.github.io/posts/2018/11/21/protoc-gen-gohttp/</link>
+      <link>https://nametake.dev/posts/2018/11/21/protoc-gen-gohttp/</link>
       <pubDate>Wed, 21 Nov 2018 16:32:07 +0900</pubDate>
-      <guid>https://nametake.github.io/posts/2018/11/21/protoc-gen-gohttp/</guid>
+      <guid>https://nametake.dev/posts/2018/11/21/protoc-gen-gohttp/</guid>
       <description>nametake/protoc-gen-gohttpというprotocのプラグインを作ったのでその話。 Protocol Buffersとは Link to heading Protocol Buffe</description>
     </item>
     <item>
       <title>GCPの認証済みのhttp.Clientの取得方法</title>
-      <link>https://nametake.github.io/posts/2018/11/09/auth-gcp-client/</link>
+      <link>https://nametake.dev/posts/2018/11/09/auth-gcp-client/</link>
       <pubDate>Fri, 09 Nov 2018 11:15:24 +0900</pubDate>
-      <guid>https://nametake.github.io/posts/2018/11/09/auth-gcp-client/</guid>
+      <guid>https://nametake.dev/posts/2018/11/09/auth-gcp-client/</guid>
       <description>GCPの認証済みのhttp.Clientが欲しいときにちょっとだけ調べたのでメモ。 結論だけ言うと、golang.org/x/oauth2/g</description>
     </item>
     <item>
       <title>depでprivateリポジトリがupdateできなかったときの解決策</title>
-      <link>https://nametake.github.io/posts/2018/09/20/dep-private-repo/</link>
+      <link>https://nametake.dev/posts/2018/09/20/dep-private-repo/</link>
       <pubDate>Thu, 20 Sep 2018 18:47:46 +0900</pubDate>
-      <guid>https://nametake.github.io/posts/2018/09/20/dep-private-repo/</guid>
+      <guid>https://nametake.dev/posts/2018/09/20/dep-private-repo/</guid>
       <description>Goをアップデートした後、dep updateをしたら以下のようなエラーが発生した。 grouped write of manifest, lock and vendor: error while writing out vendor tree: failed to write dep tree: failed to export github.com/nametake/private-repo: unable to update repository: remote: Repository not</description>
     </item>
   </channel>

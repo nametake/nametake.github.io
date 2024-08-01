@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Testing on nametake.dev</title>
-    <link>https://nametake.github.io/tags/testing/</link>
+    <link>https://nametake.dev/tags/testing/</link>
     <description>Recent content in Testing on nametake.dev</description>
     <generator>Hugo</generator>
     <language>ja</language>
     <lastBuildDate>Sun, 28 Jun 2020 00:00:00 +0900</lastBuildDate>
-    <atom:link href="https://nametake.github.io/tags/testing/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://nametake.dev/tags/testing/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>組み合わせテストでの直交表とPICTの利用</title>
-      <link>https://nametake.github.io/posts/2020/06/28/combination-test-pict-and-orthogonal-array/</link>
+      <link>https://nametake.dev/posts/2020/06/28/combination-test-pict-and-orthogonal-array/</link>
       <pubDate>Sun, 28 Jun 2020 00:00:00 +0900</pubDate>
-      <guid>https://nametake.github.io/posts/2020/06/28/combination-test-pict-and-orthogonal-array/</guid>
+      <guid>https://nametake.dev/posts/2020/06/28/combination-test-pict-and-orthogonal-array/</guid>
       <description>テストの組み合わせについてある程度知見が溜まったのでメモ。 結合テストの組み合わせ問題 Link to heading システムのリリース前には開発した機能や既存の機能を</description>
     </item>
   </channel>

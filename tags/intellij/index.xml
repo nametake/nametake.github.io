@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>IntelliJ on nametake.dev</title>
-    <link>https://nametake.github.io/tags/intellij/</link>
+    <link>https://nametake.dev/tags/intellij/</link>
     <description>Recent content in IntelliJ on nametake.dev</description>
     <generator>Hugo</generator>
     <language>ja</language>
     <lastBuildDate>Sun, 20 Jan 2019 21:05:06 +0900</lastBuildDate>
-    <atom:link href="https://nametake.github.io/tags/intellij/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://nametake.dev/tags/intellij/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>IntelliJのPopupの候補を展開するKeymap</title>
-      <link>https://nametake.github.io/posts/2019/01/20/intellij-popup-expand/</link>
+      <link>https://nametake.dev/posts/2019/01/20/intellij-popup-expand/</link>
       <pubDate>Sun, 20 Jan 2019 21:05:06 +0900</pubDate>
-      <guid>https://nametake.github.io/posts/2019/01/20/intellij-popup-expand/</guid>
+      <guid>https://nametake.dev/posts/2019/01/20/intellij-popup-expand/</guid>
       <description>自分は普段Vimでの補完候補を&amp;lt;C-k&amp;gt;で展開しているがIntelliJでの補完候補も同じコマンドで展開したかったのでメモ。 結論</description>
     </item>
   </channel>

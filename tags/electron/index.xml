@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Electron on nametake.dev</title>
-    <link>https://nametake.github.io/tags/electron/</link>
+    <link>https://nametake.dev/tags/electron/</link>
     <description>Recent content in Electron on nametake.dev</description>
     <generator>Hugo</generator>
     <language>ja</language>
     <lastBuildDate>Tue, 04 Aug 2020 00:00:00 +0900</lastBuildDate>
-    <atom:link href="https://nametake.github.io/tags/electron/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://nametake.dev/tags/electron/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>TypeScript &#43; electron-webpackでemotionを動かしたときのメモ</title>
-      <link>https://nametake.github.io/posts/2020/08/04/typescript-electron-webpack-emotion/</link>
+      <link>https://nametake.dev/posts/2020/08/04/typescript-electron-webpack-emotion/</link>
       <pubDate>Tue, 04 Aug 2020 00:00:00 +0900</pubDate>
-      <guid>https://nametake.github.io/posts/2020/08/04/typescript-electron-webpack-emotion/</guid>
+      <guid>https://nametake.dev/posts/2020/08/04/typescript-electron-webpack-emotion/</guid>
       <description>electron-webpack で emotion を動かそうとして試行錯誤したのでその結果のメモ。 ライブラリとバージョン Link to heading TypeScript(3.9.5) electron-webpack(2.8.2) emotion(10.0.27) ts-loader(7.0.5) babel-loader(8.1.0) babel-plugin-emotion(10.0.33) 起きた問題 Link to heading styled-componen</description>
     </item>
   </channel>

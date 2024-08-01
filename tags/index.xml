@@ -2,157 +2,157 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tags on nametake.dev</title>
-    <link>https://nametake.github.io/tags/</link>
+    <link>https://nametake.dev/tags/</link>
     <description>Recent content in Tags on nametake.dev</description>
     <generator>Hugo</generator>
     <language>ja</language>
     <lastBuildDate>Sun, 28 Jul 2024 00:00:00 +0900</lastBuildDate>
-    <atom:link href="https://nametake.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://nametake.dev/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Vim</title>
-      <link>https://nametake.github.io/tags/vim/</link>
+      <link>https://nametake.dev/tags/vim/</link>
       <pubDate>Sun, 28 Jul 2024 00:00:00 +0900</pubDate>
-      <guid>https://nametake.github.io/tags/vim/</guid>
+      <guid>https://nametake.dev/tags/vim/</guid>
       <description></description>
     </item>
     <item>
       <title>GitHub</title>
-      <link>https://nametake.github.io/tags/github/</link>
+      <link>https://nametake.dev/tags/github/</link>
       <pubDate>Sun, 21 Jul 2024 00:00:00 +0900</pubDate>
-      <guid>https://nametake.github.io/tags/github/</guid>
+      <guid>https://nametake.dev/tags/github/</guid>
       <description></description>
     </item>
     <item>
       <title>Go</title>
-      <link>https://nametake.github.io/tags/go/</link>
+      <link>https://nametake.dev/tags/go/</link>
       <pubDate>Sun, 21 Jul 2024 00:00:00 +0900</pubDate>
-      <guid>https://nametake.github.io/tags/go/</guid>
+      <guid>https://nametake.dev/tags/go/</guid>
       <description></description>
     </item>
     <item>
       <title>GraphQL</title>
-      <link>https://nametake.github.io/tags/graphql/</link>
+      <link>https://nametake.dev/tags/graphql/</link>
       <pubDate>Wed, 21 Feb 2024 00:00:00 +0900</pubDate>
-      <guid>https://nametake.github.io/tags/graphql/</guid>
+      <guid>https://nametake.dev/tags/graphql/</guid>
       <description></description>
     </item>
     <item>
       <title>Neovim</title>
-      <link>https://nametake.github.io/tags/neovim/</link>
+      <link>https://nametake.dev/tags/neovim/</link>
       <pubDate>Wed, 13 Dec 2023 00:00:00 +0900</pubDate>
-      <guid>https://nametake.github.io/tags/neovim/</guid>
+      <guid>https://nametake.dev/tags/neovim/</guid>
       <description></description>
     </item>
     <item>
       <title>Hugo</title>
-      <link>https://nametake.github.io/tags/hugo/</link>
+      <link>https://nametake.dev/tags/hugo/</link>
       <pubDate>Sun, 10 Dec 2023 00:00:00 +0900</pubDate>
-      <guid>https://nametake.github.io/tags/hugo/</guid>
+      <guid>https://nametake.dev/tags/hugo/</guid>
       <description></description>
     </item>
     <item>
       <title>CSS</title>
-      <link>https://nametake.github.io/tags/css/</link>
+      <link>https://nametake.dev/tags/css/</link>
       <pubDate>Sun, 14 Feb 2021 00:00:00 +0900</pubDate>
-      <guid>https://nametake.github.io/tags/css/</guid>
+      <guid>https://nametake.dev/tags/css/</guid>
       <description></description>
     </item>
     <item>
       <title>React</title>
-      <link>https://nametake.github.io/tags/react/</link>
+      <link>https://nametake.dev/tags/react/</link>
       <pubDate>Sun, 25 Oct 2020 00:00:00 +0900</pubDate>
-      <guid>https://nametake.github.io/tags/react/</guid>
+      <guid>https://nametake.dev/tags/react/</guid>
       <description></description>
     </item>
     <item>
       <title>Electron</title>
-      <link>https://nametake.github.io/tags/electron/</link>
+      <link>https://nametake.dev/tags/electron/</link>
       <pubDate>Tue, 04 Aug 2020 00:00:00 +0900</pubDate>
-      <guid>https://nametake.github.io/tags/electron/</guid>
+      <guid>https://nametake.dev/tags/electron/</guid>
       <description></description>
     </item>
     <item>
       <title>DDD</title>
-      <link>https://nametake.github.io/tags/ddd/</link>
+      <link>https://nametake.dev/tags/ddd/</link>
       <pubDate>Sat, 25 Jul 2020 00:00:00 +0900</pubDate>
-      <guid>https://nametake.github.io/tags/ddd/</guid>
+      <guid>https://nametake.dev/tags/ddd/</guid>
       <description></description>
     </item>
     <item>
       <title>TypeScript</title>
-      <link>https://nametake.github.io/tags/typescript/</link>
+      <link>https://nametake.dev/tags/typescript/</link>
       <pubDate>Mon, 13 Jul 2020 00:00:00 +0900</pubDate>
-      <guid>https://nametake.github.io/tags/typescript/</guid>
+      <guid>https://nametake.dev/tags/typescript/</guid>
       <description></description>
     </item>
     <item>
       <title>Testing</title>
-      <link>https://nametake.github.io/tags/testing/</link>
+      <link>https://nametake.dev/tags/testing/</link>
       <pubDate>Sun, 28 Jun 2020 00:00:00 +0900</pubDate>
-      <guid>https://nametake.github.io/tags/testing/</guid>
+      <guid>https://nametake.dev/tags/testing/</guid>
       <description></description>
     </item>
     <item>
       <title>Protocol Buffers</title>
-      <link>https://nametake.github.io/tags/protocol-buffers/</link>
+      <link>https://nametake.dev/tags/protocol-buffers/</link>
       <pubDate>Sun, 24 May 2020 00:00:00 +0900</pubDate>
-      <guid>https://nametake.github.io/tags/protocol-buffers/</guid>
+      <guid>https://nametake.dev/tags/protocol-buffers/</guid>
       <description></description>
     </item>
     <item>
       <title>Fish</title>
-      <link>https://nametake.github.io/tags/fish/</link>
+      <link>https://nametake.dev/tags/fish/</link>
       <pubDate>Mon, 22 Jul 2019 01:34:18 +0900</pubDate>
-      <guid>https://nametake.github.io/tags/fish/</guid>
+      <guid>https://nametake.dev/tags/fish/</guid>
       <description></description>
     </item>
     <item>
       <title>Zsh</title>
-      <link>https://nametake.github.io/tags/zsh/</link>
+      <link>https://nametake.dev/tags/zsh/</link>
       <pubDate>Mon, 22 Jul 2019 01:34:18 +0900</pubDate>
-      <guid>https://nametake.github.io/tags/zsh/</guid>
+      <guid>https://nametake.dev/tags/zsh/</guid>
       <description></description>
     </item>
     <item>
       <title>IntelliJ</title>
-      <link>https://nametake.github.io/tags/intellij/</link>
+      <link>https://nametake.dev/tags/intellij/</link>
       <pubDate>Sun, 20 Jan 2019 21:05:06 +0900</pubDate>
-      <guid>https://nametake.github.io/tags/intellij/</guid>
+      <guid>https://nametake.dev/tags/intellij/</guid>
       <description></description>
     </item>
     <item>
       <title>Slide</title>
-      <link>https://nametake.github.io/tags/slide/</link>
+      <link>https://nametake.dev/tags/slide/</link>
       <pubDate>Wed, 19 Dec 2018 11:37:17 +0900</pubDate>
-      <guid>https://nametake.github.io/tags/slide/</guid>
+      <guid>https://nametake.dev/tags/slide/</guid>
       <description></description>
     </item>
     <item>
       <title>Redux</title>
-      <link>https://nametake.github.io/tags/redux/</link>
+      <link>https://nametake.dev/tags/redux/</link>
       <pubDate>Wed, 05 Dec 2018 11:08:00 +0900</pubDate>
-      <guid>https://nametake.github.io/tags/redux/</guid>
+      <guid>https://nametake.dev/tags/redux/</guid>
       <description></description>
     </item>
     <item>
       <title>GCP</title>
-      <link>https://nametake.github.io/tags/gcp/</link>
+      <link>https://nametake.dev/tags/gcp/</link>
       <pubDate>Fri, 09 Nov 2018 11:15:24 +0900</pubDate>
-      <guid>https://nametake.github.io/tags/gcp/</guid>
+      <guid>https://nametake.dev/tags/gcp/</guid>
       <description></description>
     </item>
     <item>
       <title>Sh</title>
-      <link>https://nametake.github.io/tags/sh/</link>
+      <link>https://nametake.dev/tags/sh/</link>
       <pubDate>Wed, 10 Oct 2018 11:44:32 +0900</pubDate>
-      <guid>https://nametake.github.io/tags/sh/</guid>
+      <guid>https://nametake.dev/tags/sh/</guid>
       <description></description>
     </item>
     <item>
       <title>Git</title>
-      <link>https://nametake.github.io/tags/git/</link>
+      <link>https://nametake.dev/tags/git/</link>
       <pubDate>Thu, 20 Sep 2018 18:47:46 +0900</pubDate>
-      <guid>https://nametake.github.io/tags/git/</guid>
+      <guid>https://nametake.dev/tags/git/</guid>
       <description></description>
     </item>
   </channel>

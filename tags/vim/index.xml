@@ -2,73 +2,73 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Vim on nametake.dev</title>
-    <link>https://nametake.github.io/tags/vim/</link>
+    <link>https://nametake.dev/tags/vim/</link>
     <description>Recent content in Vim on nametake.dev</description>
     <generator>Hugo</generator>
     <language>ja</language>
     <lastBuildDate>Sun, 28 Jul 2024 00:00:00 +0900</lastBuildDate>
-    <atom:link href="https://nametake.github.io/tags/vim/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://nametake.dev/tags/vim/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>NERDTreeでファイルを開いたときにタグスタックに積む</title>
-      <link>https://nametake.github.io/posts/2024/07/28/nerdtree-tag-stack/</link>
+      <link>https://nametake.dev/posts/2024/07/28/nerdtree-tag-stack/</link>
       <pubDate>Sun, 28 Jul 2024 00:00:00 +0900</pubDate>
-      <guid>https://nametake.github.io/posts/2024/07/28/nerdtree-tag-stack/</guid>
+      <guid>https://nametake.dev/posts/2024/07/28/nerdtree-tag-stack/</guid>
       <description>自分はVimでのバッファ移動によくタグスタックを使っている。 思考スタイル的にすぐ前に戻るという感覚がやりやすいのか、telescopeでファ</description>
     </item>
     <item>
       <title>telescope.nvimのgit_filesやlive_grepでもtagstackに積みたい</title>
-      <link>https://nametake.github.io/posts/2023/12/13/telescope-nvim-git-files-tagstack/</link>
+      <link>https://nametake.dev/posts/2023/12/13/telescope-nvim-git-files-tagstack/</link>
       <pubDate>Wed, 13 Dec 2023 00:00:00 +0900</pubDate>
-      <guid>https://nametake.github.io/posts/2023/12/13/telescope-nvim-git-files-tagstack/</guid>
+      <guid>https://nametake.dev/posts/2023/12/13/telescope-nvim-git-files-tagstack/</guid>
       <description>telescope.nvimのgit_filesやlive_grepでのファイル移動でもTagstackに積みたかった。 結論からいうと以下の</description>
     </item>
     <item>
       <title>golangci-lint-langserverを作った話</title>
-      <link>https://nametake.github.io/posts/2020/03/08/golangci-lint-langserver/</link>
+      <link>https://nametake.dev/posts/2020/03/08/golangci-lint-langserver/</link>
       <pubDate>Sun, 08 Mar 2020 00:00:00 +0900</pubDate>
-      <guid>https://nametake.github.io/posts/2020/03/08/golangci-lint-langserver/</guid>
+      <guid>https://nametake.dev/posts/2020/03/08/golangci-lint-langserver/</guid>
       <description>最近VimのLinterのプラグインをaleからすべてlanguage serverに移行した。 殆どのCLIツールはdiagnostic-la</description>
     </item>
     <item>
       <title>aleとneoformatからdiagnostic-languageserverに移行した</title>
-      <link>https://nametake.github.io/posts/2020/02/26/migration-diagnostic-languageserver/</link>
+      <link>https://nametake.dev/posts/2020/02/26/migration-diagnostic-languageserver/</link>
       <pubDate>Wed, 26 Feb 2020 00:00:00 +0900</pubDate>
-      <guid>https://nametake.github.io/posts/2020/02/26/migration-diagnostic-languageserver/</guid>
+      <guid>https://nametake.dev/posts/2020/02/26/migration-diagnostic-languageserver/</guid>
       <description>Vimのプラグインとしてaleとneoformatをずっと利用してきたが、LinterやFormatterも全てLanguage Server</description>
     </item>
     <item>
       <title>Goの戻り値をいい感じに補完してくれるvim-snippetsを作った</title>
-      <link>https://nametake.github.io/posts/2019/07/29/vim-goiferr-snippets/</link>
+      <link>https://nametake.dev/posts/2019/07/29/vim-goiferr-snippets/</link>
       <pubDate>Mon, 29 Jul 2019 22:57:06 +0900</pubDate>
-      <guid>https://nametake.github.io/posts/2019/07/29/vim-goiferr-snippets/</guid>
+      <guid>https://nametake.dev/posts/2019/07/29/vim-goiferr-snippets/</guid>
       <description>最近Vimの設定を整理してcoc.nvimに乗り換えるにあたり、snippetのプラグインもneosnippetからcoc-neosnipp</description>
     </item>
     <item>
       <title>Vimのプラグインを整理した(あとcoc.nvimの紹介)</title>
-      <link>https://nametake.github.io/posts/2019/07/25/change-vim-plugins/</link>
+      <link>https://nametake.dev/posts/2019/07/25/change-vim-plugins/</link>
       <pubDate>Thu, 25 Jul 2019 00:51:43 +0900</pubDate>
-      <guid>https://nametake.github.io/posts/2019/07/25/change-vim-plugins/</guid>
+      <guid>https://nametake.dev/posts/2019/07/25/change-vim-plugins/</guid>
       <description>ちまちまとdotfilesを育ててきたが、Goの補完が動かなくなっていたり中途半端にLSP対応しようとした痕跡だけ残っていたりしたので、断捨</description>
     </item>
     <item>
       <title>IntelliJのPopupの候補を展開するKeymap</title>
-      <link>https://nametake.github.io/posts/2019/01/20/intellij-popup-expand/</link>
+      <link>https://nametake.dev/posts/2019/01/20/intellij-popup-expand/</link>
       <pubDate>Sun, 20 Jan 2019 21:05:06 +0900</pubDate>
-      <guid>https://nametake.github.io/posts/2019/01/20/intellij-popup-expand/</guid>
+      <guid>https://nametake.dev/posts/2019/01/20/intellij-popup-expand/</guid>
       <description>自分は普段Vimでの補完候補を&amp;lt;C-k&amp;gt;で展開しているがIntelliJでの補完候補も同じコマンドで展開したかったのでメモ。 結論</description>
     </item>
     <item>
       <title>VimConf2018感想</title>
-      <link>https://nametake.github.io/posts/2018/11/24/vimconf2018/</link>
+      <link>https://nametake.dev/posts/2018/11/24/vimconf2018/</link>
       <pubDate>Sat, 24 Nov 2018 10:15:34 +0900</pubDate>
-      <guid>https://nametake.github.io/posts/2018/11/24/vimconf2018/</guid>
+      <guid>https://nametake.dev/posts/2018/11/24/vimconf2018/</guid>
       <description>11月24日にあったVimConf2018へ行ったので参加ブログ。 Keynote - What is the next feature?(o) Link to heading スライド mattnさんの発表。 Keynote - Vim: From hjkl to a platform for plugins Link to</description>
     </item>
     <item>
       <title>neoformatでshfmtを使うときにインデントをタブ文字にしたい時の設定</title>
-      <link>https://nametake.github.io/posts/2018/10/10/vim-shfmt-neoformat-indent/</link>
+      <link>https://nametake.dev/posts/2018/10/10/vim-shfmt-neoformat-indent/</link>
       <pubDate>Wed, 10 Oct 2018 11:44:32 +0900</pubDate>
-      <guid>https://nametake.github.io/posts/2018/10/10/vim-shfmt-neoformat-indent/</guid>
+      <guid>https://nametake.dev/posts/2018/10/10/vim-shfmt-neoformat-indent/</guid>
       <description>neoformatで使うshfmtはデフォルトだとインデントがスペースだが、チームのコーディング規約に合わせてタブ文字へ変更したかったときに</description>
     </item>
   </channel>

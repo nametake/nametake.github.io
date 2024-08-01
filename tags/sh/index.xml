@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Sh on nametake.dev</title>
-    <link>https://nametake.github.io/tags/sh/</link>
+    <link>https://nametake.dev/tags/sh/</link>
     <description>Recent content in Sh on nametake.dev</description>
     <generator>Hugo</generator>
     <language>ja</language>
     <lastBuildDate>Wed, 10 Oct 2018 11:44:32 +0900</lastBuildDate>
-    <atom:link href="https://nametake.github.io/tags/sh/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://nametake.dev/tags/sh/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>neoformatでshfmtを使うときにインデントをタブ文字にしたい時の設定</title>
-      <link>https://nametake.github.io/posts/2018/10/10/vim-shfmt-neoformat-indent/</link>
+      <link>https://nametake.dev/posts/2018/10/10/vim-shfmt-neoformat-indent/</link>
       <pubDate>Wed, 10 Oct 2018 11:44:32 +0900</pubDate>
-      <guid>https://nametake.github.io/posts/2018/10/10/vim-shfmt-neoformat-indent/</guid>
+      <guid>https://nametake.dev/posts/2018/10/10/vim-shfmt-neoformat-indent/</guid>
       <description>neoformatで使うshfmtはデフォルトだとインデントがスペースだが、チームのコーディング規約に合わせてタブ文字へ変更したかったときに</description>
     </item>
   </channel>

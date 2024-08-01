@@ -2,45 +2,45 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Protocol Buffers on nametake.dev</title>
-    <link>https://nametake.github.io/tags/protocol-buffers/</link>
+    <link>https://nametake.dev/tags/protocol-buffers/</link>
     <description>Recent content in Protocol Buffers on nametake.dev</description>
     <generator>Hugo</generator>
     <language>ja</language>
     <lastBuildDate>Sun, 24 May 2020 00:00:00 +0900</lastBuildDate>
-    <atom:link href="https://nametake.github.io/tags/protocol-buffers/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://nametake.dev/tags/protocol-buffers/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Protocol Buffersのgo_packageの;の仕様</title>
-      <link>https://nametake.github.io/posts/2020/05/24/protobuf-go-package-semicolon/</link>
+      <link>https://nametake.dev/posts/2020/05/24/protobuf-go-package-semicolon/</link>
       <pubDate>Sun, 24 May 2020 00:00:00 +0900</pubDate>
-      <guid>https://nametake.github.io/posts/2020/05/24/protobuf-go-package-semicolon/</guid>
+      <guid>https://nametake.dev/posts/2020/05/24/protobuf-go-package-semicolon/</guid>
       <description>先日protoc-gen-gohttpの依存パッケージをしようと思って色々触っていたら以下のようなWARNINGが出てきた。 2020/05/24 11:36:51 WARNING: Deprecated use of &amp;#39;go_package&amp;#39; option</description>
     </item>
     <item>
       <title>protoc-gen-gohttpをHttpRule Optionに対応させた</title>
-      <link>https://nametake.github.io/posts/2019/08/30/protoc-gen-gohttp-httprule/</link>
+      <link>https://nametake.dev/posts/2019/08/30/protoc-gen-gohttp-httprule/</link>
       <pubDate>Fri, 30 Aug 2019 01:52:26 +0900</pubDate>
-      <guid>https://nametake.github.io/posts/2019/08/30/protoc-gen-gohttp-httprule/</guid>
+      <guid>https://nametake.dev/posts/2019/08/30/protoc-gen-gohttp-httprule/</guid>
       <description>以前、Protocol Buffersのserviceの定義を利用してGoのnet/httpで利用できるようにするためのprotoc-gen-</description>
     </item>
     <item>
       <title>Protocol Buffersを使ったAPIでのNullの設計</title>
-      <link>https://nametake.github.io/posts/2019/08/17/protobuf-null-api/</link>
+      <link>https://nametake.dev/posts/2019/08/17/protobuf-null-api/</link>
       <pubDate>Sat, 17 Aug 2019 10:44:03 +0900</pubDate>
-      <guid>https://nametake.github.io/posts/2019/08/17/protobuf-null-api/</guid>
+      <guid>https://nametake.dev/posts/2019/08/17/protobuf-null-api/</guid>
       <description>Protocol BuffersのNullの取り扱いの問題 Link to heading Protocol Buffersのproto3の仕様ではmessageの中の値をOptionalで表現する記</description>
     </item>
     <item>
       <title>Goでのprotocプラグインのテストの書き方</title>
-      <link>https://nametake.github.io/posts/2018/12/14/protoc-plugin-test/</link>
+      <link>https://nametake.dev/posts/2018/12/14/protoc-plugin-test/</link>
       <pubDate>Fri, 14 Dec 2018 00:00:00 +0900</pubDate>
-      <guid>https://nametake.github.io/posts/2018/12/14/protoc-plugin-test/</guid>
+      <guid>https://nametake.dev/posts/2018/12/14/protoc-plugin-test/</guid>
       <description>最近周りでProtocol Buffersの話題をよく聞くようになった。 ということは、そろそろ人類はprotocのプラグインを書きたくなる時代</description>
     </item>
     <item>
       <title>Protocol Buffersのserviceをnet/httpに対応させるprotoc-gen-gohttpを作った</title>
-      <link>https://nametake.github.io/posts/2018/11/21/protoc-gen-gohttp/</link>
+      <link>https://nametake.dev/posts/2018/11/21/protoc-gen-gohttp/</link>
       <pubDate>Wed, 21 Nov 2018 16:32:07 +0900</pubDate>
-      <guid>https://nametake.github.io/posts/2018/11/21/protoc-gen-gohttp/</guid>
+      <guid>https://nametake.dev/posts/2018/11/21/protoc-gen-gohttp/</guid>
       <description>nametake/protoc-gen-gohttpというprotocのプラグインを作ったのでその話。 Protocol Buffersとは Link to heading Protocol Buffe</description>
     </item>
   </channel>

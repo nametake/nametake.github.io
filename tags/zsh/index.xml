@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Zsh on nametake.dev</title>
-    <link>https://nametake.github.io/tags/zsh/</link>
+    <link>https://nametake.dev/tags/zsh/</link>
     <description>Recent content in Zsh on nametake.dev</description>
     <generator>Hugo</generator>
     <language>ja</language>
     <lastBuildDate>Mon, 22 Jul 2019 01:34:18 +0900</lastBuildDate>
-    <atom:link href="https://nametake.github.io/tags/zsh/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://nametake.dev/tags/zsh/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>zshのPATHの順番をfish shellに引き継ぐ</title>
-      <link>https://nametake.github.io/posts/2019/07/22/pass-zsh-path-to-fish/</link>
+      <link>https://nametake.dev/posts/2019/07/22/pass-zsh-path-to-fish/</link>
       <pubDate>Mon, 22 Jul 2019 01:34:18 +0900</pubDate>
-      <guid>https://nametake.github.io/posts/2019/07/22/pass-zsh-path-to-fish/</guid>
+      <guid>https://nametake.dev/posts/2019/07/22/pass-zsh-path-to-fish/</guid>
       <description>自分はメインのターミナル環境をfishにしている。 特に設定を細かくしなくてもサクサク動いてくれるので非常に助かっているが、POSIX準拠では</description>
     </item>
   </channel>

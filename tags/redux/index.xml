@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Redux on nametake.dev</title>
-    <link>https://nametake.github.io/tags/redux/</link>
+    <link>https://nametake.dev/tags/redux/</link>
     <description>Recent content in Redux on nametake.dev</description>
     <generator>Hugo</generator>
     <language>ja</language>
     <lastBuildDate>Wed, 05 Dec 2018 11:08:00 +0900</lastBuildDate>
-    <atom:link href="https://nametake.github.io/tags/redux/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://nametake.dev/tags/redux/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>TypeScript&#43;React&#43;Reduxチュートリアル</title>
-      <link>https://nametake.github.io/posts/2018/12/05/typescript-react-redux-tutorial/</link>
+      <link>https://nametake.dev/posts/2018/12/05/typescript-react-redux-tutorial/</link>
       <pubDate>Wed, 05 Dec 2018 11:08:00 +0900</pubDate>
-      <guid>https://nametake.github.io/posts/2018/12/05/typescript-react-redux-tutorial/</guid>
+      <guid>https://nametake.dev/posts/2018/12/05/typescript-react-redux-tutorial/</guid>
       <description>普段は Go でサーバサイドのコードを書いているが、TypeScript+React+Redux を勉強する機会があった。 その際、巷のチュートリアル</description>
     </item>
   </channel>

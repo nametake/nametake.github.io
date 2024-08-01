@@ -2,52 +2,52 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>TypeScript on nametake.dev</title>
-    <link>https://nametake.github.io/tags/typescript/</link>
+    <link>https://nametake.dev/tags/typescript/</link>
     <description>Recent content in TypeScript on nametake.dev</description>
     <generator>Hugo</generator>
     <language>ja</language>
     <lastBuildDate>Mon, 13 Jul 2020 00:00:00 +0900</lastBuildDate>
-    <atom:link href="https://nametake.github.io/tags/typescript/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://nametake.dev/tags/typescript/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Conditional Typesを使った話</title>
-      <link>https://nametake.github.io/posts/2020/07/13/conditional-types/</link>
+      <link>https://nametake.dev/posts/2020/07/13/conditional-types/</link>
       <pubDate>Mon, 13 Jul 2020 00:00:00 +0900</pubDate>
-      <guid>https://nametake.github.io/posts/2020/07/13/conditional-types/</guid>
+      <guid>https://nametake.dev/posts/2020/07/13/conditional-types/</guid>
       <description>機能としては知っていたものの使う機会がなかった Conditional Types を使ったのでメモ。 ElectronのMainプロセスでAPIを叩く際、API毎にchann</description>
     </item>
     <item>
       <title>TypeScriptでFormのComponentを配列で管理する</title>
-      <link>https://nametake.github.io/posts/2020/01/31/ts-array-form-onchange/</link>
+      <link>https://nametake.dev/posts/2020/01/31/ts-array-form-onchange/</link>
       <pubDate>Fri, 31 Jan 2020 00:00:00 +0900</pubDate>
-      <guid>https://nametake.github.io/posts/2020/01/31/ts-array-form-onchange/</guid>
+      <guid>https://nametake.dev/posts/2020/01/31/ts-array-form-onchange/</guid>
       <description>TypeScriptでFormのComponentを配列で管理する Link to heading toB向けのサービスや管理画面のように情報量の多いのプロダクトを作っ</description>
     </item>
     <item>
       <title>TypeScirptのプロジェクトにエイリアスを設定して絶対パスでimportするメモ</title>
-      <link>https://nametake.github.io/posts/2019/10/07/typescript-absolute-imports/</link>
+      <link>https://nametake.dev/posts/2019/10/07/typescript-absolute-imports/</link>
       <pubDate>Mon, 07 Oct 2019 00:15:35 +0900</pubDate>
-      <guid>https://nametake.github.io/posts/2019/10/07/typescript-absolute-imports/</guid>
+      <guid>https://nametake.dev/posts/2019/10/07/typescript-absolute-imports/</guid>
       <description>TypeScriptのプロジェクトを作る度に設定すると思うのでメモ。 前提 Link to heading Webpackでプロジェクトを管理している Linterはesl</description>
     </item>
     <item>
       <title>FormikとYupを使った動的フォームのバリデーション</title>
-      <link>https://nametake.github.io/posts/2019/06/05/formik-yup-dynamic-validation/</link>
+      <link>https://nametake.dev/posts/2019/06/05/formik-yup-dynamic-validation/</link>
       <pubDate>Wed, 05 Jun 2019 23:50:36 +0900</pubDate>
-      <guid>https://nametake.github.io/posts/2019/06/05/formik-yup-dynamic-validation/</guid>
+      <guid>https://nametake.dev/posts/2019/06/05/formik-yup-dynamic-validation/</guid>
       <description>Formikで動的なFormを作った時に、表示されるFormに応じてYupのバリデーションを切り替える方法でちょっと手間取ったのでメモ。 結論</description>
     </item>
     <item>
       <title>Type SafeなReducerの書き方</title>
-      <link>https://nametake.github.io/posts/2019/05/18/type-safe-reducer/</link>
+      <link>https://nametake.dev/posts/2019/05/18/type-safe-reducer/</link>
       <pubDate>Sat, 18 May 2019 10:38:55 +0900</pubDate>
-      <guid>https://nametake.github.io/posts/2019/05/18/type-safe-reducer/</guid>
+      <guid>https://nametake.dev/posts/2019/05/18/type-safe-reducer/</guid>
       <description>以前書いた記事で書いたReducerでは、受け取ったActionの型を判別するために、switchで分岐した後に対応したActionの型でキ</description>
     </item>
     <item>
       <title>TypeScript&#43;React&#43;Reduxチュートリアル</title>
-      <link>https://nametake.github.io/posts/2018/12/05/typescript-react-redux-tutorial/</link>
+      <link>https://nametake.dev/posts/2018/12/05/typescript-react-redux-tutorial/</link>
       <pubDate>Wed, 05 Dec 2018 11:08:00 +0900</pubDate>
-      <guid>https://nametake.github.io/posts/2018/12/05/typescript-react-redux-tutorial/</guid>
+      <guid>https://nametake.dev/posts/2018/12/05/typescript-react-redux-tutorial/</guid>
       <description>普段は Go でサーバサイドのコードを書いているが、TypeScript+React+Redux を勉強する機会があった。 その際、巷のチュートリアル</description>
     </item>
   </channel>
