@@ -13,18 +13,27 @@
 
 
 <meta name="author" content="nametake">
-<meta name="description" content="前提 Link to heading あくまで自分の意見の発露で、この記事の内容が100%正しいと思っているわけでも、今の構造が間違っているから直したいというわけではな">
+<meta name="description" content="
+
+  前提
+  
+    
+    Link to heading
+  
+
+あくまで自分の意見の発露で、この記事の内容が100%正しいと思っているわけでも、今の構造が間違っているから直したいというわけではないです。">
 <meta name="keywords" content="blog,developer,personal">
+
 
 
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="external-service-abstraction">
-  <meta name="twitter:description" content="前提 Link to heading あくまで自分の意見の発露で、この記事の内容が100%正しいと思っているわけでも、今の構造が間違っているから直したいというわけではな">
+  <meta name="twitter:description" content="前提 Link to heading あくまで自分の意見の発露で、この記事の内容が100%正しいと思っているわけでも、今の構造が間違っているから直したいというわけではないです。">
 
 <meta property="og:url" content="http://localhost:1313/posts/2020/10/18/external-service-abstraction/">
   <meta property="og:site_name" content="nametake.dev">
   <meta property="og:title" content="external-service-abstraction">
-  <meta property="og:description" content="前提 Link to heading あくまで自分の意見の発露で、この記事の内容が100%正しいと思っているわけでも、今の構造が間違っているから直したいというわけではな">
+  <meta property="og:description" content="前提 Link to heading あくまで自分の意見の発露で、この記事の内容が100%正しいと思っているわけでも、今の構造が間違っているから直したいというわけではないです。">
   <meta property="og:locale" content="ja">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
@@ -198,50 +207,50 @@
 </h2>
 <p>DDDは本によって用語の使い方が違ったりして、認識がズレがちなので言葉の定義を先にしておきます。</p>
 <table>
-<thead>
-<tr>
-<th>言葉</th>
-<th>意味</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>ドメイン</td>
-<td>その会社が解決する(しようとしている)問題領域。</td>
-</tr>
-<tr>
-<td>ドメインモデル</td>
-<td>ソフトウェア上で業務的振る舞いを保持するもの。</td>
-</tr>
-<tr>
-<td>コアドメイン</td>
-<td>自社のビジネスのコアとなるドメインモデル。Scalebaseの契約、請求、顧客やそれらに関係するロジックはこれ。</td>
-</tr>
-<tr>
-<td>サブドメイン</td>
-<td>コアドメインが業務を円滑に行うために支援するためのドメインモデル。コアドメインに依存することはあるが、コアドメインに依存されることはない。</td>
-</tr>
-<tr>
-<td>コンテキスト</td>
-<td>ドメインモデルの境界を示すもの。内側にコアドメインやサブドメインを持つ。</td>
-</tr>
-<tr>
-<td>業務的関心</td>
-<td>ドメインモデルと同義。</td>
-</tr>
-<tr>
-<td>技術的関心</td>
-<td>ソフトウェアを構築する上で必要な業務的関心以外のもの。エンジニアだけで判断して良い領域。</td>
-</tr>
-<tr>
-<td>ドメイン層</td>
-<td>コード上ドメインモデルが書かれている場所。技術的関心は別の層に書かれる。</td>
-</tr>
-<tr>
-<td>ドメインエキスパート</td>
-<td>そのドメインについて詳しい人。AlpだとBizサイドと呼ばれることもある。</td>
-</tr>
-</tbody>
+  <thead>
+      <tr>
+          <th>言葉</th>
+          <th>意味</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>ドメイン</td>
+          <td>その会社が解決する(しようとしている)問題領域。</td>
+      </tr>
+      <tr>
+          <td>ドメインモデル</td>
+          <td>ソフトウェア上で業務的振る舞いを保持するもの。</td>
+      </tr>
+      <tr>
+          <td>コアドメイン</td>
+          <td>自社のビジネスのコアとなるドメインモデル。Scalebaseの契約、請求、顧客やそれらに関係するロジックはこれ。</td>
+      </tr>
+      <tr>
+          <td>サブドメイン</td>
+          <td>コアドメインが業務を円滑に行うために支援するためのドメインモデル。コアドメインに依存することはあるが、コアドメインに依存されることはない。</td>
+      </tr>
+      <tr>
+          <td>コンテキスト</td>
+          <td>ドメインモデルの境界を示すもの。内側にコアドメインやサブドメインを持つ。</td>
+      </tr>
+      <tr>
+          <td>業務的関心</td>
+          <td>ドメインモデルと同義。</td>
+      </tr>
+      <tr>
+          <td>技術的関心</td>
+          <td>ソフトウェアを構築する上で必要な業務的関心以外のもの。エンジニアだけで判断して良い領域。</td>
+      </tr>
+      <tr>
+          <td>ドメイン層</td>
+          <td>コード上ドメインモデルが書かれている場所。技術的関心は別の層に書かれる。</td>
+      </tr>
+      <tr>
+          <td>ドメインエキスパート</td>
+          <td>そのドメインについて詳しい人。AlpだとBizサイドと呼ばれることもある。</td>
+      </tr>
+  </tbody>
 </table>
 <p>上記説明はエリック・エヴァンスの書籍ベースです(特にコンテキストの部分)。</p>
 <h2 id="自分の意見">
@@ -353,7 +362,6 @@
         
         
         
-
         
         
       </footer>
@@ -393,6 +401,7 @@
 
   
 
+  
 
   
 

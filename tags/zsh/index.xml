@@ -13,7 +13,7 @@
       <link>https://nametake.dev/posts/2019/07/22/pass-zsh-path-to-fish/</link>
       <pubDate>Mon, 22 Jul 2019 01:34:18 +0900</pubDate>
       <guid>https://nametake.dev/posts/2019/07/22/pass-zsh-path-to-fish/</guid>
-      <description>自分はメインのターミナル環境をfishにしている。 特に設定を細かくしなくてもサクサク動いてくれるので非常に助かっているが、POSIX準拠では</description>
+      <description>&lt;p&gt;自分はメインのターミナル環境をfishにしている。&lt;/p&gt;&#xA;&lt;p&gt;特に設定を細かくしなくてもサクサク動いてくれるので非常に助かっているが、POSIX準拠ではないためデフォルトシェルにするのは避けて、以下のような形で利用している。&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>

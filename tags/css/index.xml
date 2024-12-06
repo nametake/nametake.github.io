@@ -13,21 +13,21 @@
       <link>https://nametake.dev/posts/2021/02/14/grid-with-display-contents/</link>
       <pubDate>Sun, 14 Feb 2021 00:00:00 +0900</pubDate>
       <guid>https://nametake.dev/posts/2021/02/14/grid-with-display-contents/</guid>
-      <description>両端のborderがないテーブルをgridでスタイリングしようとすると、 :not(:first-of-type) をただ使うだけではうまくいかない。 gridにまかせて以下のようにす</description>
+      <description>&lt;p&gt;両端のborderがないテーブルをgridでスタイリングしようとすると、 &lt;code&gt;:not(:first-of-type)&lt;/code&gt; をただ使うだけではうまくいかない。&lt;/p&gt;&#xA;&lt;p&gt;gridにまかせて以下のようにすると、 &lt;code&gt;:not(:first-of-type)&lt;/code&gt; は最初のcellにしかかかってくれない。&lt;/p&gt;</description>
     </item>
     <item>
       <title>SVGが特定のサイズ以下でずれる現象の原因と解決策</title>
       <link>https://nametake.dev/posts/2020/08/10/css-svg-inline-descender/</link>
       <pubDate>Mon, 10 Aug 2020 00:00:00 +0900</pubDate>
       <guid>https://nametake.dev/posts/2020/08/10/css-svg-inline-descender/</guid>
-      <description>下記ブログを参考にしてアクセシビリティを維持したままCheckboxやRadioボタンを作ろうとしたが、特定のサイズ以下でずれる問題に遭遇し</description>
+      <description>&lt;p&gt;下記ブログを参考にしてアクセシビリティを維持したままCheckboxやRadioボタンを作ろうとしたが、特定のサイズ以下でずれる問題に遭遇した。&lt;/p&gt;</description>
     </item>
     <item>
       <title>インライン要素の高さを合わせるCSS定義</title>
       <link>https://nametake.dev/posts/2019/05/29/inline-center/</link>
       <pubDate>Wed, 29 May 2019 15:47:35 +0900</pubDate>
       <guid>https://nametake.dev/posts/2019/05/29/inline-center/</guid>
-      <description>ラジオボタンとラベルの高さを合わせるCSS定義を何回も調べている気がするのでメモ。 たぶん下の書き方が一番モダンだと思われる。 display: inline-flex; align-items: center;</description>
+      <description>&lt;p&gt;ラジオボタンとラベルの高さを合わせるCSS定義を何回も調べている気がするのでメモ。&lt;/p&gt;&#xA;&lt;p&gt;たぶん下の書き方が一番モダンだと思われる。&lt;/p&gt;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-css&#34; data-lang=&#34;css&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#f92672&#34;&gt;display&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;inline-flex&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;;&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#f92672&#34;&gt;align-items&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;center&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;;&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
     </item>
   </channel>
 </rss>

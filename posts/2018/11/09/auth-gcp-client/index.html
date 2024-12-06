@@ -13,18 +13,25 @@
 
 
 <meta name="author" content="nametake">
-<meta name="description" content="GCPの認証済みのhttp.Clientが欲しいときにちょっとだけ調べたのでメモ。 結論だけ言うと、golang.org/x/oauth2/g">
+<meta name="description" content="GCPの認証済みのhttp.Clientが欲しいときにちょっとだけ調べたのでメモ。
+結論だけ言うと、golang.org/x/oauth2/googleのDefaultClientを使えばよかった。
+今回はDataflowのAPIを叩きたかったので以下のようにすればできた。">
 <meta name="keywords" content="blog,developer,personal">
+
 
 
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="GCPの認証済みのhttp.Clientの取得方法">
-  <meta name="twitter:description" content="GCPの認証済みのhttp.Clientが欲しいときにちょっとだけ調べたのでメモ。 結論だけ言うと、golang.org/x/oauth2/g">
+  <meta name="twitter:description" content="GCPの認証済みのhttp.Clientが欲しいときにちょっとだけ調べたのでメモ。
+結論だけ言うと、golang.org/x/oauth2/googleのDefaultClientを使えばよかった。
+今回はDataflowのAPIを叩きたかったので以下のようにすればできた。">
 
 <meta property="og:url" content="https://nametake.dev/posts/2018/11/09/auth-gcp-client/">
   <meta property="og:site_name" content="nametake.dev">
   <meta property="og:title" content="GCPの認証済みのhttp.Clientの取得方法">
-  <meta property="og:description" content="GCPの認証済みのhttp.Clientが欲しいときにちょっとだけ調べたのでメモ。 結論だけ言うと、golang.org/x/oauth2/g">
+  <meta property="og:description" content="GCPの認証済みのhttp.Clientが欲しいときにちょっとだけ調べたのでメモ。
+結論だけ言うと、golang.org/x/oauth2/googleのDefaultClientを使えばよかった。
+今回はDataflowのAPIを叩きたかったので以下のようにすればできた。">
   <meta property="og:locale" content="ja">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
@@ -46,7 +53,7 @@
 
   
   
-  <link rel="stylesheet" href="../../../../../css/coder.min.38c4552ac40f9ae3408bad40358f654ebd8804412fe74ed56f2d6c8a7af82dd3.css" integrity="sha256-OMRVKsQPmuNAi61ANY9lTr2IBEEv507Vby1sinr4LdM=" crossorigin="anonymous" media="screen" />
+  <link rel="stylesheet" href="../../../../../css/coder.min.ed30115a76cdaa62f2229e973d5b1c89b2d3dd4b1d9c07a729baad06aa3b0cbe.css" integrity="sha256-7TARWnbNqmLyIp6XPVscibLT3UsdnAenKbqtBqo7DL4=" crossorigin="anonymous" media="screen" />
 
 
 
@@ -232,7 +239,6 @@
         
         
         
-
         
         
       </footer>
@@ -271,8 +277,6 @@
 
 
   
-  
-    
       <script async src="https://www.googletagmanager.com/gtag/js?id=G-ML7TD1LERR"></script>
       <script>
         var doNotTrack = false;
@@ -287,10 +291,8 @@
           gtag('config', 'G-ML7TD1LERR');
         }
       </script>
-    
+
   
-
-
 
   
 

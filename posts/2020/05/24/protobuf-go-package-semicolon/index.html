@@ -13,18 +13,26 @@
 
 
 <meta name="author" content="nametake">
-<meta name="description" content="先日protoc-gen-gohttpの依存パッケージをしようと思って色々触っていたら以下のようなWARNINGが出てきた。 2020/05/24 11:36:51 WARNING: Deprecated use of &#39;go_package&#39; option">
+<meta name="description" content="先日protoc-gen-gohttpの依存パッケージをしようと思って色々触っていたら以下のようなWARNINGが出てきた。
+2020/05/24 11:36:51 WARNING: Deprecated use of &#39;go_package&#39; option without a full import path in &#34;greeter.proto&#34;, please specify:
+        option go_package = &#34;.;main&#34;;
+A future release of protoc-gen-go will require the import path be specified.
+See https://developers.google.com/protocol-buffers/docs/reference/go-generated#package for more information.
+以下のファイルのように go_package のオプションにGoのimport pathを記述しなかったことが問題だった。">
 <meta name="keywords" content="blog,developer,personal">
+
 
 
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Protocol Buffersのgo_packageの;の仕様">
-  <meta name="twitter:description" content="先日protoc-gen-gohttpの依存パッケージをしようと思って色々触っていたら以下のようなWARNINGが出てきた。 2020/05/24 11:36:51 WARNING: Deprecated use of &#39;go_package&#39; option">
+  <meta name="twitter:description" content="先日protoc-gen-gohttpの依存パッケージをしようと思って色々触っていたら以下のようなWARNINGが出てきた。
+2020/05/24 11:36:51 WARNING: Deprecated use of &#39;go_package&#39; option without a full import path in &#34;greeter.proto&#34;, please specify: option go_package = &#34;.;main&#34;; A future release of protoc-gen-go will require the import path be specified. See https://developers.google.com/protocol-buffers/docs/reference/go-generated#package for more information. 以下のファイルのように go_package のオプションにGoのimport pathを記述しなかったことが問題だった。">
 
 <meta property="og:url" content="https://nametake.dev/posts/2020/05/24/protobuf-go-package-semicolon/">
   <meta property="og:site_name" content="nametake.dev">
   <meta property="og:title" content="Protocol Buffersのgo_packageの;の仕様">
-  <meta property="og:description" content="先日protoc-gen-gohttpの依存パッケージをしようと思って色々触っていたら以下のようなWARNINGが出てきた。 2020/05/24 11:36:51 WARNING: Deprecated use of &#39;go_package&#39; option">
+  <meta property="og:description" content="先日protoc-gen-gohttpの依存パッケージをしようと思って色々触っていたら以下のようなWARNINGが出てきた。
+2020/05/24 11:36:51 WARNING: Deprecated use of &#39;go_package&#39; option without a full import path in &#34;greeter.proto&#34;, please specify: option go_package = &#34;.;main&#34;; A future release of protoc-gen-go will require the import path be specified. See https://developers.google.com/protocol-buffers/docs/reference/go-generated#package for more information. 以下のファイルのように go_package のオプションにGoのimport pathを記述しなかったことが問題だった。">
   <meta property="og:locale" content="ja">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
@@ -46,7 +54,7 @@
 
   
   
-  <link rel="stylesheet" href="../../../../../css/coder.min.38c4552ac40f9ae3408bad40358f654ebd8804412fe74ed56f2d6c8a7af82dd3.css" integrity="sha256-OMRVKsQPmuNAi61ANY9lTr2IBEEv507Vby1sinr4LdM=" crossorigin="anonymous" media="screen" />
+  <link rel="stylesheet" href="../../../../../css/coder.min.ed30115a76cdaa62f2229e973d5b1c89b2d3dd4b1d9c07a729baad06aa3b0cbe.css" integrity="sha256-7TARWnbNqmLyIp6XPVscibLT3UsdnAenKbqtBqo7DL4=" crossorigin="anonymous" media="screen" />
 
 
 
@@ -281,7 +289,6 @@
         
         
         
-
         
         
       </footer>
@@ -320,8 +327,6 @@
 
 
   
-  
-    
       <script async src="https://www.googletagmanager.com/gtag/js?id=G-ML7TD1LERR"></script>
       <script>
         var doNotTrack = false;
@@ -336,10 +341,8 @@
           gtag('config', 'G-ML7TD1LERR');
         }
       </script>
-    
+
   
-
-
 
   
 

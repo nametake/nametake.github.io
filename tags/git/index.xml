@@ -13,7 +13,7 @@
       <link>https://nametake.dev/posts/2018/09/20/dep-private-repo/</link>
       <pubDate>Thu, 20 Sep 2018 18:47:46 +0900</pubDate>
       <guid>https://nametake.dev/posts/2018/09/20/dep-private-repo/</guid>
-      <description>Goをアップデートした後、dep updateをしたら以下のようなエラーが発生した。 grouped write of manifest, lock and vendor: error while writing out vendor tree: failed to write dep tree: failed to export github.com/nametake/private-repo: unable to update repository: remote: Repository not</description>
+      <description>&lt;p&gt;Goをアップデートした後、&lt;code&gt;dep update&lt;/code&gt;をしたら以下のようなエラーが発生した。&lt;/p&gt;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-console&#34; data-lang=&#34;console&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;grouped write of manifest, lock and vendor: error while writing out vendor tree: failed to write dep tree: failed to export github.com/nametake/private-repo: unable to update repository: remote: Repository not found.&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;fatal: repository &amp;#39;https://github.com/nametake/private-repo/&amp;#39; not found&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;: command failed: [git fetch --tags --prune origin]: exit status 128&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;make: *** [dep] Error 1&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;原因はprivateリポジトリをhttps経由でcloneしようとしたことだった。&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>

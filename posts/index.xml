@@ -13,322 +13,322 @@
       <link>https://nametake.dev/posts/2024/07/28/nerdtree-tag-stack/</link>
       <pubDate>Sun, 28 Jul 2024 00:00:00 +0900</pubDate>
       <guid>https://nametake.dev/posts/2024/07/28/nerdtree-tag-stack/</guid>
-      <description>自分はVimでのバッファ移動によくタグスタックを使っている。 思考スタイル的にすぐ前に戻るという感覚がやりやすいのか、telescopeでファ</description>
+      <description>&lt;p&gt;自分はVimでのバッファ移動によくタグスタックを使っている。&lt;/p&gt;&#xA;&lt;p&gt;思考スタイル的にすぐ前に戻るという感覚がやりやすいのか、telescopeでファイルを開いたときも全部タグスタックに積んでコマンド入力でポンポン前のファイルに戻っている。&lt;/p&gt;</description>
     </item>
     <item>
       <title>go-zetasqlfmt-actionを作った</title>
       <link>https://nametake.dev/posts/2024/07/21/go-zetasqlfmt-action/</link>
       <pubDate>Sun, 21 Jul 2024 00:00:00 +0900</pubDate>
       <guid>https://nametake.dev/posts/2024/07/21/go-zetasqlfmt-action/</guid>
-      <description>以前、spanner.StatementのSQLの文字列をフォーマットするために、go-zetasqlfmtというCLIを作った。 便利に使え</description>
+      <description>&lt;p&gt;以前、spanner.StatementのSQLの文字列をフォーマットするために、&lt;a href=&#34;https://github.com/nametake/go-zetasqlfmt&#34;  class=&#34;external-link&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;go-zetasqlfmt&lt;/a&gt;というCLIを作った。&lt;/p&gt;&#xA;&lt;p&gt;便利に使えていたが、使用している&lt;a href=&#34;https://github.com/goccy/go-zetasql&#34;  class=&#34;external-link&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;go-zetasql&lt;/a&gt;がCGOでzetasqlをBindingしている都合上、少々ビルドに時間がかかってしまう。&lt;/p&gt;&#xA;&lt;p&gt;そのため、CI上で &lt;code&gt;go run&lt;/code&gt; を使って気軽に利用しようとするとCIの時間がかかってしまう問題があった。&lt;/p&gt;</description>
     </item>
     <item>
       <title>GoでStacktraceを取るためのコード</title>
       <link>https://nametake.dev/posts/2024/07/13/go-stacktrace-frame/</link>
       <pubDate>Sat, 13 Jul 2024 00:00:00 +0900</pubDate>
       <guid>https://nametake.dev/posts/2024/07/13/go-stacktrace-frame/</guid>
-      <description>最近社内でGoのStacktraceを取る方法が話題に上がったので備忘録としてブログにしてみる。 Goでは標準機能としてスタックトレースを取る</description>
+      <description>&lt;p&gt;最近社内でGoのStacktraceを取る方法が話題に上がったので備忘録としてブログにしてみる。&lt;/p&gt;&#xA;&lt;p&gt;Goでは標準機能としてスタックトレースを取る方法を提供していない。&lt;/p&gt;</description>
     </item>
     <item>
       <title>gqlgo/gqlanalysisを使ったコマンドで独自引数を指定する</title>
       <link>https://nametake.dev/posts/2024/02/21/gqlanalysis-flags/</link>
       <pubDate>Wed, 21 Feb 2024 00:00:00 +0900</pubDate>
       <guid>https://nametake.dev/posts/2024/02/21/gqlanalysis-flags/</guid>
-      <description>GraphQLの静的解析をCLIで作りやすくしてくれるgqlgo/gqlanalysisというライブラリがある。 go/analysisを使っ</description>
+      <description>&lt;p&gt;GraphQLの静的解析をCLIで作りやすくしてくれるgqlgo/gqlanalysisというライブラリがある。&lt;/p&gt;&#xA;&lt;p&gt;go/analysisを使ったことがあればそれと殆ど同じ使い方ができるため非常に便利だが、CLIに引数を渡すときにハマったのでその備忘録。&lt;/p&gt;</description>
     </item>
     <item>
       <title>Goのコード内のZetaSQLをフォーマットするツールを作った</title>
       <link>https://nametake.dev/posts/2024/01/13/go-zetasqlfmt/</link>
       <pubDate>Sat, 13 Jan 2024 00:00:00 +0900</pubDate>
       <guid>https://nametake.dev/posts/2024/01/13/go-zetasqlfmt/</guid>
-      <description>GoからSpannerのQueryを実行しようとするとcloud.google.com/go/spannerのStatement構造体のSQ</description>
+      <description>&lt;p&gt;GoからSpannerのQueryを実行しようとすると&lt;a href=&#34;https://pkg.go.dev/cloud.google.com/go/spanner#Statement&#34;  class=&#34;external-link&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;cloud.google.com/go/spannerのStatement&lt;/a&gt;構造体のSQLフィールドに文字列として記述することになる。&lt;/p&gt;&#xA;&lt;p&gt;シンプルに文字列でしか無いため、書き方やフォーマットを統一できずに若干のもやもやがあった。&lt;/p&gt;</description>
     </item>
     <item>
       <title>go/packagesでformatterを作る</title>
       <link>https://nametake.dev/posts/2024/01/08/use-go-packages/</link>
       <pubDate>Mon, 08 Jan 2024 00:00:00 +0900</pubDate>
       <guid>https://nametake.dev/posts/2024/01/08/use-go-packages/</guid>
-      <description>特定の構造体の文字列を置き換えるFormatterを作ったときにgo/packagesを使って作ってみたので備忘録。 全体の流れ Link to heading pack</description>
+      <description>&lt;p&gt;特定の構造体の文字列を置き換えるFormatterを作ったときに&lt;a href=&#34;https://pkg.go.dev/golang.org/x/tools/go/packages&#34;  class=&#34;external-link&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;go/packages&lt;/a&gt;を使って作ってみたので備忘録。&lt;/p&gt;&#xA;&lt;h2 id=&#34;全体の流れ&#34;&gt;&#xA;  全体の流れ&#xA;  &lt;a class=&#34;heading-link&#34; href=&#34;#%e5%85%a8%e4%bd%93%e3%81%ae%e6%b5%81%e3%82%8c&#34;&gt;&#xA;    &lt;i class=&#34;fa-solid fa-link&#34; aria-hidden=&#34;true&#34; title=&#34;Link to heading&#34;&gt;&lt;/i&gt;&#xA;    &lt;span class=&#34;sr-only&#34;&gt;Link to heading&lt;/span&gt;&#xA;  &lt;/a&gt;&#xA;&lt;/h2&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://pkg.go.dev/golang.org/x/tools/go/packages#Load&#34;  class=&#34;external-link&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;packages.Load&lt;/a&gt;を使ってパッケージ情報を読み込む&lt;/li&gt;&#xA;&lt;li&gt;読み込んだ&lt;a href=&#34;https://pkg.go.dev/golang.org/x/tools/go/packages#Package&#34;  class=&#34;external-link&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;packages.Package&lt;/a&gt;からast.File(Syntax)と型情報(TypesInfo)を取り出す&lt;/li&gt;&#xA;&lt;li&gt;ファイルごとに置き換え処理&lt;/li&gt;&#xA;&lt;li&gt;保存&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;h2 id=&#34;packagesloadでパッケージ情報の読み込み&#34;&gt;&#xA;  packages.Loadでパッケージ情報の読み込み&#xA;  &lt;a class=&#34;heading-link&#34; href=&#34;#packagesload%e3%81%a7%e3%83%91%e3%83%83%e3%82%b1%e3%83%bc%e3%82%b8%e6%83%85%e5%a0%b1%e3%81%ae%e8%aa%ad%e3%81%bf%e8%be%bc%e3%81%bf&#34;&gt;&#xA;    &lt;i class=&#34;fa-solid fa-link&#34; aria-hidden=&#34;true&#34; title=&#34;Link to heading&#34;&gt;&lt;/i&gt;&#xA;    &lt;span class=&#34;sr-only&#34;&gt;Link to heading&lt;/span&gt;&#xA;  &lt;/a&gt;&#xA;&lt;/h2&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://pkg.go.dev/golang.org/x/tools/go/packages#Load&#34;  class=&#34;external-link&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;packages.Load&lt;/a&gt; は指定したパターンからパッケージの情報を読み込める。&lt;/p&gt;</description>
     </item>
     <item>
       <title>Goの関数定義の引数をチェックするLinterを作った</title>
       <link>https://nametake.dev/posts/2024/01/01/mustargs/</link>
       <pubDate>Mon, 01 Jan 2024 00:00:00 +0900</pubDate>
       <guid>https://nametake.dev/posts/2024/01/01/mustargs/</guid>
-      <description>チームでWebサービスを書いていると特定の条件の関数には特定の型の引数を渡すことがルールになっていくことがある。 例えば、マルチテナントなアプ</description>
+      <description>&lt;p&gt;チームでWebサービスを書いていると特定の条件の関数には特定の型の引数を渡すことがルールになっていくことがある。&lt;/p&gt;&#xA;&lt;p&gt;例えば、マルチテナントなアプリケーションを作っている場合、UsecaseはTenantIDを必ず引数として持ったり、DBの定義には必ず*sql.Txを持つ等がある。&lt;/p&gt;</description>
     </item>
     <item>
       <title>telescope.nvimのgit_filesやlive_grepでもtagstackに積みたい</title>
       <link>https://nametake.dev/posts/2023/12/13/telescope-nvim-git-files-tagstack/</link>
       <pubDate>Wed, 13 Dec 2023 00:00:00 +0900</pubDate>
       <guid>https://nametake.dev/posts/2023/12/13/telescope-nvim-git-files-tagstack/</guid>
-      <description>telescope.nvimのgit_filesやlive_grepでのファイル移動でもTagstackに積みたかった。 結論からいうと以下の</description>
+      <description>&lt;p&gt;&lt;a href=&#34;https://github.com/nvim-telescope/telescope.nvim&#34;  class=&#34;external-link&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;telescope.nvim&lt;/a&gt;のgit_filesやlive_grepでのファイル移動でもTagstackに積みたかった。&lt;/p&gt;&#xA;&lt;p&gt;結論からいうと以下の設定でいけた。&lt;/p&gt;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-lua&#34; data-lang=&#34;lua&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;require(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;telescope&amp;#39;&lt;/span&gt;).setup {&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  defaults &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; {&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#75715e&#34;&gt;-- ...&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  },&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  pickers &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; {&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    git_files &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; {&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      push_tagstack_on_edit &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;true&lt;/span&gt;,&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    },&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  },&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  extensions &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; {&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    live_grep_args &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; {&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &lt;span style=&#34;color:#75715e&#34;&gt;-- ...&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      push_tagstack_on_edit &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;true&lt;/span&gt;,&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    },&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  },&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;git_filesはpickersごとに&lt;code&gt;push_tagstack_on_edit&lt;/code&gt;をtrueにするだけで動いた。&lt;/p&gt;</description>
     </item>
     <item>
       <title>hugo-coderテーマの拡張</title>
       <link>https://nametake.dev/posts/2023/12/10/hugo-coder-custom-font/</link>
       <pubDate>Sun, 10 Dec 2023 00:00:00 +0900</pubDate>
       <guid>https://nametake.dev/posts/2023/12/10/hugo-coder-custom-font/</guid>
-      <description>長らく放置してしまってブログを書く場所に困ったのでこのブログの環境を整備し直した。 テーマのバージョンアップもしたが、その時に色々と気になって</description>
+      <description>&lt;p&gt;長らく放置してしまってブログを書く場所に困ったのでこのブログの環境を整備し直した。&lt;/p&gt;&#xA;&lt;p&gt;テーマのバージョンアップもしたが、その時に色々と気になっていた事を直したのでそのログ。&lt;/p&gt;</description>
     </item>
     <item>
       <title>display: gridでテーブルをスタイリングする時にdisplay: contentsを使う</title>
       <link>https://nametake.dev/posts/2021/02/14/grid-with-display-contents/</link>
       <pubDate>Sun, 14 Feb 2021 00:00:00 +0900</pubDate>
       <guid>https://nametake.dev/posts/2021/02/14/grid-with-display-contents/</guid>
-      <description>両端のborderがないテーブルをgridでスタイリングしようとすると、 :not(:first-of-type) をただ使うだけではうまくいかない。 gridにまかせて以下のようにす</description>
+      <description>&lt;p&gt;両端のborderがないテーブルをgridでスタイリングしようとすると、 &lt;code&gt;:not(:first-of-type)&lt;/code&gt; をただ使うだけではうまくいかない。&lt;/p&gt;&#xA;&lt;p&gt;gridにまかせて以下のようにすると、 &lt;code&gt;:not(:first-of-type)&lt;/code&gt; は最初のcellにしかかかってくれない。&lt;/p&gt;</description>
     </item>
     <item>
       <title>react-resizableにemotionでスタイルを当てる</title>
       <link>https://nametake.dev/posts/2020/10/25/react-resizable-emotion/</link>
       <pubDate>Sun, 25 Oct 2020 00:00:00 +0900</pubDate>
       <guid>https://nametake.dev/posts/2020/10/25/react-resizable-emotion/</guid>
-      <description>react-resizable に emotion でスタイルを当てた時のメモ。 import { ResizableBox } from &amp;#39;react-resizable&amp;#39;; const StyledResizableBox = styled(ResizableBox)` position: relative; display: inline-flex; flex-direction: column; align-items: right; justify-content: center; padding-left: 20px; overflow: hidden; border: 1px solid black; .react-resizable-handle { position: absolute; right: 0; width: 4px; height: 90%; border-left: 1px solid black; :hover { cursor: col-resize; } } `; 上記の例</description>
+      <description>&lt;p&gt;&lt;a href=&#34;https://github.com/STRML/react-resizable&#34;  class=&#34;external-link&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;react-resizable&lt;/a&gt; に &lt;a href=&#34;https://emotion.sh/&#34;  class=&#34;external-link&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;emotion&lt;/a&gt; でスタイルを当てた時のメモ。&lt;/p&gt;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-tsx&#34; data-lang=&#34;tsx&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;import&lt;/span&gt; { &lt;span style=&#34;color:#a6e22e&#34;&gt;ResizableBox&lt;/span&gt; } &lt;span style=&#34;color:#66d9ef&#34;&gt;from&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;react-resizable&amp;#39;&lt;/span&gt;;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;const&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;StyledResizableBox&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;styled&lt;/span&gt;(&lt;span style=&#34;color:#a6e22e&#34;&gt;ResizableBox&lt;/span&gt;)&lt;span style=&#34;color:#e6db74&#34;&gt;`&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;  position: relative;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;  display: inline-flex;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;  flex-direction: column;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;  align-items: right;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;  justify-content: center;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;  padding-left: 20px;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;  overflow: hidden;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;  border: 1px solid black;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;  .react-resizable-handle {&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;    position: absolute;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;    right: 0;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;    width: 4px;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;    height: 90%;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;    border-left: 1px solid black;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;    :hover {&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;      cursor: col-resize;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;    }&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;  }&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;`&lt;/span&gt;;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;上記の例だと以下のように右端にサイズ変更用のバーが出るようなスタイルになる。&lt;/p&gt;</description>
     </item>
     <item>
       <title>Reactでアクセシビリティを維持したRadioボタンをデザインする</title>
       <link>https://nametake.dev/posts/2020/09/26/react-a11y-radio/</link>
       <pubDate>Sat, 26 Sep 2020 00:00:00 +0900</pubDate>
       <guid>https://nametake.dev/posts/2020/09/26/react-a11y-radio/</guid>
-      <description>ReactでRadioボタンにデザインを当てようとすると、 display: none を使う方法を紹介している記事が多いが、その方法ではアクセシビリティが消えてしま</description>
+      <description>&lt;p&gt;ReactでRadioボタンにデザインを当てようとすると、 &lt;code&gt;display: none&lt;/code&gt; を使う方法を紹介している記事が多いが、その方法ではアクセシビリティが消えてしまう。&lt;/p&gt;</description>
     </item>
     <item>
       <title>SVGが特定のサイズ以下でずれる現象の原因と解決策</title>
       <link>https://nametake.dev/posts/2020/08/10/css-svg-inline-descender/</link>
       <pubDate>Mon, 10 Aug 2020 00:00:00 +0900</pubDate>
       <guid>https://nametake.dev/posts/2020/08/10/css-svg-inline-descender/</guid>
-      <description>下記ブログを参考にしてアクセシビリティを維持したままCheckboxやRadioボタンを作ろうとしたが、特定のサイズ以下でずれる問題に遭遇し</description>
+      <description>&lt;p&gt;下記ブログを参考にしてアクセシビリティを維持したままCheckboxやRadioボタンを作ろうとしたが、特定のサイズ以下でずれる問題に遭遇した。&lt;/p&gt;</description>
     </item>
     <item>
       <title>TypeScript &#43; electron-webpackでemotionを動かしたときのメモ</title>
       <link>https://nametake.dev/posts/2020/08/04/typescript-electron-webpack-emotion/</link>
       <pubDate>Tue, 04 Aug 2020 00:00:00 +0900</pubDate>
       <guid>https://nametake.dev/posts/2020/08/04/typescript-electron-webpack-emotion/</guid>
-      <description>electron-webpack で emotion を動かそうとして試行錯誤したのでその結果のメモ。 ライブラリとバージョン Link to heading TypeScript(3.9.5) electron-webpack(2.8.2) emotion(10.0.27) ts-loader(7.0.5) babel-loader(8.1.0) babel-plugin-emotion(10.0.33) 起きた問題 Link to heading styled-componen</description>
+      <description>&lt;p&gt;&lt;a href=&#34;https://github.com/electron-userland/electron-webpack&#34;  class=&#34;external-link&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;electron-webpack&lt;/a&gt; で &lt;a href=&#34;https://github.com/emotion-js/emotion&#34;  class=&#34;external-link&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;emotion&lt;/a&gt; を動かそうとして試行錯誤したのでその結果のメモ。&lt;/p&gt;&#xA;&lt;h2 id=&#34;ライブラリとバージョン&#34;&gt;&#xA;  ライブラリとバージョン&#xA;  &lt;a class=&#34;heading-link&#34; href=&#34;#%e3%83%a9%e3%82%a4%e3%83%96%e3%83%a9%e3%83%aa%e3%81%a8%e3%83%90%e3%83%bc%e3%82%b8%e3%83%a7%e3%83%b3&#34;&gt;&#xA;    &lt;i class=&#34;fa-solid fa-link&#34; aria-hidden=&#34;true&#34; title=&#34;Link to heading&#34;&gt;&lt;/i&gt;&#xA;    &lt;span class=&#34;sr-only&#34;&gt;Link to heading&lt;/span&gt;&#xA;  &lt;/a&gt;&#xA;&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://www.typescriptlang.org/&#34;  class=&#34;external-link&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;TypeScript&lt;/a&gt;(3.9.5)&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://github.com/electron-userland/electron-webpack&#34;  class=&#34;external-link&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;electron-webpack&lt;/a&gt;(2.8.2)&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://github.com/emotion-js/emotion&#34;  class=&#34;external-link&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;emotion&lt;/a&gt;(10.0.27)&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://github.com/TypeStrong/ts-loader&#34;  class=&#34;external-link&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;ts-loader&lt;/a&gt;(7.0.5)&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://github.com/babel/babel-loader&#34;  class=&#34;external-link&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;babel-loader&lt;/a&gt;(8.1.0)&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://github.com/emotion-js/emotion/tree/master/packages/babel-plugin-emotion&#34;  class=&#34;external-link&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;babel-plugin-emotion&lt;/a&gt;(10.0.33)&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;起きた問題&#34;&gt;&#xA;  起きた問題&#xA;  &lt;a class=&#34;heading-link&#34; href=&#34;#%e8%b5%b7%e3%81%8d%e3%81%9f%e5%95%8f%e9%a1%8c&#34;&gt;&#xA;    &lt;i class=&#34;fa-solid fa-link&#34; aria-hidden=&#34;true&#34; title=&#34;Link to heading&#34;&gt;&lt;/i&gt;&#xA;    &lt;span class=&#34;sr-only&#34;&gt;Link to heading&lt;/span&gt;&#xA;  &lt;/a&gt;&#xA;&lt;/h2&gt;&#xA;&lt;p&gt;styled-componentsのselectorに別のComponentsを指定しようとしたときに、 &lt;code&gt;babel-plugin-emotion&lt;/code&gt; が必要というエラーが発生した。&lt;/p&gt;</description>
     </item>
     <item>
       <title>DDDにおける外部サービスの抽象化</title>
       <link>https://nametake.dev/posts/2020/07/25/abstract-external-service/</link>
       <pubDate>Sat, 25 Jul 2020 00:00:00 +0900</pubDate>
       <guid>https://nametake.dev/posts/2020/07/25/abstract-external-service/</guid>
-      <description>外部サービスの抽象化 Link to heading 最近のシステムはその複雑さの上昇に伴い、様々な外部サービスと連携する機会が多い。 その際、ドメインとして外部サービス</description>
+      <description>&lt;h1 id=&#34;外部サービスの抽象化&#34;&gt;&#xA;  外部サービスの抽象化&#xA;  &lt;a class=&#34;heading-link&#34; href=&#34;#%e5%a4%96%e9%83%a8%e3%82%b5%e3%83%bc%e3%83%93%e3%82%b9%e3%81%ae%e6%8a%bd%e8%b1%a1%e5%8c%96&#34;&gt;&#xA;    &lt;i class=&#34;fa-solid fa-link&#34; aria-hidden=&#34;true&#34; title=&#34;Link to heading&#34;&gt;&lt;/i&gt;&#xA;    &lt;span class=&#34;sr-only&#34;&gt;Link to heading&lt;/span&gt;&#xA;  &lt;/a&gt;&#xA;&lt;/h1&gt;&#xA;&lt;p&gt;最近のシステムはその複雑さの上昇に伴い、様々な外部サービスと連携する機会が多い。&lt;/p&gt;&#xA;&lt;!-- textlint-disable ja-technical-writing/ja-no-weak-phrase --&gt;&#xA;&lt;p&gt;その際、ドメインとして外部サービスをどう取り扱うといいのか、という個人的なプラクティスを過去の失敗例も含めて記事にしようと思う。&lt;/p&gt;</description>
     </item>
     <item>
       <title>Conditional Typesを使った話</title>
       <link>https://nametake.dev/posts/2020/07/13/conditional-types/</link>
       <pubDate>Mon, 13 Jul 2020 00:00:00 +0900</pubDate>
       <guid>https://nametake.dev/posts/2020/07/13/conditional-types/</guid>
-      <description>機能としては知っていたものの使う機会がなかった Conditional Types を使ったのでメモ。 ElectronのMainプロセスでAPIを叩く際、API毎にchann</description>
+      <description>&lt;p&gt;機能としては知っていたものの使う機会がなかった Conditional Types を使ったのでメモ。&lt;/p&gt;&#xA;&lt;p&gt;ElectronのMainプロセスでAPIを叩く際、API毎にchannelを用意するのは手間だと思い以下のようなIPC通信用の型を用意した。&lt;/p&gt;</description>
     </item>
     <item>
       <title>組み合わせテストでの直交表とPICTの利用</title>
       <link>https://nametake.dev/posts/2020/06/28/combination-test-pict-and-orthogonal-array/</link>
       <pubDate>Sun, 28 Jun 2020 00:00:00 +0900</pubDate>
       <guid>https://nametake.dev/posts/2020/06/28/combination-test-pict-and-orthogonal-array/</guid>
-      <description>テストの組み合わせについてある程度知見が溜まったのでメモ。 結合テストの組み合わせ問題 Link to heading システムのリリース前には開発した機能や既存の機能を</description>
+      <description>&lt;p&gt;テストの組み合わせについてある程度知見が溜まったのでメモ。&lt;/p&gt;&#xA;&lt;h2 id=&#34;結合テストの組み合わせ問題&#34;&gt;&#xA;  結合テストの組み合わせ問題&#xA;  &lt;a class=&#34;heading-link&#34; href=&#34;#%e7%b5%90%e5%90%88%e3%83%86%e3%82%b9%e3%83%88%e3%81%ae%e7%b5%84%e3%81%bf%e5%90%88%e3%82%8f%e3%81%9b%e5%95%8f%e9%a1%8c&#34;&gt;&#xA;    &lt;i class=&#34;fa-solid fa-link&#34; aria-hidden=&#34;true&#34; title=&#34;Link to heading&#34;&gt;&lt;/i&gt;&#xA;    &lt;span class=&#34;sr-only&#34;&gt;Link to heading&lt;/span&gt;&#xA;  &lt;/a&gt;&#xA;&lt;/h2&gt;&#xA;&lt;p&gt;システムのリリース前には開発した機能や既存の機能を組み合わせてバグが発生していないかテストをする必要がある。&lt;/p&gt;</description>
     </item>
     <item>
       <title>Protocol Buffersのgo_packageの;の仕様</title>
       <link>https://nametake.dev/posts/2020/05/24/protobuf-go-package-semicolon/</link>
       <pubDate>Sun, 24 May 2020 00:00:00 +0900</pubDate>
       <guid>https://nametake.dev/posts/2020/05/24/protobuf-go-package-semicolon/</guid>
-      <description>先日protoc-gen-gohttpの依存パッケージをしようと思って色々触っていたら以下のようなWARNINGが出てきた。 2020/05/24 11:36:51 WARNING: Deprecated use of &amp;#39;go_package&amp;#39; option</description>
+      <description>&lt;p&gt;先日&lt;a href=&#34;https://github.com/nametake/protoc-gen-gohttp&#34;  class=&#34;external-link&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;protoc-gen-gohttp&lt;/a&gt;の依存パッケージをしようと思って色々触っていたら以下のようなWARNINGが出てきた。&lt;/p&gt;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;2020/05/24 11:36:51 WARNING: Deprecated use of &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;go_package&amp;#39;&lt;/span&gt; option without a full import path in &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;greeter.proto&amp;#34;&lt;/span&gt;, please specify:&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        option go_package &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;.;main&amp;#34;&lt;/span&gt;;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;A future release of protoc-gen-go will require the import path be specified.&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;See https://developers.google.com/protocol-buffers/docs/reference/go-generated#package &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; more information.&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;以下のファイルのように &lt;code&gt;go_package&lt;/code&gt; のオプションにGoのimport pathを記述しなかったことが問題だった。&lt;/p&gt;</description>
     </item>
     <item>
       <title>集約におけるトランザクションのドメイン的関心と技術的関心</title>
       <link>https://nametake.dev/posts/2020/04/30/ddd-aggregate/</link>
       <pubDate>Thu, 30 Apr 2020 00:00:00 +0900</pubDate>
       <guid>https://nametake.dev/posts/2020/04/30/ddd-aggregate/</guid>
-      <description>集約のトランザクション Link to heading DDDの集約について学ぶと、必ず「集約はトランザクション境界である」という説明がされている。 整合性の境界の論理的</description>
+      <description>&lt;h2 id=&#34;集約のトランザクション&#34;&gt;&#xA;  集約のトランザクション&#xA;  &lt;a class=&#34;heading-link&#34; href=&#34;#%e9%9b%86%e7%b4%84%e3%81%ae%e3%83%88%e3%83%a9%e3%83%b3%e3%82%b6%e3%82%af%e3%82%b7%e3%83%a7%e3%83%b3&#34;&gt;&#xA;    &lt;i class=&#34;fa-solid fa-link&#34; aria-hidden=&#34;true&#34; title=&#34;Link to heading&#34;&gt;&lt;/i&gt;&#xA;    &lt;span class=&#34;sr-only&#34;&gt;Link to heading&lt;/span&gt;&#xA;  &lt;/a&gt;&#xA;&lt;/h2&gt;&#xA;&lt;p&gt;DDDの集約について学ぶと、必ず「集約はトランザクション境界である」という説明がされている。&lt;/p&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;整合性の境界の論理的な意味は、「その内部にあるあらゆるものは、どんな操作をするにかかわらず、特定の不変条件のルールに従う」ということだ。この境界の外部にある、あらゆるものの整合性は、集約とは無関係になる。つまり、集約はトランザクション整合性の境界と同義である&lt;/p&gt;</description>
     </item>
     <item>
       <title>golangci-lint-langserverを作った話</title>
       <link>https://nametake.dev/posts/2020/03/08/golangci-lint-langserver/</link>
       <pubDate>Sun, 08 Mar 2020 00:00:00 +0900</pubDate>
       <guid>https://nametake.dev/posts/2020/03/08/golangci-lint-langserver/</guid>
-      <description>最近VimのLinterのプラグインをaleからすべてlanguage serverに移行した。 殆どのCLIツールはdiagnostic-la</description>
+      <description>&lt;p&gt;最近VimのLinterのプラグインをaleからすべてlanguage serverに移行した。&lt;/p&gt;&#xA;&lt;p&gt;殆どのCLIツールは&lt;a href=&#34;https://github.com/iamcco/diagnostic-languageserver&#34;  class=&#34;external-link&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;diagnostic-languageserver&lt;/a&gt;経由で使うことでいい感じに動いてくれている。&lt;/p&gt;&#xA;&lt;p&gt;ただ、&lt;a href=&#34;https://github.com/golangci/golangci-lint&#34;  class=&#34;external-link&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;golangci-lint&lt;/a&gt;だけはGoのスコープとの相性の関係ではうまく動作させることができなかった。&lt;/p&gt;&#xA;&lt;p&gt;そこで、golangci-lint専用のlanguage server、&lt;a href=&#34;https://github.com/nametake/golangci-lint-langserver&#34;  class=&#34;external-link&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;golangci-lint-langserver&lt;/a&gt;を作成してみた。&lt;/p&gt;</description>
     </item>
     <item>
       <title>aleとneoformatからdiagnostic-languageserverに移行した</title>
       <link>https://nametake.dev/posts/2020/02/26/migration-diagnostic-languageserver/</link>
       <pubDate>Wed, 26 Feb 2020 00:00:00 +0900</pubDate>
       <guid>https://nametake.dev/posts/2020/02/26/migration-diagnostic-languageserver/</guid>
-      <description>Vimのプラグインとしてaleとneoformatをずっと利用してきたが、LinterやFormatterも全てLanguage Server</description>
+      <description>&lt;p&gt;Vimのプラグインとしてaleとneoformatをずっと利用してきたが、LinterやFormatterも全てLanguage Serverに移行しようと思い、 &lt;a href=&#34;https://github.com/iamcco/diagnostic-languageserver&#34;  class=&#34;external-link&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;diagnostic-languageserver&lt;/a&gt; に移行した。&lt;/p&gt;</description>
     </item>
     <item>
       <title>TypeScriptでFormのComponentを配列で管理する</title>
       <link>https://nametake.dev/posts/2020/01/31/ts-array-form-onchange/</link>
       <pubDate>Fri, 31 Jan 2020 00:00:00 +0900</pubDate>
       <guid>https://nametake.dev/posts/2020/01/31/ts-array-form-onchange/</guid>
-      <description>TypeScriptでFormのComponentを配列で管理する Link to heading toB向けのサービスや管理画面のように情報量の多いのプロダクトを作っ</description>
+      <description>&lt;h1 id=&#34;typescriptでformのcomponentを配列で管理する&#34;&gt;&#xA;  TypeScriptでFormのComponentを配列で管理する&#xA;  &lt;a class=&#34;heading-link&#34; href=&#34;#typescript%e3%81%a7form%e3%81%aecomponent%e3%82%92%e9%85%8d%e5%88%97%e3%81%a7%e7%ae%a1%e7%90%86%e3%81%99%e3%82%8b&#34;&gt;&#xA;    &lt;i class=&#34;fa-solid fa-link&#34; aria-hidden=&#34;true&#34; title=&#34;Link to heading&#34;&gt;&lt;/i&gt;&#xA;    &lt;span class=&#34;sr-only&#34;&gt;Link to heading&lt;/span&gt;&#xA;  &lt;/a&gt;&#xA;&lt;/h1&gt;&#xA;&lt;p&gt;toB向けのサービスや管理画面のように情報量の多いのプロダクトを作っていると、FormをまとめたComponentを作りたくなるケースがある。&lt;/p&gt;</description>
     </item>
     <item>
       <title>Go言語でジェネリクスない理由の考察</title>
       <link>https://nametake.dev/posts/2019/12/31/go-no-generics/</link>
       <pubDate>Tue, 31 Dec 2019 00:00:00 +0900</pubDate>
       <guid>https://nametake.dev/posts/2019/12/31/go-no-generics/</guid>
-      <description>Go言語にはジェネリクスがない。 他言語から入ってきた方はかなりこの部分に戸惑うことが多い。 そこで、そういった方々になぜジェネリクスがないのか</description>
+      <description>&lt;!-- textlint-disable ja-technical-writing/ja-no-weak-phrase --&gt;&#xA;&lt;p&gt;Go言語にはジェネリクスがない。&lt;/p&gt;&#xA;&lt;p&gt;他言語から入ってきた方はかなりこの部分に戸惑うことが多い。&lt;/p&gt;&#xA;&lt;p&gt;そこで、そういった方々になぜジェネリクスがないのかを説明するにあたって、自分の中でいい感じに言語化できたのでログとして残しておこうと思う。&lt;/p&gt;</description>
     </item>
     <item>
       <title>Hooks対応したreact-tableをTypeScriptで使う</title>
       <link>https://nametake.dev/posts/2019/12/17/react-table/</link>
       <pubDate>Tue, 17 Dec 2019 00:00:00 +0000</pubDate>
       <guid>https://nametake.dev/posts/2019/12/17/react-table/</guid>
-      <description>この記事はReact Advent Calendar 2019の記事。 サービスにもよるとは思うが、業務系のサービスではテーブルUIはほぼ確実に登場する。 しかも、よく登場す</description>
+      <description>&lt;p&gt;この記事は&lt;a href=&#34;https://qiita.com/advent-calendar/2019/react&#34;  class=&#34;external-link&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;React Advent Calendar 2019&lt;/a&gt;の記事。&lt;/p&gt;&#xA;&lt;!-- textlint-disable ja-technical-writing/ja-no-weak-phrase --&gt;&#xA;&lt;p&gt;サービスにもよるとは思うが、業務系のサービスではテーブルUIはほぼ確実に登場する。&lt;/p&gt;&#xA;&lt;!-- textlint-enable --&gt;&#xA;&lt;p&gt;しかも、よく登場する上にたくさんの機能を求められるUIでもある。&#xA;パッと思いつく限りでも、ソート、フィルター、検索、ページネーション等多岐にわたる。&lt;/p&gt;</description>
     </item>
     <item>
       <title>Goの関数内で呼び出される関数をインターセプトする方法</title>
       <link>https://nametake.dev/posts/2019/12/09/go-func-intercept/</link>
       <pubDate>Mon, 09 Dec 2019 00:05:29 +0900</pubDate>
       <guid>https://nametake.dev/posts/2019/12/09/go-func-intercept/</guid>
-      <description>この記事はGo2 Advent Calendar 2019の記事。 自分はprotoc-gen-gohttpというプラグインを作っているが、先日grpc.UnaryServ</description>
+      <description>&lt;p&gt;この記事は&lt;a href=&#34;https://qiita.com/advent-calendar/2019/go2&#34;  class=&#34;external-link&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Go2 Advent Calendar 2019&lt;/a&gt;の記事。&lt;/p&gt;&#xA;&lt;p&gt;自分は&lt;a href=&#34;https://github.com/nametake/protoc-gen-gohttp&#34;  class=&#34;external-link&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;protoc-gen-gohttp&lt;/a&gt;というプラグインを作っているが、先日&lt;a href=&#34;https://godoc.org/google.golang.org/grpc#UnaryServerInterceptor&#34;  class=&#34;external-link&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;grpc.UnaryServerInterceptor&lt;/a&gt;に対応した。&lt;/p&gt;&#xA;&lt;!-- textlint-disable ja-technical-writing/ja-no-weak-phrase --&gt;&#xA;&lt;p&gt;その際、どうやればいいかを調査していたら、&lt;a href=&#34;https://godoc.org/github.com/grpc-ecosystem/go-grpc-middleware#ChainUnaryServer&#34;  class=&#34;external-link&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;ChainUnaryServer&lt;/a&gt;という関数を見つけた。&#xA;中身を読んでみると、特定のinterfaceを受け取ってそれを実行する機能を持った関数に対し、interfaceを実行するときに複数の関数でインターセプトする方法の知見を得られたのため記事にしようと思う。&lt;/p&gt;</description>
     </item>
     <item>
       <title>Go1.13のerrorsにWrapの機能が入ったので勉強がてらまとめる</title>
       <link>https://nametake.dev/posts/2019/10/30/unwrap-interface/</link>
       <pubDate>Wed, 30 Oct 2019 00:52:57 +0900</pubDate>
       <guid>https://nametake.dev/posts/2019/10/30/unwrap-interface/</guid>
-      <description>Go1.13からerrorsに色々機能が入った(The Go Blog)。 最近は新しいGoのことをインプットできていなかったので、リハビリがてらs</description>
+      <description>&lt;p&gt;Go1.13からerrorsに色々機能が入った(&lt;a href=&#34;https://blog.golang.org/go1.13-errors&#34;  class=&#34;external-link&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;The Go Blog&lt;/a&gt;)。&lt;/p&gt;&#xA;&lt;p&gt;最近は新しいGoのことをインプットできていなかったので、リハビリがてら&lt;a href=&#34;https://qiita.com/sonatard/items/9c9faf79ac03c20f4ae1&#34;  class=&#34;external-link&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;sonatardさんのまとめた記事&lt;/a&gt;も読みつつ、中の実装を眺めてまとめてみる。&lt;/p&gt;&#xA;&lt;h2 id=&#34;unwrap-interface&#34;&gt;&#xA;  Unwrap interface&#xA;  &lt;a class=&#34;heading-link&#34; href=&#34;#unwrap-interface&#34;&gt;&#xA;    &lt;i class=&#34;fa-solid fa-link&#34; aria-hidden=&#34;true&#34; title=&#34;Link to heading&#34;&gt;&lt;/i&gt;&#xA;    &lt;span class=&#34;sr-only&#34;&gt;Link to heading&lt;/span&gt;&#xA;  &lt;/a&gt;&#xA;&lt;/h2&gt;&#xA;&lt;p&gt;追加された機能は &lt;code&gt;errors.As&lt;/code&gt; や &lt;code&gt;errors.Is&lt;/code&gt; のようにいくつかあるが、一番のキモとなる追加機能は &lt;code&gt;errors.Unwrap&lt;/code&gt; になる。&lt;/p&gt;</description>
     </item>
     <item>
       <title>TypeScirptのプロジェクトにエイリアスを設定して絶対パスでimportするメモ</title>
       <link>https://nametake.dev/posts/2019/10/07/typescript-absolute-imports/</link>
       <pubDate>Mon, 07 Oct 2019 00:15:35 +0900</pubDate>
       <guid>https://nametake.dev/posts/2019/10/07/typescript-absolute-imports/</guid>
-      <description>TypeScriptのプロジェクトを作る度に設定すると思うのでメモ。 前提 Link to heading Webpackでプロジェクトを管理している Linterはesl</description>
+      <description>&lt;!-- textlint-disable ja-technical-writing/ja-no-weak-phrase --&gt;&#xA;&lt;p&gt;TypeScriptのプロジェクトを作る度に設定すると思うのでメモ。&lt;/p&gt;&#xA;&lt;!-- textlint-enable --&gt;&#xA;&lt;h2 id=&#34;前提&#34;&gt;&#xA;  前提&#xA;  &lt;a class=&#34;heading-link&#34; href=&#34;#%e5%89%8d%e6%8f%90&#34;&gt;&#xA;    &lt;i class=&#34;fa-solid fa-link&#34; aria-hidden=&#34;true&#34; title=&#34;Link to heading&#34;&gt;&lt;/i&gt;&#xA;    &lt;span class=&#34;sr-only&#34;&gt;Link to heading&lt;/span&gt;&#xA;  &lt;/a&gt;&#xA;&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Webpackでプロジェクトを管理している&lt;/li&gt;&#xA;&lt;li&gt;Linterはeslintを使用している&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;tsconfigjsonの設定&#34;&gt;&#xA;  tsconfig.jsonの設定&#xA;  &lt;a class=&#34;heading-link&#34; href=&#34;#tsconfigjson%e3%81%ae%e8%a8%ad%e5%ae%9a&#34;&gt;&#xA;    &lt;i class=&#34;fa-solid fa-link&#34; aria-hidden=&#34;true&#34; title=&#34;Link to heading&#34;&gt;&lt;/i&gt;&#xA;    &lt;span class=&#34;sr-only&#34;&gt;Link to heading&lt;/span&gt;&#xA;  &lt;/a&gt;&#xA;&lt;/h2&gt;&#xA;&lt;p&gt;tsconfig.jsonのcompilerOptionsを設定してsrc以下のディレクトリに対してエイリアスを貼る。&lt;/p&gt;</description>
     </item>
     <item>
       <title>Goのreflectで構造体の変数にインスタンスを詰める方法</title>
       <link>https://nametake.dev/posts/2019/09/10/go-reflect-create-instance/</link>
       <pubDate>Tue, 10 Sep 2019 13:39:29 +0900</pubDate>
       <guid>https://nametake.dev/posts/2019/09/10/go-reflect-create-instance/</guid>
-      <description>構造体の変数にreflectでインスタンスを詰める方法メモ。 package main import ( &amp;#34;fmt&amp;#34; &amp;#34;reflect&amp;#34; ) func main() { var foo *Foo fmt.Println(foo) // nil fmt.Println(&amp;#34;------------&amp;#34;) // nilにアクセスしようとするのでエラー // foo.msg =</description>
+      <description>&lt;p&gt;構造体の変数にreflectでインスタンスを詰める方法メモ。&lt;/p&gt;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-go&#34; data-lang=&#34;go&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;package&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;main&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; (&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&#x9;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;fmt&amp;#34;&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&#x9;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;reflect&amp;#34;&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;)&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;func&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;main&lt;/span&gt;() {&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&#x9;&lt;span style=&#34;color:#66d9ef&#34;&gt;var&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;foo&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;Foo&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&#x9;&lt;span style=&#34;color:#a6e22e&#34;&gt;fmt&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;Println&lt;/span&gt;(&lt;span style=&#34;color:#a6e22e&#34;&gt;foo&lt;/span&gt;) &lt;span style=&#34;color:#75715e&#34;&gt;// nil&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&#x9;&lt;span style=&#34;color:#a6e22e&#34;&gt;fmt&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;Println&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;------------&amp;#34;&lt;/span&gt;)&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&#x9;&lt;span style=&#34;color:#75715e&#34;&gt;// nilにアクセスしようとするのでエラー&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&#x9;&lt;span style=&#34;color:#75715e&#34;&gt;// foo.msg = &amp;#34;Hello&amp;#34;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&#x9;&lt;span style=&#34;color:#75715e&#34;&gt;// fooの型を取得&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&#x9;&lt;span style=&#34;color:#a6e22e&#34;&gt;typ&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;:=&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;reflect&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;TypeOf&lt;/span&gt;(&lt;span style=&#34;color:#a6e22e&#34;&gt;foo&lt;/span&gt;).&lt;span style=&#34;color:#a6e22e&#34;&gt;Elem&lt;/span&gt;()&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&#x9;&lt;span style=&#34;color:#75715e&#34;&gt;// fooの型の実体を生成&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&#x9;&lt;span style=&#34;color:#a6e22e&#34;&gt;dst&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;:=&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;reflect&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;New&lt;/span&gt;(&lt;span style=&#34;color:#a6e22e&#34;&gt;typ&lt;/span&gt;).&lt;span style=&#34;color:#a6e22e&#34;&gt;Interface&lt;/span&gt;()&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&#x9;&lt;span style=&#34;color:#75715e&#34;&gt;// foo変数への参照を取得&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&#x9;&lt;span style=&#34;color:#a6e22e&#34;&gt;src&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;:=&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;reflect&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;ValueOf&lt;/span&gt;(&lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;foo&lt;/span&gt;).&lt;span style=&#34;color:#a6e22e&#34;&gt;Elem&lt;/span&gt;()&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&#x9;&lt;span style=&#34;color:#a6e22e&#34;&gt;fmt&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;Println&lt;/span&gt;(&lt;span style=&#34;color:#a6e22e&#34;&gt;typ&lt;/span&gt;) &lt;span style=&#34;color:#75715e&#34;&gt;// main.Foo&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&#x9;&lt;span style=&#34;color:#a6e22e&#34;&gt;fmt&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;Println&lt;/span&gt;(&lt;span style=&#34;color:#a6e22e&#34;&gt;src&lt;/span&gt;) &lt;span style=&#34;color:#75715e&#34;&gt;// nil&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&#x9;&lt;span style=&#34;color:#a6e22e&#34;&gt;fmt&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;Println&lt;/span&gt;(&lt;span style=&#34;color:#a6e22e&#34;&gt;dst&lt;/span&gt;) &lt;span style=&#34;color:#75715e&#34;&gt;// &amp;amp;{}&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&#x9;&lt;span style=&#34;color:#a6e22e&#34;&gt;fmt&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;Println&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;------------&amp;#34;&lt;/span&gt;)&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&#x9;&lt;span style=&#34;color:#75715e&#34;&gt;// foo変数の参照に実体化したfooの型のを設定&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&#x9;&lt;span style=&#34;color:#a6e22e&#34;&gt;src&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;Set&lt;/span&gt;(&lt;span style=&#34;color:#a6e22e&#34;&gt;reflect&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;ValueOf&lt;/span&gt;(&lt;span style=&#34;color:#a6e22e&#34;&gt;dst&lt;/span&gt;))&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&#x9;&lt;span style=&#34;color:#a6e22e&#34;&gt;fmt&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;Println&lt;/span&gt;(&lt;span style=&#34;color:#a6e22e&#34;&gt;typ&lt;/span&gt;) &lt;span style=&#34;color:#75715e&#34;&gt;// main.Foo&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&#x9;&lt;span style=&#34;color:#a6e22e&#34;&gt;fmt&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;Println&lt;/span&gt;(&lt;span style=&#34;color:#a6e22e&#34;&gt;src&lt;/span&gt;) &lt;span style=&#34;color:#75715e&#34;&gt;// &amp;amp;{}&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&#x9;&lt;span style=&#34;color:#a6e22e&#34;&gt;fmt&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;Println&lt;/span&gt;(&lt;span style=&#34;color:#a6e22e&#34;&gt;dst&lt;/span&gt;) &lt;span style=&#34;color:#75715e&#34;&gt;// &amp;amp;{}&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&#x9;&lt;span style=&#34;color:#a6e22e&#34;&gt;fmt&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;Println&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;------------&amp;#34;&lt;/span&gt;)&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&#x9;&lt;span style=&#34;color:#75715e&#34;&gt;// 生成した変数はすべて同じ構造体を参照している&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&#x9;&lt;span style=&#34;color:#a6e22e&#34;&gt;foo&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;msg&lt;/span&gt; = &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Hello&amp;#34;&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&#x9;&lt;span style=&#34;color:#a6e22e&#34;&gt;fmt&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;Println&lt;/span&gt;(&lt;span style=&#34;color:#a6e22e&#34;&gt;src&lt;/span&gt;) &lt;span style=&#34;color:#75715e&#34;&gt;// &amp;amp;{Hello}&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&#x9;&lt;span style=&#34;color:#a6e22e&#34;&gt;fmt&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;Println&lt;/span&gt;(&lt;span style=&#34;color:#a6e22e&#34;&gt;dst&lt;/span&gt;) &lt;span style=&#34;color:#75715e&#34;&gt;// &amp;amp;{Hello}&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&#x9;&lt;span style=&#34;color:#a6e22e&#34;&gt;fmt&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;Println&lt;/span&gt;(&lt;span style=&#34;color:#a6e22e&#34;&gt;foo&lt;/span&gt;) &lt;span style=&#34;color:#75715e&#34;&gt;// &amp;amp;{Hello}&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;type&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Foo&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;struct&lt;/span&gt; {&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&#x9;&lt;span style=&#34;color:#a6e22e&#34;&gt;msg&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;string&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;上記ではわかりやすく分割しているが、以下のように一行で書くことも可能。&lt;/p&gt;</description>
     </item>
     <item>
       <title>protoc-gen-gohttpをHttpRule Optionに対応させた</title>
       <link>https://nametake.dev/posts/2019/08/30/protoc-gen-gohttp-httprule/</link>
       <pubDate>Fri, 30 Aug 2019 01:52:26 +0900</pubDate>
       <guid>https://nametake.dev/posts/2019/08/30/protoc-gen-gohttp-httprule/</guid>
-      <description>以前、Protocol Buffersのserviceの定義を利用してGoのnet/httpで利用できるようにするためのprotoc-gen-</description>
+      <description>&lt;p&gt;以前、Protocol Buffersのserviceの定義を利用してGoの&lt;code&gt;net/http&lt;/code&gt;で利用できるようにするための&lt;a href=&#34;https://github.com/nametake/protoc-gen-gohttp&#34;  class=&#34;external-link&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;protoc-gen-gohttp&lt;/a&gt;というprotocのプラグインを&lt;a href=&#34;../posts/2018/11/21/protoc-gen-gohttp/&#34; &gt;作成した&lt;/a&gt;。&lt;/p&gt;&#xA;&lt;p&gt;しかし、protoc-gen-gohttpではURLのパス部分の定義はProtocol Buffersの定義には記述できないため、クライアント側がProtocol Buffersを見ただけでパスを読み取ることができない。&#xA;また、生成されたコードはHTTPのBodyしか参照しないため、情報を取得するだけのときもHTTPのメソッドをPOSTにする必要もあった。&lt;/p&gt;</description>
     </item>
     <item>
       <title>Protocol Buffersを使ったAPIでのNullの設計</title>
       <link>https://nametake.dev/posts/2019/08/17/protobuf-null-api/</link>
       <pubDate>Sat, 17 Aug 2019 10:44:03 +0900</pubDate>
       <guid>https://nametake.dev/posts/2019/08/17/protobuf-null-api/</guid>
-      <description>Protocol BuffersのNullの取り扱いの問題 Link to heading Protocol Buffersのproto3の仕様ではmessageの中の値をOptionalで表現する記</description>
+      <description>&lt;h2 id=&#34;protocol-buffersのnullの取り扱いの問題&#34;&gt;&#xA;  Protocol BuffersのNullの取り扱いの問題&#xA;  &lt;a class=&#34;heading-link&#34; href=&#34;#protocol-buffers%e3%81%aenull%e3%81%ae%e5%8f%96%e3%82%8a%e6%89%b1%e3%81%84%e3%81%ae%e5%95%8f%e9%a1%8c&#34;&gt;&#xA;    &lt;i class=&#34;fa-solid fa-link&#34; aria-hidden=&#34;true&#34; title=&#34;Link to heading&#34;&gt;&lt;/i&gt;&#xA;    &lt;span class=&#34;sr-only&#34;&gt;Link to heading&lt;/span&gt;&#xA;  &lt;/a&gt;&#xA;&lt;/h2&gt;&#xA;&lt;p&gt;Protocol Buffersのproto3の仕様ではmessageの中の値をOptionalで表現する記法がない。&#xA;値を詰めずに送ると入れ子の値が&lt;a href=&#34;https://developers.google.com/protocol-buffers/docs/proto3#default&#34;  class=&#34;external-link&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;デフォルト値&lt;/a&gt;になってしまう。&lt;/p&gt;</description>
     </item>
     <item>
       <title>Goの戻り値をいい感じに補完してくれるvim-snippetsを作った</title>
       <link>https://nametake.dev/posts/2019/07/29/vim-goiferr-snippets/</link>
       <pubDate>Mon, 29 Jul 2019 22:57:06 +0900</pubDate>
       <guid>https://nametake.dev/posts/2019/07/29/vim-goiferr-snippets/</guid>
-      <description>最近Vimの設定を整理してcoc.nvimに乗り換えるにあたり、snippetのプラグインもneosnippetからcoc-neosnipp</description>
+      <description>&lt;p&gt;最近Vimの設定を整理してcoc.nvimに乗り換えるにあたり、snippetのプラグインもneosnippetからcoc-neosnippetに乗り換え、snippet集もvim-snippetsに変更した。&lt;/p&gt;</description>
     </item>
     <item>
       <title>Vimのプラグインを整理した(あとcoc.nvimの紹介)</title>
       <link>https://nametake.dev/posts/2019/07/25/change-vim-plugins/</link>
       <pubDate>Thu, 25 Jul 2019 00:51:43 +0900</pubDate>
       <guid>https://nametake.dev/posts/2019/07/25/change-vim-plugins/</guid>
-      <description>ちまちまとdotfilesを育ててきたが、Goの補完が動かなくなっていたり中途半端にLSP対応しようとした痕跡だけ残っていたりしたので、断捨</description>
+      <description>&lt;p&gt;ちまちまと&lt;a href=&#34;https://github.com/nametake/dotfiles&#34;  class=&#34;external-link&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;dotfiles&lt;/a&gt;を育ててきたが、Goの補完が動かなくなっていたり中途半端にLSP対応しようとした痕跡だけ残っていたりしたので、断捨離も兼ねてガッツリプラグインを整理した。&lt;/p&gt;&#xA;&lt;p&gt;プラグインの構成は&lt;a href=&#34;https://github.com/nametake/dotfiles/blob/master/vim/rc/plug.rc.vim&#34;  class=&#34;external-link&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;dotfiles/vim/rc/plug.rc.vim&lt;/a&gt;に全部寄せている。&lt;/p&gt;&#xA;&lt;p&gt;あんまり凝った構成にしてもメンテナンスが大変なので、以下の基準でプラグインを選んだ。&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;githubのStar数が多くてAPIが安定してそう&lt;/li&gt;&#xA;&lt;li&gt;少ない設定でも動く&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;整理しているときに、&lt;a href=&#34;https://github.com/neoclide/coc.nvim&#34;  class=&#34;external-link&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;coc.nvim&lt;/a&gt;という良さげな補完プラグインを見つけたので軽く紹介してみる。&lt;/p&gt;</description>
     </item>
     <item>
       <title>zshのPATHの順番をfish shellに引き継ぐ</title>
       <link>https://nametake.dev/posts/2019/07/22/pass-zsh-path-to-fish/</link>
       <pubDate>Mon, 22 Jul 2019 01:34:18 +0900</pubDate>
       <guid>https://nametake.dev/posts/2019/07/22/pass-zsh-path-to-fish/</guid>
-      <description>自分はメインのターミナル環境をfishにしている。 特に設定を細かくしなくてもサクサク動いてくれるので非常に助かっているが、POSIX準拠では</description>
+      <description>&lt;p&gt;自分はメインのターミナル環境をfishにしている。&lt;/p&gt;&#xA;&lt;p&gt;特に設定を細かくしなくてもサクサク動いてくれるので非常に助かっているが、POSIX準拠ではないためデフォルトシェルにするのは避けて、以下のような形で利用している。&lt;/p&gt;</description>
     </item>
     <item>
       <title>FormikとYupを使った動的フォームのバリデーション</title>
       <link>https://nametake.dev/posts/2019/06/05/formik-yup-dynamic-validation/</link>
       <pubDate>Wed, 05 Jun 2019 23:50:36 +0900</pubDate>
       <guid>https://nametake.dev/posts/2019/06/05/formik-yup-dynamic-validation/</guid>
-      <description>Formikで動的なFormを作った時に、表示されるFormに応じてYupのバリデーションを切り替える方法でちょっと手間取ったのでメモ。 結論</description>
+      <description>&lt;p&gt;Formikで動的なFormを作った時に、表示されるFormに応じてYupのバリデーションを切り替える方法でちょっと手間取ったのでメモ。&lt;/p&gt;&#xA;&lt;p&gt;結論から言うと&lt;code&gt;Yup.lazy()&lt;/code&gt;を使って遅延評価されるValidationSchemaを使えば解決した。&lt;code&gt;Yup.lazy()&lt;/code&gt;に渡ってくるFormの値を元にValidationwSchemaを表示されるFormに対応したValidationSchemaを返せば狙った挙動が実現できた。&lt;/p&gt;</description>
     </item>
     <item>
       <title>インライン要素の高さを合わせるCSS定義</title>
       <link>https://nametake.dev/posts/2019/05/29/inline-center/</link>
       <pubDate>Wed, 29 May 2019 15:47:35 +0900</pubDate>
       <guid>https://nametake.dev/posts/2019/05/29/inline-center/</guid>
-      <description>ラジオボタンとラベルの高さを合わせるCSS定義を何回も調べている気がするのでメモ。 たぶん下の書き方が一番モダンだと思われる。 display: inline-flex; align-items: center;</description>
+      <description>&lt;p&gt;ラジオボタンとラベルの高さを合わせるCSS定義を何回も調べている気がするのでメモ。&lt;/p&gt;&#xA;&lt;p&gt;たぶん下の書き方が一番モダンだと思われる。&lt;/p&gt;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-css&#34; data-lang=&#34;css&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#f92672&#34;&gt;display&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;inline-flex&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;;&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#f92672&#34;&gt;align-items&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;center&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;;&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
     </item>
     <item>
       <title>Type SafeなReducerの書き方</title>
       <link>https://nametake.dev/posts/2019/05/18/type-safe-reducer/</link>
       <pubDate>Sat, 18 May 2019 10:38:55 +0900</pubDate>
       <guid>https://nametake.dev/posts/2019/05/18/type-safe-reducer/</guid>
-      <description>以前書いた記事で書いたReducerでは、受け取ったActionの型を判別するために、switchで分岐した後に対応したActionの型でキ</description>
+      <description>&lt;p&gt;&lt;a href=&#34;../posts/2018/12/05/typescript-react-redux-tutorial/&#34; &gt;以前書いた記事&lt;/a&gt;で書いたReducerでは、受け取ったActionの型を判別するために、&lt;code&gt;switch&lt;/code&gt;で分岐した後に対応したActionの型でキャストをする必要があった。&lt;/p&gt;</description>
     </item>
     <item>
       <title>IntelliJのPopupの候補を展開するKeymap</title>
       <link>https://nametake.dev/posts/2019/01/20/intellij-popup-expand/</link>
       <pubDate>Sun, 20 Jan 2019 21:05:06 +0900</pubDate>
       <guid>https://nametake.dev/posts/2019/01/20/intellij-popup-expand/</guid>
-      <description>自分は普段Vimでの補完候補を&amp;lt;C-k&amp;gt;で展開しているがIntelliJでの補完候補も同じコマンドで展開したかったのでメモ。 結論</description>
+      <description>&lt;p&gt;自分は普段Vimでの補完候補を&lt;code&gt;&amp;lt;C-k&amp;gt;&lt;/code&gt;で展開しているがIntelliJでの補完候補も同じコマンドで展開したかったのでメモ。&lt;/p&gt;&#xA;&lt;p&gt;結論だけいうと、Editor Actions -&amp;gt; Choose Lookup ItemにKeymapを設定すればできた。&lt;/p&gt;</description>
     </item>
     <item>
       <title>labelerrとsuberrを作った話をLTしてきた</title>
       <link>https://nametake.dev/posts/2018/12/19/created-labelerr-and-suberr/</link>
       <pubDate>Wed, 19 Dec 2018 11:37:17 +0900</pubDate>
       <guid>https://nametake.dev/posts/2018/12/19/created-labelerr-and-suberr/</guid>
-      <description>golang.tokyo #20のLT大会で、labelerrとsuberrを作った話をしてきた。 「Goのerrorは1種類というのは綺麗だとは思うけど、実運用上e</description>
+      <description>&lt;p&gt;&lt;a href=&#34;https://golangtokyo.connpass.com/event/111077/&#34;  class=&#34;external-link&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;golang.tokyo #20&lt;/a&gt;のLT大会で、&lt;a href=&#34;https://github.com/nametake/labelerr&#34;  class=&#34;external-link&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;labelerr&lt;/a&gt;と&lt;a href=&#34;https://github.com/nametake/suberr&#34;  class=&#34;external-link&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;suberr&lt;/a&gt;を作った話をしてきた。&lt;/p&gt;&#xA;&lt;script async class=&#34;speakerdeck-embed&#34; data-id=&#34;602fca666f904e18a307698694e248da&#34; data-ratio=&#34;1.33333333333333&#34; src=&#34;//speakerdeck.com/assets/embed.js&#34;&gt;&lt;/script&gt;&#xA;&lt;!-- textlint-disable ja-technical-writing/ja-no-weak-phrase --&gt;&#xA;&lt;p&gt;「Goのerrorは1種類というのは綺麗だとは思うけど、実運用上errorに重み付けをしたいよね」ってところからこのライブラリの出発点。&lt;/p&gt;</description>
     </item>
     <item>
       <title>Goでのprotocプラグインのテストの書き方</title>
       <link>https://nametake.dev/posts/2018/12/14/protoc-plugin-test/</link>
       <pubDate>Fri, 14 Dec 2018 00:00:00 +0900</pubDate>
       <guid>https://nametake.dev/posts/2018/12/14/protoc-plugin-test/</guid>
-      <description>最近周りでProtocol Buffersの話題をよく聞くようになった。 ということは、そろそろ人類はprotocのプラグインを書きたくなる時代</description>
+      <description>&lt;p&gt;最近周りでProtocol Buffersの話題をよく聞くようになった。&lt;/p&gt;&#xA;&lt;p&gt;ということは、そろそろ人類はprotocのプラグインを書きたくなる時代がやってくるはず。&lt;/p&gt;</description>
     </item>
     <item>
       <title>TypeScript&#43;React&#43;Reduxチュートリアル</title>
       <link>https://nametake.dev/posts/2018/12/05/typescript-react-redux-tutorial/</link>
       <pubDate>Wed, 05 Dec 2018 11:08:00 +0900</pubDate>
       <guid>https://nametake.dev/posts/2018/12/05/typescript-react-redux-tutorial/</guid>
-      <description>普段は Go でサーバサイドのコードを書いているが、TypeScript+React+Redux を勉強する機会があった。 その際、巷のチュートリアル</description>
+      <description>&lt;p&gt;普段は Go でサーバサイドのコードを書いているが、TypeScript+React+Redux を勉強する機会があった。&lt;/p&gt;&#xA;&lt;p&gt;その際、巷のチュートリアルやサンプルコードは型で縛っているものが少なく、理解にかなり苦労したので自分なりの Todo アプリケーションを作るチュートリアルを書いておく。&lt;/p&gt;</description>
     </item>
     <item>
       <title>VimConf2018感想</title>
       <link>https://nametake.dev/posts/2018/11/24/vimconf2018/</link>
       <pubDate>Sat, 24 Nov 2018 10:15:34 +0900</pubDate>
       <guid>https://nametake.dev/posts/2018/11/24/vimconf2018/</guid>
-      <description>11月24日にあったVimConf2018へ行ったので参加ブログ。 Keynote - What is the next feature?(o) Link to heading スライド mattnさんの発表。 Keynote - Vim: From hjkl to a platform for plugins Link to</description>
+      <description>&lt;p&gt;11月24日にあった&lt;a href=&#34;https://vimconf.org/2018/&#34;  class=&#34;external-link&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;VimConf2018&lt;/a&gt;へ行ったので参加ブログ。&lt;/p&gt;&#xA;&lt;!-- textlint-disable ja-technical-writing/no-exclamation-question-mark --&gt;&#xA;&lt;h3 id=&#34;keynote---what-is-the-next-featureo&#34;&gt;&#xA;  Keynote - What is the next feature?(o)&#xA;  &lt;a class=&#34;heading-link&#34; href=&#34;#keynote---what-is-the-next-featureo&#34;&gt;&#xA;    &lt;i class=&#34;fa-solid fa-link&#34; aria-hidden=&#34;true&#34; title=&#34;Link to heading&#34;&gt;&lt;/i&gt;&#xA;    &lt;span class=&#34;sr-only&#34;&gt;Link to heading&lt;/span&gt;&#xA;  &lt;/a&gt;&#xA;&lt;/h3&gt;&#xA;&lt;!-- textlint-enable --&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://docs.google.com/presentation/d/e/2PACX-1vTj2uCbuCffhaLVBZE6biI538GG6jMi1INbku-T9q5hu5W0zGLwuibN3m5xbEuqdUFTDnhdhtikPyTi/pub?start=false%5c&amp;amp;loop=false%5c&amp;amp;delayms=3000%5c&amp;amp;slide=id.p&#34;  class=&#34;external-link&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;スライド&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;mattnさんの発表。&lt;/p&gt;&#xA;&lt;h3 id=&#34;keynote---vim-from-hjkl-to-a-platform-for-plugins&#34;&gt;&#xA;  Keynote - Vim: From hjkl to a platform for plugins&#xA;  &lt;a class=&#34;heading-link&#34; href=&#34;#keynote---vim-from-hjkl-to-a-platform-for-plugins&#34;&gt;&#xA;    &lt;i class=&#34;fa-solid fa-link&#34; aria-hidden=&#34;true&#34; title=&#34;Link to heading&#34;&gt;&lt;/i&gt;&#xA;    &lt;span class=&#34;sr-only&#34;&gt;Link to heading&lt;/span&gt;&#xA;  &lt;/a&gt;&#xA;&lt;/h3&gt;&#xA;&lt;p&gt;楽しみにしていたBram氏の発表。&lt;/p&gt;</description>
     </item>
     <item>
       <title>Protocol Buffersのserviceをnet/httpに対応させるprotoc-gen-gohttpを作った</title>
       <link>https://nametake.dev/posts/2018/11/21/protoc-gen-gohttp/</link>
       <pubDate>Wed, 21 Nov 2018 16:32:07 +0900</pubDate>
       <guid>https://nametake.dev/posts/2018/11/21/protoc-gen-gohttp/</guid>
-      <description>nametake/protoc-gen-gohttpというprotocのプラグインを作ったのでその話。 Protocol Buffersとは Link to heading Protocol Buffe</description>
+      <description>&lt;p&gt;&lt;a href=&#34;https://github.com/nametake/protoc-gen-gohttp&#34;  class=&#34;external-link&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;nametake/protoc-gen-gohttp&lt;/a&gt;という&lt;code&gt;protoc&lt;/code&gt;のプラグインを作ったのでその話。&lt;/p&gt;&#xA;&lt;h2 id=&#34;protocol-buffersとは&#34;&gt;&#xA;  Protocol Buffersとは&#xA;  &lt;a class=&#34;heading-link&#34; href=&#34;#protocol-buffers%e3%81%a8%e3%81%af&#34;&gt;&#xA;    &lt;i class=&#34;fa-solid fa-link&#34; aria-hidden=&#34;true&#34; title=&#34;Link to heading&#34;&gt;&lt;/i&gt;&#xA;    &lt;span class=&#34;sr-only&#34;&gt;Link to heading&lt;/span&gt;&#xA;  &lt;/a&gt;&#xA;&lt;/h2&gt;&#xA;&lt;p&gt;Protocol Buffersはインターフェース定義言語の1つでGoogleによって開発されている(ざっくりいうと、JSONやXMLの仲間)。以下のように、構造を表す&lt;code&gt;message&lt;/code&gt;とその&lt;code&gt;message&lt;/code&gt;を使ったRPCのインターフェースの&lt;code&gt;service&lt;/code&gt;というものを定義できる。&lt;/p&gt;</description>
     </item>
     <item>
       <title>GCPの認証済みのhttp.Clientの取得方法</title>
       <link>https://nametake.dev/posts/2018/11/09/auth-gcp-client/</link>
       <pubDate>Fri, 09 Nov 2018 11:15:24 +0900</pubDate>
       <guid>https://nametake.dev/posts/2018/11/09/auth-gcp-client/</guid>
-      <description>GCPの認証済みのhttp.Clientが欲しいときにちょっとだけ調べたのでメモ。 結論だけ言うと、golang.org/x/oauth2/g</description>
+      <description>&lt;p&gt;GCPの認証済みのhttp.Clientが欲しいときにちょっとだけ調べたのでメモ。&lt;/p&gt;&#xA;&lt;p&gt;結論だけ言うと、&lt;a href=&#34;https://godoc.org/golang.org/x/oauth2/google#DefaultClient&#34;  class=&#34;external-link&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;golang.org/x/oauth2/googleのDefaultClient&lt;/a&gt;を使えばよかった。&lt;/p&gt;&#xA;&lt;p&gt;今回はDataflowのAPIを叩きたかったので以下のようにすればできた。&lt;/p&gt;</description>
     </item>
     <item>
       <title>neoformatでshfmtを使うときにインデントをタブ文字にしたい時の設定</title>
       <link>https://nametake.dev/posts/2018/10/10/vim-shfmt-neoformat-indent/</link>
       <pubDate>Wed, 10 Oct 2018 11:44:32 +0900</pubDate>
       <guid>https://nametake.dev/posts/2018/10/10/vim-shfmt-neoformat-indent/</guid>
-      <description>neoformatで使うshfmtはデフォルトだとインデントがスペースだが、チームのコーディング規約に合わせてタブ文字へ変更したかったときに</description>
+      <description>&lt;p&gt;&lt;a href=&#34;https://github.com/sbdchd/neoformat&#34;  class=&#34;external-link&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&lt;code&gt;neoformat&lt;/code&gt;&lt;/a&gt;で使う&lt;a href=&#34;https://github.com/mvdan/sh&#34;  class=&#34;external-link&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&lt;code&gt;shfmt&lt;/code&gt;&lt;/a&gt;はデフォルトだとインデントがスペースだが、チームのコーディング規約に合わせてタブ文字へ変更したかったときにちょっと引っかかったのでメモ。&lt;/p&gt;&#xA;&lt;p&gt;まずは、&lt;code&gt;shfmt&lt;/code&gt; のヘルプと&lt;code&gt;neoformat&lt;/code&gt;の&lt;code&gt;shfmt&lt;/code&gt;の定義を見てみる。&lt;/p&gt;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-console&#34; data-lang=&#34;console&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  -i uint   indent: 0 for tabs (default), &amp;gt;0 for number of spaces&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-vim&#34; data-lang=&#34;vim&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;function&lt;/span&gt;! &lt;span style=&#34;color:#a6e22e&#34;&gt;neoformat&lt;/span&gt;#&lt;span style=&#34;color:#a6e22e&#34;&gt;formatters&lt;/span&gt;#&lt;span style=&#34;color:#a6e22e&#34;&gt;sh&lt;/span&gt;#&lt;span style=&#34;color:#a6e22e&#34;&gt;shfmt&lt;/span&gt;() &lt;span style=&#34;color:#a6e22e&#34;&gt;abort&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#a6e22e&#34;&gt;return&lt;/span&gt; {&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            \ &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;exe&amp;#39;&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;shfmt&amp;#39;&lt;/span&gt;,&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            \ &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;args&amp;#39;&lt;/span&gt;: [&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;-i &amp;#39;&lt;/span&gt; . &lt;span style=&#34;color:#a6e22e&#34;&gt;shiftwidth&lt;/span&gt;()],&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            \ &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;stdin&amp;#39;&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;,&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            \ }&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;endfunction&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;code&gt;shfmt&lt;/code&gt;のヘルプから、インデントをタブにしたければ&lt;code&gt;-i&lt;/code&gt;引数で0を渡せば良さそう。neoformatの定義ではインデントの値に&lt;code&gt;shiftwidth&lt;/code&gt;の値をしているようだったので、プロジェクトでのVimの設定を以下のように設定してみた(&lt;a href=&#34;https://qiita.com/unosk/items/43989b61eff48e0665f3&#34;  class=&#34;external-link&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;プロジェクト固有の設定&lt;/a&gt;ができるようにしている)。&lt;/p&gt;</description>
     </item>
     <item>
       <title>depでprivateリポジトリがupdateできなかったときの解決策</title>
       <link>https://nametake.dev/posts/2018/09/20/dep-private-repo/</link>
       <pubDate>Thu, 20 Sep 2018 18:47:46 +0900</pubDate>
       <guid>https://nametake.dev/posts/2018/09/20/dep-private-repo/</guid>
-      <description>Goをアップデートした後、dep updateをしたら以下のようなエラーが発生した。 grouped write of manifest, lock and vendor: error while writing out vendor tree: failed to write dep tree: failed to export github.com/nametake/private-repo: unable to update repository: remote: Repository not</description>
+      <description>&lt;p&gt;Goをアップデートした後、&lt;code&gt;dep update&lt;/code&gt;をしたら以下のようなエラーが発生した。&lt;/p&gt;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-console&#34; data-lang=&#34;console&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;grouped write of manifest, lock and vendor: error while writing out vendor tree: failed to write dep tree: failed to export github.com/nametake/private-repo: unable to update repository: remote: Repository not found.&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;fatal: repository &amp;#39;https://github.com/nametake/private-repo/&amp;#39; not found&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;: command failed: [git fetch --tags --prune origin]: exit status 128&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;make: *** [dep] Error 1&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;原因はprivateリポジトリをhttps経由でcloneしようとしたことだった。&lt;/p&gt;</description>
     </item>
     <item>
       <title>hugo&#43;github pagesにブログを移転したメモ</title>
       <link>https://nametake.dev/posts/2018/09/15/hugo-github-pages/</link>
       <pubDate>Sat, 15 Sep 2018 12:20:26 +0900</pubDate>
       <guid>https://nametake.dev/posts/2018/09/15/hugo-github-pages/</guid>
-      <description>大して書いていなかったブログをgithub pages+hugoの組み合わせに移行したのでそのメモ。 とは言うものの、ほとんどHugoの入門用ペ</description>
+      <description>&lt;p&gt;大して書いていなかったブログをgithub pages+hugoの組み合わせに移行したのでそのメモ。&lt;/p&gt;&#xA;&lt;p&gt;とは言うものの、ほとんど&lt;a href=&#34;https://gohugo.io/categories/getting-started&#34;  class=&#34;external-link&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Hugoの入門用ページ&lt;/a&gt;の内容をそのままやっただけなのでその辺は割愛。&lt;/p&gt;&#xA;&lt;p&gt;最終的なディレクトリ構成は以下。&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>

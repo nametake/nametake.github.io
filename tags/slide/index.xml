@@ -13,7 +13,7 @@
       <link>https://nametake.dev/posts/2018/12/19/created-labelerr-and-suberr/</link>
       <pubDate>Wed, 19 Dec 2018 11:37:17 +0900</pubDate>
       <guid>https://nametake.dev/posts/2018/12/19/created-labelerr-and-suberr/</guid>
-      <description>golang.tokyo #20のLT大会で、labelerrとsuberrを作った話をしてきた。 「Goのerrorは1種類というのは綺麗だとは思うけど、実運用上e</description>
+      <description>&lt;p&gt;&lt;a href=&#34;https://golangtokyo.connpass.com/event/111077/&#34;  class=&#34;external-link&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;golang.tokyo #20&lt;/a&gt;のLT大会で、&lt;a href=&#34;https://github.com/nametake/labelerr&#34;  class=&#34;external-link&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;labelerr&lt;/a&gt;と&lt;a href=&#34;https://github.com/nametake/suberr&#34;  class=&#34;external-link&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;suberr&lt;/a&gt;を作った話をしてきた。&lt;/p&gt;&#xA;&lt;script async class=&#34;speakerdeck-embed&#34; data-id=&#34;602fca666f904e18a307698694e248da&#34; data-ratio=&#34;1.33333333333333&#34; src=&#34;//speakerdeck.com/assets/embed.js&#34;&gt;&lt;/script&gt;&#xA;&lt;!-- textlint-disable ja-technical-writing/ja-no-weak-phrase --&gt;&#xA;&lt;p&gt;「Goのerrorは1種類というのは綺麗だとは思うけど、実運用上errorに重み付けをしたいよね」ってところからこのライブラリの出発点。&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>

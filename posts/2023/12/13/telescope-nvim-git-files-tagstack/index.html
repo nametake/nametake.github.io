@@ -13,18 +13,41 @@
 
 
 <meta name="author" content="nametake">
-<meta name="description" content="telescope.nvimのgit_filesやlive_grepでのファイル移動でもTagstackに積みたかった。 結論からいうと以下の">
+<meta name="description" content="telescope.nvimのgit_filesやlive_grepでのファイル移動でもTagstackに積みたかった。
+結論からいうと以下の設定でいけた。
+require(&#39;telescope&#39;).setup {
+  defaults = {
+    -- ...
+  },
+  pickers = {
+    git_files = {
+      push_tagstack_on_edit = true,
+    },
+  },
+  extensions = {
+    live_grep_args = {
+      -- ...
+      push_tagstack_on_edit = true,
+    },
+  },
+}
+git_filesはpickersごとにpush_tagstack_on_editをtrueにするだけで動いた。">
 <meta name="keywords" content="blog,developer,personal">
+
 
 
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="telescope.nvimのgit_filesやlive_grepでもtagstackに積みたい">
-  <meta name="twitter:description" content="telescope.nvimのgit_filesやlive_grepでのファイル移動でもTagstackに積みたかった。 結論からいうと以下の">
+  <meta name="twitter:description" content="telescope.nvimのgit_filesやlive_grepでのファイル移動でもTagstackに積みたかった。
+結論からいうと以下の設定でいけた。
+require(&#39;telescope&#39;).setup { defaults = { -- ... }, pickers = { git_files = { push_tagstack_on_edit = true, }, }, extensions = { live_grep_args = { -- ... push_tagstack_on_edit = true, }, }, } git_filesはpickersごとにpush_tagstack_on_editをtrueにするだけで動いた。">
 
 <meta property="og:url" content="https://nametake.dev/posts/2023/12/13/telescope-nvim-git-files-tagstack/">
   <meta property="og:site_name" content="nametake.dev">
   <meta property="og:title" content="telescope.nvimのgit_filesやlive_grepでもtagstackに積みたい">
-  <meta property="og:description" content="telescope.nvimのgit_filesやlive_grepでのファイル移動でもTagstackに積みたかった。 結論からいうと以下の">
+  <meta property="og:description" content="telescope.nvimのgit_filesやlive_grepでのファイル移動でもTagstackに積みたかった。
+結論からいうと以下の設定でいけた。
+require(&#39;telescope&#39;).setup { defaults = { -- ... }, pickers = { git_files = { push_tagstack_on_edit = true, }, }, extensions = { live_grep_args = { -- ... push_tagstack_on_edit = true, }, }, } git_filesはpickersごとにpush_tagstack_on_editをtrueにするだけで動いた。">
   <meta property="og:locale" content="ja">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
@@ -46,7 +69,7 @@
 
   
   
-  <link rel="stylesheet" href="../../../../../css/coder.min.38c4552ac40f9ae3408bad40358f654ebd8804412fe74ed56f2d6c8a7af82dd3.css" integrity="sha256-OMRVKsQPmuNAi61ANY9lTr2IBEEv507Vby1sinr4LdM=" crossorigin="anonymous" media="screen" />
+  <link rel="stylesheet" href="../../../../../css/coder.min.ed30115a76cdaa62f2229e973d5b1c89b2d3dd4b1d9c07a729baad06aa3b0cbe.css" integrity="sha256-7TARWnbNqmLyIp6XPVscibLT3UsdnAenKbqtBqo7DL4=" crossorigin="anonymous" media="screen" />
 
 
 
@@ -246,7 +269,6 @@
         
         
         
-
         
         
       </footer>
@@ -285,8 +307,6 @@
 
 
   
-  
-    
       <script async src="https://www.googletagmanager.com/gtag/js?id=G-ML7TD1LERR"></script>
       <script>
         var doNotTrack = false;
@@ -301,10 +321,8 @@
           gtag('config', 'G-ML7TD1LERR');
         }
       </script>
-    
+
   
-
-
 
   
 

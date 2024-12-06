@@ -13,7 +13,7 @@
       <link>https://nametake.dev/posts/2020/06/28/combination-test-pict-and-orthogonal-array/</link>
       <pubDate>Sun, 28 Jun 2020 00:00:00 +0900</pubDate>
       <guid>https://nametake.dev/posts/2020/06/28/combination-test-pict-and-orthogonal-array/</guid>
-      <description>テストの組み合わせについてある程度知見が溜まったのでメモ。 結合テストの組み合わせ問題 Link to heading システムのリリース前には開発した機能や既存の機能を</description>
+      <description>&lt;p&gt;テストの組み合わせについてある程度知見が溜まったのでメモ。&lt;/p&gt;&#xA;&lt;h2 id=&#34;結合テストの組み合わせ問題&#34;&gt;&#xA;  結合テストの組み合わせ問題&#xA;  &lt;a class=&#34;heading-link&#34; href=&#34;#%e7%b5%90%e5%90%88%e3%83%86%e3%82%b9%e3%83%88%e3%81%ae%e7%b5%84%e3%81%bf%e5%90%88%e3%82%8f%e3%81%9b%e5%95%8f%e9%a1%8c&#34;&gt;&#xA;    &lt;i class=&#34;fa-solid fa-link&#34; aria-hidden=&#34;true&#34; title=&#34;Link to heading&#34;&gt;&lt;/i&gt;&#xA;    &lt;span class=&#34;sr-only&#34;&gt;Link to heading&lt;/span&gt;&#xA;  &lt;/a&gt;&#xA;&lt;/h2&gt;&#xA;&lt;p&gt;システムのリリース前には開発した機能や既存の機能を組み合わせてバグが発生していないかテストをする必要がある。&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>

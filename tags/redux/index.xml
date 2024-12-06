@@ -13,7 +13,7 @@
       <link>https://nametake.dev/posts/2018/12/05/typescript-react-redux-tutorial/</link>
       <pubDate>Wed, 05 Dec 2018 11:08:00 +0900</pubDate>
       <guid>https://nametake.dev/posts/2018/12/05/typescript-react-redux-tutorial/</guid>
-      <description>普段は Go でサーバサイドのコードを書いているが、TypeScript+React+Redux を勉強する機会があった。 その際、巷のチュートリアル</description>
+      <description>&lt;p&gt;普段は Go でサーバサイドのコードを書いているが、TypeScript+React+Redux を勉強する機会があった。&lt;/p&gt;&#xA;&lt;p&gt;その際、巷のチュートリアルやサンプルコードは型で縛っているものが少なく、理解にかなり苦労したので自分なりの Todo アプリケーションを作るチュートリアルを書いておく。&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>

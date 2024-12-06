@@ -13,7 +13,7 @@
       <link>https://nametake.dev/posts/2024/07/21/go-zetasqlfmt-action/</link>
       <pubDate>Sun, 21 Jul 2024 00:00:00 +0900</pubDate>
       <guid>https://nametake.dev/posts/2024/07/21/go-zetasqlfmt-action/</guid>
-      <description>以前、spanner.StatementのSQLの文字列をフォーマットするために、go-zetasqlfmtというCLIを作った。 便利に使え</description>
+      <description>&lt;p&gt;以前、spanner.StatementのSQLの文字列をフォーマットするために、&lt;a href=&#34;https://github.com/nametake/go-zetasqlfmt&#34;  class=&#34;external-link&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;go-zetasqlfmt&lt;/a&gt;というCLIを作った。&lt;/p&gt;&#xA;&lt;p&gt;便利に使えていたが、使用している&lt;a href=&#34;https://github.com/goccy/go-zetasql&#34;  class=&#34;external-link&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;go-zetasql&lt;/a&gt;がCGOでzetasqlをBindingしている都合上、少々ビルドに時間がかかってしまう。&lt;/p&gt;&#xA;&lt;p&gt;そのため、CI上で &lt;code&gt;go run&lt;/code&gt; を使って気軽に利用しようとするとCIの時間がかかってしまう問題があった。&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>

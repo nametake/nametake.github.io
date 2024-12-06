@@ -17,6 +17,7 @@
 <meta name="keywords" content="blog,developer,personal">
 
 
+
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="組み合わせテストでの直交表とPICTの利用">
   <meta name="twitter:description" content="組み合わせテストで数が指数関数的に増えてしまう問題を直交表とPICTを使って解決するメモ">
@@ -45,7 +46,7 @@
 
   
   
-  <link rel="stylesheet" href="../../../../../css/coder.min.38c4552ac40f9ae3408bad40358f654ebd8804412fe74ed56f2d6c8a7af82dd3.css" integrity="sha256-OMRVKsQPmuNAi61ANY9lTr2IBEEv507Vby1sinr4LdM=" crossorigin="anonymous" media="screen" />
+  <link rel="stylesheet" href="../../../../../css/coder.min.ed30115a76cdaa62f2229e973d5b1c89b2d3dd4b1d9c07a729baad06aa3b0cbe.css" integrity="sha256-7TARWnbNqmLyIp6XPVscibLT3UsdnAenKbqtBqo7DL4=" crossorigin="anonymous" media="screen" />
 
 
 
@@ -211,30 +212,30 @@
 <p>わかりやすいように例を挙げてみる。</p>
 <p>とあるWebシステムを作っていて、下記のような環境に対応しているかテストを行う必要がある。</p>
 <table>
-<thead>
-<tr>
-<th>因子</th>
-<th>水準1</th>
-<th>水準2</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>OS</td>
-<td>Windows</td>
-<td>macOS</td>
-</tr>
-<tr>
-<td>ブラウザ</td>
-<td>Chrome</td>
-<td>Firefox</td>
-</tr>
-<tr>
-<td>端末</td>
-<td>ラップトップ</td>
-<td>モバイル</td>
-</tr>
-</tbody>
+  <thead>
+      <tr>
+          <th>因子</th>
+          <th>水準1</th>
+          <th>水準2</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>OS</td>
+          <td>Windows</td>
+          <td>macOS</td>
+      </tr>
+      <tr>
+          <td>ブラウザ</td>
+          <td>Chrome</td>
+          <td>Firefox</td>
+      </tr>
+      <tr>
+          <td>端末</td>
+          <td>ラップトップ</td>
+          <td>モバイル</td>
+      </tr>
+  </tbody>
 </table>
 <p>3因子2通りのため、全ての組み合わせは8パターンになる。</p>
 <p>8パターンであれば全てテストするのはそこまで大変でもないが、試しに直交表へ適用してみる。</p>
@@ -243,40 +244,40 @@
 <p>今回は2^3通りのため、L4(2^3)の表が使えそう。</p>
 <p>上記のテスト項目をL4(2^3)の表に当てはめてみる。</p>
 <table>
-<thead>
-<tr>
-<th>テスト番号</th>
-<th>OS</th>
-<th>ブラウザ</th>
-<th>端末</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>1</td>
-<td>Windows</td>
-<td>Chrome</td>
-<td>ラップトップ</td>
-</tr>
-<tr>
-<td>2</td>
-<td>Windows</td>
-<td>Firefox</td>
-<td>モバイル</td>
-</tr>
-<tr>
-<td>3</td>
-<td>macOS</td>
-<td>Chrome</td>
-<td>モバイル</td>
-</tr>
-<tr>
-<td>4</td>
-<td>macOS</td>
-<td>Firefox</td>
-<td>ラップトップ</td>
-</tr>
-</tbody>
+  <thead>
+      <tr>
+          <th>テスト番号</th>
+          <th>OS</th>
+          <th>ブラウザ</th>
+          <th>端末</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>1</td>
+          <td>Windows</td>
+          <td>Chrome</td>
+          <td>ラップトップ</td>
+      </tr>
+      <tr>
+          <td>2</td>
+          <td>Windows</td>
+          <td>Firefox</td>
+          <td>モバイル</td>
+      </tr>
+      <tr>
+          <td>3</td>
+          <td>macOS</td>
+          <td>Chrome</td>
+          <td>モバイル</td>
+      </tr>
+      <tr>
+          <td>4</td>
+          <td>macOS</td>
+          <td>Firefox</td>
+          <td>ラップトップ</td>
+      </tr>
+  </tbody>
 </table>
 <p>全パターン行うと8パターンだったものが4パターンで済むようになった。</p>
 <p>2因子ごとの組み合わせも全て登場するため、バグ発見率も極端に下がらない。</p>
@@ -351,7 +352,6 @@
         
         
         
-
         
         
       </footer>
@@ -390,8 +390,6 @@
 
 
   
-  
-    
       <script async src="https://www.googletagmanager.com/gtag/js?id=G-ML7TD1LERR"></script>
       <script>
         var doNotTrack = false;
@@ -406,10 +404,8 @@
           gtag('config', 'G-ML7TD1LERR');
         }
       </script>
-    
+
   
-
-
 
   
 

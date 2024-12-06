@@ -13,7 +13,7 @@
       <link>https://nametake.dev/posts/2018/11/09/auth-gcp-client/</link>
       <pubDate>Fri, 09 Nov 2018 11:15:24 +0900</pubDate>
       <guid>https://nametake.dev/posts/2018/11/09/auth-gcp-client/</guid>
-      <description>GCPの認証済みのhttp.Clientが欲しいときにちょっとだけ調べたのでメモ。 結論だけ言うと、golang.org/x/oauth2/g</description>
+      <description>&lt;p&gt;GCPの認証済みのhttp.Clientが欲しいときにちょっとだけ調べたのでメモ。&lt;/p&gt;&#xA;&lt;p&gt;結論だけ言うと、&lt;a href=&#34;https://godoc.org/golang.org/x/oauth2/google#DefaultClient&#34;  class=&#34;external-link&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;golang.org/x/oauth2/googleのDefaultClient&lt;/a&gt;を使えばよかった。&lt;/p&gt;&#xA;&lt;p&gt;今回はDataflowのAPIを叩きたかったので以下のようにすればできた。&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>

@@ -13,18 +13,42 @@
 
 
 <meta name="author" content="nametake">
-<meta name="description" content="特定の構造体の文字列を置き換えるFormatterを作ったときにgo/packagesを使って作ってみたので備忘録。 全体の流れ Link to heading pack">
+<meta name="description" content="特定の構造体の文字列を置き換えるFormatterを作ったときにgo/packagesを使って作ってみたので備忘録。
+
+  全体の流れ
+  
+    
+    Link to heading
+  
+
+
+packages.Loadを使ってパッケージ情報を読み込む
+読み込んだpackages.Packageからast.File(Syntax)と型情報(TypesInfo)を取り出す
+ファイルごとに置き換え処理
+保存
+
+
+  packages.Loadでパッケージ情報の読み込み
+  
+    
+    Link to heading
+  
+
+packages.Load は指定したパターンからパッケージの情報を読み込める。">
 <meta name="keywords" content="blog,developer,personal">
+
 
 
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="go/packagesでformatterを作る">
-  <meta name="twitter:description" content="特定の構造体の文字列を置き換えるFormatterを作ったときにgo/packagesを使って作ってみたので備忘録。 全体の流れ Link to heading pack">
+  <meta name="twitter:description" content="特定の構造体の文字列を置き換えるFormatterを作ったときにgo/packagesを使って作ってみたので備忘録。
+全体の流れ Link to heading packages.Loadを使ってパッケージ情報を読み込む 読み込んだpackages.Packageからast.File(Syntax)と型情報(TypesInfo)を取り出す ファイルごとに置き換え処理 保存 packages.Loadでパッケージ情報の読み込み Link to heading packages.Load は指定したパターンからパッケージの情報を読み込める。">
 
 <meta property="og:url" content="https://nametake.dev/posts/2024/01/08/use-go-packages/">
   <meta property="og:site_name" content="nametake.dev">
   <meta property="og:title" content="go/packagesでformatterを作る">
-  <meta property="og:description" content="特定の構造体の文字列を置き換えるFormatterを作ったときにgo/packagesを使って作ってみたので備忘録。 全体の流れ Link to heading pack">
+  <meta property="og:description" content="特定の構造体の文字列を置き換えるFormatterを作ったときにgo/packagesを使って作ってみたので備忘録。
+全体の流れ Link to heading packages.Loadを使ってパッケージ情報を読み込む 読み込んだpackages.Packageからast.File(Syntax)と型情報(TypesInfo)を取り出す ファイルごとに置き換え処理 保存 packages.Loadでパッケージ情報の読み込み Link to heading packages.Load は指定したパターンからパッケージの情報を読み込める。">
   <meta property="og:locale" content="ja">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
@@ -45,7 +69,7 @@
 
   
   
-  <link rel="stylesheet" href="../../../../../css/coder.min.38c4552ac40f9ae3408bad40358f654ebd8804412fe74ed56f2d6c8a7af82dd3.css" integrity="sha256-OMRVKsQPmuNAi61ANY9lTr2IBEEv507Vby1sinr4LdM=" crossorigin="anonymous" media="screen" />
+  <link rel="stylesheet" href="../../../../../css/coder.min.ed30115a76cdaa62f2229e973d5b1c89b2d3dd4b1d9c07a729baad06aa3b0cbe.css" integrity="sha256-7TARWnbNqmLyIp6XPVscibLT3UsdnAenKbqtBqo7DL4=" crossorigin="anonymous" media="screen" />
 
 
 
@@ -324,7 +348,6 @@
         
         
         
-
         
         
       </footer>
@@ -363,8 +386,6 @@
 
 
   
-  
-    
       <script async src="https://www.googletagmanager.com/gtag/js?id=G-ML7TD1LERR"></script>
       <script>
         var doNotTrack = false;
@@ -379,10 +400,8 @@
           gtag('config', 'G-ML7TD1LERR');
         }
       </script>
-    
+
   
-
-
 
   
 

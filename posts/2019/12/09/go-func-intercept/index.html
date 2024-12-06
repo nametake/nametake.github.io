@@ -13,18 +13,27 @@
 
 
 <meta name="author" content="nametake">
-<meta name="description" content="この記事はGo2 Advent Calendar 2019の記事。 自分はprotoc-gen-gohttpというプラグインを作っているが、先日grpc.UnaryServ">
+<meta name="description" content="この記事はGo2 Advent Calendar 2019の記事。
+自分はprotoc-gen-gohttpというプラグインを作っているが、先日grpc.UnaryServerInterceptorに対応した。
+
+その際、どうやればいいかを調査していたら、ChainUnaryServerという関数を見つけた。
+中身を読んでみると、特定のinterfaceを受け取ってそれを実行する機能を持った関数に対し、interfaceを実行するときに複数の関数でインターセプトする方法の知見を得られたのため記事にしようと思う。">
 <meta name="keywords" content="blog,developer,personal">
+
 
 
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Goの関数内で呼び出される関数をインターセプトする方法">
-  <meta name="twitter:description" content="この記事はGo2 Advent Calendar 2019の記事。 自分はprotoc-gen-gohttpというプラグインを作っているが、先日grpc.UnaryServ">
+  <meta name="twitter:description" content="この記事はGo2 Advent Calendar 2019の記事。
+自分はprotoc-gen-gohttpというプラグインを作っているが、先日grpc.UnaryServerInterceptorに対応した。
+その際、どうやればいいかを調査していたら、ChainUnaryServerという関数を見つけた。 中身を読んでみると、特定のinterfaceを受け取ってそれを実行する機能を持った関数に対し、interfaceを実行するときに複数の関数でインターセプトする方法の知見を得られたのため記事にしようと思う。">
 
 <meta property="og:url" content="https://nametake.dev/posts/2019/12/09/go-func-intercept/">
   <meta property="og:site_name" content="nametake.dev">
   <meta property="og:title" content="Goの関数内で呼び出される関数をインターセプトする方法">
-  <meta property="og:description" content="この記事はGo2 Advent Calendar 2019の記事。 自分はprotoc-gen-gohttpというプラグインを作っているが、先日grpc.UnaryServ">
+  <meta property="og:description" content="この記事はGo2 Advent Calendar 2019の記事。
+自分はprotoc-gen-gohttpというプラグインを作っているが、先日grpc.UnaryServerInterceptorに対応した。
+その際、どうやればいいかを調査していたら、ChainUnaryServerという関数を見つけた。 中身を読んでみると、特定のinterfaceを受け取ってそれを実行する機能を持った関数に対し、interfaceを実行するときに複数の関数でインターセプトする方法の知見を得られたのため記事にしようと思う。">
   <meta property="og:locale" content="ja">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
@@ -45,7 +54,7 @@
 
   
   
-  <link rel="stylesheet" href="../../../../../css/coder.min.38c4552ac40f9ae3408bad40358f654ebd8804412fe74ed56f2d6c8a7af82dd3.css" integrity="sha256-OMRVKsQPmuNAi61ANY9lTr2IBEEv507Vby1sinr4LdM=" crossorigin="anonymous" media="screen" />
+  <link rel="stylesheet" href="../../../../../css/coder.min.ed30115a76cdaa62f2229e973d5b1c89b2d3dd4b1d9c07a729baad06aa3b0cbe.css" integrity="sha256-7TARWnbNqmLyIp6XPVscibLT3UsdnAenKbqtBqo7DL4=" crossorigin="anonymous" media="screen" />
 
 
 
@@ -442,7 +451,6 @@
         
         
         
-
         
         
       </footer>
@@ -481,8 +489,6 @@
 
 
   
-  
-    
       <script async src="https://www.googletagmanager.com/gtag/js?id=G-ML7TD1LERR"></script>
       <script>
         var doNotTrack = false;
@@ -497,10 +503,8 @@
           gtag('config', 'G-ML7TD1LERR');
         }
       </script>
-    
+
   
-
-
 
   
 

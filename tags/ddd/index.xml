@@ -13,14 +13,14 @@
       <link>https://nametake.dev/posts/2020/07/25/abstract-external-service/</link>
       <pubDate>Sat, 25 Jul 2020 00:00:00 +0900</pubDate>
       <guid>https://nametake.dev/posts/2020/07/25/abstract-external-service/</guid>
-      <description>外部サービスの抽象化 Link to heading 最近のシステムはその複雑さの上昇に伴い、様々な外部サービスと連携する機会が多い。 その際、ドメインとして外部サービス</description>
+      <description>&lt;h1 id=&#34;外部サービスの抽象化&#34;&gt;&#xA;  外部サービスの抽象化&#xA;  &lt;a class=&#34;heading-link&#34; href=&#34;#%e5%a4%96%e9%83%a8%e3%82%b5%e3%83%bc%e3%83%93%e3%82%b9%e3%81%ae%e6%8a%bd%e8%b1%a1%e5%8c%96&#34;&gt;&#xA;    &lt;i class=&#34;fa-solid fa-link&#34; aria-hidden=&#34;true&#34; title=&#34;Link to heading&#34;&gt;&lt;/i&gt;&#xA;    &lt;span class=&#34;sr-only&#34;&gt;Link to heading&lt;/span&gt;&#xA;  &lt;/a&gt;&#xA;&lt;/h1&gt;&#xA;&lt;p&gt;最近のシステムはその複雑さの上昇に伴い、様々な外部サービスと連携する機会が多い。&lt;/p&gt;&#xA;&lt;!-- textlint-disable ja-technical-writing/ja-no-weak-phrase --&gt;&#xA;&lt;p&gt;その際、ドメインとして外部サービスをどう取り扱うといいのか、という個人的なプラクティスを過去の失敗例も含めて記事にしようと思う。&lt;/p&gt;</description>
     </item>
     <item>
       <title>集約におけるトランザクションのドメイン的関心と技術的関心</title>
       <link>https://nametake.dev/posts/2020/04/30/ddd-aggregate/</link>
       <pubDate>Thu, 30 Apr 2020 00:00:00 +0900</pubDate>
       <guid>https://nametake.dev/posts/2020/04/30/ddd-aggregate/</guid>
-      <description>集約のトランザクション Link to heading DDDの集約について学ぶと、必ず「集約はトランザクション境界である」という説明がされている。 整合性の境界の論理的</description>
+      <description>&lt;h2 id=&#34;集約のトランザクション&#34;&gt;&#xA;  集約のトランザクション&#xA;  &lt;a class=&#34;heading-link&#34; href=&#34;#%e9%9b%86%e7%b4%84%e3%81%ae%e3%83%88%e3%83%a9%e3%83%b3%e3%82%b6%e3%82%af%e3%82%b7%e3%83%a7%e3%83%b3&#34;&gt;&#xA;    &lt;i class=&#34;fa-solid fa-link&#34; aria-hidden=&#34;true&#34; title=&#34;Link to heading&#34;&gt;&lt;/i&gt;&#xA;    &lt;span class=&#34;sr-only&#34;&gt;Link to heading&lt;/span&gt;&#xA;  &lt;/a&gt;&#xA;&lt;/h2&gt;&#xA;&lt;p&gt;DDDの集約について学ぶと、必ず「集約はトランザクション境界である」という説明がされている。&lt;/p&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;整合性の境界の論理的な意味は、「その内部にあるあらゆるものは、どんな操作をするにかかわらず、特定の不変条件のルールに従う」ということだ。この境界の外部にある、あらゆるものの整合性は、集約とは無関係になる。つまり、集約はトランザクション整合性の境界と同義である&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>

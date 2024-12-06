@@ -13,18 +13,32 @@
 
 
 <meta name="author" content="nametake">
-<meta name="description" content="ちまちまとdotfilesを育ててきたが、Goの補完が動かなくなっていたり中途半端にLSP対応しようとした痕跡だけ残っていたりしたので、断捨">
+<meta name="description" content="ちまちまとdotfilesを育ててきたが、Goの補完が動かなくなっていたり中途半端にLSP対応しようとした痕跡だけ残っていたりしたので、断捨離も兼ねてガッツリプラグインを整理した。
+プラグインの構成はdotfiles/vim/rc/plug.rc.vimに全部寄せている。
+あんまり凝った構成にしてもメンテナンスが大変なので、以下の基準でプラグインを選んだ。
+
+githubのStar数が多くてAPIが安定してそう
+少ない設定でも動く
+
+整理しているときに、coc.nvimという良さげな補完プラグインを見つけたので軽く紹介してみる。">
 <meta name="keywords" content="blog,developer,personal">
+
 
 
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Vimのプラグインを整理した(あとcoc.nvimの紹介)">
-  <meta name="twitter:description" content="ちまちまとdotfilesを育ててきたが、Goの補完が動かなくなっていたり中途半端にLSP対応しようとした痕跡だけ残っていたりしたので、断捨">
+  <meta name="twitter:description" content="ちまちまとdotfilesを育ててきたが、Goの補完が動かなくなっていたり中途半端にLSP対応しようとした痕跡だけ残っていたりしたので、断捨離も兼ねてガッツリプラグインを整理した。
+プラグインの構成はdotfiles/vim/rc/plug.rc.vimに全部寄せている。
+あんまり凝った構成にしてもメンテナンスが大変なので、以下の基準でプラグインを選んだ。
+githubのStar数が多くてAPIが安定してそう 少ない設定でも動く 整理しているときに、coc.nvimという良さげな補完プラグインを見つけたので軽く紹介してみる。">
 
 <meta property="og:url" content="https://nametake.dev/posts/2019/07/25/change-vim-plugins/">
   <meta property="og:site_name" content="nametake.dev">
   <meta property="og:title" content="Vimのプラグインを整理した(あとcoc.nvimの紹介)">
-  <meta property="og:description" content="ちまちまとdotfilesを育ててきたが、Goの補完が動かなくなっていたり中途半端にLSP対応しようとした痕跡だけ残っていたりしたので、断捨">
+  <meta property="og:description" content="ちまちまとdotfilesを育ててきたが、Goの補完が動かなくなっていたり中途半端にLSP対応しようとした痕跡だけ残っていたりしたので、断捨離も兼ねてガッツリプラグインを整理した。
+プラグインの構成はdotfiles/vim/rc/plug.rc.vimに全部寄せている。
+あんまり凝った構成にしてもメンテナンスが大変なので、以下の基準でプラグインを選んだ。
+githubのStar数が多くてAPIが安定してそう 少ない設定でも動く 整理しているときに、coc.nvimという良さげな補完プラグインを見つけたので軽く紹介してみる。">
   <meta property="og:locale" content="ja">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
@@ -45,7 +59,7 @@
 
   
   
-  <link rel="stylesheet" href="../../../../../css/coder.min.38c4552ac40f9ae3408bad40358f654ebd8804412fe74ed56f2d6c8a7af82dd3.css" integrity="sha256-OMRVKsQPmuNAi61ANY9lTr2IBEEv507Vby1sinr4LdM=" crossorigin="anonymous" media="screen" />
+  <link rel="stylesheet" href="../../../../../css/coder.min.ed30115a76cdaa62f2229e973d5b1c89b2d3dd4b1d9c07a729baad06aa3b0cbe.css" integrity="sha256-7TARWnbNqmLyIp6XPVscibLT3UsdnAenKbqtBqo7DL4=" crossorigin="anonymous" media="screen" />
 
 
 
@@ -244,7 +258,6 @@ aleと共存するための設定があったのも個人的には嬉しい。</
         
         
         
-
         
         
       </footer>
@@ -283,8 +296,6 @@ aleと共存するための設定があったのも個人的には嬉しい。</
 
 
   
-  
-    
       <script async src="https://www.googletagmanager.com/gtag/js?id=G-ML7TD1LERR"></script>
       <script>
         var doNotTrack = false;
@@ -299,10 +310,8 @@ aleと共存するための設定があったのも個人的には嬉しい。</
           gtag('config', 'G-ML7TD1LERR');
         }
       </script>
-    
+
   
-
-
 
   
 

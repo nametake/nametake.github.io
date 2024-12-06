@@ -13,18 +13,22 @@
 
 
 <meta name="author" content="nametake">
-<meta name="description" content="チームでWebサービスを書いていると特定の条件の関数には特定の型の引数を渡すことがルールになっていくことがある。 例えば、マルチテナントなアプ">
+<meta name="description" content="チームでWebサービスを書いていると特定の条件の関数には特定の型の引数を渡すことがルールになっていくことがある。
+例えば、マルチテナントなアプリケーションを作っている場合、UsecaseはTenantIDを必ず引数として持ったり、DBの定義には必ず*sql.Txを持つ等がある。">
 <meta name="keywords" content="blog,developer,personal">
+
 
 
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Goの関数定義の引数をチェックするLinterを作った">
-  <meta name="twitter:description" content="チームでWebサービスを書いていると特定の条件の関数には特定の型の引数を渡すことがルールになっていくことがある。 例えば、マルチテナントなアプ">
+  <meta name="twitter:description" content="チームでWebサービスを書いていると特定の条件の関数には特定の型の引数を渡すことがルールになっていくことがある。
+例えば、マルチテナントなアプリケーションを作っている場合、UsecaseはTenantIDを必ず引数として持ったり、DBの定義には必ず*sql.Txを持つ等がある。">
 
 <meta property="og:url" content="https://nametake.dev/posts/2024/01/01/mustargs/">
   <meta property="og:site_name" content="nametake.dev">
   <meta property="og:title" content="Goの関数定義の引数をチェックするLinterを作った">
-  <meta property="og:description" content="チームでWebサービスを書いていると特定の条件の関数には特定の型の引数を渡すことがルールになっていくことがある。 例えば、マルチテナントなアプ">
+  <meta property="og:description" content="チームでWebサービスを書いていると特定の条件の関数には特定の型の引数を渡すことがルールになっていくことがある。
+例えば、マルチテナントなアプリケーションを作っている場合、UsecaseはTenantIDを必ず引数として持ったり、DBの定義には必ず*sql.Txを持つ等がある。">
   <meta property="og:locale" content="ja">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
@@ -45,7 +49,7 @@
 
   
   
-  <link rel="stylesheet" href="../../../../../css/coder.min.38c4552ac40f9ae3408bad40358f654ebd8804412fe74ed56f2d6c8a7af82dd3.css" integrity="sha256-OMRVKsQPmuNAi61ANY9lTr2IBEEv507Vby1sinr4LdM=" crossorigin="anonymous" media="screen" />
+  <link rel="stylesheet" href="../../../../../css/coder.min.ed30115a76cdaa62f2229e973d5b1c89b2d3dd4b1d9c07a729baad06aa3b0cbe.css" integrity="sha256-7TARWnbNqmLyIp6XPVscibLT3UsdnAenKbqtBqo7DL4=" crossorigin="anonymous" media="screen" />
 
 
 
@@ -294,7 +298,6 @@
         
         
         
-
         
         
       </footer>
@@ -333,8 +336,6 @@
 
 
   
-  
-    
       <script async src="https://www.googletagmanager.com/gtag/js?id=G-ML7TD1LERR"></script>
       <script>
         var doNotTrack = false;
@@ -349,10 +350,8 @@
           gtag('config', 'G-ML7TD1LERR');
         }
       </script>
-    
+
   
-
-
 
   
 

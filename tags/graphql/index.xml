@@ -13,7 +13,7 @@
       <link>https://nametake.dev/posts/2024/02/21/gqlanalysis-flags/</link>
       <pubDate>Wed, 21 Feb 2024 00:00:00 +0900</pubDate>
       <guid>https://nametake.dev/posts/2024/02/21/gqlanalysis-flags/</guid>
-      <description>GraphQLの静的解析をCLIで作りやすくしてくれるgqlgo/gqlanalysisというライブラリがある。 go/analysisを使っ</description>
+      <description>&lt;p&gt;GraphQLの静的解析をCLIで作りやすくしてくれるgqlgo/gqlanalysisというライブラリがある。&lt;/p&gt;&#xA;&lt;p&gt;go/analysisを使ったことがあればそれと殆ど同じ使い方ができるため非常に便利だが、CLIに引数を渡すときにハマったのでその備忘録。&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>
