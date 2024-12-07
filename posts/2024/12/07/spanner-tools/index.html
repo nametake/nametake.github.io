@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <title>
+  2024年に作ったGoのSpanner関連のツール · nametake.dev
+</title>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+
+
+
+
+<meta name="author" content="nametake">
+<meta name="description" content="2024年はGoでSpannerを扱うにあたっていくつかツールを作ったので、せっかくなのでアドベントカレンダーに投稿してみる。
+
+  go-zetasqlfmt
+  
+    
+    Link to heading
+  
+
+弊社プロダクトではGoからSpannerを扱うにあたって cloud.google.com/go/spanner を素で使っているが、SQLの部分が文字列なので書き手によってフォーマットが異なってしまっていた。">
+<meta name="keywords" content="blog,developer,personal">
+
+
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="2024年に作ったGoのSpanner関連のツール">
+  <meta name="twitter:description" content="2024年はGoでSpannerを扱うにあたっていくつかツールを作ったので、せっかくなのでアドベントカレンダーに投稿してみる。
+go-zetasqlfmt Link to heading 弊社プロダクトではGoからSpannerを扱うにあたって cloud.google.com/go/spanner を素で使っているが、SQLの部分が文字列なので書き手によってフォーマットが異なってしまっていた。">
+
+<meta property="og:url" content="https://nametake.dev/posts/2024/12/07/spanner-tools/">
+  <meta property="og:site_name" content="nametake.dev">
+  <meta property="og:title" content="2024年に作ったGoのSpanner関連のツール">
+  <meta property="og:description" content="2024年はGoでSpannerを扱うにあたっていくつかツールを作ったので、せっかくなのでアドベントカレンダーに投稿してみる。
+go-zetasqlfmt Link to heading 弊社プロダクトではGoからSpannerを扱うにあたって cloud.google.com/go/spanner を素で使っているが、SQLの部分が文字列なので書き手によってフォーマットが異なってしまっていた。">
+  <meta property="og:locale" content="ja">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2024-12-07T00:00:00+09:00">
+    <meta property="article:modified_time" content="2024-12-07T00:00:00+09:00">
+    <meta property="article:tag" content="Go">
+    <meta property="article:tag" content="GCP">
+
+
+
+
+<link rel="canonical" href="https://nametake.dev/posts/2024/12/07/spanner-tools/">
+
+
+<link rel="preload" href="../../../../../fonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../../../../../fonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../../../../../fonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
+
+
+  
+  
+  <link rel="stylesheet" href="../../../../../css/coder.min.ed30115a76cdaa62f2229e973d5b1c89b2d3dd4b1d9c07a729baad06aa3b0cbe.css" integrity="sha256-7TARWnbNqmLyIp6XPVscibLT3UsdnAenKbqtBqo7DL4=" crossorigin="anonymous" media="screen" />
+
+
+
+
+
+
+  
+    
+    
+    <link rel="stylesheet" href="../../../../../css/coder-dark.min.a00e6364bacbc8266ad1cc81230774a1397198f8cfb7bcba29b7d6fcb54ce57f.css" integrity="sha256-oA5jZLrLyCZq0cyBIwd0oTlxmPjPt7y6KbfW/LVM5X8=" crossorigin="anonymous" media="screen" />
+  
+
+
+
+ 
+  
+    
+    <link rel="stylesheet" href="../../../../../css/noto&#43;sans&#43;jp.min.ed4b9470a6e014d7c178379b142a1dc1850e399398dc9ce15b1e3bba8368c55f.css" integrity="sha256-7UuUcKbgFNfBeDebFCodwYUOOZOY3JzhWx47uoNoxV8=" crossorigin="anonymous" media="screen" />
+  
+
+
+
+  
+  
+    
+    <link rel="stylesheet" href="../../../../../scss/custom.min.058882cb3caba673503d9e9323f469b039fbd5f4a6e1f421464d8311ae68be80.css" integrity="sha256-BYiCyzyrpnNQPZ6TI/RpsDn71fSm4fQhRk2DEa5ovoA=" crossorigin="anonymous" media="screen" />
+  
+
+
+
+<link rel="icon" type="image/svg+xml" href="../../../../../images/favicon.svg" sizes="any">
+<link rel="icon" type="image/png" href="../../../../../images/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="../../../../../images/favicon-16x16.png" sizes="16x16">
+
+<link rel="apple-touch-icon" href="../../../../../images/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="180x180" href="../../../../../images/apple-touch-icon.png">
+
+<link rel="manifest" href="../../../../../site.webmanifest">
+<link rel="mask-icon" href="../../../../../images/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+
+
+
+
+
+
+</head>
+
+
+
+
+
+
+<body class="preload-transitions colorscheme-auto">
+  
+<div class="float-container">
+    <a id="dark-mode-toggle" class="colorscheme-toggle">
+        <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+    </a>
+</div>
+
+
+  <main class="wrapper">
+    <nav class="navigation">
+  <section class="container">
+    
+    <a class="navigation-title" href="https://nametake.dev/">
+      nametake.dev
+    </a>
+    
+    
+      <input type="checkbox" id="menu-toggle" />
+      <label class="menu-button float-right" for="menu-toggle">
+        <i class="fa-solid fa-bars fa-fw" aria-hidden="true"></i>
+      </label>
+      <ul class="navigation-list">
+        
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="../../../../../about/">About</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="../../../../../posts/">Blog</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="../../../../../tags/">Tags</a>
+            </li>
+          
+        
+        
+      </ul>
+    
+  </section>
+</nav>
+
+
+    <div class="content">
+      
+  <section class="container post">
+    <article>
+      <header>
+        <div class="post-title">
+          <h1 class="title">
+            <a class="title-link" href="https://nametake.dev/posts/2024/12/07/spanner-tools/">
+              2024年に作ったGoのSpanner関連のツール
+            </a>
+          </h1>
+        </div>
+        <div class="post-meta">
+          <div class="date">
+            <span class="posted-on">
+              <i class="fa-solid fa-calendar" aria-hidden="true"></i>
+              <time datetime="2024-12-07T00:00:00&#43;09:00">
+                2024/12/07
+              </time>
+            </span>
+            <span class="reading-time">
+              <i class="fa-solid fa-clock" aria-hidden="true"></i>
+              3-minute read
+            </span>
+          </div>
+          
+          
+          <div class="tags">
+  <i class="fa-solid fa-tag" aria-hidden="true"></i>
+    <span class="tag">
+      <a href="../../../../../tags/go/">Go</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="../../../../../tags/gcp/">GCP</a>
+    </span></div>
+
+        </div>
+      </header>
+
+      <div class="post-content">
+        
+        <p>2024年はGoでSpannerを扱うにあたっていくつかツールを作ったので、せっかくなのでアドベントカレンダーに投稿してみる。</p>
+<h2 id="go-zetasqlfmthttpsgithubcomnametakego-zetasqlfmt">
+  <a href="https://github.com/nametake/go-zetasqlfmt"  class="external-link" target="_blank" rel="noopener">go-zetasqlfmt</a>
+  <a class="heading-link" href="#go-zetasqlfmthttpsgithubcomnametakego-zetasqlfmt">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>弊社プロダクトではGoからSpannerを扱うにあたって <a href="https://pkg.go.dev/cloud.google.com/go/spanner"  class="external-link" target="_blank" rel="noopener">cloud.google.com/go/spanner</a> を素で使っているが、SQLの部分が文字列なので書き手によってフォーマットが異なってしまっていた。</p>
+<p>レビューやドキュメントで揃えるのも非効率なのでどうにか自動でフォーマットできないものかと思い、このフォーマッタを作成した。</p>
+<p>ZetaSQLを採用したのはGoogleの出している一番スターが多いライブラリだったため。そこまで比較検討はしていない。</p>
+<p>GoにBindingしていただいている <a href="https://github.com/goccy/go-zetasql"  class="external-link" target="_blank" rel="noopener">go-zetasql</a> をありがたく使わせていただき、プロジェクトのSQLは統一できるようになった。</p>
+<p>CI少々ビルドに時間がかかってしまうため、 <a href="https://github.com/nametake/go-zetasqlfmt-action"  class="external-link" target="_blank" rel="noopener">go-zetasqlfmt-action</a> 作ったことによってCIも回しやすくして今もプロダクトのSQLのフォーマットを揃えてくれている。</p>
+<h2 id="spansqlfmthttpsgithubcomnametakespansql-ddlfmt">
+  <a href="https://github.com/nametake/spansql-ddlfmt"  class="external-link" target="_blank" rel="noopener">spansqlfmt</a>
+  <a class="heading-link" href="#spansqlfmthttpsgithubcomnametakespansql-ddlfmt">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>コード内のSQLのフォーマットが揃ったら今度はDDLのフォーマットも揃えたくなったため、DDLをフォーマットするツールを作った。</p>
+<p>最初はZetaSQLを使おうと思ったが、SpannerのDDLは方言になっているらしく解析できなかったため、とりあえず公式パッケージに含まれている <a href="https://pkg.go.dev/cloud.google.com/go/spanner/spansql"  class="external-link" target="_blank" rel="noopener">spansql</a> を使用している。</p>
+<p>微妙にコメント周りの挙動は怪しいが、それっぽい挙動にはできた。</p>
+<h2 id="go-spanner-ddlstructdiffhttpsgithubcomnametakego-spanner-ddlstructdiff">
+  <a href="https://github.com/nametake/go-spanner-ddlstructdiff"  class="external-link" target="_blank" rel="noopener">go-spanner-ddlstructdiff</a>
+  <a class="heading-link" href="#go-spanner-ddlstructdiffhttpsgithubcomnametakego-spanner-ddlstructdiff">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>弊社のプロダクトではSpannerのデータ操作に構造体をそのまま使っているため、DDLのカラムと構造体のフィールドはズレないようにする必要があった。</p>
+<p>もちろん動作確認をすればズレていることは確認できるものの、実行しないとわからないのは非効率だったため、構造体のフィールドとカラムに差分があれば警告を出すLinterを作った。</p>
+<p>単純に同名の有無しか確認しておらず型の比較までは行っていないが、カラムの追加やテーブルの追加時に目検で確認していた差分のチェックの手間は減らせている。</p>
+<p>spansqlfmtを作っているときにspansqlへプロダクトのSQLを食わせてみたところ、簡単なものは解析できてもちょっとでも複雑だと解析できないことはわかっていた。</p>
+<p>そのため今回のツールはライブラリ選定にちょっと意志を持ち、プロダクトで使われているちょっと凝ったDMLでもParseできた <a href="https://github.com/cloudspannerecosystem/memefish"  class="external-link" target="_blank" rel="noopener">memefish</a> を使って作成した。</p>
+<h2 id="感想とか">
+  感想とか
+  <a class="heading-link" href="#%e6%84%9f%e6%83%b3%e3%81%a8%e3%81%8b">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>振り返ってみると小さいツールを作るためとはいえ、そこそこSpanner周辺のGoのライブラリに触っていたっぽい。</p>
+<p>使ってみてわかったが、どうもいろいろな歴史的経緯があることは感じていた。</p>
+<p>触った限り、SpannerのDDLとDMLを解析する必要のあるツールを1つのライブラリで作ろうと思ったらmemefishしかないのもわかっていた。</p>
+<p>仕事も忙しく調べなきゃなぁと思いながら詳細を追えていないそんなとき、ちょうど以下の記事が流れてきた。</p>
+<p><a href="https://zenn.dev/apstndb/articles/requirem-for-spansql"  class="external-link" target="_blank" rel="noopener">https://zenn.dev/apstndb/articles/requirem-for-spansql</a></p>
+<p>まさに自分の知りたかった歴史的経緯が書いてる記事でもあり、個人的にはmemefishを最初の選択肢にいれる安心を貰える記事だった。</p>
+<!-- textlint-disable ja-technical-writing/ja-no-weak-phrase -->
+<p>業務に使えそうなツールでまだ作りたいものはあったりする。今後は心配せずにmemefishを最初の選択肢として選んでいこうと思う。</p>
+<p>最後に、これらのツールを短時間で作ることができたのは、多くの方が公開してくださったライブラリのおかげである。この場を借りて深く感謝の意を表したいと思う。</p>
+<!-- textlint-enable -->
+
+      </div>
+
+
+      <footer>
+        
+
+
+        <div id="disqus_thread"></div>
+<script>
+  window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "nametake-dev" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+    
+    document.addEventListener('themeChanged', function (e) { 
+        if (document.readyState == 'complete') {
+          DISQUS.reset({ reload: true, config: disqus_config });
+        }
+    });
+</script>
+        
+        
+        
+        
+        
+        
+      </footer>
+    </article>
+
+    
+  </section>
+
+    </div>
+
+    <footer class="footer">
+  <section class="container">
+    ©
+    
+    2024
+     nametake 
+    ·
+    
+    Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/" target="_blank" rel="noopener">Coder</a>.
+    
+  </section>
+</footer>
+
+  </main>
+
+  
+
+  
+  
+  <script src="../../../../../js/coder.min.6ae284be93d2d19dad1f02b0039508d9aab3180a12a06dcc71b0b0ef7825a317.js" integrity="sha256-auKEvpPS0Z2tHwKwA5UI2aqzGAoSoG3McbCw73gloxc="></script>
+  
+
+  
+
+  
+
+
+  
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-ML7TD1LERR"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-ML7TD1LERR');
+        }
+      </script>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</body>
+
+</html>

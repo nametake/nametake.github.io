@@ -2,25 +2,31 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://nametake.dev/</loc>
-    <lastmod>2024-07-28T00:00:00+09:00</lastmod>
+    <loc>https://nametake.dev/posts/2024/12/07/spanner-tools/</loc>
+    <lastmod>2024-12-07T00:00:00+09:00</lastmod>
   </url><url>
-    <loc>https://nametake.dev/posts/2024/07/28/nerdtree-tag-stack/</loc>
-    <lastmod>2024-07-28T00:00:00+09:00</lastmod>
+    <loc>https://nametake.dev/tags/gcp/</loc>
+    <lastmod>2024-12-07T00:00:00+09:00</lastmod>
+  </url><url>
+    <loc>https://nametake.dev/tags/go/</loc>
+    <lastmod>2024-12-07T00:00:00+09:00</lastmod>
+  </url><url>
+    <loc>https://nametake.dev/</loc>
+    <lastmod>2024-12-07T00:00:00+09:00</lastmod>
   </url><url>
     <loc>https://nametake.dev/posts/</loc>
-    <lastmod>2024-07-28T00:00:00+09:00</lastmod>
+    <lastmod>2024-12-07T00:00:00+09:00</lastmod>
   </url><url>
     <loc>https://nametake.dev/tags/</loc>
+    <lastmod>2024-12-07T00:00:00+09:00</lastmod>
+  </url><url>
+    <loc>https://nametake.dev/posts/2024/07/28/nerdtree-tag-stack/</loc>
     <lastmod>2024-07-28T00:00:00+09:00</lastmod>
   </url><url>
     <loc>https://nametake.dev/tags/vim/</loc>
     <lastmod>2024-07-28T00:00:00+09:00</lastmod>
   </url><url>
     <loc>https://nametake.dev/tags/github/</loc>
-    <lastmod>2024-07-21T00:00:00+09:00</lastmod>
-  </url><url>
-    <loc>https://nametake.dev/tags/go/</loc>
     <lastmod>2024-07-21T00:00:00+09:00</lastmod>
   </url><url>
     <loc>https://nametake.dev/posts/2024/07/21/go-zetasqlfmt-action/</loc>
@@ -193,9 +199,6 @@
   </url><url>
     <loc>https://nametake.dev/posts/2018/11/21/protoc-gen-gohttp/</loc>
     <lastmod>2018-11-21T16:32:07+09:00</lastmod>
-  </url><url>
-    <loc>https://nametake.dev/tags/gcp/</loc>
-    <lastmod>2018-11-09T11:15:24+09:00</lastmod>
   </url><url>
     <loc>https://nametake.dev/posts/2018/11/09/auth-gcp-client/</loc>
     <lastmod>2018-11-09T11:15:24+09:00</lastmod>

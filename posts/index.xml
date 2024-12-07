@@ -6,8 +6,15 @@
     <description>Recent content in Posts on nametake.dev</description>
     <generator>Hugo</generator>
     <language>ja</language>
-    <lastBuildDate>Sun, 28 Jul 2024 00:00:00 +0900</lastBuildDate>
+    <lastBuildDate>Sat, 07 Dec 2024 00:00:00 +0900</lastBuildDate>
     <atom:link href="https://nametake.dev/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>2024年に作ったGoのSpanner関連のツール</title>
+      <link>https://nametake.dev/posts/2024/12/07/spanner-tools/</link>
+      <pubDate>Sat, 07 Dec 2024 00:00:00 +0900</pubDate>
+      <guid>https://nametake.dev/posts/2024/12/07/spanner-tools/</guid>
+      <description>&lt;p&gt;2024年はGoでSpannerを扱うにあたっていくつかツールを作ったので、せっかくなのでアドベントカレンダーに投稿してみる。&lt;/p&gt;&#xA;&lt;h2 id=&#34;go-zetasqlfmthttpsgithubcomnametakego-zetasqlfmt&#34;&gt;&#xA;  &lt;a href=&#34;https://github.com/nametake/go-zetasqlfmt&#34;  class=&#34;external-link&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;go-zetasqlfmt&lt;/a&gt;&#xA;  &lt;a class=&#34;heading-link&#34; href=&#34;#go-zetasqlfmthttpsgithubcomnametakego-zetasqlfmt&#34;&gt;&#xA;    &lt;i class=&#34;fa-solid fa-link&#34; aria-hidden=&#34;true&#34; title=&#34;Link to heading&#34;&gt;&lt;/i&gt;&#xA;    &lt;span class=&#34;sr-only&#34;&gt;Link to heading&lt;/span&gt;&#xA;  &lt;/a&gt;&#xA;&lt;/h2&gt;&#xA;&lt;p&gt;弊社プロダクトではGoからSpannerを扱うにあたって &lt;a href=&#34;https://pkg.go.dev/cloud.google.com/go/spanner&#34;  class=&#34;external-link&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;cloud.google.com/go/spanner&lt;/a&gt; を素で使っているが、SQLの部分が文字列なので書き手によってフォーマットが異なってしまっていた。&lt;/p&gt;</description>
+    </item>
     <item>
       <title>NERDTreeでファイルを開いたときにタグスタックに積む</title>
       <link>https://nametake.dev/posts/2024/07/28/nerdtree-tag-stack/</link>
