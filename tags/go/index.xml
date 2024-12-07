@@ -9,7 +9,7 @@
     <lastBuildDate>Sat, 07 Dec 2024 00:00:00 +0900</lastBuildDate>
     <atom:link href="https://nametake.dev/tags/go/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>2024年に作ったGoのSpanner関連のツール</title>
+      <title>2024年にGoで作ったSpanner関連のツール</title>
       <link>https://nametake.dev/posts/2024/12/07/spanner-tools/</link>
       <pubDate>Sat, 07 Dec 2024 00:00:00 +0900</pubDate>
       <guid>https://nametake.dev/posts/2024/12/07/spanner-tools/</guid>
