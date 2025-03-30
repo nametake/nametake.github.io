@@ -49,7 +49,7 @@ Goでは標準機能としてスタックトレースを取る方法を提供し
 
   
   
-  <link rel="stylesheet" href="../../../../../css/coder.min.ed30115a76cdaa62f2229e973d5b1c89b2d3dd4b1d9c07a729baad06aa3b0cbe.css" integrity="sha256-7TARWnbNqmLyIp6XPVscibLT3UsdnAenKbqtBqo7DL4=" crossorigin="anonymous" media="screen" />
+  <link rel="stylesheet" href="../../../../../css/coder.min.7763f8bc6341ecf82378e867c285e1549abb063a899be313ccd25dbfcd24fa7d.css" integrity="sha256-d2P4vGNB7PgjeOhnwoXhVJq7BjqJm&#43;MTzNJdv80k&#43;n0=" crossorigin="anonymous" media="screen" />
 
 
 
@@ -211,21 +211,21 @@ Goでは標準機能としてスタックトレースを取る方法を提供し
 </span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#34;strings&#34;</span>
 </span></span><span style="display:flex;"><span>)
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">// New returns an error that formats as the given text.
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// Each call to New returns a distinct error value even if the text is identical.
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">New</span>(<span style="color:#a6e22e">text</span> <span style="color:#66d9ef">string</span>) <span style="color:#66d9ef">error</span> {
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// New returns an error that formats as the given text.</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Each call to New returns a distinct error value even if the text is identical.</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">New</span>(<span style="color:#a6e22e">text</span> <span style="color:#66d9ef">string</span>) <span style="color:#66d9ef">error</span> {
 </span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">errors</span>.<span style="color:#a6e22e">New</span>(<span style="color:#a6e22e">text</span>)
 </span></span><span style="display:flex;"><span>}
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">// Errorf formats according to a format specifier and returns the string as a
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// value that satisfies error.
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">//
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// If the format specifier includes a %w verb with an error operand,
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// the returned error will implement an Unwrap method returning the operand. It is
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// invalid to include more than one %w verb or to supply it with an operand
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// that does not implement the error interface. The %w verb is otherwise
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// a synonym for %v.
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">Errorf</span>(<span style="color:#a6e22e">format</span> <span style="color:#66d9ef">string</span>, <span style="color:#a6e22e">a</span> <span style="color:#f92672">...</span><span style="color:#66d9ef">interface</span>{}) <span style="color:#66d9ef">error</span> {
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Errorf formats according to a format specifier and returns the string as a</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// value that satisfies error.</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">//</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// If the format specifier includes a %w verb with an error operand,</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// the returned error will implement an Unwrap method returning the operand. It is</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// invalid to include more than one %w verb or to supply it with an operand</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// that does not implement the error interface. The %w verb is otherwise</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// a synonym for %v.</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">Errorf</span>(<span style="color:#a6e22e">format</span> <span style="color:#66d9ef">string</span>, <span style="color:#a6e22e">a</span> <span style="color:#f92672">...</span><span style="color:#66d9ef">interface</span>{}) <span style="color:#66d9ef">error</span> {
 </span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">vars</span> <span style="color:#f92672">:=</span> make([]<span style="color:#66d9ef">interface</span>{}, <span style="color:#ae81ff">0</span>, len(<span style="color:#a6e22e">a</span>))
 </span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">for</span> <span style="color:#a6e22e">_</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">range</span> <span style="color:#a6e22e">a</span> {
 </span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">e</span>, <span style="color:#a6e22e">ok</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">err</span>.(<span style="color:#66d9ef">error</span>); <span style="color:#a6e22e">ok</span> {
@@ -250,11 +250,11 @@ Goでは標準機能としてスタックトレースを取る方法を提供し
 </span></span><span style="display:flex;"><span>	}
 </span></span><span style="display:flex;"><span>}
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">// StackTrace returns stack frames from error.
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">//
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// You must use Errorf to add stack frames.
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// If not added stack traces, StackTrace returns nil.
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">StackTrace</span>(<span style="color:#a6e22e">err</span> <span style="color:#66d9ef">error</span>) <span style="color:#a6e22e">Frames</span> {
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// StackTrace returns stack frames from error.</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">//</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// You must use Errorf to add stack frames.</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// If not added stack traces, StackTrace returns nil.</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">StackTrace</span>(<span style="color:#a6e22e">err</span> <span style="color:#66d9ef">error</span>) <span style="color:#a6e22e">Frames</span> {
 </span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">stackErr</span> <span style="color:#f92672">:=</span> <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">stackError</span>{}
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">for</span> {
@@ -267,8 +267,8 @@ Goでは標準機能としてスタックトレースを取る方法を提供し
 </span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">stackErr</span>.<span style="color:#a6e22e">frames</span>
 </span></span><span style="display:flex;"><span>}
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">// Frame represents a stack frame.
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">Frame</span> <span style="color:#66d9ef">struct</span> {
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Frame represents a stack frame.</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">Frame</span> <span style="color:#66d9ef">struct</span> {
 </span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">File</span>     <span style="color:#66d9ef">string</span>
 </span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">Line</span>     <span style="color:#66d9ef">int</span>
 </span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">Function</span> <span style="color:#66d9ef">string</span>
@@ -311,8 +311,8 @@ Goでは標準機能としてスタックトレースを取る方法を提供し
 </span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Sprintf</span>(<span style="color:#e6db74">&#34;%s(...)\n\t%s:%d&#34;</span>, <span style="color:#a6e22e">f</span>.<span style="color:#a6e22e">Function</span>, <span style="color:#a6e22e">f</span>.<span style="color:#a6e22e">File</span>, <span style="color:#a6e22e">f</span>.<span style="color:#a6e22e">Line</span>)
 </span></span><span style="display:flex;"><span>}
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">// frames gets stack frames with skip.
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">frames</span>(<span style="color:#a6e22e">skip</span> <span style="color:#66d9ef">int</span>) []<span style="color:#f92672">*</span><span style="color:#a6e22e">Frame</span> {
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// frames gets stack frames with skip.</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">frames</span>(<span style="color:#a6e22e">skip</span> <span style="color:#66d9ef">int</span>) []<span style="color:#f92672">*</span><span style="color:#a6e22e">Frame</span> {
 </span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">frames</span> []<span style="color:#f92672">*</span><span style="color:#a6e22e">Frame</span>
 </span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">pc</span> [<span style="color:#ae81ff">64</span>]<span style="color:#66d9ef">uintptr</span>
 </span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">skip</span> <span style="color:#f92672">+=</span> <span style="color:#ae81ff">2</span>
@@ -404,7 +404,7 @@ Goでは標準機能としてスタックトレースを取る方法を提供し
   <section class="container">
     ©
     
-    2024
+    2025
      nametake 
     ·
     
@@ -475,5 +475,4 @@ Goでは標準機能としてスタックトレースを取る方法を提供し
 
   
 </body>
-
 </html>

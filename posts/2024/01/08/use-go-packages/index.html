@@ -69,7 +69,7 @@ packages.Load は指定したパターンからパッケージの情報を読み
 
   
   
-  <link rel="stylesheet" href="../../../../../css/coder.min.ed30115a76cdaa62f2229e973d5b1c89b2d3dd4b1d9c07a729baad06aa3b0cbe.css" integrity="sha256-7TARWnbNqmLyIp6XPVscibLT3UsdnAenKbqtBqo7DL4=" crossorigin="anonymous" media="screen" />
+  <link rel="stylesheet" href="../../../../../css/coder.min.7763f8bc6341ecf82378e867c285e1549abb063a899be313ccd25dbfcd24fa7d.css" integrity="sha256-d2P4vGNB7PgjeOhnwoXhVJq7BjqJm&#43;MTzNJdv80k&#43;n0=" crossorigin="anonymous" media="screen" />
 
 
 
@@ -236,8 +236,8 @@ packages.Load は指定したパターンからパッケージの情報を読み
 </span></span><span style="display:flex;"><span>		<span style="color:#a6e22e">Mode</span>: <span style="color:#a6e22e">packages</span>.<span style="color:#a6e22e">NeedTypes</span> | <span style="color:#a6e22e">packages</span>.<span style="color:#a6e22e">NeedSyntax</span> | <span style="color:#a6e22e">packages</span>.<span style="color:#a6e22e">NeedTypesInfo</span> | <span style="color:#a6e22e">packages</span>.<span style="color:#a6e22e">NeedFiles</span>,
 </span></span><span style="display:flex;"><span>	}
 </span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">pkgs</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">packages</span>.<span style="color:#a6e22e">Load</span>(<span style="color:#a6e22e">cfg</span>, <span style="color:#e6db74">&#34;./...&#34;</span>)
-</span></span><span style="display:flex;"><span>	<span style="color:#75715e">// ~~~
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e">// ~~~</span>
+</span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div><p>packages.Packageの中にはConfigで指定したModeに沿った情報が格納されているため、これらを利用することで対象の特定や置き換えしたいファイルのastが取得できる。</p>
 <p>余談だが、この方法で実装する前は <code>filepath.Walk</code> を利用していたが、比較にならないぐらいpackages.Loadのほうが早かった。</p>
 <h2 id="packagespackageからsyntaxとtypesinfoの取り出し">
@@ -254,8 +254,8 @@ packages.Load は指定したパターンからパッケージの情報を読み
 そのため、ast.Inspectで探索中にそれらの型にキャストした上でmapのキーに渡すとそれに対応した情報を取得できる。</p>
 <p>例えば、 <code>cloud.google.com/go/spanner.Statement</code> を利用している場所を特定したい場合、以下のようにすることパッケージ名と型名の完全一致で利用箇所を特定できる。</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">Format</span>(<span style="color:#a6e22e">pkg</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">packages</span>.<span style="color:#a6e22e">Package</span>, <span style="color:#a6e22e">file</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">ast</span>.<span style="color:#a6e22e">File</span>) {
-</span></span><span style="display:flex;"><span>	<span style="color:#75715e">// ~~~
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#a6e22e">ast</span>.<span style="color:#a6e22e">Inspect</span>(<span style="color:#a6e22e">file</span>, <span style="color:#66d9ef">func</span>(<span style="color:#a6e22e">n</span> <span style="color:#a6e22e">ast</span>.<span style="color:#a6e22e">Node</span>) <span style="color:#66d9ef">bool</span> {
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e">// ~~~</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">ast</span>.<span style="color:#a6e22e">Inspect</span>(<span style="color:#a6e22e">file</span>, <span style="color:#66d9ef">func</span>(<span style="color:#a6e22e">n</span> <span style="color:#a6e22e">ast</span>.<span style="color:#a6e22e">Node</span>) <span style="color:#66d9ef">bool</span> {
 </span></span><span style="display:flex;"><span>		<span style="color:#a6e22e">compositeLit</span>, <span style="color:#a6e22e">ok</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">n</span>.(<span style="color:#f92672">*</span><span style="color:#a6e22e">ast</span>.<span style="color:#a6e22e">CompositeLit</span>)
 </span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">if</span> !<span style="color:#a6e22e">ok</span> {
 </span></span><span style="display:flex;"><span>			<span style="color:#66d9ef">return</span> <span style="color:#66d9ef">true</span>
@@ -274,8 +274,8 @@ packages.Load は指定したパターンからパッケージの情報を読み
 </span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">use</span>.<span style="color:#a6e22e">Type</span>().<span style="color:#a6e22e">String</span>() <span style="color:#f92672">!=</span> <span style="color:#e6db74">&#34;cloud.google.com/go/spanner.Statement&#34;</span> {
 </span></span><span style="display:flex;"><span>			<span style="color:#66d9ef">return</span> <span style="color:#66d9ef">true</span>
 </span></span><span style="display:flex;"><span>		}
-</span></span><span style="display:flex;"><span>		<span style="color:#75715e">// ~~~
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	}
+</span></span><span style="display:flex;"><span>		<span style="color:#75715e">// ~~~</span>
+</span></span><span style="display:flex;"><span>	}
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div><p>実行する側は以下のような感じ。</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">run</span>() {
@@ -297,8 +297,8 @@ packages.Load は指定したパターンからパッケージの情報を読み
 <p>とはいえそんなに難しい話でもなく、気をつける点といえばFileSetはpackages.Packageに含まれているものを利用するぐらいで、それ以外は普通に抽象構文木をファイルに保存する処理をすれば良い。</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">Save</span>(<span style="color:#a6e22e">pkg</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">packages</span>.<span style="color:#a6e22e">Package</span>, <span style="color:#a6e22e">file</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">ast</span>.<span style="color:#a6e22e">File</span>) {
 </span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">path</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">pkg</span>.<span style="color:#a6e22e">Fset</span>.<span style="color:#a6e22e">Position</span>(<span style="color:#a6e22e">file</span>.<span style="color:#a6e22e">Pos</span>()).<span style="color:#a6e22e">Filename</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// ~~~
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">buf</span> <span style="color:#a6e22e">bytes</span>.<span style="color:#a6e22e">Buffer</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// ~~~</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">buf</span> <span style="color:#a6e22e">bytes</span>.<span style="color:#a6e22e">Buffer</span>
 </span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">printer</span>.<span style="color:#a6e22e">Fprint</span>(<span style="color:#f92672">&amp;</span><span style="color:#a6e22e">buf</span>, <span style="color:#a6e22e">pkg</span>.<span style="color:#a6e22e">Fset</span>, <span style="color:#a6e22e">file</span>); <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
 </span></span><span style="display:flex;"><span>		panic(<span style="color:#a6e22e">err</span>)
 </span></span><span style="display:flex;"><span>	}
@@ -362,7 +362,7 @@ packages.Load は指定したパターンからパッケージの情報を読み
   <section class="container">
     ©
     
-    2024
+    2025
      nametake 
     ·
     
@@ -433,5 +433,4 @@ packages.Load は指定したパターンからパッケージの情報を読み
 
   
 </body>
-
 </html>

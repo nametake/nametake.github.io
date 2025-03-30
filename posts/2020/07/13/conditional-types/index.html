@@ -46,7 +46,7 @@
 
   
   
-  <link rel="stylesheet" href="../../../../../css/coder.min.ed30115a76cdaa62f2229e973d5b1c89b2d3dd4b1d9c07a729baad06aa3b0cbe.css" integrity="sha256-7TARWnbNqmLyIp6XPVscibLT3UsdnAenKbqtBqo7DL4=" crossorigin="anonymous" media="screen" />
+  <link rel="stylesheet" href="../../../../../css/coder.min.7763f8bc6341ecf82378e867c285e1549abb063a899be313ccd25dbfcd24fa7d.css" integrity="sha256-d2P4vGNB7PgjeOhnwoXhVJq7BjqJm&#43;MTzNJdv80k&#43;n0=" crossorigin="anonymous" media="screen" />
 
 
 
@@ -188,7 +188,7 @@
         <p>機能としては知っていたものの使う機会がなかった Conditional Types を使ったのでメモ。</p>
 <p>ElectronのMainプロセスでAPIを叩く際、API毎にchannelを用意するのは手間だと思い以下のようなIPC通信用の型を用意した。</p>
 <p>同時にEnumも定義してMainプロセスとRendererプロセスで共有し、ReduxのActionとReducerと同じ要領で型安全にするのが目的。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ts" data-lang="ts"><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">type</span> <span style="color:#a6e22e">Action</span>&lt;<span style="color:#f92672">T</span><span style="color:#960050;background-color:#1e0010">,</span> <span style="color:#a6e22e">P </span><span style="color:#f92672">=</span> <span style="color:#a6e22e">undefined</span>&gt; <span style="color:#f92672">=</span> {
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ts" data-lang="ts"><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">type</span> <span style="color:#a6e22e">Action</span>&lt;<span style="color:#f92672">T</span>, <span style="color:#a6e22e">P </span><span style="color:#f92672">=</span> <span style="color:#a6e22e">undefined</span>&gt; <span style="color:#f92672">=</span> {
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">type</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">T</span>;
 </span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">payload</span>: <span style="color:#66d9ef">P</span>;
 </span></span><span style="display:flex;"><span>}
@@ -200,11 +200,11 @@
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">type</span> <span style="color:#a6e22e">ApiAction</span> <span style="color:#f92672">=</span>
 </span></span><span style="display:flex;"><span>  <span style="color:#f92672">|</span> <span style="color:#a6e22e">Action</span>&lt;<span style="color:#f92672">ApiType.GET_ACCOUNT</span>&gt;
-</span></span><span style="display:flex;"><span>  <span style="color:#f92672">|</span> <span style="color:#a6e22e">Action</span>&lt;<span style="color:#f92672">ApiType.GET_TASKS</span><span style="color:#960050;background-color:#1e0010">,</span> <span style="color:#a6e22e">GetTasksRequest</span>&gt;;
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">|</span> <span style="color:#a6e22e">Action</span>&lt;<span style="color:#f92672">ApiType.GET_TASKS</span>, <span style="color:#a6e22e">GetTasksRequest</span>&gt;;
 </span></span></code></pre></div><p>しかし、上記の <code>Action</code> の定義では <code>payload</code> がないAPIを叩くときにも以下のように <code>undefined</code> を与えなければならない。</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ts" data-lang="ts"><span style="display:flex;"><span><span style="color:#a6e22e">invokeApi</span>({<span style="color:#66d9ef">type</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">ApiType</span>.<span style="color:#a6e22e">GET_ACCOUNT</span>, <span style="color:#a6e22e">payload</span>: <span style="color:#66d9ef">undefined</span>});
 </span></span></code></pre></div><p>そこで、以下のように <code>Action</code> の <code>payload</code> をConditional Typesで定義することにより、 <code>P</code> に型が与えられてないときは何もしないようにすることで呼び出し時にundefinedを与えなくてもいいようにした。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ts" data-lang="ts"><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">type</span> <span style="color:#a6e22e">Action</span>&lt;<span style="color:#f92672">T</span><span style="color:#960050;background-color:#1e0010">,</span> <span style="color:#a6e22e">P </span><span style="color:#f92672">=</span> <span style="color:#a6e22e">undefined</span>&gt; <span style="color:#f92672">=</span> {
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ts" data-lang="ts"><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">type</span> <span style="color:#a6e22e">Action</span>&lt;<span style="color:#f92672">T</span>, <span style="color:#a6e22e">P </span><span style="color:#f92672">=</span> <span style="color:#a6e22e">undefined</span>&gt; <span style="color:#f92672">=</span> {
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">type</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">T</span>;
 </span></span><span style="display:flex;"><span>} <span style="color:#f92672">&amp;</span> (<span style="color:#a6e22e">P</span> <span style="color:#66d9ef">extends</span> <span style="color:#66d9ef">undefined</span> <span style="color:#f92672">?</span> <span style="color:#66d9ef">unknown</span> <span style="color:#f92672">:</span> { <span style="color:#a6e22e">payload</span>: <span style="color:#66d9ef">P</span> });
 </span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ts" data-lang="ts"><span style="display:flex;"><span><span style="color:#a6e22e">invokeApi</span>({<span style="color:#66d9ef">type</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">ApiType</span>.<span style="color:#a6e22e">GET_ACCOUNT</span>});
@@ -259,7 +259,7 @@
   <section class="container">
     ©
     
-    2024
+    2025
      nametake 
     ·
     
@@ -330,5 +330,4 @@
 
   
 </body>
-
 </html>

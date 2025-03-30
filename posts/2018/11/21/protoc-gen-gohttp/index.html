@@ -57,7 +57,7 @@ Protocol Buffersとは Link to heading Protocol Buffersはインターフェー�
 
   
   
-  <link rel="stylesheet" href="../../../../../css/coder.min.ed30115a76cdaa62f2229e973d5b1c89b2d3dd4b1d9c07a729baad06aa3b0cbe.css" integrity="sha256-7TARWnbNqmLyIp6XPVscibLT3UsdnAenKbqtBqo7DL4=" crossorigin="anonymous" media="screen" />
+  <link rel="stylesheet" href="../../../../../css/coder.min.7763f8bc6341ecf82378e867c285e1549abb063a899be313ccd25dbfcd24fa7d.css" integrity="sha256-d2P4vGNB7PgjeOhnwoXhVJq7BjqJm&#43;MTzNJdv80k&#43;n0=" crossorigin="anonymous" media="screen" />
 
 
 
@@ -254,8 +254,8 @@ Protocol Buffersとは Link to heading Protocol Buffersはインターフェー�
 </span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">out</span>, <span style="color:#66d9ef">nil</span>
 </span></span><span style="display:flex;"><span>}
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">// GreeterServer is the server API for Greeter service.
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">GreeterServer</span> <span style="color:#66d9ef">interface</span> {
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// GreeterServer is the server API for Greeter service.</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">GreeterServer</span> <span style="color:#66d9ef">interface</span> {
 </span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">SayHello</span>(<span style="color:#a6e22e">context</span>.<span style="color:#a6e22e">Context</span>, <span style="color:#f92672">*</span><span style="color:#a6e22e">HelloRequest</span>) (<span style="color:#f92672">*</span><span style="color:#a6e22e">HelloReply</span>, <span style="color:#66d9ef">error</span>)
 </span></span><span style="display:flex;"><span>}
 </span></span><span style="display:flex;"><span>
@@ -293,28 +293,28 @@ Protocol Buffersとは Link to heading Protocol Buffersはインターフェー�
 </span></span><span style="display:flex;"><span>}
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">h</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">GreeterHTTPConverter</span>) <span style="color:#a6e22e">SayHello</span>(<span style="color:#a6e22e">cb</span> <span style="color:#66d9ef">func</span>(<span style="color:#a6e22e">ctx</span> <span style="color:#a6e22e">context</span>.<span style="color:#a6e22e">Context</span>, <span style="color:#a6e22e">w</span> <span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">ResponseWriter</span>, <span style="color:#a6e22e">r</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">Request</span>, <span style="color:#a6e22e">arg</span>, <span style="color:#a6e22e">ret</span> <span style="color:#a6e22e">proto</span>.<span style="color:#a6e22e">Message</span>, <span style="color:#a6e22e">err</span> <span style="color:#66d9ef">error</span>)) <span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">HandlerFunc</span> {
-</span></span><span style="display:flex;"><span>	<span style="color:#75715e">// ~~ 省略 ~~
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">HandlerFunc</span>(<span style="color:#66d9ef">func</span>(<span style="color:#a6e22e">w</span> <span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">ResponseWriter</span>, <span style="color:#a6e22e">r</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">Request</span>) {
-</span></span><span style="display:flex;"><span>	<span style="color:#75715e">// ~~ Content-Typeに応じてRequestを読み込む処理 ~~
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span> 		<span style="color:#a6e22e">ret</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">h</span>.<span style="color:#a6e22e">srv</span>.<span style="color:#a6e22e">SayHello</span>(<span style="color:#a6e22e">ctx</span>, <span style="color:#a6e22e">arg</span>)
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e">// ~~ 省略 ~~</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">HandlerFunc</span>(<span style="color:#66d9ef">func</span>(<span style="color:#a6e22e">w</span> <span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">ResponseWriter</span>, <span style="color:#a6e22e">r</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">Request</span>) {
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e">// ~~ Content-Typeに応じてRequestを読み込む処理 ~~</span>
+</span></span><span style="display:flex;"><span> 		<span style="color:#a6e22e">ret</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">h</span>.<span style="color:#a6e22e">srv</span>.<span style="color:#a6e22e">SayHello</span>(<span style="color:#a6e22e">ctx</span>, <span style="color:#a6e22e">arg</span>)
 </span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
 </span></span><span style="display:flex;"><span>			<span style="color:#a6e22e">cb</span>(<span style="color:#a6e22e">ctx</span>, <span style="color:#a6e22e">w</span>, <span style="color:#a6e22e">r</span>, <span style="color:#a6e22e">arg</span>, <span style="color:#66d9ef">nil</span>, <span style="color:#a6e22e">err</span>)
 </span></span><span style="display:flex;"><span>			<span style="color:#66d9ef">return</span>
 </span></span><span style="display:flex;"><span>		}
-</span></span><span style="display:flex;"><span>	<span style="color:#75715e">// ~~ Responseを返す処理 ~~
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  }
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e">// ~~ Responseを返す処理 ~~</span>
+</span></span><span style="display:flex;"><span>  }
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div><p><code>GreeterHTTPConverter</code>という構造体がgRPCのプラグインを使ったときに生成される<code>GreeterServer</code> interfaceを内部に持つ。<code>GreeterHTTPConverter</code>はCallbackを受け取って<code>http.HandlerFunc</code>を返す<code>SayHello</code>メソッドを実装している。</p>
 <p>返される<code>http.HandlerFunc</code>内部では、Bodyの情報をContent-Typeに合わせてJSONかバイナリかを判断して読み取り、<code>GreeterServer</code>interfaceの<code>SayHello</code>メソッドを呼び出すようになっている。</p>
 <p>上記の<code>GreeterHTTPConverter</code>を使うことで、<code>GreeterServer</code> interfaceを実装している構造体を型を守りつつ以下のように<code>net/http</code>のinterfaceに乗せることができる。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#75715e">// GreeterServerを実装している構造体
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#a6e22e">srv</span> <span style="color:#f92672">:=</span> <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">EchoGreeterServer</span>{}
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#75715e">// GreeterServerを実装している構造体</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">srv</span> <span style="color:#f92672">:=</span> <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">EchoGreeterServer</span>{}
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">// GreeterHTTPConverterのインスタンス作成
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#a6e22e">conv</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">NewGreeterHTTPConverter</span>(<span style="color:#a6e22e">srv</span>)
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// GreeterHTTPConverterのインスタンス作成</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">conv</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">NewGreeterHTTPConverter</span>(<span style="color:#a6e22e">srv</span>)
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">// Callbackを渡してhttp.HandlerFuncに登録
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">Handle</span>(<span style="color:#e6db74">&#34;/sayhello&#34;</span>, <span style="color:#a6e22e">conv</span>.<span style="color:#a6e22e">SayHello</span>(<span style="color:#a6e22e">logCallback</span>))
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Callbackを渡してhttp.HandlerFuncに登録</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">Handle</span>(<span style="color:#e6db74">&#34;/sayhello&#34;</span>, <span style="color:#a6e22e">conv</span>.<span style="color:#a6e22e">SayHello</span>(<span style="color:#a6e22e">logCallback</span>))
 </span></span></code></pre></div><p><code>SayHello</code>メソッドに渡すCallbackは<code>http.HandlerFunc</code>を抜けるときに必ず呼び出されるため、Callbackの引数をハンドリングすることで呼び出し時の挟み込む処理やエラーハンドリングができる。</p>
 <p>細かい使い方や動かし方は<a href="https://github.com/nametake/protoc-gen-gohttp#readme"  class="external-link" target="_blank" rel="noopener">README</a>に記載している。</p>
 <h3 id="コンセプト">
@@ -341,9 +341,9 @@ Protocol Buffersとは Link to heading Protocol Buffersはインターフェー�
   </a>
 </h2>
 <p>このプラグインは実際にプロジェクトで使おうと思って作ったが、作る前に似たようなものがないか調べたのでそれとの比較も書いてみる。</p>
-<h3 id="twirphttpsgithubcomtwitchtvtwirp">
+<h3 id="twirp">
   <a href="https://github.com/twitchtv/twirp"  class="external-link" target="_blank" rel="noopener">twirp</a>
-  <a class="heading-link" href="#twirphttpsgithubcomtwitchtvtwirp">
+  <a class="heading-link" href="#twirp">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
@@ -355,17 +355,17 @@ Protocol Buffersとは Link to heading Protocol Buffersはインターフェー�
 <li>RPCの呼び出しに対するHookがContextに情報を詰めるようになっていて型で守るのが難しい</li>
 <li>フレームワークなのでピンポイントで使いづらい</li>
 </ul>
-<h3 id="russellluoprotoc-go-pluginshttpsgithubcomrussellluoprotoc-go-plugins">
+<h3 id="russellluoprotoc-go-plugins">
   <a href="https://github.com/RussellLuo/protoc-go-plugins"  class="external-link" target="_blank" rel="noopener">RussellLuo/protoc-go-plugins</a>
-  <a class="heading-link" href="#russellluoprotoc-go-pluginshttpsgithubcomrussellluoprotoc-go-plugins">
+  <a class="heading-link" href="#russellluoprotoc-go-plugins">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
 <p>Protocol Buffersの定義からhttp.Handler対応の物を生成するプラグイン。JSONには対応していたが、バイナリのMarshal/Unmarshalには対応しておらず、エラーハンドリングにも余地がなかった。</p>
-<h3 id="moulprotoc-gen-gotemplatehttpsgithubcommoulprotoc-gen-gotemplate">
+<h3 id="moulprotoc-gen-gotemplate">
   <a href="https://github.com/moul/protoc-gen-gotemplate"  class="external-link" target="_blank" rel="noopener">moul/protoc-gen-gotemplate</a>
-  <a class="heading-link" href="#moulprotoc-gen-gotemplatehttpsgithubcommoulprotoc-gen-gotemplate">
+  <a class="heading-link" href="#moulprotoc-gen-gotemplate">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
@@ -424,7 +424,7 @@ Protocol Buffersとは Link to heading Protocol Buffersはインターフェー�
   <section class="container">
     ©
     
-    2024
+    2025
      nametake 
     ·
     
@@ -495,5 +495,4 @@ Protocol Buffersとは Link to heading Protocol Buffersはインターフェー�
 
   
 </body>
-
 </html>
